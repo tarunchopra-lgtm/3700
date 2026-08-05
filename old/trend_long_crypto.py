@@ -120,7 +120,7 @@ if not has_position:
 else:
     # Exit condition: Price drops below the 16-candle lowest low
     if current_price < lowest_low:
-        response = trading_client.close_position(symbol_or_symbols=SYMBOL)
+        response = trading_client.close_position(symbol=SYMBOL)
         print(f"LONG EXIT: Price ({current_price}) broke below 16-bar Low ({lowest_low}). Position closed.")
     else:
         print(f"Holding position. Price: {current_price}, 16-bar Low trail: {lowest_low}")

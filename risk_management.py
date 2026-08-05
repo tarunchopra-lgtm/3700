@@ -54,6 +54,63 @@ state: dict = {}
 def is_crypto(symbol: str) -> bool:
     return '/' in symbol
 
+
+def _normalize_symbol(symbol: str) -> str:
+    return str(symbol).replace('/', '').replace('-', '').upper()
+
+
+def _build_latest_buy_fill_map() -> dict[str, float]:
+    latest_buy_fill_by_symbol: dict[str, float] = {}
+    try:
+        orders = list(
+            trading_client.get_orders(
+                filter=GetOrdersRequest(status=QueryOrderStatus.CLOSED, limit=500)
+            )
+        )
+    except Exception as exc:
+        print(f"  ⚠ Could not read closed orders for entry cross-check: {exc}")
+        return latest_buy_fill_by_symbol
+
+    candidates = []
+    for order in orders:
+        side = (order.side.value if hasattr(order.side, 'value') else str(order.side)).upper()
+        if side != 'BUY':
+            continue
+        filled_at = getattr(order, 'filled_at', None)
+        filled_avg_price = getattr(order, 'filled_avg_price', None)
+        if filled_at is None or filled_avg_price in (None, ''):
+            continue
+        try:
+            price = float(filled_avg_price)
+        except (TypeError, ValueError):
+            continue
+        candidates.append((filled_at, _normalize_symbol(order.symbol), price))
+
+    candidates.sort(key=lambda row: row[0], reverse=True)
+    for _, norm_symbol, price in candidates:
+        if norm_symbol not in latest_buy_fill_by_symbol:
+            latest_buy_fill_by_symbol[norm_symbol] = price
+
+    return latest_buy_fill_by_symbol
+
+
+def _resolve_entry_price(symbol: str, position, latest_buy_fill_by_symbol: dict[str, float]):
+    position_entry = None
+    try:
+        raw_entry = getattr(position, 'avg_entry_price', None)
+        if raw_entry not in (None, ''):
+            position_entry = float(raw_entry)
+    except (TypeError, ValueError):
+        position_entry = None
+
+    order_entry = latest_buy_fill_by_symbol.get(_normalize_symbol(symbol))
+
+    if position_entry is not None and position_entry > 0:
+        return position_entry, 'position.avg_entry_price', position_entry, order_entry
+    if order_entry is not None and order_entry > 0:
+        return order_entry, 'latest filled BUY order', position_entry, order_entry
+    return None, 'unavailable', position_entry, order_entry
+
 def get_price(symbol: str) -> float:
     try:
         if is_crypto(symbol):
@@ -152,8 +209,11 @@ def print_state(symbol: str, s: dict, current_price: float):
 
 # ── Core per-symbol logic ─────────────────────────────────────────────────────
 
-def manage_symbol(symbol: str, position=None):
+def manage_symbol(symbol: str, position=None, latest_buy_fill_by_symbol=None):
     """Run one monitoring tick for a symbol."""
+    if latest_buy_fill_by_symbol is None:
+        latest_buy_fill_by_symbol = {}
+
     s = state.get(symbol)
 
     # ── No position branch ────────────────────────────────────────────────────
@@ -182,8 +242,26 @@ def manage_symbol(symbol: str, position=None):
         return
 
     # ── Position exists ───────────────────────────────────────────────────────
-    entry = float(position.avg_entry_price)
+    entry, entry_source, position_entry, order_entry = _resolve_entry_price(
+        symbol,
+        position,
+        latest_buy_fill_by_symbol,
+    )
+    if entry is None:
+        print(
+            f"  ✗ [{symbol}] Could not determine entry price "
+            f"(position={position_entry}, latest_buy_fill={order_entry})"
+        )
+        return
+
     qty   = float(position.qty)
+
+    print(
+        f"  [ENTRY] {symbol}: qty={qty} | "
+        f"position_entry={position_entry if position_entry is not None else 'N/A'} | "
+        f"latest_buy_fill={order_entry if order_entry is not None else 'N/A'} | "
+        f"using={entry:.4f} ({entry_source})"
+    )
 
     # First time we see this symbol — initialise state
     if s is None or s.get('waiting_reentry'):
@@ -275,6 +353,7 @@ def run():
             # Fetch all current positions
             try:
                 positions = {p.symbol: p for p in trading_client.get_all_positions()}
+                latest_buy_fill_by_symbol = _build_latest_buy_fill_map()
             except Exception as e:
                 print(f"  ✗ Error fetching positions: {e}")
                 time.sleep(CHECK_INTERVAL)
@@ -285,7 +364,7 @@ def run():
             else:
                 # Manage active positions
                 for sym, pos in positions.items():
-                    manage_symbol(sym, pos)
+                    manage_symbol(sym, pos, latest_buy_fill_by_symbol)
 
                 # Manage waiting re-entries (positions already closed)
                 for sym, s in state.items():

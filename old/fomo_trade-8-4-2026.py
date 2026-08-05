@@ -44,35 +44,24 @@ def _get_open_orders_for_symbol(symbol: str):
     return [o for o in orders if _normalize_symbol(getattr(o, "symbol", "")) == target]
 
 def _print_usage() -> None:
-    print("Usage: python fomo_trade.py <TICKER> <NUM_STOCKS> <ENTRY_PRICE> <STOP_PRICE> <TARGET1_PRICE> <TARGET2_PRICE>")
-    print("Example: python fomo_trade.py MU 2 780 770 800 900")
+    print("Usage: python fomo_trade.py <TICKER> <ENTRY_PRICE> <STOP_PRICE> <TARGET1_PRICE> <TARGET2_PRICE>")
+    print("Example: python fomo_trade.py BTC/USD 63500 63490 63510 63530")
 
 
-# Parse arguments: ticker, number of stocks, entry, stop, target1, target2
-if len(sys.argv) != 7:
-    print(f"Error: expected 6 arguments, got {len(sys.argv) - 1}")
+# Parse arguments: ticker, entry, stop, target1, target2
+if len(sys.argv) != 6:
+    print(f"Error: expected 5 arguments, got {len(sys.argv) - 1}")
     _print_usage()
     sys.exit(1)
 
 SYMBOL = sys.argv[1].upper()
 try:
-    NUM_STOCKS = int(sys.argv[2])
-    ENTRY_PRICE = float(sys.argv[3])
-    STOP_PRICE = float(sys.argv[4])
-    TARGET1_PRICE = float(sys.argv[5])
-    TARGET2_PRICE = float(sys.argv[6])
+    ENTRY_PRICE = float(sys.argv[2])
+    STOP_PRICE = float(sys.argv[3])
+    TARGET1_PRICE = float(sys.argv[4])
+    TARGET2_PRICE = float(sys.argv[5])
 except ValueError:
-    print("Error: NUM_STOCKS must be an integer and price arguments must be numeric values")
-    _print_usage()
-    sys.exit(1)
-
-if NUM_STOCKS <= 0:
-    print("Error: NUM_STOCKS must be a positive integer")
-    _print_usage()
-    sys.exit(1)
-
-if NUM_STOCKS % 2 != 0:
-    print(f"Error: NUM_STOCKS must be an even number, got {NUM_STOCKS}")
+    print("Error: ENTRY_PRICE, STOP_PRICE, TARGET1_PRICE and TARGET2_PRICE must be numeric values")
     _print_usage()
     sys.exit(1)
 
@@ -97,10 +86,9 @@ data_client = (
 )
 
 # Trading parameters
-NUM_CONTRACTS = NUM_STOCKS
-FIRST_TARGET_QTY = NUM_STOCKS // 2
-SECOND_TARGET_QTY = NUM_STOCKS - FIRST_TARGET_QTY
-TOTAL_QTY = float(NUM_STOCKS)
+QTY_PER_CONTRACT = 0.1 if IS_CRYPTO else 1
+NUM_CONTRACTS = 2
+TOTAL_QTY = QTY_PER_CONTRACT * NUM_CONTRACTS
 CHECK_INTERVAL = 5  # Check market every 5 seconds
 
 # Track state
@@ -114,7 +102,7 @@ print(f"╔═══════════════════════
 print(f"║     FOMO Trade Bot for {SYMBOL:<22} ║")
 print(f"╠════════════════════════════════════════╣")
 print(f"║ Entry Price:      ${ENTRY_PRICE:.2f}")
-print(f"║ Shares:           {NUM_STOCKS} (Target1: {FIRST_TARGET_QTY}, Target2: {SECOND_TARGET_QTY})")
+print(f"║ Contracts:        {NUM_CONTRACTS} x {QTY_PER_CONTRACT} {'BTC' if IS_CRYPTO else 'shares'} = {TOTAL_QTY} {'BTC' if IS_CRYPTO else 'shares'}")
 print(f"║ Stop Price:       ${STOP_PRICE:.2f}")
 print(f"║ Profit Target 1:  ${TARGET1_PRICE:.2f}")
 print(f"║ Profit Target 2:  ${TARGET2_PRICE:.2f}")
@@ -245,13 +233,13 @@ try:
             # Check if first profit target reached
             elif not first_contract_sold and current_price >= TARGET1_PRICE:
                 print(f"\n✓ FIRST PROFIT TARGET HIT at ${current_price:.2f}!")
-                print(f"[{datetime.now().strftime('%H:%M:%S')}] Selling first half ({FIRST_TARGET_QTY} {SYMBOL})...")
+                print(f"[{datetime.now().strftime('%H:%M:%S')}] Selling first contract ({QTY_PER_CONTRACT} {SYMBOL})...")
                 
                 try:
                     # Sell first contract
                     sell_order = MarketOrderRequest(
                         symbol=SYMBOL,
-                        qty=FIRST_TARGET_QTY,
+                        qty=QTY_PER_CONTRACT,
                         side=OrderSide.SELL,
                         time_in_force=TimeInForce.GTC
                     )

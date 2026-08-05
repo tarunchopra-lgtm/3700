@@ -40,11 +40,63 @@ def format_price(val):
     except (TypeError, ValueError):
         return "Market"
 
+def print_account_balance():
+    try:
+        account = trading_client.get_account()
+        cash = getattr(account, 'cash', None)
+        buying_power = getattr(account, 'buying_power', None)
+        portfolio_value = getattr(account, 'portfolio_value', None)
+        equity = getattr(account, 'equity', None)
+
+        print(f"\n{'─'*64}")
+        print(f"  ACCOUNT BALANCE")
+        print(f"{'─'*64}")
+        print(f"  Cash:          {format_price(cash)}")
+        print(f"  Buying Power:  {format_price(buying_power)}")
+        if equity is not None:
+            print(f"  Equity:        {format_price(equity)}")
+        if portfolio_value is not None:
+            print(f"  Portfolio Val: {format_price(portfolio_value)}")
+    except Exception as e:
+        print(f"  ✗ Error fetching account balance: {e}")
+
+def get_current_positions():
+    positions = list(trading_client.get_all_positions())
+    return filter_symbol(positions)
+
+def close_position_by_symbol(symbol: str):
+    try:
+        response = trading_client.close_position(symbol=symbol)
+        print(f"  ✓ Closed {symbol} at market price. Order ID: {getattr(response, 'id', 'N/A')}")
+        return True
+    except Exception as e:
+        print(f"  ✗ Error closing {symbol}: {e}")
+        return False
+
+def close_all_displayed_positions(positions):
+    if not positions:
+        print("  ✗ No positions to close")
+        return
+
+    confirm = input(f"Close ALL {len(positions)} displayed position(s) at market price? (Y/N): ").strip().upper()
+    if confirm != 'Y':
+        print("  Cancelled.")
+        return
+
+    closed = 0
+    for pos in positions:
+        if close_position_by_symbol(pos.symbol):
+            closed += 1
+
+    print(f"  ✓ Closed {closed}/{len(positions)} position(s)")
+
 print(f"\n╔{'═'*62}╗")
 print(f"║  ACCOUNT STATUS  {'Paper' if PAPER else 'Live':>6} | {datetime.now().strftime('%Y-%m-%d %H:%M:%S'):<20}  ║")
 if SYMBOL_FILTER:
     print(f"║  Filter: {SYMBOL_FILTER:<52}║")
 print(f"╚{'═'*62}╝")
+
+print_account_balance()
 
 # ── OPEN ORDERS ──────────────────────────────────────────────
 print(f"\n{'─'*64}")
@@ -99,9 +151,9 @@ except Exception as e:
 print(f"\n{'─'*64}")
 print(f"  CURRENT POSITIONS")
 print(f"{'─'*64}")
+positions = []
 try:
-    positions = list(trading_client.get_all_positions())
-    positions = filter_symbol(positions)
+    positions = get_current_positions()
     if not positions:
         print("  (none)")
     else:
@@ -124,5 +176,39 @@ try:
             print()
 except Exception as e:
     print(f"  ✗ Error fetching positions: {e}")
+
+if positions:
+    while True:
+        print(f"\n{'─'*64}")
+        print("  POSITION ACTIONS")
+        print(f"{'─'*64}")
+        for i, pos in enumerate(positions, 1):
+            print(f"  [{i}] Close {pos.symbol} at market")
+        print("  [A] Close ALL displayed positions at market")
+        print("  [R] Refresh")
+        print("  [Q] Quit")
+
+        choice = input("Select an option: ").strip().upper()
+
+        if choice == 'Q':
+            break
+        if choice == 'R':
+            break
+        if choice == 'A':
+            close_all_displayed_positions(positions)
+            break
+        if choice.isdigit():
+            index = int(choice)
+            if 1 <= index <= len(positions):
+                selected = positions[index - 1]
+                confirm = input(f"Close {selected.symbol} at market price? (Y/N): ").strip().upper()
+                if confirm == 'Y':
+                    close_position_by_symbol(selected.symbol)
+                else:
+                    print("  Cancelled.")
+                break
+            print(f"  ✗ Invalid selection. Choose 1-{len(positions)}, A, R, or Q.")
+            continue
+        print(f"  ✗ Invalid input. Choose 1-{len(positions)}, A, R, or Q.")
 
 print(f"{'─'*64}\n")

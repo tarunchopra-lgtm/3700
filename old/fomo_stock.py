@@ -25,10 +25,12 @@ Features:
 
 import os
 import sys
+from alpaca.common.exceptions import APIError
 from alpaca.trading.requests import MarketOrderRequest, LimitOrderRequest, GetOrdersRequest
 from alpaca.trading.enums import OrderSide, TimeInForce, QueryOrderStatus
 from alpaca.data.historical import StockHistoricalDataClient
 from alpaca.data.requests import StockLatestTradeRequest
+from alpaca.data.enums import DataFeed
 import time
 from datetime import datetime
 
@@ -68,6 +70,20 @@ def _get_open_orders_for_symbol(symbol: str):
         )
     )
     return [o for o in orders if _normalize_symbol(getattr(o, "symbol", "")) == target]
+
+
+def _get_latest_stock_price(symbol: str) -> float:
+    try:
+        req = StockLatestTradeRequest(symbol_or_symbols=symbol, feed=DataFeed.IEX)
+        trade_map = data_client.get_stock_latest_trade(req)
+        return float(trade_map[symbol].price)
+    except APIError as exc:
+        message = str(exc).lower()
+        if "subscription does not permit querying recent sip data" not in message:
+            raise
+        req = StockLatestTradeRequest(symbol_or_symbols=symbol)
+        trade_map = data_client.get_stock_latest_trade(req)
+        return float(trade_map[symbol].price)
 
 # Parse arguments
 if len(sys.argv) < 6:
@@ -142,8 +158,7 @@ if existing_position:
 else:
     # Check current price before placing buy — only buy if price is AT or BELOW entry (valid limit)
     try:
-        _check = data_client.get_stock_latest_trade(StockLatestTradeRequest(symbol_or_symbols=SYMBOL))
-        _current = _check[SYMBOL].price
+        _current = _get_latest_stock_price(SYMBOL)
         print(f"[{datetime.now().strftime('%H:%M:%S')}] Current price: ${_current:.2f} | Entry limit: ${ENTRY_PRICE:.2f}")
         if _current > ENTRY_PRICE:
             print(f"⚠ Current price ${_current:.2f} is ABOVE entry ${ENTRY_PRICE:.2f}")
@@ -179,9 +194,7 @@ try:
     while True:
         try:
             # Get current price
-            price_request = StockLatestTradeRequest(symbol_or_symbols=SYMBOL)
-            latest_trade = data_client.get_stock_latest_trade(price_request)
-            current_price = latest_trade[SYMBOL].price
+            current_price = _get_latest_stock_price(SYMBOL)
             
             # Get current position (with retries for fill/position propagation lag)
             current_position = _find_position_for_symbol(SYMBOL, retries=3, delay_seconds=1.0)

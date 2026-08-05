@@ -1,17 +1,15 @@
 from __future__ import annotations
 
-import math
 import subprocess
 import sys
 import time
-from datetime import datetime, timedelta, timezone
+from datetime import datetime
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
 from alpaca.data.enums import DataFeed
-from alpaca.data.historical import StockHistoricalDataClient
-from alpaca.data.requests import StockBarsRequest
-from alpaca.data.timeframe import TimeFrame
+from alpaca.data.historical import CryptoHistoricalDataClient, StockHistoricalDataClient
+from alpaca.data.requests import CryptoLatestTradeRequest, StockLatestTradeRequest
 
 from roles.credentials import bootstrap_trading_auth
 
@@ -28,63 +26,23 @@ def _ensure_symbol(symbol: str) -> str:
     return sanitized
 
 
-def _extract_symbol_bars(bars, symbol: str):
-    data = getattr(bars, "data", None)
-    if data is None and isinstance(bars, dict):
-        data = bars.get("data")
+def _get_current_price(symbol: str, credentials) -> float:
+    if "/" in symbol:
+        data_client = CryptoHistoricalDataClient(credentials.api_key, credentials.secret_key)
+        request = CryptoLatestTradeRequest(symbol_or_symbols=symbol)
+        trade_map = data_client.get_crypto_latest_trade(request)
+        trade = trade_map[symbol]
+        return float(trade.price)
 
-    if isinstance(data, dict):
-        symbol_bars = data.get(symbol) or data.get(symbol.upper())
-        if symbol_bars is None:
-            symbol_bars = next(iter(data.values()), None)
-        return list(symbol_bars) if symbol_bars is not None else []
-
-    return list(data) if data is not None else []
-
-
-def _get_previous_day_close(data_client: StockHistoricalDataClient, symbol: str) -> float:
-    now = datetime.now(timezone.utc)
-    request = StockBarsRequest(
-        symbol_or_symbols=symbol,
-        timeframe=TimeFrame.Day,
-        start=now - timedelta(days=20),
-        end=now,
-        limit=20,
-        feed=DataFeed.IEX,
-    )
-    bars = data_client.get_stock_bars(request)
-    bar_list = _extract_symbol_bars(bars, symbol)
-    if not bar_list:
-        raise RuntimeError(f"No daily bars returned for {symbol}")
-
-    today = now.date()
-    previous_day_bar = None
-
-    for bar in reversed(bar_list):
-        ts = getattr(bar, "timestamp", None)
-        bar_date = ts.date() if ts is not None and hasattr(ts, "date") else None
-        if bar_date is not None and bar_date < today:
-            previous_day_bar = bar
-            break
-
-    if previous_day_bar is None:
-        if len(bar_list) >= 2:
-            previous_day_bar = bar_list[-2]
-        else:
-            previous_day_bar = bar_list[-1]
-
-    close = getattr(previous_day_bar, "close", None)
-    if close is None and isinstance(previous_day_bar, dict):
-        close = previous_day_bar.get("close")
-
-    if close is None:
-        raise RuntimeError(f"Could not read previous-day close for {symbol}")
-
-    return float(close)
+    data_client = StockHistoricalDataClient(credentials.api_key, credentials.secret_key)
+    request = StockLatestTradeRequest(symbol_or_symbols=symbol, feed=DataFeed.IEX)
+    trade_map = data_client.get_stock_latest_trade(request)
+    trade = trade_map[symbol]
+    return float(trade.price)
 
 
-def _calculate_levels(previous_close: float) -> tuple[float, float, float, float]:
-    entry_price = float(math.ceil(previous_close))
+def _calculate_levels(current_price: float) -> tuple[float, float, float, float]:
+    entry_price = round(current_price, 2)
     stop_loss = round(entry_price * 0.99, 2)
     target1 = round(entry_price * 1.01, 2)
     target2 = round(entry_price * 1.03, 2)
@@ -96,7 +54,7 @@ def _calculate_levels(previous_close: float) -> tuple[float, float, float, float
     if target2 <= target1:
         target2 = round(target1 + 0.01, 2)
 
-    return previous_close, entry_price, stop_loss, target1, target2
+    return entry_price, stop_loss, target1, target2
 
 
 def _build_fomo_trade_command(symbol: str, num_stocks: int, entry: float, stop: float, target1: float, target2: float) -> list[str]:
@@ -114,9 +72,9 @@ def _build_fomo_trade_command(symbol: str, num_stocks: int, entry: float, stop: 
 
 
 def _compute_levels(credentials, symbol: str) -> tuple[float, float, float, float, float]:
-    data_client = StockHistoricalDataClient(credentials.api_key, credentials.secret_key)
-    previous_close = _get_previous_day_close(data_client, symbol)
-    return _calculate_levels(previous_close)
+    current_price = _get_current_price(symbol, credentials)
+    entry, stop, target1, target2 = _calculate_levels(current_price)
+    return current_price, entry, stop, target1, target2
 
 
 def _is_after_refresh_cutoff(now_pt: datetime) -> bool:
@@ -143,8 +101,8 @@ def _launch_fomo_trade(symbol: str, num_stocks: int, entry: float, stop: float, 
 
 def main() -> int:
     if len(sys.argv) != 3:
-        print("Usage: python previous_close.py <TICKER> <NUM_STOCKS>")
-        print("Example: python previous_close.py MU 2")
+        print("Usage: python fomo_market.py <TICKER> <NUM_STOCKS>")
+        print("Example: python fomo_market.py MU 2")
         return 1
 
     try:
@@ -158,23 +116,26 @@ def main() -> int:
         print("NUM_STOCKS must be a positive integer")
         return 1
 
-    # This prints auth diagnostics and verifies account access.
+    if num_stocks % 2 != 0:
+        print(f"NUM_STOCKS must be an even number, got {num_stocks}")
+        return 1
+
     try:
-        credentials, _ = bootstrap_trading_auth("previous_close.py")
+        credentials, _ = bootstrap_trading_auth("fomo_market.py")
     except Exception as exc:
         print(f"Authentication failed: {exc}")
         return 1
 
     try:
-        prev_close, entry, stop, target1, target2 = _compute_levels(credentials, symbol)
+        current_price, entry, stop, target1, target2 = _compute_levels(credentials, symbol)
     except Exception as exc:
-        print(f"Failed to calculate levels from previous close: {exc}")
+        print(f"Failed to calculate levels from current price: {exc}")
         return 1
 
-    print("\nStrategy levels from previous close")
+    print("\nStrategy levels from current price")
     print(f"  Ticker:          {symbol}")
-    print(f"  Previous close:  {prev_close:.4f}")
-    print(f"  Entry (ceil):    {entry:.2f}")
+    print(f"  Current price:   {current_price:.4f}")
+    print(f"  Entry (market):  {entry:.2f}")
     print(f"  Stop loss (1%):  {stop:.2f}")
     print(f"  Target 1 (1%):   {target1:.2f}")
     print(f"  Target 2 (3%):   {target2:.2f}")
@@ -189,26 +150,26 @@ def main() -> int:
             now_pt = datetime.now(PT_TZ)
             print(
                 f"[CHECK {now_pt.strftime('%Y-%m-%d %H:%M:%S %Z')}] "
-                f"Ticker={symbol} | PreviousClose={prev_close:.4f} | BuyLimit={entry:.2f}"
+                f"Ticker={symbol} | CurrentPrice={current_price:.4f} | BuyLimit={entry:.2f}"
             )
 
             if _is_after_refresh_cutoff(now_pt) and last_daily_refresh_date != now_pt.date():
-                print("\n[INFO] 2:00 PM Pacific cutoff reached. Refreshing strategy levels from latest previous close...")
+                print("\n[INFO] 2:00 PM Pacific cutoff reached. Refreshing strategy levels from current price...")
                 try:
-                    new_prev_close, new_entry, new_stop, new_target1, new_target2 = _compute_levels(credentials, symbol)
+                    new_current, new_entry, new_stop, new_target1, new_target2 = _compute_levels(credentials, symbol)
                 except Exception as exc:
                     print(f"[WARN] Refresh failed: {exc}. Will retry on next check.")
                 else:
-                    prev_close, entry, stop, target1, target2 = (
-                        new_prev_close,
+                    current_price, entry, stop, target1, target2 = (
+                        new_current,
                         new_entry,
                         new_stop,
                         new_target1,
                         new_target2,
                     )
                     print("[INFO] Updated strategy levels")
-                    print(f"  Previous close:  {prev_close:.4f}")
-                    print(f"  Entry (ceil):    {entry:.2f}")
+                    print(f"  Current price:   {current_price:.4f}")
+                    print(f"  Entry (market):  {entry:.2f}")
                     print(f"  Stop loss (1%):  {stop:.2f}")
                     print(f"  Target 1 (1%):   {target1:.2f}")
                     print(f"  Target 2 (3%):   {target2:.2f}")
@@ -229,7 +190,7 @@ def main() -> int:
         _terminate_process(process)
         return 0
     except Exception as exc:
-        print(f"Failed to start fomo_trade.py: {exc}")
+        print(f"Failed to run wrapper: {exc}")
         _terminate_process(process)
         return 1
 

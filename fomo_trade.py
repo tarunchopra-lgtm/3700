@@ -1,7 +1,9 @@
 import os
 import sys
+from alpaca.common.exceptions import APIError
 from alpaca.trading.requests import MarketOrderRequest, LimitOrderRequest, GetOrdersRequest
 from alpaca.trading.enums import OrderSide, TimeInForce, QueryOrderStatus
+from alpaca.data.enums import DataFeed
 from alpaca.data.historical import CryptoHistoricalDataClient, StockHistoricalDataClient
 from alpaca.data.requests import CryptoLatestTradeRequest, StockLatestTradeRequest
 import time
@@ -42,6 +44,34 @@ def _get_open_orders_for_symbol(symbol: str):
         )
     )
     return [o for o in orders if _normalize_symbol(getattr(o, "symbol", "")) == target]
+
+
+def _place_entry_order() -> str:
+    entry_order = MarketOrderRequest(
+        symbol=SYMBOL,
+        qty=TOTAL_QTY,
+        side=OrderSide.BUY,
+        time_in_force=TimeInForce.GTC,
+    )
+    entry_response = trading_client.submit_order(order_data=entry_order)
+    return str(entry_response.id)
+
+
+def _get_current_price(symbol: str) -> float:
+    if IS_CRYPTO:
+        price_request = CryptoLatestTradeRequest(symbol_or_symbols=symbol)
+        latest_trade = data_client.get_crypto_latest_trade(price_request)
+    else:
+        price_request = StockLatestTradeRequest(symbol_or_symbols=symbol, feed=DataFeed.IEX)
+        latest_trade = data_client.get_stock_latest_trade(price_request)
+    return float(latest_trade[symbol].price)
+
+
+def _normalize_position_qty(raw_qty: float) -> float | int:
+    if IS_CRYPTO:
+        return abs(float(raw_qty))
+    # Stock orders should use whole-share integer quantities.
+    return max(int(round(abs(float(raw_qty)))), 0)
 
 def _print_usage() -> None:
     print("Usage: python fomo_trade.py <TICKER> <NUM_STOCKS> <ENTRY_PRICE> <STOP_PRICE> <TARGET1_PRICE> <TARGET2_PRICE>")
@@ -102,6 +132,7 @@ FIRST_TARGET_QTY = NUM_STOCKS // 2
 SECOND_TARGET_QTY = NUM_STOCKS - FIRST_TARGET_QTY
 TOTAL_QTY = float(NUM_STOCKS)
 CHECK_INTERVAL = 5  # Check market every 5 seconds
+FLAT_CHECK_INTERVAL = 1  # Faster checks while waiting for a re-entry trigger
 
 # Track state
 entry_order_id = None
@@ -109,6 +140,8 @@ first_contract_sold = False
 breakeven_stop_set = False
 current_stop_loss = STOP_PRICE
 second_contract_stop_loss = None
+awaiting_reentry_after_stop = False
+last_observed_price = None
 
 print(f"╔════════════════════════════════════════╗")
 print(f"║     FOMO Trade Bot for {SYMBOL:<22} ║")
@@ -130,22 +163,10 @@ if existing_position:
     print(f"  Monitoring existing position...")
     # Don't place new order
 else:
-    print(f"[{datetime.now().strftime('%H:%M:%S')}] No existing position. Placing entry order for {TOTAL_QTY} {SYMBOL} at limit price ${ENTRY_PRICE:.2f}...")
-    try:
-        entry_order = LimitOrderRequest(
-            symbol=SYMBOL,
-            qty=TOTAL_QTY,
-            side=OrderSide.BUY,
-            limit_price=ENTRY_PRICE,
-            time_in_force=TimeInForce.GTC
-        )
-        entry_response = trading_client.submit_order(order_data=entry_order)
-        entry_order_id = entry_response.id
-        print(f"✓ Limit buy order placed at ${ENTRY_PRICE:.2f}. Order ID: {entry_order_id}")
-        time.sleep(2)  # Wait a moment
-    except Exception as e:
-        print(f"✗ Error placing entry order: {e}")
-        sys.exit(1)
+    print(
+        f"[{datetime.now().strftime('%H:%M:%S')}] No existing position. "
+        f"Waiting for price to reach/reclaim entry ${ENTRY_PRICE:.2f} for {SYMBOL}."
+    )
 
 print(f"[{datetime.now().strftime('%H:%M:%S')}] Stop loss set at ${STOP_PRICE:.2f}")
 print(f"(Stop loss will be monitored and executed automatically)")
@@ -157,13 +178,13 @@ try:
     while True:
         try:
             # Get current price
-            if IS_CRYPTO:
-                price_request = CryptoLatestTradeRequest(symbol_or_symbols=SYMBOL)
-                latest_trade = data_client.get_crypto_latest_trade(price_request)
-            else:
-                price_request = StockLatestTradeRequest(symbol_or_symbols=SYMBOL)
-                latest_trade = data_client.get_stock_latest_trade(price_request)
-            current_price = latest_trade[SYMBOL].price
+            current_price = _get_current_price(SYMBOL)
+
+            crossed_above_entry = (
+                last_observed_price is not None
+                and last_observed_price < ENTRY_PRICE
+                and current_price >= ENTRY_PRICE
+            )
             
             # Get current position
             current_position = _find_position_for_symbol(SYMBOL, retries=3, delay_seconds=1.0)
@@ -180,18 +201,60 @@ try:
                         f"{len(buy_orders)} BUY order(s) still open for {SYMBOL}."
                     )
                 else:
-                    print(
-                        f"[{datetime.now().strftime('%H:%M:%S')}] No position and no open BUY orders "
-                        f"for {SYMBOL}."
-                    )
-                time.sleep(CHECK_INTERVAL)
+                    if awaiting_reentry_after_stop and crossed_above_entry:
+                        print(
+                            f"[{datetime.now().strftime('%H:%M:%S')}] Re-entry trigger: "
+                            f"price crossed above entry (${last_observed_price:.2f} -> ${current_price:.2f}). "
+                            f"Submitting BUY for {TOTAL_QTY} {SYMBOL}..."
+                        )
+                        try:
+                            entry_order_id = _place_entry_order()
+                            first_contract_sold = False
+                            breakeven_stop_set = False
+                            second_contract_stop_loss = None
+                            awaiting_reentry_after_stop = False
+                            print(f"✓ Re-entry BUY submitted. Order ID: {entry_order_id}")
+                        except Exception as e:
+                            print(f"✗ Error submitting re-entry BUY: {e}")
+                    elif not awaiting_reentry_after_stop and current_price >= ENTRY_PRICE:
+                        print(
+                            f"[{datetime.now().strftime('%H:%M:%S')}] Initial entry trigger: "
+                            f"price ${current_price:.2f} >= entry ${ENTRY_PRICE:.2f}. "
+                            f"Submitting BUY for {TOTAL_QTY} {SYMBOL}..."
+                        )
+                        try:
+                            entry_order_id = _place_entry_order()
+                            first_contract_sold = False
+                            breakeven_stop_set = False
+                            second_contract_stop_loss = None
+                            print(f"✓ Entry BUY submitted. Order ID: {entry_order_id}")
+                        except Exception as e:
+                            print(f"✗ Error submitting entry BUY: {e}")
+                    else:
+                        print(
+                            f"[{datetime.now().strftime('%H:%M:%S')}] No position and no open BUY orders "
+                            f"for {SYMBOL}. Waiting for re-entry at ${ENTRY_PRICE:.2f} "
+                            f"(current ${current_price:.2f})."
+                        )
+                last_observed_price = current_price
+                time.sleep(FLAT_CHECK_INTERVAL)
                 continue
             
             # Calculate P&L
-            current_qty = float(current_position.qty)
+            current_qty = _normalize_position_qty(float(current_position.qty))
             unrealized_pnl = float(current_position.unrealized_pl)
+
+            if current_qty == 0:
+                print(f"[{datetime.now().strftime('%H:%M:%S')}] Position qty resolved to 0. Waiting for next refresh...")
+                time.sleep(CHECK_INTERVAL)
+                continue
             
-            print(f"[{datetime.now().strftime('%H:%M:%S')}] Price: ${current_price:.2f} | Position: {current_qty} | P&L: ${unrealized_pnl:.2f}", end="")
+            active_stop = second_contract_stop_loss if (first_contract_sold and breakeven_stop_set) else current_stop_loss
+            print(
+                f"[{datetime.now().strftime('%H:%M:%S')}] Price: ${current_price:.2f} | "
+                f"Position: {current_qty} | Stop: ${active_stop:.2f} | P&L: ${unrealized_pnl:.2f}",
+                end=""
+            )
             
             # CHECK STOP LOSS FIRST
             # Stop loss for all contracts initially
@@ -214,6 +277,8 @@ try:
                     first_contract_sold = False
                     breakeven_stop_set = False
                     second_contract_stop_loss = None
+                    awaiting_reentry_after_stop = True
+                    last_observed_price = current_price
                     print(f"\n[{datetime.now().strftime('%H:%M:%S')}] Ready for next trade...\n")
                 except Exception as e:
                     print(f"✗ Error executing stop loss: {e}")
@@ -238,6 +303,8 @@ try:
                     first_contract_sold = False
                     breakeven_stop_set = False
                     second_contract_stop_loss = None
+                    awaiting_reentry_after_stop = True
+                    last_observed_price = current_price
                     print(f"\n[{datetime.now().strftime('%H:%M:%S')}] Ready for next trade...\n")
                 except Exception as e:
                     print(f"✗ Error executing breakeven stop: {e}")
@@ -289,12 +356,15 @@ try:
                     first_contract_sold = False
                     breakeven_stop_set = False
                     second_contract_stop_loss = None
+                    awaiting_reentry_after_stop = False
                     print(f"\n[{datetime.now().strftime('%H:%M:%S')}] Ready for next trade...\n")
                 except Exception as e:
                     print(f"✗ Error closing position: {e}")
             
             else:
                 print()
+
+            last_observed_price = current_price
             
             time.sleep(CHECK_INTERVAL)
         

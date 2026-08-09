@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Inspect this week's call option for a ticker or current stock positions.
+"""Inspect this week's call and put options for a ticker or current stock positions.
 
 Usage:
     python current_week_option.py [TICKER]
@@ -7,8 +7,8 @@ Usage:
 If TICKER is provided, the script uses the ticker's current price as the
 reference price. If no ticker is provided, it inspects the account's current
 stock positions and uses each position's buy price as the reference price.
-For each reference price, it finds the nearest call option expiring this week
-and prints the option's latest price, volume, and open interest.
+For each reference price, it finds the nearest call and put options expiring
+this week and prints each option's latest price, volume, and open interest.
 """
 
 from __future__ import annotations
@@ -20,7 +20,7 @@ from datetime import date, timedelta
 from alpaca.data import TimeFrame
 from alpaca.data.enums import DataFeed, OptionsFeed
 from alpaca.data.historical import OptionHistoricalDataClient, StockHistoricalDataClient
-from alpaca.data.requests import OptionBarsRequest, OptionLatestTradeRequest, StockLatestTradeRequest
+from alpaca.data.requests import OptionBarsRequest, OptionLatestQuoteRequest, StockLatestTradeRequest
 from alpaca.trading.enums import AssetStatus, ContractType
 from alpaca.trading.requests import GetOptionContractsRequest
 
@@ -93,11 +93,11 @@ def get_current_underlying_price(symbol: str, stock_data_client: StockHistorical
     return float(price)
 
 
-def get_option_contracts_for_week(trading_client, symbol: str, expiration: date):
+def get_option_contracts_for_week(trading_client, symbol: str, expiration: date, contract_type: ContractType):
     request = GetOptionContractsRequest(
         underlying_symbols=[symbol],
         expiration_date=expiration,
-        type=ContractType.CALL,
+        type=contract_type,
         status=AssetStatus.ACTIVE,
         limit=1000,
     )
@@ -119,11 +119,20 @@ def pick_nearest_contract(contracts, target_price: float):
 
 
 def get_option_price_volume(option_data_client: OptionHistoricalDataClient, contract_symbol: str):
-    latest_trade_response = option_data_client.get_option_latest_trade(
-        OptionLatestTradeRequest(symbol_or_symbols=contract_symbol, feed=OptionsFeed.INDICATIVE)
+    latest_quote_response = option_data_client.get_option_latest_quote(
+        OptionLatestQuoteRequest(symbol_or_symbols=contract_symbol, feed=OptionsFeed.INDICATIVE)
     )
-    latest_trade = latest_trade_response.get(contract_symbol) if isinstance(latest_trade_response, dict) else latest_trade_response
-    option_price = getattr(latest_trade, "price", None)
+    latest_quote = latest_quote_response.get(contract_symbol) if isinstance(latest_quote_response, dict) else latest_quote_response
+    bid_price = getattr(latest_quote, "bid_price", None)
+    ask_price = getattr(latest_quote, "ask_price", None)
+
+    option_price = None
+    if bid_price is not None and ask_price is not None:
+        option_price = (float(bid_price) + float(ask_price)) / 2.0
+    elif bid_price is not None:
+        option_price = float(bid_price)
+    elif ask_price is not None:
+        option_price = float(ask_price)
 
     bars_response = option_data_client.get_option_bars(
         OptionBarsRequest(
@@ -141,6 +150,7 @@ def get_option_price_volume(option_data_client: OptionHistoricalDataClient, cont
 
 
 def print_contract_summary(
+    option_side: str,
     symbol: str,
     reference_price: float,
     expiration: date,
@@ -152,14 +162,11 @@ def print_contract_summary(
     strike_price = float(getattr(contract, "strike_price", 0.0))
     contract_symbol = getattr(contract, "symbol", symbol)
 
-    print(f"\n{symbol}")
-    print(f"  Reference price: {format_money(reference_price)}")
-    print(f"  Expiration:      {expiration.isoformat()}")
-    print(f"  Contract:        {contract_symbol}")
-    print(f"  Strike:          {format_money(strike_price)}")
-    print(f"  Option price:    {format_money(option_price)}")
-    print(f"  Volume:          {format_number(volume)}")
-    print(f"  Open interest:   {format_number(open_interest)}")
+    print(f"  {option_side} Contract:      {contract_symbol}")
+    print(f"  {option_side} Strike:        {format_money(strike_price)}")
+    print(f"  {option_side} Mid Price:     {format_money(option_price)}")
+    print(f"  {option_side} Volume:        {format_number(volume)}")
+    print(f"  {option_side} Open Interest: {format_number(open_interest)}")
 
 
 def main() -> None:
@@ -192,29 +199,59 @@ def main() -> None:
     print(f"Current week expiration: {expiration.isoformat()}")
 
     for reference in references:
+        print(f"\n{reference.symbol}")
+        print(f"  Reference price: {format_money(reference.reference_price)}")
+        print(f"  Expiration:      {expiration.isoformat()}")
+
         try:
-            contracts = get_option_contracts_for_week(trading_client, reference.symbol, expiration)
-            if not contracts:
-                print(f"\n{reference.symbol}")
-                print(f"  No active call contracts found for {expiration.isoformat()}")
-                continue
-
-            selected_contract = pick_nearest_contract(contracts, reference.reference_price)
-            option_price, volume = get_option_price_volume(option_data_client, selected_contract.symbol)
-            full_contract = trading_client.get_option_contract(selected_contract.symbol)
-            open_interest = getattr(full_contract, "open_interest", None)
-
-            print_contract_summary(
+            call_contracts = get_option_contracts_for_week(
+                trading_client,
                 reference.symbol,
-                reference.reference_price,
                 expiration,
-                full_contract,
-                option_price,
-                volume,
-                open_interest,
+                ContractType.CALL,
             )
+            if not call_contracts:
+                print(f"  No active CALL contracts found for {expiration.isoformat()}")
+            else:
+                selected_call_contract = pick_nearest_contract(call_contracts, reference.reference_price)
+                call_price, call_volume = get_option_price_volume(option_data_client, selected_call_contract.symbol)
+                full_call_contract = trading_client.get_option_contract(selected_call_contract.symbol)
+                call_open_interest = getattr(full_call_contract, "open_interest", None)
+                print_contract_summary(
+                    "CALL",
+                    reference.symbol,
+                    reference.reference_price,
+                    expiration,
+                    full_call_contract,
+                    call_price,
+                    call_volume,
+                    call_open_interest,
+                )
+
+            put_contracts = get_option_contracts_for_week(
+                trading_client,
+                reference.symbol,
+                expiration,
+                ContractType.PUT,
+            )
+            if not put_contracts:
+                print(f"  No active PUT contracts found for {expiration.isoformat()}")
+            else:
+                selected_put_contract = pick_nearest_contract(put_contracts, reference.reference_price)
+                put_price, put_volume = get_option_price_volume(option_data_client, selected_put_contract.symbol)
+                full_put_contract = trading_client.get_option_contract(selected_put_contract.symbol)
+                put_open_interest = getattr(full_put_contract, "open_interest", None)
+                print_contract_summary(
+                    "PUT",
+                    reference.symbol,
+                    reference.reference_price,
+                    expiration,
+                    full_put_contract,
+                    put_price,
+                    put_volume,
+                    put_open_interest,
+                )
         except Exception as exc:
-            print(f"\n{reference.symbol}")
             print(f"  Error: {exc}")
 
 

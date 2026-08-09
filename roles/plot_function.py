@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-Plot Function Module - Reusable trend plotting for stocks
+Plot Function Module - Reusable trend plotting for stocks and crypto.
 
 This module provides the plot_stock_chart function that can be imported and used
-by other programs to visualize stock data with trend lines.
+by other programs to visualize market data with trend lines.
 """
 
 import os
@@ -11,13 +11,18 @@ import pandas as pd
 from datetime import datetime, timedelta
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
-from alpaca.data.requests import StockBarsRequest, StockTradesRequest
+from alpaca.data.requests import (
+    StockBarsRequest,
+    StockTradesRequest,
+    CryptoBarsRequest,
+    CryptoTradesRequest,
+)
 from alpaca.data.timeframe import TimeFrame
 from roles.base import BaseRole
 
 
 class StockPlotter(BaseRole):
-    """Plotter class for stock analysis and visualization"""
+    """Plotter class for stock/crypto analysis and visualization"""
     
     def __init__(self, symbol):
         super().__init__(symbol)
@@ -30,13 +35,22 @@ class StockPlotter(BaseRole):
         start_date = end_date - timedelta(days=lookback_candles + 5)
         
         try:
-            request = StockBarsRequest(
-                symbol_or_symbols=self.symbol,
-                start=start_date,
-                end=end_date,
-                timeframe=TimeFrame.Day
-            )
-            bars_data = self.data_client.get_stock_bars(request)
+            if self.is_crypto:
+                request = CryptoBarsRequest(
+                    symbol_or_symbols=self.symbol,
+                    start=start_date,
+                    end=end_date,
+                    timeframe=TimeFrame.Day,
+                )
+                bars_data = self.data_client.get_crypto_bars(request)
+            else:
+                request = StockBarsRequest(
+                    symbol_or_symbols=self.symbol,
+                    start=start_date,
+                    end=end_date,
+                    timeframe=TimeFrame.Day,
+                )
+                bars_data = self.data_client.get_stock_bars(request)
             
             df = bars_data.df
             if isinstance(df.index, pd.MultiIndex):
@@ -47,11 +61,11 @@ class StockPlotter(BaseRole):
             if len(df) > lookback_candles:
                 df = df.tail(lookback_candles).reset_index(drop=True)
             
-            print(f"✓ Fetched {len(df)} daily bars")
+            print(f"OK: Fetched {len(df)} daily bars")
             return df
         
         except Exception as e:
-            print(f"✗ Error fetching daily bars: {e}")
+            print(f"ERROR: Error fetching daily bars: {e}")
             return None
     
     def get_volume_candles(self, volume_per_candle, lookback_candles=14):
@@ -62,18 +76,26 @@ class StockPlotter(BaseRole):
         start_date = end_date - timedelta(hours=6)
         
         try:
-            request = StockTradesRequest(
-                symbol_or_symbols=self.symbol,
-                start=start_date,
-                end=end_date
-            )
-            trades_data = self.data_client.get_stock_trades(request)
+            if self.is_crypto:
+                request = CryptoTradesRequest(
+                    symbol_or_symbols=self.symbol,
+                    start=start_date,
+                    end=end_date,
+                )
+                trades_data = self.data_client.get_crypto_trades(request)
+            else:
+                request = StockTradesRequest(
+                    symbol_or_symbols=self.symbol,
+                    start=start_date,
+                    end=end_date,
+                )
+                trades_data = self.data_client.get_stock_trades(request)
             
             df = trades_data.df
-            print(f"✓ Fetched {len(df):,} trades")
+            print(f"OK: Fetched {len(df):,} trades")
             
             if len(df) == 0:
-                print("✗ No trade data available")
+                print("ERROR: No trade data available")
                 return None
             
             # Reset index if needed
@@ -120,7 +142,7 @@ class StockPlotter(BaseRole):
                 candles.append(candle_data)
             
             df_candles = pd.DataFrame(candles)
-            print(f"✓ Created {len(df_candles)} volume candles ({volume_per_candle:,} volume each)")
+            print(f"OK: Created {len(df_candles)} volume candles ({volume_per_candle:,} volume each)")
             
             # Keep only last N candles
             if len(df_candles) > lookback_candles:
@@ -129,7 +151,7 @@ class StockPlotter(BaseRole):
             return df_candles
         
         except Exception as e:
-            print(f"✗ Error fetching trade data: {e}")
+            print(f"ERROR: Error fetching trade data: {e}")
             return None
     
     def get_yesterday_close(self):
@@ -137,14 +159,23 @@ class StockPlotter(BaseRole):
         try:
             end_date = datetime.now()
             start_date = end_date - timedelta(days=5)
-            
-            request = StockBarsRequest(
-                symbol_or_symbols=self.symbol,
-                start=start_date,
-                end=end_date,
-                timeframe=TimeFrame.Day
-            )
-            bars_data = self.data_client.get_stock_bars(request)
+
+            if self.is_crypto:
+                request = CryptoBarsRequest(
+                    symbol_or_symbols=self.symbol,
+                    start=start_date,
+                    end=end_date,
+                    timeframe=TimeFrame.Day,
+                )
+                bars_data = self.data_client.get_crypto_bars(request)
+            else:
+                request = StockBarsRequest(
+                    symbol_or_symbols=self.symbol,
+                    start=start_date,
+                    end=end_date,
+                    timeframe=TimeFrame.Day,
+                )
+                bars_data = self.data_client.get_stock_bars(request)
             
             df = bars_data.df
             if isinstance(df.index, pd.MultiIndex):
@@ -266,19 +297,19 @@ class StockPlotter(BaseRole):
         if filename:
             try:
                 plt.savefig(filename, dpi=100, bbox_inches='tight')
-                print(f"✓ Chart saved to {filename}")
+                print(f"OK: Chart saved to {filename}")
             except Exception as e:
-                print(f"⚠ Could not save chart: {e}")
+                print(f"WARN: Could not save chart: {e}")
         
         plt.show()
 
 
 def plot_stock_chart(symbol='MU', chart_type='daily', lookback_candles=14, volume_per_candle=None):
     """
-    Main function to plot stock chart
+    Main function to plot chart for stock or crypto
     
     Args:
-        symbol: Stock ticker (default: MU)
+        symbol: Ticker (stock like MU/AAPL or crypto like BTC/USD)
         chart_type: 'daily' for daily bars, 'vol' for volume-based candles (default: daily)
         lookback_candles: Number of candles to display (default: 14)
         volume_per_candle: Volume threshold for each candle (required if chart_type='vol')
@@ -299,14 +330,14 @@ def plot_stock_chart(symbol='MU', chart_type='daily', lookback_candles=14, volum
     # Get data
     if chart_type == 'vol':
         if volume_per_candle is None:
-            print("✗ Error: volume_per_candle required for 'vol' chart type")
+            print("ERROR: volume_per_candle required for 'vol' chart type")
             return
         df = plotter.get_volume_candles(volume_per_candle, lookback_candles)
     else:
         df = plotter.get_daily_bars(lookback_candles)
     
     if df is None or len(df) == 0:
-        print("✗ No data available")
+        print("ERROR: No data available")
         return
     
     # Generate filename

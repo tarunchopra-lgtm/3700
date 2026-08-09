@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import re
 import subprocess
 import sys
 import time
@@ -7,9 +8,9 @@ from datetime import datetime
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
-from alpaca.data.enums import DataFeed
-from alpaca.data.historical import CryptoHistoricalDataClient, StockHistoricalDataClient
-from alpaca.data.requests import CryptoLatestTradeRequest, StockLatestTradeRequest
+from alpaca.data.enums import DataFeed, OptionsFeed
+from alpaca.data.historical import CryptoHistoricalDataClient, StockHistoricalDataClient, OptionHistoricalDataClient
+from alpaca.data.requests import CryptoLatestTradeRequest, StockLatestTradeRequest, OptionLatestTradeRequest
 
 from roles.credentials import bootstrap_trading_auth
 
@@ -17,6 +18,11 @@ from roles.credentials import bootstrap_trading_auth
 CHECK_INTERVAL_SECONDS = 30
 DAILY_REFRESH_HOUR_PT = 14
 PT_TZ = ZoneInfo("America/Los_Angeles")
+OPTION_SYMBOL_PATTERN = re.compile(r"^[A-Z]{1,6}\d{6}[CP]\d{8}$")
+
+
+def _is_option_symbol(symbol: str) -> bool:
+    return bool(OPTION_SYMBOL_PATTERN.match(symbol.upper()))
 
 
 def _ensure_symbol(symbol: str) -> str:
@@ -31,6 +37,13 @@ def _get_current_price(symbol: str, credentials) -> float:
         data_client = CryptoHistoricalDataClient(credentials.api_key, credentials.secret_key)
         request = CryptoLatestTradeRequest(symbol_or_symbols=symbol)
         trade_map = data_client.get_crypto_latest_trade(request)
+        trade = trade_map[symbol]
+        return float(trade.price)
+
+    if _is_option_symbol(symbol):
+        data_client = OptionHistoricalDataClient(credentials.api_key, credentials.secret_key)
+        request = OptionLatestTradeRequest(symbol_or_symbols=symbol, feed=OptionsFeed.INDICATIVE)
+        trade_map = data_client.get_option_latest_trade(request)
         trade = trade_map[symbol]
         return float(trade.price)
 

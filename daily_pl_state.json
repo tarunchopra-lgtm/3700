@@ -1,0 +1,4020 @@
+{
+  "daily_realized_pnl": -573.9873,
+  "date": "2026-08-06",
+  "generated_at": "2026-08-06T19:54:45.848429-04:00",
+  "lookback_days": 365,
+  "note": "Realized P/L is estimated from matched fills using available order history.",
+  "symbols": {
+    "ETHUSD": {
+      "average_pnl_per_trade": -1.147974694898225,
+      "buy_qty": 332.0,
+      "realized_pnl": -573.9873474491125,
+      "sell_qty": 333.3319999989997,
+      "trade_count": 500
+    }
+  },
+  "timezone": "America/New_York",
+  "trade_count": 500,
+  "trade_log": [
+    {
+      "filled_at": "2026-08-06T17:46:13.298309-04:00",
+      "price": 1903.8,
+      "qty": 1.0,
+      "realized_pnl_delta": 0.0,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:46:18.537486-04:00",
+      "price": 1903.912,
+      "qty": 0.996,
+      "realized_pnl_delta": 0.0,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:46:26.020773-04:00",
+      "price": 1905.699,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:46:27.274281-04:00",
+      "price": 1904.288,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.411,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:46:32.514059-04:00",
+      "price": 1903.89,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.8018,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:46:39.987137-04:00",
+      "price": 1906.3,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:46:41.223634-04:00",
+      "price": 1903.862,
+      "qty": 1.0,
+      "realized_pnl_delta": -2.4356,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:46:46.462843-04:00",
+      "price": 1904.4,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.8924,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:46:53.952825-04:00",
+      "price": 1906.0,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:46:55.199540-04:00",
+      "price": 1903.95,
+      "qty": 1.0,
+      "realized_pnl_delta": -2.0524,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:47:00.440105-04:00",
+      "price": 1904.146,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.8466,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:47:07.928843-04:00",
+      "price": 1906.3,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:47:09.176767-04:00",
+      "price": 1904.8,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.4964,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:47:14.420749-04:00",
+      "price": 1904.4,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.8924,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:47:21.904754-04:00",
+      "price": 1905.8,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:47:23.144780-04:00",
+      "price": 1903.939,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.869,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:47:28.385947-04:00",
+      "price": 1904.53,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.2649,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:47:35.863713-04:00",
+      "price": 1905.5,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:47:37.103659-04:00",
+      "price": 1903.7,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.806,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:47:42.346355-04:00",
+      "price": 1904.14,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.3546,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:47:49.907034-04:00",
+      "price": 1906.0,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:47:51.149211-04:00",
+      "price": 1904.062,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.926,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:47:56.527603-04:00",
+      "price": 1904.07,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.9223,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:48:04.002712-04:00",
+      "price": 1905.5,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:48:05.245505-04:00",
+      "price": 1904.121,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.393,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:48:10.485756-04:00",
+      "price": 1904.009,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.485,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:48:17.960536-04:00",
+      "price": 1905.02,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:48:19.208962-04:00",
+      "price": 1904.087,
+      "qty": 1.0,
+      "realized_pnl_delta": -0.9484,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:48:24.445422-04:00",
+      "price": 1904.38,
+      "qty": 0.996,
+      "realized_pnl_delta": -0.6374,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:48:31.937759-04:00",
+      "price": 1905.02,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:48:33.178298-04:00",
+      "price": 1904.257,
+      "qty": 1.0,
+      "realized_pnl_delta": -0.763,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:48:38.421837-04:00",
+      "price": 1903.34,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.6733,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:48:45.902784-04:00",
+      "price": 1905.183005774,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:48:47.135215-04:00",
+      "price": 1903.499,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.6775,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:48:52.366163-04:00",
+      "price": 1904.001,
+      "qty": 0.995999999,
+      "realized_pnl_delta": -1.1773,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:48:59.852899-04:00",
+      "price": 1905.831,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:49:01.095854-04:00",
+      "price": 1904.14,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.6625,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:49:06.334283-04:00",
+      "price": 1904.602,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.2241,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:49:13.820239-04:00",
+      "price": 1905.7,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:49:15.069151-04:00",
+      "price": 1904.541,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.1653,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:49:20.310871-04:00",
+      "price": 1904.025,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.6683,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:49:27.812979-04:00",
+      "price": 1905.38,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:49:29.055752-04:00",
+      "price": 1904.197,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.1996,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:49:34.295897-04:00",
+      "price": 1903.84,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.5338,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:49:41.770342-04:00",
+      "price": 1905.73,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:49:43.018979-04:00",
+      "price": 1904.07,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.6404,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:49:48.259505-04:00",
+      "price": 1904.5,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.2251,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:49:55.745824-04:00",
+      "price": 1905.349,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:49:56.986532-04:00",
+      "price": 1903.73,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.6419,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:50:02.225739-04:00",
+      "price": 1904.28,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.0647,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:50:09.706284-04:00",
+      "price": 1906.257,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:50:10.947218-04:00",
+      "price": 1904.681,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.5179,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:50:16.185548-04:00",
+      "price": 1904.4,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.8496,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:50:23.672652-04:00",
+      "price": 1905.7,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:50:24.931961-04:00",
+      "price": 1904.431,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.3069,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:50:30.180227-04:00",
+      "price": 1904.4,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.2948,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:50:37.682049-04:00",
+      "price": 1905.805,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:50:38.918057-04:00",
+      "price": 1904.2,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.5974,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:50:44.157243-04:00",
+      "price": 1904.9,
+      "qty": 0.996,
+      "realized_pnl_delta": -0.9014,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:50:51.646977-04:00",
+      "price": 1905.78,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:50:52.885829-04:00",
+      "price": 1904.058,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.7239,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:50:58.123262-04:00",
+      "price": 1905.0,
+      "qty": 0.996,
+      "realized_pnl_delta": -0.7769,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:51:05.599819-04:00",
+      "price": 1906.478,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:51:06.852433-04:00",
+      "price": 1904.127,
+      "qty": 1.0,
+      "realized_pnl_delta": -2.2952,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:51:12.087850-04:00",
+      "price": 1904.1,
+      "qty": 0.996,
+      "realized_pnl_delta": -2.3685,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:51:19.586558-04:00",
+      "price": 1906.125,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:51:20.826785-04:00",
+      "price": 1904.51,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.6447,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:51:26.080389-04:00",
+      "price": 1904.02,
+      "qty": 0.996,
+      "realized_pnl_delta": -2.0966,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:51:33.580120-04:00",
+      "price": 1906.6,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:51:34.824084-04:00",
+      "price": 1904.6,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.9582,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:51:40.058598-04:00",
+      "price": 1904.7,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.8924,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:51:47.539320-04:00",
+      "price": 1905.95,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:51:48.776304-04:00",
+      "price": 1904.69,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.3198,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:51:54.017670-04:00",
+      "price": 1904.4,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.5438,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:52:01.507889-04:00",
+      "price": 1906.073,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:52:02.753948-04:00",
+      "price": 1904.04,
+      "qty": 1.0,
+      "realized_pnl_delta": -2.0212,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:52:07.995334-04:00",
+      "price": 1904.62,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.4472,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:52:15.477799-04:00",
+      "price": 1906.79,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:52:16.739348-04:00",
+      "price": 1905.29,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.4283,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:52:21.976901-04:00",
+      "price": 1904.953,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.8297,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:52:29.453356-04:00",
+      "price": 1906.2,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:52:30.693524-04:00",
+      "price": 1904.48,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.7814,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:52:35.924244-04:00",
+      "price": 1904.016,
+      "qty": 0.996,
+      "realized_pnl_delta": -2.1753,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:52:43.418951-04:00",
+      "price": 1906.36,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:52:44.658991-04:00",
+      "price": 1904.668,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.6747,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:52:49.904719-04:00",
+      "price": 1904.79,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.5637,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:52:57.390418-04:00",
+      "price": 1906.573,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:52:58.630081-04:00",
+      "price": 1904.851,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.6981,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:53:03.874210-04:00",
+      "price": 1904.36,
+      "qty": 0.996,
+      "realized_pnl_delta": -2.2041,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:53:11.359551-04:00",
+      "price": 1906.11,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:53:12.599468-04:00",
+      "price": 1904.7,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.4637,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:53:17.836203-04:00",
+      "price": 1904.553413755,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.5504,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:53:25.314649-04:00",
+      "price": 1906.58,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:53:26.553720-04:00",
+      "price": 1904.7,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.8236,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:53:31.792877-04:00",
+      "price": 1904.577,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.995,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:53:39.269508-04:00",
+      "price": 1906.1,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:53:40.512864-04:00",
+      "price": 1905.003,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.1565,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:53:45.747042-04:00",
+      "price": 1904.45,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.6434,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:53:53.226687-04:00",
+      "price": 1906.144,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:53:54.466040-04:00",
+      "price": 1904.77,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.3684,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:53:59.714046-04:00",
+      "price": 1904.5,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.6374,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:54:07.183262-04:00",
+      "price": 1906.66,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:54:08.423784-04:00",
+      "price": 1904.9,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.6919,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:54:13.665894-04:00",
+      "price": 1904.6,
+      "qty": 0.996,
+      "realized_pnl_delta": -2.0518,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:54:21.147452-04:00",
+      "price": 1907.085,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:54:22.385753-04:00",
+      "price": 1905.219,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.8082,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:54:27.629766-04:00",
+      "price": 1905.6,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.4791,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:54:35.110225-04:00",
+      "price": 1905.3,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:54:36.348572-04:00",
+      "price": 1904.1,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.4499,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:54:41.611031-04:00",
+      "price": 1904.108,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.1872,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:54:49.084559-04:00",
+      "price": 1906.057,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:54:50.324040-04:00",
+      "price": 1903.8,
+      "qty": 1.0,
+      "realized_pnl_delta": -2.148,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:54:55.595769-04:00",
+      "price": 1904.2,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.8496,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:55:03.086816-04:00",
+      "price": 1906.06,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:55:04.329536-04:00",
+      "price": 1903.5,
+      "qty": 1.0,
+      "realized_pnl_delta": -2.5596,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:55:09.577208-04:00",
+      "price": 1904.111,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.9412,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:55:17.053576-04:00",
+      "price": 1905.914,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:55:18.295552-04:00",
+      "price": 1904.039,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.8972,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:55:23.534479-04:00",
+      "price": 1904.17,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.737,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:55:31.186140-04:00",
+      "price": 1905.64,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:55:32.514629-04:00",
+      "price": 1903.649,
+      "qty": 1.0,
+      "realized_pnl_delta": -2.0337,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:55:37.804354-04:00",
+      "price": 1903.9,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.733,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:55:45.283007-04:00",
+      "price": 1905.7,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:55:46.523500-04:00",
+      "price": 1903.896,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.7944,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:55:51.760763-04:00",
+      "price": 1903.8,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.8924,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:55:59.240955-04:00",
+      "price": 1905.844,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:56:00.481510-04:00",
+      "price": 1904.1,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.7204,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:56:05.724115-04:00",
+      "price": 1904.073,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.7639,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:56:13.202935-04:00",
+      "price": 1905.9,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:56:14.445568-04:00",
+      "price": 1904.17,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.7206,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:56:19.686142-04:00",
+      "price": 1903.811,
+      "qty": 0.996,
+      "realized_pnl_delta": -2.0806,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:56:27.186955-04:00",
+      "price": 1905.241,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:56:28.423033-04:00",
+      "price": 1904.0,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.3543,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:56:33.668175-04:00",
+      "price": 1904.05,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.1862,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:56:41.149635-04:00",
+      "price": 1905.777,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:56:42.390084-04:00",
+      "price": 1903.46,
+      "qty": 1.0,
+      "realized_pnl_delta": -2.2227,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:56:47.632775-04:00",
+      "price": 1904.034,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.736,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:56:55.112796-04:00",
+      "price": 1905.063,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:56:56.343363-04:00",
+      "price": 1904.054,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.1375,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:57:01.587877-04:00",
+      "price": 1903.5,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.5567,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:57:09.071995-04:00",
+      "price": 1905.21,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:57:10.310585-04:00",
+      "price": 1903.79,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.393,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:57:15.557794-04:00",
+      "price": 1904.0,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.2052,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:57:23.035027-04:00",
+      "price": 1906.6,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:57:24.282008-04:00",
+      "price": 1904.502,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.8367,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:57:29.524313-04:00",
+      "price": 1904.4,
+      "qty": 0.996,
+      "realized_pnl_delta": -2.1912,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:57:37.001473-04:00",
+      "price": 1905.991,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:57:38.244826-04:00",
+      "price": 1904.3,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.8079,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:57:43.482271-04:00",
+      "price": 1904.1,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.8834,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:57:50.965084-04:00",
+      "price": 1905.625,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:57:52.200386-04:00",
+      "price": 1904.6,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.0967,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:57:57.456411-04:00",
+      "price": 1904.515,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.1056,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:58:04.945076-04:00",
+      "price": 1905.75,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:58:06.189165-04:00",
+      "price": 1904.68,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.045,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:58:11.422840-04:00",
+      "price": 1904.65,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.0956,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:58:18.897586-04:00",
+      "price": 1906.0,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:58:20.140009-04:00",
+      "price": 1904.213,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.736,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:58:25.378999-04:00",
+      "price": 1903.7,
+      "qty": 0.996,
+      "realized_pnl_delta": -2.2908,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:58:32.860768-04:00",
+      "price": 1905.7,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:58:34.103228-04:00",
+      "price": 1904.4,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.3624,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:58:39.348956-04:00",
+      "price": 1904.3,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.3944,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:58:46.830348-04:00",
+      "price": 1905.713,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:58:48.075543-04:00",
+      "price": 1903.97,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.7402,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:58:53.316299-04:00",
+      "price": 1903.97,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.736,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:59:00.801118-04:00",
+      "price": 1906.201,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:59:02.048229-04:00",
+      "price": 1903.87,
+      "qty": 1.0,
+      "realized_pnl_delta": -2.2256,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:59:07.288802-04:00",
+      "price": 1903.4,
+      "qty": 0.996,
+      "realized_pnl_delta": -2.7898,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:59:14.805630-04:00",
+      "price": 1905.51,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:59:16.043725-04:00",
+      "price": 1903.77,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.892,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:59:21.281396-04:00",
+      "price": 1904.06,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.4442,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:59:28.771933-04:00",
+      "price": 1905.7,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:59:30.012055-04:00",
+      "price": 1903.563,
+      "qty": 1.0,
+      "realized_pnl_delta": -2.0944,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:59:35.254539-04:00",
+      "price": 1904.03,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.6633,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:59:42.737053-04:00",
+      "price": 1905.3,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:59:43.975091-04:00",
+      "price": 1903.7,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.6912,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:59:49.210282-04:00",
+      "price": 1903.975,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.3197,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:59:56.698600-04:00",
+      "price": 1905.278,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T17:59:57.941045-04:00",
+      "price": 1903.6,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.6831,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:00:03.180225-04:00",
+      "price": 1904.14,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.1334,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:00:10.703415-04:00",
+      "price": 1905.9,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:00:11.939749-04:00",
+      "price": 1904.3,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.4532,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:00:17.181513-04:00",
+      "price": 1903.66,
+      "qty": 0.996,
+      "realized_pnl_delta": -2.231,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:00:24.663217-04:00",
+      "price": 1905.418,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:00:25.909026-04:00",
+      "price": 1903.783,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.7507,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:00:31.154052-04:00",
+      "price": 1902.78,
+      "qty": 0.996,
+      "realized_pnl_delta": -2.6274,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:00:38.689018-04:00",
+      "price": 1904.538,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:00:39.928043-04:00",
+      "price": 1902.7,
+      "qty": 1.0,
+      "realized_pnl_delta": -2.0527,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:00:45.164236-04:00",
+      "price": 1903.0,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.5318,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:00:52.656460-04:00",
+      "price": 1904.385,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:00:53.904679-04:00",
+      "price": 1902.6,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.8229,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:00:59.177464-04:00",
+      "price": 1902.114,
+      "qty": 0.996,
+      "realized_pnl_delta": -2.2619,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:01:06.661702-04:00",
+      "price": 1903.73,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:01:07.912841-04:00",
+      "price": 1901.63,
+      "qty": 1.0,
+      "realized_pnl_delta": -2.2651,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:04:39.779773-04:00",
+      "price": 1903.38,
+      "qty": 0.996,
+      "realized_pnl_delta": -0.3486,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:04:47.263987-04:00",
+      "price": 1905.8,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:04:48.507537-04:00",
+      "price": 1903.94,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.3301,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:04:53.754678-04:00",
+      "price": 1903.96,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.8326,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:05:01.599028-04:00",
+      "price": 1905.5,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:05:02.865325-04:00",
+      "price": 1903.9,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.678,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:05:08.170823-04:00",
+      "price": 1903.66,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.8326,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:05:15.664104-04:00",
+      "price": 1905.785,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:05:16.903778-04:00",
+      "price": 1903.9,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.8098,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:05:22.146793-04:00",
+      "price": 1903.572,
+      "qty": 0.996,
+      "realized_pnl_delta": -2.2041,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:05:29.628793-04:00",
+      "price": 1905.7,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:05:30.872336-04:00",
+      "price": 1904.1,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.6228,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:05:36.115016-04:00",
+      "price": 1904.722,
+      "qty": 0.996,
+      "realized_pnl_delta": -0.9741,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:05:43.603778-04:00",
+      "price": 1906.63,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:05:44.841995-04:00",
+      "price": 1904.207,
+      "qty": 1.0,
+      "realized_pnl_delta": -2.17,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:05:50.083314-04:00",
+      "price": 1905.241,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.3834,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:05:57.563673-04:00",
+      "price": 1906.68,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:05:58.804461-04:00",
+      "price": 1904.44,
+      "qty": 1.0,
+      "realized_pnl_delta": -2.2262,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:06:04.048214-04:00",
+      "price": 1904.8,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.8725,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:06:11.520126-04:00",
+      "price": 1906.8,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:06:12.766798-04:00",
+      "price": 1904.821,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.9454,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:06:18.015451-04:00",
+      "price": 1904.7,
+      "qty": 0.996,
+      "realized_pnl_delta": -2.0916,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:06:25.511470-04:00",
+      "price": 1906.3,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:06:26.749906-04:00",
+      "price": 1904.7,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.742,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:06:31.990655-04:00",
+      "price": 1905.2,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.0956,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:06:39.468949-04:00",
+      "price": 1906.7,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:06:40.708507-04:00",
+      "price": 1904.4,
+      "qty": 1.0,
+      "realized_pnl_delta": -2.1848,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:06:45.944853-04:00",
+      "price": 1905.331,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.3635,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:06:53.439232-04:00",
+      "price": 1907.3,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:06:54.682006-04:00",
+      "price": 1904.895,
+      "qty": 1.0,
+      "realized_pnl_delta": -2.2298,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:06:59.922458-04:00",
+      "price": 1904.731,
+      "qty": 0.996,
+      "realized_pnl_delta": -2.5587,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:07:07.403835-04:00",
+      "price": 1905.765,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:07:08.640651-04:00",
+      "price": 1904.01,
+      "qty": 1.0,
+      "realized_pnl_delta": -2.2094,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:07:13.883487-04:00",
+      "price": 1904.457,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.3028,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:07:21.364287-04:00",
+      "price": 1905.546,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:07:22.598096-04:00",
+      "price": 1903.5,
+      "qty": 1.0,
+      "realized_pnl_delta": -2.1117,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:07:27.833676-04:00",
+      "price": 1904.07,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.4701,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:07:35.319297-04:00",
+      "price": 1906.1,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:07:36.561191-04:00",
+      "price": 1903.999,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.9326,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:07:41.806511-04:00",
+      "price": 1903.85,
+      "qty": 0.996,
+      "realized_pnl_delta": -2.241,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:07:49.285981-04:00",
+      "price": 1905.3,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:07:50.527187-04:00",
+      "price": 1903.7,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.8464,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:07:55.769133-04:00",
+      "price": 1903.55,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.743,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:08:03.252718-04:00",
+      "price": 1905.3,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:08:04.490363-04:00",
+      "price": 1903.84,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.46,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:08:09.734797-04:00",
+      "price": 1903.33,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.9621,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:08:17.217115-04:00",
+      "price": 1904.5,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:08:18.457100-04:00",
+      "price": 1903.27,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.4828,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:08:23.704149-04:00",
+      "price": 1903.0,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.494,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:08:31.187102-04:00",
+      "price": 1904.6,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:08:32.427065-04:00",
+      "price": 1903.097,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.471,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:08:37.669582-04:00",
+      "price": 1903.519,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.0767,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:08:45.147900-04:00",
+      "price": 1904.68,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:08:46.392642-04:00",
+      "price": 1902.4,
+      "qty": 1.0,
+      "realized_pnl_delta": -2.2541,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:08:51.638691-04:00",
+      "price": 1903.08,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.5936,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:08:59.129169-04:00",
+      "price": 1904.801,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:09:00.368138-04:00",
+      "price": 1903.6,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.1613,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:09:05.608070-04:00",
+      "price": 1903.0,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.7938,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:09:13.103147-04:00",
+      "price": 1905.236,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:09:14.340229-04:00",
+      "price": 1903.2,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.8916,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:09:19.586744-04:00",
+      "price": 1903.09,
+      "qty": 0.996,
+      "realized_pnl_delta": -2.1374,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:09:27.063816-04:00",
+      "price": 1904.55,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:09:28.304768-04:00",
+      "price": 1902.94,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.8405,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:09:33.541198-04:00",
+      "price": 1903.3,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.245,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:09:41.023524-04:00",
+      "price": 1905.245,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:09:42.260375-04:00",
+      "price": 1903.02,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.9887,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:09:47.521528-04:00",
+      "price": 1903.17,
+      "qty": 0.996,
+      "realized_pnl_delta": -2.0667,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:09:55.008335-04:00",
+      "price": 1905.28,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:09:56.242230-04:00",
+      "price": 1903.46,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.808,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:10:01.477327-04:00",
+      "price": 1903.375,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.8974,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:10:08.962971-04:00",
+      "price": 1905.092,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:10:10.200054-04:00",
+      "price": 1903.38,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.7774,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:10:15.447255-04:00",
+      "price": 1903.5,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.5856,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:10:22.947438-04:00",
+      "price": 1904.7,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:10:24.188668-04:00",
+      "price": 1902.9,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.938,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:10:29.432124-04:00",
+      "price": 1903.08,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.6135,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:10:36.919685-04:00",
+      "price": 1905.48,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:10:38.157066-04:00",
+      "price": 1903.8,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.4023,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:10:43.398000-04:00",
+      "price": 1903.441,
+      "qty": 0.996,
+      "realized_pnl_delta": -2.0308,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:10:50.892196-04:00",
+      "price": 1905.275,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:10:52.132679-04:00",
+      "price": 1903.7,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.6488,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:10:57.370167-04:00",
+      "price": 1903.4,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.8675,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:11:04.848943-04:00",
+      "price": 1904.78,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:11:06.103224-04:00",
+      "price": 1903.36,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.6002,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:11:11.343194-04:00",
+      "price": 1903.155,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.6185,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:11:18.830223-04:00",
+      "price": 1905.26,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:11:20.068883-04:00",
+      "price": 1903.271,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.8124,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:11:25.306927-04:00",
+      "price": 1903.665,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.5886,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:11:32.801100-04:00",
+      "price": 1905.7,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:11:34.047613-04:00",
+      "price": 1903.09,
+      "qty": 1.0,
+      "realized_pnl_delta": -2.4463,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:11:39.288339-04:00",
+      "price": 1903.14,
+      "qty": 0.996,
+      "realized_pnl_delta": -2.5498,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:11:46.774701-04:00",
+      "price": 1904.9,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:11:48.015010-04:00",
+      "price": 1903.39,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.8108,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:11:53.258451-04:00",
+      "price": 1903.3,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.5936,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:12:00.741058-04:00",
+      "price": 1905.4,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:12:01.986483-04:00",
+      "price": 1903.6,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.61,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:12:07.232642-04:00",
+      "price": 1903.15,
+      "qty": 0.996,
+      "realized_pnl_delta": -2.241,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:12:14.723841-04:00",
+      "price": 1905.32,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:12:15.963945-04:00",
+      "price": 1903.834,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.5167,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:12:21.199808-04:00",
+      "price": 1904.04,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.2749,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:12:28.881089-04:00",
+      "price": 1905.294,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:12:30.121644-04:00",
+      "price": 1903.85,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.4541,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:12:35.356588-04:00",
+      "price": 1903.76,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.5279,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:12:42.831339-04:00",
+      "price": 1905.7,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:12:44.067099-04:00",
+      "price": 1903.32,
+      "qty": 1.0,
+      "realized_pnl_delta": -2.2208,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:12:49.319086-04:00",
+      "price": 1904.16,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.5338,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:12:56.800580-04:00",
+      "price": 1906.286,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:12:58.047077-04:00",
+      "price": 1904.0,
+      "qty": 1.0,
+      "realized_pnl_delta": -2.0539,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:13:03.289052-04:00",
+      "price": 1904.5,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.7789,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:13:10.776816-04:00",
+      "price": 1905.897,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:13:12.016772-04:00",
+      "price": 1904.43,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.6226,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:13:17.252152-04:00",
+      "price": 1904.5,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.3914,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:13:24.737934-04:00",
+      "price": 1905.8,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:13:25.978356-04:00",
+      "price": 1903.8,
+      "qty": 1.0,
+      "realized_pnl_delta": -2.0392,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:13:31.220135-04:00",
+      "price": 1904.4,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.3944,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:13:38.703992-04:00",
+      "price": 1906.3,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:13:39.943050-04:00",
+      "price": 1904.951,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.145,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:13:45.191089-04:00",
+      "price": 1904.9,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.3944,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:13:52.669946-04:00",
+      "price": 1906.046,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:13:53.911738-04:00",
+      "price": 1905.0,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.1506,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:13:59.148825-04:00",
+      "price": 1904.58,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.4601,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:14:06.746080-04:00",
+      "price": 1906.37,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:14:07.987542-04:00",
+      "price": 1904.79,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.4452,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:14:13.227806-04:00",
+      "price": 1904.7,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.6633,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:14:20.719789-04:00",
+      "price": 1905.8,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:14:21.959844-04:00",
+      "price": 1905.1,
+      "qty": 1.0,
+      "realized_pnl_delta": -0.9394,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:14:27.200334-04:00",
+      "price": 1904.41,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.3844,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:14:34.680110-04:00",
+      "price": 1906.09,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:14:35.914428-04:00",
+      "price": 1905.04,
+      "qty": 1.0,
+      "realized_pnl_delta": -0.927,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:14:41.150683-04:00",
+      "price": 1904.83,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.255,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:14:48.636868-04:00",
+      "price": 1906.95,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:14:49.883186-04:00",
+      "price": 1904.0,
+      "qty": 1.0,
+      "realized_pnl_delta": -2.5819,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:14:55.128178-04:00",
+      "price": 1904.767,
+      "qty": 0.996,
+      "realized_pnl_delta": -2.1743,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:15:02.595603-04:00",
+      "price": 1906.9,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:15:03.838602-04:00",
+      "price": 1904.5,
+      "qty": 1.0,
+      "realized_pnl_delta": -2.4216,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:15:09.086156-04:00",
+      "price": 1904.115,
+      "qty": 0.996,
+      "realized_pnl_delta": -2.7739,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:15:16.568465-04:00",
+      "price": 1905.92,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:15:17.813314-04:00",
+      "price": 1904.25,
+      "qty": 1.0,
+      "realized_pnl_delta": -2.0973,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:15:23.059227-04:00",
+      "price": 1904.437,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.4771,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:15:30.582761-04:00",
+      "price": 1906.5,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:15:31.815789-04:00",
+      "price": 1904.866,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.3788,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:15:37.056519-04:00",
+      "price": 1904.59,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.9024,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:15:44.530271-04:00",
+      "price": 1906.269,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:15:45.771199-04:00",
+      "price": 1904.947,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.4246,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:15:51.009373-04:00",
+      "price": 1904.99,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.2739,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:15:58.484970-04:00",
+      "price": 1906.5,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:15:59.729016-04:00",
+      "price": 1904.776,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.6205,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:16:04.969578-04:00",
+      "price": 1905.05,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.4442,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:16:12.441137-04:00",
+      "price": 1906.84,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:16:13.683118-04:00",
+      "price": 1904.71,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.9763,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:16:18.925748-04:00",
+      "price": 1904.438,
+      "qty": 0.996,
+      "realized_pnl_delta": -2.3924,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:16:26.401531-04:00",
+      "price": 1906.4,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:16:27.640408-04:00",
+      "price": 1904.4,
+      "qty": 1.0,
+      "realized_pnl_delta": -2.2006,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:16:32.921963-04:00",
+      "price": 1904.6,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.7928,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:16:40.406232-04:00",
+      "price": 1906.932,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:16:41.664165-04:00",
+      "price": 1904.2,
+      "qty": 1.0,
+      "realized_pnl_delta": -2.4873,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:16:46.902294-04:00",
+      "price": 1904.889,
+      "qty": 0.996,
+      "realized_pnl_delta": -2.0348,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:16:54.381988-04:00",
+      "price": 1905.2,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:16:55.622552-04:00",
+      "price": 1903.887,
+      "qty": 1.0,
+      "realized_pnl_delta": -2.1166,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:17:00.873049-04:00",
+      "price": 1903.5,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.6932,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:17:08.346808-04:00",
+      "price": 1905.3,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:17:09.590732-04:00",
+      "price": 1903.5,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.7532,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:17:14.830344-04:00",
+      "price": 1904.23,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.0657,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:17:22.308924-04:00",
+      "price": 1905.42,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:17:23.552204-04:00",
+      "price": 1903.6,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.7634,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:17:28.790428-04:00",
+      "price": 1903.989,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.4253,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:17:36.270889-04:00",
+      "price": 1905.58,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:17:37.514489-04:00",
+      "price": 1903.729,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.7748,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:17:42.755682-04:00",
+      "price": 1904.0,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.5737,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:17:50.237573-04:00",
+      "price": 1905.16,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:17:51.473701-04:00",
+      "price": 1903.6,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.7616,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:17:56.713151-04:00",
+      "price": 1903.956,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.1992,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:18:04.191533-04:00",
+      "price": 1905.27,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:18:05.432344-04:00",
+      "price": 1904.25,
+      "qty": 1.0,
+      "realized_pnl_delta": -0.9668,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:18:10.672044-04:00",
+      "price": 1903.2,
+      "qty": 0.996,
+      "realized_pnl_delta": -2.0617,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:18:18.172098-04:00",
+      "price": 1905.1,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:18:19.413118-04:00",
+      "price": 1903.904,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.279,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:18:24.658330-04:00",
+      "price": 1903.51,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.5836,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:18:32.147040-04:00",
+      "price": 1905.947,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:18:33.383229-04:00",
+      "price": 1903.82,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.7103,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:18:38.623504-04:00",
+      "price": 1903.995,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.9442,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:18:46.107022-04:00",
+      "price": 1905.327,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:18:47.344469-04:00",
+      "price": 1904.1,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.5345,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:18:52.590178-04:00",
+      "price": 1903.698,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.6225,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:19:00.078241-04:00",
+      "price": 1905.1,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:19:01.316297-04:00",
+      "price": 1903.1,
+      "qty": 1.0,
+      "realized_pnl_delta": -2.1135,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:19:06.555072-04:00",
+      "price": 1902.363,
+      "qty": 0.996,
+      "realized_pnl_delta": -2.7261,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:19:14.216974-04:00",
+      "price": 1904.45,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:19:15.462047-04:00",
+      "price": 1903.03,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.7476,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:19:20.703426-04:00",
+      "price": 1903.049,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.3954,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:19:28.183204-04:00",
+      "price": 1904.5,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:19:29.419934-04:00",
+      "price": 1902.3,
+      "qty": 1.0,
+      "realized_pnl_delta": -2.1746,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:19:34.658659-04:00",
+      "price": 1903.08,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.4143,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:19:42.138470-04:00",
+      "price": 1904.8,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:19:43.386536-04:00",
+      "price": 1902.99,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.6564,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:19:48.630030-04:00",
+      "price": 1903.081,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.7121,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:19:56.109846-04:00",
+      "price": 1905.337,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:19:57.350963-04:00",
+      "price": 1903.077,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.9829,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:20:02.596054-04:00",
+      "price": 1902.33,
+      "qty": 0.996,
+      "realized_pnl_delta": -2.995,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:20:10.078996-04:00",
+      "price": 1904.976,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:20:11.312587-04:00",
+      "price": 1902.847,
+      "qty": 1.0,
+      "realized_pnl_delta": -2.3167,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:20:16.553883-04:00",
+      "price": 1903.32,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.6494,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:20:24.024977-04:00",
+      "price": 1905.12,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:20:25.264055-04:00",
+      "price": 1903.307,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.7375,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:20:30.543513-04:00",
+      "price": 1903.1,
+      "qty": 0.996,
+      "realized_pnl_delta": -2.0119,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:20:38.018421-04:00",
+      "price": 1904.8,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:20:39.253895-04:00",
+      "price": 1902.6,
+      "qty": 1.0,
+      "realized_pnl_delta": -2.369,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:20:44.491492-04:00",
+      "price": 1902.793,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.999,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:20:51.968805-04:00",
+      "price": 1905.233,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:20:53.212708-04:00",
+      "price": 1903.45,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.5526,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:20:58.445201-04:00",
+      "price": 1902.314,
+      "qty": 0.996,
+      "realized_pnl_delta": -2.9073,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:21:05.918106-04:00",
+      "price": 1903.9,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:21:07.176535-04:00",
+      "price": 1901.8337,
+      "qty": 1.0,
+      "realized_pnl_delta": -2.7808,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:21:12.412505-04:00",
+      "price": 1901.5,
+      "qty": 0.996,
+      "realized_pnl_delta": -2.3904,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:21:19.891519-04:00",
+      "price": 1902.849,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:21:21.132392-04:00",
+      "price": 1901.36,
+      "qty": 1.0,
+      "realized_pnl_delta": -2.0565,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:21:26.378346-04:00",
+      "price": 1901.628,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.2161,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:21:33.861071-04:00",
+      "price": 1903.343,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:21:35.097954-04:00",
+      "price": 1901.626,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.4483,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:21:40.334817-04:00",
+      "price": 1901.99,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.3476,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:21:47.817554-04:00",
+      "price": 1903.2,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:21:49.060651-04:00",
+      "price": 1901.4,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.8784,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:21:54.297721-04:00",
+      "price": 1901.7,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.494,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:22:01.782603-04:00",
+      "price": 1903.6,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:22:03.020763-04:00",
+      "price": 1902.01,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.3692,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:22:08.259061-04:00",
+      "price": 1901.58,
+      "qty": 0.996,
+      "realized_pnl_delta": -2.0119,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:22:15.742500-04:00",
+      "price": 1903.392,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:22:16.991657-04:00",
+      "price": 1901.5,
+      "qty": 1.0,
+      "realized_pnl_delta": -2.0076,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:22:22.232874-04:00",
+      "price": 1901.14,
+      "qty": 0.996,
+      "realized_pnl_delta": -2.243,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:22:29.704059-04:00",
+      "price": 1902.9,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:22:30.943126-04:00",
+      "price": 1900.718,
+      "qty": 1.0,
+      "realized_pnl_delta": -2.4575,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:22:36.187695-04:00",
+      "price": 1901.1,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.7928,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:22:43.686373-04:00",
+      "price": 1902.3,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:22:44.938431-04:00",
+      "price": 1901.4,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.2384,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:22:50.178582-04:00",
+      "price": 1900.93,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.3645,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:22:57.667659-04:00",
+      "price": 1902.82,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:22:58.904378-04:00",
+      "price": 1900.8,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.7246,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:23:04.145196-04:00",
+      "price": 1900.7,
+      "qty": 0.996,
+      "realized_pnl_delta": -2.1115,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:23:11.623078-04:00",
+      "price": 1902.08,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:23:12.860825-04:00",
+      "price": 1901.2,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.3033,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:23:18.104870-04:00",
+      "price": 1900.92,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.1554,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:23:25.594040-04:00",
+      "price": 1902.27,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:23:26.840010-04:00",
+      "price": 1900.536,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.6246,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:23:32.079357-04:00",
+      "price": 1900.465,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.7978,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:23:39.555748-04:00",
+      "price": 1902.18,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:23:40.793964-04:00",
+      "price": 1900.65,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.5822,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:23:46.032950-04:00",
+      "price": 1900.69,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.484,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:23:53.518985-04:00",
+      "price": 1902.564,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:23:54.755111-04:00",
+      "price": 1900.769,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.5707,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:23:59.995671-04:00",
+      "price": 1900.828,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.7291,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:24:07.473099-04:00",
+      "price": 1903.187,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:24:08.716211-04:00",
+      "price": 1901.5,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.3207,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:24:13.951713-04:00",
+      "price": 1901.4,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.7799,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:24:21.422288-04:00",
+      "price": 1903.25,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:24:22.661619-04:00",
+      "price": 1901.14,
+      "qty": 1.0,
+      "realized_pnl_delta": -2.0727,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:24:27.905554-04:00",
+      "price": 1901.1,
+      "qty": 0.996,
+      "realized_pnl_delta": -2.1414,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:24:35.381475-04:00",
+      "price": 1903.972,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:24:36.629086-04:00",
+      "price": 1901.407,
+      "qty": 1.0,
+      "realized_pnl_delta": -2.1347,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:24:41.879075-04:00",
+      "price": 1901.6,
+      "qty": 0.996,
+      "realized_pnl_delta": -2.3625,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:24:49.365280-04:00",
+      "price": 1903.2,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:24:50.606040-04:00",
+      "price": 1902.0,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.6632,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:24:55.845691-04:00",
+      "price": 1901.9,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.2948,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:25:03.325946-04:00",
+      "price": 1903.511,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:25:04.570537-04:00",
+      "price": 1901.279,
+      "qty": 1.0,
+      "realized_pnl_delta": -2.0442,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:25:09.809859-04:00",
+      "price": 1901.63,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.8735,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:25:17.296637-04:00",
+      "price": 1903.13,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:25:18.540937-04:00",
+      "price": 1901.25,
+      "qty": 1.0,
+      "realized_pnl_delta": -2.1116,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:25:23.776512-04:00",
+      "price": 1901.2,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.9223,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:25:31.255083-04:00",
+      "price": 1902.95,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:25:32.490299-04:00",
+      "price": 1901.554,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.5062,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:25:37.731751-04:00",
+      "price": 1901.5,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.4442,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:25:45.213485-04:00",
+      "price": 1903.4,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:25:46.447157-04:00",
+      "price": 1901.85,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.2728,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:25:51.702259-04:00",
+      "price": 1902.02,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.3745,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:25:59.189571-04:00",
+      "price": 1903.823,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:26:00.427931-04:00",
+      "price": 1901.89,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.6707,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:26:05.667528-04:00",
+      "price": 1901.342,
+      "qty": 0.996,
+      "realized_pnl_delta": -2.4711,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:26:13.151497-04:00",
+      "price": 1903.01,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:26:14.388521-04:00",
+      "price": 1901.52,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.9973,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:26:19.628853-04:00",
+      "price": 1901.59,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.4143,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:26:27.108935-04:00",
+      "price": 1903.12,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:26:28.358904-04:00",
+      "price": 1901.49,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.5609,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:26:33.597965-04:00",
+      "price": 1901.48,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.6334,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:26:41.096950-04:00",
+      "price": 1902.9,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:26:42.355956-04:00",
+      "price": 1900.952,
+      "qty": 1.0,
+      "realized_pnl_delta": -2.087,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:26:47.597477-04:00",
+      "price": 1901.0,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.8924,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:26:55.070901-04:00",
+      "price": 1903.05,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:26:56.312049-04:00",
+      "price": 1901.902,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.0526,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:27:01.560858-04:00",
+      "price": 1902.21,
+      "qty": 0.996,
+      "realized_pnl_delta": -0.8366,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:27:09.039787-04:00",
+      "price": 1903.51,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:27:10.290368-04:00",
+      "price": 1902.077,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.1386,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:27:15.545055-04:00",
+      "price": 1902.616,
+      "qty": 0.996,
+      "realized_pnl_delta": -0.8904,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:27:23.020048-04:00",
+      "price": 1903.68,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:27:24.310595-04:00",
+      "price": 1901.65,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.9205,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:27:29.553306-04:00",
+      "price": 1902.5,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.1753,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:27:37.045176-04:00",
+      "price": 1904.451,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:27:38.285668-04:00",
+      "price": 1901.8,
+      "qty": 1.0,
+      "realized_pnl_delta": -2.1514,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:27:43.525218-04:00",
+      "price": 1902.1,
+      "qty": 0.996,
+      "realized_pnl_delta": -2.3416,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:27:51.021125-04:00",
+      "price": 1903.4,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:27:52.274717-04:00",
+      "price": 1902.2,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.8853,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:27:57.518807-04:00",
+      "price": 1901.71,
+      "qty": 0.996,
+      "realized_pnl_delta": -1.6832,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:28:04.996343-04:00",
+      "price": 1903.8,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:28:06.235548-04:00",
+      "price": 1901.725,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.8126,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:28:11.495195-04:00",
+      "price": 1901.44,
+      "qty": 0.996,
+      "realized_pnl_delta": -2.3506,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:28:19.012949-04:00",
+      "price": 1902.91,
+      "qty": 2.0,
+      "realized_pnl_delta": 0.0,
+      "side": "BUY",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T18:28:20.255638-04:00",
+      "price": 1901.5,
+      "qty": 1.0,
+      "realized_pnl_delta": -1.9974,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    },
+    {
+      "filled_at": "2026-08-06T19:22:29.790616-04:00",
+      "price": 1898.287,
+      "qty": 0.996,
+      "realized_pnl_delta": -4.6045,
+      "side": "SELL",
+      "symbol": "ETHUSD"
+    }
+  ]
+}

@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """
-Stock Chart Plotter - Interactive command-line tool
+Stock/Crypto Chart Plotter - Interactive command-line tool
 
 Usage: python plot.py [SYMBOL] [CHART_TYPE] [LOOKBACK_CANDLES] [VOLUME_PER_CANDLE]
 
 Arguments:
-    SYMBOL: Stock ticker (default: MU)
+    SYMBOL: Ticker symbol (stock like MU/AAPL or crypto like BTC/USD) (default: MU)
     CHART_TYPE: 'daily' for daily bars, 'vol' for volume-based candles (default: daily)
     LOOKBACK_CANDLES: Number of candles to display (default: 14)
     VOLUME_PER_CANDLE: Volume threshold per candle - required if chart_type='vol'
@@ -13,6 +13,7 @@ Arguments:
 Examples:
     python plot.py                              # MU daily, 14 candles
     python plot.py AAPL                         # AAPL daily, 14 candles
+    python plot.py BTC/USD daily 20             # BTC/USD daily, 20 candles
     python plot.py TSLA daily 20                # TSLA daily, 20 candles
     python plot.py MU vol 50 1000               # MU volume candles, 50 candles, 1000 vol each
 """

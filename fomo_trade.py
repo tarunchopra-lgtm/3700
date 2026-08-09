@@ -1,11 +1,12 @@
 import os
+import re
 import sys
 from alpaca.common.exceptions import APIError
-from alpaca.trading.requests import MarketOrderRequest, LimitOrderRequest, GetOrdersRequest
+from alpaca.trading.requests import MarketOrderRequest, GetOrdersRequest
 from alpaca.trading.enums import OrderSide, TimeInForce, QueryOrderStatus
-from alpaca.data.enums import DataFeed
-from alpaca.data.historical import CryptoHistoricalDataClient, StockHistoricalDataClient
-from alpaca.data.requests import CryptoLatestTradeRequest, StockLatestTradeRequest
+from alpaca.data.enums import DataFeed, OptionsFeed
+from alpaca.data.historical import CryptoHistoricalDataClient, StockHistoricalDataClient, OptionHistoricalDataClient
+from alpaca.data.requests import CryptoLatestTradeRequest, StockLatestTradeRequest, OptionLatestTradeRequest
 import time
 from datetime import datetime
 
@@ -18,6 +19,11 @@ except Exception as exc:
     raise SystemExit(1)
 
 PAPER = credentials.paper
+OPTION_SYMBOL_PATTERN = re.compile(r"^[A-Z]{1,6}\d{6}[CP]\d{8}$")
+
+
+def _is_option_symbol(symbol: str) -> bool:
+    return bool(OPTION_SYMBOL_PATTERN.match(symbol.upper()))
 
 
 def _normalize_symbol(symbol: str) -> str:
@@ -61,6 +67,9 @@ def _get_current_price(symbol: str) -> float:
     if IS_CRYPTO:
         price_request = CryptoLatestTradeRequest(symbol_or_symbols=symbol)
         latest_trade = data_client.get_crypto_latest_trade(price_request)
+    elif IS_OPTION:
+        price_request = OptionLatestTradeRequest(symbol_or_symbols=symbol, feed=OptionsFeed.INDICATIVE)
+        latest_trade = data_client.get_option_latest_trade(price_request)
     else:
         price_request = StockLatestTradeRequest(symbol_or_symbols=symbol, feed=DataFeed.IEX)
         latest_trade = data_client.get_stock_latest_trade(price_request)
@@ -120,9 +129,12 @@ if TARGET1_PRICE <= ENTRY_PRICE or TARGET2_PRICE <= TARGET1_PRICE:
     sys.exit(1)
 
 IS_CRYPTO = "/" in SYMBOL
+IS_OPTION = _is_option_symbol(SYMBOL)
 data_client = (
     CryptoHistoricalDataClient(credentials.api_key, credentials.secret_key)
     if IS_CRYPTO
+    else OptionHistoricalDataClient(credentials.api_key, credentials.secret_key)
+    if IS_OPTION
     else StockHistoricalDataClient(credentials.api_key, credentials.secret_key)
 )
 
@@ -170,6 +182,7 @@ else:
 
 print(f"[{datetime.now().strftime('%H:%M:%S')}] Stop loss set at ${STOP_PRICE:.2f}")
 print(f"(Stop loss will be monitored and executed automatically)")
+print(f"[{datetime.now().strftime('%H:%M:%S')}] Entry trigger line set at ${ENTRY_PRICE:.2f} (market order on cross)")
 
 print(f"\n[{datetime.now().strftime('%H:%M:%S')}] Monitoring position... Press Ctrl+C to exit\n")
 
@@ -181,9 +194,12 @@ try:
             current_price = _get_current_price(SYMBOL)
 
             crossed_above_entry = (
-                last_observed_price is not None
-                and last_observed_price < ENTRY_PRICE
-                and current_price >= ENTRY_PRICE
+                (last_observed_price is None and current_price >= ENTRY_PRICE)
+                or (
+                    last_observed_price is not None
+                    and last_observed_price < ENTRY_PRICE
+                    and current_price >= ENTRY_PRICE
+                )
             )
             
             # Get current position
@@ -202,10 +218,11 @@ try:
                     )
                 else:
                     if awaiting_reentry_after_stop and crossed_above_entry:
+                        prev_price_text = "startup" if last_observed_price is None else f"${last_observed_price:.2f}"
                         print(
                             f"[{datetime.now().strftime('%H:%M:%S')}] Re-entry trigger: "
-                            f"price crossed above entry (${last_observed_price:.2f} -> ${current_price:.2f}). "
-                            f"Submitting BUY for {TOTAL_QTY} {SYMBOL}..."
+                            f"price crossed above entry ({prev_price_text} -> ${current_price:.2f}). "
+                            f"Submitting MARKET BUY for {TOTAL_QTY} {SYMBOL}..."
                         )
                         try:
                             entry_order_id = _place_entry_order()
@@ -216,11 +233,12 @@ try:
                             print(f"✓ Re-entry BUY submitted. Order ID: {entry_order_id}")
                         except Exception as e:
                             print(f"✗ Error submitting re-entry BUY: {e}")
-                    elif not awaiting_reentry_after_stop and current_price >= ENTRY_PRICE:
+                    elif not awaiting_reentry_after_stop and crossed_above_entry:
+                        prev_price_text = "startup" if last_observed_price is None else f"${last_observed_price:.2f}"
                         print(
                             f"[{datetime.now().strftime('%H:%M:%S')}] Initial entry trigger: "
-                            f"price ${current_price:.2f} >= entry ${ENTRY_PRICE:.2f}. "
-                            f"Submitting BUY for {TOTAL_QTY} {SYMBOL}..."
+                            f"price crossed entry ({prev_price_text} -> ${current_price:.2f}). "
+                            f"Submitting MARKET BUY for {TOTAL_QTY} {SYMBOL}..."
                         )
                         try:
                             entry_order_id = _place_entry_order()

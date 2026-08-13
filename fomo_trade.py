@@ -2,7 +2,7 @@ import os
 import re
 import sys
 from alpaca.common.exceptions import APIError
-from alpaca.trading.requests import MarketOrderRequest, GetOrdersRequest
+from alpaca.trading.requests import LimitOrderRequest, MarketOrderRequest, GetOrdersRequest
 from alpaca.trading.enums import OrderSide, TimeInForce, QueryOrderStatus
 from alpaca.data.enums import DataFeed, OptionsFeed
 from alpaca.data.historical import CryptoHistoricalDataClient, StockHistoricalDataClient, OptionHistoricalDataClient
@@ -53,11 +53,12 @@ def _get_open_orders_for_symbol(symbol: str):
 
 
 def _place_entry_order() -> str:
-    entry_order = MarketOrderRequest(
+    entry_order = LimitOrderRequest(
         symbol=SYMBOL,
         qty=TOTAL_QTY,
         side=OrderSide.BUY,
         time_in_force=TimeInForce.GTC,
+        limit_price=ENTRY_PRICE,
     )
     entry_response = trading_client.submit_order(order_data=entry_order)
     return str(entry_response.id)
@@ -182,7 +183,7 @@ else:
 
 print(f"[{datetime.now().strftime('%H:%M:%S')}] Stop loss set at ${STOP_PRICE:.2f}")
 print(f"(Stop loss will be monitored and executed automatically)")
-print(f"[{datetime.now().strftime('%H:%M:%S')}] Entry trigger line set at ${ENTRY_PRICE:.2f} (market order on cross)")
+print(f"[{datetime.now().strftime('%H:%M:%S')}] Entry trigger line set at ${ENTRY_PRICE:.2f} (limit order on cross)")
 
 print(f"\n[{datetime.now().strftime('%H:%M:%S')}] Monitoring position... Press Ctrl+C to exit\n")
 
@@ -222,7 +223,7 @@ try:
                         print(
                             f"[{datetime.now().strftime('%H:%M:%S')}] Re-entry trigger: "
                             f"price crossed above entry ({prev_price_text} -> ${current_price:.2f}). "
-                            f"Submitting MARKET BUY for {TOTAL_QTY} {SYMBOL}..."
+                            f"Submitting LIMIT BUY for {TOTAL_QTY} {SYMBOL} at ${ENTRY_PRICE:.2f}..."
                         )
                         try:
                             entry_order_id = _place_entry_order()
@@ -238,7 +239,7 @@ try:
                         print(
                             f"[{datetime.now().strftime('%H:%M:%S')}] Initial entry trigger: "
                             f"price crossed entry ({prev_price_text} -> ${current_price:.2f}). "
-                            f"Submitting MARKET BUY for {TOTAL_QTY} {SYMBOL}..."
+                            f"Submitting LIMIT BUY for {TOTAL_QTY} {SYMBOL} at ${ENTRY_PRICE:.2f}..."
                         )
                         try:
                             entry_order_id = _place_entry_order()

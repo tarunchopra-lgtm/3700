@@ -32,6 +32,8 @@ from alpaca.data.enums import DataFeed
 from alpaca.data.historical import CryptoHistoricalDataClient, StockHistoricalDataClient
 from alpaca.data.requests import CryptoBarsRequest, CryptoLatestTradeRequest, StockBarsRequest
 from alpaca.data.timeframe import TimeFrame
+from alpaca.trading.enums import QueryOrderStatus
+from alpaca.trading.requests import GetOrdersRequest
 
 from roles.credentials import bootstrap_trading_auth
 
@@ -39,12 +41,19 @@ from roles.credentials import bootstrap_trading_auth
 LOOKBACK_CANDLES = 200
 ENTRY_QTY = 2
 ET = ZoneInfo("America/New_York")
+MAX_SIGNAL_AGE_CANDLES = 48
+MAX_ENTRY_DISTANCE_AVG_RANGES = 3.0
+MAX_ENTRY_DISTANCE_PCT = 0.02
 
 
 def _usage() -> None:
     print("Usage: python demand.py <TICKER>")
     print("Example: python demand.py SPY")
     print("Example: python demand.py BTC/USD")
+
+
+def _normalize_symbol(symbol: str) -> str:
+    return symbol.replace("/", "").replace("-", "").upper()
 
 
 def _extract_bars(bars_response, symbol: str):
@@ -123,9 +132,10 @@ def _format_bar_time_utc_et(bar) -> str:
     return f"{ts_utc} | {ts_et}"
 
 
-def _find_demand_pattern(bars: list):
+def _find_demand_pattern(bars: list, current_price: float):
     ranges = [_candle_range(bar) for bar in bars]
     avg_range = sum(ranges) / len(ranges)
+    latest_index = len(bars) - 1
 
     # Use most recent valid signal by scanning from newest toward oldest.
     for idx in range(len(bars) - 1, 0, -1):
@@ -146,10 +156,25 @@ def _find_demand_pattern(bars: list):
 
             buy_point = float(getattr(smaller_bar, "high"))
             stop_loss = float(getattr(smaller_bar, "low"))
+            signal_age_candles = latest_index - idx
+            entry_distance = abs(current_price - buy_point)
+            max_entry_distance = avg_range * MAX_ENTRY_DISTANCE_AVG_RANGES
+            entry_distance_pct = entry_distance / current_price if current_price > 0 else 0.0
+            candle_date_et = _format_bar_time_utc_et(current_bar).split(" | ")[-1]
+
+            if signal_age_candles > MAX_SIGNAL_AGE_CANDLES:
+                continue
+
+            if entry_distance > max_entry_distance:
+                continue
+
+            if entry_distance_pct > MAX_ENTRY_DISTANCE_PCT:
+                continue
 
             return {
                 "avg_range": avg_range,
                 "signal_index": idx,
+                "signal_age_candles": signal_age_candles,
                 "current_range": current_range,
                 "previous_range": previous_range,
                 "smaller_label": smaller_label,
@@ -157,6 +182,11 @@ def _find_demand_pattern(bars: list):
                 "current_time": _format_bar_time_utc_et(current_bar),
                 "previous_time": _format_bar_time_utc_et(previous_bar),
                 "smaller_time": _format_bar_time_utc_et(smaller_bar),
+                "current_range_multiple": current_range / avg_range if avg_range > 0 else 0.0,
+                "entry_distance": entry_distance,
+                "max_entry_distance": max_entry_distance,
+                "entry_distance_pct": entry_distance_pct,
+                "signal_candle_et": candle_date_et,
                 "buy_point": buy_point,
                 "stop_loss": stop_loss,
             }
@@ -182,6 +212,22 @@ def _launch_fomo_trade(symbol: str, buy_point: float, stop_loss: float, target1_
     return subprocess.Popen(command)
 
 
+def _cancel_open_orders_for_symbol(trading_client, symbol: str) -> int:
+    target = _normalize_symbol(symbol)
+    open_orders = list(
+        trading_client.get_orders(
+            filter=GetOrdersRequest(status=QueryOrderStatus.OPEN, limit=100)
+        )
+    )
+    cancelled = 0
+    for order in open_orders:
+        if _normalize_symbol(getattr(order, "symbol", "")) != target:
+            continue
+        trading_client.cancel_order_by_id(order.id)
+        cancelled += 1
+    return cancelled
+
+
 def main() -> int:
     if len(sys.argv) != 2:
         _usage()
@@ -193,7 +239,7 @@ def main() -> int:
         return 1
 
     try:
-        credentials, _ = bootstrap_trading_auth("demand.py")
+        credentials, trading_client = bootstrap_trading_auth("demand.py")
     except Exception as exc:
         print(f"Authentication failed: {exc}")
         return 1
@@ -204,9 +250,14 @@ def main() -> int:
         print(f"Error fetching hourly bars for {symbol}: {exc}")
         return 1
 
-    pattern = _find_demand_pattern(bars)
+    current_price = float(getattr(bars[-1], "close"))
+    pattern = _find_demand_pattern(bars, current_price)
     if pattern is None:
-        print("No valid demand pattern found in the last 200 hourly candles.")
+        print(
+            "No actionable demand pattern found in the last 200 hourly candles "
+            f"within {MAX_SIGNAL_AGE_CANDLES} candles, {MAX_ENTRY_DISTANCE_AVG_RANGES:.1f}x average range, "
+            f"and {MAX_ENTRY_DISTANCE_PCT*100:.1f}% of current price."
+        )
         return 1
 
     buy_point = pattern["buy_point"]
@@ -225,17 +276,34 @@ def main() -> int:
     print(f"Symbol: {symbol}")
     print(f"Hourly candles analyzed: {len(bars)}")
     print(f"Average candle range: {pattern['avg_range']:.4f}")
+    print(f"Current price reference: {current_price:.4f}")
     print(f"Signal candle pair index: prev={pattern['signal_index']-1}, curr={pattern['signal_index']}")
+    print(f"Signal age: {pattern['signal_age_candles']} candles ago")
     print(f"Signal previous candle time: {pattern['previous_time']}")
     print(f"Signal current candle time:  {pattern['current_time']}")
     print(f"Current candle range: {pattern['current_range']:.4f}")
     print(f"Previous candle range: {pattern['previous_range']:.4f}")
     print(f"Smaller candle used: {pattern['smaller_label']} (range={pattern['smaller_range']:.4f})")
     print(f"Smaller candle time: {pattern['smaller_time']}")
+    print(f"Entry candle time (buy_point candle): {pattern['smaller_time']}")
+    print(
+        f"Entry distance from current: {pattern['entry_distance']:.4f} "
+        f"(max allowed {pattern['max_entry_distance']:.4f})"
+    )
+    print(
+        f"Entry distance percent: {pattern['entry_distance_pct']*100:.2f}% "
+        f"(max allowed {MAX_ENTRY_DISTANCE_PCT*100:.2f}%)"
+    )
     print(f"Buy point: {buy_point:.4f}")
     print(f"Stop loss: {stop_loss:.4f}")
     print(f"Target 1 price: {target1_price:.4f}")
     print(f"Target 2 price: {target2_price:.4f}")
+    print(
+        "Demand zone rationale: "
+        f"At {pattern['signal_candle_et']}, the signal candle range was {pattern['current_range']:.4f}, "
+        f"which is {pattern['current_range_multiple']:.2f}x of average range ({pattern['avg_range']:.4f}), "
+        f"and the prior candle range ({pattern['previous_range']:.4f}) was below average."
+    )
 
     try:
         process = _launch_fomo_trade(symbol, buy_point, stop_loss, target1_price, target2_price)
@@ -244,6 +312,28 @@ def main() -> int:
         return 1
 
     print(f"Started fomo_trade.py with PID {process.pid}")
+    print("Press Ctrl+C to stop the child trade runner and cancel any still-open orders for this symbol.")
+
+    try:
+        exit_code = process.wait()
+        print(f"fomo_trade.py exited with code {exit_code}")
+    except KeyboardInterrupt:
+        print("\nStopping demand.py child runner...")
+        try:
+            process.terminate()
+            process.wait(timeout=10)
+        except Exception:
+            try:
+                process.kill()
+            except Exception:
+                pass
+        try:
+            cancelled = _cancel_open_orders_for_symbol(trading_client, symbol)
+            print(f"Cancelled {cancelled} open order(s) for {symbol}.")
+        except Exception as exc:
+            print(f"Warning: failed to cancel open orders for {symbol}: {exc}")
+        return 130
+
     return 0
 
 

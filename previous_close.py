@@ -83,6 +83,34 @@ def _get_previous_day_close(data_client: StockHistoricalDataClient, symbol: str)
     return float(close)
 
 
+def _get_today_open(data_client: StockHistoricalDataClient, symbol: str) -> float | None:
+    now = datetime.now(timezone.utc)
+    request = StockBarsRequest(
+        symbol_or_symbols=symbol,
+        timeframe=TimeFrame.Day,
+        start=now - timedelta(days=5),
+        end=now,
+        limit=5,
+        feed=DataFeed.IEX,
+    )
+    bars = data_client.get_stock_bars(request)
+    bar_list = _extract_symbol_bars(bars, symbol)
+    if not bar_list:
+        return None
+
+    today = now.date()
+    for bar in reversed(bar_list):
+        ts = getattr(bar, "timestamp", None)
+        bar_date = ts.date() if ts is not None and hasattr(ts, "date") else None
+        if bar_date == today:
+            open_price = getattr(bar, "open", None)
+            if open_price is None and isinstance(bar, dict):
+                open_price = bar.get("open")
+            return float(open_price) if open_price is not None else None
+
+    return None
+
+
 def _calculate_levels(previous_close: float) -> tuple[float, float, float, float]:
     entry_price = float(math.ceil(previous_close))
     stop_loss = round(entry_price * 0.99, 2)
@@ -117,6 +145,14 @@ def _compute_levels(credentials, symbol: str) -> tuple[float, float, float, floa
     data_client = StockHistoricalDataClient(credentials.api_key, credentials.secret_key)
     previous_close = _get_previous_day_close(data_client, symbol)
     return _calculate_levels(previous_close)
+
+
+def _is_entry_allowed_today(credentials, symbol: str, previous_close: float) -> tuple[bool, float | None]:
+    data_client = StockHistoricalDataClient(credentials.api_key, credentials.secret_key)
+    today_open = _get_today_open(data_client, symbol)
+    if today_open is None:
+        return False, None
+    return today_open > previous_close, today_open
 
 
 def _is_after_refresh_cutoff(now_pt: datetime) -> bool:
@@ -179,7 +215,22 @@ def main() -> int:
     print(f"  Target 1 (1%):   {target1:.2f}")
     print(f"  Target 2 (3%):   {target2:.2f}")
 
-    process = _launch_fomo_trade(symbol, num_stocks, entry, stop, target1, target2)
+    process = None
+    gate_decision_date = None
+
+    allowed, today_open = _is_entry_allowed_today(credentials, symbol, prev_close)
+    gate_decision_date = datetime.now(PT_TZ).date()
+    if today_open is None:
+        print("[INFO] Today's open is not available yet. Waiting before launching fomo_trade.py...")
+    elif not allowed:
+        print(
+            f"[INFO] No entry today: today's open ({today_open:.4f}) is not above previous close ({prev_close:.4f})."
+        )
+    else:
+        print(
+            f"[INFO] Entry gate passed: today's open ({today_open:.4f}) is above previous close ({prev_close:.4f})."
+        )
+        process = _launch_fomo_trade(symbol, num_stocks, entry, stop, target1, target2)
 
     now_pt = datetime.now(PT_TZ)
     last_daily_refresh_date = now_pt.date() if _is_after_refresh_cutoff(now_pt) else None
@@ -191,6 +242,23 @@ def main() -> int:
                 f"[CHECK {now_pt.strftime('%Y-%m-%d %H:%M:%S %Z')}] "
                 f"Ticker={symbol} | PreviousClose={prev_close:.4f} | BuyLimit={entry:.2f}"
             )
+
+            if gate_decision_date != now_pt.date():
+                gate_decision_date = now_pt.date()
+
+            if process is None:
+                allowed, today_open = _is_entry_allowed_today(credentials, symbol, prev_close)
+                if today_open is None:
+                    print("[INFO] Waiting for today's open data before entry check...")
+                elif allowed:
+                    print(
+                        f"[INFO] Entry gate passed: today's open ({today_open:.4f}) is above previous close ({prev_close:.4f})."
+                    )
+                    process = _launch_fomo_trade(symbol, num_stocks, entry, stop, target1, target2)
+                else:
+                    print(
+                        f"[INFO] Entry blocked today: open ({today_open:.4f}) <= previous close ({prev_close:.4f})."
+                    )
 
             if _is_after_refresh_cutoff(now_pt) and last_daily_refresh_date != now_pt.date():
                 print("\n[INFO] 2:00 PM Pacific cutoff reached. Refreshing strategy levels from latest previous close...")
@@ -213,24 +281,41 @@ def main() -> int:
                     print(f"  Target 1 (1%):   {target1:.2f}")
                     print(f"  Target 2 (3%):   {target2:.2f}")
 
-                    _terminate_process(process)
-                    process = _launch_fomo_trade(symbol, num_stocks, entry, stop, target1, target2)
+                    if process is not None:
+                        _terminate_process(process)
+                        process = None
+
+                    allowed, today_open = _is_entry_allowed_today(credentials, symbol, prev_close)
+                    if today_open is None:
+                        print("[INFO] Today's open is not available yet after refresh; waiting before launch.")
+                    elif not allowed:
+                        print(
+                            f"[INFO] Refresh gate blocked: open ({today_open:.4f}) <= previous close ({prev_close:.4f})."
+                        )
+                    else:
+                        print(
+                            f"[INFO] Refresh gate passed: open ({today_open:.4f}) > previous close ({prev_close:.4f})."
+                        )
+                        process = _launch_fomo_trade(symbol, num_stocks, entry, stop, target1, target2)
                     last_daily_refresh_date = now_pt.date()
 
-            exit_code = process.poll()
-            if exit_code is not None:
-                print(f"\n[WARN] fomo_trade.py exited with code {exit_code}. Restarting with current levels...")
-                process = _launch_fomo_trade(symbol, num_stocks, entry, stop, target1, target2)
+            if process is not None:
+                exit_code = process.poll()
+                if exit_code is not None:
+                    print(f"\n[WARN] fomo_trade.py exited with code {exit_code}. Restarting with current levels...")
+                    process = _launch_fomo_trade(symbol, num_stocks, entry, stop, target1, target2)
 
             sys.stdout.flush()
             time.sleep(CHECK_INTERVAL_SECONDS)
     except KeyboardInterrupt:
         print("\nStopped by user")
-        _terminate_process(process)
+        if process is not None:
+            _terminate_process(process)
         return 0
     except Exception as exc:
         print(f"Failed to start fomo_trade.py: {exc}")
-        _terminate_process(process)
+        if process is not None:
+            _terminate_process(process)
         return 1
 
 

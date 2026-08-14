@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 Stock/Crypto Chart Plotter - Interactive command-line tool
 
@@ -19,6 +19,13 @@ Examples:
 """
 
 import sys
+from pathlib import Path
+import sys
+
+WORKSPACE_ROOT = Path(__file__).resolve().parent.parent
+if str(WORKSPACE_ROOT) not in sys.path:
+    sys.path.insert(0, str(WORKSPACE_ROOT))
+
 from roles.plot_function import plot_stock_chart
 
 def main():
@@ -67,8 +74,9 @@ def main():
             volume_per_candle=volume_per_candle
         )
     except Exception as e:
-        print(f"\n✗ Error: {e}")
+        print(f"\nâœ— Error: {e}")
         sys.exit(1)
 
 if __name__ == '__main__':
     main()
+

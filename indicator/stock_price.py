@@ -1,4 +1,4 @@
-import sys
+﻿import sys
 import re
 from datetime import datetime, timedelta, timezone
 from zoneinfo import ZoneInfo
@@ -13,6 +13,13 @@ from alpaca.data.requests import (
 	OptionBarsRequest,
 )
 from alpaca.data.timeframe import TimeFrame
+
+from pathlib import Path
+import sys
+
+WORKSPACE_ROOT = Path(__file__).resolve().parent.parent
+if str(WORKSPACE_ROOT) not in sys.path:
+    sys.path.insert(0, str(WORKSPACE_ROOT))
 
 from roles.credentials import bootstrap_trading_auth
 
@@ -192,3 +199,4 @@ def main() -> int:
 
 if __name__ == "__main__":
 	raise SystemExit(main())
+

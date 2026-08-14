@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 Orders Menu - Interactive order management for stocks
 
@@ -18,6 +18,13 @@ from alpaca.trading.client import TradingClient
 from alpaca.trading.enums import QueryOrderStatus
 from alpaca.trading.requests import GetOrdersRequest
 
+from pathlib import Path
+import sys
+
+WORKSPACE_ROOT = Path(__file__).resolve().parent.parent
+if str(WORKSPACE_ROOT) not in sys.path:
+    sys.path.insert(0, str(WORKSPACE_ROOT))
+
 from roles.credentials import bootstrap_trading_auth
 
 
@@ -36,7 +43,7 @@ def get_today_orders(trading_client: TradingClient):
             print(f"  [DEBUG] {o.symbol} {o.side} {o.qty} @ {o.limit_price} status={o.status}")
         return orders_list
     except Exception as e:
-        print(f"✗ Error fetching orders: {e}")
+        print(f"âœ— Error fetching orders: {e}")
         import traceback; traceback.print_exc()
         return []
 
@@ -48,16 +55,16 @@ def get_open_positions(trading_client: TradingClient):
         print(f"  [DEBUG] API returned {len(positions)} open positions")
         return positions
     except Exception as e:
-        print(f"✗ Error fetching positions: {e}")
+        print(f"âœ— Error fetching positions: {e}")
         import traceback; traceback.print_exc()
         return []
 
 
 def display_positions(positions):
     """Display open positions before orders."""
-    print(f"\n{'─' * 64}")
+    print(f"\n{'â”€' * 64}")
     print("  OPEN POSITIONS")
-    print(f"{'─' * 64}")
+    print(f"{'â”€' * 64}")
 
     if not positions:
         print("  (none)")
@@ -87,12 +94,12 @@ def display_positions(positions):
 def display_orders(orders):
     """Display orders in a formatted menu"""
     if not orders:
-        print("\n✗ No open orders from today\n")
+        print("\nâœ— No open orders from today\n")
         return False
     
-    print(f"\n╔════════════════════════════════════════════════════════════╗")
-    print(f"║           ALL OPEN ORDERS - {datetime.now().strftime('%Y-%m-%d')}                   ║")
-    print(f"╠════════════════════════════════════════════════════════════╣")
+    print(f"\nâ•”â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•—")
+    print(f"â•‘           ALL OPEN ORDERS - {datetime.now().strftime('%Y-%m-%d')}                   â•‘")
+    print(f"â• â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•£")
     
     for i, order in enumerate(orders, 1):
         symbol = order.symbol
@@ -102,12 +109,12 @@ def display_orders(orders):
         order_id = order.id
         created_at = order.created_at.strftime('%H:%M:%S') if hasattr(order.created_at, 'strftime') else str(order.created_at)
         
-        print(f"║ [{i}] {side.upper():<5} {qty:>4} {symbol:<6} @ ${limit_price:<8} | {created_at}  ║")
+        print(f"â•‘ [{i}] {side.upper():<5} {qty:>4} {symbol:<6} @ ${limit_price:<8} | {created_at}  â•‘")
     
-    print(f"╠════════════════════════════════════════════════════════════╣")
-    print(f"║ [0] Cancel All Orders                                      ║")
-    print(f"║ [Q] Quit                                                   ║")
-    print(f"╚════════════════════════════════════════════════════════════╝\n")
+    print(f"â• â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•£")
+    print(f"â•‘ [0] Cancel All Orders                                      â•‘")
+    print(f"â•‘ [Q] Quit                                                   â•‘")
+    print(f"â•šâ•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•\n")
     
     return True
 
@@ -117,13 +124,13 @@ def cancel_order(trading_client: TradingClient, order_id):
         trading_client.cancel_order_by_id(order_id)
         return True
     except Exception as e:
-        print(f"✗ Error canceling order: {e}")
+        print(f"âœ— Error canceling order: {e}")
         return False
 
 def cancel_all_orders(trading_client: TradingClient, orders):
     """Cancel all orders"""
     if not orders:
-        print("✗ No orders to cancel")
+        print("âœ— No orders to cancel")
         return
     
     cancelled_count = 0
@@ -131,24 +138,24 @@ def cancel_all_orders(trading_client: TradingClient, orders):
         try:
             trading_client.cancel_order_by_id(order.id)
             cancelled_count += 1
-            print(f"✓ Cancelled: {order.symbol} {order.side.value if hasattr(order.side, 'value') else order.side} {order.qty}")
+            print(f"âœ“ Cancelled: {order.symbol} {order.side.value if hasattr(order.side, 'value') else order.side} {order.qty}")
         except Exception as e:
-            print(f"✗ Error canceling {order.symbol}: {e}")
+            print(f"âœ— Error canceling {order.symbol}: {e}")
     
-    print(f"\n✓ Total cancelled: {cancelled_count} orders\n")
+    print(f"\nâœ“ Total cancelled: {cancelled_count} orders\n")
 
 def main():
     """Main menu loop"""
     try:
         trading_client, paper_mode = build_authenticated_client()
     except Exception as exc:
-        print(f"\n✗ Failed to initialize authenticated trading client: {exc}\n")
+        print(f"\nâœ— Failed to initialize authenticated trading client: {exc}\n")
         return
 
-    print(f"\n╔════════════════════════════════════════════════════════════╗")
-    print(f"║              ORDERS MANAGEMENT MENU                        ║")
-    print(f"║ Paper Trading: {paper_mode}                                ║")
-    print(f"╚════════════════════════════════════════════════════════════╝\n")
+    print(f"\nâ•”â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•—")
+    print(f"â•‘              ORDERS MANAGEMENT MENU                        â•‘")
+    print(f"â•‘ Paper Trading: {paper_mode}                                â•‘")
+    print(f"â•šâ•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•\n")
     
     while True:
         positions = get_open_positions(trading_client)
@@ -180,7 +187,7 @@ def main():
             break
         elif choice == '0':
             # Cancel all orders
-            confirm = input("⚠  Are you sure? This will cancel ALL open orders. (Y/N): ").strip().upper()
+            confirm = input("âš   Are you sure? This will cancel ALL open orders. (Y/N): ").strip().upper()
             if confirm == 'Y':
                 cancel_all_orders(trading_client, orders)
             else:
@@ -194,20 +201,20 @@ def main():
                 qty = selected_order.qty
                 limit_price = selected_order.limit_price if selected_order.limit_price else "Market"
                 
-                print(f"\n✓ Selected: {side.upper()} {qty} {symbol} @ ${limit_price}")
+                print(f"\nâœ“ Selected: {side.upper()} {qty} {symbol} @ ${limit_price}")
                 confirm = input("Cancel this order? (Y/N): ").strip().upper()
                 
                 if confirm == 'Y':
                     if cancel_order(trading_client, selected_order.id):
-                        print(f"✓ Order cancelled successfully\n")
+                        print(f"âœ“ Order cancelled successfully\n")
                     else:
-                        print(f"✗ Failed to cancel order\n")
+                        print(f"âœ— Failed to cancel order\n")
                 else:
                     print("Cancelled.\n")
             else:
-                print(f"✗ Invalid order number. Please select 1-{len(orders)}\n")
+                print(f"âœ— Invalid order number. Please select 1-{len(orders)}\n")
         else:
-            print("✗ Invalid input. Please enter a number or Q to quit.\n")
+            print("âœ— Invalid input. Please enter a number or Q to quit.\n")
 
 if __name__ == '__main__':
     try:
@@ -215,3 +222,4 @@ if __name__ == '__main__':
     except KeyboardInterrupt:
         print("\n\nBot stopped by user\n")
         sys.exit(0)
+

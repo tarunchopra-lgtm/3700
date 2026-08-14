@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 Risk Management Bot - Automated stop loss and target management for all open positions
 
@@ -24,6 +24,13 @@ from alpaca.trading.enums import OrderSide, TimeInForce, QueryOrderStatus
 from alpaca.data.historical import StockHistoricalDataClient, CryptoHistoricalDataClient
 from alpaca.data.requests import StockLatestTradeRequest, CryptoLatestTradeRequest
 
+from pathlib import Path
+import sys
+
+WORKSPACE_ROOT = Path(__file__).resolve().parent.parent
+if str(WORKSPACE_ROOT) not in sys.path:
+    sys.path.insert(0, str(WORKSPACE_ROOT))
+
 from roles.credentials import bootstrap_trading_auth
 
 try:
@@ -36,20 +43,20 @@ PAPER = credentials.paper
 stock_data_client = StockHistoricalDataClient(credentials.api_key, credentials.secret_key)
 crypto_data_client = CryptoHistoricalDataClient(credentials.api_key, credentials.secret_key)
 
-# ── Constants ────────────────────────────────────────────────────────────────
+# â”€â”€ Constants â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 CHECK_INTERVAL   = 30    # seconds between market checks
 STOP_LOSS_PCT    = 0.05  # 5% below entry
 BUY_QTY          = 2     # shares per entry
 LOG_FILE         = os.path.join(os.path.dirname(__file__), 'risk_management_log.txt')
 
-# ── Per-symbol state ─────────────────────────────────────────────────────────
+# â”€â”€ Per-symbol state â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 # state keys per symbol:
 #   entry_price, stop_loss, target1, target1_hit, breakeven_set
 #   waiting_reentry, internal_qty
 state: dict = {}
 
 
-# ── Helpers ───────────────────────────────────────────────────────────────────
+# â”€â”€ Helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 def is_crypto(symbol: str) -> bool:
     return '/' in symbol
@@ -68,7 +75,7 @@ def _build_latest_buy_fill_map() -> dict[str, float]:
             )
         )
     except Exception as exc:
-        print(f"  ⚠ Could not read closed orders for entry cross-check: {exc}")
+        print(f"  âš  Could not read closed orders for entry cross-check: {exc}")
         return latest_buy_fill_by_symbol
 
     candidates = []
@@ -120,7 +127,7 @@ def get_price(symbol: str) -> float:
             r = StockLatestTradeRequest(symbol_or_symbols=symbol)
             return float(stock_data_client.get_stock_latest_trade(r)[symbol].price)
     except Exception as e:
-        print(f"  ✗ Could not get price for {symbol}: {e}")
+        print(f"  âœ— Could not get price for {symbol}: {e}")
         return None
 
 def calculate_levels(entry: float):
@@ -137,8 +144,8 @@ def log_stopped_trade(symbol, entry, stop, qty, reason='STOP'):
         with open(LOG_FILE, 'a') as f:
             f.write(line)
     except Exception as e:
-        print(f"  ✗ Could not write log: {e}")
-    print(f"  📝 Logged: {line.strip()}")
+        print(f"  âœ— Could not write log: {e}")
+    print(f"  ðŸ“ Logged: {line.strip()}")
 
 def cancel_open_orders(symbol: str):
     try:
@@ -149,9 +156,9 @@ def cancel_open_orders(symbol: str):
         for o in sym_orders:
             trading_client.cancel_order_by_id(o.id)
             side = o.side.value if hasattr(o.side, 'value') else str(o.side)
-            print(f"  ✓ Cancelled open {side.upper()} order for {symbol}")
+            print(f"  âœ“ Cancelled open {side.upper()} order for {symbol}")
     except Exception as e:
-        print(f"  ✗ Error cancelling orders for {symbol}: {e}")
+        print(f"  âœ— Error cancelling orders for {symbol}: {e}")
 
 def place_market_sell(symbol: str, qty: int, reason: str) -> bool:
     try:
@@ -162,10 +169,10 @@ def place_market_sell(symbol: str, qty: int, reason: str) -> bool:
             time_in_force=TimeInForce.GTC
         )
         resp = trading_client.submit_order(order_data=order)
-        print(f"  ✓ Market SELL {qty} {symbol} submitted ({reason}) — ID: {resp.id}")
+        print(f"  âœ“ Market SELL {qty} {symbol} submitted ({reason}) â€” ID: {resp.id}")
         return True
     except Exception as e:
-        print(f"  ✗ Error selling {symbol}: {e}")
+        print(f"  âœ— Error selling {symbol}: {e}")
         return False
 
 def place_limit_buy(symbol: str, qty: int, price: float, reason: str) -> bool:
@@ -178,10 +185,10 @@ def place_limit_buy(symbol: str, qty: int, price: float, reason: str) -> bool:
             time_in_force=TimeInForce.GTC
         )
         resp = trading_client.submit_order(order_data=order)
-        print(f"  ✓ Limit BUY {qty} {symbol} @ ${price:.4f} submitted ({reason}) — ID: {resp.id}")
+        print(f"  âœ“ Limit BUY {qty} {symbol} @ ${price:.4f} submitted ({reason}) â€” ID: {resp.id}")
         return True
     except Exception as e:
-        print(f"  ✗ Error buying {symbol}: {e}")
+        print(f"  âœ— Error buying {symbol}: {e}")
         return False
 
 def init_symbol_state(symbol: str, entry: float):
@@ -202,12 +209,12 @@ def print_state(symbol: str, s: dict, current_price: float):
     pnl = (current_price - s['entry_price']) * s['internal_qty']
     print(f"  {symbol:<8} price=${current_price:.4f} | entry=${s['entry_price']:.4f}"
           f" | stop=${s['stop_loss']:.4f} | tgt1=${s['target1']:.4f} | tgt2=${s['target2']:.4f}"
-          f" | qty={s['internal_qty']} | P&L≈${pnl:+.2f}"
+          f" | qty={s['internal_qty']} | P&Lâ‰ˆ${pnl:+.2f}"
           f"{' | waiting_reentry' if s['waiting_reentry'] else ''}"
           f"{' | tgt1_hit' if s['target1_hit'] else ''}")
 
 
-# ── Core per-symbol logic ─────────────────────────────────────────────────────
+# â”€â”€ Core per-symbol logic â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 def manage_symbol(symbol: str, position=None, latest_buy_fill_by_symbol=None):
     """Run one monitoring tick for a symbol."""
@@ -216,14 +223,14 @@ def manage_symbol(symbol: str, position=None, latest_buy_fill_by_symbol=None):
 
     s = state.get(symbol)
 
-    # ── No position branch ────────────────────────────────────────────────────
+    # â”€â”€ No position branch â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     if position is None:
         if s and s['waiting_reentry']:
             price = get_price(symbol)
             if price is None:
                 return
             if price >= s['entry_price']:
-                print(f"\n  [{symbol}] Price ${price:.4f} recovered to entry ${s['entry_price']:.4f} — re-entering")
+                print(f"\n  [{symbol}] Price ${price:.4f} recovered to entry ${s['entry_price']:.4f} â€” re-entering")
                 cancel_open_orders(symbol)
                 ok = place_limit_buy(symbol, BUY_QTY, s['entry_price'], 'RE-ENTRY')
                 if ok:
@@ -241,7 +248,7 @@ def manage_symbol(symbol: str, position=None, latest_buy_fill_by_symbol=None):
                 print(f"  [{symbol}] Waiting for reversal to ${s['entry_price']:.4f} | current=${price:.4f}")
         return
 
-    # ── Position exists ───────────────────────────────────────────────────────
+    # â”€â”€ Position exists â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     entry, entry_source, position_entry, order_entry = _resolve_entry_price(
         symbol,
         position,
@@ -249,7 +256,7 @@ def manage_symbol(symbol: str, position=None, latest_buy_fill_by_symbol=None):
     )
     if entry is None:
         print(
-            f"  ✗ [{symbol}] Could not determine entry price "
+            f"  âœ— [{symbol}] Could not determine entry price "
             f"(position={position_entry}, latest_buy_fill={order_entry})"
         )
         return
@@ -263,7 +270,7 @@ def manage_symbol(symbol: str, position=None, latest_buy_fill_by_symbol=None):
         f"using={entry:.4f} ({entry_source})"
     )
 
-    # First time we see this symbol — initialise state
+    # First time we see this symbol â€” initialise state
     if s is None or s.get('waiting_reentry'):
         s = init_symbol_state(symbol, entry)
 
@@ -289,10 +296,10 @@ def manage_symbol(symbol: str, position=None, latest_buy_fill_by_symbol=None):
     target2      = s['target2']
     entry_price  = s['entry_price']
 
-    # ── STOP LOSS ─────────────────────────────────────────────────────────────
+    # â”€â”€ STOP LOSS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     if not s['waiting_reentry'] and price <= stop_loss:
         reason = 'BREAKEVEN_STOP' if s['breakeven_set'] else 'STOP_LOSS'
-        print(f"\n  ✗ [{symbol}] {reason} HIT at ${price:.4f} (stop=${stop_loss:.4f})")
+        print(f"\n  âœ— [{symbol}] {reason} HIT at ${price:.4f} (stop=${stop_loss:.4f})")
         cancel_open_orders(symbol)
         ok = place_market_sell(symbol, current_qty, reason)
         if ok:
@@ -304,21 +311,21 @@ def manage_symbol(symbol: str, position=None, latest_buy_fill_by_symbol=None):
                 'breakeven_set':   False,
             })
 
-    # ── TARGET 1 ──────────────────────────────────────────────────────────────
+    # â”€â”€ TARGET 1 â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     elif not s['target1_hit'] and price >= target1:
         sell_qty = 1 if current_qty > 1 else current_qty
-        print(f"\n  ✓ [{symbol}] TARGET 1 HIT at ${price:.4f} (tgt=${target1:.4f}) — selling {sell_qty} share")
+        print(f"\n  âœ“ [{symbol}] TARGET 1 HIT at ${price:.4f} (tgt=${target1:.4f}) â€” selling {sell_qty} share")
         ok = place_market_sell(symbol, sell_qty, 'TARGET1')
         if ok:
             s['target1_hit']   = True
             s['internal_qty']  = max(current_qty - sell_qty, 0)
             s['stop_loss']     = entry_price   # move stop to breakeven
             s['breakeven_set'] = True
-            print(f"  ✓ [{symbol}] Stop moved to breakeven ${entry_price:.4f}")
+            print(f"  âœ“ [{symbol}] Stop moved to breakeven ${entry_price:.4f}")
 
-    # ── TARGET 2 ──────────────────────────────────────────────────────────────
+    # â”€â”€ TARGET 2 â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     elif s['target1_hit'] and current_qty > 0 and price >= target2:
-        print(f"\n  ✓ [{symbol}] TARGET 2 HIT at ${price:.4f} (tgt=${target2:.4f}) — closing remaining {current_qty}")
+        print(f"\n  âœ“ [{symbol}] TARGET 2 HIT at ${price:.4f} (tgt=${target2:.4f}) â€” closing remaining {current_qty}")
         ok = place_market_sell(symbol, current_qty, 'TARGET2')
         if ok:
             s['internal_qty'] = 0
@@ -326,25 +333,25 @@ def manage_symbol(symbol: str, position=None, latest_buy_fill_by_symbol=None):
             s['breakeven_set'] = False
             s['waiting_reentry'] = False
 
-    # ── No action ─────────────────────────────────────────────────────────────
+    # â”€â”€ No action â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     else:
         pass  # status already printed by print_state
 
 
-# ── Main loop ────────────────────────────────────────────────────────────────
+# â”€â”€ Main loop â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 def print_header():
-    print(f"\n{'═'*64}")
+    print(f"\n{'â•'*64}")
     print(f"  RISK MANAGEMENT BOT  |  {'Paper' if PAPER else 'Live'}  |  {datetime.now().strftime('%H:%M:%S')}")
     print(f"  Stop: {STOP_LOSS_PCT*100:.0f}% below entry  |  Buy qty: {BUY_QTY}  |  Check: {CHECK_INTERVAL}s")
-    print(f"{'═'*64}")
+    print(f"{'â•'*64}")
 
 def run():
-    print(f"\n╔{'═'*62}╗")
-    print(f"║  Risk Management Bot starting...                              ║")
-    print(f"║  Log file: {os.path.basename(LOG_FILE):<50}║")
-    print(f"║  Press Ctrl+C to stop                                         ║")
-    print(f"╚{'═'*62}╝\n")
+    print(f"\nâ•”{'â•'*62}â•—")
+    print(f"â•‘  Risk Management Bot starting...                              â•‘")
+    print(f"â•‘  Log file: {os.path.basename(LOG_FILE):<50}â•‘")
+    print(f"â•‘  Press Ctrl+C to stop                                         â•‘")
+    print(f"â•š{'â•'*62}â•\n")
 
     while True:
         try:
@@ -355,7 +362,7 @@ def run():
                 positions = {p.symbol: p for p in trading_client.get_all_positions()}
                 latest_buy_fill_by_symbol = _build_latest_buy_fill_map()
             except Exception as e:
-                print(f"  ✗ Error fetching positions: {e}")
+                print(f"  âœ— Error fetching positions: {e}")
                 time.sleep(CHECK_INTERVAL)
                 continue
 
@@ -378,9 +385,10 @@ def run():
             print("\n\nRisk Management Bot stopped by user.\n")
             break
         except Exception as e:
-            print(f"\n  ✗ Unexpected error: {e}")
+            print(f"\n  âœ— Unexpected error: {e}")
             time.sleep(CHECK_INTERVAL)
 
 
 if __name__ == '__main__':
     run()
+

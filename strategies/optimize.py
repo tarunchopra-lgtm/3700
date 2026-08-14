@@ -136,7 +136,7 @@ def _build_candidates(
 
 
 def _run_backtest(days: int, ticker: str, qty: int, entry: float, stop: float, target1: float, target2: float) -> BacktestResult | None:
-    backtest_path = Path(__file__).resolve().parent / "backtest.py"
+    backtest_path = Path(__file__).resolve().parent.parent / "indicator" / "backtest.py"
     cmd = [
         sys.executable,
         str(backtest_path),

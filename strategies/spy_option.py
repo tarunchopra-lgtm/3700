@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """SPY option range and trigger runner.
 
 What it does:
@@ -29,9 +29,16 @@ from alpaca.data.historical import StockHistoricalDataClient
 from alpaca.data.requests import StockBarsRequest, StockLatestTradeRequest
 from alpaca.data.timeframe import TimeFrame
 
+from pathlib import Path
+import sys
+
+WORKSPACE_ROOT = Path(__file__).resolve().parent.parent
+if str(WORKSPACE_ROOT) not in sys.path:
+    sys.path.insert(0, str(WORKSPACE_ROOT))
+
 from roles.credentials import bootstrap_trading_auth
-from current_week_option_function_call import get_current_week_call_option_symbol
-from current_week_option_function_put import get_current_week_put_option_symbol
+from strategies.current_week_option_function_call import get_current_week_call_option_symbol
+from strategies.current_week_option_function_put import get_current_week_put_option_symbol
 
 
 ATR_PERIOD = 14
@@ -156,7 +163,7 @@ def _calculate_atr(client: StockHistoricalDataClient, symbol: str) -> float:
 
 
 def _get_price_line_for_symbol(symbol: str) -> str:
-    stock_price_script = Path(__file__).resolve().parent / "stock_price.py"
+    stock_price_script = Path(__file__).resolve().parent.parent / "indicator" / "stock_price.py"
     result = subprocess.run(
         [sys.executable, str(stock_price_script), symbol],
         check=False,

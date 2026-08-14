@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """Inspect this week's call and put options for a ticker or current stock positions.
 
 Usage:
@@ -23,6 +23,13 @@ from alpaca.data.historical import OptionHistoricalDataClient, StockHistoricalDa
 from alpaca.data.requests import OptionBarsRequest, OptionLatestQuoteRequest, StockLatestTradeRequest
 from alpaca.trading.enums import AssetStatus, ContractType
 from alpaca.trading.requests import GetOptionContractsRequest
+
+from pathlib import Path
+import sys
+
+WORKSPACE_ROOT = Path(__file__).resolve().parent.parent
+if str(WORKSPACE_ROOT) not in sys.path:
+    sys.path.insert(0, str(WORKSPACE_ROOT))
 
 from roles.credentials import bootstrap_trading_auth
 

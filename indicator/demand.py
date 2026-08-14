@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """Demand pattern scanner and trade launcher.
 
 Usage:
@@ -34,6 +34,13 @@ from alpaca.data.requests import CryptoBarsRequest, CryptoLatestTradeRequest, St
 from alpaca.data.timeframe import TimeFrame
 from alpaca.trading.enums import QueryOrderStatus
 from alpaca.trading.requests import GetOrdersRequest
+
+from pathlib import Path
+import sys
+
+WORKSPACE_ROOT = Path(__file__).resolve().parent.parent
+if str(WORKSPACE_ROOT) not in sys.path:
+    sys.path.insert(0, str(WORKSPACE_ROOT))
 
 from roles.credentials import bootstrap_trading_auth
 
@@ -195,7 +202,7 @@ def _find_demand_pattern(bars: list, current_price: float):
 
 
 def _launch_fomo_trade(symbol: str, buy_point: float, stop_loss: float, target1_price: float, target2_price: float) -> subprocess.Popen:
-    script_path = Path(__file__).resolve().parent / "fomo_trade.py"
+    script_path = Path(__file__).resolve().parent.parent / "strategies" / "fomo_trade.py"
     command = [
         sys.executable,
         str(script_path),

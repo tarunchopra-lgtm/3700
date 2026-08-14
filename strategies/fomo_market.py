@@ -81,6 +81,7 @@ def _build_fomo_trade_command(symbol: str, num_stocks: int, entry: float, stop: 
     script_path = Path(__file__).resolve().parent / "fomo_trade.py"
     return [
         sys.executable,
+        "-u",
         str(script_path),
         symbol,
         str(num_stocks),
@@ -116,7 +117,9 @@ def _launch_fomo_trade(symbol: str, num_stocks: int, entry: float, stop: float, 
     command = _build_fomo_trade_command(symbol, num_stocks, entry, stop, target1, target2)
     print("\nLaunching fomo_trade.py with:")
     print("  " + " ".join(command))
-    return subprocess.Popen(command)
+    env = dict(os.environ)
+    env["PYTHONUNBUFFERED"] = "1"
+    return subprocess.Popen(command, env=env)
 
 
 def main() -> int:

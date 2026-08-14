@@ -82,12 +82,15 @@ def _resolve_call_symbol_from_script(symbol: str) -> str:
 
     match = CALL_SYMBOL_PATTERN.search(result.stdout)
     if not match:
-        raise RuntimeError(f"Could not parse CALL contract symbol for {symbol} from current_week_option.py output")
+        output_preview = " | ".join(line.strip() for line in result.stdout.splitlines()[:8])
+        raise RuntimeError(
+            f"Could not parse CALL contract symbol for {symbol} from current_week_option.py output: {output_preview}"
+        )
 
     return match.group(1).strip().upper()
 
 
-def _get_option_mid_price(option_data_client: OptionHistoricalDataClient, option_symbol: str) -> float:
+def _get_option_quote(option_data_client: OptionHistoricalDataClient, option_symbol: str) -> tuple[float | None, float | None, float]:
     quote_map = option_data_client.get_option_latest_quote(
         OptionLatestQuoteRequest(symbol_or_symbols=option_symbol, feed=OptionsFeed.INDICATIVE)
     )
@@ -97,11 +100,15 @@ def _get_option_mid_price(option_data_client: OptionHistoricalDataClient, option
     ask = getattr(quote, "ask_price", None)
 
     if bid is not None and ask is not None:
-        return round((float(bid) + float(ask)) / 2.0, 2)
+        bid_f = float(bid)
+        ask_f = float(ask)
+        return bid_f, ask_f, round((bid_f + ask_f) / 2.0, 2)
     if bid is not None:
-        return round(float(bid), 2)
+        bid_f = float(bid)
+        return bid_f, None, round(bid_f, 2)
     if ask is not None:
-        return round(float(ask), 2)
+        ask_f = float(ask)
+        return None, ask_f, round(ask_f, 2)
 
     raise RuntimeError(f"No bid/ask quote available for {option_symbol}")
 
@@ -133,8 +140,32 @@ def _buy_call_option(trading_client, option_symbol: str, qty: int, mid_price: fl
     print(f"[BUY] {option_symbol} qty={qty} @ {mid_price:.2f} id={getattr(response, 'id', 'N/A')}")
 
 
+def _cancel_open_orders(trading_client, option_symbol: str) -> None:
+    orders = list(
+        trading_client.get_orders(
+            filter=GetOrdersRequest(status=QueryOrderStatus.OPEN, limit=200)
+        )
+    )
+    for order in orders:
+        if str(getattr(order, "symbol", "")).upper() != option_symbol.upper():
+            continue
+        try:
+            trading_client.cancel_order_by_id(order.id)
+            print(f"[CANCEL] {option_symbol} order id={order.id}")
+        except Exception as exc:
+            print(f"[WARN] Could not cancel order {order.id} for {option_symbol}: {exc}")
+
+
+def _has_open_option_position(trading_client, option_symbol: str) -> bool:
+    try:
+        trading_client.get_open_position(option_symbol)
+        return True
+    except Exception:
+        return False
+
+
 def _sell_option_market(trading_client, option_symbol: str) -> None:
-    response = trading_client.close_position(symbol=option_symbol)
+    response = trading_client.close_position(option_symbol)
     print(f"[SELL] {option_symbol} MARKET id={getattr(response, 'id', 'N/A')}")
 
 
@@ -151,7 +182,12 @@ def _ensure_managed_calls(
 
         try:
             option_symbol = _resolve_call_symbol_from_script(symbol)
-            mid_price = _get_option_mid_price(option_data_client, option_symbol)
+            bid_price, ask_price, mid_price = _get_option_quote(option_data_client, option_symbol)
+            bid_text = f"{bid_price:.2f}" if bid_price is not None else "N/A"
+            ask_text = f"{ask_price:.2f}" if ask_price is not None else "N/A"
+            print(
+                f"[PLAN] {symbol} -> BUY {option_symbol} | bid={bid_text} ask={ask_text} mid={mid_price:.2f} qty={size}"
+            )
 
             if _has_open_buy_order(trading_client, option_symbol):
                 print(f"[SKIP] Open BUY already exists for {option_symbol}")
@@ -172,12 +208,24 @@ def _cleanup_removed_underlyings(
     removed = [underlying for underlying in managed if underlying not in stock_symbols]
     for underlying in removed:
         option_symbol = managed[underlying].option_symbol
+        print(f"[EXIT] Stock {underlying} is gone; unwinding {option_symbol}")
+
+        # An unfilled entry order would otherwise linger after the underlying is closed.
+        _cancel_open_orders(trading_client, option_symbol)
+
+        if not _has_open_option_position(trading_client, option_symbol):
+            print(f"[EXIT] No open position for {option_symbol}; nothing to sell")
+            managed.pop(underlying, None)
+            continue
+
         try:
             _sell_option_market(trading_client, option_symbol)
         except Exception as exc:
+            # Keep it managed so the next cycle retries the exit.
             print(f"[WARN] Could not sell option {option_symbol} for removed {underlying}: {exc}")
-        finally:
-            managed.pop(underlying, None)
+            continue
+
+        managed.pop(underlying, None)
 
 
 def main() -> int:

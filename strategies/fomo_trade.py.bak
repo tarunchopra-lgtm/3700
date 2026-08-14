@@ -1,4 +1,4 @@
-import os
+﻿import os
 import re
 import sys
 import requests
@@ -202,16 +202,16 @@ second_contract_stop_loss = None
 awaiting_reentry_after_stop = False
 last_observed_price = None
 
-print(f"╔════════════════════════════════════════╗")
-print(f"║     FOMO Trade Bot for {SYMBOL:<22} ║")
-print(f"╠════════════════════════════════════════╣")
-print(f"║ Entry Price:      ${ENTRY_PRICE:.2f}")
-print(f"║ Shares:           {NUM_STOCKS} (Target1: {FIRST_TARGET_QTY}, Target2: {SECOND_TARGET_QTY})")
-print(f"║ Stop Price:       ${STOP_PRICE:.2f}")
-print(f"║ Profit Target 1:  ${TARGET1_PRICE:.2f}")
-print(f"║ Profit Target 2:  ${TARGET2_PRICE:.2f}")
-print(f"║ Paper Trading:    {PAPER}")
-print(f"╚════════════════════════════════════════╝\n")
+print(f"â•”â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•—")
+print(f"â•‘     FOMO Trade Bot for {SYMBOL:<22} â•‘")
+print(f"â• â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•£")
+print(f"â•‘ Entry Price:      ${ENTRY_PRICE:.2f}")
+print(f"â•‘ Shares:           {NUM_STOCKS} (Target1: {FIRST_TARGET_QTY}, Target2: {SECOND_TARGET_QTY})")
+print(f"â•‘ Stop Price:       ${STOP_PRICE:.2f}")
+print(f"â•‘ Profit Target 1:  ${TARGET1_PRICE:.2f}")
+print(f"â•‘ Profit Target 2:  ${TARGET2_PRICE:.2f}")
+print(f"â•‘ Paper Trading:    {PAPER}")
+print(f"â•šâ•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•\n")
 print("[INFO] Strategy is long-running by design; prompt will not return unless you press Ctrl+C.", flush=True)
 print(f"[INFO] HTTP timeout set to {REQUEST_TIMEOUT_SECONDS:.0f}s per API call.", flush=True)
 
@@ -220,7 +220,7 @@ print(f"[{datetime.now().strftime('%H:%M:%S')}] Checking for existing position..
 existing_position = _find_position_for_symbol(SYMBOL, retries=1, delay_seconds=0.0)
 
 if existing_position:
-    print(f"✓ Existing position found: {existing_position.qty} {SYMBOL}")
+    print(f"âœ“ Existing position found: {existing_position.qty} {SYMBOL}")
     print(f"  Monitoring existing position...")
     # Don't place new order
 else:
@@ -281,9 +281,9 @@ try:
                             breakeven_stop_set = False
                             second_contract_stop_loss = None
                             awaiting_reentry_after_stop = False
-                            print(f"✓ Re-entry BUY submitted. Order ID: {entry_order_id}")
+                            print(f"âœ“ Re-entry BUY submitted. Order ID: {entry_order_id}")
                         except Exception as e:
-                            print(f"✗ Error submitting re-entry BUY: {e}")
+                            print(f"âœ— Error submitting re-entry BUY: {e}")
                     elif not awaiting_reentry_after_stop and crossed_above_entry:
                         prev_price_text = "startup" if last_observed_price is None else f"${last_observed_price:.2f}"
                         print(
@@ -296,9 +296,9 @@ try:
                             first_contract_sold = False
                             breakeven_stop_set = False
                             second_contract_stop_loss = None
-                            print(f"✓ Entry BUY submitted. Order ID: {entry_order_id}")
+                            print(f"âœ“ Entry BUY submitted. Order ID: {entry_order_id}")
                         except Exception as e:
-                            print(f"✗ Error submitting entry BUY: {e}")
+                            print(f"âœ— Error submitting entry BUY: {e}")
                     else:
                         print(
                             f"[{datetime.now().strftime('%H:%M:%S')}] No position and no open BUY orders "
@@ -328,7 +328,7 @@ try:
             # CHECK STOP LOSS FIRST
             # Stop loss for all contracts initially
             if not first_contract_sold and current_price <= current_stop_loss:
-                print(f"\n✗ STOP LOSS HIT at ${current_price:.2f}! Closing all {current_qty} {SYMBOL}...")
+                print(f"\nâœ— STOP LOSS HIT at ${current_price:.2f}! Closing all {current_qty} {SYMBOL}...")
                 try:
                     close_order = MarketOrderRequest(
                         symbol=SYMBOL,
@@ -337,11 +337,11 @@ try:
                         time_in_force=TimeInForce.GTC
                     )
                     close_response = trading_client.submit_order(order_data=close_order)
-                    print(f"✓ Position closed. Order ID: {close_response.id}")
-                    print(f"\n╔════════════════════════════════════════╗")
-                    print(f"║       STOPPED OUT                      ║")
-                    print(f"║ Loss: ${unrealized_pnl:.2f}")
-                    print(f"╚════════════════════════════════════════╝")
+                    print(f"âœ“ Position closed. Order ID: {close_response.id}")
+                    print(f"\nâ•”â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•—")
+                    print(f"â•‘       STOPPED OUT                      â•‘")
+                    print(f"â•‘ Loss: ${unrealized_pnl:.2f}")
+                    print(f"â•šâ•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•")
                     # Reset state for potential re-entry
                     first_contract_sold = False
                     breakeven_stop_set = False
@@ -350,11 +350,11 @@ try:
                     last_observed_price = current_price
                     print(f"\n[{datetime.now().strftime('%H:%M:%S')}] Ready for next trade...\n")
                 except Exception as e:
-                    print(f"✗ Error executing stop loss: {e}")
+                    print(f"âœ— Error executing stop loss: {e}")
             
             # Stop loss for remaining contract after first sale (at breakeven)
             elif first_contract_sold and breakeven_stop_set and current_price <= second_contract_stop_loss:
-                print(f"\n✗ BREAKEVEN STOP HIT at ${current_price:.2f}! Closing remaining {current_qty} {SYMBOL}...")
+                print(f"\nâœ— BREAKEVEN STOP HIT at ${current_price:.2f}! Closing remaining {current_qty} {SYMBOL}...")
                 try:
                     close_order = MarketOrderRequest(
                         symbol=SYMBOL,
@@ -363,11 +363,11 @@ try:
                         time_in_force=TimeInForce.GTC
                     )
                     close_response = trading_client.submit_order(order_data=close_order)
-                    print(f"✓ Position closed. Order ID: {close_response.id}")
-                    print(f"\n╔════════════════════════════════════════╗")
-                    print(f"║     BREAKEVEN STOP HIT                 ║")
-                    print(f"║ Final P&L: ${unrealized_pnl:.2f}")
-                    print(f"╚════════════════════════════════════════╝")
+                    print(f"âœ“ Position closed. Order ID: {close_response.id}")
+                    print(f"\nâ•”â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•—")
+                    print(f"â•‘     BREAKEVEN STOP HIT                 â•‘")
+                    print(f"â•‘ Final P&L: ${unrealized_pnl:.2f}")
+                    print(f"â•šâ•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•")
                     # Reset state for potential re-entry
                     first_contract_sold = False
                     breakeven_stop_set = False
@@ -376,11 +376,11 @@ try:
                     last_observed_price = current_price
                     print(f"\n[{datetime.now().strftime('%H:%M:%S')}] Ready for next trade...\n")
                 except Exception as e:
-                    print(f"✗ Error executing breakeven stop: {e}")
+                    print(f"âœ— Error executing breakeven stop: {e}")
             
             # Check if first profit target reached
             elif not first_contract_sold and current_price >= TARGET1_PRICE:
-                print(f"\n✓ FIRST PROFIT TARGET HIT at ${current_price:.2f}!")
+                print(f"\nâœ“ FIRST PROFIT TARGET HIT at ${current_price:.2f}!")
                 print(f"[{datetime.now().strftime('%H:%M:%S')}] Selling first half ({FIRST_TARGET_QTY} {SYMBOL})...")
                 
                 try:
@@ -392,20 +392,20 @@ try:
                         time_in_force=TimeInForce.GTC
                     )
                     sell_response = trading_client.submit_order(order_data=sell_order)
-                    print(f"✓ Sold first contract. Order ID: {sell_response.id}")
+                    print(f"âœ“ Sold first contract. Order ID: {sell_response.id}")
                     first_contract_sold = True
                     
                     # Set breakeven stop loss for remaining contract
                     second_contract_stop_loss = ENTRY_PRICE
                     breakeven_stop_set = True
-                    print(f"✓ Breakeven stop loss set at ${ENTRY_PRICE:.2f} for remaining contract")
+                    print(f"âœ“ Breakeven stop loss set at ${ENTRY_PRICE:.2f} for remaining contract")
                 
                 except Exception as e:
-                    print(f"✗ Error selling first contract: {e}")
+                    print(f"âœ— Error selling first contract: {e}")
             
             # Check if second profit target reached
             elif first_contract_sold and current_price >= TARGET2_PRICE:
-                print(f"\n✓ SECOND PROFIT TARGET HIT at ${current_price:.2f}!")
+                print(f"\nâœ“ SECOND PROFIT TARGET HIT at ${current_price:.2f}!")
                 print(f"[{datetime.now().strftime('%H:%M:%S')}] Closing remaining position ({current_qty} {SYMBOL})...")
                 
                 try:
@@ -416,11 +416,11 @@ try:
                         time_in_force=TimeInForce.GTC
                     )
                     close_response = trading_client.submit_order(order_data=close_order)
-                    print(f"✓ Position closed. Order ID: {close_response.id}")
-                    print(f"\n╔════════════════════════════════════════╗")
-                    print(f"║         TRADE COMPLETE                 ║")
-                    print(f"║ Final P&L: ${unrealized_pnl:.2f}")
-                    print(f"╚════════════════════════════════════════╝")
+                    print(f"âœ“ Position closed. Order ID: {close_response.id}")
+                    print(f"\nâ•”â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•—")
+                    print(f"â•‘         TRADE COMPLETE                 â•‘")
+                    print(f"â•‘ Final P&L: ${unrealized_pnl:.2f}")
+                    print(f"â•šâ•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•")
                     # Reset state for potential re-entry
                     first_contract_sold = False
                     breakeven_stop_set = False
@@ -428,7 +428,7 @@ try:
                     awaiting_reentry_after_stop = False
                     print(f"\n[{datetime.now().strftime('%H:%M:%S')}] Ready for next trade...\n")
                 except Exception as e:
-                    print(f"✗ Error closing position: {e}")
+                    print(f"âœ— Error closing position: {e}")
             
             else:
                 print()
@@ -441,7 +441,7 @@ try:
             print("\nExiting...")
             break
         except Exception as e:
-            print(f"\n✗ Error: {e}")
+            print(f"\nâœ— Error: {e}")
             time.sleep(CHECK_INTERVAL)
 
 except KeyboardInterrupt:

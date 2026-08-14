@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 Status - Today's orders and current positions
 
@@ -55,9 +55,9 @@ def print_account_balance():
         portfolio_value = getattr(account, 'portfolio_value', None)
         equity = getattr(account, 'equity', None)
 
-        print(f"\n{'─'*64}")
+        print(f"\n{'â”€'*64}")
         print(f"  ACCOUNT BALANCE")
-        print(f"{'─'*64}")
+        print(f"{'â”€'*64}")
         print(f"  Cash:          {format_price(cash)}")
         print(f"  Buying Power:  {format_price(buying_power)}")
         if equity is not None:
@@ -65,7 +65,7 @@ def print_account_balance():
         if portfolio_value is not None:
             print(f"  Portfolio Val: {format_price(portfolio_value)}")
     except Exception as e:
-        print(f"  ✗ Error fetching account balance: {e}")
+        print(f"  âœ— Error fetching account balance: {e}")
 
 def get_current_positions():
     positions = list(trading_client.get_all_positions())
@@ -73,16 +73,16 @@ def get_current_positions():
 
 def close_position_by_symbol(symbol: str):
     try:
-        response = trading_client.close_position(symbol)
-        print(f"  ✓ Closed {symbol} at market price. Order ID: {getattr(response, 'id', 'N/A')}")
+        response = trading_client.close_position(symbol=symbol)
+        print(f"  âœ“ Closed {symbol} at market price. Order ID: {getattr(response, 'id', 'N/A')}")
         return True
     except Exception as e:
-        print(f"  ✗ Error closing {symbol}: {e}")
+        print(f"  âœ— Error closing {symbol}: {e}")
         return False
 
 def close_all_displayed_positions(positions):
     if not positions:
-        print("  ✗ No positions to close")
+        print("  âœ— No positions to close")
         return
 
     confirm = input(f"Close ALL {len(positions)} displayed position(s) at market price? (Y/N): ").strip().upper()
@@ -95,20 +95,20 @@ def close_all_displayed_positions(positions):
         if close_position_by_symbol(pos.symbol):
             closed += 1
 
-    print(f"  ✓ Closed {closed}/{len(positions)} position(s)")
+    print(f"  âœ“ Closed {closed}/{len(positions)} position(s)")
 
-print(f"\n╔{'═'*62}╗")
-print(f"║  ACCOUNT STATUS  {'Paper' if PAPER else 'Live':>6} | {datetime.now().strftime('%Y-%m-%d %H:%M:%S'):<20}  ║")
+print(f"\nâ•”{'â•'*62}â•—")
+print(f"â•‘  ACCOUNT STATUS  {'Paper' if PAPER else 'Live':>6} | {datetime.now().strftime('%Y-%m-%d %H:%M:%S'):<20}  â•‘")
 if SYMBOL_FILTER:
-    print(f"║  Filter: {SYMBOL_FILTER:<52}║")
-print(f"╚{'═'*62}╝")
+    print(f"â•‘  Filter: {SYMBOL_FILTER:<52}â•‘")
+print(f"â•š{'â•'*62}â•")
 
 print_account_balance()
 
-# ── OPEN ORDERS ──────────────────────────────────────────────
-print(f"\n{'─'*64}")
+# â”€â”€ OPEN ORDERS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+print(f"\n{'â”€'*64}")
 print(f"  OPEN ORDERS")
-print(f"{'─'*64}")
+print(f"{'â”€'*64}")
 try:
     open_orders = list(trading_client.get_orders(filter=GetOrdersRequest(status=QueryOrderStatus.OPEN, limit=100)))
     open_orders = filter_symbol(open_orders)
@@ -123,12 +123,12 @@ try:
             tif   = o.time_in_force.value if hasattr(o.time_in_force, 'value') else str(o.time_in_force)
             print(f"  [{i}] {side:<5} {qty:>4} {o.symbol:<6} @ {price:<10} | placed {created} | {tif.upper()}")
 except Exception as e:
-    print(f"  ✗ Error fetching open orders: {e}")
+    print(f"  âœ— Error fetching open orders: {e}")
 
-# ── FILLED ORDERS TODAY ───────────────────────────────────────
-print(f"\n{'─'*64}")
+# â”€â”€ FILLED ORDERS TODAY â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+print(f"\n{'â”€'*64}")
 print(f"  FILLED ORDERS TODAY")
-print(f"{'─'*64}")
+print(f"{'â”€'*64}")
 try:
     filled_orders = list(trading_client.get_orders(filter=GetOrdersRequest(status=QueryOrderStatus.CLOSED, limit=200)))
     filled_orders = filter_symbol(filled_orders)
@@ -152,12 +152,12 @@ try:
             filled_at  = o.filled_at.strftime('%H:%M:%S') if hasattr(o.filled_at, 'strftime') else str(o.filled_at)
             print(f"  [{i}] {side:<5} {qty:>4} {o.symbol:<6} @ {fill_price:<10} | filled {filled_at}")
 except Exception as e:
-    print(f"  ✗ Error fetching filled orders: {e}")
+    print(f"  âœ— Error fetching filled orders: {e}")
 
-# ── CURRENT POSITIONS ─────────────────────────────────────────
-print(f"\n{'─'*64}")
+# â”€â”€ CURRENT POSITIONS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+print(f"\n{'â”€'*64}")
 print(f"  CURRENT POSITIONS")
-print(f"{'─'*64}")
+print(f"{'â”€'*64}")
 positions = []
 try:
     positions = get_current_positions()
@@ -172,7 +172,7 @@ try:
             pnl_pct     = float(pos.unrealized_plpc) * 100
             mkt_val     = float(pos.market_value)
             side        = pos.side.value.upper() if hasattr(pos.side, 'value') else str(pos.side).upper()
-            arrow       = '▲' if pnl >= 0 else '▼'
+            arrow       = 'â–²' if pnl >= 0 else 'â–¼'
             pnl_color   = '+' if pnl >= 0 else ''
 
             print(f"  {pos.symbol:<6} {side:<5} {qty:>5.2f} shares")
@@ -182,13 +182,13 @@ try:
             print(f"         Value:   ${mkt_val:.2f}")
             print()
 except Exception as e:
-    print(f"  ✗ Error fetching positions: {e}")
+    print(f"  âœ— Error fetching positions: {e}")
 
 if positions:
     while True:
-        print(f"\n{'─'*64}")
+        print(f"\n{'â”€'*64}")
         print("  POSITION ACTIONS")
-        print(f"{'─'*64}")
+        print(f"{'â”€'*64}")
         for i, pos in enumerate(positions, 1):
             print(f"  [{i}] Close {pos.symbol} at market")
         print("  [A] Close ALL displayed positions at market")
@@ -214,9 +214,9 @@ if positions:
                 else:
                     print("  Cancelled.")
                 break
-            print(f"  ✗ Invalid selection. Choose 1-{len(positions)}, A, R, or Q.")
+            print(f"  âœ— Invalid selection. Choose 1-{len(positions)}, A, R, or Q.")
             continue
-        print(f"  ✗ Invalid input. Choose 1-{len(positions)}, A, R, or Q.")
+        print(f"  âœ— Invalid input. Choose 1-{len(positions)}, A, R, or Q.")
 
-print(f"{'─'*64}\n")
+print(f"{'â”€'*64}\n")
 

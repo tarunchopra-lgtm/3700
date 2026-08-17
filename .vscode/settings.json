@@ -1,0 +1,8 @@
+{
+    "task.allowAutomaticTasks": "on",
+    "terminal.integrated.enablePersistentSessions": true,
+    "terminal.integrated.persistentSessionReviveProcess": "onExitAndWindowClose",
+    "terminal.integrated.persistentSessionScrollback": 1000,
+    "files.encoding": "utf8",
+    "files.autoGuessEncoding": false
+}

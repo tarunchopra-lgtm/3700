@@ -163,12 +163,12 @@ def _normalize_position_qty(raw_qty: float) -> float | int:
     return max(int(round(abs(float(raw_qty)))), 0)
 
 def _print_usage() -> None:
-    print("Usage: python fomo_trade.py <TICKER> <NUM_STOCKS> <ENTRY_PRICE> <STOP_PRICE> <TARGET1_PRICE> <TARGET2_PRICE> [--refresh-option-midpoint]")
+    print("Usage: python fomo_trade.py <TICKER> <NUM_STOCKS> <ENTRY_PRICE> <STOP_PRICE> <TARGET1_PRICE> <TARGET2_PRICE> [--refresh-option-midpoint] [--single-entry]")
     print("Example: python fomo_trade.py MU 2 780 770 800 900")
 
 
 # Parse arguments: ticker, number of stocks, entry, stop, target1, target2
-if len(sys.argv) not in (7, 8):
+if len(sys.argv) < 7:
     print(f"Error: expected 6 arguments, got {len(sys.argv) - 1}")
     _print_usage()
     sys.exit(1)
@@ -185,11 +185,14 @@ except ValueError:
     _print_usage()
     sys.exit(1)
 
-REFRESH_OPTION_MIDPOINT = len(sys.argv) == 8 and sys.argv[7] == "--refresh-option-midpoint"
-if len(sys.argv) == 8 and not REFRESH_OPTION_MIDPOINT:
-    print(f"Error: unknown option {sys.argv[7]}")
+extra_flags = set(sys.argv[7:])
+unknown_flags = extra_flags - {"--refresh-option-midpoint", "--single-entry"}
+if unknown_flags:
+    print(f"Error: unknown option(s): {', '.join(sorted(unknown_flags))}")
     _print_usage()
     sys.exit(1)
+REFRESH_OPTION_MIDPOINT = "--refresh-option-midpoint" in extra_flags
+SINGLE_ENTRY_MODE = "--single-entry" in extra_flags
 
 if NUM_STOCKS <= 0:
     print("Error: NUM_STOCKS must be a positive integer")
@@ -396,6 +399,9 @@ try:
                     awaiting_reentry_after_stop = True
                     last_observed_price = current_price
                     print(f"\n[{datetime.now().strftime('%H:%M:%S')}] Ready for next trade...\n")
+                    if SINGLE_ENTRY_MODE:
+                        print("[INFO] Single-entry lifecycle complete after stop; returning control to parent.")
+                        break
                 except Exception as e:
                     print(f"✗ Error executing stop loss: {e}")
             
@@ -422,6 +428,9 @@ try:
                     awaiting_reentry_after_stop = True
                     last_observed_price = current_price
                     print(f"\n[{datetime.now().strftime('%H:%M:%S')}] Ready for next trade...\n")
+                    if SINGLE_ENTRY_MODE:
+                        print("[INFO] Single-entry lifecycle complete after breakeven stop; returning control to parent.")
+                        break
                 except Exception as e:
                     print(f"✗ Error executing breakeven stop: {e}")
             
@@ -474,6 +483,9 @@ try:
                     second_contract_stop_loss = None
                     awaiting_reentry_after_stop = False
                     print(f"\n[{datetime.now().strftime('%H:%M:%S')}] Ready for next trade...\n")
+                    if SINGLE_ENTRY_MODE:
+                        print("[INFO] Single-entry lifecycle complete after targets; returning control to parent.")
+                        break
                 except Exception as e:
                     print(f"✗ Error closing position: {e}")
             

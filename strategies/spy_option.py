@@ -32,6 +32,8 @@ from alpaca.data.enums import DataFeed, OptionsFeed
 from alpaca.data.historical import OptionHistoricalDataClient, StockHistoricalDataClient
 from alpaca.data.requests import OptionLatestQuoteRequest, StockBarsRequest, StockLatestTradeRequest
 from alpaca.data.timeframe import TimeFrame
+from alpaca.trading.enums import QueryOrderStatus
+from alpaca.trading.requests import GetOrdersRequest
 
 from pathlib import Path
 import sys
@@ -199,6 +201,7 @@ def _build_fomo_trade_command(option_symbol: str, entry_price: float) -> list[st
         f"{target1_price:.2f}",
         f"{target2_price:.2f}",
         "--refresh-option-midpoint",
+        "--single-entry",
     ]
 
 
@@ -213,6 +216,19 @@ def _launch_trade(
     print(f"  Fresh {option_symbol} quote: bid=${bid:.2f} ask=${ask:.2f} midpoint=${midpoint:.2f}")
     print("  " + " ".join(cmd))
     return subprocess.Popen(cmd)
+
+
+def _option_trade_active(trading_client, option_symbol: str) -> bool:
+    try:
+        trading_client.get_open_position(option_symbol)
+        return True
+    except Exception:
+        pass
+
+    orders = trading_client.get_orders(
+        filter=GetOrdersRequest(status=QueryOrderStatus.OPEN, limit=200)
+    )
+    return any(str(getattr(order, "symbol", "")).upper() == option_symbol for order in orders)
 
 
 def main() -> int:
@@ -233,7 +249,7 @@ def main() -> int:
     symbol = "SPY"
 
     try:
-        credentials, _ = bootstrap_trading_auth("spy_option.py")
+        credentials, trading_client = bootstrap_trading_auth("spy_option.py")
     except Exception as exc:
         print(f"Authentication failed: {exc}")
         return 1
@@ -279,42 +295,61 @@ def main() -> int:
     print("Option bid/ask prices are deferred until the corresponding SPY trigger is hit.")
 
     print("\nMonitoring SPY for trigger hits...")
-    print(f"- CALL trigger when SPY <= {call_reference}")
-    print(f"- PUT trigger when SPY >= {put_reference}")
+    print(f"- CALL trigger when SPY reaches <= {call_reference}; re-arms above {call_reference}")
+    print(f"- PUT trigger when SPY reaches >= {put_reference}; re-arms below {put_reference}")
 
-    last_spy_price = current_price
-    call_launched = False
-    put_launched = False
-    processes: list[subprocess.Popen] = []
+    call_armed = True
+    put_armed = True
+    call_process: subprocess.Popen | None = None
+    put_process: subprocess.Popen | None = None
 
     try:
         while True:
             spy_now = _get_current_price(client, symbol)
             print(f"[{datetime.now().strftime('%H:%M:%S')}] SPY={spy_now:.2f}")
 
-            call_hit = last_spy_price > call_reference >= spy_now or spy_now <= call_reference
-            put_hit = last_spy_price < put_reference <= spy_now or spy_now >= put_reference
+            if call_process is not None and call_process.poll() is not None:
+                print(f"[CALL] Trade runner PID {call_process.pid} completed")
+                call_process = None
+            if put_process is not None and put_process.poll() is not None:
+                print(f"[PUT] Trade runner PID {put_process.pid} completed")
+                put_process = None
 
-            if not call_launched and call_hit:
-                processes.append(_launch_trade(option_client, call_symbol, "CALL"))
-                call_launched = True
+            if spy_now > call_reference:
+                call_armed = True
+            if spy_now < put_reference:
+                put_armed = True
 
-            if not put_launched and put_hit:
-                processes.append(_launch_trade(option_client, put_symbol, "PUT"))
-                put_launched = True
+            call_hit = call_armed and spy_now <= call_reference
+            put_hit = put_armed and spy_now >= put_reference
 
-            if call_launched and put_launched:
-                print("Both CALL and PUT trade runners launched.")
-                break
+            if call_hit:
+                call_armed = False
+                if call_process is not None or _option_trade_active(trading_client, call_symbol):
+                    print(
+                        f"[CALL] SPY lower level reached, but {call_symbol} already has an active "
+                        f"trade/order; SPY must move above {call_reference} before another CALL trigger"
+                    )
+                else:
+                    call_process = _launch_trade(option_client, call_symbol, "CALL")
 
-            last_spy_price = spy_now
+            if put_hit:
+                put_armed = False
+                if put_process is not None or _option_trade_active(trading_client, put_symbol):
+                    print(
+                        f"[PUT] SPY upper level reached, but {put_symbol} already has an active "
+                        f"trade/order; SPY must move below {put_reference} before another PUT trigger"
+                    )
+                else:
+                    put_process = _launch_trade(option_client, put_symbol, "PUT")
+
             time.sleep(CHECK_INTERVAL_SECONDS)
     except KeyboardInterrupt:
         print("Stopped by user.")
 
-    # Keep references alive for child processes and show status.
-    for process in processes:
-        print(f"Launched PID: {process.pid}")
+    for process in (call_process, put_process):
+        if process is not None:
+            print(f"Active child PID left running: {process.pid}")
 
     return 0
 

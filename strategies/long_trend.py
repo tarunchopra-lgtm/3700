@@ -1,11 +1,16 @@
 #!/usr/bin/env python3
 """Trade a long breakout above descending resistance built from volume candles.
 
-Usage:
-    python strategies/long_trend.py <TICKER> <SHARES> <VOLUME_PER_CANDLE>
+Supports stocks, slash-form crypto pairs, and OCC option symbols. Option volume
+history requires an accepted Alpaca OPRA market-data agreement.
 
-Example:
+Usage:
+    python strategies/long_trend.py <SYMBOL> <QUANTITY> <VOLUME_PER_CANDLE>
+
+Examples:
     python strategies/long_trend.py MU 10 1000
+    python strategies/long_trend.py BTC/USD 0.01 0.25
+    python strategies/long_trend.py SPY260821C00650000 2 100
 """
 
 from __future__ import annotations
@@ -13,15 +18,28 @@ from __future__ import annotations
 import sys
 import time
 import math
+import re
 from collections import deque
 from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 
-from alpaca.data.enums import DataFeed
-from alpaca.data.historical import StockHistoricalDataClient
-from alpaca.data.requests import StockLatestTradeRequest, StockTradesRequest
+from alpaca.common.exceptions import APIError
+from alpaca.data.enums import DataFeed, OptionsFeed
+from alpaca.data.historical import (
+    CryptoHistoricalDataClient,
+    OptionHistoricalDataClient,
+    StockHistoricalDataClient,
+)
+from alpaca.data.requests import (
+    CryptoLatestTradeRequest,
+    CryptoTradesRequest,
+    OptionLatestTradeRequest,
+    OptionTradesRequest,
+    StockLatestTradeRequest,
+    StockTradesRequest,
+)
 from alpaca.trading.enums import OrderSide, TimeInForce
 from alpaca.trading.requests import MarketOrderRequest
 
@@ -37,6 +55,7 @@ EXIT_LOOKBACK = 10
 CHECK_INTERVAL_SECONDS = 30
 INITIAL_HISTORY_HOURS = 6
 MAX_STORED_CANDLES = 100
+OPTION_SYMBOL_PATTERN = re.compile(r"^[A-Z]{1,6}\d{6}[CP]\d{8}$")
 
 
 @dataclass(frozen=True)
@@ -60,7 +79,7 @@ class TrendLine:
 
 
 class VolumeCandleBuilder:
-    def __init__(self, volume_target: int) -> None:
+    def __init__(self, volume_target: float) -> None:
         self.volume_target = float(volume_target)
         self.completed: deque[VolumeCandle] = deque(maxlen=MAX_STORED_CANDLES)
         self._timestamp = None
@@ -115,7 +134,11 @@ def _extract_trade_rows(response, symbol: str) -> list[tuple[Any, float, float]]
         try:
             frame = frame.xs(symbol, level="symbol")
         except KeyError:
-            return []
+            normalized = _normalize_symbol(symbol)
+            matching = [value for value in frame.index.unique("symbol") if _normalize_symbol(value) == normalized]
+            if not matching:
+                return []
+            frame = frame.xs(matching[0], level="symbol")
 
     frame = frame.sort_index()
     return [
@@ -126,27 +149,83 @@ def _extract_trade_rows(response, symbol: str) -> list[tuple[Any, float, float]]
 
 
 def _fetch_trades(
-    data_client: StockHistoricalDataClient,
+    data_client,
+    asset_kind: str,
     symbol: str,
     start: datetime,
     end: datetime,
 ) -> list[tuple[Any, float, float]]:
-    response = data_client.get_stock_trades(
-        StockTradesRequest(
-            symbol_or_symbols=symbol,
-            start=start,
-            end=end,
-            feed=DataFeed.IEX,
+    if asset_kind == "crypto":
+        response = data_client.get_crypto_trades(
+            CryptoTradesRequest(symbol_or_symbols=symbol, start=start, end=end)
         )
-    )
+    elif asset_kind == "option":
+        try:
+            response = data_client.get_option_trades(
+                OptionTradesRequest(symbol_or_symbols=symbol, start=start, end=end)
+            )
+        except APIError as exc:
+            if "OPRA agreement" in str(exc):
+                raise RuntimeError(
+                    "Option volume history requires accepting Alpaca's OPRA market-data agreement"
+                ) from exc
+            raise
+    else:
+        response = data_client.get_stock_trades(
+            StockTradesRequest(
+                symbol_or_symbols=symbol,
+                start=start,
+                end=end,
+                feed=DataFeed.IEX,
+            )
+        )
     return _extract_trade_rows(response, symbol)
 
 
-def _latest_price(data_client: StockHistoricalDataClient, symbol: str) -> float:
-    response = data_client.get_stock_latest_trade(
-        StockLatestTradeRequest(symbol_or_symbols=symbol, feed=DataFeed.IEX)
-    )
-    return float(response[symbol].price)
+def _latest_price(data_client, asset_kind: str, symbol: str) -> float:
+    if asset_kind == "crypto":
+        response = data_client.get_crypto_latest_trade(
+            CryptoLatestTradeRequest(symbol_or_symbols=symbol)
+        )
+    elif asset_kind == "option":
+        response = data_client.get_option_latest_trade(
+            OptionLatestTradeRequest(symbol_or_symbols=symbol, feed=OptionsFeed.INDICATIVE)
+        )
+    else:
+        response = data_client.get_stock_latest_trade(
+            StockLatestTradeRequest(symbol_or_symbols=symbol, feed=DataFeed.IEX)
+        )
+
+    trade = response.get(symbol)
+    if trade is None:
+        normalized = _normalize_symbol(symbol)
+        trade = next(
+            (value for key, value in response.items() if _normalize_symbol(key) == normalized),
+            None,
+        )
+    if trade is None:
+        raise RuntimeError(f"No latest trade returned for {symbol}")
+    return float(trade.price)
+
+
+def _normalize_symbol(symbol: Any) -> str:
+    return str(symbol).replace("/", "").replace("-", "").upper()
+
+
+def _asset_kind(symbol: str) -> str:
+    if OPTION_SYMBOL_PATTERN.fullmatch(symbol):
+        return "option"
+    if "/" in symbol or "-" in symbol:
+        return "crypto"
+    return "stock"
+
+
+def _build_data_client(credentials, asset_kind: str):
+    if asset_kind == "crypto":
+        return CryptoHistoricalDataClient(credentials.api_key, credentials.secret_key)
+    if asset_kind == "option":
+        return OptionHistoricalDataClient(credentials.api_key, credentials.secret_key)
+    return StockHistoricalDataClient(credentials.api_key, credentials.secret_key)
 
 
 def _fit_trend(values: list[float]) -> TrendLine:
@@ -169,11 +248,23 @@ def _find_position(trading_client, symbol: str):
     try:
         return trading_client.get_open_position(symbol)
     except Exception:
-        return None
+        target = _normalize_symbol(symbol)
+        try:
+            return next(
+                (
+                    position
+                    for position in trading_client.get_all_positions()
+                    if _normalize_symbol(getattr(position, "symbol", "")) == target
+                ),
+                None,
+            )
+        except Exception:
+            return None
 
 
-def _position_quantity(position) -> int:
-    return int(round(float(getattr(position, "qty", 0))))
+def _position_quantity(position, asset_kind: str) -> float | int:
+    quantity = float(getattr(position, "qty", 0))
+    return quantity if asset_kind == "crypto" else int(round(quantity))
 
 
 def _order_status(trading_client, order_id: str | None) -> str:
@@ -187,13 +278,19 @@ def _order_status(trading_client, order_id: str | None) -> str:
         return "UNKNOWN"
 
 
-def _submit_market_order(trading_client, symbol: str, quantity: int, side: OrderSide) -> str:
+def _submit_market_order(
+    trading_client,
+    symbol: str,
+    quantity: float | int,
+    side: OrderSide,
+    asset_kind: str,
+) -> str:
     response = trading_client.submit_order(
         order_data=MarketOrderRequest(
             symbol=symbol,
             qty=quantity,
             side=side,
-            time_in_force=TimeInForce.DAY,
+            time_in_force=TimeInForce.GTC if asset_kind == "crypto" else TimeInForce.DAY,
         )
     )
     return str(response.id)
@@ -243,21 +340,27 @@ def _render_chart(
     print("Legend: C=close, R=resistance, B=long breakout, X=low-trend exit, P=current, *=overlap")
 
 
-def _parse_arguments() -> tuple[str, int, int]:
+def _parse_arguments() -> tuple[str, float | int, float]:
     if len(sys.argv) != 4:
         raise ValueError(
-            "Usage: python strategies/long_trend.py <TICKER> <SHARES> <VOLUME_PER_CANDLE>"
+            "Usage: python strategies/long_trend.py <SYMBOL> <QUANTITY> <VOLUME_PER_CANDLE>"
         )
 
     symbol = sys.argv[1].strip().upper()
+    if "-" in symbol and not OPTION_SYMBOL_PATTERN.fullmatch(symbol):
+        symbol = symbol.replace("-", "/")
     try:
-        quantity = int(sys.argv[2])
-        volume_target = int(sys.argv[3])
+        raw_quantity = float(sys.argv[2])
+        volume_target = float(sys.argv[3])
     except ValueError as exc:
-        raise ValueError("SHARES and VOLUME_PER_CANDLE must be whole numbers") from exc
+        raise ValueError("QUANTITY and VOLUME_PER_CANDLE must be numeric") from exc
 
-    if not symbol or quantity <= 0 or volume_target <= 0:
+    asset_kind = _asset_kind(symbol)
+    if not symbol or raw_quantity <= 0 or volume_target <= 0:
         raise ValueError("TICKER must be set and numeric arguments must be greater than zero")
+    if asset_kind != "crypto" and (not raw_quantity.is_integer() or not volume_target.is_integer()):
+        raise ValueError("Stock and option quantity/volume must be whole numbers")
+    quantity = raw_quantity if asset_kind == "crypto" else int(raw_quantity)
     return symbol, quantity, volume_target
 
 
@@ -274,19 +377,20 @@ def main() -> int:
         print(f"Authentication failed: {exc}")
         return 1
 
-    data_client = StockHistoricalDataClient(credentials.api_key, credentials.secret_key)
+    asset_kind = _asset_kind(symbol)
+    data_client = _build_data_client(credentials, asset_kind)
     builder = VolumeCandleBuilder(volume_target)
     history_end = datetime.now(timezone.utc)
     history_start = history_end - timedelta(hours=INITIAL_HISTORY_HOURS)
 
     try:
-        initial_trades = _fetch_trades(data_client, symbol, history_start, history_end)
+        initial_trades = _fetch_trades(data_client, asset_kind, symbol, history_start, history_end)
     except Exception as exc:
         print(f"Could not load initial trades for {symbol}: {exc}")
         return 1
 
     if not initial_trades:
-        print(f"No IEX trades returned for {symbol} in the last {INITIAL_HISTORY_HOURS} hours")
+        print(f"No {asset_kind} trades returned for {symbol} in the last {INITIAL_HISTORY_HOURS} hours")
         return 1
 
     for timestamp, price, size in initial_trades:
@@ -294,7 +398,8 @@ def main() -> int:
     last_trade_timestamp = initial_trades[-1][0]
 
     print(
-        f"Watching {symbol}: quantity={quantity}, volume candle={volume_target:,} shares, "
+        f"Watching {symbol} ({asset_kind}): quantity={quantity:g}, "
+        f"volume candle={volume_target:g} {'contracts' if asset_kind == 'option' else 'units' if asset_kind == 'crypto' else 'shares'}, "
         f"entry lookback={ENTRY_LOOKBACK}, exit lookback={EXIT_LOOKBACK}, "
         f"refresh={CHECK_INTERVAL_SECONDS}s"
     )
@@ -311,6 +416,7 @@ def main() -> int:
             try:
                 new_trades = _fetch_trades(
                     data_client,
+                    asset_kind,
                     symbol,
                     last_trade_timestamp + timedelta(microseconds=1),
                     cycle_end,
@@ -320,7 +426,7 @@ def main() -> int:
                 if new_trades:
                     last_trade_timestamp = new_trades[-1][0]
 
-                current_price = _latest_price(data_client, symbol)
+                current_price = _latest_price(data_client, asset_kind, symbol)
                 candles = list(builder.completed)
                 if len(candles) < ENTRY_LOOKBACK:
                     print(
@@ -338,7 +444,7 @@ def main() -> int:
                     exit_trend = _fit_trend([candle.low for candle in candles[-EXIT_LOOKBACK:]])
 
                 position = _find_position(trading_client, symbol)
-                position_qty = _position_quantity(position) if position is not None else 0
+                position_qty = _position_quantity(position, asset_kind) if position is not None else 0
                 if position_qty < 0:
                     print(f"[{datetime.now().strftime('%H:%M:%S')}] Existing SHORT position found; no action taken")
                     time.sleep(CHECK_INTERVAL_SECONDS)
@@ -377,7 +483,7 @@ def main() -> int:
                             exit_order_id = None
                     if current_price < exit_level and exit_order_id is None:
                         exit_order_id = _submit_market_order(
-                            trading_client, symbol, position_qty, OrderSide.SELL
+                            trading_client, symbol, position_qty, OrderSide.SELL, asset_kind
                         )
                         print(
                             f"[EXIT] {symbol} ${current_price:.2f} below ${exit_level:.2f}; "
@@ -400,7 +506,7 @@ def main() -> int:
                     if descending and breakout and entry_order_id is None:
                         initial_stop = min(candle.low for candle in entry_candles)
                         entry_order_id = _submit_market_order(
-                            trading_client, symbol, quantity, OrderSide.BUY
+                            trading_client, symbol, quantity, OrderSide.BUY, asset_kind
                         )
                         print(
                             f"[ENTRY] {symbol} ${current_price:.2f} above descending resistance "

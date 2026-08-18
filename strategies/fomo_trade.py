@@ -7,7 +7,7 @@ from alpaca.trading.requests import LimitOrderRequest, MarketOrderRequest, GetOr
 from alpaca.trading.enums import OrderSide, TimeInForce, QueryOrderStatus
 from alpaca.data.enums import DataFeed, OptionsFeed
 from alpaca.data.historical import CryptoHistoricalDataClient, StockHistoricalDataClient, OptionHistoricalDataClient
-from alpaca.data.requests import CryptoLatestTradeRequest, StockLatestTradeRequest, OptionLatestTradeRequest
+from alpaca.data.requests import CryptoLatestTradeRequest, StockLatestTradeRequest, OptionLatestTradeRequest, OptionLatestQuoteRequest
 import time
 from datetime import datetime
 
@@ -98,16 +98,49 @@ def _get_open_orders_for_symbol(symbol: str):
     return [o for o in orders if _normalize_symbol(getattr(o, "symbol", "")) == target]
 
 
-def _place_entry_order() -> str:
+def _get_option_midpoint() -> tuple[float, float, float]:
+    quotes = _timed(
+        "get_option_latest_quote",
+        data_client.get_option_latest_quote,
+        OptionLatestQuoteRequest(symbol_or_symbols=SYMBOL, feed=OptionsFeed.INDICATIVE),
+    )
+    quote = quotes[SYMBOL]
+    bid = float(quote.bid_price)
+    ask = float(quote.ask_price)
+    if bid <= 0 or ask <= 0 or ask < bid:
+        raise RuntimeError(f"Invalid option quote for {SYMBOL}: bid={bid}, ask={ask}")
+    return bid, ask, round((bid + ask) / 2.0, 2)
+
+
+def _refresh_option_entry_levels() -> tuple[float, float, float]:
+    global ENTRY_PRICE, STOP_PRICE, TARGET1_PRICE, TARGET2_PRICE, current_stop_loss
+
+    bid, ask, midpoint = _get_option_midpoint()
+    ENTRY_PRICE = midpoint
+    STOP_PRICE = max(round(midpoint - STOP_LOSS_DISTANCE, 2), 0.01)
+    TARGET1_PRICE = round(midpoint + TARGET1_DISTANCE, 2)
+    TARGET2_PRICE = round(midpoint + TARGET2_DISTANCE, 2)
+    current_stop_loss = STOP_PRICE
+    return bid, ask, midpoint
+
+
+def _place_entry_order() -> tuple[str, float]:
+    limit_price = ENTRY_PRICE
+    if REFRESH_OPTION_MIDPOINT:
+        bid, ask, limit_price = _refresh_option_entry_levels()
+        print(
+            f"[QUOTE] Fresh {SYMBOL} bid=${bid:.2f} ask=${ask:.2f} midpoint=${limit_price:.2f}; "
+            f"stop=${STOP_PRICE:.2f} target1=${TARGET1_PRICE:.2f} target2=${TARGET2_PRICE:.2f}"
+        )
     entry_order = LimitOrderRequest(
         symbol=SYMBOL,
         qty=TOTAL_QTY,
         side=OrderSide.BUY,
-        time_in_force=TimeInForce.GTC,
-        limit_price=ENTRY_PRICE,
+        time_in_force=ORDER_TIME_IN_FORCE,
+        limit_price=limit_price,
     )
     entry_response = _timed("submit_order(entry)", trading_client.submit_order, order_data=entry_order)
-    return str(entry_response.id)
+    return str(entry_response.id), limit_price
 
 
 def _get_current_price(symbol: str) -> float:
@@ -130,12 +163,12 @@ def _normalize_position_qty(raw_qty: float) -> float | int:
     return max(int(round(abs(float(raw_qty)))), 0)
 
 def _print_usage() -> None:
-    print("Usage: python fomo_trade.py <TICKER> <NUM_STOCKS> <ENTRY_PRICE> <STOP_PRICE> <TARGET1_PRICE> <TARGET2_PRICE>")
+    print("Usage: python fomo_trade.py <TICKER> <NUM_STOCKS> <ENTRY_PRICE> <STOP_PRICE> <TARGET1_PRICE> <TARGET2_PRICE> [--refresh-option-midpoint]")
     print("Example: python fomo_trade.py MU 2 780 770 800 900")
 
 
 # Parse arguments: ticker, number of stocks, entry, stop, target1, target2
-if len(sys.argv) != 7:
+if len(sys.argv) not in (7, 8):
     print(f"Error: expected 6 arguments, got {len(sys.argv) - 1}")
     _print_usage()
     sys.exit(1)
@@ -149,6 +182,12 @@ try:
     TARGET2_PRICE = float(sys.argv[6])
 except ValueError:
     print("Error: NUM_STOCKS must be an integer and price arguments must be numeric values")
+    _print_usage()
+    sys.exit(1)
+
+REFRESH_OPTION_MIDPOINT = len(sys.argv) == 8 and sys.argv[7] == "--refresh-option-midpoint"
+if len(sys.argv) == 8 and not REFRESH_OPTION_MIDPOINT:
+    print(f"Error: unknown option {sys.argv[7]}")
     _print_usage()
     sys.exit(1)
 
@@ -177,6 +216,13 @@ if TARGET1_PRICE <= ENTRY_PRICE or TARGET2_PRICE <= TARGET1_PRICE:
 
 IS_CRYPTO = "/" in SYMBOL
 IS_OPTION = _is_option_symbol(SYMBOL)
+if REFRESH_OPTION_MIDPOINT and not IS_OPTION:
+    print("Error: --refresh-option-midpoint can only be used with an option symbol")
+    sys.exit(1)
+STOP_LOSS_DISTANCE = ENTRY_PRICE - STOP_PRICE
+TARGET1_DISTANCE = TARGET1_PRICE - ENTRY_PRICE
+TARGET2_DISTANCE = TARGET2_PRICE - ENTRY_PRICE
+ORDER_TIME_IN_FORCE = TimeInForce.DAY if IS_OPTION else TimeInForce.GTC
 data_client = (
     CryptoHistoricalDataClient(credentials.api_key, credentials.secret_key)
     if IS_CRYPTO
@@ -245,7 +291,8 @@ try:
                 print(f"[HEARTBEAT] {SYMBOL} current=${current_price:.2f} entry=${ENTRY_PRICE:.2f}", flush=True)
 
             crossed_above_entry = (
-                (last_observed_price is None and current_price >= ENTRY_PRICE)
+                (REFRESH_OPTION_MIDPOINT and last_observed_price is None)
+                or (last_observed_price is None and current_price >= ENTRY_PRICE)
                 or (
                     last_observed_price is not None
                     and last_observed_price < ENTRY_PRICE
@@ -276,12 +323,12 @@ try:
                             f"Submitting LIMIT BUY for {TOTAL_QTY} {SYMBOL} at ${ENTRY_PRICE:.2f}..."
                         )
                         try:
-                            entry_order_id = _place_entry_order()
+                            entry_order_id, submitted_price = _place_entry_order()
                             first_contract_sold = False
                             breakeven_stop_set = False
                             second_contract_stop_loss = None
                             awaiting_reentry_after_stop = False
-                            print(f"✓ Re-entry BUY submitted. Order ID: {entry_order_id}")
+                            print(f"✓ Re-entry BUY submitted at midpoint ${submitted_price:.2f}. Order ID: {entry_order_id}")
                         except Exception as e:
                             print(f"✗ Error submitting re-entry BUY: {e}")
                     elif not awaiting_reentry_after_stop and crossed_above_entry:
@@ -292,11 +339,11 @@ try:
                             f"Submitting LIMIT BUY for {TOTAL_QTY} {SYMBOL} at ${ENTRY_PRICE:.2f}..."
                         )
                         try:
-                            entry_order_id = _place_entry_order()
+                            entry_order_id, submitted_price = _place_entry_order()
                             first_contract_sold = False
                             breakeven_stop_set = False
                             second_contract_stop_loss = None
-                            print(f"✓ Entry BUY submitted. Order ID: {entry_order_id}")
+                            print(f"✓ Entry BUY submitted at midpoint ${submitted_price:.2f}. Order ID: {entry_order_id}")
                         except Exception as e:
                             print(f"✗ Error submitting entry BUY: {e}")
                     else:
@@ -334,7 +381,7 @@ try:
                         symbol=SYMBOL,
                         qty=current_qty,
                         side=OrderSide.SELL,
-                        time_in_force=TimeInForce.GTC
+                        time_in_force=ORDER_TIME_IN_FORCE
                     )
                     close_response = trading_client.submit_order(order_data=close_order)
                     print(f"✓ Position closed. Order ID: {close_response.id}")
@@ -360,7 +407,7 @@ try:
                         symbol=SYMBOL,
                         qty=current_qty,
                         side=OrderSide.SELL,
-                        time_in_force=TimeInForce.GTC
+                        time_in_force=ORDER_TIME_IN_FORCE
                     )
                     close_response = trading_client.submit_order(order_data=close_order)
                     print(f"✓ Position closed. Order ID: {close_response.id}")
@@ -389,7 +436,7 @@ try:
                         symbol=SYMBOL,
                         qty=FIRST_TARGET_QTY,
                         side=OrderSide.SELL,
-                        time_in_force=TimeInForce.GTC
+                        time_in_force=ORDER_TIME_IN_FORCE
                     )
                     sell_response = trading_client.submit_order(order_data=sell_order)
                     print(f"✓ Sold first contract. Order ID: {sell_response.id}")
@@ -413,7 +460,7 @@ try:
                         symbol=SYMBOL,
                         qty=current_qty,
                         side=OrderSide.SELL,
-                        time_in_force=TimeInForce.GTC
+                        time_in_force=ORDER_TIME_IN_FORCE
                     )
                     close_response = trading_client.submit_order(order_data=close_order)
                     print(f"✓ Position closed. Order ID: {close_response.id}")

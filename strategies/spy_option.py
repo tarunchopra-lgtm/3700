@@ -5,18 +5,22 @@ What it does:
 - Reads current stock price
 - Checks this week's call and put expiration contracts via helper functions
 - Calculates ATR(14)
-- Uses current stock price as midpoint for expected low/high range
+- Uses argument $1 as the ATR multiplier for today's SPY expected range
 - Computes call/put trigger levels from range + today's open
-- Uses whole-number triggers and launches trade runners when hit
+- Fetches option bid/ask only when a SPY trigger is hit
+- Launches trade runners with fresh midpoint pricing for entry and re-entry
 
 Usage:
     python spy_option.py
-    python spy_option.py SPY
+    python spy_option.py [ATR_RANGE_MULTIPLIER]
+
+Examples:
+    python spy_option.py       # Defaults to current SPY +/- 0.5 ATR
+    python spy_option.py 0.25  # Uses current SPY +/- 0.25 ATR
 """
 
 from __future__ import annotations
 
-import re
 import subprocess
 import sys
 import time
@@ -24,9 +28,9 @@ from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
-from alpaca.data.enums import DataFeed
-from alpaca.data.historical import StockHistoricalDataClient
-from alpaca.data.requests import StockBarsRequest, StockLatestTradeRequest
+from alpaca.data.enums import DataFeed, OptionsFeed
+from alpaca.data.historical import OptionHistoricalDataClient, StockHistoricalDataClient
+from alpaca.data.requests import OptionLatestQuoteRequest, StockBarsRequest, StockLatestTradeRequest
 from alpaca.data.timeframe import TimeFrame
 
 from pathlib import Path
@@ -42,13 +46,13 @@ from strategies.current_week_option_function_put import get_current_week_put_opt
 
 
 ATR_PERIOD = 14
+ATR_RANGE_MULTIPLIER = 0.5
 CHECK_INTERVAL_SECONDS = 2
 ORDER_QTY = 2
 STOP_LOSS_OFFSET = 0.25
 TARGET1_OFFSET = 0.25
 TARGET2_OFFSET = 1.00
 ET = ZoneInfo("America/New_York")
-CURRENT_PRICE_PATTERN = re.compile(r"Current:\s*\$(\d+(?:\.\d+)?)")
 
 
 def _extract_bars(bars_response, symbol: str):
@@ -162,29 +166,22 @@ def _calculate_atr(client: StockHistoricalDataClient, symbol: str) -> float:
     return sum(tr_values[-ATR_PERIOD:]) / ATR_PERIOD
 
 
-def _get_price_line_for_symbol(symbol: str) -> str:
-    stock_price_script = Path(__file__).resolve().parent.parent / "indicator" / "stock_price.py"
-    result = subprocess.run(
-        [sys.executable, str(stock_price_script), symbol],
-        check=False,
-        capture_output=True,
-        text=True,
+def _get_option_midpoint(
+    option_client: OptionHistoricalDataClient,
+    option_symbol: str,
+) -> tuple[float, float, float]:
+    quotes = option_client.get_option_latest_quote(
+        OptionLatestQuoteRequest(
+            symbol_or_symbols=option_symbol,
+            feed=OptionsFeed.INDICATIVE,
+        )
     )
-    if result.returncode != 0:
-        err = result.stderr.strip() or result.stdout.strip() or "unknown error"
-        raise RuntimeError(f"stock_price.py failed for {symbol}: {err}")
-
-    lines = [line.strip() for line in result.stdout.splitlines() if line.strip()]
-    if not lines:
-        raise RuntimeError(f"No output from stock_price.py for {symbol}")
-    return lines[-1]
-
-
-def _extract_current_price_from_line(line: str) -> float:
-    match = CURRENT_PRICE_PATTERN.search(line)
-    if not match:
-        raise RuntimeError(f"Unable to parse current price from line: {line}")
-    return float(match.group(1))
+    quote = quotes[option_symbol]
+    bid = float(quote.bid_price)
+    ask = float(quote.ask_price)
+    if bid <= 0 or ask <= 0 or ask < bid:
+        raise RuntimeError(f"Invalid option quote for {option_symbol}: bid={bid}, ask={ask}")
+    return bid, ask, round((bid + ask) / 2.0, 2)
 
 
 def _build_fomo_trade_command(option_symbol: str, entry_price: float) -> list[str]:
@@ -201,20 +198,39 @@ def _build_fomo_trade_command(option_symbol: str, entry_price: float) -> list[st
         f"{stop_price:.2f}",
         f"{target1_price:.2f}",
         f"{target2_price:.2f}",
+        "--refresh-option-midpoint",
     ]
 
 
-def _launch_trade(option_symbol: str, side_label: str) -> subprocess.Popen:
-    price_line = _get_price_line_for_symbol(option_symbol)
-    option_price = _extract_current_price_from_line(price_line)
-    cmd = _build_fomo_trade_command(option_symbol, option_price)
+def _launch_trade(
+    option_client: OptionHistoricalDataClient,
+    option_symbol: str,
+    side_label: str,
+) -> subprocess.Popen:
+    bid, ask, midpoint = _get_option_midpoint(option_client, option_symbol)
+    cmd = _build_fomo_trade_command(option_symbol, midpoint)
     print(f"[{datetime.now().strftime('%H:%M:%S')}] {side_label} trigger hit. Launching:")
+    print(f"  Fresh {option_symbol} quote: bid=${bid:.2f} ask=${ask:.2f} midpoint=${midpoint:.2f}")
     print("  " + " ".join(cmd))
     return subprocess.Popen(cmd)
 
 
 def main() -> int:
-    symbol = sys.argv[1].strip().upper() if len(sys.argv) > 1 else "SPY"
+    if len(sys.argv) > 2:
+        print("Usage: python strategies/spy_option.py [ATR_RANGE_MULTIPLIER]")
+        print("Argument $1 controls today's SPY range; examples: 0.5 or 0.25")
+        return 1
+
+    try:
+        atr_range_multiplier = float(sys.argv[1]) if len(sys.argv) == 2 else ATR_RANGE_MULTIPLIER
+    except ValueError:
+        print("ATR_RANGE_MULTIPLIER must be numeric, for example 0.5 or 0.25")
+        return 1
+    if atr_range_multiplier <= 0:
+        print("ATR_RANGE_MULTIPLIER must be greater than zero")
+        return 1
+
+    symbol = "SPY"
 
     try:
         credentials, _ = bootstrap_trading_auth("spy_option.py")
@@ -223,6 +239,7 @@ def main() -> int:
         return 1
 
     client = StockHistoricalDataClient(credentials.api_key, credentials.secret_key)
+    option_client = OptionHistoricalDataClient(credentials.api_key, credentials.secret_key)
 
     try:
         latest_bar = _get_latest_trading_day_bar(client, symbol)
@@ -234,8 +251,8 @@ def main() -> int:
         print(f"Error computing range for {symbol}: {exc}")
         return 1
 
-    expected_low = current_price - (atr / 2.0)
-    expected_high = current_price + (atr / 2.0)
+    expected_low = current_price - (atr * atr_range_multiplier)
+    expected_high = current_price + (atr * atr_range_multiplier)
 
     call_reference = round((expected_low + open_price) / 2.0)
     put_reference = round((expected_high + open_price) / 2.0)
@@ -247,26 +264,19 @@ def main() -> int:
         print(f"Error resolving option symbols for {symbol}: {exc}")
         return 1
 
-    try:
-        call_price_line = _get_price_line_for_symbol(call_symbol)
-        put_price_line = _get_price_line_for_symbol(put_symbol)
-    except Exception as exc:
-        print(f"Error fetching option price lines: {exc}")
-        return 1
-
     print(f"Symbol: {symbol}")
     print(f"Current Price: {current_price:.2f}")
     print(f"ATR({ATR_PERIOD}): {atr:.4f}")
+    print(f"Argument $1 - Today's SPY ATR Range Multiplier: {atr_range_multiplier:g}")
     print(f"Reference Open ({reference_open_date.isoformat()}): {open_price:.2f}")
     print(f"This Week Expiration: {_get_weekly_expiration().isoformat()}")
-    print(f"Expected Low (current-ATR/2): {expected_low:.2f}")
-    print(f"Expected High (current+ATR/2): {expected_high:.2f}")
+    print(f"Expected Low (current-ATR*{atr_range_multiplier:g}): {expected_low:.2f}")
+    print(f"Expected High (current+ATR*{atr_range_multiplier:g}): {expected_high:.2f}")
     print(f"Call Trigger (whole): {call_reference}")
     print(f"Put Trigger (whole): {put_reference}")
     print(f"CALL Symbol: {call_symbol}")
     print(f"PUT Symbol: {put_symbol}")
-    print(f"CALL Price: {call_price_line}")
-    print(f"PUT Price: {put_price_line}")
+    print("Option bid/ask prices are deferred until the corresponding SPY trigger is hit.")
 
     print("\nMonitoring SPY for trigger hits...")
     print(f"- CALL trigger when SPY <= {call_reference}")
@@ -286,11 +296,11 @@ def main() -> int:
             put_hit = last_spy_price < put_reference <= spy_now or spy_now >= put_reference
 
             if not call_launched and call_hit:
-                processes.append(_launch_trade(call_symbol, "CALL"))
+                processes.append(_launch_trade(option_client, call_symbol, "CALL"))
                 call_launched = True
 
             if not put_launched and put_hit:
-                processes.append(_launch_trade(put_symbol, "PUT"))
+                processes.append(_launch_trade(option_client, put_symbol, "PUT"))
                 put_launched = True
 
             if call_launched and put_launched:

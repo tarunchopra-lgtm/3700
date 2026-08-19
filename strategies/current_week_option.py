@@ -146,6 +146,7 @@ def get_option_price_volume(option_data_client: OptionHistoricalDataClient, cont
             symbol_or_symbols=contract_symbol,
             timeframe=TimeFrame.Day,
             limit=10,
+            feed=OptionsFeed.INDICATIVE,
         )
     )
     bars_data = getattr(bars_response, "data", {})

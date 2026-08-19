@@ -4,6 +4,9 @@
 Supports stocks, slash-form crypto pairs, and OCC option symbols. Option volume
 history requires an accepted Alpaca OPRA market-data agreement.
 
+After entry, Target 1 sells half at one times the initial risk. The remainder
+exits when price breaks the 10-candle low trend line or the original hard stop.
+
 Usage:
     python strategies/long_trend.py <SYMBOL> <QUANTITY> <VOLUME_PER_CANDLE>
 
@@ -267,6 +270,12 @@ def _position_quantity(position, asset_kind: str) -> float | int:
     return quantity if asset_kind == "crypto" else int(round(quantity))
 
 
+def _half_quantity(quantity: float | int, asset_kind: str) -> float | int:
+    if asset_kind == "crypto":
+        return float(quantity) / 2.0
+    return int(quantity) // 2
+
+
 def _order_status(trading_client, order_id: str | None) -> str:
     if order_id is None:
         return ""
@@ -404,11 +413,17 @@ def main() -> int:
         f"refresh={CHECK_INTERVAL_SECONDS}s"
     )
     print("Entry requires a negative 15-candle high slope and price above projected resistance.")
+    print("Target 1 sells half at 1R; the remainder follows the 10-candle low-trend exit.")
     print("Press Ctrl+C to stop.\n")
 
     initial_stop: float | None = None
     entry_order_id: str | None = None
     exit_order_id: str | None = None
+    target1_order_id: str | None = None
+    entry_average_price: float | None = None
+    target1_price: float | None = None
+    target1_sold = False
+    initial_position_qty: float | int | None = None
 
     try:
         while True:
@@ -469,31 +484,77 @@ def main() -> int:
                     entry_order_id = None
                     if initial_stop is None:
                         initial_stop = min(candle.low for candle in entry_candles)
+                    if entry_average_price is None:
+                        entry_average_price = float(getattr(position, "avg_entry_price"))
+                        initial_position_qty = position_qty
+                        risk_per_unit = entry_average_price - initial_stop
+                        if risk_per_unit <= 0:
+                            raise RuntimeError(
+                                f"Entry ${entry_average_price:.2f} is not above hard stop ${initial_stop:.2f}"
+                            )
+                        target1_price = entry_average_price + risk_per_unit
                     dynamic_exit = exit_trend.projected if exit_trend is not None else initial_stop
                     exit_level = max(initial_stop, dynamic_exit)
                     print(
                         f"POSITION RISK: Hard stop (15-candle lowest low)=${initial_stop:.2f} | "
                         f"Low trend line (10 candles)=${dynamic_exit:.4f} | "
-                        f"SELL if price below=${exit_level:.2f}"
+                        f"SELL remainder if price below=${exit_level:.2f} | "
+                        f"Target 1 (1R)=${target1_price:.2f} | "
+                        f"Target 1 sold={target1_sold}"
                     )
+                    if target1_order_id is not None:
+                        target_status = _order_status(trading_client, target1_order_id)
+                        print(f"Target 1 order {target1_order_id} status={target_status}")
+                        if target_status == "FILLED":
+                            target1_sold = True
+                            target1_order_id = None
+                        elif target_status in {"CANCELED", "EXPIRED", "REJECTED"}:
+                            target1_order_id = None
                     if exit_order_id is not None:
                         status = _order_status(trading_client, exit_order_id)
                         print(f"Exit order {exit_order_id} status={status}")
                         if status in {"CANCELED", "EXPIRED", "REJECTED"}:
                             exit_order_id = None
                     if current_price < exit_level and exit_order_id is None:
-                        exit_order_id = _submit_market_order(
-                            trading_client, symbol, position_qty, OrderSide.SELL, asset_kind
-                        )
-                        print(
-                            f"[EXIT] {symbol} ${current_price:.2f} below ${exit_level:.2f}; "
-                            f"market sell submitted id={exit_order_id}"
-                        )
+                        if target1_order_id is not None:
+                            trading_client.cancel_order_by_id(target1_order_id)
+                            print("[EXIT] Cancelled pending Target 1 order; position will be reconciled next cycle")
+                            target1_order_id = None
+                        else:
+                            exit_order_id = _submit_market_order(
+                                trading_client, symbol, position_qty, OrderSide.SELL, asset_kind
+                            )
+                            print(
+                                f"[EXIT] {symbol} ${current_price:.2f} below ${exit_level:.2f}; "
+                                f"market sell submitted for remaining {position_qty} id={exit_order_id}"
+                            )
+                    elif not target1_sold and target1_order_id is None and current_price >= target1_price:
+                        target_quantity = _half_quantity(initial_position_qty, asset_kind)
+                        if target_quantity > 0:
+                            target1_order_id = _submit_market_order(
+                                trading_client, symbol, target_quantity, OrderSide.SELL, asset_kind
+                            )
+                            print(
+                                f"[TARGET 1] {symbol} ${current_price:.2f} reached 1R ${target1_price:.2f}; "
+                                f"market sell submitted for 50% ({target_quantity}) id={target1_order_id}"
+                            )
+                        else:
+                            target1_sold = True
+                            print("[TARGET 1] Position is too small to split; trailing the full position")
                 else:
                     if exit_order_id is not None:
                         print(f"[FLAT] Exit order {exit_order_id} completed; ready for another setup")
                         exit_order_id = None
+                    elif entry_average_price is not None:
+                        print("[FLAT] Position closed; ready for another setup")
+
+                    if entry_average_price is not None:
                         initial_stop = None
+                        target1_order_id = None
+                        entry_average_price = None
+                        target1_price = None
+                        target1_sold = False
+                        initial_position_qty = None
 
                     if entry_order_id is not None:
                         status = _order_status(trading_client, entry_order_id)

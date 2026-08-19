@@ -1,6 +1,7 @@
 """Trend analysis role - detects breakouts and trend lines"""
 import pandas as pd
 from datetime import datetime, timedelta
+from alpaca.data.enums import DataFeed
 from alpaca.data.requests import StockTradesRequest, CryptoTradesRequest
 from .base import BaseRole
 
@@ -33,7 +34,8 @@ class TrendRole(BaseRole):
             request = StockTradesRequest(
                 symbol_or_symbols=self.symbol,
                 start=start_date,
-                end=end_date
+                end=end_date,
+                feed=DataFeed.IEX,
             )
             trades_data = self.data_client.get_stock_trades(request)
         

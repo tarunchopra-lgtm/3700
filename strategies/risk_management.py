@@ -21,6 +21,7 @@ from alpaca.trading.requests import (
     MarketOrderRequest, LimitOrderRequest, GetOrdersRequest
 )
 from alpaca.trading.enums import OrderSide, TimeInForce, QueryOrderStatus
+from alpaca.data.enums import DataFeed
 from alpaca.data.historical import StockHistoricalDataClient, CryptoHistoricalDataClient
 from alpaca.data.requests import StockLatestTradeRequest, CryptoLatestTradeRequest
 
@@ -124,7 +125,7 @@ def get_price(symbol: str) -> float:
             r = CryptoLatestTradeRequest(symbol_or_symbols=symbol)
             return float(crypto_data_client.get_crypto_latest_trade(r)[symbol].price)
         else:
-            r = StockLatestTradeRequest(symbol_or_symbols=symbol)
+            r = StockLatestTradeRequest(symbol_or_symbols=symbol, feed=DataFeed.IEX)
             return float(stock_data_client.get_stock_latest_trade(r)[symbol].price)
     except Exception as e:
         print(f"  ✗ Could not get price for {symbol}: {e}")

@@ -49,11 +49,11 @@ from strategies.current_week_option_function_put import get_current_week_put_opt
 
 ATR_PERIOD = 14
 ATR_RANGE_MULTIPLIER = 0.5
-CHECK_INTERVAL_SECONDS = 2
+CHECK_INTERVAL_SECONDS = 12
 ORDER_QTY = 2
 STOP_LOSS_OFFSET = 0.25
 TARGET1_OFFSET = 0.25
-TARGET2_OFFSET = 1.00
+TARGET2_OFFSET = 2.00
 ET = ZoneInfo("America/New_York")
 
 
@@ -128,6 +128,21 @@ def _get_reference_open_price(client: StockHistoricalDataClient, symbol: str) ->
     if bar_date is None:
         raise RuntimeError(f"Could not read trading-day date for {symbol}")
     return float(bar_open), bar_date
+
+
+def _get_today_range(
+    client: StockHistoricalDataClient,
+    symbol: str,
+    observed_low: float,
+    observed_high: float,
+) -> tuple[float, float]:
+    latest_bar = _get_latest_trading_day_bar(client, symbol)
+    if _get_bar_date_et(latest_bar) != datetime.now(ET).date():
+        return observed_low, observed_high
+
+    bar_low = float(getattr(latest_bar, "low"))
+    bar_high = float(getattr(latest_bar, "high"))
+    return min(bar_low, observed_low), max(bar_high, observed_high)
 
 
 def _true_range(current_bar, previous_close: float | None) -> float:
@@ -297,16 +312,32 @@ def main() -> int:
     print("\nMonitoring SPY for trigger hits...")
     print(f"- CALL trigger when SPY reaches <= {call_reference}; re-arms above {call_reference}")
     print(f"- PUT trigger when SPY reaches >= {put_reference}; re-arms below {put_reference}")
+    print(f"- Current price and today's range refresh every {CHECK_INTERVAL_SECONDS} seconds")
 
     call_armed = True
     put_armed = True
     call_process: subprocess.Popen | None = None
     put_process: subprocess.Popen | None = None
+    observed_low = current_price
+    observed_high = current_price
 
     try:
         while True:
             spy_now = _get_current_price(client, symbol)
-            print(f"[{datetime.now().strftime('%H:%M:%S')}] SPY={spy_now:.2f}")
+            observed_low = min(observed_low, spy_now)
+            observed_high = max(observed_high, spy_now)
+            try:
+                today_low, today_high = _get_today_range(
+                    client, symbol, observed_low, observed_high
+                )
+            except Exception:
+                today_low, today_high = observed_low, observed_high
+            print(
+                f"[{datetime.now().strftime('%H:%M:%S')}] SPY=${spy_now:.2f} | "
+                f"Today Low=${today_low:.2f} | Today High=${today_high:.2f} | "
+                f"Today Range=${today_high - today_low:.2f} | "
+                f"CALL Trigger<=${call_reference:.2f} | PUT Trigger>=${put_reference:.2f}"
+            )
 
             if call_process is not None and call_process.poll() is not None:
                 print(f"[CALL] Trade runner PID {call_process.pid} completed")

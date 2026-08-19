@@ -17,6 +17,7 @@ from alpaca.data.requests import (
     CryptoBarsRequest,
     CryptoTradesRequest,
 )
+from alpaca.data.enums import DataFeed
 from alpaca.data.timeframe import TimeFrame
 from roles.base import BaseRole
 
@@ -49,6 +50,7 @@ class StockPlotter(BaseRole):
                     start=start_date,
                     end=end_date,
                     timeframe=TimeFrame.Day,
+                    feed=DataFeed.IEX,
                 )
                 bars_data = self.data_client.get_stock_bars(request)
             
@@ -88,6 +90,7 @@ class StockPlotter(BaseRole):
                     symbol_or_symbols=self.symbol,
                     start=start_date,
                     end=end_date,
+                    feed=DataFeed.IEX,
                 )
                 trades_data = self.data_client.get_stock_trades(request)
             
@@ -174,6 +177,7 @@ class StockPlotter(BaseRole):
                     start=start_date,
                     end=end_date,
                     timeframe=TimeFrame.Day,
+                    feed=DataFeed.IEX,
                 )
                 bars_data = self.data_client.get_stock_bars(request)
             

@@ -7,8 +7,9 @@ Behavior:
 3) Run strategies/current_week_option.py for each stock to discover call option.
 4) Buy that option at bid/ask mid-price using a limit order.
 5) Use first CLI argument as option quantity (e.g., 1, 5).
-6) Every minute, if stock still exists do nothing.
-7) If underlying stock no longer exists, sell the option at market.
+6) If an underlying position crosses down to 50 shares, sell half the option position.
+7) Every minute, if stock still exists otherwise do nothing.
+8) If underlying stock no longer exists, sell the remaining option at market.
 
 Usage:
     python strategies/gocall.py <SIZE>
@@ -30,7 +31,7 @@ from alpaca.data.enums import OptionsFeed
 from alpaca.data.historical import OptionHistoricalDataClient
 from alpaca.data.requests import OptionLatestQuoteRequest
 from alpaca.trading.enums import OrderSide, QueryOrderStatus, TimeInForce
-from alpaca.trading.requests import GetOrdersRequest, LimitOrderRequest
+from alpaca.trading.requests import GetOrdersRequest, LimitOrderRequest, MarketOrderRequest
 
 WORKSPACE_ROOT = Path(__file__).resolve().parent.parent
 if str(WORKSPACE_ROOT) not in sys.path:
@@ -39,6 +40,7 @@ if str(WORKSPACE_ROOT) not in sys.path:
 from roles.credentials import bootstrap_trading_auth
 
 CHECK_INTERVAL_SECONDS = 60
+STOCK_PARTIAL_TRIGGER_QTY = 50
 CALL_SYMBOL_PATTERN = re.compile(r"CALL Contract:\s+(\S+)")
 
 
@@ -46,6 +48,10 @@ CALL_SYMBOL_PATTERN = re.compile(r"CALL Contract:\s+(\S+)")
 class ManagedOption:
     underlying: str
     option_symbol: str
+    previous_stock_qty: float
+    half_triggered: bool = False
+    half_sold: bool = False
+    half_sell_order_id: str | None = None
 
 
 def _is_stock_position(position) -> bool:
@@ -56,10 +62,10 @@ def _is_stock_position(position) -> bool:
     return bool(symbol) and any(token in asset_class_text for token in ("us_equity", "stock"))
 
 
-def _get_stock_position_symbols(trading_client) -> set[str]:
+def _get_stock_positions(trading_client) -> dict[str, float]:
     positions = list(trading_client.get_all_positions())
     return {
-        str(getattr(position, "symbol", "")).upper()
+        str(getattr(position, "symbol", "")).upper(): abs(float(getattr(position, "qty", 0)))
         for position in positions
         if _is_stock_position(position)
     }
@@ -169,14 +175,40 @@ def _sell_option_market(trading_client, option_symbol: str) -> None:
     print(f"[SELL] {option_symbol} MARKET id={getattr(response, 'id', 'N/A')}")
 
 
+def _get_option_position_qty(trading_client, option_symbol: str) -> int:
+    try:
+        position = trading_client.get_open_position(option_symbol)
+        return max(int(round(abs(float(getattr(position, "qty", 0))))), 0)
+    except Exception:
+        return 0
+
+
+def _sell_option_quantity_market(trading_client, option_symbol: str, qty: int) -> str:
+    response = trading_client.submit_order(
+        order_data=MarketOrderRequest(
+            symbol=option_symbol,
+            qty=qty,
+            side=OrderSide.SELL,
+            time_in_force=TimeInForce.DAY,
+        )
+    )
+    return str(response.id)
+
+
+def _order_status(trading_client, order_id: str) -> str:
+    order = trading_client.get_order_by_id(order_id)
+    status = getattr(order, "status", "")
+    return (status.value if hasattr(status, "value") else str(status)).upper()
+
+
 def _ensure_managed_calls(
     trading_client,
     option_data_client: OptionHistoricalDataClient,
     size: int,
     managed: dict[str, ManagedOption],
-    stock_symbols: set[str],
+    stock_positions: dict[str, float],
 ) -> None:
-    for symbol in sorted(stock_symbols):
+    for symbol in sorted(stock_positions):
         if symbol in managed:
             continue
 
@@ -191,13 +223,80 @@ def _ensure_managed_calls(
 
             if _has_open_buy_order(trading_client, option_symbol):
                 print(f"[SKIP] Open BUY already exists for {option_symbol}")
-                managed[symbol] = ManagedOption(underlying=symbol, option_symbol=option_symbol)
+                managed[symbol] = ManagedOption(
+                    underlying=symbol,
+                    option_symbol=option_symbol,
+                    previous_stock_qty=stock_positions[symbol],
+                )
                 continue
 
             _buy_call_option(trading_client, option_symbol, size, mid_price)
-            managed[symbol] = ManagedOption(underlying=symbol, option_symbol=option_symbol)
+            managed[symbol] = ManagedOption(
+                underlying=symbol,
+                option_symbol=option_symbol,
+                previous_stock_qty=stock_positions[symbol],
+            )
         except Exception as exc:
             print(f"[WARN] Could not open call for {symbol}: {exc}")
+
+
+def _reduce_options_at_50_shares(
+    trading_client,
+    managed: dict[str, ManagedOption],
+    stock_positions: dict[str, float],
+) -> None:
+    for underlying, item in managed.items():
+        current_stock_qty = stock_positions.get(underlying)
+        if current_stock_qty is None:
+            continue
+
+        if item.half_sell_order_id is not None:
+            try:
+                status = _order_status(trading_client, item.half_sell_order_id)
+                print(f"[HALF] {item.option_symbol} order={item.half_sell_order_id} status={status}")
+                if status == "FILLED":
+                    item.half_sold = True
+                    item.half_sell_order_id = None
+                elif status in {"CANCELED", "EXPIRED", "REJECTED"}:
+                    item.half_sell_order_id = None
+            except Exception as exc:
+                print(f"[WARN] Could not check half-sell order for {item.option_symbol}: {exc}")
+
+        crossed_to_50 = (
+            item.previous_stock_qty > STOCK_PARTIAL_TRIGGER_QTY
+            and current_stock_qty <= STOCK_PARTIAL_TRIGGER_QTY
+        )
+        if crossed_to_50:
+            item.half_triggered = True
+
+        if item.half_triggered and not item.half_sold and item.half_sell_order_id is None:
+            option_qty = _get_option_position_qty(trading_client, item.option_symbol)
+            sell_qty = option_qty // 2
+            if sell_qty > 0:
+                try:
+                    item.half_sell_order_id = _sell_option_quantity_market(
+                        trading_client, item.option_symbol, sell_qty
+                    )
+                    print(
+                        f"[HALF] {underlying} reduced {item.previous_stock_qty:g} -> "
+                        f"{current_stock_qty:g} shares; selling {sell_qty}/{option_qty} "
+                        f"{item.option_symbol} at market id={item.half_sell_order_id}"
+                    )
+                except Exception as exc:
+                    print(f"[WARN] Could not sell half of {item.option_symbol}: {exc}")
+            elif option_qty == 1:
+                item.half_sold = True
+                print(
+                    f"[HALF] {underlying} reached {current_stock_qty:g} shares, but "
+                    f"{item.option_symbol} has only 1 contract; no partial sale possible"
+                )
+            else:
+                print(
+                    f"[HALF] {underlying} reached {current_stock_qty:g} shares; waiting for "
+                    f"the {item.option_symbol} option position to fill before reducing it"
+                )
+
+        item.previous_stock_qty = current_stock_qty
 
 
 def _cleanup_removed_underlyings(
@@ -256,10 +355,15 @@ def main() -> int:
 
     try:
         while True:
-            stock_symbols = _get_stock_position_symbols(trading_client)
-            print(f"\n[SYNC] Stock positions: {sorted(stock_symbols) if stock_symbols else 'none'}")
+            stock_positions = _get_stock_positions(trading_client)
+            stock_symbols = set(stock_positions)
+            position_text = ", ".join(
+                f"{symbol}={stock_positions[symbol]:g}" for symbol in sorted(stock_positions)
+            )
+            print(f"\n[SYNC] Stock positions: {position_text or 'none'}")
 
-            _ensure_managed_calls(trading_client, option_data_client, size, managed, stock_symbols)
+            _ensure_managed_calls(trading_client, option_data_client, size, managed, stock_positions)
+            _reduce_options_at_50_shares(trading_client, managed, stock_positions)
             _cleanup_removed_underlyings(trading_client, managed, stock_symbols)
 
             print(f"[STATE] Managed calls: {[managed[k].option_symbol for k in sorted(managed)]}")

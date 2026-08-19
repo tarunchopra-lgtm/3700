@@ -1,100 +1,46 @@
 # Trading Programs Documentation
 
-Last updated: 2026-08-08
+Last updated: 2026-08-18
 
-This document lists the Python programs in the workspace root and provides:
-- program name
-- what it does
-- usage syntax
+## Strategies
 
-It is written in Markdown so it can be pasted into Google Docs and maintained there.
+| Program | What It Does | Usage |
+|---|---|---|
+| `current_week_option.py` | Shows the nearest current-week call and put contracts with midpoint, volume, and open interest for a ticker or held stocks. | `python strategies/current_week_option.py [TICKER]` |
+| `current_week_option_function_call.py` | Prints the nearest active current-week call symbol for a ticker and optional reference price. | `python strategies/current_week_option_function_call.py <TICKER> [REFERENCE_PRICE]` |
+| `current_week_option_function_put.py` | Prints the nearest active current-week put symbol for a ticker and optional reference price. | `python strategies/current_week_option_function_put.py <TICKER> [REFERENCE_PRICE]` |
+| `daily-stat.py` | Records daily account equity in `balance.txt` without same-day overwrites and reports change from the previous record. | `python strategies/daily-stat.py [--schedule]` |
+| `find_daily_trend.py` | Scans ticker-list files for stocks breaking above a descending 15-day high trend today. | `python strategies/find_daily_trend.py [LIST_FILE ...]` |
+| `find_vol.py` | Tests 0.1%-1.0% average-volume candle sizes and recommends a qualified size for `long_trend.py`. | `python strategies/find_vol.py <TICKER>` |
+| `fomo_market.py` | Derives levels from current price and launches `fomo_trade.py`, refreshing them daily after 2:00 PM Pacific. | `python strategies/fomo_market.py <TICKER> <NUM_STOCKS>` |
+| `fomo_trade.py` | Manages long limit entry, stop, partial target, final target, and optional option midpoint/single-entry behavior. | `python strategies/fomo_trade.py <TICKER> <NUM_STOCKS> <ENTRY> <STOP> <TARGET1> <TARGET2> [--refresh-option-midpoint] [--single-entry]` |
+| `gocall.py` | Buys weekly calls for held stocks, halves the option at a 50-share underlying reduction, and exits when the stock closes. | `python strategies/gocall.py <SIZE>` |
+| `long_trend.py` | Trades volume-candle breaks above descending resistance, sells half at 1R, and trails the remainder under the 10-candle low trend. | `python strategies/long_trend.py <SYMBOL> <QUANTITY> <VOLUME_PER_CANDLE>` |
+| `optimize.py` | Grid-searches fixed FOMO entry, stop, and target ranges by repeatedly running the historical backtest. | `python strategies/optimize.py <DAYS_BACK> <TICKER> <NUM_STOCKS> <ENTRY_RANGE> <STOP_RANGE> <TARGET1_RANGE> <TARGET2_RANGE>` |
+| `optimize_long_trend.py` | Compares `long_trend.py` performance across 0.1%-1.0% average-volume candle sizes. | `python strategies/optimize_long_trend.py <TICKER>` |
+| `orders_menu.py` | Opens an interactive menu to inspect positions/orders and cancel one or all open orders. | `python strategies/orders_menu.py` |
+| `position_options.py` | Runs the weekly-option report for every current stock position. | `python strategies/position_options.py` |
+| `previous_close.py` | Derives entry, stop, and targets from previous close and launches a daily-refreshing FOMO trade. | `python strategies/previous_close.py <TICKER> <NUM_STOCKS>` |
+| `risk_management.py` | Continuously manages all positions with a 5% stop, 1R partial target, breakeven logic, and re-entry. | `python strategies/risk_management.py` |
+| `spy_option.py` | Watches ATR-based SPY levels and launches fresh-midpoint weekly call or put trades on each re-armed trigger. | `python strategies/spy_option.py [ATR_RANGE_MULTIPLIER]` |
+| `status.py` | Displays account balance, orders, fills, and positions with optional filtering and interactive market-close actions. | `python strategies/status.py [SYMBOL]` |
+| `uptrend.py` | Reports each ticker's latest daily descending-trend break and subsequent open or exited trade result. | `python strategies/uptrend.py <TICKER> [TICKER ...]` |
 
-## Quick Index
+## Indicators
 
-- atr.py
-- crypto_price.py
-- current_week_option.py
-- current_week_option_function_call.py
-- current_week_option_function_put.py
-- daily_pl.py
-- demand.py
-- fomo_market.py
-- fomo_trade.py
-- orders_menu.py
-- plot.py
-- position_options.py
-- previous_close.py
-- risk_management.py
-- spy_option.py
-- spy_options.py
-- status.py
-- stock_price.py
-
-## Program Reference
-
-| Program | What It Does | Usage Syntax | Notes |
-|---|---|---|---|
-| `atr.py` | Prints a single 14-day daily ATR value for a stock ticker. | `python atr.py <TICKER>` | Silent credential loading; prints only the ATR number. |
-| `crypto_price.py` | Prints latest crypto trade price from Alpaca market data. | `python crypto_price.py [SYMBOL]` | Default symbol is `BTC/USD`. |
-| `current_week_option.py` | Shows nearest this-week CALL and PUT option contracts for a ticker, including mid price, volume, and open interest. | `python current_week_option.py [TICKER]` | Without a ticker, it scans current stock positions and uses buy price as reference. |
-| `current_week_option_function_call.py` | Returns only the nearest this-week CALL option symbol. | `python current_week_option_function_call.py <TICKER> [REFERENCE_PRICE]` | Prints only the option symbol. Optional `REFERENCE_PRICE` overrides live stock price. |
-| `current_week_option_function_put.py` | Returns only the nearest this-week PUT option symbol. | `python current_week_option_function_put.py <TICKER> [REFERENCE_PRICE]` | Prints only the option symbol. Optional `REFERENCE_PRICE` overrides live stock price. |
-| `daily_pl.py` | Computes today's realized P/L from filled orders and saves a JSON state file for daily tracking. | `python daily_pl.py [OUTPUT_FILE]` | Prints per-symbol trade count, total realized P/L, and average P/L per trade. |
-| `demand.py` | Scans the last 200 hourly candles for a demand pattern, computes buy/stop/targets, and launches `fomo_trade.py`. | `python demand.py <TICKER>` | Pattern requires a 2x average-range candle preceded by a smaller-than-average candle. Rejects stale/far-away setups. |
-| `fomo_market.py` | Wrapper that computes entry, stop, and targets from current market price and launches `fomo_trade.py`. | `python fomo_market.py <TICKER> <NUM_STOCKS>` | Refreshes levels daily after 2:00 PM PT and restarts the child process. |
-| `fomo_trade.py` | Core trade runner for stocks, crypto, and options. Monitors price, manages stop/targets, and can re-enter after stop-out. | `python fomo_trade.py <TICKER> <NUM_STOCKS> <ENTRY_PRICE> <STOP_PRICE> <TARGET1_PRICE> <TARGET2_PRICE>` | Uses `ENTRY_PRICE` as the trigger line and submits market buys when price crosses it. `NUM_STOCKS` must be even. |
-| `orders_menu.py` | Interactive order management menu for open orders and current positions. | `python orders_menu.py` | Supports cancel-one and cancel-all order actions. |
-| `plot.py` | Plots stock or crypto charts using daily candles or volume-based candles. | `python plot.py [SYMBOL] [CHART_TYPE] [LOOKBACK_CANDLES] [VOLUME_PER_CANDLE]` | `CHART_TYPE` is `daily` or `vol`. If `vol`, `VOLUME_PER_CANDLE` is required. |
-| `position_options.py` | Runs `current_week_option.py` once for every stock position in the account. | `python position_options.py` | Useful for scanning all held stock positions for this-week options. |
-| `previous_close.py` | Wrapper that computes entry, stop, and targets from previous day close and launches `fomo_trade.py`. | `python previous_close.py <TICKER> <NUM_STOCKS>` | Uses ceiling of previous close for entry and refreshes daily after 2:00 PM PT. |
-| `risk_management.py` | Continuous risk-management daemon for all open positions. | `python risk_management.py` | Monitors stop, breakeven, and re-entry logic across positions. Runs continuously. |
-| `spy_option.py` | SPY-specific options strategy runner using ATR, current/open/reference levels, and automatic CALL/PUT trigger monitoring. | `python spy_option.py [SYMBOL]` | Weekend-safe: uses most recent trading-day data when current session data is unavailable. |
-| `spy_options.py` | Alias entrypoint for `spy_option.py`. | `python spy_options.py [SYMBOL]` | Same behavior as `spy_option.py`. |
-| `status.py` | Shows account balance, open orders, today's fills, and current positions with close-position actions. | `python status.py [SYMBOL]` | Optional symbol filter. Includes close-one and close-all market actions. |
-| `stock_price.py` | Prints latest stock or option price plus high/low summary. | `python stock_price.py [TICKER]` | Stocks use intraday minute bars for today's high/low. Option symbols use option market data and fall back to `N/A` high/low if bars are unavailable. |
-
-## Monday Plan
-
-Planned Monday strategy split so results can be reviewed independently by symbol:
-
-| Strategy | Program | Planned Symbol | Notes |
-|---|---|---|---|
-| FOMO manual trigger strategy | `fomo_trade.py` | `MU` | Keep MU isolated for direct FOMO trade management. |
-| Previous-close setup | `previous_close.py` | `INTC` | Uses previous close to compute entry/stop/targets. |
-| SPY options strategy | `spy_options.py` | `SPY` | Dedicated SPY options workflow so option P/L is isolated. |
-
-This separation keeps all three strategies on different symbols, which makes end-of-day review and P/L analysis easier.
-
-## Usage Examples
-
-```bash
-python status.py
-python status.py MU
-
-python fomo_trade.py MU 2 780 770 800 900
-python previous_close.py INTC 2
-python fomo_market.py ETH/USD 2
-
-python current_week_option.py SPY
-python current_week_option_function_call.py SPY
-python current_week_option_function_put.py SPY 770
-python position_options.py
-
-python stock_price.py SPY
-python stock_price.py SPY260814C00770000
-python crypto_price.py BTC/USD
-python atr.py SPY
-python daily_pl.py
-python demand.py BTC/USD
-python spy_options.py
-python plot.py BTC/USD daily 20
-python plot.py MU vol 50 1000
-```
-
-## Maintenance Template
-
-Use this table format when adding or updating scripts:
-
-| Program | What It Does | Usage Syntax | Notes |
-|---|---|---|---|
-| `example.py` | One-line purpose. | `python example.py <ARG1> [ARG2]` | Defaults, constraints, and special behavior. |
+| Program | What It Does | Usage |
+|---|---|---|
+| `atr.py` | Prints a stock's 14-day daily Average True Range. | `python indicator/atr.py <TICKER>` |
+| `backtest.py` | Backtests supported previous-close or fixed-level FOMO strategies over historical daily and minute bars. | `python indicator/backtest.py <DAYS_BACK> <PROGRAM_FILE.py> <PROGRAM_ARGS...>` |
+| `backtest_previous_close_intc_daily.py` | Runs the fixed INTC previous-close strategy simulation over 100 daily candles. | `python indicator/backtest_previous_close_intc_daily.py` |
+| `crypto_price.py` | Prints the latest Alpaca crypto trade price, defaulting to `BTC/USD`. | `python indicator/crypto_price.py [SYMBOL]` |
+| `daily_pl.py` | FIFO-matches today's fills, prints realized P/L by symbol and total, and saves JSON state. | `python indicator/daily_pl.py [OUTPUT_FILE]` |
+| `demand.py` | Finds a recent 2x-range hourly demand pattern, calculates levels, and launches `fomo_trade.py`. | `python indicator/demand.py <TICKER>` |
+| `email_status.py` | Polls positions and orders every minute and emails detected additions, reductions, closures, or status changes. | `python indicator/email_status.py` |
+| `max_loss.py` | Calculates today's realized maximum loss and prints it as `MAX_LOSS_TODAY=<amount>`. | `python indicator/max_loss.py` |
+| `plot.py` | Draws stock or crypto daily/volume charts using the reusable plot role. | `python indicator/plot.py [SYMBOL] [daily|vol] [LOOKBACK_CANDLES] [VOLUME_PER_CANDLE]` |
+| `plot_graph.py` | Builds fixed-volume stock or option candles from minute bars and displays a price/volume chart. | `python indicator/plot_graph.py --ticker <TICKER> --volume <VOLUME> [--candles <COUNT>]` |
+| `stock_alert.py` | Polls `alert_data.txt` each minute and emails when a stock comes within 0.5% of its target. | `python indicator/stock_alert.py` |
+| `stock_price.py` | Prints current stock/option price and today's available high and low. | `python indicator/stock_price.py [TICKER]` |
+| `vol_finder.py` | Prints 14-day average IEX volume and its 1% volume-candle size. | `python indicator/vol_finder.py <TICKER>` |
+| `zone_finder.py` | Finds the latest 2x-range displacement among 500 volume candles and reports its supply/demand zone. | `python indicator/zone_finder.py <TICKER>` |

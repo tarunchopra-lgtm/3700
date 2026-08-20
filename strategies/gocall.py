@@ -41,6 +41,7 @@ from roles.credentials import bootstrap_trading_auth
 
 CHECK_INTERVAL_SECONDS = 60
 STOCK_PARTIAL_TRIGGER_QTY = 50
+MIN_OPEN_INTEREST = 1000  # Minimum open interest required to buy a call option
 CALL_SYMBOL_PATTERN = re.compile(r"CALL Contract:\s+(\S+)")
 
 
@@ -96,7 +97,7 @@ def _resolve_call_symbol_from_script(symbol: str) -> str:
     return match.group(1).strip().upper()
 
 
-def _get_option_quote(option_data_client: OptionHistoricalDataClient, option_symbol: str) -> tuple[float | None, float | None, float]:
+def _get_option_quote(option_data_client: OptionHistoricalDataClient, option_symbol: str) -> tuple[float | None, float | None, float, int]:
     quote_map = option_data_client.get_option_latest_quote(
         OptionLatestQuoteRequest(symbol_or_symbols=option_symbol, feed=OptionsFeed.INDICATIVE)
     )
@@ -104,17 +105,18 @@ def _get_option_quote(option_data_client: OptionHistoricalDataClient, option_sym
 
     bid = getattr(quote, "bid_price", None)
     ask = getattr(quote, "ask_price", None)
+    open_interest = int(getattr(quote, "open_interest", 0) or 0)
 
     if bid is not None and ask is not None:
         bid_f = float(bid)
         ask_f = float(ask)
-        return bid_f, ask_f, round((bid_f + ask_f) / 2.0, 2)
+        return bid_f, ask_f, round((bid_f + ask_f) / 2.0, 2), open_interest
     if bid is not None:
         bid_f = float(bid)
-        return bid_f, None, round(bid_f, 2)
+        return bid_f, None, round(bid_f, 2), open_interest
     if ask is not None:
         ask_f = float(ask)
-        return None, ask_f, round(ask_f, 2)
+        return None, ask_f, round(ask_f, 2), open_interest
 
     raise RuntimeError(f"No bid/ask quote available for {option_symbol}")
 
@@ -214,12 +216,19 @@ def _ensure_managed_calls(
 
         try:
             option_symbol = _resolve_call_symbol_from_script(symbol)
-            bid_price, ask_price, mid_price = _get_option_quote(option_data_client, option_symbol)
+            bid_price, ask_price, mid_price, open_interest = _get_option_quote(option_data_client, option_symbol)
             bid_text = f"{bid_price:.2f}" if bid_price is not None else "N/A"
             ask_text = f"{ask_price:.2f}" if ask_price is not None else "N/A"
             print(
-                f"[PLAN] {symbol} -> BUY {option_symbol} | bid={bid_text} ask={ask_text} mid={mid_price:.2f} qty={size}"
+                f"[PLAN] {symbol} -> BUY {option_symbol} | bid={bid_text} ask={ask_text} mid={mid_price:.2f} oi={open_interest} qty={size}"
             )
+
+            # Check open interest threshold
+            if open_interest < MIN_OPEN_INTEREST:
+                print(
+                    f"[SKIP] Insufficient open interest for {option_symbol}: {open_interest} < {MIN_OPEN_INTEREST} (min)"
+                )
+                continue
 
             if _has_open_buy_order(trading_client, option_symbol):
                 print(f"[SKIP] Open BUY already exists for {option_symbol}")

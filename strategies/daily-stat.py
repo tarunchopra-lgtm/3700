@@ -8,6 +8,7 @@ Usage:
 The one-time command records immediately. Schedule mode waits and records at
 12:59 PM Pacific on weekdays. Repeated runs on the same date never overwrite the
 stored value; they show live profit/loss versus the previous recorded date.
+Every run emails the result.
 """
 
 from __future__ import annotations
@@ -26,6 +27,7 @@ if str(WORKSPACE_ROOT) not in sys.path:
     sys.path.insert(0, str(WORKSPACE_ROOT))
 
 from roles.credentials import bootstrap_trading_auth
+from roles.email_notify import send_email
 
 
 BALANCE_FILE = WORKSPACE_ROOT / "balance.txt"
@@ -120,15 +122,18 @@ def _signed_money(value: Decimal) -> str:
     return f"{sign}${abs(value):,.2f}"
 
 
-def _print_snapshot(snapshot: AccountSnapshot) -> None:
-    print(f"Account equity: {_money(snapshot.equity)}")
-    print(f"Cash: {_money(snapshot.cash)}")
-    print(
-        f"Position market value: {_money(snapshot.position_market_value)} "
-        f"across {snapshot.position_count} position(s)"
-    )
+def _snapshot_lines(snapshot: AccountSnapshot) -> list[str]:
+    lines = [
+        f"Account equity: {_money(snapshot.equity)}",
+        f"Cash: {_money(snapshot.cash)}",
+        (
+            f"Position market value: {_money(snapshot.position_market_value)} "
+            f"across {snapshot.position_count} position(s)"
+        ),
+    ]
     for symbol, quantity, market_value in snapshot.positions:
-        print(f"  {symbol}: qty={quantity:g} market={_money(market_value)}")
+        lines.append(f"  {symbol}: qty={quantity:g} market={_money(market_value)}")
+    return lines
 
 
 def record_and_report(
@@ -142,29 +147,45 @@ def record_and_report(
     balances = _load_balances(balance_file)
     snapshot = _get_account_snapshot(trading_client)
 
-    print(f"\nDAILY ACCOUNT STAT - {today} {now_pt.strftime('%H:%M:%S %Z')}")
-    _print_snapshot(snapshot)
+    lines = [f"DAILY ACCOUNT STAT - {today} {now_pt.strftime('%H:%M:%S %Z')}"]
+    lines.extend(_snapshot_lines(snapshot))
 
     if today in balances:
-        print(
+        lines.append(
             f"Stored balance already exists for {today}: {_money(balances[today])}. "
             f"{balance_file.name} was not changed."
         )
     else:
         balances[today] = snapshot.equity
         _write_balances(balances, balance_file)
-        print(f"Recorded {today} : {snapshot.equity:.2f} in {balance_file}")
+        lines.append(f"Recorded {today} : {snapshot.equity:.2f} in {balance_file}")
 
     previous = _previous_balance(balances, today)
     if previous is None:
-        print("Today's P/L: N/A (no previous recorded date)")
-        return
+        subject = f"Daily account stat {today}: {_money(snapshot.equity)} (no prior record)"
+        lines.append("Today's P/L: N/A (no previous recorded date)")
+    else:
+        previous_date, previous_equity = previous
+        change = snapshot.equity - previous_equity
+        percent = change / previous_equity * Decimal("100") if previous_equity else Decimal("0")
+        subject = (
+            f"Daily account stat {today}: {_signed_money(change)} "
+            f"({percent:+.2f}%) | equity {_money(snapshot.equity)}"
+        )
+        lines.append(f"Previous record: {previous_date} : {_money(previous_equity)}")
+        lines.append(
+            f"Today's P/L versus {previous_date}: {_signed_money(change)} ({percent:+.2f}%)"
+        )
 
-    previous_date, previous_equity = previous
-    change = snapshot.equity - previous_equity
-    percent = change / previous_equity * Decimal("100") if previous_equity else Decimal("0")
-    print(f"Previous record: {previous_date} : {_money(previous_equity)}")
-    print(f"Today's P/L versus {previous_date}: {_signed_money(change)} ({percent:+.2f}%)")
+    print()
+    for line in lines:
+        print(line)
+
+    try:
+        recipient = send_email(subject, "\n".join(lines) + "\n")
+        print(f"Emailed report to {recipient}")
+    except Exception as exc:
+        print(f"Could not email report: {exc}")
 
 
 def _next_schedule_time(now_pt: datetime, balances: dict[date, Decimal]) -> datetime:

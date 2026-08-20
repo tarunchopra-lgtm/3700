@@ -4,8 +4,10 @@
 Usage:
     python strategies/find_daily_trend.py
     python strategies/find_daily_trend.py nasdaq.txt spy.txt
+    python strategies/find_daily_trend.py --email
 
-With no arguments, every .txt file in lists/ is scanned.
+With no list arguments, every .txt file in lists/ is scanned. The top 10 matches
+are always written to lists/today-breakout.
 """
 
 from __future__ import annotations
@@ -27,12 +29,16 @@ if str(WORKSPACE_ROOT) not in sys.path:
     sys.path.insert(0, str(WORKSPACE_ROOT))
 
 from roles.credentials import bootstrap_trading_auth
+from roles.email_notify import send_email
 from strategies.long_trend import ENTRY_LOOKBACK, _first_cent_above, _fit_trend
 
 
 ET = ZoneInfo("America/New_York")
 BATCH_SIZE = 100
 HISTORY_DAYS = 50
+TOP_COUNT = 10
+# No .txt suffix keeps this output from being re-read as an input universe.
+BREAKOUT_FILE = LISTS_DIR / "today-breakout"
 
 
 def _resolve_list_files(arguments: list[str]) -> list[Path]:
@@ -143,8 +149,12 @@ def _today_breakout(bars: list, today_et: date):
 
 
 def main() -> int:
+    arguments = sys.argv[1:]
+    email_requested = "--email" in arguments
+    list_arguments = [argument for argument in arguments if argument != "--email"]
+
     try:
-        files = _resolve_list_files(sys.argv[1:])
+        files = _resolve_list_files(list_arguments)
         symbols, memberships = _load_universe(files)
     except Exception as exc:
         print(f"Could not load ticker lists: {exc}")
@@ -170,24 +180,54 @@ def main() -> int:
         if breakout is not None:
             matches.append((symbol, breakout))
 
-    print(f"\nDAILY DOWNTREND BREAKS - {today_et}")
-    print(
-        f"Lists: {', '.join(path.name for path in files)} | "
-        f"unique symbols: {len(symbols)} | matches: {len(matches)}"
-    )
-    if not matches:
-        print("No symbols are currently above a newly broken descending 15-day high trend today.")
+    ranked = sorted(matches, key=lambda item: item[1]["above_percent"], reverse=True)
+    top_matches = ranked[:TOP_COUNT]
+
+    lines = [
+        f"DAILY DOWNTREND BREAKS - {today_et}",
+        (
+            f"Lists: {', '.join(path.name for path in files)} | "
+            f"unique symbols: {len(symbols)} | matches: {len(ranked)}"
+        ),
+    ]
+    if not ranked:
+        lines.append("No symbols are currently above a newly broken descending 15-day high trend today.")
     else:
-        for symbol, breakout in sorted(matches, key=lambda item: item[1]["above_percent"], reverse=True):
+        for symbol, breakout in ranked:
             sources = ",".join(sorted(memberships[symbol]))
-            print(
+            lines.append(
                 f"{symbol} [{sources}]: TODAY BREAK ${breakout['trigger']:.2f} | "
                 f"current ${breakout['current']:.2f} | high ${breakout['high']:.2f} | "
                 f"above {breakout['above_percent']:.2f}% | slope {breakout['slope']:.4f}"
             )
 
+    top_symbols = [symbol for symbol, _ in top_matches]
+    BREAKOUT_FILE.write_text(
+        "\n".join(top_symbols) + ("\n" if top_symbols else ""), encoding="utf-8"
+    )
+    lines.append(
+        f"Top {len(top_symbols)} written to {BREAKOUT_FILE.name}: "
+        f"{', '.join(top_symbols) if top_symbols else 'none'}"
+    )
+
     if unavailable:
-        print(f"Unavailable/no daily data: {len(unavailable)} ({', '.join(unavailable)})")
+        lines.append(f"Unavailable/no daily data: {len(unavailable)} ({', '.join(unavailable)})")
+
+    print()
+    for line in lines:
+        print(line)
+
+    if email_requested:
+        subject = f"Daily breakouts {today_et}: {len(ranked)} match(es)"
+        if top_symbols:
+            subject += f" | top: {', '.join(top_symbols[:5])}"
+        try:
+            recipient = send_email(subject, "\n".join(lines) + "\n")
+            print(f"Emailed report to {recipient}")
+        except Exception as exc:
+            print(f"Could not email report: {exc}")
+            return 1
+
     return 0
 
 

@@ -11,7 +11,7 @@ Last updated: 2026-08-18
 | `current_week_option_function_put.py` | Prints the nearest active current-week put symbol for a ticker and optional reference price. | `python strategies/current_week_option_function_put.py <TICKER> [REFERENCE_PRICE]` |
 | `daily-stat.py` | Records daily account equity in `balance.txt` without same-day overwrites and reports change from the previous record. | `python strategies/daily-stat.py [--schedule]` |
 | `find_daily_trend.py` | Scans ticker-list files for stocks breaking above a descending 15-day high trend today. | `python strategies/find_daily_trend.py [LIST_FILE ...]` |
-| `find_vol.py` | Tests 0.1%-1.0% average-volume candle sizes and recommends a qualified size for `long_trend.py`. | `python strategies/find_vol.py <TICKER>` |
+| `find_vol.py` | Tests 0.1%-1.0% average-volume_da candle sizes and recommends a qualified size for `long_trend.py`. | `python strategies/find_vol.py <TICKER>` |
 | `fomo_market.py` | Derives levels from current price and launches `fomo_trade.py`, refreshing them daily after 2:00 PM Pacific. | `python strategies/fomo_market.py <TICKER> <NUM_STOCKS>` |
 | `fomo_trade.py` | Manages long limit entry, stop, partial target, final target, and optional option midpoint/single-entry behavior. | `python strategies/fomo_trade.py <TICKER> <NUM_STOCKS> <ENTRY> <STOP> <TARGET1> <TARGET2> [--refresh-option-midpoint] [--single-entry]` |
 | `gocall.py` | Buys weekly calls for held stocks, halves the option at a 50-share underlying reduction, and exits when the stock closes. | `python strategies/gocall.py <SIZE>` |

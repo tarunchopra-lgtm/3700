@@ -1,18 +1,35 @@
 #!/usr/bin/env python3
 """
-Risk Management Bot - Automated stop loss and target management for all open positions
+Risk Management Bot - Automated stop loss and target management for open positions
 
-Monitors ALL open positions and applies risk management rules:
-  - Stop loss: 5% below average entry price
+Monitors open positions and applies risk management rules:
+  - Stop loss: customizable percentage below average entry price (default 1%)
   - Target 1:  entry + (entry - stop_loss)  [1:1 risk/reward]
   - After Target 1: stop moves to entry (breakeven)
-  - If stopped out: logs trade, waits for reversal, re-enters 2 shares
+  - Target 2:  entry + (2 * risk) [2:1 risk/reward]
 
-Usage: python risk_management.py
+Usage:
+    python risk_management.py                    # All positions: 1% stop, 1% target1, 2% target2
+    python risk_management.py --ticker SPY       # Only SPY: 1% stop, 1% target1, 2% target2
+    python risk_management.py --ticker SPY --stop-loss 0.5 --target1 0.5 --target2 1.0
+    python risk_management.py -h                 # Show this help
+
+Options:
+    --ticker SYMBOL      Apply risk management only to this symbol
+    --stop-loss PCT      Stop loss as percentage (e.g., 0.5 or .05 = 0.05%)
+    --target1 PCT        Target 1 as percentage (moves stop to entry on hit)
+    --target2 PCT        Target 2 as percentage (close remaining position)
+    -h, --help           Show this help message
+
+Examples:
+    python risk_management.py                              # 1% stop, 1% tgt1, 2% tgt2 on all
+    python risk_management.py --ticker SPY                 # 1% stop, 1% tgt1, 2% tgt2 on SPY only
+    python risk_management.py --stop-loss 2 --target1 2    # 2% stop, 2% tgt1, 2% tgt2 on all
 
 Runs continuously every 30 seconds. Press Ctrl+C to stop.
 """
 
+import argparse
 import os
 import sys
 import time
@@ -26,7 +43,6 @@ from alpaca.data.historical import StockHistoricalDataClient, CryptoHistoricalDa
 from alpaca.data.requests import StockLatestTradeRequest, CryptoLatestTradeRequest
 
 from pathlib import Path
-import sys
 
 WORKSPACE_ROOT = Path(__file__).resolve().parent.parent
 if str(WORKSPACE_ROOT) not in sys.path:
@@ -34,11 +50,60 @@ if str(WORKSPACE_ROOT) not in sys.path:
 
 from roles.credentials import bootstrap_trading_auth
 
+# ── Command-line argument parsing ────────────────────────────────────────────
+def parse_arguments():
+    """Parse command-line arguments for risk management configuration."""
+    parser = argparse.ArgumentParser(
+        description="Risk Management Bot - Automated stop loss and target management",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Examples:
+  %(prog)s                                    # 1%% stop, 1%% tgt1, 2%% tgt2 on all positions
+  %(prog)s --ticker SPY                       # 1%% stop, 1%% tgt1, 2%% tgt2 on SPY only
+  %(prog)s --stop-loss 2 --target1 2          # 2%% stop, 2%% tgt1, 2%% tgt2 on all positions
+  %(prog)s --ticker SPY --stop-loss 0.5       # 0.5%% stop, 0.5%% tgt1, 1.0%% tgt2 on SPY
+        """
+    )
+    parser.add_argument(
+        "--ticker",
+        type=str,
+        default=None,
+        help="Apply risk management only to this symbol (e.g., SPY, BTC/USD)"
+    )
+    parser.add_argument(
+        "--stop-loss",
+        type=float,
+        default=1.0,
+        help="Stop loss as percentage (default: 1.0, can be decimal like 0.05)"
+    )
+    parser.add_argument(
+        "--target1",
+        type=float,
+        default=None,
+        help="Target 1 profit as percentage (default: same as stop-loss)"
+    )
+    parser.add_argument(
+        "--target2",
+        type=float,
+        default=None,
+        help="Target 2 profit as percentage (default: 2 * target1)"
+    )
+    return parser.parse_args()
+
+# Parse arguments before authenticating
+args = parse_arguments()
+
 try:
     credentials, trading_client = bootstrap_trading_auth("risk_management.py")
 except Exception as exc:
     print(f"Authentication failed: {exc}")
     raise SystemExit(1)
+
+# Calculate effective percentages (convert from % to decimal)
+STOP_LOSS_PCT = args.stop_loss / 100.0 if args.stop_loss else 0.01
+TARGET1_PCT = (args.target1 / 100.0 if args.target1 else args.stop_loss / 100.0)
+TARGET2_PCT = (args.target2 / 100.0 if args.target2 else (2 * TARGET1_PCT))
+TICKER_FILTER = args.ticker.upper() if args.ticker else None
 
 PAPER = credentials.paper
 stock_data_client = StockHistoricalDataClient(credentials.api_key, credentials.secret_key)
@@ -46,7 +111,6 @@ crypto_data_client = CryptoHistoricalDataClient(credentials.api_key, credentials
 
 # ── Constants ────────────────────────────────────────────────────────────────
 CHECK_INTERVAL   = 30    # seconds between market checks
-STOP_LOSS_PCT    = 0.05  # 5% below entry
 BUY_QTY          = 2     # shares per entry
 LOG_FILE         = os.path.join(os.path.dirname(__file__), 'risk_management_log.txt')
 
@@ -132,10 +196,10 @@ def get_price(symbol: str) -> float:
         return None
 
 def calculate_levels(entry: float):
+    """Calculate stop loss and profit targets based on configured percentages."""
     stop  = round(entry * (1 - STOP_LOSS_PCT), 4)
-    risk  = entry - stop
-    tgt1  = round(entry + risk, 4)
-    tgt2  = round(entry + (2 * risk), 4)
+    tgt1  = round(entry * (1 + TARGET1_PCT), 4)
+    tgt2  = round(entry * (1 + TARGET2_PCT), 4)
     return stop, tgt1, tgt2
 
 def log_stopped_trade(symbol, entry, stop, qty, reason='STOP'):
@@ -342,17 +406,20 @@ def manage_symbol(symbol: str, position=None, latest_buy_fill_by_symbol=None):
 # ── Main loop ────────────────────────────────────────────────────────────────
 
 def print_header():
-    print(f"\n{'═'*64}")
-    print(f"  RISK MANAGEMENT BOT  |  {'Paper' if PAPER else 'Live'}  |  {datetime.now().strftime('%H:%M:%S')}")
-    print(f"  Stop: {STOP_LOSS_PCT*100:.0f}% below entry  |  Buy qty: {BUY_QTY}  |  Check: {CHECK_INTERVAL}s")
-    print(f"{'═'*64}")
+    ticker_info = f" | Ticker: {TICKER_FILTER}" if TICKER_FILTER else ""
+    print(f"\n{'═'*80}")
+    print(f"  RISK MANAGEMENT BOT  |  {'Paper' if PAPER else 'Live'}  |  {datetime.now().strftime('%H:%M:%S')}{ticker_info}")
+    print(f"  Stop: {STOP_LOSS_PCT*100:.3f}% | Target1: {TARGET1_PCT*100:.3f}% | Target2: {TARGET2_PCT*100:.3f}% | Check: {CHECK_INTERVAL}s")
+    print(f"{'═'*80}")
 
 def run():
-    print(f"\n╔{'═'*62}╗")
-    print(f"║  Risk Management Bot starting...                              ║")
-    print(f"║  Log file: {os.path.basename(LOG_FILE):<50}║")
-    print(f"║  Press Ctrl+C to stop                                         ║")
-    print(f"╚{'═'*62}╝\n")
+    ticker_info = f" for {TICKER_FILTER}" if TICKER_FILTER else " for all positions"
+    print(f"\n╔{'═'*78}╗")
+    print(f"║  Risk Management Bot starting{ticker_info:<48}║")
+    print(f"║  Stop: {STOP_LOSS_PCT*100:.3f}% | Target1: {TARGET1_PCT*100:.3f}% | Target2: {TARGET2_PCT*100:.3f}%{' '*28}║")
+    print(f"║  Log file: {os.path.basename(LOG_FILE):<60}║")
+    print(f"║  Press Ctrl+C to stop{' '*54}║")
+    print(f"╚{'═'*78}╝\n")
 
     while True:
         try:
@@ -360,7 +427,12 @@ def run():
 
             # Fetch all current positions
             try:
-                positions = {p.symbol: p for p in trading_client.get_all_positions()}
+                all_positions = {p.symbol: p for p in trading_client.get_all_positions()}
+                # Filter by ticker if specified
+                if TICKER_FILTER:
+                    positions = {k: v for k, v in all_positions.items() if k.upper() == TICKER_FILTER}
+                else:
+                    positions = all_positions
                 latest_buy_fill_by_symbol = _build_latest_buy_fill_map()
             except Exception as e:
                 print(f"  ✗ Error fetching positions: {e}")

@@ -20,7 +20,7 @@ from zoneinfo import ZoneInfo
 
 from alpaca.data.enums import DataFeed
 from alpaca.data.historical import StockHistoricalDataClient
-from alpaca.data.requests import StockBarsRequest
+from alpaca.data.requests import StockBarsRequest, StockLatestTradeRequest
 from alpaca.data.timeframe import TimeFrame
 
 WORKSPACE_ROOT = Path(__file__).resolve().parent.parent
@@ -119,10 +119,32 @@ def _fetch_daily_bars(
     return all_bars
 
 
-def _today_breakout(bars: list, today_et: date):
+def _fetch_current_prices(
+    data_client: StockHistoricalDataClient,
+    symbols: list[str],
+) -> dict[str, float]:
+    """Fetch latest trade prices (works pre-market and post-market)."""
+    current_prices: dict[str, float] = {}
+    for number, batch in enumerate(_chunks(symbols, BATCH_SIZE), start=1):
+        try:
+            response = data_client.get_stock_latest_trade(
+                StockLatestTradeRequest(symbol_or_symbols=batch)
+            )
+            if isinstance(response, dict):
+                for symbol, trade in response.items():
+                    if trade:
+                        price = float(getattr(trade, "price", 0))
+                        if price > 0:
+                            current_prices[str(symbol).upper()] = price
+        except Exception as exc:
+            print(f"Warning: Could not fetch current prices for batch: {exc}", file=sys.stderr)
+    return current_prices
+
+
+def _today_breakout(bars: list, today_et: date, current_price: float | None = None):
     completed = [bar for bar in bars if _bar_date_et(bar) and _bar_date_et(bar) < today_et]
     today_bars = [bar for bar in bars if _bar_date_et(bar) == today_et]
-    if len(completed) < ENTRY_LOOKBACK or not today_bars:
+    if len(completed) < ENTRY_LOOKBACK:
         return None
 
     prior = completed[-ENTRY_LOOKBACK:]
@@ -132,9 +154,20 @@ def _today_breakout(bars: list, today_et: date):
 
     trigger = _first_cent_above(resistance.projected)
     yesterday_close = float(getattr(prior[-1], "close"))
-    today_bar = today_bars[-1]
-    current_price = float(getattr(today_bar, "close"))
-    today_high = float(getattr(today_bar, "high"))
+
+    # Use provided current_price, or fall back to today's bar if available
+    if current_price is None:
+        if not today_bars:
+            return None
+        today_bar = today_bars[-1]
+        current_price = float(getattr(today_bar, "close"))
+        today_high = float(getattr(today_bar, "high"))
+    else:
+        # Use pre-market/current price, and today's high if available
+        if today_bars:
+            today_high = float(getattr(today_bars[-1], "high"))
+        else:
+            today_high = current_price  # Pre-market: current price is also the high so far
 
     if yesterday_close >= trigger or current_price < trigger:
         return None
@@ -164,6 +197,7 @@ def main() -> int:
         credentials, _ = bootstrap_trading_auth("find_daily_trend.py")
         data_client = StockHistoricalDataClient(credentials.api_key, credentials.secret_key)
         bars_by_symbol = _fetch_daily_bars(data_client, symbols)
+        current_prices = _fetch_current_prices(data_client, symbols)
     except Exception as exc:
         print(f"Could not load market data: {exc}")
         return 1
@@ -176,7 +210,8 @@ def main() -> int:
         if not bars:
             unavailable.append(symbol)
             continue
-        breakout = _today_breakout(bars, today_et)
+        current_price = current_prices.get(symbol)
+        breakout = _today_breakout(bars, today_et, current_price)
         if breakout is not None:
             matches.append((symbol, breakout))
 

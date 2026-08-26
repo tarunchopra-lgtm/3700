@@ -24,7 +24,6 @@ import sys
 import time
 import math
 import re
-import pandas as pd
 from collections import deque
 from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
@@ -40,12 +39,12 @@ from alpaca.data.historical import (
 )
 from alpaca.data.requests import (
     CryptoLatestTradeRequest,
+    CryptoTradesRequest,
     OptionLatestTradeRequest,
+    OptionTradesRequest,
     StockLatestTradeRequest,
-    StockBarsRequest,
-    OptionBarsRequest,
+    StockTradesRequest,
 )
-from alpaca.data.timeframe import TimeFrame
 from alpaca.trading.enums import OrderSide, TimeInForce
 from alpaca.trading.requests import MarketOrderRequest
 
@@ -54,7 +53,6 @@ if str(WORKSPACE_ROOT) not in sys.path:
     sys.path.insert(0, str(WORKSPACE_ROOT))
 
 from roles.credentials import bootstrap_trading_auth
-from roles.candle_builder import build_volume_candles_from_bars
 
 
 ENTRY_LOOKBACK = 15
@@ -67,35 +65,12 @@ OPTION_SYMBOL_PATTERN = re.compile(r"^[A-Z]{1,6}\d{6}[CP]\d{8}$")
 
 @dataclass(frozen=True)
 class VolumeCandle:
-    """A candle built from fixed volume accumulation."""
     timestamp: Any
     open: float
     high: float
     low: float
     close: float
     volume: float
-
-
-class VolumeCandleManager:
-    """Manages a collection of volume candles fetched from 1-minute bars."""
-    def __init__(self, volume_target: float) -> None:
-        self.volume_target = float(volume_target)
-        self.completed: list[dict] = []
-
-    def add_candles(self, candles_df) -> None:
-        """Add candles from a DataFrame."""
-        if candles_df is not None and not candles_df.empty:
-            for _, row in candles_df.iterrows():
-                self.completed.append({
-                    'timestamp': row.get('timestamp'),
-                    'open': float(row.get('open', 0)),
-                    'high': float(row.get('high', 0)),
-                    'low': float(row.get('low', 0)),
-                    'close': float(row.get('close', 0)),
-                    'volume': float(row.get('volume', 0)),
-                })
-            # Keep only last MAX_STORED_CANDLES
-            self.completed = self.completed[-MAX_STORED_CANDLES:]
 
 
 @dataclass(frozen=True)
@@ -108,53 +83,108 @@ class TrendLine:
         return self.intercept + self.slope * candle_index
 
 
-def _fetch_minute_bars(
+class VolumeCandleBuilder:
+    def __init__(self, volume_target: float) -> None:
+        self.volume_target = float(volume_target)
+        self.completed: deque[VolumeCandle] = deque(maxlen=MAX_STORED_CANDLES)
+        self._timestamp = None
+        self._open: float | None = None
+        self._high: float | None = None
+        self._low: float | None = None
+        self._close: float | None = None
+        self._volume = 0.0
+
+    def add_trade(self, timestamp: Any, price: float, size: float) -> None:
+        remaining = float(size)
+        while remaining > 0:
+            if self._open is None:
+                self._timestamp = timestamp
+                self._open = price
+                self._high = price
+                self._low = price
+
+            self._high = max(float(self._high), price)
+            self._low = min(float(self._low), price)
+            self._close = price
+
+            accepted = min(remaining, self.volume_target - self._volume)
+            self._volume += accepted
+            remaining -= accepted
+
+            if self._volume >= self.volume_target:
+                self.completed.append(
+                    VolumeCandle(
+                        timestamp=self._timestamp,
+                        open=float(self._open),
+                        high=float(self._high),
+                        low=float(self._low),
+                        close=float(self._close),
+                        volume=self._volume,
+                    )
+                )
+                self._timestamp = None
+                self._open = None
+                self._high = None
+                self._low = None
+                self._close = None
+                self._volume = 0.0
+
+
+def _extract_trade_rows(response, symbol: str) -> list[tuple[Any, float, float]]:
+    frame = response.df
+    if frame.empty:
+        return []
+
+    if "symbol" in frame.index.names:
+        try:
+            frame = frame.xs(symbol, level="symbol")
+        except KeyError:
+            normalized = _normalize_symbol(symbol)
+            matching = [value for value in frame.index.unique("symbol") if _normalize_symbol(value) == normalized]
+            if not matching:
+                return []
+            frame = frame.xs(matching[0], level="symbol")
+
+    frame = frame.sort_index()
+    return [
+        (timestamp, float(row["price"]), float(row["size"]))
+        for timestamp, row in frame.iterrows()
+        if float(row["size"]) > 0
+    ]
+
+
+def _fetch_trades(
     data_client,
     asset_kind: str,
     symbol: str,
     start: datetime,
     end: datetime,
-) -> list[tuple[Any, float, float, float, float]]:
-    """Fetch 1-minute bars and return as list of (timestamp, open, high, low, close, volume)."""
-    try:
-        if asset_kind == "crypto":
-            # Crypto doesn't support minute bars through this client, use hourly
-            # For now, raise an error directing user to use stock symbols
-            raise RuntimeError("Crypto candles not yet supported in this version; use stock symbols")
-        elif asset_kind == "option":
-            response = data_client.get_option_bars(
-                OptionBarsRequest(
-                    symbol_or_symbols=symbol,
-                    timeframe=TimeFrame.Minute,
-                    start=start,
-                    end=end,
-                    feed=OptionsFeed.INDICATIVE,
-                )
+) -> list[tuple[Any, float, float]]:
+    if asset_kind == "crypto":
+        response = data_client.get_crypto_trades(
+            CryptoTradesRequest(symbol_or_symbols=symbol, start=start, end=end)
+        )
+    elif asset_kind == "option":
+        try:
+            response = data_client.get_option_trades(
+                OptionTradesRequest(symbol_or_symbols=symbol, start=start, end=end)
             )
-        else:
-            response = data_client.get_stock_bars(
-                StockBarsRequest(
-                    symbol_or_symbols=symbol,
-                    timeframe=TimeFrame.Minute,
-                    start=start,
-                    end=end,
-                    feed=DataFeed.IEX,
-                )
+        except APIError as exc:
+            if "OPRA agreement" in str(exc):
+                raise RuntimeError(
+                    "Option volume history requires accepting Alpaca's OPRA market-data agreement"
+                ) from exc
+            raise
+    else:
+        response = data_client.get_stock_trades(
+            StockTradesRequest(
+                symbol_or_symbols=symbol,
+                start=start,
+                end=end,
+                feed=DataFeed.IEX,
             )
-        
-        # Convert to DataFrame
-        df = response.df
-        if "symbol" in df.index.names:
-            df = df.reset_index(level=0, drop=True)
-        df = df.reset_index()
-        
-        if df.empty:
-            return None
-        
-        return df
-    except Exception as exc:
-        print(f"[WARN] Could not fetch minute bars for {symbol}: {exc}")
-        return None
+        )
+    return _extract_trade_rows(response, symbol)
 
 
 def _latest_price(data_client, asset_kind: str, symbol: str) -> float:
@@ -373,30 +403,23 @@ def main() -> int:
 
     asset_kind = _asset_kind(symbol)
     data_client = _build_data_client(credentials, asset_kind)
-    manager = VolumeCandleManager(volume_target)
-    
+    builder = VolumeCandleBuilder(volume_target)
     history_end = datetime.now(timezone.utc)
     history_start = history_end - timedelta(hours=history_hours)
 
     try:
-        initial_bars_df = _fetch_minute_bars(data_client, asset_kind, symbol, history_start, history_end)
+        initial_trades = _fetch_trades(data_client, asset_kind, symbol, history_start, history_end)
     except Exception as exc:
-        print(f"Could not load initial bars for {symbol}: {exc}")
+        print(f"Could not load initial trades for {symbol}: {exc}")
         return 1
 
-    if initial_bars_df is None or initial_bars_df.empty:
-        print(f"No {asset_kind} bars returned for {symbol} in the last {history_hours} hours")
+    if not initial_trades:
+        print(f"No {asset_kind} trades returned for {symbol} in the last {history_hours} hours")
         return 1
 
-    # Build initial volume candles from minute bars
-    initial_candles_df = build_volume_candles_from_bars(initial_bars_df, volume_target, ENTRY_LOOKBACK * 2)
-    
-    if initial_candles_df.empty:
-        print(f"Could not build any volume candles from {len(initial_bars_df)} minute bars")
-        return 1
-    
-    manager.add_candles(initial_candles_df)
-    last_bar_timestamp = initial_bars_df.iloc[-1]['timestamp']
+    for timestamp, price, size in initial_trades:
+        builder.add_trade(timestamp, price, size)
+    last_trade_timestamp = initial_trades[-1][0]
 
     print(
         f"Watching {symbol} ({asset_kind}): quantity={quantity:g}, "
@@ -404,7 +427,7 @@ def main() -> int:
         f"entry lookback={ENTRY_LOOKBACK}, exit lookback={EXIT_LOOKBACK}, "
         f"refresh={CHECK_INTERVAL_SECONDS}s, initial history={history_hours}h"
     )
-    print(f"[INIT] Built {len(manager.completed)}/{ENTRY_LOOKBACK} volume candles from {history_hours}h of history")
+    print(f"[INIT] Built {len(builder.completed)}/{ENTRY_LOOKBACK} volume candles from {history_hours}h of history")
     print("Entry requires a negative 15-candle high slope and price above projected resistance.")
     print("Target 1 sells half at 1R; the remainder follows the 10-candle low-trend exit.")
     print("Press Ctrl+C to stop.\n")
@@ -422,32 +445,20 @@ def main() -> int:
         while True:
             cycle_end = datetime.now(timezone.utc)
             try:
-                # Fetch new minute bars since last check
-                new_bars_df = _fetch_minute_bars(
+                new_trades = _fetch_trades(
                     data_client,
                     asset_kind,
                     symbol,
-                    last_bar_timestamp + timedelta(minutes=1),
+                    last_trade_timestamp + timedelta(microseconds=1),
                     cycle_end,
                 )
-                
-                if new_bars_df is not None and not new_bars_df.empty:
-                    # Rebuild all candles from all available bars
-                    # (This ensures we don't miss any volume transitions)
-                    all_bars_df = pd.concat([initial_bars_df, new_bars_df], ignore_index=True)
-                    all_bars_df = all_bars_df.drop_duplicates(subset=['timestamp'], keep='last')
-                    all_bars_df = all_bars_df.sort_values('timestamp')
-                    
-                    refreshed_candles_df = build_volume_candles_from_bars(
-                        all_bars_df, volume_target, ENTRY_LOOKBACK * 3
-                    )
-                    manager.completed = []
-                    manager.add_candles(refreshed_candles_df)
-                    last_bar_timestamp = new_bars_df.iloc[-1]['timestamp']
+                for timestamp, price, size in new_trades:
+                    builder.add_trade(timestamp, price, size)
+                if new_trades:
+                    last_trade_timestamp = new_trades[-1][0]
 
                 current_price = _latest_price(data_client, asset_kind, symbol)
-                candles = manager.completed
-                
+                candles = list(builder.completed)
                 if len(candles) < ENTRY_LOOKBACK:
                     print(
                         f"[{datetime.now().strftime('%H:%M:%S')}] Waiting for completed candles: "
@@ -456,16 +467,12 @@ def main() -> int:
                     time.sleep(CHECK_INTERVAL_SECONDS)
                     continue
 
-                # Convert dict candles to simpler format for trend analysis
                 entry_candles = candles[-ENTRY_LOOKBACK:]
-                entry_highs = [c['high'] for c in entry_candles]
-                entry_trend = _fit_trend(entry_highs)
+                entry_trend = _fit_trend([candle.high for candle in entry_candles])
                 breakout_price = _first_cent_above(entry_trend.projected)
-                
                 exit_trend = None
                 if len(candles) >= EXIT_LOOKBACK:
-                    exit_lows = [c['low'] for c in candles[-EXIT_LOOKBACK:]]
-                    exit_trend = _fit_trend(exit_lows)
+                    exit_trend = _fit_trend([candle.low for candle in candles[-EXIT_LOOKBACK:]])
 
                 position = _find_position(trading_client, symbol)
                 position_qty = _position_quantity(position, asset_kind) if position is not None else 0
@@ -474,6 +481,13 @@ def main() -> int:
                     time.sleep(CHECK_INTERVAL_SECONDS)
                     continue
 
+                _render_chart(
+                    entry_candles,
+                    entry_trend,
+                    breakout_price,
+                    exit_trend if position_qty > 0 else None,
+                    current_price,
+                )
                 print(
                     f"[{datetime.now().strftime('%H:%M:%S')}] Current=${current_price:.2f} | "
                     f"Trend line=${entry_trend.projected:.4f} | "
@@ -485,7 +499,7 @@ def main() -> int:
                 if position_qty > 0:
                     entry_order_id = None
                     if initial_stop is None:
-                        initial_stop = min(candle['low'] for candle in entry_candles)
+                        initial_stop = min(candle.low for candle in entry_candles)
                     if entry_average_price is None:
                         entry_average_price = float(getattr(position, "avg_entry_price"))
                         initial_position_qty = position_qty
@@ -567,7 +581,7 @@ def main() -> int:
                     descending = entry_trend.slope < 0
                     breakout = current_price >= breakout_price
                     if descending and breakout and entry_order_id is None:
-                        initial_stop = min(candle['low'] for candle in entry_candles)
+                        initial_stop = min(candle.low for candle in entry_candles)
                         entry_order_id = _submit_market_order(
                             trading_client, symbol, quantity, OrderSide.BUY, asset_kind
                         )

@@ -41,7 +41,7 @@ from roles.credentials import bootstrap_trading_auth
 
 CHECK_INTERVAL_SECONDS = 60
 STOCK_PARTIAL_TRIGGER_QTY = 50
-MIN_OPEN_INTEREST = 1000  # Minimum open interest required to buy a call option
+MIN_OPEN_INTEREST = 100  # Minimum open interest required to buy a call option
 CALL_SYMBOL_PATTERN = re.compile(r"CALL Contract:\s+(\S+)")
 
 

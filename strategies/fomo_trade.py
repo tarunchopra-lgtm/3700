@@ -273,14 +273,20 @@ if existing_position:
     print(f"  Monitoring existing position...")
     # Don't place new order
 else:
-    print(
-        f"[{datetime.now().strftime('%H:%M:%S')}] No existing position. "
-        f"Waiting for price to reach/reclaim entry ${ENTRY_PRICE:.2f} for {SYMBOL}."
-    )
+    # Place initial limit order immediately
+    print(f"[{datetime.now().strftime('%H:%M:%S')}] No existing position.")
+    print(f"[{datetime.now().strftime('%H:%M:%S')}] Placing LIMIT BUY order for {TOTAL_QTY} {SYMBOL} at ${ENTRY_PRICE:.2f}...")
+    try:
+        entry_order_id, submitted_price = _place_entry_order()
+        print(f"✓ LIMIT BUY order placed successfully at ${submitted_price:.2f}. Order ID: {entry_order_id}")
+        print(f"  Order will fill when price comes down to ${ENTRY_PRICE:.2f}")
+    except Exception as e:
+        print(f"✗ Error placing initial BUY order: {e}")
+        entry_order_id = None
 
 print(f"[{datetime.now().strftime('%H:%M:%S')}] Stop loss set at ${STOP_PRICE:.2f}")
 print(f"(Stop loss will be monitored and executed automatically)")
-print(f"[{datetime.now().strftime('%H:%M:%S')}] Entry trigger line set at ${ENTRY_PRICE:.2f} (limit order on cross)")
+print(f"[{datetime.now().strftime('%H:%M:%S')}] Entry limit order placed at ${ENTRY_PRICE:.2f} (waiting for fill)")
 
 print(f"\n[{datetime.now().strftime('%H:%M:%S')}] Monitoring position... Press Ctrl+C to exit\n")
 

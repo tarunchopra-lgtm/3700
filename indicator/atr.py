@@ -29,12 +29,12 @@ def _usage() -> None:
 
 
 def _load_credentials() -> tuple[str, str]:
-    base_dir = Path(__file__).resolve().parent
-    env_path = base_dir / "env" / "credentials"
+    workspace_root = Path(__file__).resolve().parent.parent
+    env_path = workspace_root / "env" / "credentials"
     if env_path.exists():
         load_dotenv(dotenv_path=env_path)
     else:
-        load_dotenv(dotenv_path=base_dir / ".env")
+        load_dotenv(dotenv_path=workspace_root / ".env")
 
     api_key = (
         os.getenv("ALPACA_API_KEY")

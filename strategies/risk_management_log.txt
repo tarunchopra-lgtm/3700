@@ -1,1 +1,6 @@
 [2026-08-26 12:55:07] BREAKEVEN_STOP SPY      entry=766.3250  stop=766.3250  qty=1
+[2026-08-27 06:39:33] STOP_LOSS    MU       entry=944.3300  stop=944.0500  qty=1
+[2026-08-27 06:41:35] STOP_LOSS    MU       entry=943.6900  stop=943.4100  qty=2
+[2026-08-27 06:44:38] STOP_LOSS    MU       entry=943.6800  stop=943.4000  qty=2
+[2026-08-27 06:55:14] STOP_LOSS    MU       entry=938.3200  stop=938.0400  qty=2
+[2026-08-27 06:57:16] STOP_LOSS    INTC     entry=89.8900  stop=89.0000  qty=2

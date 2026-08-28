@@ -30,6 +30,7 @@ Runs continuously every 30 seconds. Press Ctrl+C to stop.
 """
 
 import argparse
+import math
 import os
 import sys
 import time
@@ -123,6 +124,10 @@ state: dict = {}
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
 
+def round_up_to_penny(price: float) -> float:
+    """Round up sub-penny prices to the nearest penny (2 decimal places)."""
+    return math.ceil(price * 100) / 100
+
 def is_crypto(symbol: str) -> bool:
     return '/' in symbol
 
@@ -197,9 +202,9 @@ def get_price(symbol: str) -> float:
 
 def calculate_levels(entry: float):
     """Calculate stop loss and profit targets based on configured percentages."""
-    stop  = round(entry * (1 - STOP_LOSS_PCT), 4)
-    tgt1  = round(entry * (1 + TARGET1_PCT), 4)
-    tgt2  = round(entry * (1 + TARGET2_PCT), 4)
+    stop  = round_up_to_penny(entry * (1 - STOP_LOSS_PCT))
+    tgt1  = round_up_to_penny(entry * (1 + TARGET1_PCT))
+    tgt2  = round_up_to_penny(entry * (1 + TARGET2_PCT))
     return stop, tgt1, tgt2
 
 def log_stopped_trade(symbol, entry, stop, qty, reason='STOP'):
@@ -257,6 +262,7 @@ def place_limit_buy(symbol: str, qty: int, price: float, reason: str) -> bool:
         return False
 
 def init_symbol_state(symbol: str, entry: float):
+    entry = round_up_to_penny(entry)
     stop, tgt1, tgt2 = calculate_levels(entry)
     state[symbol] = {
         'entry_price':   entry,

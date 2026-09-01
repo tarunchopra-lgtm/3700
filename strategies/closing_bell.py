@@ -36,6 +36,7 @@ if str(WORKSPACE_ROOT) not in sys.path:
     sys.path.insert(0, str(WORKSPACE_ROOT))
 
 from roles.credentials import bootstrap_trading_auth
+from roles.email_notify import send_email
 
 # ── Configuration ────────────────────────────────────────────────────────────
 CLOSING_HOUR = 12
@@ -206,17 +207,51 @@ def _sell_at_market(
         return False
 
 
+def _send_close_report(closed_positions: list) -> None:
+    """Send email report of closed positions."""
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    
+    if closed_positions:
+        subject = f"🔔 Closing Bell Report - {len(closed_positions)} position(s) closed"
+        body = f"Closing Bell executed at {timestamp}\n\n"
+        body += f"Positions closed: {len(closed_positions)}\n"
+        body += "="*60 + "\n\n"
+        
+        for pos in closed_positions:
+            symbol = pos["symbol"]
+            qty = pos["qty"]
+            price = pos["price"]
+            price_str = f"${price:.2f}" if price is not None else "Market Price"
+            body += f"{symbol}: {qty} shares closed at {price_str}\n"
+        
+        body += "\n" + "="*60
+    else:
+        subject = f"🔔 Closing Bell Report - No positions to close"
+        body = f"Closing Bell executed at {timestamp}\n\n"
+        body += "No open positions existed at closing time.\n"
+        body += "Program ran successfully with no action required."
+    
+    try:
+        recipient = send_email(subject, body)
+        _log(f"✓ Email report sent to {recipient}")
+    except Exception as e:
+        _log(f"✗ Failed to send email report: {e}")
+
+
 def close_all_positions(trading_client, stock_data_client, crypto_data_client) -> None:
-    """Close all open positions."""
+    """Close all open positions and send email report."""
     _log("\n" + "=" * 60)
     _log("🔔 CLOSING BELL - Closing all positions...")
     _log("=" * 60)
     
     positions = _get_all_positions(trading_client)
+    closed_positions = []  # Track closed positions with prices
     
     if not positions:
         _log("✓ No open positions to close.")
         _log("=" * 60 + "\n")
+        # Email even if no positions
+        _send_close_report(closed_positions)
         return
     
     _log(f"Found {len(positions)} open position(s). Starting closeout...")
@@ -228,6 +263,7 @@ def close_all_positions(trading_client, stock_data_client, crypto_data_client) -
         symbol = position["symbol"]
         qty = position["qty"]
         market_value = position["market_value"]
+        close_price = None
         
         _log(f"\n[{symbol}] Qty: {qty}, Value: ${market_value:.2f}")
         
@@ -237,10 +273,12 @@ def close_all_positions(trading_client, stock_data_client, crypto_data_client) -
         if bid_ask:
             bid, ask = bid_ask
             midpoint = (bid + ask) / 2.0
+            close_price = midpoint
             _log(f"  Bid: ${bid:.2f}, Ask: ${ask:.2f}, Midpoint: ${midpoint:.2f}")
             
             # Try limit order at midpoint first
             if _sell_at_limit(trading_client, symbol, qty, midpoint, LIMIT_ORDER_TIMEOUT):
+                closed_positions.append({"symbol": symbol, "qty": qty, "price": close_price})
                 successful_closes += 1
                 continue
         else:
@@ -248,6 +286,7 @@ def close_all_positions(trading_client, stock_data_client, crypto_data_client) -
         
         # If limit order failed or bid/ask unavailable, use market order
         if _sell_at_market(trading_client, symbol, qty):
+            closed_positions.append({"symbol": symbol, "qty": qty, "price": close_price})
             successful_closes += 1
         else:
             failed_closes += 1
@@ -255,6 +294,9 @@ def close_all_positions(trading_client, stock_data_client, crypto_data_client) -
     _log("\n" + "=" * 60)
     _log(f"Closeout Summary: {successful_closes} successful, {failed_closes} failed")
     _log("=" * 60 + "\n")
+    
+    # Send email report
+    _send_close_report(closed_positions)
 
 
 def main():

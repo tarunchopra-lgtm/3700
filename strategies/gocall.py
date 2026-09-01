@@ -6,16 +6,17 @@ Behavior:
 2) Check all stock positions currently open.
 3) Run strategies/current_week_option.py for each stock to discover call option.
 4) Buy that option at bid/ask mid-price using a limit order.
-5) Use first CLI argument as option quantity (e.g., 1, 5).
+5) Use first CLI argument as option quantity (default: 2 if not specified).
 6) If an underlying position crosses down to 50 shares, sell half the option position.
 7) Every minute, if stock still exists otherwise do nothing.
 8) If underlying stock no longer exists, sell the remaining option at market.
 
 Usage:
-    python strategies/gocall.py <SIZE>
+    python strategies/gocall.py [SIZE]
 
 Example:
     python strategies/gocall.py 1
+    python strategies/gocall.py       # Uses default SIZE of 2
 """
 
 from __future__ import annotations
@@ -97,7 +98,7 @@ def _resolve_call_symbol_from_script(symbol: str) -> str:
     return match.group(1).strip().upper()
 
 
-def _get_option_quote(option_data_client: OptionHistoricalDataClient, option_symbol: str) -> tuple[float | None, float | None, float, int]:
+def _get_option_quote(trading_client, option_data_client: OptionHistoricalDataClient, option_symbol: str) -> tuple[float | None, float | None, float, int]:
     quote_map = option_data_client.get_option_latest_quote(
         OptionLatestQuoteRequest(symbol_or_symbols=option_symbol, feed=OptionsFeed.INDICATIVE)
     )
@@ -105,7 +106,13 @@ def _get_option_quote(option_data_client: OptionHistoricalDataClient, option_sym
 
     bid = getattr(quote, "bid_price", None)
     ask = getattr(quote, "ask_price", None)
-    open_interest = int(getattr(quote, "open_interest", 0) or 0)
+    
+    # Get open_interest from the full contract object (not the quote)
+    try:
+        full_contract = trading_client.get_option_contract(option_symbol)
+        open_interest = int(getattr(full_contract, "open_interest", 0) or 0)
+    except Exception:
+        open_interest = 0
 
     if bid is not None and ask is not None:
         bid_f = float(bid)
@@ -216,7 +223,7 @@ def _ensure_managed_calls(
 
         try:
             option_symbol = _resolve_call_symbol_from_script(symbol)
-            bid_price, ask_price, mid_price, open_interest = _get_option_quote(option_data_client, option_symbol)
+            bid_price, ask_price, mid_price, open_interest = _get_option_quote(trading_client, option_data_client, option_symbol)
             bid_text = f"{bid_price:.2f}" if bid_price is not None else "N/A"
             ask_text = f"{ask_price:.2f}" if ask_price is not None else "N/A"
             print(
@@ -337,12 +344,13 @@ def _cleanup_removed_underlyings(
 
 
 def main() -> int:
-    if len(sys.argv) != 2:
-        print("Usage: python strategies/gocall.py <SIZE>")
+    if len(sys.argv) not in (1, 2):
+        print("Usage: python strategies/gocall.py [SIZE]")
+        print("       SIZE defaults to 2 if not specified")
         return 1
 
     try:
-        size = int(sys.argv[1])
+        size = int(sys.argv[1]) if len(sys.argv) == 2 else 2
     except ValueError:
         print("SIZE must be an integer")
         return 1

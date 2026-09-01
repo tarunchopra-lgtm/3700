@@ -6,7 +6,7 @@ Usage:
     python strategies/daily-stat.py --schedule
 
 The one-time command records immediately. Schedule mode waits and records at
-12:59 PM Pacific on weekdays. Repeated runs on the same date never overwrite the
+12:59 PM Mountain (MST) on weekdays. Repeated runs on the same date never overwrite the
 stored value; they show live profit/loss versus the previous recorded date.
 Every run emails the result.
 """
@@ -31,7 +31,7 @@ from roles.email_notify import send_email
 
 
 BALANCE_FILE = WORKSPACE_ROOT / "balance.txt"
-PT = ZoneInfo("America/Los_Angeles")
+MST = ZoneInfo("America/Denver")
 SNAPSHOT_TIME = clock_time(12, 59)
 BALANCE_LINE_PATTERN = re.compile(r"^(\d{4}-\d{2}-\d{2})\s*:\s*([-+]?\d+(?:\.\d+)?)$")
 
@@ -142,7 +142,7 @@ def record_and_report(
     balance_file: Path = BALANCE_FILE,
 ) -> None:
     if now_pt is None:
-        now_pt = datetime.now(PT)
+        now_pt = datetime.now(MST)
     today = now_pt.date()
     balances = _load_balances(balance_file)
     snapshot = _get_account_snapshot(trading_client)
@@ -191,26 +191,26 @@ def record_and_report(
 def _next_schedule_time(now_pt: datetime, balances: dict[date, Decimal]) -> datetime:
     candidate_date = now_pt.date()
     while True:
-        candidate = datetime.combine(candidate_date, SNAPSHOT_TIME, tzinfo=PT)
+        candidate = datetime.combine(candidate_date, SNAPSHOT_TIME, tzinfo=MST)
         if candidate_date.weekday() < 5 and candidate_date not in balances:
             return now_pt if candidate <= now_pt else candidate
         candidate_date += timedelta(days=1)
 
 
 def _run_schedule(trading_client) -> None:
-    print("Schedule mode active. Daily snapshot time: 12:59 PM Pacific, weekdays.")
+    print("Schedule mode active. Daily snapshot time: 12:59 PM Mountain (MST), weekdays.")
     print("Press Ctrl+C to stop.")
     while True:
         balances = _load_balances()
-        now_pt = datetime.now(PT)
+        now_pt = datetime.now(MST)
         run_at = _next_schedule_time(now_pt, balances)
         print(f"Next snapshot: {run_at.strftime('%Y-%m-%d %H:%M:%S %Z')}")
         while True:
-            remaining = (run_at - datetime.now(PT)).total_seconds()
+            remaining = (run_at - datetime.now(MST)).total_seconds()
             if remaining <= 0:
                 break
             time.sleep(min(remaining, 60))
-        record_and_report(trading_client, datetime.now(PT))
+        record_and_report(trading_client, datetime.now(MST))
 
 
 def main() -> int:

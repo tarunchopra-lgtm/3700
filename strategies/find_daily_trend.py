@@ -2,12 +2,15 @@
 """Find symbols breaking descending daily resistance today across lists/*.txt.
 
 Usage:
-    python strategies/find_daily_trend.py
-    python strategies/find_daily_trend.py nasdaq.txt spy.txt
-    python strategies/find_daily_trend.py --email
+    python strategies/find_daily_trend.py                    # Scan all lists
+    python strategies/find_daily_trend.py nasdaq.txt spy.txt # Scan specific lists
+    python strategies/find_daily_trend.py --email            # Scan & email results
+    python strategies/find_daily_trend.py INTC               # Detailed analysis for INTC
+    python strategies/find_daily_trend.py BKR                # Show chart & trend for BKR
 
-With no list arguments, every .txt file in lists/ is scanned. The top 10 matches
-are always written to lists/today-breakout.
+With no arguments, every .txt file in lists/ is scanned and the top 10 matches
+are written to lists/today-breakout. When a ticker symbol is provided, detailed
+analysis with ASCII chart is shown instead.
 """
 
 from __future__ import annotations
@@ -148,44 +151,213 @@ def _today_breakout(bars: list, today_et: date, current_price: float | None = No
         return None
 
     prior = completed[-ENTRY_LOOKBACK:]
-    resistance = _fit_trend([float(getattr(bar, "high")) for bar in prior])
+    highs = [float(getattr(bar, "high")) for bar in prior]
+    resistance = _fit_trend(highs)
     if resistance.slope >= 0:
         return None
 
-    trigger = _first_cent_above(resistance.projected)
     yesterday_close = float(getattr(prior[-1], "close"))
+    
+    # Calculate trend line value at yesterday's position (x = ENTRY_LOOKBACK - 1)
+    yesterday_trend_value = resistance.intercept + resistance.slope * (ENTRY_LOOKBACK - 1)
+    # Calculate trend line value at today's position (x = ENTRY_LOOKBACK)
+    today_trend_value = resistance.intercept + resistance.slope * ENTRY_LOOKBACK
+    
+    trigger = _first_cent_above(today_trend_value)
 
-    # Use provided current_price, or fall back to today's bar if available
+    # Check today's open as confirmation of breakout
+    if not today_bars:
+        return None
+    today_bar = today_bars[-1]
+    today_open = float(getattr(today_bar, "open"))
+    today_high = float(getattr(today_bar, "high"))
+
+    # Use provided current_price for display, or fall back to today's close
     if current_price is None:
-        if not today_bars:
-            return None
-        today_bar = today_bars[-1]
         current_price = float(getattr(today_bar, "close"))
-        today_high = float(getattr(today_bar, "high"))
-    else:
-        # Use pre-market/current price, and today's high if available
-        if today_bars:
-            today_high = float(getattr(today_bars[-1], "high"))
-        else:
-            today_high = current_price  # Pre-market: current price is also the high so far
 
-    if yesterday_close >= trigger or current_price < trigger:
+    # Verify the breakout: 
+    # 1. Yesterday must close BELOW the trend line at yesterday's position
+    # 2. Today must open ABOVE the trend line at today's position
+    if yesterday_close >= yesterday_trend_value or today_open < trigger:
         return None
 
     return {
         "current": current_price,
         "high": today_high,
         "trigger": trigger,
+        "today_open": today_open,
         "slope": resistance.slope,
-        "above_percent": (current_price - trigger) / trigger * 100.0,
+        "above_percent": (today_open - trigger) / trigger * 100.0,
+        "prior_bars": prior,
+        "resistance": resistance,
     }
+
+
+def _draw_ascii_chart(symbol: str, prior_bars: list, resistance, today_open: float) -> None:
+    """Draw ASCII chart showing downtrend line and today's open."""
+    highs = [float(getattr(bar, "high")) for bar in prior_bars]
+    lows = [float(getattr(bar, "low")) for bar in prior_bars]
+    
+    if not highs:
+        return
+    
+    # Find price range
+    min_price = min(min(highs), min(lows), today_open)
+    max_price = max(max(highs), max(lows), today_open)
+    price_range = max_price - min_price
+    if price_range == 0:
+        price_range = 1
+    
+    # Chart dimensions
+    chart_height = 15
+    chart_width = len(highs) + 2
+    
+    # Build the chart
+    lines = []
+    for row in range(chart_height, 0, -1):
+        price_at_row = min_price + (row / chart_height) * price_range
+        line = f"${price_at_row:7.2f} |"
+        
+        for col, (high, low) in enumerate(zip(highs, lows)):
+            trend_val = resistance.intercept + resistance.slope * col
+            
+            # Place markers
+            if low <= price_at_row <= high:
+                line += "█"  # In range
+            elif abs(trend_val - price_at_row) < (price_range / chart_height / 2):
+                line += "─"  # Trend line
+            else:
+                line += " "
+        
+        # Today's open at the end
+        if abs(today_open - price_at_row) < (price_range / chart_height / 2):
+            line += "O"  # Today's open marker
+        else:
+            line += " "
+        
+        lines.append(line)
+    
+    # Bottom axis
+    axis_line = "        +"
+    for i in range(len(highs)):
+        axis_line += "-"
+    axis_line += "+"
+    lines.append(axis_line)
+    
+    # Day numbers
+    day_line = "        "
+    for i in range(len(highs)):
+        if i % 5 == 0:
+            day_line += str(i % 10)
+        else:
+            day_line += " "
+    day_line += "T"  # Today
+    lines.append(day_line)
+    
+    # Print chart
+    print(f"\n{symbol} - 15-Day Downtrend with Today's Open")
+    print("=" * (chart_width + 10))
+    for line in lines:
+        print(line)
+    print(f"\nLegend: █=Daily range | ─=Trend line | O=Today's open")
+
+
+def _show_ticker_details(symbol: str, bars: list, current_price: float) -> None:
+    """Show detailed analysis for a specific ticker."""
+    today_et = datetime.now(ET).date()
+    breakout = _today_breakout(bars, today_et, current_price)
+    
+    if breakout is None:
+        print(f"\n{symbol}: No breakout detected")
+        return
+    
+    print(f"\n{'='*70}")
+    print(f"DETAILED ANALYSIS: {symbol}")
+    print(f"{'='*70}")
+    
+    prior = breakout["prior_bars"]
+    resistance = breakout["resistance"]
+    
+    # Show last 15 days
+    print(f"\nLast 15 days of highs and lows:")
+    print(f"{'Day':<6} {'Date':<12} {'High':<10} {'Low':<10} {'Trend Val':<12} {'Above?':<8}")
+    print("-" * 60)
+    
+    for i, bar in enumerate(prior):
+        bar_date = _bar_date_et(bar)
+        high = float(getattr(bar, "high"))
+        low = float(getattr(bar, "low"))
+        trend_val = resistance.intercept + resistance.slope * i
+        above = "✓ Yes" if high >= trend_val else "Below"
+        print(f"{i:<6} {str(bar_date):<12} ${high:<9.2f} ${low:<9.2f} ${trend_val:<11.2f} {above:<8}")
+    
+    # Today's values
+    print(f"\n{'Today (Day 15)':<6} {'NOW':<12} ${breakout['high']:<9.2f} {'N/A':<9} ${breakout['trigger']:<11.2f}")
+    
+    # Summary
+    print(f"\n{'='*70}")
+    print(f"BREAKOUT SUMMARY")
+    print(f"{'='*70}")
+    print(f"Trend Line Slope:          {resistance.slope:.6f}")
+    print(f"Yesterday's Close:         ${float(getattr(prior[-1], 'close')):.2f}")
+    print(f"Yesterday's Trend Value:   ${resistance.intercept + resistance.slope * (ENTRY_LOOKBACK - 1):.2f}")
+    print(f"Today's Trend Line Value:  ${breakout['trigger']:.2f}")
+    print(f"Today's Open:              ${breakout['today_open']:.2f}")
+    print(f"Current Price:             ${breakout['current']:.2f}")
+    print(f"Today's High:              ${breakout['high']:.2f}")
+    print(f"Above Trend Line:          {breakout['above_percent']:.2f}%")
+    print(f"{'='*70}\n")
+    
+    # Draw ASCII chart
+    _draw_ascii_chart(symbol, prior, resistance, breakout['today_open'])
 
 
 def main() -> int:
     arguments = sys.argv[1:]
     email_requested = "--email" in arguments
     list_arguments = [argument for argument in arguments if argument != "--email"]
-
+    
+    # Check if a specific ticker symbol is provided
+    ticker_symbol = None
+    if list_arguments and len(list_arguments) == 1 and list_arguments[0].upper().replace("/", "").replace("-", "").isalpha():
+        ticker_symbol = list_arguments[0].upper()
+        # Fetch data for this specific ticker
+        try:
+            credentials, _ = bootstrap_trading_auth("find_daily_trend.py")
+            data_client = StockHistoricalDataClient(credentials.api_key, credentials.secret_key)
+            
+            now = datetime.now(timezone.utc)
+            response = data_client.get_stock_bars(
+                StockBarsRequest(
+                    symbol_or_symbols=[ticker_symbol],
+                    timeframe=TimeFrame.Day,
+                    start=now - timedelta(days=HISTORY_DAYS),
+                    end=now,
+                    feed=DataFeed.IEX,
+                )
+            )
+            
+            bars_data = _extract_bar_map(response)
+            bars = bars_data.get(ticker_symbol, [])
+            
+            if not bars:
+                print(f"No data available for {ticker_symbol}")
+                return 1
+            
+            # Get current price
+            current_prices = _fetch_current_prices(data_client, [ticker_symbol])
+            current_price = current_prices.get(ticker_symbol)
+            
+            # Show detailed analysis
+            _show_ticker_details(ticker_symbol, bars, current_price)
+            return 0
+        
+        except Exception as exc:
+            print(f"Could not analyze {ticker_symbol}: {exc}")
+            return 1
+    
+    # Normal mode: scan all lists
     try:
         files = _resolve_list_files(list_arguments)
         symbols, memberships = _load_universe(files)
@@ -232,6 +404,7 @@ def main() -> int:
             sources = ",".join(sorted(memberships[symbol]))
             lines.append(
                 f"{symbol} [{sources}]: TODAY BREAK ${breakout['trigger']:.2f} | "
+                f"TODAY OPEN ${breakout['today_open']:.2f} | "
                 f"current ${breakout['current']:.2f} | high ${breakout['high']:.2f} | "
                 f"above {breakout['above_percent']:.2f}% | slope {breakout['slope']:.4f}"
             )

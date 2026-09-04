@@ -40,8 +40,7 @@ if str(WORKSPACE_ROOT) not in sys.path:
 
 from roles.credentials import bootstrap_trading_auth
 
-CHECK_INTERVAL_SECONDS = 60
-STOCK_PARTIAL_TRIGGER_QTY = 50
+CHECK_INTERVAL_SECONDS = 10
 MIN_OPEN_INTEREST = 10  # Minimum open interest required to buy a call option
 CALL_SYMBOL_PATTERN = re.compile(r"CALL Contract:\s+(\S+)")
 
@@ -51,6 +50,7 @@ class ManagedOption:
     underlying: str
     option_symbol: str
     previous_stock_qty: float
+    initial_stock_qty: float  # Track initial position size for 50% reduction logic
     half_triggered: bool = False
     half_sold: bool = False
     half_sell_order_id: str | None = None
@@ -243,6 +243,7 @@ def _ensure_managed_calls(
                     underlying=symbol,
                     option_symbol=option_symbol,
                     previous_stock_qty=stock_positions[symbol],
+                    initial_stock_qty=stock_positions[symbol],
                 )
                 continue
 
@@ -251,6 +252,7 @@ def _ensure_managed_calls(
                 underlying=symbol,
                 option_symbol=option_symbol,
                 previous_stock_qty=stock_positions[symbol],
+                initial_stock_qty=stock_positions[symbol],
             )
         except Exception as exc:
             print(f"[WARN] Could not open call for {symbol}: {exc}")
@@ -278,11 +280,13 @@ def _reduce_options_at_50_shares(
             except Exception as exc:
                 print(f"[WARN] Could not check half-sell order for {item.option_symbol}: {exc}")
 
-        crossed_to_50 = (
-            item.previous_stock_qty > STOCK_PARTIAL_TRIGGER_QTY
-            and current_stock_qty <= STOCK_PARTIAL_TRIGGER_QTY
+        # Trigger half-sale when underlying position is reduced to 50% of initial size
+        half_initial_qty = item.initial_stock_qty / 2
+        crossed_to_half = (
+            item.previous_stock_qty > half_initial_qty
+            and current_stock_qty <= half_initial_qty
         )
-        if crossed_to_50:
+        if crossed_to_half:
             item.half_triggered = True
 
         if item.half_triggered and not item.half_sold and item.half_sell_order_id is None:

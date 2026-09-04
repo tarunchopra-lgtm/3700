@@ -4,3 +4,10 @@
 [2026-08-27 06:44:38] STOP_LOSS    MU       entry=943.6800  stop=943.4000  qty=2
 [2026-08-27 06:55:14] STOP_LOSS    MU       entry=938.3200  stop=938.0400  qty=2
 [2026-08-27 06:57:16] STOP_LOSS    INTC     entry=89.8900  stop=89.0000  qty=2
+[2026-09-01 11:35:31] STOP_LOSS    INTC     entry=88.5300  stop=88.4900  qty=2
+[2026-09-01 11:36:01] STOP_LOSS    INTC     entry=88.5300  stop=88.4900  qty=2
+[2026-09-01 11:40:34] STOP_LOSS    INTC     entry=88.4100  stop=88.3700  qty=2
+[2026-09-01 11:42:05] STOP_LOSS    INTC     entry=88.3100  stop=88.2700  qty=2
+[2026-09-01 11:42:35] STOP_LOSS    INTC     entry=88.3100  stop=88.2700  qty=2
+[2026-09-01 11:43:06] STOP_LOSS    INTC     entry=88.3100  stop=88.2700  qty=2
+[2026-09-01 12:07:37] BREAKEVEN_STOP INTC     entry=88.3100  stop=88.3100  qty=1

@@ -273,20 +273,33 @@ if existing_position:
     print(f"  Monitoring existing position...")
     # Don't place new order
 else:
-    # Place initial limit order immediately
+    # Check current price before placing initial order
     print(f"[{datetime.now().strftime('%H:%M:%S')}] No existing position.")
-    print(f"[{datetime.now().strftime('%H:%M:%S')}] Placing LIMIT BUY order for {TOTAL_QTY} {SYMBOL} at ${ENTRY_PRICE:.2f}...")
     try:
-        entry_order_id, submitted_price = _place_entry_order()
-        print(f"✓ LIMIT BUY order placed successfully at ${submitted_price:.2f}. Order ID: {entry_order_id}")
-        print(f"  Order will fill when price comes down to ${ENTRY_PRICE:.2f}")
+        current_price = _get_current_price(SYMBOL)
+        print(f"[{datetime.now().strftime('%H:%M:%S')}] Current price: ${current_price:.2f} | Entry price: ${ENTRY_PRICE:.2f}")
+        
+        # Only place initial order if current price is at or above entry price
+        # This ensures we don't immediately fill at worse prices
+        if current_price >= ENTRY_PRICE:
+            print(f"[{datetime.now().strftime('%H:%M:%S')}] Placing LIMIT BUY order for {TOTAL_QTY} {SYMBOL} at ${ENTRY_PRICE:.2f}...")
+            try:
+                entry_order_id, submitted_price = _place_entry_order()
+                print(f"✓ LIMIT BUY order placed successfully at ${submitted_price:.2f}. Order ID: {entry_order_id}")
+                print(f"  Order will fill when price comes down to ${ENTRY_PRICE:.2f}")
+            except Exception as e:
+                print(f"✗ Error placing initial BUY order: {e}")
+                entry_order_id = None
+        else:
+            print(f"[{datetime.now().strftime('%H:%M:%S')}] Current price (${current_price:.2f}) is below entry (${ENTRY_PRICE:.2f})")
+            print(f"[{datetime.now().strftime('%H:%M:%S')}] Waiting for price to cross above ${ENTRY_PRICE:.2f} before placing order...")
+            entry_order_id = None
     except Exception as e:
-        print(f"✗ Error placing initial BUY order: {e}")
+        print(f"✗ Error checking current price: {e}")
         entry_order_id = None
 
 print(f"[{datetime.now().strftime('%H:%M:%S')}] Stop loss set at ${STOP_PRICE:.2f}")
 print(f"(Stop loss will be monitored and executed automatically)")
-print(f"[{datetime.now().strftime('%H:%M:%S')}] Entry limit order placed at ${ENTRY_PRICE:.2f} (waiting for fill)")
 
 print(f"\n[{datetime.now().strftime('%H:%M:%S')}] Monitoring position... Press Ctrl+C to exit\n")
 

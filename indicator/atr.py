@@ -1,8 +1,14 @@
 #!/usr/bin/env python3
-"""Print the daily Average True Range (ATR) for a stock.
+"""Print the daily Average True Range (ATR) for a stock or crypto.
 
 Usage:
-    python atr.py <TICKER>
+    python atr.py <TICKER>  # For stocks
+    python atr.py <CRYPTO>  # For crypto (e.g., BTC/USD, ETH/USD)
+
+Examples:
+    python atr.py NVDA
+    python atr.py BTC/USD
+    python atr.py ETH/USD
 
 The script prints a single ATR value computed from daily bars.
 """
@@ -15,8 +21,8 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 from alpaca.data.enums import DataFeed
-from alpaca.data.historical import StockHistoricalDataClient
-from alpaca.data.requests import StockBarsRequest
+from alpaca.data.historical import StockHistoricalDataClient, CryptoHistoricalDataClient
+from alpaca.data.requests import StockBarsRequest, CryptoBarsRequest
 from alpaca.data.timeframe import TimeFrame
 from dotenv import load_dotenv
 
@@ -79,17 +85,28 @@ def _true_range(current_bar, previous_close: float | None) -> float:
     )
 
 
-def _calculate_atr(data_client: StockHistoricalDataClient, symbol: str) -> float:
+def _calculate_atr(data_client, symbol: str, is_crypto: bool = False) -> float:
     now = datetime.now(timezone.utc)
-    request = StockBarsRequest(
-        symbol_or_symbols=symbol,
-        timeframe=TimeFrame.Day,
-        start=now - timedelta(days=ATR_PERIOD * 4),
-        end=now,
-        limit=ATR_PERIOD + 1,
-        feed=DataFeed.IEX,
-    )
-    bars_response = data_client.get_stock_bars(request)
+    
+    if is_crypto:
+        request = CryptoBarsRequest(
+            symbol_or_symbols=symbol,
+            timeframe=TimeFrame.Day,
+            start=now - timedelta(days=ATR_PERIOD * 4),
+            end=now,
+            limit=ATR_PERIOD + 1,
+        )
+        bars_response = data_client.get_crypto_bars(request)
+    else:
+        request = StockBarsRequest(
+            symbol_or_symbols=symbol,
+            timeframe=TimeFrame.Day,
+            start=now - timedelta(days=ATR_PERIOD * 4),
+            end=now,
+            limit=ATR_PERIOD + 1,
+            feed=DataFeed.IEX,
+        )
+        bars_response = data_client.get_stock_bars(request)
     bars = _extract_bars(bars_response, symbol)
 
     if len(bars) < ATR_PERIOD + 1:
@@ -123,10 +140,16 @@ def main() -> int:
         print(f"Authentication failed: {exc}")
         return 1
 
-    data_client = StockHistoricalDataClient(api_key, secret_key)
+    # Detect if symbol is crypto (contains /)
+    is_crypto = "/" in symbol
+    
+    if is_crypto:
+        data_client = CryptoHistoricalDataClient(api_key, secret_key)
+    else:
+        data_client = StockHistoricalDataClient(api_key, secret_key)
 
     try:
-        atr_value = _calculate_atr(data_client, symbol)
+        atr_value = _calculate_atr(data_client, symbol, is_crypto=is_crypto)
     except Exception as exc:
         print(f"Error calculating ATR for {symbol}: {exc}")
         return 1

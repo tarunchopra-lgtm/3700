@@ -1,32 +1,28 @@
 #!/usr/bin/env python3
 """
-Closing Bell - Automated position closer at market close (12:55 PM MST)
+Closing Bell - Close all open positions
 
-Sells every open position at market close:
+Sells every open position:
 1. First attempts to sell at the midpoint of bid/ask for each position
 2. If the order doesn't fill within 1 minute, cancels and sells at market price
 
 Usage:
     python strategies/closing_bell.py
 
-This script runs continuously and triggers at 12:55 PM MST every trading day.
-Press Ctrl+C to stop.
+Note: Scheduling is handled via Windows Task Scheduler.
 """
 
 import os
 import sys
-import time
 from datetime import datetime
 from pathlib import Path
 from typing import Optional
 
-from alpaca.common.exceptions import APIError
 from alpaca.trading.requests import (
     LimitOrderRequest,
     MarketOrderRequest,
-    GetOrdersRequest,
 )
-from alpaca.trading.enums import OrderSide, TimeInForce, QueryOrderStatus
+from alpaca.trading.enums import OrderSide, TimeInForce
 from alpaca.data.enums import DataFeed
 from alpaca.data.historical import StockHistoricalDataClient, CryptoHistoricalDataClient
 from alpaca.data.requests import StockLatestQuoteRequest, CryptoLatestQuoteRequest
@@ -39,13 +35,8 @@ from roles.credentials import bootstrap_trading_auth
 from roles.email_notify import send_email
 
 # ── Configuration ────────────────────────────────────────────────────────────
-CLOSING_HOUR = 12
-CLOSING_MINUTE = 55
-CHECK_INTERVAL = 30  # seconds between time checks
 LIMIT_ORDER_TIMEOUT = 60  # seconds to wait for limit order to fill
 LOG_FILE = os.path.join(os.path.dirname(__file__), "closing_bell_log.txt")
-
-# ── Constants ────────────────────────────────────────────────────────────────
 ORDER_TIME_IN_FORCE = TimeInForce.DAY
 
 
@@ -57,32 +48,6 @@ def _log(message: str) -> None:
     with open(LOG_FILE, "a", encoding="utf-8") as f:
         f.write(log_entry + "\n")
 
-
-def _is_trading_hours() -> bool:
-    """Check if we're within trading hours (9:30 AM - 4:00 PM MST)."""
-    now = datetime.now()
-    hour = now.hour
-    minute = now.minute
-    weekday = now.weekday()  # 0 = Monday, 4 = Friday, 5 = Saturday, 6 = Sunday
-    
-    # Skip weekends
-    if weekday >= 5:
-        return False
-    
-    # 9:30 AM to 4:00 PM (16:00)
-    if hour < 9 or hour > 16:
-        return False
-    
-    if hour == 9 and minute < 30:
-        return False
-    
-    return True
-
-
-def _is_closing_time() -> bool:
-    """Check if it's 12:55 PM MST."""
-    now = datetime.now()
-    return now.hour == CLOSING_HOUR and now.minute == CLOSING_MINUTE
 
 
 def _is_crypto(symbol: str) -> bool:
@@ -117,7 +82,7 @@ def _get_all_positions(trading_client):
             {
                 "symbol": position.symbol,
                 "qty": position.qty,
-                "market_value": position.market_value,
+                "market_value": float(position.market_value),
             }
             for position in positions
         ]
@@ -300,7 +265,7 @@ def close_all_positions(trading_client, stock_data_client, crypto_data_client) -
 
 
 def main():
-    """Main loop."""
+    """Close all positions immediately."""
     try:
         credentials, trading_client = bootstrap_trading_auth("closing_bell.py")
     except Exception as exc:
@@ -310,41 +275,7 @@ def main():
     stock_data_client = StockHistoricalDataClient(credentials.api_key, credentials.secret_key)
     crypto_data_client = CryptoHistoricalDataClient(credentials.api_key, credentials.secret_key)
     
-    _log("\n🔔 Closing Bell initialized. Waiting for 12:55 PM MST...")
-    _log(f"Current time: {datetime.now().strftime('%H:%M:%S %Z')}")
-    
-    last_run_date = None  # Track the date we last ran to avoid duplicate runs
-    
-    try:
-        while True:
-            now = datetime.now()
-            
-            # Check if it's trading hours
-            if not _is_trading_hours():
-                # Only log this once per day at market open time
-                if now.hour == 9 and now.minute == 30:
-                    _log(f"[{now.strftime('%H:%M:%S')}] Market closed or weekend, waiting...")
-                time.sleep(CHECK_INTERVAL)
-                continue
-            
-            # Check if it's closing time
-            if _is_closing_time():
-                today = now.date()
-                
-                # Run only once per day
-                if last_run_date != today:
-                    close_all_positions(trading_client, stock_data_client, crypto_data_client)
-                    last_run_date = today
-                else:
-                    _log(f"[{now.strftime('%H:%M:%S')}] Already closed positions today, waiting...")
-            
-            time.sleep(CHECK_INTERVAL)
-    
-    except KeyboardInterrupt:
-        _log("\n\n🛑 Closing Bell stopped by user.")
-    except Exception as e:
-        _log(f"\n✗ Unexpected error: {e}")
-        raise
+    close_all_positions(trading_client, stock_data_client, crypto_data_client)
 
 
 if __name__ == "__main__":

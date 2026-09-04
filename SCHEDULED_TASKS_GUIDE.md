@@ -1,5 +1,23 @@
 # Scheduled Tasks Management Guide
 
+## ⚡ QUICK COMMANDS (Copy & Paste)
+
+**Update ClosingBell to 12:26 PM:**
+```powershell
+$Time = "12:26"; $Trigger = New-ScheduledTaskTrigger -Daily -At $Time; Set-ScheduledTask -TaskName "ClosingBell" -Trigger $Trigger; Write-Host "✓ ClosingBell updated to $Time"
+```
+
+**Update ANY task time (template):**
+```powershell
+$Time = "HH:MM"; $Trigger = New-ScheduledTaskTrigger -Daily -At $Time; Set-ScheduledTask -TaskName "TaskName" -Trigger $Trigger; Write-Host "✓ Updated to $Time"
+```
+
+**Replace:**
+- `"HH:MM"` with time in 24-hour format (e.g., `"12:26"`, `"14:30"`, `"06:31"`)
+- `"TaskName"` with the task name (e.g., `"ClosingBell"`, `"3700 Daily Breakout Email"`)
+
+---
+
 ## Quick Setup
 
 ### Option 1: Using PowerShell (Recommended)
@@ -82,7 +100,46 @@ Get-ScheduledTask -TaskName "ClosingBell" | Get-ScheduledTaskInfo | Select-Objec
 
 ## TASK MANAGEMENT
 
-### Modify task trigger (change time)
+### Modify task trigger (change time) - EASY WAY
+
+**To change ANY task time, just copy-paste and replace the time:**
+
+```powershell
+# Change ClosingBell to ANY time (e.g., 12:26 PM)
+$Time = "12:40"; $Trigger = New-ScheduledTaskTrigger -Daily -At $Time; Set-ScheduledTask -TaskName "ClosingBell" -Trigger $Trigger; Write-Host "✓ Updated to $Time"
+
+
+$Time = "12:39"; $Trigger = New-ScheduledTaskTrigger -Daily -At $Time; Set-ScheduledTask -TaskName "ClosingBell" -Trigger $Trigger -Description "Closing Bell - Runs daily at $Time"; Write-Host "✓ ClosingBell updated to $Time"
+
+# Change Daily Breakout Email to ANY time (e.g., 6:31 AM)
+$Time = "06:31"; $Trigger = New-ScheduledTaskTrigger -Daily -At $Time; Set-ScheduledTask -TaskName "3700 Daily Breakout Email" -Trigger $Trigger; Write-Host "✓ Updated to $Time"
+```
+
+**How to use:**
+1. Replace `"12:26"` with your desired time in 24-hour format (e.g., `"14:30"` for 2:30 PM)
+2. Replace `"ClosingBell"` with the task name you want to change
+3. Copy-paste the entire line into PowerShell
+4. Done!
+
+**Common times:**
+```powershell
+# 6:30 AM
+$Time = "06:30"
+
+# 12:26 PM (noon + 26 minutes)
+$Time = "12:26"
+
+# 1:55 PM
+$Time = "13:55"
+
+# 3:00 PM
+$Time = "15:00"
+
+# 4:15 PM
+$Time = "16:15"
+```
+
+### Modify task trigger (change time) - Detailed way
 ```powershell
 # Example: Change to run at 7:00 AM instead of 8:00 AM
 $task = Get-ScheduledTask -TaskName "ClosingBell"
@@ -221,3 +278,18 @@ Then navigate to:
 ### Task runs but Python script errors?
 - Check the log file: `C:\Users\TarunChopra\3700\strategies\closing_bell_log.txt`
 - Run script manually to test: `python C:\Users\TarunChopra\3700\strategies\closing_bell.py`
+
+
+
+Get-ScheduledTask | Where-Object { $_.TaskName -match "ClosingBell|Balance|Daily" } | Format-Table TaskName, State, Description
+
+
+Get-ScheduledTask | Where-Object { $_.TaskName -match "ClosingBell|Balance|Daily" } | ForEach-Object { 
+    $info = Get-ScheduledTaskInfo -TaskName $_.TaskName
+    [PSCustomObject]@{
+        TaskName = $_.TaskName
+        State = $_.State
+        NextRunTime = $info.NextRunTime
+        Description = $_.Description
+    }
+} | Format-Table -AutoSize

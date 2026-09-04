@@ -9,3 +9,111 @@
 [2026-08-31 12:55:03] ============================================================
 
 [2026-08-31 12:55:33] [12:55:33] Already closed positions today, waiting...
+[2026-09-01 12:55:03] 
+🔔 Closing Bell initialized. Waiting for 12:55 PM MST...
+[2026-09-01 12:55:03] Current time: 12:55:03 
+[2026-09-01 12:55:03] 
+============================================================
+[2026-09-01 12:55:03] 🔔 CLOSING BELL - Closing all positions...
+[2026-09-01 12:55:03] ============================================================
+[2026-09-01 12:55:03] ✓ No open positions to close.
+[2026-09-01 12:55:03] ============================================================
+
+[2026-09-01 12:55:04] ✓ Email report sent to tarun.chopra@gmail.com
+[2026-09-01 12:55:34] [12:55:34] Already closed positions today, waiting...
+[2026-09-02 12:55:08] 
+🔔 Closing Bell initialized. Waiting for 12:55 PM MST...
+[2026-09-02 12:55:08] Current time: 12:55:08 
+[2026-09-02 12:55:08] 
+============================================================
+[2026-09-02 12:55:08] 🔔 CLOSING BELL - Closing all positions...
+[2026-09-02 12:55:08] ============================================================
+[2026-09-02 12:55:08] Found 2 open position(s). Starting closeout...
+[2026-09-02 12:55:08] 
+✗ Unexpected error: Unknown format code 'f' for object of type 'str'
+[2026-09-03 12:30:02] 
+🔔 Closing Bell initialized. Waiting for 12:55 PM MST...
+[2026-09-03 12:30:02] Current time: 12:30:02 
+[2026-09-03 12:30:34] 
+
+🛑 Closing Bell stopped by user.
+[2026-09-03 12:33:06] 
+============================================================
+[2026-09-03 12:33:06] 🔔 CLOSING BELL - Closing all positions...
+[2026-09-03 12:33:06] ============================================================
+[2026-09-03 12:33:06] Found 7 open position(s). Starting closeout...
+[2026-09-03 12:33:36] 
+============================================================
+[2026-09-03 12:33:36] 🔔 CLOSING BELL - Closing all positions...
+[2026-09-03 12:33:36] ============================================================
+[2026-09-03 12:33:36] Found 7 open position(s). Starting closeout...
+[2026-09-03 12:37:14] 
+============================================================
+[2026-09-03 12:37:14] 🔔 CLOSING BELL - Closing all positions...
+[2026-09-03 12:37:14] ============================================================
+[2026-09-03 12:37:18] Found 7 open position(s). Starting closeout...
+[2026-09-03 12:37:18] 
+[INTC] Qty: 1, Value: $91.17
+[2026-09-03 12:37:18]   Bid: $91.16, Ask: $91.18, Midpoint: $91.17
+[2026-09-03 12:37:18]   → Submitted limit order 65b5fbda-860a-453f-928d-de3569d1c119 for 1 INTC @ $91.17
+[2026-09-03 12:37:18]   ✗ Error submitting limit order for INTC: name 'time' is not defined
+[2026-09-03 12:37:24]   ✓ Market sell order submitted for 1 INTC (Order ID: 65ad94f0-8b7d-419b-ac99-eef7338f3935)
+[2026-09-03 12:37:24] 
+[INTC260904C00088000] Qty: 2, Value: $650.00
+[2026-09-03 12:37:24]   ⚠ Error getting bid/ask for INTC260904C00088000: {"message":"code=400, message=invalid symbol: INTC260904C00088000"}
+
+[2026-09-03 12:37:24]   ⚠ Could not get bid/ask, proceeding to market order
+[2026-09-03 12:37:24]   ✓ Market sell order submitted for 2 INTC260904C00088000 (Order ID: abc5358f-662b-40f3-b51b-2f9f55167a75)
+[2026-09-03 12:37:24] 
+[INTC260904C00089000] Qty: 2, Value: $514.00
+[2026-09-03 12:37:24]   ⚠ Error getting bid/ask for INTC260904C00089000: {"message":"code=400, message=invalid symbol: INTC260904C00089000"}
+
+[2026-09-03 12:37:24]   ⚠ Could not get bid/ask, proceeding to market order
+[2026-09-03 12:37:28]   ✓ Market sell order submitted for 2 INTC260904C00089000 (Order ID: 62932567-9dfe-4179-9981-94fad41e1d7b)
+[2026-09-03 12:37:28] 
+[INTC260904C00091000] Qty: 2, Value: $258.00
+[2026-09-03 12:37:28]   ⚠ Error getting bid/ask for INTC260904C00091000: {"message":"code=400, message=invalid symbol: INTC260904C00091000"}
+
+[2026-09-03 12:37:28]   ⚠ Could not get bid/ask, proceeding to market order
+[2026-09-03 12:37:28]   ✓ Market sell order submitted for 2 INTC260904C00091000 (Order ID: f1452133-be3f-4e05-a57b-d804f6a66f00)
+[2026-09-03 12:37:28] 
+[NVDA] Qty: 1, Value: $229.28
+[2026-09-03 12:37:28]   Bid: $229.26, Ask: $229.27, Midpoint: $229.26
+[2026-09-03 12:37:28]   → Submitted limit order 26bf7375-4961-41a7-997a-e6fbc6497168 for 1 NVDA @ $229.26
+[2026-09-03 12:37:28]   ✗ Error submitting limit order for NVDA: name 'time' is not defined
+[2026-09-03 12:37:28]   ✗ Error submitting market order for NVDA: {"available":"0","code":40310000,"existing_qty":"1","held_for_orders":"1","message":"insufficient qty available for order (requested: 1, available: 0)","symbol":"NVDA"}
+[2026-09-03 12:37:28] 
+[NVDA260904C00227500] Qty: 2, Value: $572.00
+[2026-09-03 12:37:28]   ⚠ Error getting bid/ask for NVDA260904C00227500: {"message":"code=400, message=invalid symbol: NVDA260904C00227500"}
+
+[2026-09-03 12:37:28]   ⚠ Could not get bid/ask, proceeding to market order
+[2026-09-03 12:37:28]   ✓ Market sell order submitted for 2 NVDA260904C00227500 (Order ID: 124d3f8d-a553-4a5a-adce-74d4bf0f3440)
+[2026-09-03 12:37:28] 
+[NVDA260904C00230000] Qty: 2, Value: $294.00
+[2026-09-03 12:37:28]   ⚠ Error getting bid/ask for NVDA260904C00230000: {"message":"code=400, message=invalid symbol: NVDA260904C00230000"}
+
+[2026-09-03 12:37:28]   ⚠ Could not get bid/ask, proceeding to market order
+[2026-09-03 12:37:28]   ✓ Market sell order submitted for 2 NVDA260904C00230000 (Order ID: 38f544c9-773c-429e-aed3-78640b372cda)
+[2026-09-03 12:37:28] 
+============================================================
+[2026-09-03 12:37:28] Closeout Summary: 6 successful, 1 failed
+[2026-09-03 12:37:28] ============================================================
+
+[2026-09-03 12:37:30] ✓ Email report sent to tarun.chopra@gmail.com
+[2026-09-03 12:40:02] 
+============================================================
+[2026-09-03 12:40:02] 🔔 CLOSING BELL - Closing all positions...
+[2026-09-03 12:40:02] ============================================================
+[2026-09-03 12:40:02] Found 1 open position(s). Starting closeout...
+[2026-09-03 12:40:02] 
+[INTC] Qty: 1, Value: $91.08
+[2026-09-03 12:40:02]   Bid: $91.07, Ask: $91.08, Midpoint: $91.07
+[2026-09-03 12:40:02]   → Submitted limit order ccd90181-e8b2-4500-a175-658e590d3034 for 1 INTC @ $91.07
+[2026-09-03 12:40:02]   ✗ Error submitting limit order for INTC: name 'time' is not defined
+[2026-09-03 12:40:02]   ✗ Error submitting market order for INTC: {"available":"0","code":40310000,"existing_qty":"1","held_for_orders":"1","message":"insufficient qty available for order (requested: 1, available: 0)","symbol":"INTC"}
+[2026-09-03 12:40:02] 
+============================================================
+[2026-09-03 12:40:02] Closeout Summary: 0 successful, 1 failed
+[2026-09-03 12:40:02] ============================================================
+
+[2026-09-03 12:40:04] ✓ Email report sent to tarun.chopra@gmail.com

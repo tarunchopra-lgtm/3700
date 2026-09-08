@@ -284,7 +284,7 @@ Then navigate to:
 Get-ScheduledTask | Where-Object { $_.TaskName -match "ClosingBell|Balance|Daily" } | Format-Table TaskName, State, Description
 
 
-Get-ScheduledTask | Where-Object { $_.TaskName -match "ClosingBell|Balance|Daily" } | ForEach-Object { 
+Get-ScheduledTask | Where-Object { $_.TaskName -match "ClosingBell|3700" } | ForEach-Object { 
     $info = Get-ScheduledTaskInfo -TaskName $_.TaskName
     [PSCustomObject]@{
         TaskName = $_.TaskName
@@ -293,3 +293,11 @@ Get-ScheduledTask | Where-Object { $_.TaskName -match "ClosingBell|Balance|Daily
         Description = $_.Description
     }
 } | Format-Table -AutoSize
+
+
+
+$Time = "06:31"; $Trigger = New-ScheduledTaskTrigger -Daily -At $Time; Set-ScheduledTask -TaskName "3700 Daily Breakout Email" -Trigger $Trigger; Write-Host "✓ Updated to $Time"
+
+$Time = "12:50"; $Trigger = New-ScheduledTaskTrigger -Daily -At $Time; Set-ScheduledTask -TaskName "ClosingBell" -Trigger $Trigger; Write-Host "✓ Updated to $Time"
+
+$Time = "1:01"; $Trigger = New-ScheduledTaskTrigger -Daily -At $Time; Set-ScheduledTask -TaskName "3700 Daily account Stat" -Trigger $Trigger; Write-Host "✓ Updated to $Time"

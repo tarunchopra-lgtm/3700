@@ -134,7 +134,7 @@ def _get_current_price(symbol: str) -> float:
 
 
 def _get_today_open(symbol: str) -> float:
-    """Get today's open price from daily bars."""
+    """Get today's open price from daily bars. Falls back to most recent bar if today's not available."""
     try:
         now = datetime.now(timezone.utc)
         
@@ -143,26 +143,41 @@ def _get_today_open(symbol: str) -> float:
             request = CryptoBarsRequest(
                 symbol_or_symbols=[symbol],
                 timeframe=TimeFrame.Day,
-                start=now - timedelta(days=1),
+                start=now - timedelta(days=10),  # Fetch 10 days to ensure data availability
                 end=now,
             )
             response = data_client.get_crypto_bars(request)
         else:
-            request = StockBarsRequest(
-                symbol_or_symbols=[symbol],
-                timeframe=TimeFrame.Day,
-                start=now - timedelta(days=1),
-                end=now,
-                feed=DataFeed.IEX,
-            )
-            response = data_client.get_stock_bars(request)
+            # Try SIP feed first (more comprehensive), fall back to IEX
+            try:
+                request = StockBarsRequest(
+                    symbol_or_symbols=[symbol],
+                    timeframe=TimeFrame.Day,
+                    start=now - timedelta(days=10),  # Fetch 10 days to ensure data availability
+                    end=now,
+                    feed=DataFeed.SIP,
+                )
+                response = data_client.get_stock_bars(request)
+            except Exception:
+                # Fall back to IEX feed
+                request = StockBarsRequest(
+                    symbol_or_symbols=[symbol],
+                    timeframe=TimeFrame.Day,
+                    start=now - timedelta(days=10),
+                    end=now,
+                    feed=DataFeed.IEX,
+                )
+                response = data_client.get_stock_bars(request)
         
         if hasattr(response, 'data') and symbol in response.data:
             bars = response.data[symbol]
             if bars:
+                # Get the most recent bar (today's if available, otherwise yesterday's or earlier)
                 return float(bars[-1].open)
+        
+        print(f"Debug: No bars found for {symbol}. Response type: {type(response)}")
     except Exception as e:
-        print(f"Warning: Could not fetch today's open: {e}")
+        print(f"Debug: Error fetching open price: {e}")
     return None
 
 
@@ -241,23 +256,55 @@ def _round_price(price: float) -> float:
 
 
 def _print_usage() -> None:
-    print("Usage: python spray.py <TICKER> <NUM_STOCKS>")
-    print("Example: python spray.py MU 10")
+    print("Usage: python spray.py")
+    print("Reads configuration from lists/spray.txt")
+    print("File format: SYMBOL NUM_STOCKS")
+    print("Example line: NVDA 4")
 
 
-# Parse arguments
-if len(sys.argv) < 3:
-    print(f"Error: expected 2 arguments, got {len(sys.argv) - 1}")
-    _print_usage()
-    sys.exit(1)
+def _read_config_from_file() -> tuple:
+    """Read the first active (non-comment) line from lists/spray.txt"""
+    config_path = WORKSPACE_ROOT / "lists" / "spray.txt"
+    
+    if not config_path.exists():
+        print(f"Error: Configuration file not found at {config_path}")
+        print("Please create lists/spray.txt with content like:")
+        print("NVDA 4")
+        sys.exit(1)
+    
+    try:
+        with open(config_path, 'r') as f:
+            for line in f:
+                line = line.strip()
+                # Skip empty lines and comments
+                if not line or line.startswith('#'):
+                    continue
+                
+                parts = line.split()
+                if len(parts) < 2:
+                    print(f"Error: Invalid configuration line: {line}")
+                    print("Expected format: SYMBOL NUM_STOCKS")
+                    sys.exit(1)
+                
+                symbol = parts[0].upper()
+                try:
+                    num_stocks = int(parts[1])
+                except ValueError as e:
+                    print(f"Error: Invalid value in configuration line: {line}")
+                    print(f"Details: {e}")
+                    sys.exit(1)
+                
+                return symbol, num_stocks
+        
+        print("Error: No valid configuration lines found in lists/spray.txt")
+        sys.exit(1)
+    except Exception as e:
+        print(f"Error reading configuration file: {e}")
+        sys.exit(1)
 
-SYMBOL = sys.argv[1].upper()
-try:
-    NUM_STOCKS = int(sys.argv[2])
-except ValueError:
-    print("Error: NUM_STOCKS must be an integer")
-    _print_usage()
-    sys.exit(1)
+
+# Parse configuration from file
+SYMBOL, NUM_STOCKS = _read_config_from_file()
 
 if NUM_STOCKS <= 0:
     print("Error: NUM_STOCKS must be positive")
@@ -397,13 +444,68 @@ try:
                             zone_distances = [(idx, abs(current_price - params['buy_price'])) for idx, params in enumerate(ZONE_PARAMS)]
                             active_zone_idx, _ = min(zone_distances, key=lambda x: x[1])
                     
-                    if active_zone_idx is not None:
-                        zone_info = ZONE_PARAMS[active_zone_idx]
+                    # Re-evaluate if we should switch zones based on current price
+                    zone_distances = [
+                        (idx, abs(current_price - params['buy_price']))
+                        for idx, params in enumerate(ZONE_PARAMS)
+                    ]
+                    closest_zone_idx, closest_distance = min(zone_distances, key=lambda x: x[1])
+                    current_zone_distance = zone_distances[active_zone_idx][1]
+                    
+                    # Switch zones if price has moved significantly closer to a different zone
+                    # (e.g., price moved from Zone 1 up to Zone 3 territory)
+                    if closest_zone_idx != active_zone_idx and closest_distance < current_zone_distance * 0.5:
+                        # New zone is much closer, switch zones
                         print(
-                            f"[{datetime.now().strftime('%H:%M:%S')}] 🔍 WAITING FOR FILL | {zone_info['name']} | "
-                            f"Buy @ ${zone_info['buy_price']:.2f} | Current: ${current_price:.2f} | "
-                            f"{len(buy_orders)} order(s) open"
+                            f"[{datetime.now().strftime('%H:%M:%S')}] 🔄 ZONE CHANGE DETECTED: "
+                            f"Price moved away from {ZONE_PARAMS[active_zone_idx]['name']} "
+                            f"(distance: ${current_zone_distance:.2f}) to {ZONE_PARAMS[closest_zone_idx]['name']} "
+                            f"(distance: ${closest_distance:.2f})"
                         )
+                        cancelled = _cancel_all_orders_for_symbol(SYMBOL)
+                        if cancelled > 0:
+                            print(f"  ✓ Cancelled {cancelled} order(s)")
+                        
+                        active_zone_idx = closest_zone_idx
+                        first_target_sold = False
+                        current_stop_loss = ZONE_PARAMS[active_zone_idx]['stop_loss']
+                        second_target_stop_loss = ZONE_PARAMS[active_zone_idx]['stop_loss']
+                        highest_price = None
+                        waiting_for_price_level = False
+                        
+                        zone_info = ZONE_PARAMS[active_zone_idx]
+                        print(f"  ⚡ Activated {zone_info['name']} | Buy @ ${zone_info['buy_price']:.2f}")
+                        
+                        # Check if buy price is above current price
+                        if zone_info['buy_price'] > current_price:
+                            waiting_for_price_level = True
+                            print(f"  ⏳ Waiting for price to reach ${zone_info['buy_price']:.2f}...")
+                        else:
+                            # Place order for new zone
+                            try:
+                                entry_order = LimitOrderRequest(
+                                    symbol=SYMBOL,
+                                    qty=TOTAL_QTY,
+                                    side=OrderSide.BUY,
+                                    time_in_force=ORDER_TIME_IN_FORCE,
+                                    limit_price=zone_info['buy_price'],
+                                )
+                                entry_response = _timed("submit_order(entry)", trading_client.submit_order, order_data=entry_order)
+                                entry_order_id = str(entry_response.id)
+                                print(f"  ✓ Order placed for {zone_info['name']}. ID: {entry_order_id}")
+                            except Exception as e:
+                                print(f"  ✗ Error placing order: {e}")
+                                active_zone_idx = None
+                                entry_order_id = None
+                    else:
+                        # Still waiting for same zone to fill
+                        if active_zone_idx is not None:
+                            zone_info = ZONE_PARAMS[active_zone_idx]
+                            print(
+                                f"[{datetime.now().strftime('%H:%M:%S')}] 🔍 WAITING FOR FILL | {zone_info['name']} | "
+                                f"Buy @ ${zone_info['buy_price']:.2f} | Current: ${current_price:.2f} | "
+                                f"{len(buy_orders)} order(s) open"
+                            )
                 else:
                     # Determine which zone to activate
                     # Find the zone closest to current price

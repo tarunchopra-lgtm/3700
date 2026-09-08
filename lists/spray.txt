@@ -1,0 +1,9 @@
+# spray.py configuration file
+# Format: SYMBOL NUM_STOCKS
+# Example lines (uncomment and modify as needed):
+# NVDA 4
+# MU 2
+# BTC/USD 0.1
+
+# Active spray trade configuration (first non-comment line will be used):
+INTC 4

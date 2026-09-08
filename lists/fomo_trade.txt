@@ -1,0 +1,9 @@
+# fomo_trade.py configuration file
+# Format: SYMBOL NUM_STOCKS ENTRY_PRICE STOP_PRICE TARGET1_PRICE TARGET2_PRICE
+# Example lines (uncomment and modify as needed):
+# MU 2 780 770 800 900
+# INTC 2 55 50 60 70
+# NVDA 2 250 240 260 280
+
+# Active trade configuration (first non-comment line will be used):
+MU 2 780 770 800 900 

@@ -32,6 +32,7 @@ Runs continuously every 30 seconds. Press Ctrl+C to stop.
 import argparse
 import math
 import os
+import re
 import sys
 import time
 from datetime import datetime
@@ -99,6 +100,65 @@ try:
 except Exception as exc:
     print(f"Authentication failed: {exc}")
     raise SystemExit(1)
+
+# ── Load exclusion lists ─────────────────────────────────────────────────────
+def _load_excluded_symbols() -> set:
+    """Load symbols from lists/fomo_trade.txt and lists/spray.txt to exclude from risk management."""
+    excluded = set()
+    
+    # Read fomo_trade.txt
+    fomo_path = WORKSPACE_ROOT / "lists" / "fomo_trade.txt"
+    if fomo_path.exists():
+        try:
+            with open(fomo_path, 'r') as f:
+                for line in f:
+                    line = line.strip()
+                    if not line or line.startswith('#'):
+                        continue
+                    parts = line.split()
+                    if parts:
+                        symbol = parts[0].upper()
+                        excluded.add(symbol)
+        except Exception as e:
+            print(f"Warning: Could not read fomo_trade.txt: {e}")
+    
+    # Read spray.txt
+    spray_path = WORKSPACE_ROOT / "lists" / "spray.txt"
+    if spray_path.exists():
+        try:
+            with open(spray_path, 'r') as f:
+                for line in f:
+                    line = line.strip()
+                    if not line or line.startswith('#'):
+                        continue
+                    parts = line.split()
+                    if parts:
+                        symbol = parts[0].upper()
+                        excluded.add(symbol)
+        except Exception as e:
+            print(f"Warning: Could not read spray.txt: {e}")
+    
+    return excluded
+
+
+def _is_call_option(symbol: str) -> bool:
+    """Check if symbol is a call option (e.g., NVDA250221C00300000)."""
+    pattern = re.compile(r"^[A-Z]{1,6}\d{6}[C]\d{8}$")
+    return bool(pattern.match(symbol))
+
+
+def _get_underlying_from_option(symbol: str) -> str:
+    """Extract underlying symbol from option symbol (e.g., NVDA250221C00300000 -> NVDA)."""
+    # Option format: STOCK250221C00300000
+    # Extract letters at start until we hit a digit
+    match = re.match(r"^([A-Z]+)", symbol)
+    if match:
+        return match.group(1)
+    return None
+
+
+# Load excluded symbols
+EXCLUDED_SYMBOLS = _load_excluded_symbols()
 
 # Calculate effective percentages (convert from % to decimal)
 STOP_LOSS_PCT = args.stop_loss / 100.0 if args.stop_loss else 0.01
@@ -419,9 +479,14 @@ def print_header():
     print(f"{'═'*80}")
 
 def run():
-    ticker_info = f" for {TICKER_FILTER}" if TICKER_FILTER else " for all positions"
+    if TICKER_FILTER:
+        scope_info = f" for {TICKER_FILTER}"
+    else:
+        excluded_str = ", ".join(sorted(EXCLUDED_SYMBOLS)) if EXCLUDED_SYMBOLS else "none"
+        scope_info = f" (excluding: {excluded_str})"
+    
     print(f"\n╔{'═'*78}╗")
-    print(f"║  Risk Management Bot starting{ticker_info:<48}║")
+    print(f"║  Risk Management Bot starting{scope_info:<48}║")
     print(f"║  Stop: {STOP_LOSS_PCT*100:.3f}% | Target1: {TARGET1_PCT*100:.3f}% | Target2: {TARGET2_PCT*100:.3f}%{' '*28}║")
     print(f"║  Log file: {os.path.basename(LOG_FILE):<60}║")
     print(f"║  Press Ctrl+C to stop{' '*54}║")
@@ -434,11 +499,28 @@ def run():
             # Fetch all current positions
             try:
                 all_positions = {p.symbol: p for p in trading_client.get_all_positions()}
-                # Filter by ticker if specified
+                
+                # Filter by ticker if specified (for backward compatibility)
                 if TICKER_FILTER:
                     positions = {k: v for k, v in all_positions.items() if k.upper() == TICKER_FILTER}
                 else:
-                    positions = all_positions
+                    # Include all positions EXCEPT those in exclusion lists and their call options
+                    positions = {}
+                    for k, v in all_positions.items():
+                        symbol_upper = k.upper()
+                        
+                        # Exclude if symbol is in exclusion list
+                        if symbol_upper in EXCLUDED_SYMBOLS:
+                            continue
+                        
+                        # Exclude if it's a call option for an excluded stock
+                        if _is_call_option(symbol_upper):
+                            underlying = _get_underlying_from_option(symbol_upper)
+                            if underlying and underlying in EXCLUDED_SYMBOLS:
+                                continue
+                        
+                        positions[k] = v
+                
                 latest_buy_fill_by_symbol = _build_latest_buy_fill_map()
             except Exception as e:
                 print(f"  ✗ Error fetching positions: {e}")

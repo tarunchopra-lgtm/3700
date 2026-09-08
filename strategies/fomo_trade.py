@@ -143,6 +143,34 @@ def _place_entry_order() -> tuple[str, float]:
     return str(entry_response.id), limit_price
 
 
+def _place_reentry_market_order() -> tuple[str, float]:
+    """Place a market order for re-entry. Waits for price to reach ENTRY_PRICE before submitting."""
+    # Wait for price to reach entry level
+    while True:
+        try:
+            current_price = _get_current_price(SYMBOL)
+            if current_price >= ENTRY_PRICE:
+                # Price reached entry level - place market order
+                print(f"[{datetime.now().strftime('%H:%M:%S')}] Price reached ${current_price:.2f}. Submitting MARKET BUY...")
+                entry_order = MarketOrderRequest(
+                    symbol=SYMBOL,
+                    qty=TOTAL_QTY,
+                    side=OrderSide.BUY,
+                    time_in_force=ORDER_TIME_IN_FORCE,
+                )
+                entry_response = _timed("submit_order(reentry_market)", trading_client.submit_order, order_data=entry_order)
+                return str(entry_response.id), current_price
+            else:
+                # Price still below entry level
+                print(
+                    f"[{datetime.now().strftime('%H:%M:%S')}] Waiting for re-entry: price ${current_price:.2f} < entry ${ENTRY_PRICE:.2f}"
+                )
+                time.sleep(2)
+        except Exception as e:
+            print(f"[{datetime.now().strftime('%H:%M:%S')}] Error in re-entry wait: {e}")
+            time.sleep(2)
+
+
 def _get_current_price(symbol: str) -> float:
     if IS_CRYPTO:
         price_request = CryptoLatestTradeRequest(symbol_or_symbols=symbol)
@@ -163,36 +191,63 @@ def _normalize_position_qty(raw_qty: float) -> float | int:
     return max(int(round(abs(float(raw_qty)))), 0)
 
 def _print_usage() -> None:
-    print("Usage: python fomo_trade.py <TICKER> <NUM_STOCKS> <ENTRY_PRICE> <STOP_PRICE> <TARGET1_PRICE> <TARGET2_PRICE> [--refresh-option-midpoint] [--single-entry]")
-    print("Example: python fomo_trade.py MU 2 780 770 800 900")
+    print("Usage: python fomo_trade.py")
+    print("Reads configuration from lists/fomo_trade.txt")
+    print("File format: SYMBOL NUM_STOCKS ENTRY_PRICE STOP_PRICE TARGET1_PRICE TARGET2_PRICE")
+    print("Example line: MU 2 780 770 800 900")
 
 
-# Parse arguments: ticker, number of stocks, entry, stop, target1, target2
-if len(sys.argv) < 7:
-    print(f"Error: expected 6 arguments, got {len(sys.argv) - 1}")
-    _print_usage()
-    sys.exit(1)
+def _read_config_from_file() -> tuple:
+    """Read the first active (non-comment) line from lists/fomo_trade.txt"""
+    config_path = WORKSPACE_ROOT / "lists" / "fomo_trade.txt"
+    
+    if not config_path.exists():
+        print(f"Error: Configuration file not found at {config_path}")
+        print("Please create lists/fomo_trade.txt with content like:")
+        print("MU 2 780 770 800 900")
+        sys.exit(1)
+    
+    try:
+        with open(config_path, 'r') as f:
+            for line in f:
+                line = line.strip()
+                # Skip empty lines and comments
+                if not line or line.startswith('#'):
+                    continue
+                
+                parts = line.split()
+                if len(parts) < 6:
+                    print(f"Error: Invalid configuration line: {line}")
+                    print("Expected format: SYMBOL NUM_STOCKS ENTRY_PRICE STOP_PRICE TARGET1_PRICE TARGET2_PRICE")
+                    sys.exit(1)
+                
+                symbol = parts[0].upper()
+                try:
+                    num_stocks = int(parts[1])
+                    entry_price = float(parts[2])
+                    stop_price = float(parts[3])
+                    target1_price = float(parts[4])
+                    target2_price = float(parts[5])
+                except ValueError as e:
+                    print(f"Error: Invalid value in configuration line: {line}")
+                    print(f"Details: {e}")
+                    sys.exit(1)
+                
+                return symbol, num_stocks, entry_price, stop_price, target1_price, target2_price
+        
+        print("Error: No valid configuration lines found in lists/fomo_trade.txt")
+        sys.exit(1)
+    except Exception as e:
+        print(f"Error reading configuration file: {e}")
+        sys.exit(1)
 
-SYMBOL = sys.argv[1].upper()
-try:
-    NUM_STOCKS = int(sys.argv[2])
-    ENTRY_PRICE = float(sys.argv[3])
-    STOP_PRICE = float(sys.argv[4])
-    TARGET1_PRICE = float(sys.argv[5])
-    TARGET2_PRICE = float(sys.argv[6])
-except ValueError:
-    print("Error: NUM_STOCKS must be an integer and price arguments must be numeric values")
-    _print_usage()
-    sys.exit(1)
 
-extra_flags = set(sys.argv[7:])
-unknown_flags = extra_flags - {"--refresh-option-midpoint", "--single-entry"}
-if unknown_flags:
-    print(f"Error: unknown option(s): {', '.join(sorted(unknown_flags))}")
-    _print_usage()
-    sys.exit(1)
-REFRESH_OPTION_MIDPOINT = "--refresh-option-midpoint" in extra_flags
-SINGLE_ENTRY_MODE = "--single-entry" in extra_flags
+# Parse configuration from file
+SYMBOL, NUM_STOCKS, ENTRY_PRICE, STOP_PRICE, TARGET1_PRICE, TARGET2_PRICE = _read_config_from_file()
+
+# Fixed flags (can be modified here if needed)
+REFRESH_OPTION_MIDPOINT = False
+SINGLE_ENTRY_MODE = False
 
 if NUM_STOCKS <= 0:
     print("Error: NUM_STOCKS must be a positive integer")
@@ -342,17 +397,17 @@ try:
                         print(
                             f"[{datetime.now().strftime('%H:%M:%S')}] Re-entry trigger: "
                             f"price crossed above entry ({prev_price_text} -> ${current_price:.2f}). "
-                            f"Submitting LIMIT BUY for {TOTAL_QTY} {SYMBOL} at ${ENTRY_PRICE:.2f}..."
+                            f"Waiting for price to reach ${ENTRY_PRICE:.2f}, then submitting MARKET BUY for {TOTAL_QTY} {SYMBOL}..."
                         )
                         try:
-                            entry_order_id, submitted_price = _place_entry_order()
+                            entry_order_id, submitted_price = _place_reentry_market_order()
                             first_contract_sold = False
                             breakeven_stop_set = False
                             second_contract_stop_loss = None
                             awaiting_reentry_after_stop = False
-                            print(f"✓ Re-entry BUY submitted at midpoint ${submitted_price:.2f}. Order ID: {entry_order_id}")
+                            print(f"✓ Re-entry MARKET BUY submitted at ${submitted_price:.2f}. Order ID: {entry_order_id}")
                         except Exception as e:
-                            print(f"✗ Error submitting re-entry BUY: {e}")
+                            print(f"✗ Error submitting re-entry MARKET BUY: {e}")
                     elif not awaiting_reentry_after_stop and crossed_above_entry:
                         prev_price_text = "startup" if last_observed_price is None else f"${last_observed_price:.2f}"
                         print(

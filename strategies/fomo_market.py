@@ -123,8 +123,95 @@ def _launch_fomo_trade(symbol: str, num_stocks: int, entry: float, stop: float, 
 
 
 def main() -> int:
+    # Handle help flag
+    if len(sys.argv) < 2 or sys.argv[1] in ["--help", "-h", "help"]:
+        print("""
+FOMO_MARKET.PY - Automated Market Entry Strategy with Continuous Monitoring
+
+SYNTAX:
+  python strategies/fomo_market.py <TICKER> <NUM_STOCKS> [--help]
+
+REQUIRED:
+  <TICKER>       Stock or crypto symbol (e.g., MU, AAPL, BTC/USD)
+  <NUM_STOCKS>   Number of shares per position (must be EVEN integer)
+
+OPTIONS:
+  --help, -h    Show this help message
+
+DESCRIPTION:
+  Automated FOMO trading strategy that enters at market price
+  Calculates dynamic stops and targets based on current price
+  Launches fomo_trade.py subprocess for position management
+  Continuously monitors price and refreshes levels daily at 2:00 PM PT
+  Useful for aggressive entry strategies in trending markets
+
+PRICE LEVEL CALCULATION:
+  Entry:     Current market price (market order)
+  Stop Loss: Entry - 1% (hard exit on drops)
+  Target 1:  Entry + 1% (first profit take)
+  Target 2:  Entry + 3% (aggressive profit target)
+
+AUTOMATION:
+  - Calculates levels from live market price
+  - Splits position across two trades
+  - Monitors price every 30 seconds
+  - Refreshes levels daily at 2:00 PM Pacific
+
+REQUIRED PARAMETERS:
+  NUM_STOCKS:
+  - Must be EVEN (e.g., 2, 4, 6, 10)
+  - Each position trades half the quantity
+  - Example: 4 becomes 2 shares per entry
+
+EXAMPLES:
+  python strategies/fomo_market.py MU 2
+    - Enter Micron at current price
+    - Targets: +1% and +3%
+    - Stop: -1% from entry
+
+  python strategies/fomo_market.py AAPL 4
+    - Enter Apple with 4 shares (2+2 split)
+    - Continuous monitoring
+    - Daily level refresh
+
+  python strategies/fomo_market.py BTC/USD 2
+    - Bitcoin entry at market
+    - Dynamic stops based on volatility
+    - Crypto-compatible pricing
+
+OUTPUT:
+  Console:
+  - Calculated entry, stop, and target levels
+  - Current price monitoring updates
+  - Strategy execution and subprocess launch
+  - Daily refresh confirmations
+
+  fomo_trade.py subprocess:
+  - Position entry notifications
+  - Stop loss execution
+  - Target hit confirmations
+  - Final P&L reporting
+
+MONITORING:
+  - Checks every 30 seconds
+  - Displays current price vs. entry/stop/targets
+  - Refreshes levels daily at 2:00 PM PT
+  - Auto-stops when positions close
+
+NOTES:
+  - Requires valid Alpaca API credentials
+  - NUM_STOCKS must be EVEN (constraints position sizing)
+  - Aggressive strategy (good for trending markets)
+  - Stop loss is hard (-1% from entry)
+  - Time zone: Pacific Time (PT)
+  - Daily refresh cutoff: 2:00 PM PT
+  - Press Ctrl+C to stop monitoring
+  - Subprocess (fomo_trade.py) continues after stop
+""")
+        return 0
+    
     if len(sys.argv) != 3:
-        print("Usage: python fomo_market.py <TICKER> <NUM_STOCKS>")
+        print("Usage: python fomo_market.py <TICKER> <NUM_STOCKS> [--help]")
         print("Example: python fomo_market.py MU 2")
         return 1
 

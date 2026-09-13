@@ -31,7 +31,39 @@ ATR_PERIOD = 14
 
 
 def _usage() -> None:
-    print("Usage: python atr.py <TICKER>")
+    print("""
+ATR.PY - Average True Range Calculator for Stocks and Cryptocurrencies
+
+SYNTAX:
+  python atr.py <SYMBOL> [--help]
+
+REQUIRED:
+  <SYMBOL>      Stock or crypto symbol (e.g., AAPL, SPY, BTC/USD, ETH/USD)
+
+OPTIONS:
+  --help, -h    Show this help message
+
+DESCRIPTION:
+  Calculates the 14-period Average True Range (ATR) for a given symbol
+  ATR measures volatility using the true range over a period
+  Works with both stocks and cryptocurrencies
+
+EXAMPLES:
+  python indicator/atr.py AAPL
+  python indicator/atr.py SPY
+  python indicator/atr.py BTC/USD
+  python indicator/atr.py ETH/USD
+  python indicator/atr.py --help
+
+OUTPUT:
+  Prints current ATR value for the symbol
+  Returns 0 on success, 1 on error
+
+NOTES:
+  - Requires valid Alpaca API credentials in env/credentials
+  - Crypto symbols use format: BTC/USD, ETH/USD, etc.
+  - Uses latest 14 days of market data
+""")
 
 
 def _load_credentials() -> tuple[str, str]:
@@ -125,9 +157,10 @@ def _calculate_atr(data_client, symbol: str, is_crypto: bool = False) -> float:
 
 
 def main() -> int:
-    if len(sys.argv) != 2:
+    # Handle help flag
+    if len(sys.argv) < 2 or sys.argv[1] in ["--help", "-h", "help"]:
         _usage()
-        return 1
+        return 0 if len(sys.argv) > 1 else 1
 
     symbol = sys.argv[1].strip().upper()
     if not symbol:

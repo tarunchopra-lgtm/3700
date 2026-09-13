@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: MDT
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $95.83
+  ATR (14-day): $2.07
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $88.50 - $91.61
+  Size:         $3.11
+  Distance:     $4.22 (203% of ATR)
+  Formed:       2026-08-12
+  FRESHNESS:    STALE
+  Notes:        STALE - Daily candle tested zone yesterday (low $90.65)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $91.42 - $93.39
+  Size:         $1.97
+  Distance:     $2.44
+  Formed:       2026-09-09
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($95.83 >= zone $91.42)
+
+TRADE METRICS:
+  Stop Loss Distance:  $7.33
+  Profit Target (PT):  $-4.41
+  Risk:Reward Ratio:   1:-0.60

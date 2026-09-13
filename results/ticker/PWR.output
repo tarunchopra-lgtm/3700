@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: PWR
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $683.93
+  ATR (14-day): $33.56
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $615.47 - $630.55
+  Size:         $15.09
+  Distance:     $53.38 (159% of ATR)
+  Formed:       2026-09-10
+  FRESHNESS:    STALE
+  Notes:        STALE - Daily candle tested zone yesterday (low $615.47)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $610.00 - $667.00
+  Size:         $57.00
+  Distance:     $16.93
+  Formed:       2026-08-24
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($683.93 >= zone $610.00)
+
+TRADE METRICS:
+  Stop Loss Distance:  $68.46
+  Profit Target (PT):  $-73.93
+  Risk:Reward Ratio:   1:-1.08

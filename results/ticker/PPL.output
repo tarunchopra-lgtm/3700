@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: PPL
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $34.40
+  ATR (14-day): $0.72
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $33.76 - $34.24
+  Size:         $0.48
+  Distance:     $0.16 (22% of ATR)
+  Formed:       2026-08-31
+  FRESHNESS:    STALE
+  Notes:        STALE - Daily candle tested zone yesterday (low $34.15)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $34.15 - $35.22
+  Size:         $1.07
+  Distance:     $0.00
+  Formed:       2026-09-10
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($34.40 >= zone $34.15)
+
+TRADE METRICS:
+  Stop Loss Distance:  $0.64
+  Profit Target (PT):  $-0.25
+  Risk:Reward Ratio:   1:-0.39

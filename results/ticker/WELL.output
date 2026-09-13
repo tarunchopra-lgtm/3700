@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: WELL
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $247.22
+  ATR (14-day): $5.35
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $233.52 - $237.89
+  Size:         $4.37
+  Distance:     $9.33 (174% of ATR)
+  Formed:       2026-08-31
+  FRESHNESS:    STALE
+  Notes:        STALE - Daily candle tested zone yesterday (low $234.94)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $234.72 - $240.35
+  Size:         $5.63
+  Distance:     $6.87
+  Formed:       2026-09-09
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($247.22 >= zone $234.72)
+
+TRADE METRICS:
+  Stop Loss Distance:  $13.70
+  Profit Target (PT):  $-12.50
+  Risk:Reward Ratio:   1:-0.91

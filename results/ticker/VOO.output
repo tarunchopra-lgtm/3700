@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: VOO
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $702.65
+  ATR (14-day): $8.23
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $678.06 - $688.35
+  Size:         $10.29
+  Distance:     $14.30 (174% of ATR)
+  Formed:       2026-07-31
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $699.49 - $707.51
+  Size:         $8.02
+  Distance:     $0.00
+  Formed:       2026-09-09
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($702.65 >= zone $699.49)
+
+TRADE METRICS:
+  Stop Loss Distance:  $24.59
+  Profit Target (PT):  $-3.16
+  Risk:Reward Ratio:   1:-0.13

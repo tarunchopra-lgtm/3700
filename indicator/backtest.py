@@ -55,19 +55,70 @@ class StrategyConfig:
 
 
 def _print_usage() -> None:
-    print("Usage: python backtest.py <DAYS_BACK> <PROGRAM_FILE.py> <PROGRAM_ARGS...>")
-    print("")
-    print("Supported program adapters:")
-    print("  previous_close.py <TICKER> <NUM_STOCKS>")
-    print("    Uses previous_close levels: stop=1%, target1=1%, target2=3%.")
-    print("    Applies open gate: enter only if today's open > previous close.")
-    print("")
-    print("  fomo_trade.py <TICKER> <NUM_STOCKS> <ENTRY_PRICE> <STOP_PRICE> <TARGET1_PRICE> <TARGET2_PRICE>")
-    print("    Uses fixed absolute entry/stop/targets from supplied args for each tested day.")
-    print("")
-    print("Examples:")
-    print("  python backtest.py 100 previous_close.py INTC 100")
-    print("  python backtest.py 60 fomo_trade.py INTC 100 40 39.6 40.4 41.2")
+    print("""
+BACKTEST.PY - Strategy Backtesting Framework
+
+SYNTAX:
+  python strategies/backtest.py <DAYS_BACK> <PROGRAM_FILE.py> [PROGRAM_ARGS...] [--help]
+
+REQUIRED:
+  DAYS_BACK          Number of days to backtest (e.g., 100, 60, 365)
+  PROGRAM_FILE.py    Strategy program to test (see Supported Programs below)
+  PROGRAM_ARGS       Arguments specific to the strategy program
+
+OPTIONS:
+  --help, -h         Show this help message
+
+DESCRIPTION:
+  Generic backtesting framework that adapts to different strategy programs
+  Simulates trading over historical daily candles
+  Tests entry/stop/target levels at each candle's open, high, low, close
+  Reports P/L, win rate, and outcome statistics
+
+SUPPORTED PROGRAMS:
+
+  1. previous_close.py <TICKER> <NUM_STOCKS>
+     - Entry at daily open (if open > previous close)
+     - Stop Loss: -1% from entry
+     - Target 1: +1% (sell 50% of position)
+     - Target 2: +3% (sell remaining 50%)
+     Example: python backtest.py 100 previous_close.py INTC 100
+
+  2. fomo_trade.py <TICKER> <NUM_STOCKS> <ENTRY> <STOP> <TARGET1> <TARGET2>
+     - Fixed entry/stop/target prices from arguments
+     - Tests same prices on each historical day
+     Example: python backtest.py 60 fomo_trade.py INTC 100 40 39.6 40.4 41.2
+
+EXAMPLES:
+
+  python strategies/backtest.py 100 previous_close.py INTC 100
+    - Test previous_close strategy on INTC for 100 days
+    - Entry at each day's open, stop at -1%, targets at +1% and +3%
+
+  python strategies/backtest.py 60 fomo_trade.py MU 50 90 87.5 91.5 94.0
+    - Test fixed levels on MU for 60 days
+    - Entry: $90, Stop: $87.50, Target1: $91.50, Target2: $94.00
+
+  python strategies/backtest.py 250 previous_close.py SPY 100
+    - Test 250-day backtest on SPY
+
+OUTPUT:
+  - Daily results: entry price, outcome, P/L
+  - Outcomes: "entered", "no_entry", "stopped_before_t1", "hit_t1", "hit_t2"
+  - Summary statistics:
+    * Total trades
+    * Winning trades vs. losing trades
+    * Total P/L and average P/L per trade
+    * Win rate percentage
+
+NOTES:
+  - Requires valid Alpaca API credentials
+  - Uses historical daily OHLC data only (paper trading simulation)
+  - Intraday execution simulated within each candle
+  - Results are historical; past performance ≠ future results
+  - Each strategy program must return StrategyConfig with parameters
+  - Adapter patterns defined in _parse_previous_close() and _parse_fomo_trade()
+""")
 
 
 def _parse_percent(value: str, arg_name: str) -> float:

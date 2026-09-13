@@ -127,6 +127,71 @@ def _timestamp() -> str:
 
 
 def main() -> int:
+    # Handle help flag
+    if len(sys.argv) > 1 and sys.argv[1] in ["--help", "-h", "help"]:
+        print("""
+STOCK_ALERT.PY - Price Target Alert System
+
+SYNTAX:
+  python indicator/stock_alert.py [--help]
+
+REQUIRED:
+  alert_data.txt    File with <TICKER> <TARGET_PRICE> pairs (one per line)
+
+OPTIONS:
+  --help, -h        Show this help message
+
+DESCRIPTION:
+  Continuously monitors specified stocks for price levels
+  Sends email alerts when price reaches or approaches target
+  Reads alert rules from alert_data.txt in workspace root
+  Runs as background service, polling every minute
+  Integrates with Gmail for email notifications
+
+ALERT_DATA.TXT FORMAT:
+  TICKER    TARGET_PRICE   [# Optional comment]
+  AAPL      150            # Alert when AAPL reaches $150
+  SPY       450            # Alert when SPY reaches $450
+  BTC/USD   42000          # Alert when Bitcoin reaches $42k
+  
+  Lines starting with # are comments
+  Blank lines are ignored
+
+TRIGGER LOGIC:
+  - Trigger band: ±0.5% of target price
+  - Once triggered, alert repeats only if price leaves band (1% wider)
+  - Uses latest trade prices from Alpaca API
+  - Polls every 60 seconds
+
+EXAMPLES:
+  # Create alert_data.txt with:
+  #   INTC 90
+  #   SPY 450
+  #   TSLA 250
+  
+  python indicator/stock_alert.py
+    - Start monitoring, alerts to configured email
+
+OUTPUT:
+  - [HH:MM:SS] Ticker status updates every poll
+  - [HH:MM:SS] ALERT SENT: Confirmation when triggered
+  - Current price and distance from target shown
+
+EMAIL ALERTS:
+  - Requires Gmail credentials in env/credentials
+  - Email subject: "TICKER reached $TARGET - current $PRICE"
+  - Email body includes full trade details and timestamp
+
+NOTES:
+  - Requires valid Alpaca API credentials and trading account
+  - Requires Gmail account with app-specific password
+  - Credentials stored in env/credentials (api_key, secret_key, gmail config)
+  - Runs indefinitely until stopped (Ctrl+C)
+  - Best used with system process manager or task scheduler
+  - Works with both stocks and cryptocurrencies (format: BTC/USD, ETH/USD)
+""")
+        return 0
+    
     try:
         credentials, _ = bootstrap_trading_auth("stock_alert.py")
         from_email, to_email, app_password = _load_email_config()

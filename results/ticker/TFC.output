@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: TFC
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $53.12
+  ATR (14-day): $0.87
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $49.06 - $50.17
+  Size:         $1.11
+  Distance:     $2.95 (341% of ATR)
+  Formed:       2026-09-01
+  FRESHNESS:    STALE
+  Notes:        STALE - Daily candle tested zone yesterday (low $49.76)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $49.76 - $51.64
+  Size:         $1.88
+  Distance:     $1.48
+  Formed:       2026-09-09
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($53.12 >= zone $49.76)
+
+TRADE METRICS:
+  Stop Loss Distance:  $4.06
+  Profit Target (PT):  $-3.36
+  Risk:Reward Ratio:   1:-0.83

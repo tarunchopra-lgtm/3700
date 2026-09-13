@@ -213,9 +213,70 @@ def _send_email(from_email: str, to_email: str, app_password: str, subject: str,
 
 
 def main() -> int:
+    # Handle help flag
     if len(sys.argv) > 1:
-        print("Usage: python email_status.py")
-        return 1
+        if sys.argv[1] in ["--help", "-h", "help"]:
+            print("""
+EMAIL_STATUS.PY - Account Activity Monitor with Email Alerts
+
+SYNTAX:
+  python indicator/email_status.py [--help]
+
+OPTIONS:
+  --help, -h    Show this help message
+
+DESCRIPTION:
+  Monitors your Alpaca trading account for changes
+  Tracks open/closed positions and order status changes
+  Emails alerts when positions open/close or orders change
+  Runs continuously polling every 60 seconds
+  Useful for passive monitoring without watching screen
+
+MONITORING:
+  - Position changes (new entries, exits, quantity changes)
+  - Order submissions (new orders placed)
+  - Order fills (orders executed successfully)
+  - Order cancellations (orders rejected or cancelled)
+  - Account balance changes (if significant)
+
+ALERTS:
+  - Position opened: Symbol, quantity, entry price, market value
+  - Position closed: Exit price and P&L
+  - Order submitted: Symbol, side, quantity, order type, limit price
+  - Order filled: Confirmation with fill price
+  - Order cancelled: Reason and details
+
+EXAMPLE:
+  python indicator/email_status.py
+    - Start monitoring account
+    - Sends emails to configured address every minute if changes detected
+    - Press Ctrl+C to stop monitoring
+
+OUTPUT:
+  - [HH:MM:SS] Baseline snapshot captured on startup
+  - [HH:MM:SS] Change detected: "Position AAPL opened at $150"
+  - Email alerts with position and order details
+  - Console output shows monitoring status
+
+CONFIGURATION:
+  Email settings stored in env/credentials:
+  - Email from address (Gmail account)
+  - Email to address (recipient)
+  - App-specific password for Gmail
+
+NOTES:
+  - Requires Alpaca API credentials
+  - Requires Gmail account with app password configured
+  - Poll interval: 60 seconds (change POLL_SECONDS in code)
+  - Runs as foreground process (start with & for background)
+  - Best used with process manager for 24/7 monitoring
+  - Compare each snapshot against previous to detect changes
+  - Email alerts help traders stay informed without screen time
+""")
+            return 0
+        else:
+            print("Usage: python email_status.py [--help]")
+            return 1
 
     try:
         credentials, trading_client = bootstrap_trading_auth("email_status.py")

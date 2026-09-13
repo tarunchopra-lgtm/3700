@@ -47,8 +47,101 @@ def _is_recommended(result: BacktestResult) -> bool:
 
 
 def main() -> int:
+    # Handle help flag
+    if len(sys.argv) > 1 and sys.argv[1] in ["--help", "-h", "help"]:
+        print("""
+FIND_VOL.PY - Volume Candle Size Optimizer for long_trend.py
+
+SYNTAX:
+  python strategies/find_vol.py <TICKER> [--help]
+
+REQUIRED:
+  <TICKER>    Stock symbol to optimize (e.g., AAPL, SPY, INTC)
+
+OPTIONS:
+  --help, -h  Show this help message
+
+DESCRIPTION:
+  Analyzes historical minute bars to find optimal volume candle size
+  Backtests multiple candle sizes (5% - 50% of average daily volume)
+  Scores each size by profitability and trade frequency
+  Recommends best size for use with long_trend.py strategy
+  Uses trailing profit factor and win rate for scoring
+
+OPTIMIZATION CRITERIA:
+  - Minimum 10 completed trades for qualification
+  - Positive net P&L (profit > 0)
+  - Profit factor > 1.0 (wins > losses)
+  - Tests recent 15 completed candles
+  - Ranks by net profit, then profit factor, then win rate
+
+VOLUME CANDLE SIZING:
+  Testing percentages: 5%, 10%, 15%, 20%, 30%, 40%, 50% of ADV
+  Smaller volumes:
+  - More candles formed = more signals
+  - Faster pattern confirmation
+  - More trades tested
+  - Higher noise/whipsaw risk
+
+  Larger volumes:
+  - Fewer candles = cleaner signals
+  - Better trend confirmation
+  - Fewer trades but higher quality
+  - Less noise
+
+EXAMPLES:
+  python strategies/find_vol.py AAPL
+    - Test Apple with various candle sizes
+    - Recommend optimal size for long_trend.py
+
+  python strategies/find_vol.py SPY
+    - Analyze S&P 500 ETF
+    - Find best volume candle for trend trading
+
+OUTPUT:
+  Console table:
+  - VOL%: Percentage of average daily volume
+  - CANDLE SIZE: Actual share volume per candle
+  - TRADES: Number of completed trades tested
+  - W/L: Wins/Losses ratio
+  - WIN%: Percentage of winning trades
+  - NET/SH: Net profit per share across all trades
+  - PF: Profit Factor (gross profit / gross loss)
+  - STATUS: QUALIFIES or REJECT
+
+  Results:
+  - 14-day average IEX volume (baseline)
+  - Best tested size (most profitable)
+  - Recommended size (passes all criteria)
+  - Command to use in long_trend.py
+
+RECOMMENDATION OUTPUT:
+  If qualified:
+  - Specific volume candle size recommended
+  - Profit factor and win rate shown
+  - Ready-to-run command for long_trend.py
+  - Example: python long_trend.py AAPL 5 2500
+
+  If rejected:
+  - No size passed the criteria
+  - Best size shown for reference
+  - Suggests retesting after strategy changes
+
+NOTES:
+  - Requires valid Alpaca API credentials
+  - Uses 14-day average volume from IEX data
+  - Tests recent minute bars (lookback period)
+  - Backtests on trend-break pattern detection
+  - Use recommended size with long_trend.py
+  - Re-run quarterly or after market changes
+  - Paper account recommended for testing
+  - Volume candle approach good for choppy markets
+  - Recommendation is data-driven, not guaranteed
+""")
+        return 0
+    
     if len(sys.argv) != 2 or not sys.argv[1].strip():
-        print("Usage: python strategies/find_vol.py <TICKER>")
+        print("Usage: python strategies/find_vol.py <TICKER> [--help]")
         return 1
 
     symbol = sys.argv[1].strip().upper()
@@ -98,6 +191,28 @@ def main() -> int:
         f"\nBest tested size: {best_tested.volume_per_candle:,} shares "
         f"({best_tested.percent:.1f}% of average daily volume) | "
         f"net=${best_tested.net_profit:.2f}/share | "
+        f"PF={_format_profit_factor(best_tested.profit_factor, best_tested.trades)}"
+    )
+
+    if not qualified:
+        print("RECOMMENDATION: NONE. No tested candle size demonstrated a profitable trend-break edge.")
+        print(
+            f"Do not select {best_tested.volume_per_candle:,} merely because it lost the least; "
+            "retest after changing the entry or exit rules."
+        )
+        return 0
+
+    recommended = max(qualified, key=_rank_key)
+    print(
+        f"RECOMMENDED VOLUME CANDLE SIZE: {recommended.volume_per_candle:,} shares "
+        f"({recommended.percent:.1f}%)"
+    )
+    print("Use with long_trend.py:")
+    print(
+        f"python strategies\\long_trend.py {symbol} <QUANTITY> "
+        f"{recommended.volume_per_candle}"
+    )
+    return 0
         f"PF={_format_profit_factor(best_tested.profit_factor, best_tested.trades)}"
     )
 

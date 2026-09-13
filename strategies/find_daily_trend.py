@@ -8,7 +8,7 @@ Usage:
     python strategies/find_daily_trend.py INTC               # Detailed analysis for INTC
     python strategies/find_daily_trend.py BKR                # Show chart & trend for BKR
 
-With no arguments, every .txt file in lists/ is scanned and the top 10 matches
+With no arguments, every .txt file in lists/ is scanned and the top 5 matches
 are written to lists/today-breakout. When a ticker symbol is provided, detailed
 analysis with ASCII chart is shown instead.
 """
@@ -39,7 +39,7 @@ from strategies.long_trend import ENTRY_LOOKBACK, _first_cent_above, _fit_trend
 ET = ZoneInfo("America/New_York")
 BATCH_SIZE = 100
 HISTORY_DAYS = 50
-TOP_COUNT = 10
+TOP_COUNT = 5
 # No .txt suffix keeps this output from being re-read as an input universe.
 BREAKOUT_FILE = LISTS_DIR / "today-breakout"
 
@@ -47,6 +47,9 @@ BREAKOUT_FILE = LISTS_DIR / "today-breakout"
 def _resolve_list_files(arguments: list[str]) -> list[Path]:
     if not arguments:
         files = sorted(LISTS_DIR.glob("*.txt"))
+        # Ignore specific list files
+        ignored = {"fomo_trade.txt", "spray.txt"}
+        files = [f for f in files if f.name not in ignored]
     else:
         files = []
         for argument in arguments:
@@ -256,7 +259,7 @@ def _draw_ascii_chart(symbol: str, prior_bars: list, resistance, today_open: flo
     lines.append(day_line)
     
     # Print chart
-    print(f"\n{symbol} - 15-Day Downtrend with Today's Open")
+    print(f"\n{symbol} - 10-Day Downtrend with Today's Open")
     print("=" * (chart_width + 10))
     for line in lines:
         print(line)
@@ -314,6 +317,136 @@ def _show_ticker_details(symbol: str, bars: list, current_price: float) -> None:
 
 
 def main() -> int:
+    # Handle help flag
+    if len(sys.argv) > 1 and sys.argv[1] in ["--help", "-h", "help"]:
+        print("""
+FIND_DAILY_TREND.PY - Scan Watchlists for Daily Breakouts
+
+SYNTAX:
+  python strategies/find_daily_trend.py [OPTIONS] [--help]
+
+OPTIONAL:
+  (no args)              Scan all lists/*.txt files
+  LIST1.txt LIST2.txt    Scan specific list files (with or without .txt)
+  --email                Include email output to configured recipient
+  SYMBOL                 Show detailed analysis for single symbol (e.g., AAPL)
+  --help, -h             Show this help message
+
+DESCRIPTION:
+  Scans multiple watchlists for stocks with descending daily trend breakouts
+  Identifies potential entry points across your entire trading universe
+  Can email results automatically
+  Shows detailed analysis for individual symbols
+
+SCANNING MODES:
+
+  Default (No Arguments):
+  - Scans all .txt files in lists/ directory
+  - Ignores: fomo_trade.txt, spray.txt
+  - Finds top 5 breakout candidates
+  - Saves results to lists/today-breakout
+  - Skips if no data available
+
+  Specific Lists:
+  - python find_daily_trend.py nasdaq.txt spy.txt
+  - Scans only specified watchlists
+  - Results merged from multiple lists
+  - Top 5 across all specified lists
+
+  With --email:
+  - python find_daily_trend.py --email
+  - Scans normally AND emails results
+  - Uses configured Gmail account
+  - Subject: Daily trend breakouts
+  - Can combine with specific lists: find_daily_trend.py nasdaq.txt --email
+
+  Detailed Analysis (Single Symbol):
+  - python find_daily_trend.py INTC
+  - Shows ASCII chart for last 50 days
+  - Displays trend lines and resistance
+  - Current price and breakout distance
+  - Detailed trade setup information
+
+PATTERN DETECTION:
+  - 15-day descending high trend
+  - Current price above resistance line
+  - Close above slope line = entry signal
+  - Works on completed daily candles
+  - Last 50 trading days analyzed
+
+WATCHLIST FILES:
+  Located in lists/ directory:
+  - nasdaq.txt: NASDAQ 100 stocks
+  - spy.txt: S&P 500 stocks
+  - etf.txt: ETF universe
+  - Your custom lists (.txt format)
+
+  Format per file:
+  AAPL
+  MSFT
+  GOOGL
+  # Comments start with #
+
+EXAMPLES:
+  python strategies/find_daily_trend.py
+    - Scan all lists
+    - Write top 5 to lists/today-breakout
+
+  python strategies/find_daily_trend.py nasdaq.txt
+    - Scan only nasdaq.txt
+    - Show top 5 matches
+
+  python strategies/find_daily_trend.py --email
+    - Scan all lists AND email results
+
+  python strategies/find_daily_trend.py nasdaq.txt spy.txt --email
+    - Scan nasdaq and spy lists
+    - Email the results
+
+  python strategies/find_daily_trend.py INTC
+    - Show detailed chart and analysis for Intel
+    - Display ASCII price chart
+    - Show trend lines and resistance
+
+OUTPUT:
+
+  Scan Mode:
+  - Lists file: lists/today-breakout (top 5 matches)
+  - Format: SYMBOL: Entry=X.XX Stop=X.XX Target=X.XX
+  - Lists which watchlist(s) each symbol came from
+
+  Detailed Mode (Single Symbol):
+  - ASCII 50-day daily chart
+  - Trend line with descending slope
+  - Current price position vs. resistance
+  - Trade setup details (entry, stop, target)
+  - Date and analysis timestamp
+
+  Email Mode:
+  - Subject: Daily Trend Breakouts [Date]
+  - Body: List of all breakout candidates
+  - Sent to configured email address
+  - Can include multiple lists
+
+PERFORMANCE:
+  - Batch size: 100 symbols per API call
+  - Scans efficiently across large lists
+  - Top 5 ranked by slope quality
+  - Processes in ~30-60 seconds per list
+
+NOTES:
+  - Requires valid Alpaca API credentials
+  - Uses daily completed candles only
+  - Best run after market close (4:00 PM ET)
+  - Lists directory must contain .txt watchlists
+  - Email requires Gmail credentials in env/credentials
+  - 50-day history for analysis
+  - 15-candle lookback for trend detection
+  - Single symbol shows detailed ASCII chart
+  - Multiple lists scanned separately then merged
+""")
+        return 0
+    
     arguments = sys.argv[1:]
     email_requested = "--email" in arguments
     list_arguments = [argument for argument in arguments if argument != "--email"]

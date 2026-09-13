@@ -11,3 +11,9 @@
 [2026-09-01 11:42:35] STOP_LOSS    INTC     entry=88.3100  stop=88.2700  qty=2
 [2026-09-01 11:43:06] STOP_LOSS    INTC     entry=88.3100  stop=88.2700  qty=2
 [2026-09-01 12:07:37] BREAKEVEN_STOP INTC     entry=88.3100  stop=88.3100  qty=1
+[2026-09-10 12:11:38] STOP_LOSS    AAPL     entry=325.3000  stop=325.3600  qty=2
+[2026-09-10 12:23:15] STOP_LOSS    AAPL     entry=325.2800  stop=325.3600  qty=2
+[2026-09-10 12:26:48] STOP_LOSS    AAPL     entry=325.2800  stop=325.3600  qty=2
+[2026-09-10 12:27:49] STOP_LOSS    AAPL     entry=325.2800  stop=325.3600  qty=2
+[2026-09-10 12:29:51] STOP_LOSS    AAPL     entry=325.2400  stop=325.3600  qty=2
+[2026-09-10 12:30:52] STOP_LOSS    AAPL     entry=325.2300  stop=325.3600  qty=2

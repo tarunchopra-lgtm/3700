@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: PHM
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $124.63
+  ATR (14-day): $3.97
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $114.78 - $121.13
+  Size:         $6.35
+  Distance:     $3.50 (88% of ATR)
+  Formed:       2026-09-09
+  FRESHNESS:    STALE
+  Notes:        STALE - Daily candle tested zone yesterday (low $115.00)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $117.79 - $124.36
+  Size:         $6.57
+  Distance:     $0.27
+  Formed:       2026-09-09
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($124.63 >= zone $117.79)
+
+TRADE METRICS:
+  Stop Loss Distance:  $9.85
+  Profit Target (PT):  $-6.84
+  Risk:Reward Ratio:   1:-0.69

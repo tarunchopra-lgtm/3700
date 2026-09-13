@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: CMCSA
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $26.76
+  ATR (14-day): $0.93
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $24.14 - $24.89
+  Size:         $0.75
+  Distance:     $1.87 (201% of ATR)
+  Formed:       2026-08-03
+  FRESHNESS:    STALE
+  Notes:        STALE - Daily candle tested zone yesterday (low $24.51)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $25.96 - $27.13
+  Size:         $1.17
+  Distance:     $0.00
+  Formed:       2026-09-04
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($26.76 >= zone $25.96)
+
+TRADE METRICS:
+  Stop Loss Distance:  $2.62
+  Profit Target (PT):  $-0.80
+  Risk:Reward Ratio:   1:-0.31

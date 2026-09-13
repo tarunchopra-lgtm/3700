@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: VTRS
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $17.31
+  ATR (14-day): $0.57
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $16.15 - $16.51
+  Size:         $0.36
+  Distance:     $0.80 (141% of ATR)
+  Formed:       2026-09-10
+  FRESHNESS:    STALE
+  Notes:        STALE - Daily candle tested zone yesterday (low $16.15)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $16.67 - $17.28
+  Size:         $0.61
+  Distance:     $0.03
+  Formed:       2026-09-03
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($17.31 >= zone $16.67)
+
+TRADE METRICS:
+  Stop Loss Distance:  $1.16
+  Profit Target (PT):  $-0.64
+  Risk:Reward Ratio:   1:-0.55

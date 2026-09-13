@@ -162,15 +162,84 @@ def _normalize_position_qty(raw_qty: float) -> float | int:
     return max(int(round(abs(float(raw_qty)))), 0)
 
 def _print_usage() -> None:
-    print("Usage: python fomo_trailing_trade.py <TICKER> <NUM_STOCKS> <ENTRY_PRICE> <STOP_PRICE> <TARGET1_PRICE> <TRAILING_STOP> [--refresh-option-midpoint] [--single-entry]")
-    print("Example: python fomo_trailing_trade.py INTC 10 90 89 91 1")
-    print("  After TARGET1 is hit, trailing stop activates and closes when price drops TRAILING_STOP from the high")
+    print("""
+FOMO_TRAILING_TRADE.PY - Automated Position Entry with Trailing Stop Exit
+
+SYNTAX:
+  python fomo_trailing_trade.py <TICKER> <NUM_STOCKS> <ENTRY_PRICE> <STOP_PRICE> <TARGET1_PRICE> <TRAILING_STOP> [OPTIONS] [--help]
+
+REQUIRED PARAMETERS:
+  <TICKER>              Stock or crypto symbol (e.g., INTC, AAPL, BTC/USD)
+  <NUM_STOCKS>          Number of concurrent positions to maintain (integer)
+  <ENTRY_PRICE>         Entry price for opening positions (decimal)
+  <STOP_PRICE>          Hard stop loss price (decimal)
+  <TARGET1_PRICE>       First profit target / trailing stop activation (decimal)
+  <TRAILING_STOP>       Trailing stop distance from peak after TARGET1 (decimal)
+
+OPTIONS:
+  --refresh-option-midpoint  Refresh option pricing data periodically
+  --single-entry             Only enter once (do not re-enter on stop)
+  --help, -h                 Show this help message
+
+DESCRIPTION:
+  Opens and manages multiple concurrent positions at entry price
+  Closes at stop loss if price drops below STOP_PRICE
+  Activates trailing stop when TARGET1 is reached
+  Trailing stop closes when price drops TRAILING_STOP from peak
+  Supports both stocks and cryptocurrencies
+
+POSITION MANAGEMENT:
+  - Entry: Buy NUM_STOCKS shares at ENTRY_PRICE
+  - First Exit: Stop loss if price < STOP_PRICE
+  - Trailing Exit: Activates when price > TARGET1, closes when price drops TRAILING_STOP from high
+  
+EXAMPLE 1 - INTC Stock Trading:
+  python strategies/fomo_trailing_trade.py INTC 10 90 89 91 1
+  - Buy 10 INTC shares at $90
+  - Stop loss at $89
+  - When price reaches $91, activate trailing stop
+  - Close if price drops $1 from high (trailing)
+
+EXAMPLE 2 - Bitcoin Crypto:
+  python strategies/fomo_trailing_trade.py BTC/USD 1 40000 39000 41000 500
+  - Buy 1 BTC at $40,000
+  - Stop loss at $39,000
+  - Trailing stop: $500 from peak after $41,000 is reached
+
+EXAMPLE 3 - Multi-position SPY:
+  python strategies/fomo_trailing_trade.py SPY 100 450 445 460 2
+  - Buy 100 SPY shares at $450
+  - Stop loss at $445
+  - Trailing stop activates at $460, exits on $2 pullback
+
+OUTPUT:
+  - Position entry confirmation
+  - Stop loss execution details
+  - Target hit notifications
+  - Trailing stop updates and final exit price
+  - P&L calculation and reporting
+
+NOTES:
+  - Requires valid Alpaca API credentials and active trading account
+  - Order execution is automatic on price conditions
+  - Trailing stop requires real-time price monitoring
+  - For crypto: uses crypto pair format (BTC/USD, ETH/USD)
+  - For stocks: uses standard symbol format (INTC, AAPL, SPY)
+""")
+
+
+def _print_usage_short() -> None:
+    print("Usage: python fomo_trailing_trade.py <TICKER> <NUM_STOCKS> <ENTRY_PRICE> <STOP_PRICE> <TARGET1_PRICE> <TRAILING_STOP>")
 
 
 # Parse arguments: ticker, number of stocks, entry, stop, target1, trailing_stop
+if len(sys.argv) < 2 or sys.argv[1] in ["--help", "-h", "help"]:
+    _print_usage()
+    sys.exit(0 if len(sys.argv) > 1 else 1)
+
 if len(sys.argv) < 7:
     print(f"Error: expected 6 arguments, got {len(sys.argv) - 1}")
-    _print_usage()
+    _print_usage_short()
     sys.exit(1)
 
 SYMBOL = sys.argv[1].upper()

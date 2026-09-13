@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: DASH
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $214.53
+  ATR (14-day): $8.23
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $185.55 - $199.89
+  Size:         $14.34
+  Distance:     $14.64 (178% of ATR)
+  Formed:       2026-07-28
+  FRESHNESS:    STALE
+  Notes:        STALE - Daily candle tested zone yesterday (low $191.90)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $199.67 - $222.05
+  Size:         $22.38
+  Distance:     $0.00
+  Formed:       2026-09-08
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($214.53 >= zone $199.67)
+
+TRADE METRICS:
+  Stop Loss Distance:  $28.98
+  Profit Target (PT):  $-14.86
+  Risk:Reward Ratio:   1:-0.51

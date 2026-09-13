@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: EXR
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $153.83
+  ATR (14-day): $3.10
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $135.16 - $137.15
+  Size:         $1.99
+  Distance:     $16.68 (539% of ATR)
+  Formed:       2026-09-10
+  FRESHNESS:    STALE
+  Notes:        STALE - Daily candle tested zone yesterday (low $135.42)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $138.50 - $141.84
+  Size:         $3.34
+  Distance:     $11.99
+  Formed:       2026-09-08
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($153.83 >= zone $138.50)
+
+TRADE METRICS:
+  Stop Loss Distance:  $18.67
+  Profit Target (PT):  $-15.33
+  Risk:Reward Ratio:   1:-0.82

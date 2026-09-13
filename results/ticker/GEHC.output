@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: GEHC
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $67.46
+  ATR (14-day): $2.44
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $60.20 - $62.70
+  Size:         $2.50
+  Distance:     $4.76 (195% of ATR)
+  Formed:       2026-07-27
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $63.63 - $67.00
+  Size:         $3.37
+  Distance:     $0.46
+  Formed:       2026-09-10
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($67.46 >= zone $63.63)
+
+TRADE METRICS:
+  Stop Loss Distance:  $7.26
+  Profit Target (PT):  $-3.83
+  Risk:Reward Ratio:   1:-0.53

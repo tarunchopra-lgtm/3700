@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: CRWV
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $93.82
+  ATR (14-day): $7.69
+  Within ATR:   YES
+
+DEMAND ZONE (Buy Zone):
+  Range:        $84.85 - $89.63
+  Size:         $4.78
+  Distance:     $4.19 (54% of ATR)
+  Formed:       2026-09-04
+  FRESHNESS:    FRESH
+  Notes:        Limited data
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $88.73 - $100.58
+  Size:         $11.85
+  Distance:     $0.00
+  Formed:       2026-09-10
+  FRESHNESS:    FRESH
+  Notes:        Limited data
+
+TRADE METRICS:
+  Stop Loss Distance:  $8.97
+  Profit Target (PT):  $-5.09
+  Risk:Reward Ratio:   1:-0.57

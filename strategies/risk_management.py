@@ -56,14 +56,63 @@ from roles.credentials import bootstrap_trading_auth
 def parse_arguments():
     """Parse command-line arguments for risk management configuration."""
     parser = argparse.ArgumentParser(
-        description="Risk Management Bot - Automated stop loss and target management",
+        description="""
+RISK_MANAGEMENT.PY - Automated Position Stop Loss and Target Management
+
+Monitors open positions and automatically executes stop loss and profit-taking orders.
+Manages position lifecycle: Entry → Stop Loss → Target 1 (partial exit) → Target 2 (full exit).
+
+STRATEGY:
+  - Stop loss: Close position if price drops below entry - stop_loss_pct
+  - Target 1:  Sell 50% at entry + target1_pct, move stop to breakeven
+  - Target 2:  Close remaining 50% at entry + target2_pct
+  - Monitors every 30 seconds for price conditions
+        """,
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
-Examples:
-  %(prog)s                                    # 1%% stop, 1%% tgt1, 2%% tgt2 on all positions
-  %(prog)s --ticker SPY                       # 1%% stop, 1%% tgt1, 2%% tgt2 on SPY only
-  %(prog)s --stop-loss 2 --target1 2          # 2%% stop, 2%% tgt1, 2%% tgt2 on all positions
-  %(prog)s --ticker SPY --stop-loss 0.5       # 0.5%% stop, 0.5%% tgt1, 1.0%% tgt2 on SPY
+EXAMPLES:
+  python strategies/risk_management.py
+    Default: 1%% stop, 1%% tgt1, 2%% tgt2 on ALL open positions
+
+  python strategies/risk_management.py --ticker SPY
+    Manage only SPY: 1%% stop, 1%% tgt1, 2%% tgt2
+
+  python strategies/risk_management.py --stop-loss 2 --target1 2
+    Wider stops: 2%% stop, 2%% tgt1, 2%% tgt2 on all positions
+
+  python strategies/risk_management.py --ticker SPY --stop-loss 0.5 --target1 0.75
+    Aggressive on SPY: 0.5%% stop, 0.75%% tgt1, 1.5%% tgt2
+
+CONFIGURATION FILES:
+  Loads from: lists/fomo_trade.txt
+  Format: SYMBOL STOP% TARGET1% TARGET2%
+  Example:
+    AAPL 1.0 1.0 2.0
+    SPY 0.5 1.5 3.0
+    MU 2.0 2.0 4.0
+  Per-symbol config overrides command-line defaults
+
+LOG FILE:
+  Saved to: strategies/risk_management_log.txt
+  Records all stop losses, target hits, and exit executions
+
+POSITION MANAGEMENT WORKFLOW:
+  1. Monitors price vs. entry price
+  2. If price < entry - stop_loss%: Sell entire position (STOP)
+  3. If price > entry + target1%: Sell 50% (TARGET1), move stop to entry
+  4. If remaining > entry + target2%: Sell remaining 50% (TARGET2)
+  5. If target1 hit, trailing stops until target2 or stop hit
+  6. Runs continuously every 30 seconds
+
+NOTES:
+  - Requires valid Alpaca API credentials and active trading account
+  - Runs as background process indefinitely
+  - Press Ctrl+C to stop
+  - Logs all activity to risk_management_log.txt
+  - Per-symbol configuration in lists/fomo_trade.txt takes precedence
+  - Percentages can be decimals (0.05 = 0.05%)
+  - Works with both stocks and cryptocurrencies
+  - Ideal for automated position management during market hours
         """
     )
     parser.add_argument(
@@ -101,26 +150,55 @@ except Exception as exc:
     print(f"Authentication failed: {exc}")
     raise SystemExit(1)
 
-# ── Load exclusion lists ─────────────────────────────────────────────────────
-def _load_excluded_symbols() -> set:
-    """Load symbols from lists/fomo_trade.txt and lists/spray.txt to exclude from risk management."""
-    excluded = set()
+# ── Load fomo_trade configuration ───────────────────────────────────────────
+def _load_fomo_trade_config() -> dict:
+    """Load trading configuration from lists/fomo_trade.txt"""
+    config = {}
     
-    # Read fomo_trade.txt
     fomo_path = WORKSPACE_ROOT / "lists" / "fomo_trade.txt"
-    if fomo_path.exists():
-        try:
-            with open(fomo_path, 'r') as f:
-                for line in f:
-                    line = line.strip()
-                    if not line or line.startswith('#'):
-                        continue
-                    parts = line.split()
-                    if parts:
-                        symbol = parts[0].upper()
-                        excluded.add(symbol)
-        except Exception as e:
-            print(f"Warning: Could not read fomo_trade.txt: {e}")
+    if not fomo_path.exists():
+        print(f"Warning: {fomo_path} not found. Risk management will use default percentages.")
+        return config
+    
+    try:
+        with open(fomo_path, 'r') as f:
+            for line in f:
+                line = line.strip()
+                if not line or line.startswith('#'):
+                    continue
+                
+                parts = line.split()
+                if len(parts) < 6:
+                    print(f"Warning: Skipping invalid line in fomo_trade.txt: {line}")
+                    continue
+                
+                symbol = parts[0].upper()
+                try:
+                    num_stocks = int(parts[1])
+                    entry_price = float(parts[2])
+                    stop_price = float(parts[3])
+                    target1_price = float(parts[4])
+                    target2_price = float(parts[5])
+                    
+                    config[symbol] = {
+                        "num_stocks": num_stocks,
+                        "entry_price": entry_price,
+                        "stop_price": stop_price,
+                        "target1_price": target1_price,
+                        "target2_price": target2_price,
+                    }
+                except ValueError as e:
+                    print(f"Warning: Skipping line with invalid values: {line}")
+                    continue
+    except Exception as e:
+        print(f"Warning: Could not read fomo_trade.txt: {e}")
+    
+    return config
+
+
+def _load_excluded_symbols() -> set:
+    """Load symbols from lists/spray.txt to exclude from risk management."""
+    excluded = set()
     
     # Read spray.txt
     spray_path = WORKSPACE_ROOT / "lists" / "spray.txt"
@@ -157,10 +235,11 @@ def _get_underlying_from_option(symbol: str) -> str:
     return None
 
 
-# Load excluded symbols
+# Load configurations
+FOMO_TRADE_CONFIG = _load_fomo_trade_config()
 EXCLUDED_SYMBOLS = _load_excluded_symbols()
 
-# Calculate effective percentages (convert from % to decimal)
+# Calculate effective percentages (convert from % to decimal) - only used if symbol not in fomo_trade config
 STOP_LOSS_PCT = args.stop_loss / 100.0 if args.stop_loss else 0.01
 TARGET1_PCT = (args.target1 / 100.0 if args.target1 else args.stop_loss / 100.0)
 TARGET2_PCT = (args.target2 / 100.0 if args.target2 else (2 * TARGET1_PCT))
@@ -321,18 +400,31 @@ def place_limit_buy(symbol: str, qty: int, price: float, reason: str) -> bool:
         print(f"  ✗ Error buying {symbol}: {e}")
         return False
 
-def init_symbol_state(symbol: str, entry: float):
+def init_symbol_state(symbol: str, entry: float, fomo_config: dict = None):
+    """Initialize symbol state. If fomo_config provided, use its stop/targets. Otherwise calculate from percentages."""
     entry = round_up_to_penny(entry)
-    stop, tgt1, tgt2 = calculate_levels(entry)
+    
+    # Check if this symbol has specific configuration from fomo_trade.txt
+    if fomo_config:
+        stop = round_up_to_penny(fomo_config.get('stop_price', entry))
+        tgt1 = round_up_to_penny(fomo_config.get('target1_price', entry))
+        tgt2 = round_up_to_penny(fomo_config.get('target2_price', entry))
+    else:
+        # Fallback to percentage-based calculation
+        stop, tgt1, tgt2 = calculate_levels(entry)
+    
     state[symbol] = {
-        'entry_price':   entry,
-        'stop_loss':     stop,
-        'target1':       tgt1,
-        'target2':       tgt2,
-        'target1_hit':   False,
-        'breakeven_set': False,
-        'waiting_reentry': False,
-        'internal_qty':  BUY_QTY,
+        'entry_price':        entry,
+        'stop_loss':          stop,
+        'target1':            tgt1,
+        'target2':            tgt2,
+        'target1_hit':        False,
+        'breakeven_set':      False,
+        'waiting_reentry':    False,
+        'entry_order_placed': False,  # Track if we've placed initial entry order
+        'entry_price_used':   entry,  # Track entry price that was used when order was placed
+        'reentry_order_placed': False,  # Track if we've placed a re-entry order
+        'internal_qty':       BUY_QTY,
     }
     return state[symbol]
 
@@ -347,34 +439,71 @@ def print_state(symbol: str, s: dict, current_price: float):
 
 # ── Core per-symbol logic ─────────────────────────────────────────────────────
 
-def manage_symbol(symbol: str, position=None, latest_buy_fill_by_symbol=None):
+def manage_symbol(symbol: str, position=None, latest_buy_fill_by_symbol=None, fomo_configs=None):
     """Run one monitoring tick for a symbol."""
     if latest_buy_fill_by_symbol is None:
         latest_buy_fill_by_symbol = {}
+    if fomo_configs is None:
+        fomo_configs = {}
 
     s = state.get(symbol)
+    
+    # Get fomo_trade config for this symbol (if any) - use the passed-in reloaded config
+    fomo_cfg = fomo_configs.get(symbol)
 
     # ── No position branch ────────────────────────────────────────────────────
     if position is None:
+        # Check if entry price has changed in fomo_trade.txt
+        if s and fomo_cfg and not s['waiting_reentry']:
+            config_entry_price = round_up_to_penny(fomo_cfg['entry_price'])
+            last_used_price = s.get('entry_price_used', config_entry_price)
+            
+            # If entry price in config changed, update the order
+            if abs(config_entry_price - last_used_price) > 1e-9:
+                print(f"\n  [{symbol}] Entry price updated in fomo_trade.txt: ${last_used_price:.4f} → ${config_entry_price:.4f}")
+                # Cancel existing entry orders
+                cancel_open_orders(symbol)
+                # Place new order with updated price
+                ok = place_limit_buy(symbol, BUY_QTY, config_entry_price, 'ENTRY (UPDATED)')
+                if ok:
+                    s['entry_price'] = config_entry_price
+                    s['entry_price_used'] = config_entry_price
+                    # Recalculate stop/target if they depend on entry price
+                    if fomo_cfg:
+                        s['stop_loss'] = round_up_to_penny(fomo_cfg.get('stop_price', config_entry_price))
+                        s['target1'] = round_up_to_penny(fomo_cfg.get('target1_price', config_entry_price))
+                        s['target2'] = round_up_to_penny(fomo_cfg.get('target2_price', config_entry_price))
+                    print(f"  ✓ [{symbol}] New entry order placed @ ${config_entry_price:.4f}")
+                return
+        
+        # Place initial entry order (if not already placed)
+        if s and not s['waiting_reentry'] and not s['entry_order_placed'] and fomo_cfg:
+            # Place initial entry order
+            print(f"\n  [{symbol}] Placing initial entry order from fomo_trade.txt")
+            entry_price = round_up_to_penny(fomo_cfg['entry_price'])
+            ok = place_limit_buy(symbol, BUY_QTY, entry_price, 'ENTRY')
+            if ok:
+                s['entry_order_placed'] = True
+                s['entry_price_used'] = entry_price
+                print(f"  ✓ [{symbol}] Entry limit buy placed @ ${entry_price:.4f}. Waiting for fill...")
+            return
+        
+        # Check if we need to place re-entry order (after stop loss)
         if s and s['waiting_reentry']:
             price = get_price(symbol)
             if price is None:
                 return
             if price >= s['entry_price']:
-                print(f"\n  [{symbol}] Price ${price:.4f} recovered to entry ${s['entry_price']:.4f} — re-entering")
-                cancel_open_orders(symbol)
-                ok = place_limit_buy(symbol, BUY_QTY, s['entry_price'], 'RE-ENTRY')
-                if ok:
-                    stop, tgt1, tgt2 = calculate_levels(s['entry_price'])
-                    s.update({
-                        'stop_loss':     stop,
-                        'target1':       tgt1,
-                        'target2':       tgt2,
-                        'target1_hit':   False,
-                        'breakeven_set': False,
-                        'waiting_reentry': False,
-                        'internal_qty':  BUY_QTY,
-                    })
+                # Only place re-entry order once (not multiple times)
+                if not s.get('reentry_order_placed'):
+                    print(f"\n  [{symbol}] Price ${price:.4f} recovered to entry ${s['entry_price']:.4f} — placing re-entry order")
+                    cancel_open_orders(symbol)
+                    ok = place_limit_buy(symbol, BUY_QTY, s['entry_price'], 'RE-ENTRY')
+                    if ok:
+                        s['reentry_order_placed'] = True
+                        print(f"  ✓ [{symbol}] Re-entry limit buy placed. Waiting for fill...")
+                else:
+                    print(f"  [{symbol}] Re-entry limit buy pending @ ${s['entry_price']:.4f} | current=${price:.4f}")
             else:
                 print(f"  [{symbol}] Waiting for reversal to ${s['entry_price']:.4f} | current=${price:.4f}")
         return
@@ -402,12 +531,31 @@ def manage_symbol(symbol: str, position=None, latest_buy_fill_by_symbol=None):
     )
 
     # First time we see this symbol — initialise state
-    if s is None or s.get('waiting_reentry'):
-        s = init_symbol_state(symbol, entry)
+    if s is None:
+        s = init_symbol_state(symbol, entry, fomo_cfg)
 
     # Always keep risk levels aligned with current live entry and qty.
     if abs(s['entry_price'] - entry) > 1e-9:
-        s = init_symbol_state(symbol, entry)
+        s = init_symbol_state(symbol, entry, fomo_cfg)
+    
+    # Check if fomo config has changed (stop/target prices) and update state accordingly
+    if fomo_cfg:
+        new_stop = round_up_to_penny(fomo_cfg.get('stop_price', entry))
+        new_tgt1 = round_up_to_penny(fomo_cfg.get('target1_price', entry))
+        new_tgt2 = round_up_to_penny(fomo_cfg.get('target2_price', entry))
+        
+        # If config values changed, update state (except if we've already hit target1)
+        if not s.get('target1_hit'):
+            if abs(s['stop_loss'] - new_stop) > 1e-9 or abs(s['target1'] - new_tgt1) > 1e-9 or abs(s['target2'] - new_tgt2) > 1e-9:
+                print(f"  ✓ [{symbol}] Config updated: stop ${s['stop_loss']:.4f}→${new_stop:.4f} | tgt1 ${s['target1']:.4f}→${new_tgt1:.4f} | tgt2 ${s['target2']:.4f}→${new_tgt2:.4f}")
+                s['stop_loss'] = new_stop
+                s['target1'] = new_tgt1
+                s['target2'] = new_tgt2
+        elif s.get('target1_hit') and not s.get('breakeven_set'):
+            # Target 1 was hit, update target2 if it changed
+            if abs(s['target2'] - new_tgt2) > 1e-9:
+                print(f"  ✓ [{symbol}] Target2 updated: ${s['target2']:.4f}→${new_tgt2:.4f}")
+                s['target2'] = new_tgt2
 
     live_qty = max(int(round(abs(qty))), 0)
     s['internal_qty'] = min(BUY_QTY, live_qty)
@@ -436,37 +584,50 @@ def manage_symbol(symbol: str, position=None, latest_buy_fill_by_symbol=None):
         if ok:
             log_stopped_trade(symbol, entry_price, stop_loss, current_qty, reason)
             s.update({
-                'waiting_reentry': True,
-                'internal_qty':    BUY_QTY,
-                'target1_hit':     False,
-                'breakeven_set':   False,
+                'waiting_reentry':       True,
+                'reentry_order_placed':  False,  # Reset re-entry flag for new entry
+                'entry_order_placed':    False,  # Reset entry flag
+                'entry_price_used':      entry_price,  # Track what price was used
+                'internal_qty':          BUY_QTY,
+                'target1_hit':           False,
+                'breakeven_set':         False,
             })
 
     # ── TARGET 1 ──────────────────────────────────────────────────────────────
     elif not s['target1_hit'] and price >= target1:
-        sell_qty = 1 if current_qty > 1 else current_qty
-        print(f"\n  ✓ [{symbol}] TARGET 1 HIT at ${price:.4f} (tgt=${target1:.4f}) — selling {sell_qty} share")
+        # Sell 1/2 of position
+        sell_qty = max(current_qty // 2, 1)
+        print(f"\n  ✓ [{symbol}] TARGET 1 HIT at ${price:.4f} (tgt=${target1:.4f}) — selling {sell_qty} shares (1/2 position)")
         ok = place_market_sell(symbol, sell_qty, 'TARGET1')
         if ok:
             s['target1_hit']   = True
             s['internal_qty']  = max(current_qty - sell_qty, 0)
-            s['stop_loss']     = entry_price   # move stop to breakeven
+            s['stop_loss']     = entry_price   # move stop to entry price (breakeven)
             s['breakeven_set'] = True
             print(f"  ✓ [{symbol}] Stop moved to breakeven ${entry_price:.4f}")
+            print(f"  ✓ [{symbol}] Remaining position: {s['internal_qty']} shares | Keep Target 2 at ${target2:.4f}")
 
     # ── TARGET 2 ──────────────────────────────────────────────────────────────
-    elif s['target1_hit'] and current_qty > 0 and price >= target2:
-        print(f"\n  ✓ [{symbol}] TARGET 2 HIT at ${price:.4f} (tgt=${target2:.4f}) — closing remaining {current_qty}")
-        ok = place_market_sell(symbol, current_qty, 'TARGET2')
+    elif s['target1_hit'] and s['internal_qty'] > 0 and price >= target2:
+        remaining_qty = s['internal_qty']
+        print(f"\n  ✓ [{symbol}] TARGET 2 HIT at ${price:.4f} (tgt=${target2:.4f}) — closing remaining {remaining_qty} shares")
+        ok = place_market_sell(symbol, remaining_qty, 'TARGET2')
         if ok:
             s['internal_qty'] = 0
             s['target1_hit'] = False
             s['breakeven_set'] = False
             s['waiting_reentry'] = False
+            s['reentry_order_placed'] = False
+            s['entry_order_placed'] = False
+            s['entry_price_used'] = s['entry_price']  # Reset to current entry price
+            print(f"  ✓ [{symbol}] Position fully closed. Ready for new trade.")
 
     # ── No action ─────────────────────────────────────────────────────────────
     else:
         pass  # status already printed by print_state
+    
+    # Save state back to global dictionary
+    state[symbol] = s
 
 
 # ── Main loop ────────────────────────────────────────────────────────────────
@@ -482,18 +643,26 @@ def run():
     if TICKER_FILTER:
         scope_info = f" for {TICKER_FILTER}"
     else:
+        # Get initial config to display
+        initial_config = _load_fomo_trade_config()
+        config_symbols = ", ".join(sorted(initial_config.keys())) if initial_config else "none"
         excluded_str = ", ".join(sorted(EXCLUDED_SYMBOLS)) if EXCLUDED_SYMBOLS else "none"
-        scope_info = f" (excluding: {excluded_str})"
+        scope_info = f" | Managing: {config_symbols} | Excluding: {excluded_str}"
     
-    print(f"\n╔{'═'*78}╗")
-    print(f"║  Risk Management Bot starting{scope_info:<48}║")
-    print(f"║  Stop: {STOP_LOSS_PCT*100:.3f}% | Target1: {TARGET1_PCT*100:.3f}% | Target2: {TARGET2_PCT*100:.3f}%{' '*28}║")
-    print(f"║  Log file: {os.path.basename(LOG_FILE):<60}║")
-    print(f"║  Press Ctrl+C to stop{' '*54}║")
-    print(f"╚{'═'*78}╝\n")
+    print(f"\n╔{'═'*100}╗")
+    print(f"║  Risk Management Bot starting{scope_info:<70}║")
+    print(f"║  Using stop/target levels from lists/fomo_trade.txt (reloads every check){' '*18}║")
+    print(f"║  Logic: Stop → Exit & Wait | Target1 → Sell 1/2 (set stop to entry) | Target2 → Close{' '*8}║")
+    print(f"║  Default Fallback: Stop: {STOP_LOSS_PCT*100:.3f}% | Target1: {TARGET1_PCT*100:.3f}% | Target2: {TARGET2_PCT*100:.3f}%{' '*20}║")
+    print(f"║  Log file: {os.path.basename(LOG_FILE):<70}║")
+    print(f"║  Press Ctrl+C to stop{' '*76}║")
+    print(f"╚{'═'*100}╝\n")
 
     while True:
         try:
+            # Reload fomo_trade.txt config on every iteration (in case levels changed)
+            current_fomo_config = _load_fomo_trade_config()
+            
             print_header()
 
             # Fetch all current positions
@@ -504,22 +673,17 @@ def run():
                 if TICKER_FILTER:
                     positions = {k: v for k, v in all_positions.items() if k.upper() == TICKER_FILTER}
                 else:
-                    # Include all positions EXCEPT those in exclusion lists and their call options
+                    # Only include positions that are in fomo_trade.txt config
                     positions = {}
                     for k, v in all_positions.items():
                         symbol_upper = k.upper()
                         
-                        # Exclude if symbol is in exclusion list
-                        if symbol_upper in EXCLUDED_SYMBOLS:
-                            continue
-                        
-                        # Exclude if it's a call option for an excluded stock
-                        if _is_call_option(symbol_upper):
-                            underlying = _get_underlying_from_option(symbol_upper)
-                            if underlying and underlying in EXCLUDED_SYMBOLS:
+                        # Only manage if symbol is in fomo_trade config OR in state (re-entry waiting)
+                        if symbol_upper in current_fomo_config or symbol_upper in state:
+                            # Skip if symbol is in exclusion list (spray.txt)
+                            if symbol_upper in EXCLUDED_SYMBOLS:
                                 continue
-                        
-                        positions[k] = v
+                            positions[k] = v
                 
                 latest_buy_fill_by_symbol = _build_latest_buy_fill_map()
             except Exception as e:
@@ -527,17 +691,34 @@ def run():
                 time.sleep(CHECK_INTERVAL)
                 continue
 
-            if not positions and not any(s.get('waiting_reentry') for s in state.values()):
-                print("  No open positions and no pending re-entries.")
-            else:
-                # Manage active positions
-                for sym, pos in positions.items():
-                    manage_symbol(sym, pos, latest_buy_fill_by_symbol)
-
-                # Manage waiting re-entries (positions already closed)
-                for sym, s in state.items():
-                    if sym not in positions and s.get('waiting_reentry'):
-                        manage_symbol(sym, None)
+            # Manage all symbols in fomo_trade.txt config
+            managed_any = False
+            
+            # Build set of all symbols we need to manage:
+            # 1. Symbols with open positions in fomo_trade.txt
+            # 2. Symbols in fomo_trade.txt that have state (tracking re-entries or previous activity)
+            # 3. All symbols in fomo_trade.txt config (ensure continuous tracking)
+            symbols_to_manage = set(positions.keys()) | set(state.keys()) | set(current_fomo_config.keys())
+            
+            for symbol in symbols_to_manage:
+                # Skip if excluded
+                if symbol in EXCLUDED_SYMBOLS:
+                    continue
+                
+                pos = positions.get(symbol)
+                s = state.get(symbol)
+                
+                # Initialize state if this is first time seeing this fomo_trade symbol
+                if s is None and symbol in current_fomo_config:
+                    s = init_symbol_state(symbol, current_fomo_config[symbol]['entry_price'], current_fomo_config[symbol])
+                    print(f"  ℹ [{symbol}] Now tracking from fomo_trade.txt | entry=${s['entry_price']:.4f} | stop=${s['stop_loss']:.4f}")
+                
+                # Manage this symbol
+                manage_symbol(symbol, pos, latest_buy_fill_by_symbol, current_fomo_config)
+                managed_any = True
+            
+            if not managed_any:
+                print("  No open positions matching fomo_trade.txt config and no pending re-entries.")
 
             print(f"\n  Next check in {CHECK_INTERVAL}s...\n")
             time.sleep(CHECK_INTERVAL)

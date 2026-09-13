@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: MTD
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $1473.52
+  ATR (14-day): $38.26
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $1212.78 - $1261.01
+  Size:         $48.23
+  Distance:     $212.51 (555% of ATR)
+  Formed:       2026-06-25
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $1334.73 - $1387.32
+  Size:         $52.59
+  Distance:     $86.20
+  Formed:       2026-09-04
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($1473.52 >= zone $1334.73)
+
+TRADE METRICS:
+  Stop Loss Distance:  $260.74
+  Profit Target (PT):  $-138.79
+  Risk:Reward Ratio:   1:-0.53

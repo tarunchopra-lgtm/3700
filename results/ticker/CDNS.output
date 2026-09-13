@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: CDNS
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $304.40
+  ATR (14-day): $12.76
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $281.65 - $287.76
+  Size:         $6.11
+  Distance:     $16.64 (130% of ATR)
+  Formed:       2026-09-09
+  FRESHNESS:    FRESH
+  Notes:        Limited data
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $302.36 - $313.21
+  Size:         $10.85
+  Distance:     $0.00
+  Formed:       2026-09-03
+  FRESHNESS:    FRESH
+  Notes:        Limited data
+
+TRADE METRICS:
+  Stop Loss Distance:  $22.75
+  Profit Target (PT):  $-2.04
+  Risk:Reward Ratio:   1:-0.09

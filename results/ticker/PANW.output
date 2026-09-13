@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: PANW
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $344.18
+  ATR (14-day): $14.12
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $321.39 - $333.31
+  Size:         $11.92
+  Distance:     $10.87 (77% of ATR)
+  Formed:       2026-09-03
+  FRESHNESS:    STALE
+  Notes:        STALE - Daily candle tested zone yesterday (low $330.85)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $330.30 - $344.79
+  Size:         $14.49
+  Distance:     $0.00
+  Formed:       2026-09-09
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($344.18 >= zone $330.30)
+
+TRADE METRICS:
+  Stop Loss Distance:  $22.79
+  Profit Target (PT):  $-13.88
+  Risk:Reward Ratio:   1:-0.61

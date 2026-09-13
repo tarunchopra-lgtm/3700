@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: BXP
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $73.31
+  ATR (14-day): $1.84
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $63.19 - $65.88
+  Size:         $2.69
+  Distance:     $7.43 (403% of ATR)
+  Formed:       2026-09-09
+  FRESHNESS:    STALE
+  Notes:        STALE - Daily candle tested zone yesterday (low $63.22)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $64.05 - $68.02
+  Size:         $3.97
+  Distance:     $5.29
+  Formed:       2026-09-09
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($73.31 >= zone $64.05)
+
+TRADE METRICS:
+  Stop Loss Distance:  $10.12
+  Profit Target (PT):  $-9.26
+  Risk:Reward Ratio:   1:-0.92

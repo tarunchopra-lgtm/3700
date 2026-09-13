@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: FDX
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $328.09
+  ATR (14-day): $6.08
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $304.18 - $311.45
+  Size:         $7.27
+  Distance:     $16.64 (274% of ATR)
+  Formed:       2026-07-31
+  FRESHNESS:    STALE
+  Notes:        STALE - Daily candle tested zone yesterday (low $308.73)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $306.79 - $321.15
+  Size:         $14.36
+  Distance:     $6.94
+  Formed:       2026-09-09
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($328.09 >= zone $306.79)
+
+TRADE METRICS:
+  Stop Loss Distance:  $23.91
+  Profit Target (PT):  $-21.30
+  Risk:Reward Ratio:   1:-0.89

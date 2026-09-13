@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: HUBB
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $506.98
+  ATR (14-day): $17.17
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $446.99 - $456.62
+  Size:         $9.63
+  Distance:     $50.36 (293% of ATR)
+  Formed:       2026-09-10
+  FRESHNESS:    STALE
+  Notes:        STALE - Daily candle tested zone yesterday (low $448.01)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $458.46 - $469.36
+  Size:         $10.90
+  Distance:     $37.62
+  Formed:       2026-09-04
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($506.98 >= zone $458.46)
+
+TRADE METRICS:
+  Stop Loss Distance:  $59.99
+  Profit Target (PT):  $-48.52
+  Risk:Reward Ratio:   1:-0.81

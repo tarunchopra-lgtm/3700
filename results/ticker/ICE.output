@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: ICE
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $165.90
+  ATR (14-day): $3.91
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $153.26 - $155.46
+  Size:         $2.20
+  Distance:     $10.44 (267% of ATR)
+  Formed:       2026-08-14
+  FRESHNESS:    STALE
+  Notes:        STALE - Daily candle tested zone yesterday (low $155.34)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $155.87 - $160.63
+  Size:         $4.76
+  Distance:     $5.27
+  Formed:       2026-09-09
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($165.90 >= zone $155.87)
+
+TRADE METRICS:
+  Stop Loss Distance:  $12.64
+  Profit Target (PT):  $-10.03
+  Risk:Reward Ratio:   1:-0.79

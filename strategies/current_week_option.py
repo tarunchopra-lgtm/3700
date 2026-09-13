@@ -2,7 +2,7 @@
 """Inspect this week's call and put options for a ticker or current stock positions.
 
 Usage:
-    python current_week_option.py [TICKER]
+    python current_week_option.py [TICKER] [--help]
 
 If TICKER is provided, the script uses the ticker's current price as the
 reference price. If no ticker is provided, it inspects the account's current
@@ -10,6 +10,88 @@ stock positions and uses each position's buy price as the reference price.
 For each reference price, it finds the nearest call and put options expiring
 this week and prints each option's latest price, volume, and open interest.
 """
+
+import sys
+# Check for --help early
+if len(sys.argv) > 1 and sys.argv[1] in ["--help", "-h", "help"]:
+    print("""
+CURRENT_WEEK_OPTION.PY - Weekly Option Inspector for Tickers and Positions
+
+SYNTAX:
+  python strategies/current_week_option.py [TICKER] [--help]
+
+OPTIONAL:
+  TICKER              Specific stock symbol to analyze (e.g., AAPL, SPY, MU)
+                      If omitted, analyzes all current account stock positions
+  --help, -h          Show this help message
+
+DESCRIPTION:
+  Inspects this week's call and put option contracts for given ticker(s)
+  Shows latest price, bid/ask, volume, and open interest per contract
+  Useful for options trading analysis and strategy planning
+  Can work with single ticker or all open stock positions
+
+MODES:
+
+  1. Single Ticker Mode:
+     - Provide stock ticker as first argument
+     - Uses current market price as reference
+     - Shows nearest call and put options
+     - Displays bid/ask spreads and Greeks
+
+  2. Account Positions Mode:
+     - Run with no arguments
+     - Scans all current stock positions
+     - Uses each position's buy price as reference
+     - Shows options for each position
+
+EXAMPLES:
+  python strategies/current_week_option.py AAPL
+    - Show this week's AAPL call and put options
+    - Display bid/ask prices and volume data
+
+  python strategies/current_week_option.py
+    - Analyze options for all current positions
+    - Shows calls and puts for each position
+
+  python strategies/current_week_option.py SPY --help
+    - Show this help message
+
+WEEKLY EXPIRATION:
+  - Targets this Friday's expiration (Friday = 4 - today.weekday() % 7)
+  - Shows contracts expiring within 7 days
+  - Auto-updates weekly on Monday
+
+OUTPUT:
+  Per ticker:
+  - Underlying symbol
+  - Reference price (current or position buy price)
+  - Call contract: symbol, bid/ask, last price, volume, open interest
+  - Put contract: symbol, bid/ask, last price, volume, open interest
+  - Greeks (if available): delta, gamma, theta, vega
+
+CONTRACT INFORMATION:
+  - Contract symbol (Alpaca format: AAPL240920C00150000)
+  - Bid/ask prices (current market quotes)
+  - Last trade price (most recent transaction)
+  - Volume (daily contracts traded)
+  - Open Interest (total open contracts)
+
+DEPENDENCIES:
+  - Valid Alpaca API credentials
+  - Options data subscription (level 2)
+  - IEX data feed access
+
+NOTES:
+  - Requires valid Alpaca API credentials
+  - Best run during market hours for current quotes
+  - Works with both paper and live trading accounts
+  - Shows only active, tradeable contracts
+  - Useful for analyzing bid/ask spreads
+  - Use with fomo_trade.py for execution
+  - Used by gocall.py and spy_option.py
+""")
+    sys.exit(0)
 
 from __future__ import annotations
 

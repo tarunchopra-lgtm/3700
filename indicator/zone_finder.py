@@ -74,8 +74,50 @@ def find_latest_zone(candles):
 
 
 def main() -> int:
-    if len(sys.argv) != 2 or not sys.argv[1].strip():
-        print("Usage: python indicator/zone_finder.py <TICKER>")
+    # Handle help flag
+    if len(sys.argv) < 2 or sys.argv[1] in ["--help", "-h", "help"]:
+        print("""
+ZONE_FINDER.PY - Support and Resistance Zone Detector
+
+SYNTAX:
+  python zone_finder.py <SYMBOL> [--help]
+
+REQUIRED:
+  <SYMBOL>      Stock or crypto symbol (e.g., AAPL, SPY, BTC/USD)
+
+OPTIONS:
+  --help, -h    Show this help message
+
+DESCRIPTION:
+  Identifies support (demand) and resistance (supply) zones
+  Analyzes price action patterns from 50 hourly candles
+  Marks consolidation regions and breakout levels
+
+ZONE TYPES:
+  - Support Zones: Price consolidation below recent highs
+  - Resistance Zones: Price consolidation above recent lows
+  - Breakout Levels: Points where price broke through zones
+
+OUTPUT:
+  - Zone price ranges (low-high)
+  - Zone formation dates/times
+  - Breakout confirmation status
+
+EXAMPLES:
+  python indicator/zone_finder.py AAPL
+  python indicator/zone_finder.py SPY
+  python indicator/zone_finder.py BTC/USD
+  python indicator/zone_finder.py --help
+
+NOTES:
+  - Requires valid Alpaca API credentials
+  - Uses 50 hourly candles for analysis
+  - Requires at least 50 candles of data to function
+""")
+        return 0 if len(sys.argv) > 1 else 1
+
+    if not sys.argv[1].strip():
+        print("Error: Symbol cannot be empty")
         return 1
 
     symbol = sys.argv[1].strip().upper()

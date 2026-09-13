@@ -2,11 +2,70 @@
 """Return only the nearest this-week call option contract symbol for a ticker.
 
 Usage:
-    python current_week_option_function_call.py <TICKER> [REFERENCE_PRICE]
+    python current_week_option_function_call.py <TICKER> [REFERENCE_PRICE] [--help]
 
 Output:
     Prints only the option contract symbol, with no auth debug or extra details.
 """
+
+# Check for --help early
+def _check_help():
+    import sys
+    if len(sys.argv) > 1 and sys.argv[1] in ["--help", "-h", "help"]:
+        print("""
+CURRENT_WEEK_OPTION_FUNCTION_CALL.PY - Weekly Call Option Finder
+
+SYNTAX:
+  python strategies/current_week_option_function_call.py <TICKER> [REFERENCE_PRICE] [--help]
+
+REQUIRED:
+  TICKER              Stock symbol (e.g., AAPL, SPY, MU)
+
+OPTIONAL:
+  REFERENCE_PRICE     Strike price to find nearest call (default: current market price)
+  --help, -h          Show this help message
+
+DESCRIPTION:
+  Finds the nearest weekly call option contract for a given stock
+  Selects the call option with strike closest to reference price
+  Returns ONLY the option contract symbol (Alpaca format)
+  Useful for automated options trading and gocall.py integration
+
+WEEKLY EXPIRATION:
+  - Automatically uses this Friday's expiration date
+  - Friday is defined as: (4 - today.weekday()) % 7 days forward
+  - Finds all active weekly call contracts expiring that date
+
+STRIKE SELECTION:
+  - Finds strike nearest to reference price
+  - If reference price not provided: uses current market price
+  - Returns contract symbol of nearest ATM (at-the-money) call
+
+EXAMPLES:
+  python strategies/current_week_option_function_call.py AAPL
+    - Find weekly call for AAPL at current market price
+    Output: AAPL240920C00150000
+
+  python strategies/current_week_option_function_call.py SPY 520
+    - Find SPY weekly call with strike near $520
+    Output: SPY240920C00520000
+
+OUTPUT:
+  - Single line: Alpaca option contract symbol (no newline, parseable)
+  - Format: SYMBOL + YYMMDD + C + 8-digit strike price
+  - Example: AAPL240920C00150000 (AAPL, 2024-09-20, Call, $150.00)
+
+NOTES:
+  - Requires valid Alpaca API credentials
+  - Returns ONLY the contract symbol (no extra output)
+  - Used by gocall.py and current_week_option.py
+  - Uses IEX data feed for current price
+  - Active status filter: only returns live tradeable contracts
+  - Returns strike nearest to reference price, not exact match
+""")
+        sys.exit(0)
+
+_check_help()
 
 from __future__ import annotations
 
@@ -113,8 +172,59 @@ def get_current_week_call_option_symbol(ticker: str, reference_price: float | No
 
 
 def main() -> int:
+    # Handle help flag
+    if len(sys.argv) < 2 or sys.argv[1] in ["--help", "-h", "help"]:
+        print("""
+CURRENT_WEEK_OPTION_FUNCTION_CALL.PY - Weekly Call Option Finder
+
+SYNTAX:
+  python current_week_option_function_call.py <TICKER> [REFERENCE_PRICE] [--help]
+
+REQUIRED:
+  <TICKER>              Stock symbol (e.g., AAPL, SPY, TSLA)
+
+OPTIONAL:
+  REFERENCE_PRICE       Strike price reference (default: current stock price)
+  --help, -h            Show this help message
+
+DESCRIPTION:
+  Finds the nearest weekly call option contract for a given stock
+  Useful for options trading strategies
+  Returns tradeable option contract symbol
+  Uses current price or provided reference for strike selection
+
+CONTRACT SELECTION:
+  - Finds options expiring this week (Friday typically)
+  - Selects call options near reference price
+  - Returns Alpaca-compatible contract symbol
+  - Used in automated options strategies
+
+EXAMPLES:
+  python strategies/current_week_option_function_call.py AAPL
+    - Find weekly call for AAPL near current market price
+
+  python strategies/current_week_option_function_call.py SPY 450
+    - Find weekly call for SPY near $450 strike
+
+  python strategies/current_week_option_function_call.py TSLA 250
+    - Find weekly call for TSLA near $250 strike
+
+OUTPUT:
+  - Alpaca contract symbol (e.g., AAPL 240920C00150000)
+  - Contract format: SYMBOL DATE{YYMMDD} C/P STRIKE
+  - Usable directly in options trading orders
+
+NOTES:
+  - Requires valid Alpaca API credentials with options approval
+  - Works with stocks that have weekly options
+  - Reference price helps find nearest strike
+  - Call = bullish position (right to buy at strike)
+  - Use with options trading strategies for automation
+""")
+        return 0
+    
     if len(sys.argv) not in (2, 3):
-        print("Usage: python current_week_option_function_call.py <TICKER> [REFERENCE_PRICE]", file=sys.stderr)
+        print("Usage: python current_week_option_function_call.py <TICKER> [REFERENCE_PRICE] [--help]", file=sys.stderr)
         return 1
 
     try:

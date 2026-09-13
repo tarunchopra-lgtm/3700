@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: RF
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $31.42
+  ATR (14-day): $0.54
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $29.25 - $29.84
+  Size:         $0.59
+  Distance:     $1.58 (294% of ATR)
+  Formed:       2026-09-01
+  FRESHNESS:    STALE
+  Notes:        STALE - Daily candle tested zone yesterday (low $29.56)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $29.96 - $30.62
+  Size:         $0.66
+  Distance:     $0.80
+  Formed:       2026-09-03
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($31.42 >= zone $29.96)
+
+TRADE METRICS:
+  Stop Loss Distance:  $2.17
+  Profit Target (PT):  $-1.46
+  Risk:Reward Ratio:   1:-0.67

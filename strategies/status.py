@@ -2,15 +2,114 @@
 """
 Status - Today's orders and current positions
 
-Usage: python status.py [SYMBOL]
+Usage: python status.py [SYMBOL] [--help]
        SYMBOL is optional - if provided, filters to that ticker only
 
 Examples:
     python status.py        # Show all orders and positions
     python status.py MU     # Show only MU orders and position
+    python status.py --help # Show detailed usage
 """
 
 import sys
+
+# Handle help flag early
+if len(sys.argv) > 1 and sys.argv[1] in ["--help", "-h", "help"]:
+    print("""
+STATUS.PY - View Today's Orders and Current Positions
+
+SYNTAX:
+  python strategies/status.py [SYMBOL] [--help]
+
+OPTIONAL:
+  SYMBOL    Filter results to specific ticker (e.g., MU, AAPL, SPY)
+  --help, -h  Show this help message
+
+DESCRIPTION:
+  Displays today's trading activity and current account status
+  Shows open orders, filled orders (today), and open positions
+  Optional symbol filter to view only specific ticker activity
+  Real-time account balance and buying power display
+
+DISPLAY SECTIONS:
+  
+  Account Balance:
+  - Available cash
+  - Buying power (margin available)
+  - Total equity
+  - Portfolio value
+
+  Open Orders:
+  - Unfilled pending orders
+  - Order type, quantity, price
+  - Time placed and time-in-force
+  - Displayed with numeric index for reference
+
+  Filled Orders (Today):
+  - Orders filled today only
+  - Fill price, timestamp, quantity
+  - P&L per fill
+  - Total P&L for day
+
+  Current Positions:
+  - All open holdings
+  - Quantity, entry price, current price
+  - Market value per position
+  - Unrealized P&L
+  - Total position value
+
+EXAMPLES:
+  python strategies/status.py
+    - Show all account activity and positions
+    - No filtering applied
+
+  python strategies/status.py MU
+    - Filter to Micron only
+    - Show MU orders and positions
+
+  python strategies/status.py AAPL
+    - Show Apple activity only
+    - Open orders for AAPL
+    - Filled trades today for AAPL
+    - Current AAPL position
+
+  python strategies/status.py SPY --help
+    - Show help (filter ignored when --help present)
+
+FEATURES:
+  - Paper vs. Live trading indicator
+  - Timestamp of status report
+  - Symbol filtering for focused view
+  - Interactive close position options
+  - Real-time data from Alpaca
+
+OUTPUT:
+  Console display with:
+  - Account header with timestamp
+  - Paper/Live indicator
+  - Symbol filter indicator
+  - Multiple sections for orders/positions
+  - Formatted prices and quantities
+  - Error handling per section
+
+ACCOUNT BALANCE DISPLAY:
+  - Cash: Available uninvested funds
+  - Buying Power: Margin available for new orders
+  - Equity: Total account value
+  - Portfolio Value: Current holdings value
+
+NOTES:
+  - Requires valid Alpaca API credentials
+  - Works with both paper and live accounts
+  - Filters apply to all sections
+  - Optional symbol filter for focused analysis
+  - Run anytime to get current account snapshot
+  - Paper/Live mode determined by credentials
+  - Use daily for account monitoring
+  - Great for post-market position review
+""")
+    sys.exit(0)
+
 from datetime import datetime, date, timezone
 from alpaca.trading.requests import GetOrdersRequest
 from alpaca.trading.enums import QueryOrderStatus
@@ -23,6 +122,7 @@ if str(WORKSPACE_ROOT) not in sys.path:
     sys.path.insert(0, str(WORKSPACE_ROOT))
 
 from roles.credentials import bootstrap_trading_auth
+import re
 
 try:
     credentials, trading_client = bootstrap_trading_auth("status.py")
@@ -35,6 +135,19 @@ PAPER = credentials.paper
 SYMBOL_FILTER = sys.argv[1].upper() if len(sys.argv) > 1 else None
 
 today = date.today()
+
+def _extract_underlying_symbol(symbol: str) -> str:
+    """Extract underlying symbol from option symbol (e.g., AAPL260911C00315000 -> AAPL)."""
+    # Option format: STOCK260911C00315000 (stock + date + C/P + price)
+    match = re.match(r"^([A-Z]+)", symbol)
+    if match:
+        return match.group(1)
+    return symbol
+
+def _is_option_symbol(symbol: str) -> bool:
+    """Check if symbol is an option (e.g., AAPL260911C00315000)."""
+    pattern = re.compile(r"^[A-Z]{1,6}\d{6}[CP]\d{8}$")
+    return bool(pattern.match(symbol))
 
 def filter_symbol(items, key='symbol'):
     if SYMBOL_FILTER is None:
@@ -183,6 +296,113 @@ try:
             print()
 except Exception as e:
     print(f"  ✗ Error fetching positions: {e}")
+
+# ── P&L SUMMARY BY TICKER (TODAY'S FILLED ORDERS) ─────────────
+print(f"\n{'─'*64}")
+print(f"  P&L SUMMARY BY TICKER - TODAY'S TRADES (stocks + options)")
+print(f"{'─'*64}")
+
+try:
+    # Get all filled orders today
+    filled_orders = list(trading_client.get_orders(filter=GetOrdersRequest(status=QueryOrderStatus.CLOSED, limit=200)))
+    
+    # Collect all fills for each symbol
+    symbol_fills = {}  # symbol -> list of (time, side, qty, price)
+    
+    for o in filled_orders:
+        if o.filled_at is None:
+            continue
+        filled_date = o.filled_at.date() if hasattr(o.filled_at, 'date') else None
+        if filled_date != today:
+            continue
+        
+        symbol = o.symbol
+        side = (o.side.value if hasattr(o.side, 'value') else str(o.side)).upper()
+        qty = float(o.filled_qty or o.qty)
+        fill_price = float(o.filled_avg_price or 0)
+        
+        if symbol not in symbol_fills:
+            symbol_fills[symbol] = []
+        
+        symbol_fills[symbol].append((o.filled_at, side, qty, fill_price))
+    
+    # Calculate P&L per symbol using FIFO accounting
+    symbol_pnl = {}  # symbol -> total_realized_pnl
+    
+    for symbol in symbol_fills:
+        fills = sorted(symbol_fills[symbol], key=lambda x: x[0])  # Sort by time
+        
+        # FIFO: track buy queue and match sells against oldest buys
+        buy_queue = []  # list of (qty, price)
+        pnl = 0.0
+        
+        for time, side, qty, price in fills:
+            if side == 'BUY':
+                buy_queue.append((qty, price))
+            else:  # SELL
+                qty_remaining = qty
+                while qty_remaining > 0 and buy_queue:
+                    buy_qty, buy_price = buy_queue.pop(0)
+                    
+                    # Match qty_remaining against this buy
+                    matched_qty = min(qty_remaining, buy_qty)
+                    pnl += (price - buy_price) * matched_qty
+                    qty_remaining -= matched_qty
+                    
+                    # If not all of this buy was used, put remainder back
+                    if matched_qty < buy_qty:
+                        buy_queue.insert(0, (buy_qty - matched_qty, buy_price))
+        
+        symbol_pnl[symbol] = pnl
+    
+    # Group by underlying ticker and sum P&L
+    ticker_summary = {}  # ticker -> {'total_pnl': X, 'symbol_pnl': {symbol: pnl}}
+    
+    for symbol in symbol_pnl:
+        underlying = _extract_underlying_symbol(symbol)
+        pnl = symbol_pnl[symbol]
+        
+        if underlying not in ticker_summary:
+            ticker_summary[underlying] = {
+                'total_pnl': 0.0,
+                'symbols': {}
+            }
+        
+        ticker_summary[underlying]['total_pnl'] += pnl
+        ticker_summary[underlying]['symbols'][symbol] = {
+            'pnl': pnl,
+            'is_option': _is_option_symbol(symbol)
+        }
+    
+    # Sort by total P&L descending
+    sorted_tickers = sorted(ticker_summary.items(), key=lambda x: x[1]['total_pnl'], reverse=True)
+    
+    if sorted_tickers:
+        for ticker, data in sorted_tickers:
+            total_pnl = data['total_pnl']
+            arrow = '▲' if total_pnl >= 0 else '▼'
+            pnl_color = '+' if total_pnl >= 0 else ''
+            
+            print(f"  {ticker:<6} {pnl_color}${total_pnl:>8.2f} {arrow}")
+            
+            # Show individual symbols
+            for symbol in sorted(data['symbols'].keys()):
+                sym_data = data['symbols'][symbol]
+                pos_type = "(OPTION)" if sym_data['is_option'] else "(STOCK)"
+                sym_pnl = sym_data['pnl']
+                sym_pnl_color = '+' if sym_pnl >= 0 else ''
+                print(f"         {symbol:<15} {pos_type:<8} {sym_pnl_color}${sym_pnl:>8.2f}")
+        
+        # Total for all tickers
+        total_all_pnl = sum(data['total_pnl'] for data in ticker_summary.values())
+        total_arrow = '▲' if total_all_pnl >= 0 else '▼'
+        total_color = '+' if total_all_pnl >= 0 else ''
+        print(f"\n  {'TOTAL':<6} {total_color}${total_all_pnl:>8.2f} {total_arrow}")
+    else:
+        print("  (no filled orders today)")
+        
+except Exception as e:
+    print(f"  ✗ Error calculating P&L summary: {e}")
 
 if positions:
     while True:

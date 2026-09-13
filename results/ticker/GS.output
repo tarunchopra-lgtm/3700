@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: GS
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $1088.64
+  ATR (14-day): $34.11
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $977.70 - $1042.98
+  Size:         $65.28
+  Distance:     $45.66 (134% of ATR)
+  Formed:       2026-07-30
+  FRESHNESS:    STALE
+  Notes:        STALE - Daily candle tested zone yesterday (low $1012.63)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $1022.62 - $1048.84
+  Size:         $26.22
+  Distance:     $39.80
+  Formed:       2026-08-31
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($1088.64 >= zone $1022.62)
+
+TRADE METRICS:
+  Stop Loss Distance:  $110.94
+  Profit Target (PT):  $-66.02
+  Risk:Reward Ratio:   1:-0.60

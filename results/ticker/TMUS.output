@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: TMUS
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $191.93
+  ATR (14-day): $7.29
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $174.65 - $183.26
+  Size:         $8.61
+  Distance:     $8.67 (119% of ATR)
+  Formed:       2026-09-08
+  FRESHNESS:    STALE
+  Notes:        STALE - Daily candle tested zone yesterday (low $174.74)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $179.61 - $187.71
+  Size:         $8.10
+  Distance:     $4.22
+  Formed:       2026-09-08
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($191.93 >= zone $179.61)
+
+TRADE METRICS:
+  Stop Loss Distance:  $17.28
+  Profit Target (PT):  $-12.32
+  Risk:Reward Ratio:   1:-0.71

@@ -176,6 +176,65 @@ def _get_option_price_line(ticker: str, api_key: str, secret_key: str) -> str:
 	return f"{ticker} | Current: ${float(trade.price):.2f} | High: {high} | Low: {low}"
 
 def main() -> int:
+	# Handle help flag
+	if len(sys.argv) > 1 and sys.argv[1] in ["--help", "-h", "help"]:
+		print("""
+STOCK_PRICE.PY - Get Current Stock and Option Prices
+
+SYNTAX:
+  python indicator/stock_price.py [TICKER] [--help]
+
+OPTIONAL:
+  TICKER    Stock symbol or option contract (default: AAPL)
+            Format: AAPL or INTC or BTC/USD for stocks/crypto
+            Format: AAPL240920C00150000 for options
+  --help, -h  Show this help message
+
+DESCRIPTION:
+  Fetches real-time price data for stocks, cryptocurrencies, and options
+  Handles both simple stock tickers and complex option contracts
+  Shows latest trade price with market context and time
+  Works with stocks, cryptocurrencies, and options instruments
+
+TICKER FORMATS:
+  - Stock: AAPL, SPY, INTC (regular symbols)
+  - Crypto: BTC/USD, ETH/USD (cryptocurrency pairs)
+  - Option: AAPL240920C00150000 (contract symbol)
+            Format: SYMBOL + YYMMDD + C/P + STRIKE (8 digits)
+
+EXAMPLES:
+  python indicator/stock_price.py AAPL
+    - Latest price for Apple stock
+
+  python indicator/stock_price.py
+    - Default: show AAPL (Apple) price
+
+  python indicator/stock_price.py SPY
+    - Get SPY (S&P 500 ETF) price
+
+  python indicator/stock_price.py BTC/USD
+    - Get Bitcoin price in USD
+
+  python indicator/stock_price.py INTC240920C00090000
+    - Get price for specific Intel call option
+
+OUTPUT:
+  - Ticker symbol
+  - Latest trade price (formatted as $XXX.XX)
+  - Trade timestamp (ET timezone)
+  - Intraday high/low (if available)
+  - Volume information
+
+NOTES:
+  - Requires valid Alpaca API credentials
+  - Uses IEX data feed for stocks
+  - For crypto: format ticker as SYMBOL/USD
+  - Option symbols must match Alpaca contract format exactly
+  - Prices are delayed based on data subscription level
+  - Uses Eastern Time (ET) for all timestamps
+""")
+		return 0
+	
 	ticker = sys.argv[1].upper() if len(sys.argv) > 1 else "AAPL"
 
 	try:

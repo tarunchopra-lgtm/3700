@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: IEX
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $254.92
+  ATR (14-day): $5.23
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $218.46 - $223.78
+  Size:         $5.32
+  Distance:     $31.14 (595% of ATR)
+  Formed:       2026-07-21
+  FRESHNESS:    STALE
+  Notes:        STALE - Daily candle tested zone yesterday (low $219.79)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $220.98 - $227.37
+  Size:         $6.39
+  Distance:     $27.55
+  Formed:       2026-09-04
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($254.92 >= zone $220.98)
+
+TRADE METRICS:
+  Stop Loss Distance:  $36.46
+  Profit Target (PT):  $-33.94
+  Risk:Reward Ratio:   1:-0.93

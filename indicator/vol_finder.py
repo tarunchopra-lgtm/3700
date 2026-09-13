@@ -93,8 +93,45 @@ def calculate_volume_per_candle(average_daily_volume: float) -> int:
 
 
 def main() -> int:
-    if len(sys.argv) != 2 or not sys.argv[1].strip():
-        print("Usage: python indicator/vol_finder.py <TICKER>")
+    # Handle help flag
+    if len(sys.argv) < 2 or sys.argv[1] in ["--help", "-h", "help"]:
+        print("""
+VOL_FINDER.PY - Average Daily Volume Calculator
+
+SYNTAX:
+  python vol_finder.py <SYMBOL> [--help]
+
+REQUIRED:
+  <SYMBOL>      Stock symbol (e.g., AAPL, SPY, TSLA)
+
+OPTIONS:
+  --help, -h    Show this help message
+
+DESCRIPTION:
+  Calculates average daily volume from historical market data
+  Computes volume per candle based on intraday trading
+  Useful for determining lot sizes and liquidity analysis
+
+OUTPUT INCLUDES:
+  - Average Daily Volume (ADV)
+  - Volume per Candle (intraday)
+  - Historical bar data
+  
+EXAMPLES:
+  python indicator/vol_finder.py AAPL
+  python indicator/vol_finder.py SPY
+  python indicator/vol_finder.py TSLA
+  python indicator/vol_finder.py --help
+
+NOTES:
+  - Requires valid Alpaca API credentials
+  - Uses 100 days of historical data
+  - Volume per candle = ADV * 0.005 (0.5%)
+""")
+        return 0 if len(sys.argv) > 1 else 1
+
+    if not sys.argv[1].strip():
+        print("Error: Symbol cannot be empty")
         return 1
 
     symbol = sys.argv[1].strip().upper()

@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: GOOGL
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $358.84
+  ATR (14-day): $13.17
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $314.90 - $324.18
+  Size:         $9.28
+  Distance:     $34.66 (263% of ATR)
+  Formed:       2026-07-24
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $333.22 - $343.53
+  Size:         $10.31
+  Distance:     $15.31
+  Formed:       2026-09-08
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($358.84 >= zone $333.22)
+
+TRADE METRICS:
+  Stop Loss Distance:  $43.94
+  Profit Target (PT):  $-25.62
+  Risk:Reward Ratio:   1:-0.58

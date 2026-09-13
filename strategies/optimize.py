@@ -36,13 +36,68 @@ class BacktestResult:
 
 
 def _print_usage() -> None:
+    print("""
+OPTIMIZE.PY - Position Entry/Exit Optimization for Range-Based Trading
+
+SYNTAX:
+  python optimize.py <DAYS_BACK> <TICKER> <NUM_STOCKS> <ENTRY_RANGE> <STOP_RANGE> <TARGET1_RANGE> <TARGET2_RANGE> [--help]
+
+REQUIRED PARAMETERS:
+  <DAYS_BACK>          Number of days to backtest (1-100)
+  <TICKER>             Stock symbol (e.g., MU, AAPL, SPY)
+  <NUM_STOCKS>         Number of concurrent positions/stocks to trade
+  <ENTRY_RANGE>        Entry price range (BASE-OFFSET, e.g., 850-5)
+  <STOP_RANGE>         Stop loss range (BASE-OFFSET, e.g., 800-5)
+  <TARGET1_RANGE>      First target range (BASE-OFFSET, e.g., 860-5)
+  <TARGET2_RANGE>      Second target range (BASE-OFFSET, e.g., 880-5)
+
+OPTIONS:
+  --help, -h    Show this help message
+
+RANGE FORMAT:
+  BASE-OFFSET creates a range of values:
+    850-5 = [845, 846, 847, 848, 849, 850, 851, 852, 853, 854, 855]
+  All values are in price increments (whole numbers or decimals)
+
+DESCRIPTION:
+  Optimizes trade parameters by backtesting across date ranges
+  Tests all combinations of entry/stop/target prices
+  Calculates P&L, win rates, and statistics for each combination
+  Helps identify optimal parameters before live trading
+
+EXAMPLES:
+  python strategies/optimize.py 50 MU 100 850-5 800-5 860-5 880-5
+    - Test 50 days of MU price data
+    - 100 positions per trade
+    - Entry prices: 845-855
+    - Stops: 795-805
+    - Targets: 855-865, 875-885
+
+  python strategies/optimize.py 100 AAPL 50 150-3 145-3 155-3 160-3
+    - Test 100 days of AAPL
+    - Entry range: 147-153
+    - Stop range: 142-148
+    - Target 1: 152-158
+    - Target 2: 157-163
+
+OUTPUT:
+  - P&L statistics for each parameter combination
+  - Win/Loss percentages
+  - Most profitable entry/stop/target combinations
+  - Backtesting metrics and analysis
+
+NOTES:
+  - Requires historical price data for the specified ticker
+  - All parameters test all value combinations (combinatorial)
+  - Results help validate trading strategy parameters
+""")
+
+
+def _print_usage_short() -> None:
     print(
         "Usage: python optimize.py <DAYS_BACK 1-100> <TICKER> <NUM_STOCKS> "
         "<ENTRY_PRICE-RANGE> <STOP_PRICE-RANGE> <TARGET1_PRICE-RANGE> <TARGET2_PRICE-RANGE>"
     )
-    print("Example: python optimize.py 50 MU 100 850-5 800-5 860-5 880-5")
-    print("Range format is BASE-RANGE using whole numbers.")
-    print("For example 850-5 means values 845 to 855.")
 
 
 def _parse_range_values(raw: str, arg_name: str) -> list[int]:
@@ -61,8 +116,13 @@ def _parse_range_values(raw: str, arg_name: str) -> list[int]:
 
 
 def _parse_args() -> tuple[int, str, int, list[int], list[int], list[int], list[int]]:
-    if len(sys.argv) != 8:
+    # Handle help flag
+    if len(sys.argv) < 2 or sys.argv[1] in ["--help", "-h", "help"]:
         _print_usage()
+        raise SystemExit(0 if len(sys.argv) > 1 else 1)
+    
+    if len(sys.argv) != 8:
+        _print_usage_short()
         raise SystemExit(1)
 
     try:

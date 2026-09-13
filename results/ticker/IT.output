@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: IT
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $198.33
+  ATR (14-day): $10.69
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $166.01 - $184.84
+  Size:         $18.83
+  Distance:     $13.49 (126% of ATR)
+  Formed:       2026-09-08
+  FRESHNESS:    STALE
+  Notes:        STALE - Daily candle tested zone yesterday (low $169.24)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $166.01 - $184.09
+  Size:         $18.09
+  Distance:     $14.24
+  Formed:       2026-09-09
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($198.33 >= zone $166.01)
+
+TRADE METRICS:
+  Stop Loss Distance:  $32.32
+  Profit Target (PT):  $-32.32
+  Risk:Reward Ratio:   1:-1.00

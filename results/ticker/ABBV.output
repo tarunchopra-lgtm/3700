@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: ABBV
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $270.89
+  ATR (14-day): $6.44
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $249.74 - $255.31
+  Size:         $5.57
+  Distance:     $15.58 (242% of ATR)
+  Formed:       2026-09-10
+  FRESHNESS:    FRESH
+  Notes:        Limited data
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $255.58 - $264.25
+  Size:         $8.67
+  Distance:     $6.64
+  Formed:       2026-09-04
+  FRESHNESS:    FRESH
+  Notes:        Limited data
+
+TRADE METRICS:
+  Stop Loss Distance:  $21.15
+  Profit Target (PT):  $-15.31
+  Risk:Reward Ratio:   1:-0.72

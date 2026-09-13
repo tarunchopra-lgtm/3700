@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: ASML
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $1935.20
+  ATR (14-day): $77.60
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $1582.00 - $1655.20
+  Size:         $73.20
+  Distance:     $280.00 (361% of ATR)
+  Formed:       2026-08-03
+  FRESHNESS:    FRESH
+  Notes:        Limited data
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $1721.66 - $1790.00
+  Size:         $68.34
+  Distance:     $145.20
+  Formed:       2026-09-08
+  FRESHNESS:    FRESH
+  Notes:        Limited data
+
+TRADE METRICS:
+  Stop Loss Distance:  $353.20
+  Profit Target (PT):  $-213.54
+  Risk:Reward Ratio:   1:-0.60

@@ -264,6 +264,78 @@ def _write_state_file(path: Path, summary: dict[str, Any]) -> None:
 
 
 def main() -> int:
+    # Handle help flag
+    if len(sys.argv) > 1 and sys.argv[1] in ["--help", "-h", "help"]:
+        print("""
+DAILY_PL.PY - Daily Profit/Loss Calculator
+
+SYNTAX:
+  python indicator/daily_pl.py [OUTPUT_FILE] [--help]
+
+OPTIONAL:
+  OUTPUT_FILE   Save summary to JSON file (default: daily_pl_state.json)
+  --help, -h    Show this help message
+
+DESCRIPTION:
+  Calculates today's realized and unrealized profit/loss
+  Fetches all filled orders from Alpaca trading account
+  Matches buy/sell pairs using FIFO (First In, First Out) method
+  Generates detailed P/L summary by symbol and overall
+  Saves summary to JSON state file for historical tracking
+
+CALCULATION METHOD:
+  - FIFO matching: first buy is matched against first sell
+  - Per-symbol tracking: tracks P/L for each traded symbol
+  - Realized P/L: from completed buy-sell pairs
+  - Unrealized P/L: from current open positions
+  - Daily total: sum of all realized and unrealized gains/losses
+
+EXAMPLES:
+  python indicator/daily_pl.py
+    - Calculate today's P/L
+    - Save to default: daily_pl_state.json
+
+  python indicator/daily_pl.py ~/trading/pl_today.json
+    - Calculate and save to custom file
+
+  python indicator/daily_pl.py /tmp/pl_summary.json
+    - Save to absolute path
+
+OUTPUT:
+  - Per-symbol trade count and average P/L per trade
+  - Symbol-wise summary (symbol, quantity, buy price, sell price, P/L)
+  - Total realized P/L today
+  - Total unrealized P/L (open positions)
+  - Overall daily profit or loss
+  - JSON summary file with historical data
+
+SUMMARY FILE FORMAT (JSON):
+  {
+    "date": "2024-01-15",
+    "symbols": {
+      "AAPL": {
+        "trades": 3,
+        "avg_pl": 125.50,
+        "total_pl": 376.50
+      }
+    },
+    "daily_total": {
+      "realized": 1250.75,
+      "unrealized": 420.30,
+      "total": 1671.05
+    }
+  }
+
+NOTES:
+  - Requires valid Alpaca API credentials and trading account
+  - Analyzes 365 days of order history
+  - Works only with completed/filled orders
+  - Useful for daily trading journals and performance tracking
+  - Use with risk_management.py for loss checking
+  - Historical summaries accumulate in JSON state file
+""")
+        return 0
+    
     output_path = Path(sys.argv[1]).expanduser() if len(sys.argv) > 1 else DEFAULT_STATE_FILE
 
     try:

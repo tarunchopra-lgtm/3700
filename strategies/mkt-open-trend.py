@@ -11,12 +11,102 @@ Behavior:
 4) Run continuously every 20 seconds, checking for new breakouts.
 
 Usage:
-    python strategies/mkt-open-trend.py
+    python strategies/mkt-open-trend.py [--help]
 
 Environment:
     QUANTITY (default 2): Shares to trade per symbol (configurable at top of file)
     VOLUME_PERCENT (default 1.0): Percentage of average volume to use as volume-per-candle
 """
+
+import sys
+# Check for --help early
+if len(sys.argv) > 1 and sys.argv[1] in ["--help", "-h", "help"]:
+    print("""
+MKT-OPEN-TREND.PY - Market Open Daily Breakout Executor
+
+SYNTAX:
+  python strategies/mkt-open-trend.py [--help]
+
+OPTIONS:
+  --help, -h    Show this help message
+
+DESCRIPTION:
+  Monitors daily breakout candidates throughout the day
+  Executes long_trend.py for each breakout stock
+  Calculates volume-based candle targets from historical ADV
+  Continuously monitors for new breakouts every 20 seconds
+  Useful for systematic trend-following at market open
+
+WORKFLOW:
+  1. Load daily breakout list from lists/today-breakout (or run find_daily_trend.py)
+  2. For each breakout candidate:
+     - Calculate 30-day average daily volume
+     - Compute volume-per-candle target = ADV × 1% (configurable)
+     - Start long_trend.py with QUANTITY shares and calculated volume
+  3. Monitor for new breakouts every 20 seconds
+  4. Execute trades immediately when new breakouts detected
+
+BREAKOUT DETECTION:
+  - Uses 15-day descending high trend pattern
+  - Entry when price closes above resistance line
+  - Checks every 20 seconds (CHECK_INTERVAL_SECONDS)
+  - Automatically detects if lists/today-breakout is current
+
+VOLUME CALCULATION:
+  - Fetches last 30 days of daily OHLC bars
+  - Calculates average daily volume (ADV)
+  - Volume target = ADV × VOLUME_PERCENT (default 1.0%)
+  - Passed to long_trend.py for volume candle aggregation
+
+TRADE EXECUTION:
+  - Launches long_trend.py subprocess per ticker
+  - Executes with QUANTITY shares (default 2)
+  - Uses calculated volume-per-candle target
+  - Separate process per stock running in parallel
+
+EXAMPLES:
+  python strategies/mkt-open-trend.py
+    - Start market open trend monitoring
+    - Continuously check for breakouts
+    - Execute long_trend.py for each new breakout
+
+  python strategies/mkt-open-trend.py --help
+    - Show this help message
+
+CONFIGURATION (top of file):
+  QUANTITY = 2                    # Shares per trade
+  VOLUME_PERCENT = 1.0            # Percentage of ADV for volume candles
+  VOLUME_LOOKBACK_DAYS = 30       # Days for ADV calculation
+  CHECK_INTERVAL_SECONDS = 20     # Polling frequency
+  BREAKOUT_FILE = lists/today-breakout  # Input file
+
+FILE DEPENDENCIES:
+  - lists/today-breakout: Daily breakout candidates
+  - strategies/find_daily_trend.py: To generate breakout list
+  - strategies/long_trend.py: Executes per-stock trades
+
+OUTPUT:
+  - Breakout list status ([OK] or [INIT])
+  - Per ticker: current price, volume, candle target
+  - Execution status for each long_trend.py launch
+  - Continuous monitoring output to console
+
+DEPENDENCIES:
+  - Valid Alpaca API credentials
+  - lists/today-breakout file (from find_daily_trend.py)
+  - strategies/find_daily_trend.py
+  - strategies/long_trend.py
+
+NOTES:
+  - Requires valid Alpaca API credentials
+  - Run during extended market hours for best coverage
+  - Volume-per-candle must be reasonable (1%-5% typical ADV)
+  - Each stock runs in separate subprocess
+  - Modify QUANTITY and VOLUME_PERCENT at top of file to customize
+  - Works with both paper and live trading accounts
+  - Best paired with find_daily_trend.py in mkt-open.py workflow
+""")
+    sys.exit(0)
 
 from __future__ import annotations
 

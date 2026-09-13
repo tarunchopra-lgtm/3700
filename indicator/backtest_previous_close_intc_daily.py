@@ -20,6 +20,56 @@ if str(WORKSPACE_ROOT) not in sys.path:
 from roles.credentials import bootstrap_trading_auth
 
 
+# Check for --help early in module execution
+if len(sys.argv) > 1 and sys.argv[1] in ["--help", "-h", "help"]:
+    print("""
+BACKTEST_PREVIOUS_CLOSE_INTC_DAILY.PY - Intel Daily Backtest Strategy
+
+SYNTAX:
+  python indicator/backtest_previous_close_intc_daily.py [--help]
+
+OPTIONS:
+  --help, -h    Show this help message
+
+DESCRIPTION:
+  Backtests the previous close strategy specifically for Intel (INTC)
+  Tests entry at daily open above previous close price
+  Simulates 50% take-profit at 1% target, then trails with remaining 50%
+  Uses stop loss at -1% from entry price
+  Analyzes 100 days of historical data
+
+TEST PARAMETERS:
+  - Symbol: INTC (Intel)
+  - Lookback: Last 100 trading days
+  - Entry: Open > Previous Close
+  - Stop Loss: -1% from entry
+  - Take Profit 1: +1% (sell 50% of position)
+  - Take Profit 2: +3% (sell remaining 50%)
+  - Position Size: 100 shares per trade
+
+EXAMPLES:
+  python indicator/backtest_previous_close_intc_daily.py
+    - Run full backtest on INTC daily data
+    - Shows all trade outcomes and P/L summary
+
+  python indicator/backtest_previous_close_intc_daily.py --help
+    - Show this help message
+
+OUTPUT:
+  - Daily results with entry price and outcome
+  - Trade summary: wins, losses, breakeven
+  - Total P/L for 100-day test period
+  - Win rate and average P/L per trade
+
+NOTES:
+  - Specific to INTC; modify SYMBOL variable for other stocks
+  - Requires valid Alpaca API credentials
+  - Uses historical daily candles (OHLC data)
+  - Simulates position entry/exit within each day's price movement
+  - Results are historical only; not guarantee of future performance
+""")
+    sys.exit(0)
+
 SYMBOL = "INTC"
 DAYS = 100
 QTY = 100

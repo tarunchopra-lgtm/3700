@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: XLU
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $43.79
+  ATR (14-day): $0.78
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $41.86 - $42.56
+  Size:         $0.70
+  Distance:     $1.23 (157% of ATR)
+  Formed:       2026-08-31
+  FRESHNESS:    STALE
+  Notes:        STALE - Daily candle tested zone yesterday (low $42.51)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $42.51 - $43.53
+  Size:         $1.02
+  Distance:     $0.26
+  Formed:       2026-09-10
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($43.79 >= zone $42.51)
+
+TRADE METRICS:
+  Stop Loss Distance:  $1.93
+  Profit Target (PT):  $-1.28
+  Risk:Reward Ratio:   1:-0.66

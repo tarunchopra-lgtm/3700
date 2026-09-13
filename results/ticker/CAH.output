@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: CAH
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $250.81
+  ATR (14-day): $5.05
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $232.37 - $238.10
+  Size:         $5.73
+  Distance:     $12.71 (252% of ATR)
+  Formed:       2026-08-25
+  FRESHNESS:    STALE
+  Notes:        STALE - Daily candle tested zone yesterday (low $235.74)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $238.41 - $245.83
+  Size:         $7.43
+  Distance:     $4.98
+  Formed:       2026-09-09
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($250.81 >= zone $238.41)
+
+TRADE METRICS:
+  Stop Loss Distance:  $18.44
+  Profit Target (PT):  $-12.40
+  Risk:Reward Ratio:   1:-0.67

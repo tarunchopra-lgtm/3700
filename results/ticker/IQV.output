@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: IQV
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $293.18
+  ATR (14-day): $9.53
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $246.87 - $260.30
+  Size:         $13.43
+  Distance:     $32.88 (345% of ATR)
+  Formed:       2026-08-20
+  FRESHNESS:    STALE
+  Notes:        STALE - Daily candle tested zone yesterday (low $253.04)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $262.60 - $271.80
+  Size:         $9.20
+  Distance:     $21.38
+  Formed:       2026-09-04
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($293.18 >= zone $262.60)
+
+TRADE METRICS:
+  Stop Loss Distance:  $46.31
+  Profit Target (PT):  $-30.58
+  Risk:Reward Ratio:   1:-0.66

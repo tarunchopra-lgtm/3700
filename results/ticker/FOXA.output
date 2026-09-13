@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: FOXA
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $69.55
+  ATR (14-day): $1.68
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $62.90 - $65.48
+  Size:         $2.58
+  Distance:     $4.07 (243% of ATR)
+  Formed:       2026-08-13
+  FRESHNESS:    STALE
+  Notes:        STALE - Daily candle tested zone yesterday (low $63.08)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $63.70 - $67.52
+  Size:         $3.82
+  Distance:     $2.03
+  Formed:       2026-09-08
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($69.55 >= zone $63.70)
+
+TRADE METRICS:
+  Stop Loss Distance:  $6.65
+  Profit Target (PT):  $-5.85
+  Risk:Reward Ratio:   1:-0.88

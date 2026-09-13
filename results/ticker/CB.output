@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: CB
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $354.45
+  ATR (14-day): $7.58
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $322.00 - $330.03
+  Size:         $8.03
+  Distance:     $24.42 (322% of ATR)
+  Formed:       2026-06-22
+  FRESHNESS:    FRESH
+  Notes:        Limited data
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $333.63 - $347.68
+  Size:         $14.05
+  Distance:     $6.77
+  Formed:       2026-09-08
+  FRESHNESS:    FRESH
+  Notes:        Limited data
+
+TRADE METRICS:
+  Stop Loss Distance:  $32.45
+  Profit Target (PT):  $-20.82
+  Risk:Reward Ratio:   1:-0.64

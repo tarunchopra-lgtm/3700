@@ -28,14 +28,67 @@ def is_option_symbol(symbol: str) -> bool:
 def parse_arguments():
     """Parses command line arguments for ticker and chart type (volume or daily)."""
     parser = argparse.ArgumentParser(
-        description="Draw candle charts using Alpaca data (volume-based or daily).",
+        description="""PLOT_GRAPH.PY - Generate Stock/Crypto Chart Visualizations
+
+Draws candle charts using Alpaca historical data (volume-based or daily candles).
+Supports stocks, cryptocurrencies, and options contracts.
+Generates matplotlib charts with price action and optional trend line analysis.
+
+SYNTAX:
+  python indicator/plot_graph.py --ticker SYMBOL [--volume VOL | --daily] [OPTIONS] [--help]
+
+REQUIRED:
+  --ticker SYMBOL      Stock/crypto symbol (AAPL, SPY, BTC/USD, option contract)
+
+OPTIONS:
+  --volume VOL         Volume-based candles (e.g., 10000, 25000)
+  --daily              Daily candles (default 250 candles if --volume not used)
+  --candles N          Number of candles to display (default: 500 for volume, 250 for daily)
+  --trend_line_break   Calculate and report trend line breakout price
+  --help, -h           Show this help message
+
+EXAMPLES:
+  python indicator/plot_graph.py --ticker SPY --volume 25000 --candles 50
+    - Volume-based chart for SPY with 50 candles of 25k volume each
+
+  python indicator/plot_graph.py --ticker SPY --daily
+    - Daily chart for SPY with 250 candles
+
+  python indicator/plot_graph.py --ticker BTC/USD --volume 10000 --candles 100
+    - Volume chart for Bitcoin with 100 candles
+
+  python indicator/plot_graph.py --ticker SPY --daily --candles 100 --trend_line_break
+    - Daily chart with 100 candles plus trend line breakout analysis
+
+CHART TYPES:
+  - Volume-based: Aggregates minute bars into candles by total volume
+  - Daily: Uses daily OHLC bars (default 250 candles)
+
+TICKER FORMATS:
+  - Stock: AAPL, SPY, INTC
+  - Crypto: BTC/USD, ETH/USD (format with /)
+  - Options: AAPL240920C00150000 (Alpaca contract symbol)
+
+OUTPUT:
+  - Matplotlib chart window displays
+  - OHLC candles with wicks
+  - Volume histogram below price
+  - Optional trend line with resistance/support
+
+NOTES:
+  - Requires valid Alpaca API credentials
+  - Matplotlib must be installed (pip install matplotlib)
+  - Either --volume or --daily must be specified
+  - Trend line shows recent resistance/support levels
+  - Charts open in interactive matplotlib window
+        """,
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
-Examples:
-  %(prog)s --ticker SPY --volume 25000 --candles 50          # Volume-based chart
-  %(prog)s --ticker SPY --daily                               # Daily chart (default 250 candles)
-  %(prog)s --ticker SPY --daily --candles 100                 # Daily chart with custom candle count
-  %(prog)s --ticker SPY --volume 25000 --trend_line_break     # Volume chart with breakout price
+Quick Examples:
+  %(prog)s --ticker SPY --volume 25000 --candles 50          # Volume chart
+  %(prog)s --ticker SPY --daily                               # Daily chart (250 candles)
+  %(prog)s --ticker SPY --daily --candles 100                 # Daily with 100 candles
+  %(prog)s --ticker BTC/USD --volume 1000000 --candles 200    # Bitcoin volume chart
         """
     )
     parser.add_argument(

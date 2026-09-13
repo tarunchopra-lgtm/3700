@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: CCEP
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $116.93
+  ATR (14-day): $2.66
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $99.50 - $102.73
+  Size:         $3.23
+  Distance:     $14.20 (533% of ATR)
+  Formed:       2026-06-29
+  FRESHNESS:    STALE
+  Notes:        STALE - Daily candle tested zone today (low $102.47)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $102.84 - $105.95
+  Size:         $3.11
+  Distance:     $10.98
+  Formed:       2026-09-10
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($116.93 >= zone $102.84)
+
+TRADE METRICS:
+  Stop Loss Distance:  $17.43
+  Profit Target (PT):  $-14.09
+  Risk:Reward Ratio:   1:-0.81

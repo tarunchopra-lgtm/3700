@@ -6,4 +6,8 @@
 # NVDA 2 250 240 260 280
 
 # Active trade configuration (first non-comment line will be used):
-MU 2 780 770 800 900 
+MU 2 958 948 968 1000
+aapl 2 326 324 328 335
+nvda 2 214 212 216 225
+efa 4 106.32 105.75 108 110
+mar 6 330.5 329.5 332.5 335

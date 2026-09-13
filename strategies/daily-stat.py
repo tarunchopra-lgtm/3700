@@ -214,8 +214,89 @@ def _run_schedule(trading_client) -> None:
 
 
 def main() -> int:
+    # Handle help flag
+    if len(sys.argv) > 1 and sys.argv[1] in ["--help", "-h", "help"]:
+        print("""
+DAILY-STAT.PY - Daily Account Equity Snapshot and Tracking
+
+SYNTAX:
+  python strategies/daily-stat.py [--schedule] [--help]
+
+OPTIONAL:
+  --schedule    Run scheduled mode (records at 12:59 PM MST weekdays)
+  --help, -h    Show this help message
+
+DESCRIPTION:
+  Records daily account equity and compares with previous records
+  Tracks account value, cash, and open positions daily
+  Emails summary to configured address
+  Saves historical balance data to balance.txt
+  Useful for daily P&L tracking and account monitoring
+
+MODES:
+
+  Default (No Arguments):
+    - Snapshot account equity immediately
+    - Compare with previous day's recorded value
+    - Show P&L since yesterday
+    - Email report to configured address
+    - Exit after one report
+
+  --schedule Mode:
+    - Runs indefinitely
+    - Records at 12:59 PM MST on weekdays only
+    - Waits between snapshots
+    - Auto-emails daily summaries
+    - Press Ctrl+C to stop scheduler
+
+TRACKING:
+  - Account equity (total portfolio value)
+  - Available cash balance
+  - Open position market value
+  - Position count and details
+  - Daily change from previous record
+  - Historical balance file (balance.txt)
+
+EXAMPLES:
+  python strategies/daily-stat.py
+    - Record and report immediately
+    - Shows vs. yesterday's balance
+    - Email sent
+
+  python strategies/daily-stat.py --schedule
+    - Start scheduler
+    - Records at 12:59 PM MST daily
+    - Runs indefinitely (Ctrl+C to stop)
+
+OUTPUT:
+  Console:
+  - Current equity and cash
+  - Open positions list with market values
+  - P&L vs. previous recorded date
+  - Timestamp in MST
+
+  balance.txt:
+  - Date : Equity pairs for historical tracking
+  - Format: YYYY-MM-DD : $XXXX.XX
+  - One entry per recorded date
+
+  Email:
+  - Subject: "DAILY ACCOUNT STAT - YYYY-MM-DD"
+  - Shows equity, cash, positions, and P&L
+
+NOTES:
+  - Time zone: MST (Mountain Standard Time)
+  - Schedule records at 12:59 PM MST
+  - Only records once per date (subsequent runs show live P&L)
+  - Requires Alpaca API credentials
+  - Requires Gmail configured for email alerts
+  - Useful for end-of-day account review
+  - Historical data accumulates in balance.txt
+""")
+        return 0
+    
     if len(sys.argv) > 2 or (len(sys.argv) == 2 and sys.argv[1] != "--schedule"):
-        print("Usage: python strategies/daily-stat.py [--schedule]")
+        print("Usage: python strategies/daily-stat.py [--schedule] [--help]")
         return 1
 
     try:

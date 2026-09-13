@@ -185,8 +185,61 @@ def _launch_fomo_trade(symbol: str, num_stocks: int, entry: float, stop: float, 
 
 
 def main() -> int:
+    # Handle help flag
+    if len(sys.argv) < 2 or sys.argv[1] in ["--help", "-h", "help"]:
+        print("""
+PREVIOUS_CLOSE.PY - Previous Day Close Price Trading Strategy
+
+SYNTAX:
+  python previous_close.py <TICKER> <NUM_STOCKS> [--help]
+
+REQUIRED:
+  <TICKER>       Stock symbol (e.g., MU, AAPL, SPY)
+  <NUM_STOCKS>   Number of shares to trade per position (positive integer)
+
+OPTIONS:
+  --help, -h    Show this help message
+
+DESCRIPTION:
+  Automated trading strategy that trades at previous day's close price
+  Opens positions in multiple stocks at historical close prices
+  Useful for gap-fill and opening price analysis
+  Tracks execution and position management
+
+STRATEGY LOGIC:
+  - Uses previous trading day's close price as entry
+  - Trades NUM_STOCKS shares per symbol
+  - Manages position lifecycle automatically
+  - Tracks open/close prices and P&L
+
+EXAMPLES:
+  python strategies/previous_close.py MU 2
+    - Trade 2 shares of Micron at yesterday's close price
+
+  python strategies/previous_close.py AAPL 5
+    - Trade 5 shares of Apple at yesterday's close
+
+  python strategies/previous_close.py SPY 10
+    - Trade 10 shares of SPY at yesterday's close
+
+OUTPUT:
+  - Previous close price details
+  - Entry execution details
+  - Position open/close tracking
+  - P&L calculations
+  - Trade execution logs
+
+NOTES:
+  - Requires valid Alpaca API credentials and trading account
+  - NUM_STOCKS must be positive integer (1 or more)
+  - Uses previous trading day's data (not today)
+  - Works during market hours
+  - Monitor positions for gap risk at market open
+""")
+        return 0
+    
     if len(sys.argv) != 3:
-        print("Usage: python previous_close.py <TICKER> <NUM_STOCKS>")
+        print("Usage: python previous_close.py <TICKER> <NUM_STOCKS> [--help]")
         print("Example: python previous_close.py MU 2")
         return 1
 

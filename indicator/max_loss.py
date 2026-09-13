@@ -37,6 +37,46 @@ def get_todays_max_loss() -> float:
 
 
 def main() -> int:
+    # Check for --help early
+    if len(sys.argv) > 1 and sys.argv[1] in ["--help", "-h", "help"]:
+        print("""
+MAX_LOSS.PY - Today's Maximum Loss Reporter
+
+SYNTAX:
+  python indicator/max_loss.py [--help]
+
+OPTIONS:
+  --help, -h    Show this help message
+
+DESCRIPTION:
+  Reports the maximum loss realized in today's trading
+  Uses FIFO matching logic same as daily_pl.py
+  Useful for risk management and position monitoring
+  Outputs a single line with loss value
+
+EXAMPLES:
+  python indicator/max_loss.py
+    - Check today's maximum loss
+    Output: MAX_LOSS_TODAY=150.50
+
+  python indicator/max_loss.py --help
+    - Show this help message
+
+OUTPUT:
+  - Single line: MAX_LOSS_TODAY=<amount>
+  - Amount is formatted to 2 decimal places
+  - Reports as 0.00 if today's realized P/L is positive
+
+NOTES:
+  - Requires valid Alpaca API credentials
+  - Analyzes 365 days of order history for today's trades
+  - Works only with completed/filled orders
+  - Uses FIFO (First In, First Out) matching
+  - Useful for daily risk monitoring and max drawdown tracking
+  - Use with daily_pl.py for complete P/L picture
+""")
+        return 0
+    
     try:
         max_loss = get_todays_max_loss()
     except Exception as exc:

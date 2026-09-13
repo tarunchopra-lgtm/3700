@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: ETN
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $440.99
+  ATR (14-day): $18.24
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $405.70 - $415.16
+  Size:         $9.46
+  Distance:     $25.83 (142% of ATR)
+  Formed:       2026-09-10
+  FRESHNESS:    STALE
+  Notes:        STALE - Daily candle tested zone yesterday (low $405.74)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $411.24 - $430.25
+  Size:         $19.01
+  Distance:     $10.74
+  Formed:       2026-09-08
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($440.99 >= zone $411.24)
+
+TRADE METRICS:
+  Stop Loss Distance:  $35.29
+  Profit Target (PT):  $-29.75
+  Risk:Reward Ratio:   1:-0.84

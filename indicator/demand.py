@@ -54,9 +54,57 @@ MAX_ENTRY_DISTANCE_PCT = 0.02
 
 
 def _usage() -> None:
-    print("Usage: python demand.py <TICKER>")
-    print("Example: python demand.py SPY")
-    print("Example: python demand.py BTC/USD")
+    print("""
+DEMAND.PY - Real-time Demand Zone Detection for Live Trading
+
+SYNTAX:
+  python demand.py <SYMBOL> [--help]
+
+REQUIRED:
+  <SYMBOL>      Stock or crypto symbol (e.g., AAPL, SPY, BTC/USD, ETH/USD)
+
+OPTIONS:
+  --help, -h    Show this help message
+
+DESCRIPTION:
+  Monitors hourly candles for demand zone patterns
+  Automatically launches fomo_trade.py when valid entry signal is detected
+  Uses volatility-based entry distance calculation
+  Tracks signal age and position management
+
+PATTERN CRITERIA:
+  - Current candle range >= 2x average range (volatility expansion)
+  - Previous candle range < average (consolidation before breakout)
+  - Entry distance within 3x average range or 2% of price
+  - Signal age <= 48 hourly candles
+  
+ENTRY LOGIC:
+  - Buy Point: High of identified smaller candle (previous or current)
+  - Stop Loss: Low of identified smaller candle
+  - Auto-launches fomo_trade.py with calculated targets
+
+EXAMPLES:
+  python indicator/demand.py AAPL
+  python indicator/demand.py SPY
+  python indicator/demand.py BTC/USD
+  python indicator/demand.py ETH/USD
+  python indicator/demand.py --help
+
+OUTPUT:
+  Prints demand zone details if found
+  Automatically executes fomo_trade.py
+  Returns 0 on success, 1 on error
+
+NOTES:
+  - Requires valid Alpaca API credentials and trading account
+  - Uses hourly (1H) candles only
+  - Cancels any existing open orders for the symbol before trading
+  - Targets calculated as: buy_point + 3x(buy_point - stop_loss)
+""")
+
+
+def _usage_short() -> None:
+    print("Usage: python demand.py <SYMBOL> [--help]")
 
 
 def _normalize_symbol(symbol: str) -> str:
@@ -236,9 +284,10 @@ def _cancel_open_orders_for_symbol(trading_client, symbol: str) -> int:
 
 
 def main() -> int:
-    if len(sys.argv) != 2:
+    # Handle help flag
+    if len(sys.argv) < 2 or sys.argv[1] in ["--help", "-h", "help"]:
         _usage()
-        return 1
+        return 0 if len(sys.argv) > 1 else 1
 
     symbol = sys.argv[1].strip().upper()
     if not symbol:

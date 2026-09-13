@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: BDX
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $185.26
+  ATR (14-day): $4.09
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $168.01 - $170.91
+  Size:         $2.90
+  Distance:     $14.35 (351% of ATR)
+  Formed:       2026-08-05
+  FRESHNESS:    FRESH
+  Notes:        Limited data
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $184.91 - $191.75
+  Size:         $6.84
+  Distance:     $0.00
+  Formed:       2026-09-02
+  FRESHNESS:    FRESH
+  Notes:        Limited data
+
+TRADE METRICS:
+  Stop Loss Distance:  $17.25
+  Profit Target (PT):  $-0.35
+  Risk:Reward Ratio:   1:-0.02

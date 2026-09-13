@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: JCI
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $155.40
+  ATR (14-day): $4.56
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $142.43 - $147.05
+  Size:         $4.62
+  Distance:     $8.35 (183% of ATR)
+  Formed:       2026-09-08
+  FRESHNESS:    STALE
+  Notes:        STALE - Daily candle tested zone yesterday (low $142.47)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $142.84 - $149.64
+  Size:         $6.80
+  Distance:     $5.76
+  Formed:       2026-08-20
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($155.40 >= zone $142.84)
+
+TRADE METRICS:
+  Stop Loss Distance:  $12.97
+  Profit Target (PT):  $-12.56
+  Risk:Reward Ratio:   1:-0.97

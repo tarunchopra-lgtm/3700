@@ -348,15 +348,64 @@ def _cleanup_removed_underlyings(
 
 
 def main() -> int:
+    # Handle help flag
+    if len(sys.argv) > 1 and sys.argv[1] in ["--help", "-h", "help"]:
+        print("""
+GOCALL.PY - Automated Options Call Trading Strategy
+
+SYNTAX:
+  python gocall.py [SIZE] [--help]
+
+OPTIONAL PARAMETERS:
+  SIZE           Number of contracts to manage (default: 2, integer)
+  --help, -h    Show this help message
+
+DESCRIPTION:
+  Automated trading bot for selling call options
+  Manages multiple concurrent call positions
+  Monitors positions for profit targets and stop losses
+  Automatically closes profitable trades or cuts losses
+
+POSITION MANAGEMENT:
+  - Scans market for call selling opportunities
+  - Opens SIZE number of concurrent positions
+  - Tracks each position for real-time P&L
+  - Closes positions at predefined profit/loss levels
+  
+EXAMPLES:
+  python strategies/gocall.py
+    - Default: manage 2 concurrent call positions
+
+  python strategies/gocall.py 5
+    - Manage 5 concurrent call positions
+
+  python strategies/gocall.py --help
+    - Show detailed usage information
+
+OUTPUT:
+  - Active positions summary
+  - Entry prices and quantity
+  - Current P&L per position
+  - Exit signals and execution details
+  - Overall strategy performance
+
+NOTES:
+  - Requires valid Alpaca API credentials and options approval
+  - Suitable for experienced options traders
+  - Monitor positions actively during market hours
+  - Adjust SIZE based on account capital and risk tolerance
+""")
+        return 0
+    
     if len(sys.argv) not in (1, 2):
-        print("Usage: python strategies/gocall.py [SIZE]")
-        print("       SIZE defaults to 2 if not specified")
+        print("Usage: python strategies/gocall.py [SIZE] [--help]")
+        print("       SIZE defaults to 2 if not specified (must be integer)")
         return 1
 
     try:
         size = int(sys.argv[1]) if len(sys.argv) == 2 else 2
     except ValueError:
-        print("SIZE must be an integer")
+        print("Error: SIZE must be an integer")
         return 1
 
     if size <= 0:

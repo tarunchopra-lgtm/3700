@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: WST
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $380.37
+  ATR (14-day): $10.47
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $325.27 - $336.71
+  Size:         $11.44
+  Distance:     $43.66 (417% of ATR)
+  Formed:       2026-07-27
+  FRESHNESS:    STALE
+  Notes:        STALE - Daily candle tested zone yesterday (low $332.15)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $346.25 - $354.78
+  Size:         $8.53
+  Distance:     $25.59
+  Formed:       2026-08-26
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($380.37 >= zone $346.25)
+
+TRADE METRICS:
+  Stop Loss Distance:  $55.10
+  Profit Target (PT):  $-34.12
+  Risk:Reward Ratio:   1:-0.62

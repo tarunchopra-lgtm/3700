@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: MELI
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $2162.87
+  ATR (14-day): $54.18
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $1759.21 - $1813.99
+  Size:         $54.78
+  Distance:     $348.88 (644% of ATR)
+  Formed:       2026-08-18
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $1966.00 - $2066.00
+  Size:         $100.00
+  Distance:     $96.87
+  Formed:       2026-09-04
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($2162.87 >= zone $1966.00)
+
+TRADE METRICS:
+  Stop Loss Distance:  $403.66
+  Profit Target (PT):  $-196.87
+  Risk:Reward Ratio:   1:-0.49

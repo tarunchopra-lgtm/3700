@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: TROW
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $112.01
+  ATR (14-day): $2.78
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $104.40 - $109.58
+  Size:         $5.18
+  Distance:     $2.43 (88% of ATR)
+  Formed:       2026-06-22
+  FRESHNESS:    STALE
+  Notes:        STALE - Daily candle tested zone yesterday (low $107.12)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $106.75 - $109.62
+  Size:         $2.87
+  Distance:     $2.39
+  Formed:       2026-09-10
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($112.01 >= zone $106.75)
+
+TRADE METRICS:
+  Stop Loss Distance:  $7.61
+  Profit Target (PT):  $-5.26
+  Risk:Reward Ratio:   1:-0.69

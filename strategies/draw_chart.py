@@ -302,17 +302,72 @@ def _show_analysis(
 
 def main() -> int:
     """Main entry point."""
-    if len(sys.argv) < 3:
-        print("Usage: python draw_chart.py <SYMBOL> <DAYS_LOOKBACK>")
-        print("\nExamples:")
-        print("  python draw_chart.py INTC 15")
-        print("  python draw_chart.py SPY 20")
-        print("  python draw_chart.py BKR 30")
+    # Handle help flag
+    if len(sys.argv) < 2 or sys.argv[1] in ["--help", "-h", "help"]:
+        print("""
+DRAW_CHART.PY - ASCII Market Chart Visualization with Trend Analysis
+
+SYNTAX:
+  python draw_chart.py <SYMBOL> [DAYS_LOOKBACK] [--help]
+
+REQUIRED:
+  <SYMBOL>           Stock or crypto symbol (e.g., INTC, SPY, BTC/USD)
+
+OPTIONAL:
+  DAYS_LOOKBACK      Number of days to display (default: 20, min: 2)
+  --help, -h         Show this help message
+
+DESCRIPTION:
+  Generates ASCII price charts in the terminal
+  Shows daily OHLC (Open, High, Low, Close) candles
+  Includes trend line analysis and support/resistance zones
+  Useful for quick technical analysis without leaving terminal
+
+CHART ELEMENTS:
+  - Daily candles (open/close as blocks)
+  - High/Low wicks
+  - Trend line (calculated from price action)
+  - Support/Resistance zones
+  - Volume indicators
+  - Key price levels
+
+EXAMPLES:
+  python strategies/draw_chart.py INTC
+    - Default: 20 days of INTC with trend analysis
+
+  python strategies/draw_chart.py SPY 30
+    - 30 days of SPY chart
+
+  python strategies/draw_chart.py BTC/USD 40
+    - 40 days of Bitcoin chart
+
+  python strategies/draw_chart.py AAPL --help
+    - Show detailed usage
+
+OUTPUT:
+  - ASCII chart in terminal
+  - Price scale (Y-axis with actual prices)
+  - Date scale (X-axis with trading dates)
+  - Trend line overlay
+  - Statistical analysis (high/low/close)
+  - Opening price indicator
+
+NOTES:
+  - Requires Alpaca API credentials
+  - Works with both stocks and cryptocurrencies
+  - DAYS_LOOKBACK must be between 2 and 365
+  - Uses daily (1D) candles
+  - Great for quick analysis in terminal environment
+""")
+        return 0
+    
+    if len(sys.argv) < 2:
+        print("Usage: python draw_chart.py <SYMBOL> [DAYS_LOOKBACK] [--help]")
         return 1
     
     symbol = sys.argv[1].upper()
     try:
-        lookback_days = int(sys.argv[2])
+        lookback_days = int(sys.argv[2]) if len(sys.argv) > 2 else 20
         if lookback_days < 2:
             print("Error: DAYS_LOOKBACK must be at least 2")
             return 1

@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: LYB
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $68.69
+  ATR (14-day): $2.40
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $62.91 - $65.21
+  Size:         $2.30
+  Distance:     $3.48 (145% of ATR)
+  Formed:       2026-09-04
+  FRESHNESS:    STALE
+  Notes:        STALE - Daily candle tested zone yesterday (low $64.29)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $63.84 - $66.10
+  Size:         $2.26
+  Distance:     $2.59
+  Formed:       2026-09-10
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($68.69 >= zone $63.84)
+
+TRADE METRICS:
+  Stop Loss Distance:  $5.78
+  Profit Target (PT):  $-4.85
+  Risk:Reward Ratio:   1:-0.84

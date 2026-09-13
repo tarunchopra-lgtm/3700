@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: NEE
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $87.57
+  ATR (14-day): $1.89
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $80.75 - $82.60
+  Size:         $1.85
+  Distance:     $4.97 (263% of ATR)
+  Formed:       2026-08-31
+  FRESHNESS:    STALE
+  Notes:        STALE - Daily candle tested zone yesterday (low $82.23)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $82.23 - $84.25
+  Size:         $2.02
+  Distance:     $3.32
+  Formed:       2026-09-10
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($87.57 >= zone $82.23)
+
+TRADE METRICS:
+  Stop Loss Distance:  $6.82
+  Profit Target (PT):  $-5.34
+  Risk:Reward Ratio:   1:-0.78

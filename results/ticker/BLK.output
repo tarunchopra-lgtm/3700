@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: BLK
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $1158.89
+  ATR (14-day): $24.11
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $1033.49 - $1069.99
+  Size:         $36.50
+  Distance:     $88.90 (369% of ATR)
+  Formed:       2026-07-24
+  FRESHNESS:    FRESH
+  Notes:        Limited data
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $1071.19 - $1113.03
+  Size:         $41.84
+  Distance:     $45.86
+  Formed:       2026-09-09
+  FRESHNESS:    FRESH
+  Notes:        Limited data
+
+TRADE METRICS:
+  Stop Loss Distance:  $125.40
+  Profit Target (PT):  $-87.70
+  Risk:Reward Ratio:   1:-0.70

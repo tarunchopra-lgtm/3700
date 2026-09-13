@@ -11,13 +11,80 @@ What it does:
 - Launches trade runners with fresh midpoint pricing for entry and re-entry
 
 Usage:
-    python spy_option.py
-    python spy_option.py [ATR_RANGE_MULTIPLIER]
-
+    python spy_option.py [ATR_RANGE_MULTIPLIER] [--help]
+    
 Examples:
     python spy_option.py       # Defaults to current SPY +/- 0.5 ATR
     python spy_option.py 0.25  # Uses current SPY +/- 0.25 ATR
 """
+
+import sys
+# Check for --help early
+if len(sys.argv) > 1 and sys.argv[1] in ["--help", "-h", "help"]:
+    print("""
+SPY_OPTION.PY - SPY Weekly Options Range and Trigger Monitor
+
+SYNTAX:
+  python strategies/spy_option.py [ATR_RANGE_MULTIPLIER] [--help]
+
+OPTIONAL:
+  ATR_RANGE_MULTIPLIER    ATR multiple for expected range (default: 0.5)
+                           ATR for 14 periods * multiplier = range
+  --help, -h              Show this help message
+
+DESCRIPTION:
+  Monitors SPY price and calculates expected daily range using ATR
+  Finds weekly call and put option contracts
+  Sets trigger levels above and below current price
+  Continuously checks if SPY price hits call/put triggers
+  Launches options trading with fresh bid/ask pricing when triggered
+
+RANGE CALCULATION:
+  1. Reads current SPY price
+  2. Calculates 14-period ATR (Average True Range)
+  3. Multiplies ATR by ATR_RANGE_MULTIPLIER (default 0.5)
+  4. Sets call trigger = SPY price + (ATR × multiplier)
+  5. Sets put trigger = SPY price - (ATR × multiplier)
+
+EXAMPLES:
+  python strategies/spy_option.py
+    - Use default 0.5 ATR multiplier
+    - SPY +/- 0.5 × ATR14 = range for options triggers
+
+  python strategies/spy_option.py 0.25
+    - Tighter range: 0.25 × ATR14 (triggers closer to current price)
+
+  python strategies/spy_option.py 1.0
+    - Wider range: 1.0 × ATR14 (triggers farther out)
+
+CONFIGURATION PARAMETERS:
+  ATR_PERIOD = 14           # Historical bars for volatility
+  CHECK_INTERVAL_SECONDS = 12  # How often to check price
+  ORDER_QTY = 2             # Contracts per trade
+  STOP_LOSS_OFFSET = 0.25   # Stop loss distance from entry
+  TARGET1_OFFSET = 0.25     # First profit target
+  TARGET2_OFFSET = 2.00     # Second profit target
+
+OUTPUT:
+  - Current SPY price and ATR
+  - Calculated call/put trigger levels
+  - Trigger status and option contract symbols
+  - Trade execution status and outcomes
+  - Real-time price monitoring output
+
+DEPENDENCIES:
+  - current_week_option_function_call.py
+  - current_week_option_function_put.py
+  - Valid Alpaca API credentials
+
+NOTES:
+  - Requires valid Alpaca API credentials
+  - Run during SPY market hours (9:30 AM - 4:00 PM ET)
+  - Smaller multiplier = more frequent triggers
+  - Larger multiplier = fewer, larger moves
+  - Best for options selling strategies
+""")
+    sys.exit(0)
 
 from __future__ import annotations
 

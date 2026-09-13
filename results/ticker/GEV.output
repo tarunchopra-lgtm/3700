@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: GEV
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $997.69
+  ATR (14-day): $58.07
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $918.60 - $983.34
+  Size:         $64.74
+  Distance:     $14.35 (25% of ATR)
+  Formed:       2026-09-09
+  FRESHNESS:    STALE
+  Notes:        STALE - Daily candle tested zone yesterday (low $918.86)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $949.06 - $983.34
+  Size:         $34.28
+  Distance:     $14.35
+  Formed:       2026-09-09
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($997.69 >= zone $949.06)
+
+TRADE METRICS:
+  Stop Loss Distance:  $79.09
+  Profit Target (PT):  $-48.63
+  Risk:Reward Ratio:   1:-0.61

@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: GE
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $339.68
+  ATR (14-day): $9.63
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $318.25 - $332.92
+  Size:         $14.67
+  Distance:     $6.76 (70% of ATR)
+  Formed:       2026-06-11
+  FRESHNESS:    STALE
+  Notes:        STALE - Daily candle tested zone yesterday (low $321.88)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $321.16 - $332.06
+  Size:         $10.90
+  Distance:     $7.62
+  Formed:       2026-09-10
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($339.68 >= zone $321.16)
+
+TRADE METRICS:
+  Stop Loss Distance:  $21.43
+  Profit Target (PT):  $-18.52
+  Risk:Reward Ratio:   1:-0.86

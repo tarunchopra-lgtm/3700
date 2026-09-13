@@ -220,9 +220,101 @@ def _format_trade(symbol: str, trade: TrendTrade) -> str:
 
 
 def main() -> int:
+    # Handle help flag
+    if len(sys.argv) > 1 and sys.argv[1] in ["--help", "-h", "help"]:
+        print("""
+UPTREND.PY - Identify Stocks in Descending Breakout Patterns
+
+SYNTAX:
+  python strategies/uptrend.py <TICKER> [TICKER ...] [--help]
+
+REQUIRED:
+  <TICKER>      Stock symbols to analyze (one or more)
+                Examples: AAPL SPY INTC TSLA
+
+OPTIONAL:
+  --help, -h    Show this help message
+
+DESCRIPTION:
+  Scans daily candles for descending 15-day high trend breakouts
+  Identifies potential entry points in uptrending stocks
+  Analyzes completed daily candles (yesterday's close)
+  Returns most recent breakout trade signal for each symbol
+  Useful for end-of-day breakout scanning or historical analysis
+
+PATTERN DETECTION:
+  
+  Descending High Trend:
+  - Last 15 daily candles
+  - Highs forming descending slope
+  - Lower high, lower high, lower high...
+  - Price trending downward (accumulation)
+
+  Breakout Signal:
+  - Current daily close > resistance line
+  - Closes above descending high trend
+  - 15-candle lookback for trend confirmation
+  - First close above line = entry signal
+
+  Trade Setup:
+  - Entry: Current daily close (above resistance)
+  - Stop: Low of entry candle or previous pivot
+  - Target: Projected swing high or 2R/3R
+  - Risk/Reward: Minimum 1:2
+
+EXAMPLES:
+  python strategies/uptrend.py AAPL
+    - Scan Apple for uptrend breakouts
+
+  python strategies/uptrend.py SPY QQQ IWM
+    - Scan multiple ETFs simultaneously
+
+  python strategies/uptrend.py AAPL MSFT GOOGL TSLA AMZN
+    - Scan tech stocks for breakout setups
+
+  python strategies/uptrend.py INTC --help
+    - Show detailed help
+
+OUTPUT:
+  For each symbol:
+  - If breakout found: "SYMBOL: Entry=X.XX Stop=X.XX Target=X.XX"
+  - If no breakout: "SYMBOL: no descending 15-day high trend break..."
+  - If error: "SYMBOL: ERROR [error details]"
+
+OUTPUT FORMAT:
+  AAPL: Entry=150.25 Stop=149.50 Target=151.75
+  - Shows most recent breakout signal
+  - Entry price = daily close
+  - Stop price = trend support
+  - Target price = projected swing high
+
+ANALYSIS SCOPE:
+  - Daily timeframe (1D candles)
+  - 15 completed candles minimum
+  - Last ~75 trading days analyzed
+  - Completed candles only (yesterday's close used)
+
+MULTIPLE SYMBOLS:
+  - Scans all symbols in single run
+  - Sequential processing (one at a time)
+  - Error in one symbol doesn't stop others
+  - Useful for watchlist scanning
+
+NOTES:
+  - Requires valid Alpaca API credentials
+  - Works with stocks only (not crypto/options)
+  - Uses daily completed candles only
+  - Best run after market close (3:59 PM ET)
+  - 15-candle lookback = ~3 weeks of history
+  - Descending high pattern = potential accumulation
+  - Ideal for swing trading or position entries
+  - Multiple symbols for portfolio screening
+""")
+        return 0
+    
     symbols = _parse_symbols(sys.argv[1:])
     if not symbols:
-        print("Usage: python strategies/uptrend.py <TICKER> [TICKER ...]")
+        print("Usage: python strategies/uptrend.py <TICKER> [TICKER ...] [--help]")
         return 1
 
     try:

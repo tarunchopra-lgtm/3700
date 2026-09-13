@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: DOW
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $30.29
+  ATR (14-day): $1.27
+  Within ATR:   YES
+
+DEMAND ZONE (Buy Zone):
+  Range:        $28.23 - $30.77
+  Size:         $2.54
+  Distance:     $0.00 (0% of ATR)
+  Formed:       2026-07-24
+  FRESHNESS:    FRESH
+  Notes:        Limited data
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $28.95 - $30.26
+  Size:         $1.31
+  Distance:     $0.03
+  Formed:       2026-09-10
+  FRESHNESS:    FRESH
+  Notes:        Limited data
+
+TRADE METRICS:
+  Stop Loss Distance:  $2.06
+  Profit Target (PT):  $-1.34
+  Risk:Reward Ratio:   1:-0.65

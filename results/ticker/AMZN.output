@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: AMZN
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $267.11
+  ATR (14-day): $9.89
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $226.16 - $233.11
+  Size:         $6.95
+  Distance:     $34.00 (344% of ATR)
+  Formed:       2026-07-28
+  FRESHNESS:    FRESH
+  Notes:        Limited data
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $251.93 - $264.36
+  Size:         $12.43
+  Distance:     $2.75
+  Formed:       2026-09-01
+  FRESHNESS:    FRESH
+  Notes:        Limited data
+
+TRADE METRICS:
+  Stop Loss Distance:  $40.95
+  Profit Target (PT):  $-15.18
+  Risk:Reward Ratio:   1:-0.37

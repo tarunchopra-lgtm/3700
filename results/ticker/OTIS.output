@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: OTIS
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $72.11
+  ATR (14-day): $1.64
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $67.64 - $70.04
+  Size:         $2.40
+  Distance:     $2.07 (126% of ATR)
+  Formed:       2026-09-09
+  FRESHNESS:    STALE
+  Notes:        STALE - Daily candle tested zone yesterday (low $67.65)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $68.41 - $71.35
+  Size:         $2.94
+  Distance:     $0.76
+  Formed:       2026-09-09
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($72.11 >= zone $68.41)
+
+TRADE METRICS:
+  Stop Loss Distance:  $4.47
+  Profit Target (PT):  $-3.70
+  Risk:Reward Ratio:   1:-0.83

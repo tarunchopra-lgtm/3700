@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: MSCI
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $601.65
+  ATR (14-day): $18.36
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $545.12 - $556.61
+  Size:         $11.49
+  Distance:     $45.04 (245% of ATR)
+  Formed:       2026-09-09
+  FRESHNESS:    STALE
+  Notes:        STALE - Daily candle tested zone yesterday (low $545.28)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $545.56 - $569.34
+  Size:         $23.78
+  Distance:     $32.31
+  Formed:       2026-09-09
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($601.65 >= zone $545.56)
+
+TRADE METRICS:
+  Stop Loss Distance:  $56.53
+  Profit Target (PT):  $-56.09
+  Risk:Reward Ratio:   1:-0.99

@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: WRB
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $73.80
+  ATR (14-day): $1.47
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $67.36 - $68.48
+  Size:         $1.12
+  Distance:     $5.32 (361% of ATR)
+  Formed:       2026-09-01
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $69.18 - $71.28
+  Size:         $2.09
+  Distance:     $2.52
+  Formed:       2026-08-20
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($73.80 >= zone $69.18)
+
+TRADE METRICS:
+  Stop Loss Distance:  $6.44
+  Profit Target (PT):  $-4.62
+  Risk:Reward Ratio:   1:-0.72

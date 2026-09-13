@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: VMRK
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $69.19
+  ATR (14-day): $1.18
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $64.60 - $65.56
+  Size:         $0.96
+  Distance:     $3.63 (308% of ATR)
+  Formed:       2026-09-10
+  FRESHNESS:    STALE
+  Notes:        STALE - Daily candle tested zone yesterday (low $64.61)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $65.08 - $67.26
+  Size:         $2.18
+  Distance:     $1.93
+  Formed:       2026-08-28
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($69.19 >= zone $65.08)
+
+TRADE METRICS:
+  Stop Loss Distance:  $4.59
+  Profit Target (PT):  $-4.11
+  Risk:Reward Ratio:   1:-0.90

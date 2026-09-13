@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: CNC
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $70.01
+  ATR (14-day): $2.81
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $61.81 - $68.20
+  Size:         $6.39
+  Distance:     $1.81 (64% of ATR)
+  Formed:       2026-09-09
+  FRESHNESS:    STALE
+  Notes:        STALE - Daily candle tested zone yesterday (low $65.37)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $66.77 - $68.83
+  Size:         $2.06
+  Distance:     $1.18
+  Formed:       2026-09-03
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($70.01 >= zone $66.77)
+
+TRADE METRICS:
+  Stop Loss Distance:  $8.20
+  Profit Target (PT):  $-3.24
+  Risk:Reward Ratio:   1:-0.40

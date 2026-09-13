@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: ADSK
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $223.65
+  ATR (14-day): $9.83
+  Within ATR:   YES
+
+DEMAND ZONE (Buy Zone):
+  Range:        $206.33 - $213.89
+  Size:         $7.56
+  Distance:     $9.76 (99% of ATR)
+  Formed:       2026-09-10
+  FRESHNESS:    FRESH
+  Notes:        Limited data
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $208.09 - $232.13
+  Size:         $24.05
+  Distance:     $0.00
+  Formed:       2026-09-08
+  FRESHNESS:    FRESH
+  Notes:        Limited data
+
+TRADE METRICS:
+  Stop Loss Distance:  $17.32
+  Profit Target (PT):  $-15.56
+  Risk:Reward Ratio:   1:-0.90

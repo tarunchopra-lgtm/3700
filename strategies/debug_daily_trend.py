@@ -2,6 +2,51 @@
 """Debug script to analyze why find_daily_trend is giving false positives."""
 
 import sys
+# Check for --help early
+if len(sys.argv) > 1 and sys.argv[1] in ["--help", "-h", "help"]:
+    print("""
+DEBUG_DAILY_TREND.PY - Troubleshoot Daily Trend Detection
+
+SYNTAX:
+  python strategies/debug_daily_trend.py <TICKER> [--help]
+
+REQUIRED:
+  TICKER              Stock symbol to debug (e.g., AAPL, INTC, SPY)
+
+OPTIONS:
+  --help, -h          Show this help message
+
+DESCRIPTION:
+  Analyzes why a stock passed or failed the daily trend breakout check
+  Shows detailed breakdown of 15-day descending high trend
+  Displays historical highs, fitted trend line, resistance levels
+  Identifies exact entry point and breakout distance
+
+EXAMPLES:
+  python strategies/debug_daily_trend.py AAPL
+    - Show why AAPL passed or failed trend breakout
+    - Display 15-day descending high pattern
+
+  python strategies/debug_daily_trend.py INTC
+    - Debug Intel trend detection
+
+OUTPUT:
+  - Symbol and completed bar count
+  - Last 15 days of daily highs with dates
+  - Trend line equation and fit statistics
+  - Current price vs. resistance
+  - Breakout status ("BREAKOUT" or "NO BREAKOUT")
+
+NOTES:
+  - Requires valid Alpaca API credentials
+  - Analyzes last 50 days of data
+  - Uses 15-day lookback for trend line
+  - Works with stocks only (not crypto/options)
+  - Helpful for tuning trend detection parameters
+""")
+    sys.exit(0)
+
+import sys
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from zoneinfo import ZoneInfo

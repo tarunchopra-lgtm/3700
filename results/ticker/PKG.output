@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: PKG
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $249.48
+  ATR (14-day): $7.24
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $214.18 - $226.20
+  Size:         $12.02
+  Distance:     $23.28 (321% of ATR)
+  Formed:       2026-06-11
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $233.79 - $246.18
+  Size:         $12.39
+  Distance:     $3.30
+  Formed:       2026-08-31
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($249.48 >= zone $233.79)
+
+TRADE METRICS:
+  Stop Loss Distance:  $35.30
+  Profit Target (PT):  $-15.69
+  Risk:Reward Ratio:   1:-0.44

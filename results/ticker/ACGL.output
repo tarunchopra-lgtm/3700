@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: ACGL
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $101.85
+  ATR (14-day): $2.34
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $90.91 - $92.81
+  Size:         $1.90
+  Distance:     $9.04 (386% of ATR)
+  Formed:       2026-06-22
+  FRESHNESS:    FRESH
+  Notes:        Limited data
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $97.87 - $100.51
+  Size:         $2.64
+  Distance:     $1.34
+  Formed:       2026-09-03
+  FRESHNESS:    FRESH
+  Notes:        Limited data
+
+TRADE METRICS:
+  Stop Loss Distance:  $10.94
+  Profit Target (PT):  $-3.98
+  Risk:Reward Ratio:   1:-0.36

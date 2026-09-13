@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: OMC
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $83.27
+  ATR (14-day): $3.20
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $76.45 - $87.41
+  Size:         $10.95
+  Distance:     $0.00 (0% of ATR)
+  Formed:       2026-07-29
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($83.27 <= zone $87.41)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $82.19 - $84.80
+  Size:         $2.61
+  Distance:     $0.00
+  Formed:       2026-09-04
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($83.27 >= zone $82.19)
+
+TRADE METRICS:
+  Stop Loss Distance:  $6.82
+  Profit Target (PT):  $-1.08
+  Risk:Reward Ratio:   1:-0.16

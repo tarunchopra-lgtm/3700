@@ -29,6 +29,11 @@ if str(WORKSPACE_ROOT) not in sys.path:
 from roles.plot_function import plot_stock_chart
 
 def main():
+    # Check for --help early
+    if len(sys.argv) > 1 and sys.argv[1] in ["--help", "-h", "help"]:
+        print(__doc__)
+        return 0
+    
     # Parse arguments with defaults
     symbol = 'MU'
     chart_type = 'daily'

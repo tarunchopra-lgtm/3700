@@ -57,7 +57,7 @@ from roles.credentials import bootstrap_trading_auth
 from roles.candle_builder import build_volume_candles_from_bars
 
 
-ENTRY_LOOKBACK = 15
+ENTRY_LOOKBACK = 10
 EXIT_LOOKBACK = 10
 CHECK_INTERVAL_SECONDS = 30
 INITIAL_HISTORY_HOURS = 24  # Fetch full trading day of history to build candles
@@ -359,6 +359,115 @@ def _parse_arguments() -> tuple[str, float | int, float, int]:
 
 
 def main() -> int:
+    # Handle help flag manually (before argparse)
+    if len(sys.argv) > 1 and sys.argv[1] in ["--help", "-h", "help"]:
+        print("""
+LONG_TREND.PY - Volume-Based Breakout Trading Strategy
+
+SYNTAX:
+  python strategies/long_trend.py <SYMBOL> <QUANTITY> <VOLUME_PER_CANDLE> [--history-hours HOURS] [--help]
+
+REQUIRED:
+  <SYMBOL>               Stock ticker, crypto pair, or option symbol
+                        Examples: AAPL, SPY, BTC/USD, AAPL240920C00150000
+  <QUANTITY>             Shares/contracts/units to trade (must be positive, whole for stocks/options)
+  <VOLUME_PER_CANDLE>    Target volume per candle (whole number for stocks/options)
+
+OPTIONAL:
+  --history-hours H     Historical data lookback (default: 100 hours)
+  --help, -h            Show this help message
+
+DESCRIPTION:
+  Automated breakout trading strategy using volume-based candles
+  Builds resistance from volume candles (15 candle lookback)
+  Enters on breakout above descending resistance
+  Uses volume-weighted price action for trend identification
+  Works with stocks, cryptocurrencies, and options
+
+STRATEGY MECHANICS:
+  
+  Entry Signal:
+  - Identifies 15 completed volume candles
+  - Calculates descending resistance from candle highs
+  - Enters when price closes above the resistance line
+  - Requires negative slope (descending trend for breakout)
+
+  Position Management:
+  - Target 1: Sells 50% at 1R (1 * Risk/Reward)
+  - Target 2: Remaining 50% follows 10-candle low-trend exit
+  - Stop Loss: Adjusted based on entry volatility
+  - Risk: Initial stop to entry distance
+
+  Volume Candles:
+  - Groups minute bars by cumulative volume
+  - Each candle = VOLUME_PER_CANDLE units traded
+  - OHLC prices calculated from grouped bars
+  - More stable than time-based candles in ranging markets
+
+EXAMPLES:
+  python strategies/long_trend.py AAPL 10 5000
+    - Trade Apple with 10 shares
+    - Each volume candle = 5,000 shares traded
+    - 100-hour history (default)
+
+  python strategies/long_trend.py BTC/USD 0.5 100 --history-hours 240
+    - Trade Bitcoin with 0.5 BTC
+    - Each volume candle = 100 BTC
+    - Load 240 hours of history
+
+  python strategies/long_trend.py TSLA 5 2000 --history-hours 48
+    - Tesla, 5 shares per trade
+    - 2,000 share volume candles
+    - 48-hour initial history
+
+PARAMETERS:
+
+  SYMBOL:
+  - Stock: AAPL, SPY, INTC (4-6 character tickers)
+  - Crypto: BTC/USD, ETH/USD (with forward slash)
+  - Option: AAPL240920C00150000 (OCC format)
+
+  QUANTITY:
+  - Must be > 0 (decimal allowed for crypto only)
+  - Stocks/Options: whole numbers only
+  - Crypto: can be fractional (0.5 BTC valid)
+
+  VOLUME_PER_CANDLE:
+  - Must be > 0 (whole number for stocks/options)
+  - Recommended: 2000-10000 for stocks
+  - Smaller volumes = more candles = slower confirmation
+  - Larger volumes = fewer candles = faster confirmation
+
+ASSET SUPPORT:
+  - Stocks: AAPL, SPY, INTC, etc.
+  - Cryptocurrencies: BTC/USD, ETH/USD, SOL/USD, etc.
+  - Options: AAPL240920C00150000 format
+
+OUTPUT:
+  - Initial candle building: [INIT] Built X/15 candles
+  - Resistance calculations and slope display
+  - Entry signal: [ENTRY] Symbol price signal
+  - Target 1 fills: [TARGET1] 50% exit confirmation
+  - Candle completions: [CANDLE] New volume candle formed
+  - Stop loss exits: [STOP] Order execution
+
+MONITORING:
+  - Refreshes every 5 seconds
+  - Builds volume candles from minute bars
+  - Calculates rolling resistance trends
+  - Real-time P&L tracking
+
+NOTES:
+  - Requires valid Alpaca API credentials
+  - Works during market hours (stocks) or 24/7 (crypto)
+  - Volume candle approach reduces noise vs. time-based candles
+  - Breakout strategy works better in trending markets
+  - Press Ctrl+C to stop and close any open positions
+  - History hours: 100 default, min 1, recommended 48-240
+  - Positional trade strategy (holds multiple candles)
+""")
+        return 0
+    
     try:
         symbol, quantity, volume_target, history_hours = _parse_arguments()
     except ValueError as exc:

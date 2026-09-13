@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: FLEX
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $122.54
+  ATR (14-day): $8.94
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $107.92 - $115.28
+  Size:         $7.36
+  Distance:     $7.26 (81% of ATR)
+  Formed:       2026-09-09
+  FRESHNESS:    STALE
+  Notes:        STALE - Daily candle tested zone yesterday (low $107.92)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $109.90 - $121.62
+  Size:         $11.72
+  Distance:     $0.92
+  Formed:       2026-08-20
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($122.54 >= zone $109.90)
+
+TRADE METRICS:
+  Stop Loss Distance:  $14.62
+  Profit Target (PT):  $-12.64
+  Risk:Reward Ratio:   1:-0.86

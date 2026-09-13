@@ -7,13 +7,14 @@ Sells every open position:
 2. If the order doesn't fill within 1 minute, cancels and sells at market price
 
 Usage:
-    python strategies/closing_bell.py
+    python strategies/closing_bell.py [--help]
 
 Note: Scheduling is handled via Windows Task Scheduler.
 """
 
 import os
 import sys
+import time
 from datetime import datetime
 from pathlib import Path
 from typing import Optional
@@ -266,6 +267,67 @@ def close_all_positions(trading_client, stock_data_client, crypto_data_client) -
 
 def main():
     """Close all positions immediately."""
+    # Handle help flag
+    if len(sys.argv) > 1 and sys.argv[1] in ["--help", "-h", "help"]:
+        print("""
+CLOSING_BELL.PY - Force Close All Open Positions
+
+SYNTAX:
+  python strategies/closing_bell.py [--help]
+
+OPTIONS:
+  --help, -h    Show this help message
+
+DESCRIPTION:
+  Emergency program to close all open trading positions
+  Executes at market close or on-demand to flatten account
+  Uses intelligent exit strategy: limit order → market order
+  Useful for end-of-day cleanup or risk management
+
+EXIT STRATEGY:
+  1. Get bid/ask quotes for each position
+  2. Calculate midpoint price (bid + ask) / 2
+  3. Place limit order at midpoint (60-second timeout)
+  4. If limit doesn't fill, auto-cancel and sell at market price
+  5. Log all trades to closing_bell_log.txt
+
+POSITIONS CLOSED:
+  - All stock holdings
+  - All cryptocurrency holdings
+  - All long and short positions
+
+EXAMPLES:
+  python strategies/closing_bell.py
+    - Close all open positions immediately
+    - Limit order for 60 seconds at midpoint
+    - Falls back to market order if needed
+
+  python strategies/closing_bell.py --help
+    - Show detailed usage
+
+OUTPUT:
+  Console output:
+  - Symbol, quantity, and exit price for each position
+  - Order type (limit or market)
+  - Fill confirmations
+  - Total P&L on close
+  
+  Log file: strategies/closing_bell_log.txt
+  - Timestamp for each trade
+  - Order IDs and status
+  - Fill prices and quantities
+
+IMPORTANT NOTES:
+  - Closes ALL positions (both stocks and crypto)
+  - No confirmation prompts (use with caution!)
+  - Ideal to run as Windows Task Scheduler job at market close
+  - Limit order timeout: 60 seconds
+  - Best for end-of-day cleanup (4:00 PM ET)
+  - Requires active trading account and Alpaca API credentials
+  - Order time in force: DAY (expires if not filled by close)
+""")
+        return 0
+    
     try:
         credentials, trading_client = bootstrap_trading_auth("closing_bell.py")
     except Exception as exc:

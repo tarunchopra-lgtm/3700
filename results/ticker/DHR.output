@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: DHR
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $213.15
+  ATR (14-day): $8.91
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $196.48 - $201.34
+  Size:         $4.86
+  Distance:     $11.81 (133% of ATR)
+  Formed:       2026-08-06
+  FRESHNESS:    STALE
+  Notes:        STALE - Daily candle tested zone yesterday (low $200.47)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $208.21 - $220.67
+  Size:         $12.46
+  Distance:     $0.00
+  Formed:       2026-08-20
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($213.15 >= zone $208.21)
+
+TRADE METRICS:
+  Stop Loss Distance:  $16.67
+  Profit Target (PT):  $-4.94
+  Risk:Reward Ratio:   1:-0.30

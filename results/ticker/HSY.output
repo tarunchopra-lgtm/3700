@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: HSY
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $181.59
+  ATR (14-day): $4.06
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $168.75 - $172.83
+  Size:         $4.08
+  Distance:     $8.76 (216% of ATR)
+  Formed:       2026-07-20
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $172.02 - $179.26
+  Size:         $7.24
+  Distance:     $2.33
+  Formed:       2026-09-01
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($181.59 >= zone $172.02)
+
+TRADE METRICS:
+  Stop Loss Distance:  $12.84
+  Profit Target (PT):  $-9.57
+  Risk:Reward Ratio:   1:-0.75

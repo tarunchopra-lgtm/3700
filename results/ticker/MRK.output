@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: MRK
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $153.20
+  ATR (14-day): $2.95
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $133.40 - $135.97
+  Size:         $2.57
+  Distance:     $17.23 (585% of ATR)
+  Formed:       2026-08-14
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $149.14 - $156.92
+  Size:         $7.78
+  Distance:     $0.00
+  Formed:       2026-08-24
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($153.20 >= zone $149.14)
+
+TRADE METRICS:
+  Stop Loss Distance:  $19.80
+  Profit Target (PT):  $-4.06
+  Risk:Reward Ratio:   1:-0.21

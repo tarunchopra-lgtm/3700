@@ -1,8 +1,8 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """Run current_week_option.py for every stock position in the account.
 
 Usage:
-    python position_options.py
+    python position_options.py [--help]
 """
 
 from __future__ import annotations
@@ -11,8 +11,58 @@ import subprocess
 import sys
 from pathlib import Path
 
-from pathlib import Path
-import sys
+# Check for --help early
+if len(sys.argv) > 1 and sys.argv[1] in ["--help", "-h", "help"]:
+    print("""
+POSITION_OPTIONS.PY - Generate Options for All Stock Positions
+
+SYNTAX:
+  python strategies/position_options.py [--help]
+
+OPTIONS:
+  --help, -h    Show this help message
+
+DESCRIPTION:
+  Iterates through all current stock positions in trading account
+  Runs current_week_option.py for each position
+  Generates weekly option chain analysis and trading recommendations
+  Useful for managing options across entire portfolio
+
+WORKFLOW:
+  1. Authenticate with Alpaca API
+  2. Fetch all open positions in account
+  3. Filter for stock positions only (US equity assets)
+  4. For each stock position, run current_week_option.py
+  5. Display analysis and option recommendations per stock
+
+EXAMPLES:
+  python strategies/position_options.py
+    - Analyze weekly options for all current stock positions
+    - Outputs analysis for AAPL, then MSFT, then GOOGL, etc.
+    - Shows option recommendations for each position
+
+OUTPUT:
+  Per position:
+  - Stock symbol and position details
+  - Weekly call option analysis
+  - Weekly put option analysis
+  - Option bid/ask prices and premiums
+  - Trading opportunity indicators
+
+DEPENDENCIES:
+  - current_week_option.py (must be in same strategies/ directory)
+  - Valid Alpaca API credentials
+  - Active trading account with positions
+
+NOTES:
+  - Requires valid Alpaca API credentials
+  - Works with both paper and live trading accounts
+  - Best run during market hours for current prices
+  - Generates output for EACH position sequentially
+  - Exit with error if no positions found
+  - Use with gocall.py for options selling strategies
+""")
+    sys.exit(0)
 
 WORKSPACE_ROOT = Path(__file__).resolve().parent.parent
 if str(WORKSPACE_ROOT) not in sys.path:

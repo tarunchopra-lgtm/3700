@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: TSN
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $55.64
+  ATR (14-day): $1.74
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $51.48 - $53.05
+  Size:         $1.57
+  Distance:     $2.59 (149% of ATR)
+  Formed:       2026-09-09
+  FRESHNESS:    STALE
+  Notes:        STALE - Daily candle tested zone yesterday (low $52.20)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $56.50 - $57.68
+  Size:         $1.18
+  Distance:     $0.86
+  Formed:       2026-08-26
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+TRADE METRICS:
+  Stop Loss Distance:  $4.16
+  Profit Target (PT):  $0.86
+  Risk:Reward Ratio:   1:0.21

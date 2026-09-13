@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: SW
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $45.44
+  ATR (14-day): $2.05
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $41.70 - $42.83
+  Size:         $1.13
+  Distance:     $2.61 (127% of ATR)
+  Formed:       2026-09-10
+  FRESHNESS:    STALE
+  Notes:        STALE - Daily candle tested zone yesterday (low $41.73)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $45.14 - $46.84
+  Size:         $1.70
+  Distance:     $0.00
+  Formed:       2026-09-02
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($45.44 >= zone $45.14)
+
+TRADE METRICS:
+  Stop Loss Distance:  $3.74
+  Profit Target (PT):  $-0.30
+  Risk:Reward Ratio:   1:-0.08

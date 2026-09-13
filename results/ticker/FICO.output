@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: FICO
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $1049.84
+  ATR (14-day): $74.90
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $947.91 - $994.50
+  Size:         $46.59
+  Distance:     $55.34 (74% of ATR)
+  Formed:       2026-09-10
+  FRESHNESS:    STALE
+  Notes:        STALE - Daily candle tested zone yesterday (low $948.38)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $1086.00 - $1150.84
+  Size:         $64.84
+  Distance:     $36.16
+  Formed:       2026-09-02
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+TRADE METRICS:
+  Stop Loss Distance:  $101.93
+  Profit Target (PT):  $36.16
+  Risk:Reward Ratio:   1:0.35

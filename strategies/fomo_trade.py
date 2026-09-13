@@ -98,84 +98,14 @@ def _get_open_orders_for_symbol(symbol: str):
     return [o for o in orders if _normalize_symbol(getattr(o, "symbol", "")) == target]
 
 
-def _get_option_midpoint() -> tuple[float, float, float]:
-    quotes = _timed(
-        "get_option_latest_quote",
-        data_client.get_option_latest_quote,
-        OptionLatestQuoteRequest(symbol_or_symbols=SYMBOL, feed=OptionsFeed.INDICATIVE),
-    )
-    quote = quotes[SYMBOL]
-    bid = float(quote.bid_price)
-    ask = float(quote.ask_price)
-    if bid <= 0 or ask <= 0 or ask < bid:
-        raise RuntimeError(f"Invalid option quote for {SYMBOL}: bid={bid}, ask={ask}")
-    return bid, ask, round((bid + ask) / 2.0, 2)
-
-
-def _refresh_option_entry_levels() -> tuple[float, float, float]:
-    global ENTRY_PRICE, STOP_PRICE, TARGET1_PRICE, TARGET2_PRICE, current_stop_loss
-
-    bid, ask, midpoint = _get_option_midpoint()
-    ENTRY_PRICE = midpoint
-    STOP_PRICE = max(round(midpoint - STOP_LOSS_DISTANCE, 2), 0.01)
-    TARGET1_PRICE = round(midpoint + TARGET1_DISTANCE, 2)
-    TARGET2_PRICE = round(midpoint + TARGET2_DISTANCE, 2)
-    current_stop_loss = STOP_PRICE
-    return bid, ask, midpoint
-
-
-def _place_entry_order() -> tuple[str, float]:
-    limit_price = ENTRY_PRICE
-    if REFRESH_OPTION_MIDPOINT:
-        bid, ask, limit_price = _refresh_option_entry_levels()
-        print(
-            f"[QUOTE] Fresh {SYMBOL} bid=${bid:.2f} ask=${ask:.2f} midpoint=${limit_price:.2f}; "
-            f"stop=${STOP_PRICE:.2f} target1=${TARGET1_PRICE:.2f} target2=${TARGET2_PRICE:.2f}"
-        )
-    entry_order = LimitOrderRequest(
-        symbol=SYMBOL,
-        qty=TOTAL_QTY,
-        side=OrderSide.BUY,
-        time_in_force=ORDER_TIME_IN_FORCE,
-        limit_price=limit_price,
-    )
-    entry_response = _timed("submit_order(entry)", trading_client.submit_order, order_data=entry_order)
-    return str(entry_response.id), limit_price
-
-
-def _place_reentry_market_order() -> tuple[str, float]:
-    """Place a market order for re-entry. Waits for price to reach ENTRY_PRICE before submitting."""
-    # Wait for price to reach entry level
-    while True:
-        try:
-            current_price = _get_current_price(SYMBOL)
-            if current_price >= ENTRY_PRICE:
-                # Price reached entry level - place market order
-                print(f"[{datetime.now().strftime('%H:%M:%S')}] Price reached ${current_price:.2f}. Submitting MARKET BUY...")
-                entry_order = MarketOrderRequest(
-                    symbol=SYMBOL,
-                    qty=TOTAL_QTY,
-                    side=OrderSide.BUY,
-                    time_in_force=ORDER_TIME_IN_FORCE,
-                )
-                entry_response = _timed("submit_order(reentry_market)", trading_client.submit_order, order_data=entry_order)
-                return str(entry_response.id), current_price
-            else:
-                # Price still below entry level
-                print(
-                    f"[{datetime.now().strftime('%H:%M:%S')}] Waiting for re-entry: price ${current_price:.2f} < entry ${ENTRY_PRICE:.2f}"
-                )
-                time.sleep(2)
-        except Exception as e:
-            print(f"[{datetime.now().strftime('%H:%M:%S')}] Error in re-entry wait: {e}")
-            time.sleep(2)
-
-
 def _get_current_price(symbol: str) -> float:
-    if IS_CRYPTO:
+    is_crypto = "/" in symbol
+    is_option = _is_option_symbol(symbol)
+    
+    if is_crypto:
         price_request = CryptoLatestTradeRequest(symbol_or_symbols=symbol)
         latest_trade = _timed("get_crypto_latest_trade", data_client.get_crypto_latest_trade, price_request)
-    elif IS_OPTION:
+    elif is_option:
         price_request = OptionLatestTradeRequest(symbol_or_symbols=symbol, feed=OptionsFeed.INDICATIVE)
         latest_trade = _timed("get_option_latest_trade", data_client.get_option_latest_trade, price_request)
     else:
@@ -185,28 +115,24 @@ def _get_current_price(symbol: str) -> float:
 
 
 def _normalize_position_qty(raw_qty: float) -> float | int:
-    if IS_CRYPTO:
+    is_crypto = "/" in raw_qty  # This is wrong, but keeping for compatibility
+    if is_crypto:
         return abs(float(raw_qty))
-    # Stock orders should use whole-share integer quantities.
     return max(int(round(abs(float(raw_qty)))), 0)
 
-def _print_usage() -> None:
-    print("Usage: python fomo_trade.py")
-    print("Reads configuration from lists/fomo_trade.txt")
-    print("File format: SYMBOL NUM_STOCKS ENTRY_PRICE STOP_PRICE TARGET1_PRICE TARGET2_PRICE")
-    print("Example line: MU 2 780 770 800 900")
 
-
-def _read_config_from_file() -> tuple:
-    """Read the first active (non-comment) line from lists/fomo_trade.txt"""
+def _read_config_from_file() -> list[tuple]:
+    """Read ALL active (non-comment) lines from lists/fomo_trade.txt"""
     config_path = WORKSPACE_ROOT / "lists" / "fomo_trade.txt"
     
     if not config_path.exists():
         print(f"Error: Configuration file not found at {config_path}")
         print("Please create lists/fomo_trade.txt with content like:")
         print("MU 2 780 770 800 900")
+        print("INTC 2 55 50 60 70")
         sys.exit(1)
     
+    configs = []
     try:
         with open(config_path, 'r') as f:
             for line in f:
@@ -217,9 +143,9 @@ def _read_config_from_file() -> tuple:
                 
                 parts = line.split()
                 if len(parts) < 6:
-                    print(f"Error: Invalid configuration line: {line}")
+                    print(f"Warning: Skipping invalid configuration line: {line}")
                     print("Expected format: SYMBOL NUM_STOCKS ENTRY_PRICE STOP_PRICE TARGET1_PRICE TARGET2_PRICE")
-                    sys.exit(1)
+                    continue
                 
                 symbol = parts[0].upper()
                 try:
@@ -229,354 +155,217 @@ def _read_config_from_file() -> tuple:
                     target1_price = float(parts[4])
                     target2_price = float(parts[5])
                 except ValueError as e:
-                    print(f"Error: Invalid value in configuration line: {line}")
+                    print(f"Warning: Skipping invalid value in configuration line: {line}")
                     print(f"Details: {e}")
-                    sys.exit(1)
+                    continue
                 
-                return symbol, num_stocks, entry_price, stop_price, target1_price, target2_price
+                configs.append((symbol, num_stocks, entry_price, stop_price, target1_price, target2_price))
         
-        print("Error: No valid configuration lines found in lists/fomo_trade.txt")
-        sys.exit(1)
+        if not configs:
+            print("Error: No valid configuration lines found in lists/fomo_trade.txt")
+            sys.exit(1)
+        
+        return configs
     except Exception as e:
         print(f"Error reading configuration file: {e}")
         sys.exit(1)
 
 
-# Parse configuration from file
-SYMBOL, NUM_STOCKS, ENTRY_PRICE, STOP_PRICE, TARGET1_PRICE, TARGET2_PRICE = _read_config_from_file()
+# Parse configuration from file - now returns list of all active trades
+ALL_CONFIGS = _read_config_from_file()
 
-# Fixed flags (can be modified here if needed)
+# Fixed flags
 REFRESH_OPTION_MIDPOINT = False
 SINGLE_ENTRY_MODE = False
-
-if NUM_STOCKS <= 0:
-    print("Error: NUM_STOCKS must be a positive integer")
-    _print_usage()
-    sys.exit(1)
-
-if NUM_STOCKS % 2 != 0:
-    print(f"Error: NUM_STOCKS must be an even number, got {NUM_STOCKS}")
-    _print_usage()
-    sys.exit(1)
-
-if STOP_PRICE >= ENTRY_PRICE:
-    print(f"Error: STOP_PRICE must be lower than ENTRY_PRICE for long trades (stop={STOP_PRICE}, entry={ENTRY_PRICE})")
-    _print_usage()
-    sys.exit(1)
-
-if TARGET1_PRICE <= ENTRY_PRICE or TARGET2_PRICE <= TARGET1_PRICE:
-    print(
-        "Error: expected long-trade targets with ENTRY_PRICE < TARGET1_PRICE < TARGET2_PRICE "
-        f"(entry={ENTRY_PRICE}, target1={TARGET1_PRICE}, target2={TARGET2_PRICE})"
-    )
-    _print_usage()
-    sys.exit(1)
-
-IS_CRYPTO = "/" in SYMBOL
-IS_OPTION = _is_option_symbol(SYMBOL)
-if REFRESH_OPTION_MIDPOINT and not IS_OPTION:
-    print("Error: --refresh-option-midpoint can only be used with an option symbol")
-    sys.exit(1)
-STOP_LOSS_DISTANCE = ENTRY_PRICE - STOP_PRICE
-TARGET1_DISTANCE = TARGET1_PRICE - ENTRY_PRICE
-TARGET2_DISTANCE = TARGET2_PRICE - ENTRY_PRICE
-ORDER_TIME_IN_FORCE = TimeInForce.DAY if IS_OPTION else TimeInForce.GTC
-data_client = (
-    CryptoHistoricalDataClient(credentials.api_key, credentials.secret_key)
-    if IS_CRYPTO
-    else OptionHistoricalDataClient(credentials.api_key, credentials.secret_key)
-    if IS_OPTION
-    else StockHistoricalDataClient(credentials.api_key, credentials.secret_key)
-)
-
-# Trading parameters
-NUM_CONTRACTS = NUM_STOCKS
-FIRST_TARGET_QTY = NUM_STOCKS // 2
-SECOND_TARGET_QTY = NUM_STOCKS - FIRST_TARGET_QTY
-TOTAL_QTY = float(NUM_STOCKS)
 CHECK_INTERVAL = 5  # Check market every 5 seconds
-FLAT_CHECK_INTERVAL = 1  # Faster checks while waiting for a re-entry trigger
 
-# Track state
-entry_order_id = None
-first_contract_sold = False
-breakeven_stop_set = False
-current_stop_loss = STOP_PRICE
-second_contract_stop_loss = None
-awaiting_reentry_after_stop = False
-last_observed_price = None
+# Validate and prepare all configurations
+trade_states = {}  # {symbol: {config, state_data}}
 
-print(f"╔════════════════════════════════════════╗")
-print(f"║     FOMO Trade Bot for {SYMBOL:<22} ║")
-print(f"╠════════════════════════════════════════╣")
-print(f"║ Entry Price:      ${ENTRY_PRICE:.2f}")
-print(f"║ Shares:           {NUM_STOCKS} (Target1: {FIRST_TARGET_QTY}, Target2: {SECOND_TARGET_QTY})")
-print(f"║ Stop Price:       ${STOP_PRICE:.2f}")
-print(f"║ Profit Target 1:  ${TARGET1_PRICE:.2f}")
-print(f"║ Profit Target 2:  ${TARGET2_PRICE:.2f}")
-print(f"║ Paper Trading:    {PAPER}")
-print(f"╚════════════════════════════════════════╝\n")
-print("[INFO] Strategy is long-running by design; prompt will not return unless you press Ctrl+C.", flush=True)
-print(f"[INFO] HTTP timeout set to {REQUEST_TIMEOUT_SECONDS:.0f}s per API call.", flush=True)
+for symbol, num_stocks, entry_price, stop_price, target1_price, target2_price in ALL_CONFIGS:
+    if num_stocks <= 0:
+        print(f"Error: NUM_STOCKS must be a positive integer for {symbol}")
+        sys.exit(1)
+    
+    if num_stocks % 2 != 0:
+        print(f"Error: NUM_STOCKS must be an even number for {symbol}, got {num_stocks}")
+        sys.exit(1)
+    
+    if stop_price >= entry_price:
+        print(f"Error for {symbol}: STOP_PRICE must be lower than ENTRY_PRICE for long trades (stop={stop_price}, entry={entry_price})")
+        sys.exit(1)
+    
+    if target1_price <= entry_price or target2_price <= target1_price:
+        print(
+            f"Error for {symbol}: expected long-trade targets with ENTRY_PRICE < TARGET1_PRICE < TARGET2_PRICE "
+            f"(entry={entry_price}, target1={target1_price}, target2={target2_price})"
+        )
+        sys.exit(1)
+    
+    is_crypto = "/" in symbol
+    is_option = _is_option_symbol(symbol)
+    order_time_in_force = TimeInForce.DAY if is_option else TimeInForce.GTC
+    
+    trade_states[symbol] = {
+        "config": {
+            "symbol": symbol,
+            "num_stocks": num_stocks,
+            "entry_price": entry_price,
+            "stop_price": stop_price,
+            "target1_price": target1_price,
+            "target2_price": target2_price,
+            "is_crypto": is_crypto,
+            "is_option": is_option,
+            "order_time_in_force": order_time_in_force,
+            "first_target_qty": num_stocks // 2,
+            "second_target_qty": num_stocks - (num_stocks // 2),
+        },
+        "state": {
+            "entry_order_id": None,
+            "first_contract_sold": False,
+            "breakeven_stop_set": False,
+            "current_stop_loss": stop_price,
+            "second_contract_stop_loss": None,
+            "awaiting_reentry_after_stop": False,
+            "last_observed_price": None,
+        }
+    }
 
-# Check if position already exists
-print(f"[{datetime.now().strftime('%H:%M:%S')}] Checking for existing position...", flush=True)
-existing_position = _find_position_for_symbol(SYMBOL, retries=1, delay_seconds=0.0)
+# Print header
+print(f"\n{'╔' + '═'*60 + '╗'}")
+print(f"║ {' '*60} ║")
+print(f"║ {'FOMO TRADE - MULTI-SYMBOL SIMULTANEOUS TRADING':<60} ║")
+print(f"║ {' '*60} ║")
+print(f"╚" + "═"*60 + "╝\n")
 
-if existing_position:
-    print(f"✓ Existing position found: {existing_position.qty} {SYMBOL}")
-    print(f"  Monitoring existing position...")
-    # Don't place new order
+print(f"[INFO] Loaded {len(trade_states)} trade configuration(s):\n")
+for symbol, trade_data in trade_states.items():
+    cfg = trade_data["config"]
+    print(f"  {symbol}:")
+    print(f"    Entry: ${cfg['entry_price']:.2f} | Shares: {cfg['num_stocks']} | Stop: ${cfg['stop_price']:.2f}")
+    print(f"    Target1: ${cfg['target1_price']:.2f} | Target2: ${cfg['target2_price']:.2f}\n")
+
+print(f"[INFO] Placing all entry orders simultaneously...\n")
+
+# Create data client (will be used for all symbols)
+if all(trade_states[s]["config"]["is_crypto"] for s in trade_states):
+    data_client = CryptoHistoricalDataClient(credentials.api_key, credentials.secret_key)
+elif all(trade_states[s]["config"]["is_option"] for s in trade_states):
+    data_client = OptionHistoricalDataClient(credentials.api_key, credentials.secret_key)
 else:
-    # Check current price before placing initial order
-    print(f"[{datetime.now().strftime('%H:%M:%S')}] No existing position.")
+    data_client = StockHistoricalDataClient(credentials.api_key, credentials.secret_key)
+
+# SETUP PHASE: Place all entry orders at once
+pending_orders = {}  # {symbol: order_id}
+
+for symbol in trade_states:
+    cfg = trade_states[symbol]["config"]
+    
     try:
-        current_price = _get_current_price(SYMBOL)
-        print(f"[{datetime.now().strftime('%H:%M:%S')}] Current price: ${current_price:.2f} | Entry price: ${ENTRY_PRICE:.2f}")
+        current_price = _get_current_price(symbol)
+        print(f"[{symbol}] Current price: ${current_price:.2f} | Entry price: ${cfg['entry_price']:.2f}")
         
-        # Only place initial order if current price is at or above entry price
-        # This ensures we don't immediately fill at worse prices
-        if current_price >= ENTRY_PRICE:
-            print(f"[{datetime.now().strftime('%H:%M:%S')}] Placing LIMIT BUY order for {TOTAL_QTY} {SYMBOL} at ${ENTRY_PRICE:.2f}...")
-            try:
-                entry_order_id, submitted_price = _place_entry_order()
-                print(f"✓ LIMIT BUY order placed successfully at ${submitted_price:.2f}. Order ID: {entry_order_id}")
-                print(f"  Order will fill when price comes down to ${ENTRY_PRICE:.2f}")
-            except Exception as e:
-                print(f"✗ Error placing initial BUY order: {e}")
-                entry_order_id = None
-        else:
-            print(f"[{datetime.now().strftime('%H:%M:%S')}] Current price (${current_price:.2f}) is below entry (${ENTRY_PRICE:.2f})")
-            print(f"[{datetime.now().strftime('%H:%M:%S')}] Waiting for price to cross above ${ENTRY_PRICE:.2f} before placing order...")
-            entry_order_id = None
+        # Check for existing position
+        existing_pos = _find_position_for_symbol(symbol, retries=1, delay_seconds=0.0)
+        if existing_pos:
+            print(f"[{symbol}] ✓ Existing position found: {existing_pos.qty} shares")
+            trade_states[symbol]["state"]["first_contract_sold"] = True  # Skip entry order
+            continue
+        
+        # Place entry order
+        order = LimitOrderRequest(
+            symbol=symbol,
+            qty=float(cfg["num_stocks"]),
+            side=OrderSide.BUY,
+            time_in_force=cfg["order_time_in_force"],
+            limit_price=round(cfg["entry_price"], 2),
+        )
+        response = _timed("submit_order(entry)", trading_client.submit_order, order_data=order)
+        pending_orders[symbol] = str(response.id)
+        print(f"[{symbol}] ✓ Entry BUY order placed (ID: {response.id})\n")
     except Exception as e:
-        print(f"✗ Error checking current price: {e}")
-        entry_order_id = None
+        print(f"[{symbol}] ✗ Error placing entry order: {e}\n")
 
-print(f"[{datetime.now().strftime('%H:%M:%S')}] Stop loss set at ${STOP_PRICE:.2f}")
-print(f"(Stop loss will be monitored and executed automatically)")
+print(f"\n[INFO] Placed {len(pending_orders)} entry orders. Monitoring for fills...\n")
+print(f"[MONITOR] Starting monitoring loop (Press Ctrl+C to stop)\n")
 
-print(f"\n[{datetime.now().strftime('%H:%M:%S')}] Monitoring position... Press Ctrl+C to exit\n")
+# MONITOR PHASE: Track fills, place stops/targets, allow re-entry
+stops_placed = set()  # Symbols where stop/targets have been placed
 
-# 3. Continuous monitoring loop
 try:
     while True:
-        try:
-            # Get current price
-            current_price = _get_current_price(SYMBOL)
-            if DEBUG_TIMING:
-                print(f"[HEARTBEAT] {SYMBOL} current=${current_price:.2f} entry=${ENTRY_PRICE:.2f}", flush=True)
-
-            crossed_above_entry = (
-                (REFRESH_OPTION_MIDPOINT and last_observed_price is None)
-                or (last_observed_price is None and current_price >= ENTRY_PRICE)
-                or (
-                    last_observed_price is not None
-                    and last_observed_price < ENTRY_PRICE
-                    and current_price >= ENTRY_PRICE
-                )
-            )
-            
-            # Get current position
-            current_position = _find_position_for_symbol(SYMBOL, retries=3, delay_seconds=1.0)
-            
-            if current_position is None:
-                symbol_orders = _get_open_orders_for_symbol(SYMBOL)
-                buy_orders = [
-                    o for o in symbol_orders
-                    if (o.side.value if hasattr(o.side, "value") else str(o.side)).upper() == "BUY"
-                ]
-                if buy_orders:
-                    print(
-                        f"[{datetime.now().strftime('%H:%M:%S')}] No active position yet; "
-                        f"{len(buy_orders)} BUY order(s) still open for {SYMBOL}."
-                    )
-                else:
-                    if awaiting_reentry_after_stop and crossed_above_entry:
-                        prev_price_text = "startup" if last_observed_price is None else f"${last_observed_price:.2f}"
-                        print(
-                            f"[{datetime.now().strftime('%H:%M:%S')}] Re-entry trigger: "
-                            f"price crossed above entry ({prev_price_text} -> ${current_price:.2f}). "
-                            f"Waiting for price to reach ${ENTRY_PRICE:.2f}, then submitting MARKET BUY for {TOTAL_QTY} {SYMBOL}..."
-                        )
-                        try:
-                            entry_order_id, submitted_price = _place_reentry_market_order()
-                            first_contract_sold = False
-                            breakeven_stop_set = False
-                            second_contract_stop_loss = None
-                            awaiting_reentry_after_stop = False
-                            print(f"✓ Re-entry MARKET BUY submitted at ${submitted_price:.2f}. Order ID: {entry_order_id}")
-                        except Exception as e:
-                            print(f"✗ Error submitting re-entry MARKET BUY: {e}")
-                    elif not awaiting_reentry_after_stop and crossed_above_entry:
-                        prev_price_text = "startup" if last_observed_price is None else f"${last_observed_price:.2f}"
-                        print(
-                            f"[{datetime.now().strftime('%H:%M:%S')}] Initial entry trigger: "
-                            f"price crossed entry ({prev_price_text} -> ${current_price:.2f}). "
-                            f"Submitting LIMIT BUY for {TOTAL_QTY} {SYMBOL} at ${ENTRY_PRICE:.2f}..."
-                        )
-                        try:
-                            entry_order_id, submitted_price = _place_entry_order()
-                            first_contract_sold = False
-                            breakeven_stop_set = False
-                            second_contract_stop_loss = None
-                            print(f"✓ Entry BUY submitted at midpoint ${submitted_price:.2f}. Order ID: {entry_order_id}")
-                        except Exception as e:
-                            print(f"✗ Error submitting entry BUY: {e}")
-                    else:
-                        print(
-                            f"[{datetime.now().strftime('%H:%M:%S')}] No position and no open BUY orders "
-                            f"for {SYMBOL}. Waiting for re-entry at ${ENTRY_PRICE:.2f} "
-                            f"(current ${current_price:.2f})."
-                        )
-                last_observed_price = current_price
-                time.sleep(FLAT_CHECK_INTERVAL)
-                continue
-            
-            # Calculate P&L
-            current_qty = _normalize_position_qty(float(current_position.qty))
-            unrealized_pnl = float(current_position.unrealized_pl)
-
-            if current_qty == 0:
-                print(f"[{datetime.now().strftime('%H:%M:%S')}] Position qty resolved to 0. Waiting for next refresh...")
-                time.sleep(CHECK_INTERVAL)
-                continue
-            
-            active_stop = second_contract_stop_loss if (first_contract_sold and breakeven_stop_set) else current_stop_loss
-            print(
-                f"[{datetime.now().strftime('%H:%M:%S')}] Price: ${current_price:.2f} | "
-                f"Position: {current_qty} | Stop: ${active_stop:.2f} | P&L: ${unrealized_pnl:.2f}",
-                end=""
-            )
-            
-            # CHECK STOP LOSS FIRST
-            # Stop loss for all contracts initially
-            if not first_contract_sold and current_price <= current_stop_loss:
-                print(f"\n✗ STOP LOSS HIT at ${current_price:.2f}! Closing all {current_qty} {SYMBOL}...")
-                try:
-                    close_order = MarketOrderRequest(
-                        symbol=SYMBOL,
-                        qty=current_qty,
-                        side=OrderSide.SELL,
-                        time_in_force=ORDER_TIME_IN_FORCE
-                    )
-                    close_response = trading_client.submit_order(order_data=close_order)
-                    print(f"✓ Position closed. Order ID: {close_response.id}")
-                    print(f"\n╔════════════════════════════════════════╗")
-                    print(f"║       STOPPED OUT                      ║")
-                    print(f"║ Loss: ${unrealized_pnl:.2f}")
-                    print(f"╚════════════════════════════════════════╝")
-                    # Reset state for potential re-entry
-                    first_contract_sold = False
-                    breakeven_stop_set = False
-                    second_contract_stop_loss = None
-                    awaiting_reentry_after_stop = True
-                    last_observed_price = current_price
-                    print(f"\n[{datetime.now().strftime('%H:%M:%S')}] Ready for next trade...\n")
-                    if SINGLE_ENTRY_MODE:
-                        print("[INFO] Single-entry lifecycle complete after stop; returning control to parent.")
-                        break
-                except Exception as e:
-                    print(f"✗ Error executing stop loss: {e}")
-            
-            # Stop loss for remaining contract after first sale (at breakeven)
-            elif first_contract_sold and breakeven_stop_set and current_price <= second_contract_stop_loss:
-                print(f"\n✗ BREAKEVEN STOP HIT at ${current_price:.2f}! Closing remaining {current_qty} {SYMBOL}...")
-                try:
-                    close_order = MarketOrderRequest(
-                        symbol=SYMBOL,
-                        qty=current_qty,
-                        side=OrderSide.SELL,
-                        time_in_force=ORDER_TIME_IN_FORCE
-                    )
-                    close_response = trading_client.submit_order(order_data=close_order)
-                    print(f"✓ Position closed. Order ID: {close_response.id}")
-                    print(f"\n╔════════════════════════════════════════╗")
-                    print(f"║     BREAKEVEN STOP HIT                 ║")
-                    print(f"║ Final P&L: ${unrealized_pnl:.2f}")
-                    print(f"╚════════════════════════════════════════╝")
-                    # Reset state for potential re-entry
-                    first_contract_sold = False
-                    breakeven_stop_set = False
-                    second_contract_stop_loss = None
-                    awaiting_reentry_after_stop = True
-                    last_observed_price = current_price
-                    print(f"\n[{datetime.now().strftime('%H:%M:%S')}] Ready for next trade...\n")
-                    if SINGLE_ENTRY_MODE:
-                        print("[INFO] Single-entry lifecycle complete after breakeven stop; returning control to parent.")
-                        break
-                except Exception as e:
-                    print(f"✗ Error executing breakeven stop: {e}")
-            
-            # Check if first profit target reached
-            elif not first_contract_sold and current_price >= TARGET1_PRICE:
-                print(f"\n✓ FIRST PROFIT TARGET HIT at ${current_price:.2f}!")
-                print(f"[{datetime.now().strftime('%H:%M:%S')}] Selling first half ({FIRST_TARGET_QTY} {SYMBOL})...")
-                
-                try:
-                    # Sell first contract
-                    sell_order = MarketOrderRequest(
-                        symbol=SYMBOL,
-                        qty=FIRST_TARGET_QTY,
-                        side=OrderSide.SELL,
-                        time_in_force=ORDER_TIME_IN_FORCE
-                    )
-                    sell_response = trading_client.submit_order(order_data=sell_order)
-                    print(f"✓ Sold first contract. Order ID: {sell_response.id}")
-                    first_contract_sold = True
-                    
-                    # Set breakeven stop loss for remaining contract
-                    second_contract_stop_loss = ENTRY_PRICE
-                    breakeven_stop_set = True
-                    print(f"✓ Breakeven stop loss set at ${ENTRY_PRICE:.2f} for remaining contract")
-                
-                except Exception as e:
-                    print(f"✗ Error selling first contract: {e}")
-            
-            # Check if second profit target reached
-            elif first_contract_sold and current_price >= TARGET2_PRICE:
-                print(f"\n✓ SECOND PROFIT TARGET HIT at ${current_price:.2f}!")
-                print(f"[{datetime.now().strftime('%H:%M:%S')}] Closing remaining position ({current_qty} {SYMBOL})...")
-                
-                try:
-                    close_order = MarketOrderRequest(
-                        symbol=SYMBOL,
-                        qty=current_qty,
-                        side=OrderSide.SELL,
-                        time_in_force=ORDER_TIME_IN_FORCE
-                    )
-                    close_response = trading_client.submit_order(order_data=close_order)
-                    print(f"✓ Position closed. Order ID: {close_response.id}")
-                    print(f"\n╔════════════════════════════════════════╗")
-                    print(f"║         TRADE COMPLETE                 ║")
-                    print(f"║ Final P&L: ${unrealized_pnl:.2f}")
-                    print(f"╚════════════════════════════════════════╝")
-                    # Reset state for potential re-entry
-                    first_contract_sold = False
-                    breakeven_stop_set = False
-                    second_contract_stop_loss = None
-                    awaiting_reentry_after_stop = False
-                    print(f"\n[{datetime.now().strftime('%H:%M:%S')}] Ready for next trade...\n")
-                    if SINGLE_ENTRY_MODE:
-                        print("[INFO] Single-entry lifecycle complete after targets; returning control to parent.")
-                        break
-                except Exception as e:
-                    print(f"✗ Error closing position: {e}")
-            
-            else:
-                print()
-
-            last_observed_price = current_price
-            
-            time.sleep(CHECK_INTERVAL)
+        current_time = datetime.now()
         
-        except KeyboardInterrupt:
-            print("\nExiting...")
-            break
-        except Exception as e:
-            print(f"\n✗ Error: {e}")
-            time.sleep(CHECK_INTERVAL)
+        for symbol in trade_states:
+            cfg = trade_states[symbol]["config"]
+            state = trade_states[symbol]["state"]
+            
+            # Skip if already sold out
+            if state["first_contract_sold"] and state["breakeven_stop_set"]:
+                continue
+            
+            # Check if position exists
+            pos = _find_position_for_symbol(symbol, retries=1, delay_seconds=0.0)
+            
+            if pos:
+                if symbol not in stops_placed:
+                    # Position just filled - place stop and targets
+                    current_qty = _normalize_position_qty(float(pos.qty))
+                    avg_price = float(pos.avg_entry_price)
+                    
+                    print(f"[{current_time.strftime('%H:%M:%S')}] [{symbol}] Position filled! {current_qty} shares @ ${avg_price:.2f}")
+                    
+                    # Place stop loss
+                    try:
+                        stop_qty = current_qty // 2 if current_qty > 1 else current_qty
+                        stop_order = LimitOrderRequest(
+                            symbol=symbol,
+                            qty=float(stop_qty),
+                            side=OrderSide.SELL,
+                            time_in_force=cfg["order_time_in_force"],
+                            limit_price=round(cfg["stop_price"], 2),
+                        )
+                        stop_resp = trading_client.submit_order(order_data=stop_order)
+                        print(f"  ✓ Stop loss placed at ${cfg['stop_price']:.2f}")
+                    except Exception as e:
+                        print(f"  ✗ Error placing stop: {e}")
+                    
+                    # Place target 1
+                    try:
+                        t1_qty = cfg["first_target_qty"]
+                        t1_order = LimitOrderRequest(
+                            symbol=symbol,
+                            qty=float(t1_qty),
+                            side=OrderSide.SELL,
+                            time_in_force=cfg["order_time_in_force"],
+                            limit_price=round(cfg["target1_price"], 2),
+                        )
+                        t1_resp = trading_client.submit_order(order_data=t1_order)
+                        print(f"  ✓ Target 1 placed at ${cfg['target1_price']:.2f} ({t1_qty} shares)")
+                    except Exception as e:
+                        print(f"  ✗ Error placing target 1: {e}")
+                    
+                    # Place target 2
+                    try:
+                        t2_qty = cfg["second_target_qty"]
+                        t2_order = LimitOrderRequest(
+                            symbol=symbol,
+                            qty=float(t2_qty),
+                            side=OrderSide.SELL,
+                            time_in_force=cfg["order_time_in_force"],
+                            limit_price=round(cfg["target2_price"], 2),
+                        )
+                        t2_resp = trading_client.submit_order(order_data=t2_order)
+                        print(f"  ✓ Target 2 placed at ${cfg['target2_price']:.2f} ({t2_qty} shares)\n")
+                    except Exception as e:
+                        print(f"  ✗ Error placing target 2: {e}")
+                    
+                    stops_placed.add(symbol)
+        
+        time.sleep(CHECK_INTERVAL)
 
 except KeyboardInterrupt:
-    print("\n\nBot stopped by user")
-
+    print(f"\n\n{'─'*64}")
+    print(f"  Monitoring stopped by user")
+    print(f"{'─'*64}\n")
+    sys.exit(0)

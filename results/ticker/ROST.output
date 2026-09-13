@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: ROST
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $241.50
+  ATR (14-day): $5.01
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $218.06 - $221.25
+  Size:         $3.19
+  Distance:     $20.25 (404% of ATR)
+  Formed:       2026-07-14
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $227.20 - $233.45
+  Size:         $6.25
+  Distance:     $8.05
+  Formed:       2026-09-04
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($241.50 >= zone $227.20)
+
+TRADE METRICS:
+  Stop Loss Distance:  $23.44
+  Profit Target (PT):  $-14.30
+  Risk:Reward Ratio:   1:-0.61

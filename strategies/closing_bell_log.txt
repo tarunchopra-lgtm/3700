@@ -149,3 +149,125 @@
 [2026-09-07 12:40:05] ============================================================
 
 [2026-09-07 12:40:06] ✓ Email report sent to tarun.chopra@gmail.com
+[2026-09-08 12:50:04] 
+============================================================
+[2026-09-08 12:50:04] 🔔 CLOSING BELL - Closing all positions...
+[2026-09-08 12:50:04] ============================================================
+[2026-09-08 12:50:04] Found 2 open position(s). Starting closeout...
+[2026-09-08 12:50:04] 
+[AAPL] Qty: 1, Value: $315.93
+[2026-09-08 12:50:04]   Bid: $315.08, Ask: $315.97, Midpoint: $315.52
+[2026-09-08 12:50:04]   → Submitted limit order ff95fa90-cd32-4c3b-94e5-7d6fc20002b6 for 1 AAPL @ $315.52
+[2026-09-08 12:50:04]   ✗ Error submitting limit order for AAPL: name 'time' is not defined
+[2026-09-08 12:50:04]   ✗ Error submitting market order for AAPL: {"available":"0","code":40310000,"existing_qty":"1","held_for_orders":"1","message":"insufficient qty available for order (requested: 1, available: 0)","symbol":"AAPL"}
+[2026-09-08 12:50:04] 
+[AAPL260911C00315000] Qty: 1, Value: $500.00
+[2026-09-08 12:50:05]   ⚠ Error getting bid/ask for AAPL260911C00315000: {"message":"code=400, message=invalid symbol: AAPL260911C00315000"}
+
+[2026-09-08 12:50:05]   ⚠ Could not get bid/ask, proceeding to market order
+[2026-09-08 12:50:05]   ✓ Market sell order submitted for 1 AAPL260911C00315000 (Order ID: d09433c6-751b-4d61-b840-4e507758c027)
+[2026-09-08 12:50:05] 
+============================================================
+[2026-09-08 12:50:05] Closeout Summary: 1 successful, 1 failed
+[2026-09-08 12:50:05] ============================================================
+
+[2026-09-08 12:50:06] ✓ Email report sent to tarun.chopra@gmail.com
+[2026-09-09 12:50:04] 
+============================================================
+[2026-09-09 12:50:04] 🔔 CLOSING BELL - Closing all positions...
+[2026-09-09 12:50:04] ============================================================
+[2026-09-09 12:50:04] Found 3 open position(s). Starting closeout...
+[2026-09-09 12:50:04] 
+[AKAM] Qty: 9, Value: $996.84
+[2026-09-09 12:50:04]   Bid: $108.00, Ask: $116.79, Midpoint: $112.40
+[2026-09-09 12:50:04]   → Submitted limit order e44dc25d-835a-484f-83a5-990fe7899114 for 9 AKAM @ $112.40
+[2026-09-09 12:50:04]   ✗ Error submitting limit order for AKAM: name 'time' is not defined
+[2026-09-09 12:50:04]   ✗ Error submitting market order for AKAM: {"available":"0","code":40310000,"existing_qty":"9","held_for_orders":"9","message":"insufficient qty available for order (requested: 9, available: 0)","symbol":"AKAM"}
+[2026-09-09 12:50:04] 
+[NEM] Qty: 7, Value: $904.19
+[2026-09-09 12:50:04]   Bid: $122.56, Ask: $129.18, Midpoint: $125.87
+[2026-09-09 12:50:04]   ✗ Error submitting limit order for NEM: {"available":"4","code":40310000,"existing_qty":"7","held_for_orders":"3","message":"insufficient qty available for order (requested: 7, available: 4)","related_orders":["37de0512-02a3-4ba5-b754-80d0f8d4cc58"],"symbol":"NEM"}
+[2026-09-09 12:50:04]   ✗ Error submitting market order for NEM: {"available":"4","code":40310000,"existing_qty":"7","held_for_orders":"3","message":"insufficient qty available for order (requested: 7, available: 4)","related_orders":["37de0512-02a3-4ba5-b754-80d0f8d4cc58"],"symbol":"NEM"}
+[2026-09-09 12:50:04] 
+[SLV] Qty: 16, Value: $972.04
+[2026-09-09 12:50:05]   Bid: $60.74, Ask: $60.75, Midpoint: $60.75
+[2026-09-09 12:50:05]   → Submitted limit order cb6365dc-6a62-4f8a-9aa1-8fe9dc3b9b73 for 16 SLV @ $60.75
+[2026-09-09 12:50:05]   ✗ Error submitting limit order for SLV: name 'time' is not defined
+[2026-09-09 12:50:05]   ✗ Error submitting market order for SLV: {"available":"0","code":40310000,"existing_qty":"16","held_for_orders":"16","message":"insufficient qty available for order (requested: 16, available: 0)","symbol":"SLV"}
+[2026-09-09 12:50:05] 
+============================================================
+[2026-09-09 12:50:05] Closeout Summary: 0 successful, 3 failed
+[2026-09-09 12:50:05] ============================================================
+
+[2026-09-09 12:50:08] ✓ Email report sent to tarun.chopra@gmail.com
+[2026-09-09 12:55:35] 
+============================================================
+[2026-09-09 12:55:35] 🔔 CLOSING BELL - Closing all positions...
+[2026-09-09 12:55:35] ============================================================
+[2026-09-09 12:55:35] Found 2 open position(s). Starting closeout...
+[2026-09-09 12:55:35] 
+[AKAM] Qty: 9, Value: $994.46
+[2026-09-09 12:55:35]   Bid: $110.44, Ask: $110.57, Midpoint: $110.50
+[2026-09-09 12:55:35]   ✗ Error submitting limit order for AKAM: {"available":"0","code":40310000,"existing_qty":"9","held_for_orders":"9","message":"insufficient qty available for order (requested: 9, available: 0)","related_orders":["e44dc25d-835a-484f-83a5-990fe7899114"],"symbol":"AKAM"}
+[2026-09-09 12:55:36]   ✗ Error submitting market order for AKAM: {"available":"0","code":40310000,"existing_qty":"9","held_for_orders":"9","message":"insufficient qty available for order (requested: 9, available: 0)","related_orders":["e44dc25d-835a-484f-83a5-990fe7899114"],"symbol":"AKAM"}
+[2026-09-09 12:55:36] 
+[NEM] Qty: 7, Value: $903.21
+[2026-09-09 12:55:36]   Bid: $122.56, Ask: $136.22, Midpoint: $129.39
+[2026-09-09 12:55:36]   ✗ Error submitting limit order for NEM: {"available":"4","code":40310000,"existing_qty":"7","held_for_orders":"3","message":"insufficient qty available for order (requested: 7, available: 4)","related_orders":["37de0512-02a3-4ba5-b754-80d0f8d4cc58"],"symbol":"NEM"}
+[2026-09-09 12:55:36]   ✗ Error submitting market order for NEM: {"available":"4","code":40310000,"existing_qty":"7","held_for_orders":"3","message":"insufficient qty available for order (requested: 7, available: 4)","related_orders":["37de0512-02a3-4ba5-b754-80d0f8d4cc58"],"symbol":"NEM"}
+[2026-09-09 12:55:36] 
+============================================================
+[2026-09-09 12:55:36] Closeout Summary: 0 successful, 2 failed
+[2026-09-09 12:55:36] ============================================================
+
+[2026-09-09 12:55:37] ✓ Email report sent to tarun.chopra@gmail.com
+[2026-09-10 12:50:04] 
+============================================================
+[2026-09-10 12:50:04] 🔔 CLOSING BELL - Closing all positions...
+[2026-09-10 12:50:04] ============================================================
+[2026-09-10 12:50:04] Found 1 open position(s). Starting closeout...
+[2026-09-10 12:50:04] 
+[INTC] Qty: 2, Value: $201.53
+[2026-09-10 12:50:04]   Bid: $100.76, Ask: $100.77, Midpoint: $100.77
+[2026-09-10 12:50:05]   → Submitted limit order e62bbc0c-e078-4d67-a872-aa67d4d28c04 for 2 INTC @ $100.77
+[2026-09-10 12:50:05]   ✗ Error submitting limit order for INTC: name 'time' is not defined
+[2026-09-10 12:50:05]   ✗ Error submitting market order for INTC: {"available":"0","code":40310000,"existing_qty":"2","held_for_orders":"2","message":"insufficient qty available for order (requested: 2, available: 0)","symbol":"INTC"}
+[2026-09-10 12:50:05] 
+============================================================
+[2026-09-10 12:50:05] Closeout Summary: 0 successful, 1 failed
+[2026-09-10 12:50:05] ============================================================
+
+[2026-09-10 12:50:08] ✓ Email report sent to tarun.chopra@gmail.com
+[2026-09-11 12:50:04] 
+============================================================
+[2026-09-11 12:50:04] 🔔 CLOSING BELL - Closing all positions...
+[2026-09-11 12:50:04] ============================================================
+[2026-09-11 12:50:04] Found 1 open position(s). Starting closeout...
+[2026-09-11 12:50:04] 
+[HSY] Qty: 14, Value: $2424.38
+[2026-09-11 12:50:05]   Bid: $165.15, Ask: $181.59, Midpoint: $173.37
+[2026-09-11 12:50:05]   → Submitted limit order e77ff05e-e4ac-4881-b833-ec6e279e8d31 for 14 HSY @ $173.37
+[2026-09-11 12:50:05]   ✗ Error submitting limit order for HSY: name 'time' is not defined
+[2026-09-11 12:50:05]   ✗ Error submitting market order for HSY: {"available":"0","code":40310000,"existing_qty":"14","held_for_orders":"14","message":"insufficient qty available for order (requested: 14, available: 0)","symbol":"HSY"}
+[2026-09-11 12:50:05] 
+============================================================
+[2026-09-11 12:50:05] Closeout Summary: 0 successful, 1 failed
+[2026-09-11 12:50:05] ============================================================
+
+[2026-09-11 12:50:07] ✓ Email report sent to tarun.chopra@gmail.com
+[2026-09-12 12:50:05] 
+============================================================
+[2026-09-12 12:50:05] 🔔 CLOSING BELL - Closing all positions...
+[2026-09-12 12:50:05] ============================================================
+[2026-09-12 12:50:05] ✓ No open positions to close.
+[2026-09-12 12:50:05] ============================================================
+
+[2026-09-12 12:50:07] ✓ Email report sent to tarun.chopra@gmail.com
+[2026-09-13 12:50:08] 
+============================================================
+[2026-09-13 12:50:08] 🔔 CLOSING BELL - Closing all positions...
+[2026-09-13 12:50:08] ============================================================
+[2026-09-13 12:50:08] ✓ No open positions to close.
+[2026-09-13 12:50:08] ============================================================
+
+[2026-09-13 12:50:10] ✓ Email report sent to tarun.chopra@gmail.com

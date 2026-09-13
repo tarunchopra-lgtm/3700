@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: CEG
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $299.83
+  ATR (14-day): $10.52
+  Within ATR:   YES
+
+DEMAND ZONE (Buy Zone):
+  Range:        $277.88 - $296.62
+  Size:         $18.74
+  Distance:     $3.21 (31% of ATR)
+  Formed:       2026-09-02
+  FRESHNESS:    FRESH
+  Notes:        Limited data
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $292.75 - $305.80
+  Size:         $13.05
+  Distance:     $0.00
+  Formed:       2026-09-09
+  FRESHNESS:    FRESH
+  Notes:        Limited data
+
+TRADE METRICS:
+  Stop Loss Distance:  $21.95
+  Profit Target (PT):  $-7.08
+  Risk:Reward Ratio:   1:-0.32

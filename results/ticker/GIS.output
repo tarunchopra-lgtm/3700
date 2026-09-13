@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: GIS
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $37.56
+  ATR (14-day): $1.09
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $35.60 - $36.28
+  Size:         $0.68
+  Distance:     $1.28 (117% of ATR)
+  Formed:       2026-08-06
+  FRESHNESS:    STALE
+  Notes:        STALE - Daily candle tested zone yesterday (low $35.76)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $36.52 - $38.65
+  Size:         $2.13
+  Distance:     $0.00
+  Formed:       2026-09-09
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($37.56 >= zone $36.52)
+
+TRADE METRICS:
+  Stop Loss Distance:  $1.96
+  Profit Target (PT):  $-1.04
+  Risk:Reward Ratio:   1:-0.53

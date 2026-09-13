@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: VLTO
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $99.16
+  ATR (14-day): $2.48
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $92.36 - $95.64
+  Size:         $3.28
+  Distance:     $3.52 (142% of ATR)
+  Formed:       2026-07-31
+  FRESHNESS:    STALE
+  Notes:        STALE - Daily candle tested zone yesterday (low $92.95)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $95.22 - $97.23
+  Size:         $2.01
+  Distance:     $1.93
+  Formed:       2026-09-08
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($99.16 >= zone $95.22)
+
+TRADE METRICS:
+  Stop Loss Distance:  $6.80
+  Profit Target (PT):  $-3.94
+  Risk:Reward Ratio:   1:-0.58

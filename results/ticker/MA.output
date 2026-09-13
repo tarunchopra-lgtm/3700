@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: MA
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $602.39
+  ATR (14-day): $11.68
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $553.89 - $564.61
+  Size:         $10.72
+  Distance:     $37.78 (323% of ATR)
+  Formed:       2026-07-28
+  FRESHNESS:    STALE
+  Notes:        STALE - Daily candle tested zone yesterday (low $563.17)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $578.71 - $592.97
+  Size:         $14.26
+  Distance:     $9.42
+  Formed:       2026-09-04
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($602.39 >= zone $578.71)
+
+TRADE METRICS:
+  Stop Loss Distance:  $48.50
+  Profit Target (PT):  $-23.68
+  Risk:Reward Ratio:   1:-0.49

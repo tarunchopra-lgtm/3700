@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: AMCR
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $46.54
+  ATR (14-day): $1.20
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $41.94 - $43.51
+  Size:         $1.57
+  Distance:     $3.03 (252% of ATR)
+  Formed:       2026-07-23
+  FRESHNESS:    FRESH
+  Notes:        Limited data
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $42.51 - $44.32
+  Size:         $1.81
+  Distance:     $2.22
+  Formed:       2026-09-10
+  FRESHNESS:    FRESH
+  Notes:        Limited data
+
+TRADE METRICS:
+  Stop Loss Distance:  $4.60
+  Profit Target (PT):  $-4.03
+  Risk:Reward Ratio:   1:-0.88

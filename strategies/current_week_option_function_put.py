@@ -2,11 +2,70 @@
 """Return only the nearest this-week put option contract symbol for a ticker.
 
 Usage:
-    python current_week_option_function_put.py <TICKER> [REFERENCE_PRICE]
+    python current_week_option_function_put.py <TICKER> [REFERENCE_PRICE] [--help]
 
 Output:
     Prints only the option contract symbol, with no auth debug or extra details.
 """
+
+# Check for --help early
+def _check_help():
+    import sys
+    if len(sys.argv) > 1 and sys.argv[1] in ["--help", "-h", "help"]:
+        print("""
+CURRENT_WEEK_OPTION_FUNCTION_PUT.PY - Weekly Put Option Finder
+
+SYNTAX:
+  python strategies/current_week_option_function_put.py <TICKER> [REFERENCE_PRICE] [--help]
+
+REQUIRED:
+  TICKER              Stock symbol (e.g., AAPL, SPY, MU)
+
+OPTIONAL:
+  REFERENCE_PRICE     Strike price to find nearest put (default: current market price)
+  --help, -h          Show this help message
+
+DESCRIPTION:
+  Finds the nearest weekly put option contract for a given stock
+  Selects the put option with strike closest to reference price
+  Returns ONLY the option contract symbol (Alpaca format)
+  Useful for automated options trading and hedging strategies
+
+WEEKLY EXPIRATION:
+  - Automatically uses this Friday's expiration date
+  - Friday is defined as: (4 - today.weekday()) % 7 days forward
+  - Finds all active weekly put contracts expiring that date
+
+STRIKE SELECTION:
+  - Finds strike nearest to reference price
+  - If reference price not provided: uses current market price
+  - Returns contract symbol of nearest ATM (at-the-money) put
+
+EXAMPLES:
+  python strategies/current_week_option_function_put.py AAPL
+    - Find weekly put for AAPL at current market price
+    Output: AAPL240920P00150000
+
+  python strategies/current_week_option_function_put.py SPY 520
+    - Find SPY weekly put with strike near $520
+    Output: SPY240920P00520000
+
+OUTPUT:
+  - Single line: Alpaca option contract symbol (no newline, parseable)
+  - Format: SYMBOL + YYMMDD + P + 8-digit strike price
+  - Example: AAPL240920P00150000 (AAPL, 2024-09-20, Put, $150.00)
+
+NOTES:
+  - Requires valid Alpaca API credentials
+  - Returns ONLY the contract symbol (no extra output)
+  - Used by option hedging and downside protection strategies
+  - Uses IEX data feed for current price
+  - Active status filter: only returns live tradeable contracts
+  - Returns strike nearest to reference price, not exact match
+""")
+        sys.exit(0)
+
+_check_help()
 
 from __future__ import annotations
 

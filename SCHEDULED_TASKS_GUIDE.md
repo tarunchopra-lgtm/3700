@@ -284,7 +284,7 @@ Then navigate to:
 Get-ScheduledTask | Where-Object { $_.TaskName -match "ClosingBell|Balance|Daily" } | Format-Table TaskName, State, Description
 
 
-Get-ScheduledTask | Where-Object { $_.TaskName -match "ClosingBell|3700" } | ForEach-Object { 
+Get-ScheduledTask | Where-Object { $_.TaskName -match "ClosingBell|3700|spray|fomo" } | ForEach-Object { 
     $info = Get-ScheduledTaskInfo -TaskName $_.TaskName
     [PSCustomObject]@{
         TaskName = $_.TaskName
@@ -301,3 +301,31 @@ $Time = "06:31"; $Trigger = New-ScheduledTaskTrigger -Daily -At $Time; Set-Sched
 $Time = "12:50"; $Trigger = New-ScheduledTaskTrigger -Daily -At $Time; Set-ScheduledTask -TaskName "ClosingBell" -Trigger $Trigger; Write-Host "✓ Updated to $Time"
 
 $Time = "1:01"; $Trigger = New-ScheduledTaskTrigger -Daily -At $Time; Set-ScheduledTask -TaskName "3700 Daily account Stat" -Trigger $Trigger; Write-Host "✓ Updated to $Time"
+
+
+add spray and fomo command
+# Task 1: fomo_trade.py at 6:31 AM
+$Action1 = New-ScheduledTaskAction -Execute "python.exe" -Argument "strategies/fomo_trade.py" -WorkingDirectory "C:\Users\TarunChopra\3700"
+$Trigger1 = New-ScheduledTaskTrigger -Daily -At 06:31
+Register-ScheduledTask -TaskName "fomo_trade" -Action $Action1 -Trigger $Trigger1 -Description "Run fomo_trade strategy from config file" -AsJob
+Write-Host "✓ Task 'fomo_trade' created - runs daily at 6:31 AM"
+
+# Task 2: spray.py at 6:32 AM (staggered by 1 minute to avoid conflict)
+$Action2 = New-ScheduledTaskAction -Execute "python.exe" -Argument "strategies/spray.py" -WorkingDirectory "C:\Users\TarunChopra\3700"
+$Trigger2 = New-ScheduledTaskTrigger -Daily -At 06:32
+Register-ScheduledTask -TaskName "spray" -Action $Action2 -Trigger $Trigger2 -Description "Run spray strategy from config file" -AsJob
+Write-Host "✓ Task 'spray' created - runs daily at 6:32 AM"
+
+easily enable disable
+
+Disable-ScheduledTask -TaskName "3700 Daily Account Stat"
+Disable-ScheduledTask -TaskName "3700 Daily Breakout Email"
+Disable-ScheduledTask -TaskName "ClosingBell"
+Disable-ScheduledTask -TaskName "fomo_trade"
+Disable-ScheduledTask -TaskName "spray"
+
+Enable-ScheduledTask -TaskName "3700 Daily Account Stat"
+Enable-ScheduledTask -TaskName "3700 Daily Breakout Email"
+Enable-ScheduledTask -TaskName "ClosingBell"
+Enable-ScheduledTask -TaskName "fomo_trade"
+Enable-ScheduledTask -TaskName "spray"

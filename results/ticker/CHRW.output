@@ -3,27 +3,27 @@ TICKER: CHRW
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $169.05
-  ATR (14-day): $8.89
+  Price:        $164.17
+  ATR (14-day): $9.01
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $143.16 - $151.22
   Size:         $8.06
-  Distance:     $17.83 (201% of ATR)
+  Distance:     $12.94 (144% of ATR)
   Formed:       2026-07-31
-  FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $151.12)
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
   Range:        $184.33 - $192.50
   Size:         $8.17
-  Distance:     $15.28
+  Distance:     $20.16
   Formed:       2026-06-10
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $25.89
-  Profit Target (PT):  $15.28
-  Risk:Reward Ratio:   1:0.59
+  Stop Loss Distance:  $21.01
+  Profit Target (PT):  $20.16
+  Risk:Reward Ratio:   1:0.96

@@ -3,27 +3,27 @@ TICKER: GEN
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $32.55
+  Price:        $32.57
   ATR (14-day): $0.93
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $23.84 - $25.09
   Size:         $1.26
-  Distance:     $7.45 (804% of ATR)
+  Distance:     $7.48 (801% of ATR)
   Formed:       2026-06-10
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $29.51 - $31.29
-  Size:         $1.78
-  Distance:     $1.26
-  Formed:       2026-08-27
+  Range:        $30.76 - $31.65
+  Size:         $0.89
+  Distance:     $0.92
+  Formed:       2026-09-03
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($32.55 >= zone $29.51)
+  Notes:        STALE - Price reached zone ($32.57 >= zone $30.76)
 
 TRADE METRICS:
-  Stop Loss Distance:  $8.71
-  Profit Target (PT):  $-3.04
-  Risk:Reward Ratio:   1:-0.35
+  Stop Loss Distance:  $8.73
+  Profit Target (PT):  $-1.81
+  Risk:Reward Ratio:   1:-0.21

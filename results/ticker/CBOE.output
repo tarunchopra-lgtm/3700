@@ -3,14 +3,14 @@ TICKER: CBOE
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $300.30
-  ATR (14-day): $11.13
+  Price:        $277.64
+  ATR (14-day): $10.43
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $246.96 - $265.13
   Size:         $18.17
-  Distance:     $35.17 (316% of ATR)
+  Distance:     $12.51 (120% of ATR)
   Formed:       2026-06-17
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
@@ -18,12 +18,12 @@ DEMAND ZONE (Buy Zone):
 SUPPLY ZONE (Sell Zone):
   Range:        $282.08 - $301.99
   Size:         $19.91
-  Distance:     $0.00
+  Distance:     $4.44
   Formed:       2026-06-10
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($300.30 >= zone $282.08)
+  Notes:        STALE - Daily candle tested zone yesterday (high $285.78)
 
 TRADE METRICS:
-  Stop Loss Distance:  $53.34
-  Profit Target (PT):  $-18.22
-  Risk:Reward Ratio:   1:-0.34
+  Stop Loss Distance:  $30.68
+  Profit Target (PT):  $4.44
+  Risk:Reward Ratio:   1:0.14

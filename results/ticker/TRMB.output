@@ -3,14 +3,14 @@ TICKER: TRMB
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $61.22
-  ATR (14-day): $2.00
+  Price:        $61.28
+  ATR (14-day): $1.96
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $48.90 - $50.69
   Size:         $1.79
-  Distance:     $10.53 (527% of ATR)
+  Distance:     $10.59 (540% of ATR)
   Formed:       2026-06-11
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
@@ -18,12 +18,12 @@ DEMAND ZONE (Buy Zone):
 SUPPLY ZONE (Sell Zone):
   Range:        $53.15 - $59.49
   Size:         $6.34
-  Distance:     $1.73
+  Distance:     $1.79
   Formed:       2026-07-27
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($61.22 >= zone $53.15)
+  Notes:        STALE - Price reached zone ($61.28 >= zone $53.15)
 
 TRADE METRICS:
-  Stop Loss Distance:  $12.32
-  Profit Target (PT):  $-8.07
+  Stop Loss Distance:  $12.38
+  Profit Target (PT):  $-8.13
   Risk:Reward Ratio:   1:-0.66

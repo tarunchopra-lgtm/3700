@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: CASY
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $640.85
+  ATR (14-day): $23.99
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $595.02 - $730.30
+  Size:         $135.28
+  Distance:     $0.00 (0% of ATR)
+  Formed:       2026-09-09
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($640.85 <= zone $730.30)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $890.00 - $927.85
+  Size:         $37.85
+  Distance:     $249.15
+  Formed:       2026-06-11
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+TRADE METRICS:
+  Stop Loss Distance:  $45.83
+  Profit Target (PT):  $249.15
+  Risk:Reward Ratio:   1:5.44

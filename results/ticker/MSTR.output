@@ -3,27 +3,27 @@ TICKER: MSTR
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $137.30
-  ATR (14-day): $5.46
+  Price:        $131.50
+  ATR (14-day): $5.48
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $114.21 - $120.94
   Size:         $6.73
-  Distance:     $16.36 (299% of ATR)
+  Distance:     $10.56 (193% of ATR)
   Formed:       2026-06-10
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $137.07 - $144.92
-  Size:         $7.85
+  Range:        $120.87 - $139.78
+  Size:         $18.91
   Distance:     $0.00
-  Formed:       2026-09-04
+  Formed:       2026-08-26
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($137.30 >= zone $137.07)
+  Notes:        STALE - Price reached zone ($131.50 >= zone $120.87)
 
 TRADE METRICS:
-  Stop Loss Distance:  $23.09
-  Profit Target (PT):  $-0.23
-  Risk:Reward Ratio:   1:-0.01
+  Stop Loss Distance:  $17.29
+  Profit Target (PT):  $-10.63
+  Risk:Reward Ratio:   1:-0.61

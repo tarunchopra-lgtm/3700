@@ -3,27 +3,27 @@ TICKER: MRSH
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $189.00
-  ATR (14-day): $4.60
+  Price:        $190.63
+  ATR (14-day): $4.36
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $165.66 - $168.82
   Size:         $3.16
-  Distance:     $20.18 (439% of ATR)
+  Distance:     $21.81 (500% of ATR)
   Formed:       2026-06-10
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $179.36 - $186.00
-  Size:         $6.64
-  Distance:     $3.00
-  Formed:       2026-07-17
+  Range:        $177.81 - $182.36
+  Size:         $4.56
+  Distance:     $8.27
+  Formed:       2026-07-13
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($189.00 >= zone $179.36)
+  Notes:        STALE - Price reached zone ($190.63 >= zone $177.81)
 
 TRADE METRICS:
-  Stop Loss Distance:  $23.34
-  Profit Target (PT):  $-9.64
-  Risk:Reward Ratio:   1:-0.41
+  Stop Loss Distance:  $24.97
+  Profit Target (PT):  $-12.82
+  Risk:Reward Ratio:   1:-0.51

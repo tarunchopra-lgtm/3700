@@ -3,14 +3,14 @@ TICKER: ALNY
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $265.90
-  ATR (14-day): $15.66
+  Price:        $247.27
+  ATR (14-day): $15.62
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $197.81 - $207.99
   Size:         $10.18
-  Distance:     $57.91 (370% of ATR)
+  Distance:     $39.28 (251% of ATR)
   Formed:       2026-07-31
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
@@ -18,12 +18,12 @@ DEMAND ZONE (Buy Zone):
 SUPPLY ZONE (Sell Zone):
   Range:        $285.22 - $299.70
   Size:         $14.48
-  Distance:     $19.32
+  Distance:     $37.95
   Formed:       2026-06-11
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $68.09
-  Profit Target (PT):  $19.32
-  Risk:Reward Ratio:   1:0.28
+  Stop Loss Distance:  $49.46
+  Profit Target (PT):  $37.95
+  Risk:Reward Ratio:   1:0.77

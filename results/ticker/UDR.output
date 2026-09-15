@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: UDR
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $34.92
+  ATR (14-day): $0.75
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $34.83 - $35.45
+  Size:         $0.62
+  Distance:     $0.00 (0% of ATR)
+  Formed:       2026-09-11
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($34.92 <= zone $35.45)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $39.26 - $39.72
+  Size:         $0.46
+  Distance:     $4.34
+  Formed:       2026-06-10
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+TRADE METRICS:
+  Stop Loss Distance:  $0.09
+  Profit Target (PT):  $4.34
+  Risk:Reward Ratio:   1:45.63

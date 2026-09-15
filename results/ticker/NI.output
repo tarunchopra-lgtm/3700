@@ -3,27 +3,27 @@ TICKER: NI
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $44.21
-  ATR (14-day): $1.00
+  Price:        $40.97
+  ATR (14-day): $0.96
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $40.49 - $41.08
   Size:         $0.59
-  Distance:     $3.13 (313% of ATR)
+  Distance:     $0.00 (0% of ATR)
   Formed:       2026-08-24
-  FRESHNESS:    FRESH
-  Notes:        Fresh - not tested recently
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($40.97 <= zone $41.08)
 
 SUPPLY ZONE (Sell Zone):
   Range:        $46.27 - $46.72
   Size:         $0.45
-  Distance:     $2.06
+  Distance:     $5.30
   Formed:       2026-06-10
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $3.72
-  Profit Target (PT):  $2.06
-  Risk:Reward Ratio:   1:0.55
+  Stop Loss Distance:  $0.48
+  Profit Target (PT):  $5.30
+  Risk:Reward Ratio:   1:11.04

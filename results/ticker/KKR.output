@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: KKR
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $107.15
+  ATR (14-day): $3.87
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $93.93 - $97.44
+  Size:         $3.51
+  Distance:     $9.71 (251% of ATR)
+  Formed:       2026-06-10
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $99.73 - $102.85
+  Size:         $3.12
+  Distance:     $4.30
+  Formed:       2026-07-16
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($107.15 >= zone $99.73)
+
+TRADE METRICS:
+  Stop Loss Distance:  $13.22
+  Profit Target (PT):  $-7.42
+  Risk:Reward Ratio:   1:-0.56

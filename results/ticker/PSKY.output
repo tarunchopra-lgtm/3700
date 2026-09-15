@@ -3,14 +3,14 @@ TICKER: PSKY
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $11.24
-  ATR (14-day): $0.38
+  Price:        $10.94
+  ATR (14-day): $0.36
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $9.35 - $9.96
   Size:         $0.61
-  Distance:     $1.29 (339% of ATR)
+  Distance:     $0.98 (270% of ATR)
   Formed:       2026-06-26
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
@@ -18,12 +18,12 @@ DEMAND ZONE (Buy Zone):
 SUPPLY ZONE (Sell Zone):
   Range:        $10.78 - $11.20
   Size:         $0.42
-  Distance:     $0.04
+  Distance:     $0.00
   Formed:       2026-09-03
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($11.24 >= zone $10.78)
+  Notes:        STALE - Price reached zone ($10.94 >= zone $10.78)
 
 TRADE METRICS:
-  Stop Loss Distance:  $1.89
-  Profit Target (PT):  $-0.46
-  Risk:Reward Ratio:   1:-0.24
+  Stop Loss Distance:  $1.59
+  Profit Target (PT):  $-0.16
+  Risk:Reward Ratio:   1:-0.10

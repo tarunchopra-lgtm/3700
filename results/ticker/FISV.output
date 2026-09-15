@@ -3,27 +3,27 @@ TICKER: FISV
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $54.44
-  ATR (14-day): $2.10
-  Within ATR:   NO
+  Price:        $50.48
+  ATR (14-day): $2.13
+  Within ATR:   YES
 
 DEMAND ZONE (Buy Zone):
   Range:        $47.04 - $48.95
   Size:         $1.91
-  Distance:     $5.49 (261% of ATR)
+  Distance:     $1.53 (72% of ATR)
   Formed:       2026-06-18
-  FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $48.40)
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
   Range:        $51.78 - $54.39
   Size:         $2.61
-  Distance:     $0.05
+  Distance:     $1.30
   Formed:       2026-06-10
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($54.44 >= zone $51.78)
+  Notes:        STALE - Daily candle tested zone yesterday (high $52.88)
 
 TRADE METRICS:
-  Stop Loss Distance:  $7.40
-  Profit Target (PT):  $-2.66
-  Risk:Reward Ratio:   1:-0.36
+  Stop Loss Distance:  $3.44
+  Profit Target (PT):  $1.30
+  Risk:Reward Ratio:   1:0.38

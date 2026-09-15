@@ -3,27 +3,27 @@ TICKER: ORLY
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $91.14
-  ATR (14-day): $2.48
+  Price:        $86.01
+  ATR (14-day): $2.42
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $84.76 - $86.28
   Size:         $1.52
-  Distance:     $4.86 (196% of ATR)
+  Distance:     $0.00 (0% of ATR)
   Formed:       2026-06-22
   FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $85.02)
+  Notes:        STALE - Price reached zone ($86.01 <= zone $86.28)
 
 SUPPLY ZONE (Sell Zone):
   Range:        $91.69 - $92.91
   Size:         $1.22
-  Distance:     $0.55
+  Distance:     $5.68
   Formed:       2026-07-01
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $6.38
-  Profit Target (PT):  $0.55
-  Risk:Reward Ratio:   1:0.09
+  Stop Loss Distance:  $1.25
+  Profit Target (PT):  $5.68
+  Risk:Reward Ratio:   1:4.54

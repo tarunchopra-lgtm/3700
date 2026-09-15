@@ -3,14 +3,14 @@ TICKER: TRV
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $399.00
-  ATR (14-day): $8.25
+  Price:        $378.79
+  ATR (14-day): $8.13
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $303.61 - $307.13
   Size:         $3.52
-  Distance:     $91.87 (1113% of ATR)
+  Distance:     $71.66 (882% of ATR)
   Formed:       2026-06-11
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
@@ -18,12 +18,12 @@ DEMAND ZONE (Buy Zone):
 SUPPLY ZONE (Sell Zone):
   Range:        $386.66 - $398.69
   Size:         $12.03
-  Distance:     $0.31
+  Distance:     $7.87
   Formed:       2026-07-27
-  FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($399.00 >= zone $386.66)
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $95.39
-  Profit Target (PT):  $-12.34
-  Risk:Reward Ratio:   1:-0.13
+  Stop Loss Distance:  $75.18
+  Profit Target (PT):  $7.87
+  Risk:Reward Ratio:   1:0.10

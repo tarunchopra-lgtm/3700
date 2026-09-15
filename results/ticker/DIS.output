@@ -3,14 +3,14 @@ TICKER: DIS
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $112.24
-  ATR (14-day): $2.52
+  Price:        $107.57
+  ATR (14-day): $2.49
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $99.53 - $101.77
   Size:         $2.23
-  Distance:     $10.47 (415% of ATR)
+  Distance:     $5.80 (233% of ATR)
   Formed:       2026-06-12
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
@@ -18,12 +18,12 @@ DEMAND ZONE (Buy Zone):
 SUPPLY ZONE (Sell Zone):
   Range:        $109.76 - $111.87
   Size:         $2.11
-  Distance:     $0.37
+  Distance:     $2.19
   Formed:       2026-08-25
-  FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($112.24 >= zone $109.76)
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $12.70
-  Profit Target (PT):  $-2.48
-  Risk:Reward Ratio:   1:-0.20
+  Stop Loss Distance:  $8.03
+  Profit Target (PT):  $2.19
+  Risk:Reward Ratio:   1:0.27

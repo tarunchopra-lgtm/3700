@@ -3,27 +3,27 @@ TICKER: MET
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $105.00
-  ATR (14-day): $1.92
+  Price:        $102.04
+  ATR (14-day): $1.87
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $85.38 - $88.83
   Size:         $3.45
-  Distance:     $16.17 (844% of ATR)
+  Distance:     $13.21 (708% of ATR)
   Formed:       2026-06-16
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $96.65 - $98.58
-  Size:         $1.93
-  Distance:     $6.42
-  Formed:       2026-08-18
+  Range:        $94.83 - $97.80
+  Size:         $2.97
+  Distance:     $4.24
+  Formed:       2026-07-27
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($105.00 >= zone $96.65)
+  Notes:        STALE - Price reached zone ($102.04 >= zone $94.83)
 
 TRADE METRICS:
-  Stop Loss Distance:  $19.62
-  Profit Target (PT):  $-8.35
+  Stop Loss Distance:  $16.66
+  Profit Target (PT):  $-7.21
   Risk:Reward Ratio:   1:-0.43

@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: WY
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $22.32
+  ATR (14-day): $0.72
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $21.82 - $22.33
+  Size:         $0.51
+  Distance:     $0.00 (0% of ATR)
+  Formed:       2026-09-11
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($22.32 <= zone $22.33)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $24.56 - $25.42
+  Size:         $0.86
+  Distance:     $2.24
+  Formed:       2026-06-16
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+TRADE METRICS:
+  Stop Loss Distance:  $0.50
+  Profit Target (PT):  $2.24
+  Risk:Reward Ratio:   1:4.53

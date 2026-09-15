@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: AFL
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $123.97
+  ATR (14-day): $1.98
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $113.60 - $115.77
+  Size:         $2.17
+  Distance:     $8.20 (415% of ATR)
+  Formed:       2026-09-11
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $116.66 - $118.39
+  Size:         $1.73
+  Distance:     $5.58
+  Formed:       2026-06-15
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($123.97 >= zone $116.66)
+
+TRADE METRICS:
+  Stop Loss Distance:  $10.37
+  Profit Target (PT):  $-7.31
+  Risk:Reward Ratio:   1:-0.70

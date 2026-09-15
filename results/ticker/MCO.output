@@ -3,14 +3,14 @@ TICKER: MCO
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $508.20
-  ATR (14-day): $10.53
+  Price:        $471.92
+  ATR (14-day): $10.41
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $438.41 - $454.10
   Size:         $15.69
-  Distance:     $54.10 (514% of ATR)
+  Distance:     $17.82 (171% of ATR)
   Formed:       2026-06-10
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
@@ -18,12 +18,12 @@ DEMAND ZONE (Buy Zone):
 SUPPLY ZONE (Sell Zone):
   Range:        $474.27 - $504.91
   Size:         $30.64
-  Distance:     $3.29
+  Distance:     $2.35
   Formed:       2026-07-02
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($508.20 >= zone $474.27)
+  Notes:        STALE - Daily candle tested zone yesterday (high $483.16)
 
 TRADE METRICS:
-  Stop Loss Distance:  $69.79
-  Profit Target (PT):  $-33.93
-  Risk:Reward Ratio:   1:-0.49
+  Stop Loss Distance:  $33.51
+  Profit Target (PT):  $2.35
+  Risk:Reward Ratio:   1:0.07

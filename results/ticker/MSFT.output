@@ -3,27 +3,27 @@ TICKER: MSFT
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $522.74
-  ATR (14-day): $17.88
+  Price:        $503.62
+  ATR (14-day): $17.34
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $382.27 - $391.74
   Size:         $9.47
-  Distance:     $131.00 (733% of ATR)
+  Distance:     $111.88 (645% of ATR)
   Formed:       2026-06-12
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $449.33 - $499.44
-  Size:         $50.11
-  Distance:     $23.30
-  Formed:       2026-07-31
+  Range:        $498.73 - $513.73
+  Size:         $15.00
+  Distance:     $0.00
+  Formed:       2026-08-07
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($522.74 >= zone $449.33)
+  Notes:        STALE - Price reached zone ($503.62 >= zone $498.73)
 
 TRADE METRICS:
-  Stop Loss Distance:  $140.47
-  Profit Target (PT):  $-73.41
-  Risk:Reward Ratio:   1:-0.52
+  Stop Loss Distance:  $121.35
+  Profit Target (PT):  $-4.89
+  Risk:Reward Ratio:   1:-0.04

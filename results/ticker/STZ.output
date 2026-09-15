@@ -3,27 +3,27 @@ TICKER: STZ
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $129.82
-  ATR (14-day): $2.87
+  Price:        $124.36
+  ATR (14-day): $2.83
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $120.25 - $122.67
   Size:         $2.42
-  Distance:     $7.15 (249% of ATR)
+  Distance:     $1.69 (60% of ATR)
   Formed:       2026-09-09
   FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $121.56)
+  Notes:        STALE - Daily candle tested zone yesterday (low $122.52)
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $127.36 - $132.89
-  Size:         $5.53
-  Distance:     $0.00
-  Formed:       2026-09-03
-  FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($129.82 >= zone $127.36)
+  Range:        $147.25 - $150.99
+  Size:         $3.74
+  Distance:     $22.89
+  Formed:       2026-06-15
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $9.57
-  Profit Target (PT):  $-2.46
-  Risk:Reward Ratio:   1:-0.26
+  Stop Loss Distance:  $4.11
+  Profit Target (PT):  $22.89
+  Risk:Reward Ratio:   1:5.57

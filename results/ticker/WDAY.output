@@ -3,14 +3,14 @@ TICKER: WDAY
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $202.65
-  ATR (14-day): $10.23
+  Price:        $204.23
+  ATR (14-day): $9.97
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $113.51 - $120.50
   Size:         $6.99
-  Distance:     $82.15 (803% of ATR)
+  Distance:     $83.73 (840% of ATR)
   Formed:       2026-06-25
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
@@ -21,9 +21,9 @@ SUPPLY ZONE (Sell Zone):
   Distance:     $0.00
   Formed:       2026-08-14
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($202.65 >= zone $195.01)
+  Notes:        STALE - Price reached zone ($204.23 >= zone $195.01)
 
 TRADE METRICS:
-  Stop Loss Distance:  $89.14
-  Profit Target (PT):  $-7.64
-  Risk:Reward Ratio:   1:-0.09
+  Stop Loss Distance:  $90.72
+  Profit Target (PT):  $-9.22
+  Risk:Reward Ratio:   1:-0.10

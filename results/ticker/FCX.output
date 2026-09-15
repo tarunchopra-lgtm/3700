@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: FCX
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $73.49
+  ATR (14-day): $2.78
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $61.05 - $63.75
+  Size:         $2.70
+  Distance:     $9.74 (351% of ATR)
+  Formed:       2026-06-24
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $69.25 - $71.88
+  Size:         $2.63
+  Distance:     $1.61
+  Formed:       2026-06-16
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($73.49 >= zone $69.25)
+
+TRADE METRICS:
+  Stop Loss Distance:  $12.44
+  Profit Target (PT):  $-4.24
+  Risk:Reward Ratio:   1:-0.34

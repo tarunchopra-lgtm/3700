@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: BKR
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $56.72
+  ATR (14-day): $2.01
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $55.56 - $59.42
+  Size:         $3.86
+  Distance:     $0.00 (0% of ATR)
+  Formed:       2026-06-22
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($56.72 <= zone $59.42)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $62.56 - $65.44
+  Size:         $2.88
+  Distance:     $5.84
+  Formed:       2026-06-10
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+TRADE METRICS:
+  Stop Loss Distance:  $1.16
+  Profit Target (PT):  $5.84
+  Risk:Reward Ratio:   1:5.03

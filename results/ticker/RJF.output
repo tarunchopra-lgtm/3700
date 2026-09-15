@@ -3,27 +3,27 @@ TICKER: RJF
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $191.12
-  ATR (14-day): $3.48
+  Price:        $169.34
+  ATR (14-day): $3.55
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $154.23 - $156.89
   Size:         $2.66
-  Distance:     $34.23 (984% of ATR)
+  Distance:     $12.45 (350% of ATR)
   Formed:       2026-06-15
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $177.56 - $181.87
-  Size:         $4.31
-  Distance:     $9.25
-  Formed:       2026-08-04
+  Range:        $172.99 - $178.28
+  Size:         $5.29
+  Distance:     $3.65
+  Formed:       2026-07-28
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($191.12 >= zone $177.56)
+  Notes:        STALE - Daily candle tested zone yesterday (high $173.78)
 
 TRADE METRICS:
-  Stop Loss Distance:  $36.89
-  Profit Target (PT):  $-13.56
-  Risk:Reward Ratio:   1:-0.37
+  Stop Loss Distance:  $15.11
+  Profit Target (PT):  $3.65
+  Risk:Reward Ratio:   1:0.24

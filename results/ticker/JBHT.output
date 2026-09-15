@@ -3,27 +3,27 @@ TICKER: JBHT
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $285.79
-  ATR (14-day): $6.57
+  Price:        $274.41
+  ATR (14-day): $6.75
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $264.49 - $274.72
   Size:         $10.23
-  Distance:     $11.07 (169% of ATR)
+  Distance:     $0.00 (0% of ATR)
   Formed:       2026-07-31
   FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $265.69)
+  Notes:        STALE - Price reached zone ($274.41 <= zone $274.72)
 
 SUPPLY ZONE (Sell Zone):
   Range:        $287.01 - $292.44
   Size:         $5.42
-  Distance:     $1.22
+  Distance:     $12.60
   Formed:       2026-06-12
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $21.30
-  Profit Target (PT):  $1.22
-  Risk:Reward Ratio:   1:0.06
+  Stop Loss Distance:  $9.92
+  Profit Target (PT):  $12.60
+  Risk:Reward Ratio:   1:1.27

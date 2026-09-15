@@ -3,14 +3,14 @@ TICKER: GPC
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $143.46
-  ATR (14-day): $3.63
+  Price:        $142.57
+  ATR (14-day): $3.42
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $97.47 - $100.23
   Size:         $2.76
-  Distance:     $43.23 (1191% of ATR)
+  Distance:     $42.34 (1239% of ATR)
   Formed:       2026-06-10
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
@@ -18,12 +18,12 @@ DEMAND ZONE (Buy Zone):
 SUPPLY ZONE (Sell Zone):
   Range:        $136.58 - $139.89
   Size:         $3.31
-  Distance:     $3.57
+  Distance:     $2.68
   Formed:       2026-08-26
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($143.46 >= zone $136.58)
+  Notes:        STALE - Price reached zone ($142.57 >= zone $136.58)
 
 TRADE METRICS:
-  Stop Loss Distance:  $45.99
-  Profit Target (PT):  $-6.88
-  Risk:Reward Ratio:   1:-0.15
+  Stop Loss Distance:  $45.10
+  Profit Target (PT):  $-5.99
+  Risk:Reward Ratio:   1:-0.13

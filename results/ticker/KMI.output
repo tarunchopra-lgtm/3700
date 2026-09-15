@@ -3,27 +3,27 @@ TICKER: KMI
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $33.56
-  ATR (14-day): $0.72
+  Price:        $30.91
+  ATR (14-day): $0.71
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $30.51 - $31.14
   Size:         $0.62
-  Distance:     $2.43 (338% of ATR)
+  Distance:     $0.00 (0% of ATR)
   Formed:       2026-08-24
   FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $30.95)
+  Notes:        STALE - Price reached zone ($30.91 <= zone $31.14)
 
 SUPPLY ZONE (Sell Zone):
   Range:        $32.98 - $33.34
   Size:         $0.36
-  Distance:     $0.22
+  Distance:     $2.07
   Formed:       2026-06-26
-  FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($33.56 >= zone $32.98)
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $3.05
-  Profit Target (PT):  $-0.58
-  Risk:Reward Ratio:   1:-0.19
+  Stop Loss Distance:  $0.40
+  Profit Target (PT):  $2.07
+  Risk:Reward Ratio:   1:5.18

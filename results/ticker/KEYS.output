@@ -3,27 +3,27 @@ TICKER: KEYS
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $343.35
-  ATR (14-day): $12.31
+  Price:        $331.57
+  ATR (14-day): $12.41
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $323.19 - $340.13
-  Size:         $16.94
-  Distance:     $3.22 (26% of ATR)
-  Formed:       2026-06-11
+  Range:        $306.01 - $328.58
+  Size:         $22.57
+  Distance:     $2.99 (24% of ATR)
+  Formed:       2026-07-06
   FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $325.55)
+  Notes:        STALE - Daily candle tested zone yesterday (low $314.38)
 
 SUPPLY ZONE (Sell Zone):
   Range:        $339.40 - $352.20
   Size:         $12.80
-  Distance:     $0.00
+  Distance:     $7.83
   Formed:       2026-06-12
-  FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($343.35 >= zone $339.40)
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $20.16
-  Profit Target (PT):  $-3.95
-  Risk:Reward Ratio:   1:-0.20
+  Stop Loss Distance:  $25.56
+  Profit Target (PT):  $7.83
+  Risk:Reward Ratio:   1:0.31

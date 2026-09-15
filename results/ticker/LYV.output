@@ -3,27 +3,27 @@ TICKER: LYV
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $178.77
-  ATR (14-day): $4.77
+  Price:        $171.07
+  ATR (14-day): $4.73
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $167.50 - $175.00
   Size:         $7.50
-  Distance:     $3.77 (79% of ATR)
+  Distance:     $0.00 (0% of ATR)
   Formed:       2026-06-11
   FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $168.52)
+  Notes:        STALE - Price reached zone ($171.07 <= zone $175.00)
 
 SUPPLY ZONE (Sell Zone):
   Range:        $167.50 - $175.00
   Size:         $7.50
-  Distance:     $3.77
+  Distance:     $0.00
   Formed:       2026-06-11
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($178.77 >= zone $167.50)
+  Notes:        STALE - Price reached zone ($171.07 >= zone $167.50)
 
 TRADE METRICS:
-  Stop Loss Distance:  $11.27
-  Profit Target (PT):  $-11.27
+  Stop Loss Distance:  $3.57
+  Profit Target (PT):  $-3.57
   Risk:Reward Ratio:   1:-1.00

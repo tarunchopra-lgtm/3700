@@ -22,8 +22,9 @@ from typing import Optional
 from alpaca.trading.requests import (
     LimitOrderRequest,
     MarketOrderRequest,
+    GetOrdersRequest,
 )
-from alpaca.trading.enums import OrderSide, TimeInForce
+from alpaca.trading.enums import OrderSide, TimeInForce, QueryOrderStatus
 from alpaca.data.enums import DataFeed
 from alpaca.data.historical import StockHistoricalDataClient, CryptoHistoricalDataClient
 from alpaca.data.requests import StockLatestQuoteRequest, CryptoLatestQuoteRequest
@@ -102,6 +103,24 @@ def _cancel_order(trading_client, order_id: str) -> bool:
         return False
 
 
+def _cancel_all_pending_sell_orders(trading_client, symbol: str) -> None:
+    """Cancel all pending SELL orders for a symbol to free up qty."""
+    try:
+        orders = trading_client.get_orders(
+            filter=GetOrdersRequest(status=QueryOrderStatus.OPEN, limit=100)
+        )
+        sell_orders = [o for o in orders if o.symbol == symbol and o.side == OrderSide.SELL]
+        
+        for order in sell_orders:
+            try:
+                trading_client.cancel_order_by_id(order.id)
+                _log(f"  ✓ Cancelled pending order @ ${float(order.limit_price):.2f}")
+            except Exception as e:
+                _log(f"  ⚠ Could not cancel order {order.id}: {e}")
+    except Exception as e:
+        _log(f"  ⚠ Error fetching orders for {symbol}: {e}")
+
+
 def _sell_at_limit(
     trading_client,
     symbol: str,
@@ -130,8 +149,10 @@ def _sell_at_limit(
         while time.time() - start_time < timeout_seconds:
             try:
                 order_status = trading_client.get_order_by_id(order_id)
-                if order_status.filled_qty and order_status.filled_qty > 0:
-                    _log(f"  ✓ Limit order filled! {order_status.filled_qty} {symbol} @ avg ${order_status.filled_avg_price:.2f}")
+                filled_qty = float(order_status.filled_qty) if order_status.filled_qty else 0
+                if filled_qty > 0:
+                    filled_avg_price = float(order_status.filled_avg_price) if order_status.filled_avg_price else 0
+                    _log(f"  ✓ Limit order filled! {filled_qty} {symbol} @ avg ${filled_avg_price:.2f}")
                     return order_id  # Filled, return success
                 
                 if order_status.status in ("canceled", "expired", "rejected"):
@@ -232,6 +253,9 @@ def close_all_positions(trading_client, stock_data_client, crypto_data_client) -
         close_price = None
         
         _log(f"\n[{symbol}] Qty: {qty}, Value: ${market_value:.2f}")
+        
+        # FIRST: Cancel any pending SELL orders to free up qty
+        _cancel_all_pending_sell_orders(trading_client, symbol)
         
         # Try to get bid/ask for midpoint calculation
         bid_ask = _get_bid_ask(trading_client, symbol, stock_data_client, crypto_data_client)

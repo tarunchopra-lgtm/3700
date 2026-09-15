@@ -3,27 +3,27 @@ TICKER: TER
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $370.13
-  ATR (14-day): $29.05
+  Price:        $348.09
+  ATR (14-day): $29.85
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $340.34 - $374.82
-  Size:         $34.48
+  Range:        $328.28 - $399.80
+  Size:         $71.52
   Distance:     $0.00 (0% of ATR)
-  Formed:       2026-06-10
+  Formed:       2026-07-06
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($370.13 <= zone $374.82)
+  Notes:        STALE - Price reached zone ($348.09 <= zone $399.80)
 
 SUPPLY ZONE (Sell Zone):
   Range:        $380.00 - $437.77
   Size:         $57.77
-  Distance:     $9.87
+  Distance:     $31.91
   Formed:       2026-06-12
-  FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone today (high $385.35)
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $29.79
-  Profit Target (PT):  $9.87
-  Risk:Reward Ratio:   1:0.33
+  Stop Loss Distance:  $19.81
+  Profit Target (PT):  $31.91
+  Risk:Reward Ratio:   1:1.61

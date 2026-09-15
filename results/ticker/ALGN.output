@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: ALGN
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $152.76
+  ATR (14-day): $6.56
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $149.49 - $153.86
+  Size:         $4.37
+  Distance:     $0.00 (0% of ATR)
+  Formed:       2026-09-14
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($152.76 <= zone $153.86)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $172.43 - $182.59
+  Size:         $10.16
+  Distance:     $19.67
+  Formed:       2026-06-12
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+TRADE METRICS:
+  Stop Loss Distance:  $3.27
+  Profit Target (PT):  $19.67
+  Risk:Reward Ratio:   1:6.02

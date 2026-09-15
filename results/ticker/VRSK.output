@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: VRSK
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $183.59
+  ATR (14-day): $8.12
+  Within ATR:   YES
+
+DEMAND ZONE (Buy Zone):
+  Range:        $171.79 - $179.21
+  Size:         $7.42
+  Distance:     $4.38 (54% of ATR)
+  Formed:       2026-09-09
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $183.02 - $194.79
+  Size:         $11.77
+  Distance:     $0.00
+  Formed:       2026-07-06
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($183.59 >= zone $183.02)
+
+TRADE METRICS:
+  Stop Loss Distance:  $11.80
+  Profit Target (PT):  $-0.57
+  Risk:Reward Ratio:   1:-0.05

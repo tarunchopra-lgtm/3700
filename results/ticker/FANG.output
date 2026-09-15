@@ -3,27 +3,27 @@ TICKER: FANG
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $220.49
-  ATR (14-day): $6.88
+  Price:        $210.16
+  ATR (14-day): $6.93
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $189.44 - $195.43
   Size:         $5.99
-  Distance:     $25.06 (364% of ATR)
+  Distance:     $14.73 (212% of ATR)
   Formed:       2026-06-12
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $206.47 - $210.41
-  Size:         $3.94
-  Distance:     $10.08
-  Formed:       2026-08-18
+  Range:        $209.15 - $216.90
+  Size:         $7.75
+  Distance:     $0.00
+  Formed:       2026-08-21
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($220.49 >= zone $206.47)
+  Notes:        STALE - Price reached zone ($210.16 >= zone $209.15)
 
 TRADE METRICS:
-  Stop Loss Distance:  $31.05
-  Profit Target (PT):  $-14.02
-  Risk:Reward Ratio:   1:-0.45
+  Stop Loss Distance:  $20.72
+  Profit Target (PT):  $-1.01
+  Risk:Reward Ratio:   1:-0.05

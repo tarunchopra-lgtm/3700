@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: PSX
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $276.89
+  ATR (14-day): $7.01
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $171.02 - $181.87
+  Size:         $10.85
+  Distance:     $95.02 (1356% of ATR)
+  Formed:       2026-06-12
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $257.86 - $265.43
+  Size:         $7.57
+  Distance:     $11.46
+  Formed:       2026-09-11
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($276.89 >= zone $257.86)
+
+TRADE METRICS:
+  Stop Loss Distance:  $105.87
+  Profit Target (PT):  $-19.03
+  Risk:Reward Ratio:   1:-0.18

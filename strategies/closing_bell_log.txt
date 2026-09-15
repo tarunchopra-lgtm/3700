@@ -297,3 +297,107 @@
 [2026-09-14 12:50:05] ============================================================
 
 [2026-09-14 12:50:06] ✓ Email report sent to tarun.chopra@gmail.com
+[2026-09-15 12:50:04] 
+============================================================
+[2026-09-15 12:50:04] 🔔 CLOSING BELL - Closing all positions...
+[2026-09-15 12:50:04] ============================================================
+[2026-09-15 12:50:04] Found 3 open position(s). Starting closeout...
+[2026-09-15 12:50:04] 
+[COHR] Qty: 1, Value: $270.96
+[2026-09-15 12:50:05]   Bid: $268.00, Ask: $279.00, Midpoint: $273.50
+[2026-09-15 12:50:05]   ✗ Error submitting limit order for COHR: {"available":"0","code":40310000,"existing_qty":"1","held_for_orders":"1","message":"insufficient qty available for order (requested: 1, available: 0)","related_orders":["3494df5b-dda1-436a-a792-226b53a35e4e"],"symbol":"COHR"}
+[2026-09-15 12:50:05]   ✗ Error submitting market order for COHR: {"available":"0","code":40310000,"existing_qty":"1","held_for_orders":"1","message":"insufficient qty available for order (requested: 1, available: 0)","related_orders":["3494df5b-dda1-436a-a792-226b53a35e4e"],"symbol":"COHR"}
+[2026-09-15 12:50:05] 
+[DIA] Qty: 4, Value: $2083.88
+[2026-09-15 12:50:05]   Bid: $520.95, Ask: $520.99, Midpoint: $520.97
+[2026-09-15 12:50:05]   ✗ Error submitting limit order for DIA: {"available":"0","code":40310000,"existing_qty":"4","held_for_orders":"4","message":"insufficient qty available for order (requested: 4, available: 0)","related_orders":["365f1148-9297-4504-b0e9-338edf5fb4f4","d4dbe62f-4a6b-42c7-8477-8c504bf60200"],"symbol":"DIA"}
+[2026-09-15 12:50:05]   ✗ Error submitting market order for DIA: {"available":"0","code":40310000,"existing_qty":"4","held_for_orders":"4","message":"insufficient qty available for order (requested: 4, available: 0)","related_orders":["365f1148-9297-4504-b0e9-338edf5fb4f4","d4dbe62f-4a6b-42c7-8477-8c504bf60200"],"symbol":"DIA"}
+[2026-09-15 12:50:05] 
+[NVDA] Qty: 1, Value: $211.99
+[2026-09-15 12:50:05]   Bid: $211.98, Ask: $212.00, Midpoint: $211.99
+[2026-09-15 12:50:05]   ✗ Error submitting limit order for NVDA: {"available":"0","code":40310000,"existing_qty":"1","held_for_orders":"1","message":"insufficient qty available for order (requested: 1, available: 0)","related_orders":["53831f34-2718-4d7c-a3d3-b4d69e48b9f4"],"symbol":"NVDA"}
+[2026-09-15 12:50:05]   ✗ Error submitting market order for NVDA: {"available":"0","code":40310000,"existing_qty":"1","held_for_orders":"1","message":"insufficient qty available for order (requested: 1, available: 0)","related_orders":["53831f34-2718-4d7c-a3d3-b4d69e48b9f4"],"symbol":"NVDA"}
+[2026-09-15 12:50:05] 
+============================================================
+[2026-09-15 12:50:05] Closeout Summary: 0 successful, 3 failed
+[2026-09-15 12:50:05] ============================================================
+
+[2026-09-15 12:50:07] ✓ Email report sent to tarun.chopra@gmail.com
+[2026-09-15 12:54:54] 
+============================================================
+[2026-09-15 12:54:54] 🔔 CLOSING BELL - Closing all positions...
+[2026-09-15 12:54:54] ============================================================
+[2026-09-15 12:54:55] Found 3 open position(s). Starting closeout...
+[2026-09-15 12:54:55] 
+[COHR] Qty: 1, Value: $271.00
+[2026-09-15 12:54:55]   Bid: $270.97, Ask: $271.14, Midpoint: $271.06
+[2026-09-15 12:54:55]   ✗ Error submitting limit order for COHR: {"available":"0","code":40310000,"existing_qty":"1","held_for_orders":"1","message":"insufficient qty available for order (requested: 1, available: 0)","related_orders":["3494df5b-dda1-436a-a792-226b53a35e4e"],"symbol":"COHR"}
+[2026-09-15 12:54:55]   ✗ Error submitting market order for COHR: {"available":"0","code":40310000,"existing_qty":"1","held_for_orders":"1","message":"insufficient qty available for order (requested: 1, available: 0)","related_orders":["3494df5b-dda1-436a-a792-226b53a35e4e"],"symbol":"COHR"}
+[2026-09-15 12:54:55] 
+[DIA] Qty: 4, Value: $2083.62
+[2026-09-15 12:54:55]   Bid: $520.80, Ask: $520.95, Midpoint: $520.88
+[2026-09-15 12:54:55]   ✗ Error submitting limit order for DIA: {"available":"0","code":40310000,"existing_qty":"4","held_for_orders":"4","message":"insufficient qty available for order (requested: 4, available: 0)","related_orders":["365f1148-9297-4504-b0e9-338edf5fb4f4","d4dbe62f-4a6b-42c7-8477-8c504bf60200"],"symbol":"DIA"}
+[2026-09-15 12:54:55]   ✗ Error submitting market order for DIA: {"available":"0","code":40310000,"existing_qty":"4","held_for_orders":"4","message":"insufficient qty available for order (requested: 4, available: 0)","related_orders":["365f1148-9297-4504-b0e9-338edf5fb4f4","d4dbe62f-4a6b-42c7-8477-8c504bf60200"],"symbol":"DIA"}
+[2026-09-15 12:54:55] 
+[NVDA] Qty: 1, Value: $212.23
+[2026-09-15 12:54:55]   Bid: $212.20, Ask: $212.23, Midpoint: $212.21
+[2026-09-15 12:54:55]   ✗ Error submitting limit order for NVDA: {"available":"0","code":40310000,"existing_qty":"1","held_for_orders":"1","message":"insufficient qty available for order (requested: 1, available: 0)","related_orders":["53831f34-2718-4d7c-a3d3-b4d69e48b9f4"],"symbol":"NVDA"}
+[2026-09-15 12:54:55]   ✗ Error submitting market order for NVDA: {"available":"0","code":40310000,"existing_qty":"1","held_for_orders":"1","message":"insufficient qty available for order (requested: 1, available: 0)","related_orders":["53831f34-2718-4d7c-a3d3-b4d69e48b9f4"],"symbol":"NVDA"}
+[2026-09-15 12:54:55] 
+============================================================
+[2026-09-15 12:54:55] Closeout Summary: 0 successful, 3 failed
+[2026-09-15 12:54:55] ============================================================
+
+[2026-09-15 12:54:57] ✓ Email report sent to tarun.chopra@gmail.com
+[2026-09-15 12:56:37] 
+============================================================
+[2026-09-15 12:56:37] 🔔 CLOSING BELL - Closing all positions...
+[2026-09-15 12:56:37] ============================================================
+[2026-09-15 12:56:37] Found 3 open position(s). Starting closeout...
+[2026-09-15 12:56:37] 
+[COHR] Qty: 1, Value: $271.08
+[2026-09-15 12:56:37]   ✓ Cancelled pending order @ $272.00
+[2026-09-15 12:56:38]   Bid: $268.00, Ask: $271.09, Midpoint: $269.54
+[2026-09-15 12:56:38]   → Submitted limit order d38be478-816c-4c5c-adb3-9d7ff93cf4d5 for 1 COHR @ $269.54
+[2026-09-15 12:56:38]   ⚠ Error checking order status: '>' not supported between instances of 'str' and 'int'
+[2026-09-15 12:56:43]   ⚠ Error checking order status: '>' not supported between instances of 'str' and 'int'
+[2026-09-15 12:56:48]   ⚠ Error checking order status: '>' not supported between instances of 'str' and 'int'
+[2026-09-15 12:56:53]   ⚠ Error checking order status: '>' not supported between instances of 'str' and 'int'
+[2026-09-15 12:56:58]   ⚠ Error checking order status: '>' not supported between instances of 'str' and 'int'
+[2026-09-15 12:57:03]   ⚠ Error checking order status: '>' not supported between instances of 'str' and 'int'
+[2026-09-15 12:57:08]   ⚠ Error checking order status: '>' not supported between instances of 'str' and 'int'
+[2026-09-15 12:57:14]   ⚠ Error checking order status: '>' not supported between instances of 'str' and 'int'
+[2026-09-15 12:57:27] 
+============================================================
+[2026-09-15 12:57:27] 🔔 CLOSING BELL - Closing all positions...
+[2026-09-15 12:57:27] ============================================================
+[2026-09-15 12:57:27] Found 2 open position(s). Starting closeout...
+[2026-09-15 12:57:27] 
+[DIA] Qty: 4, Value: $2083.60
+[2026-09-15 12:57:27]   ✓ Cancelled pending order @ $525.00
+[2026-09-15 12:57:27]   ✓ Cancelled pending order @ $522.00
+[2026-09-15 12:57:28]   Bid: $520.87, Ask: $520.94, Midpoint: $520.90
+[2026-09-15 12:57:28]   → Submitted limit order b3b2c13e-1ee5-450e-aaf4-1fcd3d17a42a for 4 DIA @ $520.90
+[2026-09-15 12:57:33]   ⚠ Error checking order status: Unknown format code 'f' for object of type 'str'
+[2026-09-15 12:57:38]   ⚠ Error checking order status: Unknown format code 'f' for object of type 'str'
+[2026-09-15 12:57:43]   ⚠ Error checking order status: Unknown format code 'f' for object of type 'str'
+[2026-09-15 12:57:48]   ⚠ Error checking order status: Unknown format code 'f' for object of type 'str'
+[2026-09-15 12:57:53]   ⚠ Error checking order status: Unknown format code 'f' for object of type 'str'
+[2026-09-15 12:57:58]   ⚠ Error checking order status: Unknown format code 'f' for object of type 'str'
+[2026-09-15 12:58:17] 
+============================================================
+[2026-09-15 12:58:17] 🔔 CLOSING BELL - Closing all positions...
+[2026-09-15 12:58:17] ============================================================
+[2026-09-15 12:58:17] Found 1 open position(s). Starting closeout...
+[2026-09-15 12:58:17] 
+[NVDA] Qty: 1, Value: $212.16
+[2026-09-15 12:58:17]   ✓ Cancelled pending order @ $214.00
+[2026-09-15 12:58:17]   Bid: $212.15, Ask: $212.17, Midpoint: $212.16
+[2026-09-15 12:58:17]   → Submitted limit order 787f4b67-2841-44e3-84f8-0e924d24d119 for 1 NVDA @ $212.16
+[2026-09-15 12:59:08]   ✓ Limit order filled! 1.0 NVDA @ avg $212.16
+[2026-09-15 12:59:08] 
+============================================================
+[2026-09-15 12:59:08] Closeout Summary: 1 successful, 0 failed
+[2026-09-15 12:59:08] ============================================================
+
+[2026-09-15 12:59:10] ✓ Email report sent to tarun.chopra@gmail.com

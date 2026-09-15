@@ -3,14 +3,14 @@ TICKER: VTI
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $385.22
-  ATR (14-day): $4.32
+  Price:        $373.82
+  ATR (14-day): $4.38
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $359.95 - $364.79
   Size:         $4.84
-  Distance:     $20.43 (473% of ATR)
+  Distance:     $9.03 (206% of ATR)
   Formed:       2026-06-26
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
@@ -18,12 +18,12 @@ DEMAND ZONE (Buy Zone):
 SUPPLY ZONE (Sell Zone):
   Range:        $374.26 - $381.74
   Size:         $7.48
-  Distance:     $3.48
+  Distance:     $0.44
   Formed:       2026-08-04
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($385.22 >= zone $374.26)
+  Notes:        STALE - Daily candle tested zone yesterday (high $376.05)
 
 TRADE METRICS:
-  Stop Loss Distance:  $25.27
-  Profit Target (PT):  $-10.96
-  Risk:Reward Ratio:   1:-0.43
+  Stop Loss Distance:  $13.87
+  Profit Target (PT):  $0.44
+  Risk:Reward Ratio:   1:0.03

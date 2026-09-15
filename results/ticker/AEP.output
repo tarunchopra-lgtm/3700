@@ -3,27 +3,27 @@ TICKER: AEP
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $130.29
-  ATR (14-day): $2.83
+  Price:        $129.12
+  ATR (14-day): $2.74
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $122.25 - $126.37
-  Size:         $4.12
-  Distance:     $3.92 (139% of ATR)
-  Formed:       2026-08-07
+  Range:        $120.06 - $122.28
+  Size:         $2.22
+  Distance:     $6.84 (250% of ATR)
+  Formed:       2026-08-24
   FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $123.40)
+  Notes:        STALE - Daily candle tested zone yesterday (low $121.85)
 
 SUPPLY ZONE (Sell Zone):
   Range:        $132.92 - $139.08
   Size:         $6.16
-  Distance:     $2.63
+  Distance:     $3.80
   Formed:       2026-06-24
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $8.04
-  Profit Target (PT):  $2.63
-  Risk:Reward Ratio:   1:0.33
+  Stop Loss Distance:  $9.06
+  Profit Target (PT):  $3.80
+  Risk:Reward Ratio:   1:0.42

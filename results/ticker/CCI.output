@@ -3,27 +3,27 @@ TICKER: CCI
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $78.75
-  ATR (14-day): $3.06
+  Price:        $72.50
+  ATR (14-day): $3.05
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $69.72 - $76.47
   Size:         $6.75
-  Distance:     $2.28 (74% of ATR)
+  Distance:     $0.00 (0% of ATR)
   Formed:       2026-08-06
   FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $73.43)
+  Notes:        STALE - Price reached zone ($72.50 <= zone $76.47)
 
 SUPPLY ZONE (Sell Zone):
   Range:        $91.43 - $93.65
   Size:         $2.22
-  Distance:     $12.68
+  Distance:     $18.93
   Formed:       2026-06-12
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $9.03
-  Profit Target (PT):  $12.68
-  Risk:Reward Ratio:   1:1.40
+  Stop Loss Distance:  $2.78
+  Profit Target (PT):  $18.93
+  Risk:Reward Ratio:   1:6.81

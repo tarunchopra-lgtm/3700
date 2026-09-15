@@ -3,14 +3,14 @@ TICKER: TSCO
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $35.17
-  ATR (14-day): $1.13
+  Price:        $32.85
+  ATR (14-day): $1.20
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $29.45 - $30.31
   Size:         $0.86
-  Distance:     $4.86 (430% of ATR)
+  Distance:     $2.54 (211% of ATR)
   Formed:       2026-06-24
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
@@ -18,12 +18,12 @@ DEMAND ZONE (Buy Zone):
 SUPPLY ZONE (Sell Zone):
   Range:        $34.96 - $36.67
   Size:         $1.71
-  Distance:     $0.00
+  Distance:     $2.11
   Formed:       2026-08-12
-  FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($35.17 >= zone $34.96)
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $5.72
-  Profit Target (PT):  $-0.21
-  Risk:Reward Ratio:   1:-0.04
+  Stop Loss Distance:  $3.40
+  Profit Target (PT):  $2.11
+  Risk:Reward Ratio:   1:0.62

@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: ROL
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $34.61
+  ATR (14-day): $1.44
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $34.34 - $35.33
+  Size:         $0.98
+  Distance:     $0.00 (0% of ATR)
+  Formed:       2026-09-09
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($34.61 <= zone $35.33)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $46.47 - $48.52
+  Size:         $2.05
+  Distance:     $11.86
+  Formed:       2026-06-10
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+TRADE METRICS:
+  Stop Loss Distance:  $0.27
+  Profit Target (PT):  $11.86
+  Risk:Reward Ratio:   1:44.75

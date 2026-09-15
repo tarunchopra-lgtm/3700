@@ -3,27 +3,27 @@ TICKER: CBRE
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $148.25
-  ATR (14-day): $4.57
+  Price:        $146.10
+  ATR (14-day): $4.70
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $130.77 - $134.56
   Size:         $3.79
-  Distance:     $13.69 (300% of ATR)
+  Distance:     $11.54 (246% of ATR)
   Formed:       2026-06-11
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $148.10 - $151.98
-  Size:         $3.88
-  Distance:     $0.00
-  Formed:       2026-08-04
+  Range:        $138.31 - $142.57
+  Size:         $4.26
+  Distance:     $3.53
+  Formed:       2026-07-09
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($148.25 >= zone $148.10)
+  Notes:        STALE - Price reached zone ($146.10 >= zone $138.31)
 
 TRADE METRICS:
-  Stop Loss Distance:  $17.48
-  Profit Target (PT):  $-0.15
-  Risk:Reward Ratio:   1:-0.01
+  Stop Loss Distance:  $15.33
+  Profit Target (PT):  $-7.79
+  Risk:Reward Ratio:   1:-0.51

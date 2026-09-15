@@ -3,27 +3,27 @@ TICKER: CSGP
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $32.55
-  ATR (14-day): $1.63
+  Price:        $31.11
+  ATR (14-day): $1.58
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $28.54 - $30.89
   Size:         $2.35
-  Distance:     $1.66 (102% of ATR)
+  Distance:     $0.22 (14% of ATR)
   Formed:       2026-06-23
   FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $28.81)
+  Notes:        STALE - Daily candle tested zone yesterday (low $30.75)
 
 SUPPLY ZONE (Sell Zone):
   Range:        $33.16 - $34.77
   Size:         $1.61
-  Distance:     $0.61
+  Distance:     $2.05
   Formed:       2026-06-10
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $4.01
-  Profit Target (PT):  $0.61
-  Risk:Reward Ratio:   1:0.15
+  Stop Loss Distance:  $2.57
+  Profit Target (PT):  $2.05
+  Risk:Reward Ratio:   1:0.80

@@ -3,27 +3,27 @@ TICKER: NBIS
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $234.83
-  ATR (14-day): $24.54
+  Price:        $218.17
+  ATR (14-day): $24.01
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $200.30 - $230.99
   Size:         $30.69
-  Distance:     $3.84 (16% of ATR)
+  Distance:     $0.00 (0% of ATR)
   Formed:       2026-06-10
   FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $226.21)
+  Notes:        STALE - Price reached zone ($218.17 <= zone $230.99)
 
 SUPPLY ZONE (Sell Zone):
   Range:        $275.57 - $298.80
   Size:         $23.23
-  Distance:     $40.74
+  Distance:     $57.41
   Formed:       2026-06-18
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $34.53
-  Profit Target (PT):  $40.74
-  Risk:Reward Ratio:   1:1.18
+  Stop Loss Distance:  $17.87
+  Profit Target (PT):  $57.41
+  Risk:Reward Ratio:   1:3.21

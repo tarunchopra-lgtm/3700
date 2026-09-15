@@ -3,27 +3,27 @@ TICKER: ARM
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $280.68
-  ATR (14-day): $22.92
+  Price:        $250.95
+  ATR (14-day): $22.79
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $232.67 - $261.90
   Size:         $29.23
-  Distance:     $18.78 (82% of ATR)
+  Distance:     $0.00 (0% of ATR)
   Formed:       2026-07-31
   FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $251.39)
+  Notes:        STALE - Price reached zone ($250.95 <= zone $261.90)
 
 SUPPLY ZONE (Sell Zone):
   Range:        $344.68 - $416.17
   Size:         $71.49
-  Distance:     $64.00
+  Distance:     $93.73
   Formed:       2026-06-12
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $48.01
-  Profit Target (PT):  $64.00
-  Risk:Reward Ratio:   1:1.33
+  Stop Loss Distance:  $18.28
+  Profit Target (PT):  $93.73
+  Risk:Reward Ratio:   1:5.13

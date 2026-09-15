@@ -3,27 +3,27 @@ TICKER: FIS
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $40.81
-  ATR (14-day): $1.89
+  Price:        $38.13
+  ATR (14-day): $1.85
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $37.42 - $38.90
   Size:         $1.48
-  Distance:     $1.91 (101% of ATR)
+  Distance:     $0.00 (0% of ATR)
   Formed:       2026-06-18
   FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $37.93)
+  Notes:        STALE - Price reached zone ($38.13 <= zone $38.90)
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $40.94 - $41.84
-  Size:         $0.91
-  Distance:     $0.13
-  Formed:       2026-07-02
-  FRESHNESS:    FRESH
-  Notes:        Fresh - not tested recently
+  Range:        $37.85 - $40.61
+  Size:         $2.76
+  Distance:     $0.00
+  Formed:       2026-06-18
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($38.13 >= zone $37.85)
 
 TRADE METRICS:
-  Stop Loss Distance:  $3.39
-  Profit Target (PT):  $0.13
-  Risk:Reward Ratio:   1:0.04
+  Stop Loss Distance:  $0.71
+  Profit Target (PT):  $-0.28
+  Risk:Reward Ratio:   1:-0.39

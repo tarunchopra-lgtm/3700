@@ -3,27 +3,27 @@ TICKER: PEP
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $145.10
-  ATR (14-day): $2.73
+  Price:        $135.12
+  ATR (14-day): $2.74
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $134.94 - $142.37
-  Size:         $7.43
-  Distance:     $2.73 (100% of ATR)
-  Formed:       2026-06-26
+  Range:        $134.69 - $142.44
+  Size:         $7.75
+  Distance:     $0.00 (0% of ATR)
+  Formed:       2026-07-09
   FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $136.52)
+  Notes:        STALE - Price reached zone ($135.12 <= zone $142.44)
 
 SUPPLY ZONE (Sell Zone):
   Range:        $143.00 - $145.45
   Size:         $2.45
-  Distance:     $0.00
+  Distance:     $7.88
   Formed:       2026-06-10
-  FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($145.10 >= zone $143.00)
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $10.16
-  Profit Target (PT):  $-2.10
-  Risk:Reward Ratio:   1:-0.21
+  Stop Loss Distance:  $0.43
+  Profit Target (PT):  $7.88
+  Risk:Reward Ratio:   1:18.33

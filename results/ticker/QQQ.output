@@ -3,8 +3,8 @@ TICKER: QQQ
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $703.44
-  ATR (14-day): $14.14
+  Price:        $708.85
+  ATR (14-day): $14.23
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
@@ -13,17 +13,17 @@ DEMAND ZONE (Buy Zone):
   Distance:     $0.00 (0% of ATR)
   Formed:       2026-06-10
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($703.44 <= zone $711.28)
+  Notes:        STALE - Price reached zone ($708.85 <= zone $711.28)
 
 SUPPLY ZONE (Sell Zone):
   Range:        $711.28 - $744.76
   Size:         $33.48
-  Distance:     $7.84
+  Distance:     $2.43
   Formed:       2026-06-12
   FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (high $712.01)
+  Notes:        STALE - Daily candle tested zone yesterday (high $712.88)
 
 TRADE METRICS:
-  Stop Loss Distance:  $17.07
-  Profit Target (PT):  $7.84
-  Risk:Reward Ratio:   1:0.46
+  Stop Loss Distance:  $22.48
+  Profit Target (PT):  $2.43
+  Risk:Reward Ratio:   1:0.11

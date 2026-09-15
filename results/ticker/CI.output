@@ -3,27 +3,27 @@ TICKER: CI
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $299.25
-  ATR (14-day): $8.60
+  Price:        $287.20
+  ATR (14-day): $8.63
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $272.08 - $283.83
-  Size:         $11.75
-  Distance:     $15.42 (179% of ATR)
-  Formed:       2026-08-03
+  Range:        $275.29 - $286.73
+  Size:         $11.44
+  Distance:     $0.47 (5% of ATR)
+  Formed:       2026-06-22
   FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $279.12)
+  Notes:        STALE - Daily candle tested zone yesterday (low $285.11)
 
 SUPPLY ZONE (Sell Zone):
   Range:        $290.39 - $298.00
   Size:         $7.61
-  Distance:     $1.25
+  Distance:     $3.19
   Formed:       2026-06-10
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($299.25 >= zone $290.39)
+  Notes:        STALE - Daily candle tested zone yesterday (high $290.82)
 
 TRADE METRICS:
-  Stop Loss Distance:  $27.17
-  Profit Target (PT):  $-8.86
-  Risk:Reward Ratio:   1:-0.33
+  Stop Loss Distance:  $11.91
+  Profit Target (PT):  $3.19
+  Risk:Reward Ratio:   1:0.27

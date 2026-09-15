@@ -3,27 +3,27 @@ TICKER: HCA
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $452.83
-  ATR (14-day): $12.33
+  Price:        $436.95
+  ATR (14-day): $12.61
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $371.11 - $380.71
   Size:         $9.60
-  Distance:     $72.12 (585% of ATR)
+  Distance:     $56.24 (446% of ATR)
   Formed:       2026-06-10
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $410.23 - $429.54
-  Size:         $19.31
-  Distance:     $23.29
-  Formed:       2026-07-06
+  Range:        $424.50 - $436.50
+  Size:         $12.00
+  Distance:     $0.45
+  Formed:       2026-08-24
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($452.83 >= zone $410.23)
+  Notes:        STALE - Price reached zone ($436.95 >= zone $424.50)
 
 TRADE METRICS:
-  Stop Loss Distance:  $81.72
-  Profit Target (PT):  $-42.60
-  Risk:Reward Ratio:   1:-0.52
+  Stop Loss Distance:  $65.84
+  Profit Target (PT):  $-12.45
+  Risk:Reward Ratio:   1:-0.19

@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: LULU
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $98.74
+  ATR (14-day): $3.80
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $95.67 - $99.03
+  Size:         $3.36
+  Distance:     $0.00 (0% of ATR)
+  Formed:       2026-09-11
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($98.74 <= zone $99.03)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $115.88 - $124.38
+  Size:         $8.50
+  Distance:     $17.14
+  Formed:       2026-06-10
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+TRADE METRICS:
+  Stop Loss Distance:  $3.07
+  Profit Target (PT):  $17.14
+  Risk:Reward Ratio:   1:5.58

@@ -3,27 +3,27 @@ TICKER: TXN
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $270.27
-  ATR (14-day): $11.06
+  Price:        $265.82
+  ATR (14-day): $10.80
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $255.18 - $263.33
   Size:         $8.15
-  Distance:     $6.94 (63% of ATR)
+  Distance:     $2.49 (23% of ATR)
   Formed:       2026-08-24
   FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $255.94)
+  Notes:        STALE - Daily candle tested zone yesterday (low $257.44)
 
 SUPPLY ZONE (Sell Zone):
   Range:        $295.85 - $315.86
   Size:         $20.01
-  Distance:     $25.58
+  Distance:     $30.03
   Formed:       2026-06-12
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $15.09
-  Profit Target (PT):  $25.58
-  Risk:Reward Ratio:   1:1.69
+  Stop Loss Distance:  $10.64
+  Profit Target (PT):  $30.03
+  Risk:Reward Ratio:   1:2.82

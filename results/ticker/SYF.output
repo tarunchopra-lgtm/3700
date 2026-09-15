@@ -3,27 +3,27 @@ TICKER: SYF
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $80.14
-  ATR (14-day): $1.93
+  Price:        $78.78
+  ATR (14-day): $1.89
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $73.91 - $76.07
   Size:         $2.16
-  Distance:     $4.07 (211% of ATR)
+  Distance:     $2.71 (143% of ATR)
   Formed:       2026-06-18
   FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $75.12)
+  Notes:        STALE - Daily candle tested zone yesterday (low $75.06)
 
 SUPPLY ZONE (Sell Zone):
   Range:        $77.66 - $79.69
   Size:         $2.04
-  Distance:     $0.45
+  Distance:     $0.00
   Formed:       2026-06-26
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($80.14 >= zone $77.66)
+  Notes:        STALE - Price reached zone ($78.78 >= zone $77.66)
 
 TRADE METRICS:
-  Stop Loss Distance:  $6.23
-  Profit Target (PT):  $-2.48
-  Risk:Reward Ratio:   1:-0.40
+  Stop Loss Distance:  $4.88
+  Profit Target (PT):  $-1.12
+  Risk:Reward Ratio:   1:-0.23

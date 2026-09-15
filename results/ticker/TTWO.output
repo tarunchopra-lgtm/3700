@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: TTWO
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $232.86
+  ATR (14-day): $8.18
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $209.00 - $213.77
+  Size:         $4.77
+  Distance:     $19.09 (233% of ATR)
+  Formed:       2026-06-12
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $226.45 - $242.15
+  Size:         $15.70
+  Distance:     $0.00
+  Formed:       2026-06-17
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($232.86 >= zone $226.45)
+
+TRADE METRICS:
+  Stop Loss Distance:  $23.86
+  Profit Target (PT):  $-6.41
+  Risk:Reward Ratio:   1:-0.27

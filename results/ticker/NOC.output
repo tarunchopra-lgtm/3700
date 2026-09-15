@@ -3,14 +3,14 @@ TICKER: NOC
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $552.07
-  ATR (14-day): $14.05
+  Price:        $553.78
+  ATR (14-day): $12.85
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $493.84 - $512.43
   Size:         $18.59
-  Distance:     $39.64 (282% of ATR)
+  Distance:     $41.35 (322% of ATR)
   Formed:       2026-06-25
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
@@ -21,9 +21,9 @@ SUPPLY ZONE (Sell Zone):
   Distance:     $0.00
   Formed:       2026-06-10
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($552.07 >= zone $541.00)
+  Notes:        STALE - Price reached zone ($553.78 >= zone $541.00)
 
 TRADE METRICS:
-  Stop Loss Distance:  $58.23
-  Profit Target (PT):  $-11.07
-  Risk:Reward Ratio:   1:-0.19
+  Stop Loss Distance:  $59.94
+  Profit Target (PT):  $-12.78
+  Risk:Reward Ratio:   1:-0.21

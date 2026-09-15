@@ -3,17 +3,17 @@ TICKER: AMT
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $188.81
-  ATR (14-day): $5.63
+  Price:        $184.97
+  ATR (14-day): $5.59
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $167.24 - $175.29
   Size:         $8.05
-  Distance:     $13.52 (240% of ATR)
+  Distance:     $9.68 (173% of ATR)
   Formed:       2026-06-25
   FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $171.82)
+  Notes:        STALE - Daily candle tested zone yesterday (low $175.08)
 
 SUPPLY ZONE (Sell Zone):
   Range:        $183.69 - $192.94
@@ -21,9 +21,9 @@ SUPPLY ZONE (Sell Zone):
   Distance:     $0.00
   Formed:       2026-06-12
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($188.81 >= zone $183.69)
+  Notes:        STALE - Price reached zone ($184.97 >= zone $183.69)
 
 TRADE METRICS:
-  Stop Loss Distance:  $21.57
-  Profit Target (PT):  $-5.12
-  Risk:Reward Ratio:   1:-0.24
+  Stop Loss Distance:  $17.73
+  Profit Target (PT):  $-1.28
+  Risk:Reward Ratio:   1:-0.07

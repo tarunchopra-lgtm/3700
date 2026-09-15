@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: ADM
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $91.88
+  ATR (14-day): $2.51
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $78.18 - $80.25
+  Size:         $2.07
+  Distance:     $11.63 (463% of ATR)
+  Formed:       2026-06-12
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $86.07 - $88.75
+  Size:         $2.68
+  Distance:     $3.13
+  Formed:       2026-09-11
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($91.88 >= zone $86.07)
+
+TRADE METRICS:
+  Stop Loss Distance:  $13.70
+  Profit Target (PT):  $-5.81
+  Risk:Reward Ratio:   1:-0.42

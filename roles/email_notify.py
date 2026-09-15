@@ -5,6 +5,7 @@ from __future__ import annotations
 import os
 import smtplib
 from email.message import EmailMessage
+from pathlib import Path
 
 DEFAULT_EMAIL = "tarun.chopra@gmail.com"
 
@@ -29,6 +30,63 @@ def send_email(subject: str, body: str) -> str:
     message["To"] = to_email
     message["Subject"] = subject
     message.set_content(body)
+
+    with smtplib.SMTP_SSL("smtp.gmail.com", 465) as smtp:
+        smtp.login(from_email, app_password)
+        smtp.send_message(message)
+
+    return to_email
+
+
+def send_email_with_attachments(subject: str, body: str, attachments: list[Path] | list[str]) -> str:
+    """
+    Send email with file attachments.
+    
+    Args:
+        subject: Email subject
+        body: Email body text
+        attachments: List of file paths to attach (Path or str)
+    
+    Returns:
+        Recipient email address
+    """
+    from_email, to_email, app_password = load_email_config()
+
+    message = EmailMessage()
+    message["From"] = from_email
+    message["To"] = to_email
+    message["Subject"] = subject
+    message.set_content(body)
+
+    # Add attachments
+    for attachment in attachments:
+        file_path = Path(attachment)
+        if not file_path.exists():
+            print(f"[WARNING] Attachment not found: {file_path}")
+            continue
+        
+        # Read file and add as attachment
+        with open(file_path, 'rb') as f:
+            file_data = f.read()
+            file_name = file_path.name
+            
+            # Guess the subtype based on file extension
+            maintype = 'text'
+            subtype = 'plain'
+            if file_name.endswith('.txt'):
+                maintype = 'text'
+                subtype = 'plain'
+            elif file_name.endswith('.output'):
+                maintype = 'text'
+                subtype = 'plain'
+            elif file_name.endswith('.html'):
+                maintype = 'text'
+                subtype = 'html'
+            elif file_name.endswith('.pdf'):
+                maintype = 'application'
+                subtype = 'pdf'
+            
+            message.add_attachment(file_data, maintype=maintype, subtype=subtype, filename=file_name)
 
     with smtplib.SMTP_SSL("smtp.gmail.com", 465) as smtp:
         smtp.login(from_email, app_password)

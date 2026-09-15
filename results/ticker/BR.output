@@ -3,27 +3,27 @@ TICKER: BR
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $181.43
-  ATR (14-day): $6.41
+  Price:        $172.02
+  ATR (14-day): $6.48
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $144.19 - $147.12
   Size:         $2.94
-  Distance:     $34.31 (535% of ATR)
+  Distance:     $24.90 (384% of ATR)
   Formed:       2026-06-11
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $165.81 - $174.49
+  Range:        $178.22 - $186.91
   Size:         $8.69
-  Distance:     $6.94
-  Formed:       2026-08-11
-  FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($181.43 >= zone $165.81)
+  Distance:     $6.20
+  Formed:       2026-08-21
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $37.24
-  Profit Target (PT):  $-15.62
-  Risk:Reward Ratio:   1:-0.42
+  Stop Loss Distance:  $27.83
+  Profit Target (PT):  $6.20
+  Risk:Reward Ratio:   1:0.22

@@ -27,6 +27,7 @@ import threading
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from roles.credentials import CredentialsRole
+from roles.email_notify import send_email_with_attachments
 from alpaca.data.historical import StockHistoricalDataClient
 from alpaca.data.requests import StockLatestQuoteRequest, StockBarsRequest
 from alpaca.data.timeframe import TimeFrame
@@ -409,6 +410,54 @@ def process_batch(batch_symbols: list, batch_num: int, client: StockHistoricalDa
     return batch_setups
 
 
+def create_found_zones_report(all_setups: list, report_path: Path) -> None:
+    """
+    Create found_zones.output by consolidating all ticker files into a single summary.
+    Shows all found zones with key metrics sorted by proximity.
+    """
+    if not all_setups:
+        with open(report_path, 'w', encoding='utf-8') as f:
+            f.write("No stocks found with demand/supply zones.\n")
+        return
+    
+    # Sort by distance to demand (closest first)
+    sorted_setups = sorted(all_setups, key=lambda x: x.distance_to_demand())
+    
+    with open(report_path, 'w', encoding='utf-8') as f:
+        f.write("="*120 + "\n")
+        f.write("FOUND ZONES - CONSOLIDATED REPORT\n")
+        f.write(f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+        f.write("="*120 + "\n\n")
+        
+        f.write(f"Total Zones Found: {len(all_setups)}\n")
+        f.write(f"Sorted by: Distance to Demand Zone (closest first)\n\n")
+        
+        for rank, setup in enumerate(sorted_setups, 1):
+            rr_ratio = setup.stop_loss_to_profit_target_ratio()
+            dist_demand = setup.distance_to_demand()
+            dist_supply = setup.distance_to_supply()
+            pct_atr = (dist_demand / setup.atr) * 100
+            in_atr = "✓" if setup.is_demand_in_atr_reach() else " "
+            demand_fresh = "✓" if setup.demand_is_fresh else "✗"
+            supply_fresh = "✓" if setup.supply_is_fresh else "✗"
+            
+            f.write(f"{rank:3d}. {setup.symbol:6s} | ${setup.current_price:8.2f} | ")
+            f.write(f"Demand: ${setup.demand_zone_low:.2f}-${setup.demand_zone_high:.2f} | ")
+            f.write(f"Supply: ${setup.supply_zone_low:.2f}-${setup.supply_zone_high:.2f} | ")
+            f.write(f"Dist: ${dist_demand:6.2f} ({pct_atr:3.0f}% ATR) [{in_atr}] | ")
+            f.write(f"RR: 1:{rr_ratio:.2f} | ")
+            f.write(f"Fresh: D{demand_fresh}S{supply_fresh}\n")
+        
+        f.write("\n" + "="*120 + "\n")
+        f.write("LEGEND:\n")
+        f.write("  [✓] Within 1 ATR from demand zone (actionable)\n")
+        f.write("  Dist: Distance from current price to demand zone\n")
+        f.write("  ATR %: Distance as percentage of Average True Range\n")
+        f.write("  RR: Risk:Reward ratio (higher is better)\n")
+        f.write("  Fresh: D=Demand zone fresh, S=Supply zone fresh\n")
+        f.write("  ✓ = Fresh (not tested), ✗ = Stale (already tested)\n")
+
+
 def compile_daily_report(all_setups: list, report_path: Path) -> None:
     """
     Compile daily report with analysis metrics sorted by demand/gap ratio.
@@ -628,16 +677,47 @@ def main():
     print(f"Time Elapsed:                {elapsed}")
     
     # Create top 10 picks file
-    pick_path = Path(__file__).parent.parent / "results" / "pick.output"
+    pick_path = Path(__file__).parent.parent / "results" / "pick.txt"
     compile_top_picks(all_setups, pick_path)
     
     # Create daily report file
     report_path = Path(__file__).parent.parent / "results" / "daily_report.txt"
     compile_daily_report(all_setups, report_path)
     
+    # Create found_zones.txt by consolidating all ticker files
+    found_zones_path = Path(__file__).parent.parent / "results" / "found_zones.txt"
+    create_found_zones_report(all_setups, found_zones_path)
+    
     print(f"\n[OK] Individual ticker files:  results/ticker/*.output ({len(all_setups)} files)")
-    print(f"[OK] Top 10 picks file:       results/pick.output")
+    print(f"[OK] Found zones report:      results/found_zones.txt")
+    print(f"[OK] Top 10 picks file:       results/pick.txt")
     print(f"[OK] Daily report file:       results/daily_report.txt")
+    
+    # Send emails with report files
+    try:
+        attachments = [report_path, found_zones_path, pick_path]
+        recipient = send_email_with_attachments(
+            subject=f"Zone Scan Report - {datetime.now().strftime('%Y-%m-%d %H:%M')}",
+            body=f"""Zone Scan Complete
+
+Total Stocks Scanned:        {len(all_symbols)}
+Stocks with Zones:           {len(all_setups)}
+Stocks Within 1 ATR:         {len(actionable)}
+Stocks with FRESH Zones:     {len(fresh_actionable)}
+Time Elapsed:                {elapsed}
+
+Attachments:
+1. daily_report.txt - All stocks sorted by demand/gap ratio
+2. found_zones.txt - Summary of all found zones
+3. pick.txt - Top 10 actionable setups (fresh + within ATR)
+
+Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
+""",
+            attachments=attachments
+        )
+        print(f"\n[EMAIL SENT] Reports sent to {recipient}")
+    except Exception as e:
+        print(f"\n[EMAIL ERROR] Failed to send reports: {e}")
     
     # Console summary
     if actionable:

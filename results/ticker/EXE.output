@@ -3,27 +3,27 @@ TICKER: EXE
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $101.07
-  ATR (14-day): $2.86
+  Price:        $93.81
+  ATR (14-day): $2.67
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $86.80 - $90.28
   Size:         $3.48
-  Distance:     $10.79 (377% of ATR)
+  Distance:     $3.53 (132% of ATR)
   Formed:       2026-06-10
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $99.05 - $100.13
-  Size:         $1.08
-  Distance:     $0.94
-  Formed:       2026-09-02
-  FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($101.07 >= zone $99.05)
+  Range:        $96.54 - $98.88
+  Size:         $2.34
+  Distance:     $2.73
+  Formed:       2026-08-11
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $14.27
-  Profit Target (PT):  $-2.02
-  Risk:Reward Ratio:   1:-0.14
+  Stop Loss Distance:  $7.01
+  Profit Target (PT):  $2.73
+  Risk:Reward Ratio:   1:0.39

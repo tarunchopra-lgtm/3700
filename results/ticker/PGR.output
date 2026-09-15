@@ -3,27 +3,27 @@ TICKER: PGR
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $234.52
-  ATR (14-day): $4.64
+  Price:        $234.15
+  ATR (14-day): $4.62
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $200.00 - $203.61
   Size:         $3.61
-  Distance:     $30.91 (666% of ATR)
+  Distance:     $30.54 (661% of ATR)
   Formed:       2026-06-12
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $215.52 - $221.44
-  Size:         $5.92
-  Distance:     $13.08
-  Formed:       2026-06-24
+  Range:        $218.59 - $224.53
+  Size:         $5.94
+  Distance:     $9.62
+  Formed:       2026-06-29
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($234.52 >= zone $215.52)
+  Notes:        STALE - Price reached zone ($234.15 >= zone $218.59)
 
 TRADE METRICS:
-  Stop Loss Distance:  $34.52
-  Profit Target (PT):  $-19.00
-  Risk:Reward Ratio:   1:-0.55
+  Stop Loss Distance:  $34.15
+  Profit Target (PT):  $-15.56
+  Risk:Reward Ratio:   1:-0.46

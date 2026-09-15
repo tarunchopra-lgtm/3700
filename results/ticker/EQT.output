@@ -3,14 +3,14 @@ TICKER: EQT
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $57.49
-  ATR (14-day): $1.63
-  Within ATR:   NO
+  Price:        $53.20
+  ATR (14-day): $1.40
+  Within ATR:   YES
 
 DEMAND ZONE (Buy Zone):
   Range:        $50.61 - $52.29
   Size:         $1.68
-  Distance:     $5.20 (318% of ATR)
+  Distance:     $0.91 (65% of ATR)
   Formed:       2026-06-12
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
@@ -18,12 +18,12 @@ DEMAND ZONE (Buy Zone):
 SUPPLY ZONE (Sell Zone):
   Range:        $53.85 - $56.47
   Size:         $2.62
-  Distance:     $1.02
+  Distance:     $0.65
   Formed:       2026-08-27
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($57.49 >= zone $53.85)
+  Notes:        STALE - Daily candle tested zone yesterday (high $54.67)
 
 TRADE METRICS:
-  Stop Loss Distance:  $6.88
-  Profit Target (PT):  $-3.64
-  Risk:Reward Ratio:   1:-0.53
+  Stop Loss Distance:  $2.59
+  Profit Target (PT):  $0.65
+  Risk:Reward Ratio:   1:0.25

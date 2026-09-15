@@ -3,14 +3,14 @@ TICKER: HIG
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $158.82
-  ATR (14-day): $2.97
+  Price:        $136.16
+  ATR (14-day): $2.95
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $127.41 - $130.58
   Size:         $3.18
-  Distance:     $28.24 (950% of ATR)
+  Distance:     $5.58 (189% of ATR)
   Formed:       2026-06-12
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
@@ -18,12 +18,12 @@ DEMAND ZONE (Buy Zone):
 SUPPLY ZONE (Sell Zone):
   Range:        $136.54 - $141.30
   Size:         $4.76
-  Distance:     $17.52
+  Distance:     $0.38
   Formed:       2026-07-06
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($158.82 >= zone $136.54)
+  Notes:        STALE - Daily candle tested zone yesterday (high $138.60)
 
 TRADE METRICS:
-  Stop Loss Distance:  $31.41
-  Profit Target (PT):  $-22.28
-  Risk:Reward Ratio:   1:-0.71
+  Stop Loss Distance:  $8.75
+  Profit Target (PT):  $0.38
+  Risk:Reward Ratio:   1:0.04

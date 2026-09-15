@@ -3,27 +3,27 @@ TICKER: HAL
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $38.07
-  ATR (14-day): $1.05
+  Price:        $35.08
+  ATR (14-day): $1.00
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $34.54 - $36.12
   Size:         $1.58
-  Distance:     $1.95 (185% of ATR)
+  Distance:     $0.00 (0% of ATR)
   Formed:       2026-06-18
   FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $35.77)
+  Notes:        STALE - Price reached zone ($35.08 <= zone $36.12)
 
 SUPPLY ZONE (Sell Zone):
   Range:        $39.03 - $40.67
   Size:         $1.64
-  Distance:     $0.96
+  Distance:     $3.95
   Formed:       2026-06-10
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $3.53
-  Profit Target (PT):  $0.96
-  Risk:Reward Ratio:   1:0.27
+  Stop Loss Distance:  $0.54
+  Profit Target (PT):  $3.95
+  Risk:Reward Ratio:   1:7.31

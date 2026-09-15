@@ -3,14 +3,14 @@ TICKER: ULTA
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $575.68
-  ATR (14-day): $14.58
+  Price:        $544.51
+  ATR (14-day): $14.51
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $469.12 - $482.20
   Size:         $13.08
-  Distance:     $93.48 (641% of ATR)
+  Distance:     $62.31 (429% of ATR)
   Formed:       2026-06-10
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
@@ -18,12 +18,12 @@ DEMAND ZONE (Buy Zone):
 SUPPLY ZONE (Sell Zone):
   Range:        $535.29 - $566.73
   Size:         $31.44
-  Distance:     $8.95
+  Distance:     $0.00
   Formed:       2026-08-05
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($575.68 >= zone $535.29)
+  Notes:        STALE - Price reached zone ($544.51 >= zone $535.29)
 
 TRADE METRICS:
-  Stop Loss Distance:  $106.56
-  Profit Target (PT):  $-40.39
-  Risk:Reward Ratio:   1:-0.38
+  Stop Loss Distance:  $75.39
+  Profit Target (PT):  $-9.22
+  Risk:Reward Ratio:   1:-0.12

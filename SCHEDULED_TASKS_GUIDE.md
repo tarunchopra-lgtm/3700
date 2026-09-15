@@ -283,8 +283,17 @@ Then navigate to:
 
 Get-ScheduledTask | Where-Object { $_.TaskName -match "ClosingBell|Balance|Daily" } | Format-Table TaskName, State, Description
 
+Get-ScheduledTask | Where-Object { $_.TaskName -match "ClosingBell|3700|spray|fomo|zone" }| ForEach-Object { 
+    $info = Get-ScheduledTaskInfo -TaskName $_.TaskName
+    [PSCustomObject]@{
+        TaskName = $_.TaskName
+        State = $_.State
+        NextRunTime = $info.NextRunTime
+        Description = $_.Description
+    }
+} | Format-Table -AutoSize
 
-Get-ScheduledTask | Where-Object { $_.TaskName -match "ClosingBell|3700|spray|fomo" } | ForEach-Object { 
+Get-ScheduledTask | Where-Object { $_.TaskName -match "ClosingBell|3700|spray|fomo|zone|CimJob" } | ForEach-Object { 
     $info = Get-ScheduledTaskInfo -TaskName $_.TaskName
     [PSCustomObject]@{
         TaskName = $_.TaskName
@@ -316,6 +325,12 @@ $Trigger2 = New-ScheduledTaskTrigger -Daily -At 06:32
 Register-ScheduledTask -TaskName "spray" -Action $Action2 -Trigger $Trigger2 -Description "Run spray strategy from config file" -AsJob
 Write-Host "✓ Task 'spray' created - runs daily at 6:32 AM"
 
+# Task 3: zone_scan.py at 6:31 AM
+$Action3 = New-ScheduledTaskAction -Execute "python.exe" -Argument "strategies/zone_scan.py" -WorkingDirectory "C:\Users\TarunChopra\3700"
+$Trigger3 = New-ScheduledTaskTrigger -Daily -At 06:31
+Register-ScheduledTask -TaskName "zone_scan" -Action $Action3 -Trigger $Trigger3 -Description "Scan demand/supply zones on all symbols, update result files, and email report" -AsJob
+Write-Host "✓ Task 'zone_scan' created - runs daily at 6:31 AM (emails: daily_report.txt, found_zones.txt, pick.txt)"
+
 easily enable disable
 
 Disable-ScheduledTask -TaskName "3700 Daily Account Stat"
@@ -323,9 +338,16 @@ Disable-ScheduledTask -TaskName "3700 Daily Breakout Email"
 Disable-ScheduledTask -TaskName "ClosingBell"
 Disable-ScheduledTask -TaskName "fomo_trade"
 Disable-ScheduledTask -TaskName "spray"
+Disable-ScheduledTask -TaskName "zone_scan"
 
 Enable-ScheduledTask -TaskName "3700 Daily Account Stat"
 Enable-ScheduledTask -TaskName "3700 Daily Breakout Email"
 Enable-ScheduledTask -TaskName "ClosingBell"
 Enable-ScheduledTask -TaskName "fomo_trade"
 Enable-ScheduledTask -TaskName "spray"
+Enable-ScheduledTask -TaskName "zone_scan"
+
+
+$Action3 = New-ScheduledTaskAction -Execute "python.exe" -Argument "strategies/zone_scan.py" -WorkingDirectory "C:\Users\TarunChopra\3700"
+$Trigger3 = New-ScheduledTaskTrigger -Daily -At 06:31
+Register-ScheduledTask -TaskName "zone_scan" -Action $Action3 -Trigger $Trigger3 -Description "Scan demand/supply zones on all symbols, update result files, and email report" -AsJob

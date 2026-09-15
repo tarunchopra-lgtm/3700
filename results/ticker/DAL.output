@@ -3,27 +3,27 @@ TICKER: DAL
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $81.69
-  ATR (14-day): $2.60
+  Price:        $84.63
+  ATR (14-day): $2.62
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $75.99 - $82.31
   Size:         $6.32
-  Distance:     $0.00 (0% of ATR)
+  Distance:     $2.32 (89% of ATR)
   Formed:       2026-08-28
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($81.69 <= zone $82.31)
+  Notes:        STALE - Daily candle tested zone yesterday (low $77.91)
 
 SUPPLY ZONE (Sell Zone):
   Range:        $80.93 - $83.44
   Size:         $2.51
-  Distance:     $0.00
+  Distance:     $1.19
   Formed:       2026-06-12
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($81.69 >= zone $80.93)
+  Notes:        STALE - Price reached zone ($84.63 >= zone $80.93)
 
 TRADE METRICS:
-  Stop Loss Distance:  $5.70
-  Profit Target (PT):  $-0.76
-  Risk:Reward Ratio:   1:-0.13
+  Stop Loss Distance:  $8.64
+  Profit Target (PT):  $-3.70
+  Risk:Reward Ratio:   1:-0.43

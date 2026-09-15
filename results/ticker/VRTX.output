@@ -3,27 +3,27 @@ TICKER: VRTX
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $546.39
-  ATR (14-day): $15.10
+  Price:        $540.00
+  ATR (14-day): $14.97
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $433.80 - $445.78
   Size:         $11.98
-  Distance:     $100.61 (666% of ATR)
+  Distance:     $94.22 (629% of ATR)
   Formed:       2026-06-11
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $519.82 - $546.17
-  Size:         $26.35
-  Distance:     $0.22
-  Formed:       2026-08-11
+  Range:        $512.34 - $529.99
+  Size:         $17.65
+  Distance:     $10.01
+  Formed:       2026-07-06
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($546.39 >= zone $519.82)
+  Notes:        STALE - Price reached zone ($540.00 >= zone $512.34)
 
 TRADE METRICS:
-  Stop Loss Distance:  $112.59
-  Profit Target (PT):  $-26.57
-  Risk:Reward Ratio:   1:-0.24
+  Stop Loss Distance:  $106.20
+  Profit Target (PT):  $-27.66
+  Risk:Reward Ratio:   1:-0.26

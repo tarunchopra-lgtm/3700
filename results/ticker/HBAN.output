@@ -3,27 +3,27 @@ TICKER: HBAN
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $17.70
+  Price:        $16.93
   ATR (14-day): $0.38
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $16.40 - $16.80
   Size:         $0.41
-  Distance:     $0.89 (233% of ATR)
+  Distance:     $0.12 (33% of ATR)
   Formed:       2026-09-01
   FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $16.43)
+  Notes:        STALE - Daily candle tested zone yesterday (low $16.70)
 
 SUPPLY ZONE (Sell Zone):
   Range:        $17.23 - $17.61
   Size:         $0.38
-  Distance:     $0.09
+  Distance:     $0.30
   Formed:       2026-06-12
-  FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($17.70 >= zone $17.23)
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $1.30
-  Profit Target (PT):  $-0.46
-  Risk:Reward Ratio:   1:-0.36
+  Stop Loss Distance:  $0.53
+  Profit Target (PT):  $0.30
+  Risk:Reward Ratio:   1:0.58

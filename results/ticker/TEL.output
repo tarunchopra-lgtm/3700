@@ -3,27 +3,27 @@ TICKER: TEL
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $224.49
-  ATR (14-day): $7.33
+  Price:        $203.74
+  ATR (14-day): $6.53
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $194.34 - $203.11
   Size:         $8.77
-  Distance:     $21.38 (292% of ATR)
+  Distance:     $0.63 (10% of ATR)
   Formed:       2026-07-06
   FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $200.52)
+  Notes:        STALE - Daily candle tested zone yesterday (low $201.98)
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $210.66 - $220.57
-  Size:         $9.91
-  Distance:     $3.92
-  Formed:       2026-06-18
-  FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($224.49 >= zone $210.66)
+  Range:        $207.57 - $212.33
+  Size:         $4.76
+  Distance:     $3.83
+  Formed:       2026-06-12
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $30.15
-  Profit Target (PT):  $-13.83
-  Risk:Reward Ratio:   1:-0.46
+  Stop Loss Distance:  $9.40
+  Profit Target (PT):  $3.83
+  Risk:Reward Ratio:   1:0.41

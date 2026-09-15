@@ -3,27 +3,27 @@ TICKER: XLB
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $52.24
-  ATR (14-day): $0.91
+  Price:        $50.37
+  ATR (14-day): $0.89
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $49.57 - $51.33
   Size:         $1.76
-  Distance:     $0.91 (100% of ATR)
+  Distance:     $0.00 (0% of ATR)
   Formed:       2026-06-11
   FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $50.58)
+  Notes:        STALE - Price reached zone ($50.37 <= zone $51.33)
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $52.35 - $53.20
-  Size:         $0.84
-  Distance:     $0.11
-  Formed:       2026-06-15
+  Range:        $51.33 - $52.35
+  Size:         $1.02
+  Distance:     $0.96
+  Formed:       2026-06-12
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $2.67
-  Profit Target (PT):  $0.11
-  Risk:Reward Ratio:   1:0.04
+  Stop Loss Distance:  $0.80
+  Profit Target (PT):  $0.96
+  Risk:Reward Ratio:   1:1.20

@@ -3,14 +3,14 @@ TICKER: JPM
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $371.59
-  ATR (14-day): $6.17
+  Price:        $369.60
+  ATR (14-day): $6.18
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $308.88 - $314.72
   Size:         $5.84
-  Distance:     $56.87 (921% of ATR)
+  Distance:     $54.88 (889% of ATR)
   Formed:       2026-06-11
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
@@ -18,12 +18,12 @@ DEMAND ZONE (Buy Zone):
 SUPPLY ZONE (Sell Zone):
   Range:        $358.20 - $363.00
   Size:         $4.80
-  Distance:     $8.59
+  Distance:     $6.60
   Formed:       2026-08-05
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($371.59 >= zone $358.20)
+  Notes:        STALE - Price reached zone ($369.60 >= zone $358.20)
 
 TRADE METRICS:
-  Stop Loss Distance:  $62.71
-  Profit Target (PT):  $-13.39
-  Risk:Reward Ratio:   1:-0.21
+  Stop Loss Distance:  $60.72
+  Profit Target (PT):  $-11.40
+  Risk:Reward Ratio:   1:-0.19

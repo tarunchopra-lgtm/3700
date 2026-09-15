@@ -3,14 +3,14 @@ TICKER: BG
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $130.67
-  ATR (14-day): $3.92
+  Price:        $123.27
+  ATR (14-day): $3.82
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $106.00 - $113.10
   Size:         $7.10
-  Distance:     $17.57 (448% of ATR)
+  Distance:     $10.17 (266% of ATR)
   Formed:       2026-06-22
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
@@ -18,12 +18,12 @@ DEMAND ZONE (Buy Zone):
 SUPPLY ZONE (Sell Zone):
   Range:        $124.14 - $129.43
   Size:         $5.29
-  Distance:     $1.24
+  Distance:     $0.87
   Formed:       2026-06-12
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($130.67 >= zone $124.14)
+  Notes:        STALE - Daily candle tested zone yesterday (high $125.65)
 
 TRADE METRICS:
-  Stop Loss Distance:  $24.67
-  Profit Target (PT):  $-6.53
-  Risk:Reward Ratio:   1:-0.26
+  Stop Loss Distance:  $17.27
+  Profit Target (PT):  $0.87
+  Risk:Reward Ratio:   1:0.05

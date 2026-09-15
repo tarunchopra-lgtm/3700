@@ -3,27 +3,27 @@ TICKER: MNST
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $45.10
-  ATR (14-day): $2.32
-  Within ATR:   NO
+  Price:        $44.27
+  ATR (14-day): $5.56
+  Within ATR:   YES
 
 DEMAND ZONE (Buy Zone):
   Range:        $42.19 - $43.01
   Size:         $0.82
-  Distance:     $2.09 (90% of ATR)
+  Distance:     $1.26 (23% of ATR)
   Formed:       2026-09-09
-  FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $42.81)
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $43.65 - $45.37
-  Size:         $1.72
-  Distance:     $0.00
-  Formed:       2026-09-03
-  FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($45.10 >= zone $43.65)
+  Range:        $96.05 - $97.87
+  Size:         $1.82
+  Distance:     $51.78
+  Formed:       2026-06-26
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $2.91
-  Profit Target (PT):  $-1.45
-  Risk:Reward Ratio:   1:-0.50
+  Stop Loss Distance:  $2.09
+  Profit Target (PT):  $51.78
+  Risk:Reward Ratio:   1:24.83

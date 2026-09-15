@@ -3,27 +3,27 @@ TICKER: DRI
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $230.06
-  ATR (14-day): $4.99
+  Price:        $214.36
+  ATR (14-day): $4.81
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $199.25 - $206.07
   Size:         $6.82
-  Distance:     $23.99 (481% of ATR)
+  Distance:     $8.29 (172% of ATR)
   Formed:       2026-06-10
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $212.43 - $219.38
-  Size:         $6.95
-  Distance:     $10.68
-  Formed:       2026-06-18
-  FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($230.06 >= zone $212.43)
+  Range:        $222.37 - $229.76
+  Size:         $7.39
+  Distance:     $8.01
+  Formed:       2026-08-13
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $30.81
-  Profit Target (PT):  $-17.63
-  Risk:Reward Ratio:   1:-0.57
+  Stop Loss Distance:  $15.11
+  Profit Target (PT):  $8.01
+  Risk:Reward Ratio:   1:0.53

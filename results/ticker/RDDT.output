@@ -3,27 +3,27 @@ TICKER: RDDT
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $166.74
-  ATR (14-day): $12.46
+  Price:        $163.42
+  ATR (14-day): $11.49
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $144.05 - $151.37
   Size:         $7.32
-  Distance:     $15.37 (123% of ATR)
+  Distance:     $12.05 (105% of ATR)
   Formed:       2026-08-20
-  FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $145.56)
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
   Range:        $174.72 - $182.41
   Size:         $7.69
-  Distance:     $7.98
+  Distance:     $11.30
   Formed:       2026-06-16
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $22.69
-  Profit Target (PT):  $7.98
-  Risk:Reward Ratio:   1:0.35
+  Stop Loss Distance:  $19.37
+  Profit Target (PT):  $11.30
+  Risk:Reward Ratio:   1:0.58

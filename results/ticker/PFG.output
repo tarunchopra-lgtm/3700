@@ -3,14 +3,14 @@ TICKER: PFG
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $124.49
+  Price:        $123.50
   ATR (14-day): $2.11
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $108.74 - $110.25
   Size:         $1.51
-  Distance:     $14.24 (674% of ATR)
+  Distance:     $13.25 (627% of ATR)
   Formed:       2026-06-11
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
@@ -18,12 +18,12 @@ DEMAND ZONE (Buy Zone):
 SUPPLY ZONE (Sell Zone):
   Range:        $115.82 - $121.18
   Size:         $5.36
-  Distance:     $3.31
+  Distance:     $2.32
   Formed:       2026-09-04
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($124.49 >= zone $115.82)
+  Notes:        STALE - Price reached zone ($123.50 >= zone $115.82)
 
 TRADE METRICS:
-  Stop Loss Distance:  $15.75
-  Profit Target (PT):  $-8.67
-  Risk:Reward Ratio:   1:-0.55
+  Stop Loss Distance:  $14.76
+  Profit Target (PT):  $-7.68
+  Risk:Reward Ratio:   1:-0.52

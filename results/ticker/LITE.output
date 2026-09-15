@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: LITE
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $875.00
+  ATR (14-day): $82.30
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $776.01 - $884.18
+  Size:         $108.17
+  Distance:     $0.00 (0% of ATR)
+  Formed:       2026-06-10
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($875.00 <= zone $884.18)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $853.78 - $961.68
+  Size:         $107.90
+  Distance:     $0.00
+  Formed:       2026-06-17
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($875.00 >= zone $853.78)
+
+TRADE METRICS:
+  Stop Loss Distance:  $98.99
+  Profit Target (PT):  $-21.22
+  Risk:Reward Ratio:   1:-0.21

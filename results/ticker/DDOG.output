@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: DDOG
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $229.42
+  ATR (14-day): $17.50
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $208.22 - $223.02
+  Size:         $14.80
+  Distance:     $6.40 (37% of ATR)
+  Formed:       2026-09-02
+  FRESHNESS:    STALE
+  Notes:        STALE - Daily candle tested zone yesterday (low $221.10)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $227.23 - $236.81
+  Size:         $9.58
+  Distance:     $0.00
+  Formed:       2026-06-12
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($229.42 >= zone $227.23)
+
+TRADE METRICS:
+  Stop Loss Distance:  $21.20
+  Profit Target (PT):  $-2.19
+  Risk:Reward Ratio:   1:-0.10

@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: NRG
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $116.34
+  ATR (14-day): $7.94
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $111.30 - $117.23
+  Size:         $5.93
+  Distance:     $0.00 (0% of ATR)
+  Formed:       2026-08-21
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($116.34 <= zone $117.23)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $136.85 - $150.52
+  Size:         $13.67
+  Distance:     $20.51
+  Formed:       2026-06-24
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+TRADE METRICS:
+  Stop Loss Distance:  $5.04
+  Profit Target (PT):  $20.51
+  Risk:Reward Ratio:   1:4.07

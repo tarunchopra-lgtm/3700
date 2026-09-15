@@ -3,27 +3,27 @@ TICKER: GRMN
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $301.16
-  ATR (14-day): $11.30
+  Price:        $299.25
+  ATR (14-day): $11.06
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $268.01 - $279.94
-  Size:         $11.94
-  Distance:     $21.22 (188% of ATR)
-  Formed:       2026-09-02
-  FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $269.76)
+  Range:        $230.86 - $239.12
+  Size:         $8.26
+  Distance:     $60.13 (544% of ATR)
+  Formed:       2026-06-17
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $282.47 - $291.50
-  Size:         $9.03
-  Distance:     $9.66
-  Formed:       2026-08-31
+  Range:        $285.96 - $304.00
+  Size:         $18.04
+  Distance:     $0.00
+  Formed:       2026-07-30
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($301.16 >= zone $282.47)
+  Notes:        STALE - Price reached zone ($299.25 >= zone $285.96)
 
 TRADE METRICS:
-  Stop Loss Distance:  $33.15
-  Profit Target (PT):  $-18.69
-  Risk:Reward Ratio:   1:-0.56
+  Stop Loss Distance:  $68.39
+  Profit Target (PT):  $-13.29
+  Risk:Reward Ratio:   1:-0.19

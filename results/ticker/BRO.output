@@ -3,27 +3,27 @@ TICKER: BRO
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $71.33
-  ATR (14-day): $2.42
+  Price:        $70.80
+  ATR (14-day): $2.33
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $64.82 - $65.81
-  Size:         $0.99
-  Distance:     $5.52 (228% of ATR)
-  Formed:       2026-07-23
+  Range:        $60.53 - $62.34
+  Size:         $1.81
+  Distance:     $8.46 (363% of ATR)
+  Formed:       2026-06-24
   FRESHNESS:    FRESH
-  Notes:        Limited data
+  Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $66.16 - $67.88
-  Size:         $1.72
-  Distance:     $3.45
-  Formed:       2026-09-10
-  FRESHNESS:    FRESH
-  Notes:        Limited data
+  Range:        $67.10 - $70.08
+  Size:         $2.98
+  Distance:     $0.72
+  Formed:       2026-07-02
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($70.80 >= zone $67.10)
 
 TRADE METRICS:
-  Stop Loss Distance:  $6.51
-  Profit Target (PT):  $-5.17
-  Risk:Reward Ratio:   1:-0.79
+  Stop Loss Distance:  $10.27
+  Profit Target (PT):  $-3.70
+  Risk:Reward Ratio:   1:-0.36

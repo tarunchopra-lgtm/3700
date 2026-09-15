@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: TPL
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $402.87
+  ATR (14-day): $16.72
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $340.58 - $360.84
+  Size:         $20.26
+  Distance:     $42.03 (251% of ATR)
+  Formed:       2026-08-07
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $375.11 - $404.44
+  Size:         $29.33
+  Distance:     $0.00
+  Formed:       2026-06-10
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($402.87 >= zone $375.11)
+
+TRADE METRICS:
+  Stop Loss Distance:  $62.29
+  Profit Target (PT):  $-27.76
+  Risk:Reward Ratio:   1:-0.45

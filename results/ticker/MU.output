@@ -3,27 +3,27 @@ TICKER: MU
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $1023.82
-  ATR (14-day): $83.80
-  Within ATR:   YES
+  Price:        $930.57
+  ATR (14-day): $78.36
+  Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $918.88 - $959.76
-  Size:         $40.88
-  Distance:     $64.06 (76% of ATR)
-  Formed:       2026-09-03
-  FRESHNESS:    FRESH
-  Notes:        Fresh - not tested recently
+  Range:        $854.35 - $957.48
+  Size:         $103.13
+  Distance:     $0.00 (0% of ATR)
+  Formed:       2026-06-10
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($930.57 <= zone $957.48)
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $973.50 - $1042.40
-  Size:         $68.90
-  Distance:     $0.00
-  Formed:       2026-09-10
+  Range:        $960.19 - $1097.47
+  Size:         $137.28
+  Distance:     $29.62
+  Formed:       2026-06-12
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($1023.82 >= zone $973.50)
+  Notes:        STALE - Daily candle tested zone yesterday (high $998.75)
 
 TRADE METRICS:
-  Stop Loss Distance:  $104.94
-  Profit Target (PT):  $-50.32
-  Risk:Reward Ratio:   1:-0.48
+  Stop Loss Distance:  $76.22
+  Profit Target (PT):  $29.62
+  Risk:Reward Ratio:   1:0.39

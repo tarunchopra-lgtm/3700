@@ -1,9 +1,9 @@
 ========================================================================================================================
 TOP 10 TRADING PICKS - FRESH ZONES (Within 1 ATR, Not Recently Tested)
-Generated: 2026-09-13 10:36:19
+Generated: 2026-09-14 06:29:52
 ========================================================================================================================
 
-Total Actionable Stocks (within 1 ATR + FRESH): 12
+Total Actionable Stocks (within 1 ATR + FRESH): 1
 Top 10 shown below (sorted by proximity to fresh demand zone)
 
 FRESHNESS CRITERIA:
@@ -11,233 +11,26 @@ FRESHNESS CRITERIA:
   - Zone must NOT be tested by recent candle wicks (last 2 hours)
   - Zone must be within 1 ATR distance from current price
 
-1. DOW
+1. COHR
 ------------------------------------------------------------------------------------------------------------------------
-Current Price:       $30.29
-ATR (14-day):        $1.27
+Current Price:       $299.15
+ATR (14-day):        $35.62
 
-DEMAND ZONE:         $28.23 - $30.77
-  Distance:          $0.00 (0% of ATR) [PRIMARY SORT]
-  Formed:            2026-07-24
-  Freshness:         ✓ FRESH - Limited data
-
-SUPPLY ZONE:         $28.95 - $30.26
-  Distance:          $0.03 [SECONDARY SORT]
-  Formed:            2026-09-10
-  Freshness:         ✓ FRESH - Limited data
-
-TRADE SETUP:
-  Entry Range:       $28.23 - $30.77
-  Stop Loss:         $28.22
-  Profit Target:     $28.95
-  Risk Amount:       $2.06
-  Reward Amount:     $-1.34
-  RISK:REWARD:       1:-0.65
-
-2. BF.B
-------------------------------------------------------------------------------------------------------------------------
-Current Price:       $27.58
-ATR (14-day):        $0.92
-
-DEMAND ZONE:         $26.08 - $27.36
-  Distance:          $0.22 (24% of ATR) [PRIMARY SORT]
-  Formed:            2026-09-08
-  Freshness:         ✓ FRESH - Limited data
-
-SUPPLY ZONE:         $26.08 - $27.36
-  Distance:          $0.22 [SECONDARY SORT]
-  Formed:            2026-09-09
-  Freshness:         ✓ FRESH - Limited data
-
-TRADE SETUP:
-  Entry Range:       $26.08 - $27.36
-  Stop Loss:         $26.07
-  Profit Target:     $26.08
-  Risk Amount:       $1.50
-  Reward Amount:     $-1.50
-  RISK:REWARD:       1:-1.00
-
-3. BAX
-------------------------------------------------------------------------------------------------------------------------
-Current Price:       $25.28
-ATR (14-day):        $1.31
-
-DEMAND ZONE:         $23.39 - $24.75
-  Distance:          $0.53 (40% of ATR) [PRIMARY SORT]
-  Formed:            2026-07-28
-  Freshness:         ✓ FRESH - Limited data
-
-SUPPLY ZONE:         $23.92 - $25.75
-  Distance:          $0.00 [SECONDARY SORT]
-  Formed:            2026-09-09
-  Freshness:         ✓ FRESH - Limited data
-
-TRADE SETUP:
-  Entry Range:       $23.39 - $24.75
-  Stop Loss:         $23.38
-  Profit Target:     $23.92
-  Risk Amount:       $1.89
-  Reward Amount:     $-1.36
-  RISK:REWARD:       1:-0.72
-
-4. CSGP
-------------------------------------------------------------------------------------------------------------------------
-Current Price:       $31.95
-ATR (14-day):        $1.62
-
-DEMAND ZONE:         $28.13 - $30.45
-  Distance:          $1.50 (93% of ATR) [PRIMARY SORT]
-  Formed:            2026-07-30
-  Freshness:         ✓ FRESH - Limited data
-
-SUPPLY ZONE:         $31.72 - $33.63
-  Distance:          $0.00 [SECONDARY SORT]
-  Formed:            2026-08-21
-  Freshness:         ✓ FRESH - Limited data
-
-TRADE SETUP:
-  Entry Range:       $28.13 - $30.45
-  Stop Loss:         $28.12
-  Profit Target:     $31.72
-  Risk Amount:       $3.82
-  Reward Amount:     $-0.23
-  RISK:REWARD:       1:-0.06
-
-5. BKNG
-------------------------------------------------------------------------------------------------------------------------
-Current Price:       $181.81
-ATR (14-day):        $8.09
-
-DEMAND ZONE:         $170.12 - $179.53
-  Distance:          $2.28 (28% of ATR) [PRIMARY SORT]
-  Formed:            2026-09-09
-  Freshness:         ✓ FRESH - Limited data
-
-SUPPLY ZONE:         $170.12 - $192.00
-  Distance:          $0.00 [SECONDARY SORT]
-  Formed:            2026-09-09
-  Freshness:         ✓ FRESH - Limited data
-
-TRADE SETUP:
-  Entry Range:       $170.12 - $179.53
-  Stop Loss:         $170.11
-  Profit Target:     $170.12
-  Risk Amount:       $11.69
-  Reward Amount:     $-11.69
-  RISK:REWARD:       1:-1.00
-
-6. BLDR
-------------------------------------------------------------------------------------------------------------------------
-Current Price:       $66.15
-ATR (14-day):        $3.60
-
-DEMAND ZONE:         $58.13 - $63.09
-  Distance:          $3.06 (85% of ATR) [PRIMARY SORT]
-  Formed:            2026-09-09
-  Freshness:         ✓ FRESH - Limited data
-
-SUPPLY ZONE:         $61.19 - $65.80
-  Distance:          $0.35 [SECONDARY SORT]
-  Formed:            2026-09-09
-  Freshness:         ✓ FRESH - Limited data
-
-TRADE SETUP:
-  Entry Range:       $58.13 - $63.09
-  Stop Loss:         $58.12
-  Profit Target:     $61.19
-  Risk Amount:       $8.02
-  Reward Amount:     $-4.96
-  RISK:REWARD:       1:-0.62
-
-7. CEG
-------------------------------------------------------------------------------------------------------------------------
-Current Price:       $299.83
-ATR (14-day):        $10.52
-
-DEMAND ZONE:         $277.88 - $296.62
-  Distance:          $3.21 (31% of ATR) [PRIMARY SORT]
-  Formed:            2026-09-02
-  Freshness:         ✓ FRESH - Limited data
-
-SUPPLY ZONE:         $292.75 - $305.80
-  Distance:          $0.00 [SECONDARY SORT]
-  Formed:            2026-09-09
-  Freshness:         ✓ FRESH - Limited data
-
-TRADE SETUP:
-  Entry Range:       $277.88 - $296.62
-  Stop Loss:         $277.87
-  Profit Target:     $292.75
-  Risk Amount:       $21.95
-  Reward Amount:     $-7.08
-  RISK:REWARD:       1:-0.32
-
-8. CRWV
-------------------------------------------------------------------------------------------------------------------------
-Current Price:       $93.82
-ATR (14-day):        $7.69
-
-DEMAND ZONE:         $84.85 - $89.63
-  Distance:          $4.19 (54% of ATR) [PRIMARY SORT]
-  Formed:            2026-09-04
-  Freshness:         ✓ FRESH - Limited data
-
-SUPPLY ZONE:         $88.73 - $100.58
-  Distance:          $0.00 [SECONDARY SORT]
-  Formed:            2026-09-10
-  Freshness:         ✓ FRESH - Limited data
-
-TRADE SETUP:
-  Entry Range:       $84.85 - $89.63
-  Stop Loss:         $84.84
-  Profit Target:     $88.73
-  Risk Amount:       $8.97
-  Reward Amount:     $-5.09
-  RISK:REWARD:       1:-0.57
-
-9. XLK
-------------------------------------------------------------------------------------------------------------------------
-Current Price:       $187.75
-ATR (14-day):        $5.44
-
-DEMAND ZONE:         $178.81 - $183.02
-  Distance:          $4.73 (87% of ATR) [PRIMARY SORT]
-  Formed:            2026-08-25
+DEMAND ZONE:         $273.87 - $289.93
+  Distance:          $9.22 (26% of ATR) [PRIMARY SORT]
+  Formed:            2026-07-16
   Freshness:         ✓ FRESH - Fresh - not tested recently
 
-SUPPLY ZONE:         $189.25 - $191.75
-  Distance:          $1.50 [SECONDARY SORT]
-  Formed:            2026-08-17
+SUPPLY ZONE:         $376.55 - $439.68
+  Distance:          $77.40 [SECONDARY SORT]
+  Formed:            2026-06-17
   Freshness:         ✓ FRESH - Fresh - not tested recently
 
 TRADE SETUP:
-  Entry Range:       $178.81 - $183.02
-  Stop Loss:         $178.80
-  Profit Target:     $189.25
-  Risk Amount:       $8.94
-  Reward Amount:     $1.50
-  RISK:REWARD:       1:0.17
-
-10. COIN
-------------------------------------------------------------------------------------------------------------------------
-Current Price:       $183.35
-ATR (14-day):        $10.24
-
-DEMAND ZONE:         $170.39 - $174.61
-  Distance:          $8.74 (85% of ATR) [PRIMARY SORT]
-  Formed:            2026-09-10
-  Freshness:         ✓ FRESH - Limited data
-
-SUPPLY ZONE:         $182.87 - $195.85
-  Distance:          $0.00 [SECONDARY SORT]
-  Formed:            2026-09-04
-  Freshness:         ✓ FRESH - Limited data
-
-TRADE SETUP:
-  Entry Range:       $170.39 - $174.61
-  Stop Loss:         $170.38
-  Profit Target:     $182.87
-  Risk Amount:       $12.96
-  Reward Amount:     $-0.48
-  RISK:REWARD:       1:-0.04
+  Entry Range:       $273.87 - $289.93
+  Stop Loss:         $273.86
+  Profit Target:     $376.55
+  Risk Amount:       $25.28
+  Reward Amount:     $77.40
+  RISK:REWARD:       1:3.06
 

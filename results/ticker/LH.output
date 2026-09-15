@@ -3,27 +3,27 @@ TICKER: LH
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $331.71
-  ATR (14-day): $8.77
+  Price:        $337.76
+  ATR (14-day): $8.85
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $253.05 - $256.73
-  Size:         $3.68
-  Distance:     $74.98 (855% of ATR)
-  Formed:       2026-06-22
+  Range:        $253.05 - $260.06
+  Size:         $7.01
+  Distance:     $77.70 (878% of ATR)
+  Formed:       2026-06-18
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $318.57 - $328.06
-  Size:         $9.50
-  Distance:     $3.65
-  Formed:       2026-09-09
+  Range:        $326.74 - $339.76
+  Size:         $13.02
+  Distance:     $0.00
+  Formed:       2026-08-20
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($331.71 >= zone $318.57)
+  Notes:        STALE - Price reached zone ($337.76 >= zone $326.74)
 
 TRADE METRICS:
-  Stop Loss Distance:  $78.66
-  Profit Target (PT):  $-13.14
-  Risk:Reward Ratio:   1:-0.17
+  Stop Loss Distance:  $84.71
+  Profit Target (PT):  $-11.02
+  Risk:Reward Ratio:   1:-0.13

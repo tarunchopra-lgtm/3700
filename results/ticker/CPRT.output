@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: CPRT
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $31.77
+  ATR (14-day): $1.02
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $29.50 - $30.89
+  Size:         $1.39
+  Distance:     $0.88 (85% of ATR)
+  Formed:       2026-06-16
+  FRESHNESS:    STALE
+  Notes:        STALE - Daily candle tested zone yesterday (low $30.54)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $33.42 - $34.62
+  Size:         $1.20
+  Distance:     $1.65
+  Formed:       2026-08-20
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+TRADE METRICS:
+  Stop Loss Distance:  $2.27
+  Profit Target (PT):  $1.65
+  Risk:Reward Ratio:   1:0.73

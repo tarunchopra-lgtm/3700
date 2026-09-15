@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: BRK.B
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $538.13
+  ATR (14-day): $8.15
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $481.06 - $486.47
+  Size:         $5.41
+  Distance:     $51.66 (634% of ATR)
+  Formed:       2026-06-11
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $501.27 - $513.44
+  Size:         $12.17
+  Distance:     $24.69
+  Formed:       2026-07-29
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($538.13 >= zone $501.27)
+
+TRADE METRICS:
+  Stop Loss Distance:  $57.07
+  Profit Target (PT):  $-36.86
+  Risk:Reward Ratio:   1:-0.65

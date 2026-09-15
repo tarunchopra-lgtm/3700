@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: ECHO
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $96.48
+  ATR (14-day): $4.21
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $85.82 - $92.36
+  Size:         $6.54
+  Distance:     $4.12 (98% of ATR)
+  Formed:       2026-07-23
+  FRESHNESS:    STALE
+  Notes:        STALE - Daily candle tested zone yesterday (low $89.81)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $106.56 - $131.22
+  Size:         $24.66
+  Distance:     $10.08
+  Formed:       2026-06-15
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+TRADE METRICS:
+  Stop Loss Distance:  $10.66
+  Profit Target (PT):  $10.08
+  Risk:Reward Ratio:   1:0.95

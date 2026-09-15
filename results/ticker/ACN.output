@@ -3,27 +3,27 @@ TICKER: ACN
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $192.34
-  ATR (14-day): $8.37
+  Price:        $201.38
+  ATR (14-day): $8.53
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $175.49 - $179.39
-  Size:         $3.90
-  Distance:     $12.95 (155% of ATR)
-  Formed:       2026-09-10
+  Range:        $118.15 - $155.91
+  Size:         $37.76
+  Distance:     $45.47 (533% of ATR)
+  Formed:       2026-06-18
   FRESHNESS:    FRESH
-  Notes:        Limited data
+  Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $177.04 - $192.17
-  Size:         $15.13
-  Distance:     $0.17
-  Formed:       2026-09-08
-  FRESHNESS:    FRESH
-  Notes:        Limited data
+  Range:        $182.33 - $188.45
+  Size:         $6.12
+  Distance:     $12.93
+  Formed:       2026-08-24
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($201.38 >= zone $182.33)
 
 TRADE METRICS:
-  Stop Loss Distance:  $16.85
-  Profit Target (PT):  $-15.30
-  Risk:Reward Ratio:   1:-0.91
+  Stop Loss Distance:  $83.23
+  Profit Target (PT):  $-19.05
+  Risk:Reward Ratio:   1:-0.23

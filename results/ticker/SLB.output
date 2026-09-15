@@ -3,27 +3,27 @@ TICKER: SLB
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $59.45
-  ATR (14-day): $1.93
+  Price:        $59.20
+  ATR (14-day): $2.02
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $54.67 - $57.42
-  Size:         $2.75
-  Distance:     $2.03 (105% of ATR)
-  Formed:       2026-08-28
+  Range:        $54.45 - $56.77
+  Size:         $2.32
+  Distance:     $2.43 (120% of ATR)
+  Formed:       2026-06-10
   FRESHNESS:    STALE
   Notes:        STALE - Daily candle tested zone yesterday (low $55.15)
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $56.24 - $59.36
-  Size:         $3.12
-  Distance:     $0.09
-  Formed:       2026-09-03
+  Range:        $54.67 - $60.46
+  Size:         $5.79
+  Distance:     $0.00
+  Formed:       2026-08-28
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($59.45 >= zone $56.24)
+  Notes:        STALE - Price reached zone ($59.20 >= zone $54.67)
 
 TRADE METRICS:
-  Stop Loss Distance:  $4.78
-  Profit Target (PT):  $-3.21
-  Risk:Reward Ratio:   1:-0.67
+  Stop Loss Distance:  $4.75
+  Profit Target (PT):  $-4.53
+  Risk:Reward Ratio:   1:-0.95

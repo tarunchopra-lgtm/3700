@@ -3,27 +3,27 @@ TICKER: J
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $160.63
-  ATR (14-day): $3.90
+  Price:        $157.50
+  ATR (14-day): $3.99
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $140.17 - $143.99
-  Size:         $3.82
-  Distance:     $16.64 (426% of ATR)
-  Formed:       2026-09-09
-  FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $140.26)
+  Range:        $121.75 - $126.87
+  Size:         $5.12
+  Distance:     $30.63 (768% of ATR)
+  Formed:       2026-06-10
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $141.56 - $146.09
-  Size:         $4.53
-  Distance:     $14.54
-  Formed:       2026-09-09
+  Range:        $144.01 - $149.54
+  Size:         $5.53
+  Distance:     $7.96
+  Formed:       2026-08-11
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($160.63 >= zone $141.56)
+  Notes:        STALE - Price reached zone ($157.50 >= zone $144.01)
 
 TRADE METRICS:
-  Stop Loss Distance:  $20.46
-  Profit Target (PT):  $-19.07
-  Risk:Reward Ratio:   1:-0.93
+  Stop Loss Distance:  $35.75
+  Profit Target (PT):  $-13.49
+  Risk:Reward Ratio:   1:-0.38

@@ -3,27 +3,27 @@ TICKER: GL
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $183.19
-  ATR (14-day): $3.88
+  Price:        $185.83
+  ATR (14-day): $4.17
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $163.14 - $165.78
-  Size:         $2.64
-  Distance:     $17.41 (448% of ATR)
-  Formed:       2026-06-11
+  Range:        $159.81 - $163.50
+  Size:         $3.69
+  Distance:     $22.33 (536% of ATR)
+  Formed:       2026-06-10
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $174.01 - $176.99
-  Size:         $2.98
-  Distance:     $6.20
-  Formed:       2026-09-04
+  Range:        $173.62 - $177.05
+  Size:         $3.43
+  Distance:     $8.78
+  Formed:       2026-06-24
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($183.19 >= zone $174.01)
+  Notes:        STALE - Price reached zone ($185.83 >= zone $173.62)
 
 TRADE METRICS:
-  Stop Loss Distance:  $20.05
-  Profit Target (PT):  $-9.18
-  Risk:Reward Ratio:   1:-0.46
+  Stop Loss Distance:  $26.02
+  Profit Target (PT):  $-12.21
+  Risk:Reward Ratio:   1:-0.47

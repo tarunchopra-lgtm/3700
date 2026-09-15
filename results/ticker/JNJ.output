@@ -3,27 +3,27 @@ TICKER: JNJ
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $282.24
-  ATR (14-day): $5.98
+  Price:        $282.98
+  ATR (14-day): $5.83
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $263.83 - $268.38
+  Range:        $237.05 - $241.60
   Size:         $4.55
-  Distance:     $13.86 (232% of ATR)
-  Formed:       2026-08-28
-  FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $265.81)
+  Distance:     $41.38 (709% of ATR)
+  Formed:       2026-06-10
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $266.73 - $271.99
-  Size:         $5.26
-  Distance:     $10.25
-  Formed:       2026-09-09
+  Range:        $264.79 - $274.90
+  Size:         $10.11
+  Distance:     $8.08
+  Formed:       2026-07-29
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($282.24 >= zone $266.73)
+  Notes:        STALE - Price reached zone ($282.98 >= zone $264.79)
 
 TRADE METRICS:
-  Stop Loss Distance:  $18.41
-  Profit Target (PT):  $-15.51
-  Risk:Reward Ratio:   1:-0.84
+  Stop Loss Distance:  $45.93
+  Profit Target (PT):  $-18.19
+  Risk:Reward Ratio:   1:-0.40

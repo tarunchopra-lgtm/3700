@@ -3,27 +3,27 @@ TICKER: PH
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $991.07
-  ATR (14-day): $27.95
+  Price:        $997.50
+  ATR (14-day): $27.69
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $875.60 - $932.99
   Size:         $57.39
-  Distance:     $58.08 (208% of ATR)
+  Distance:     $64.51 (233% of ATR)
   Formed:       2026-06-11
   FRESHNESS:    STALE
   Notes:        STALE - Daily candle tested zone yesterday (low $929.24)
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $960.43 - $978.38
-  Size:         $17.95
-  Distance:     $12.69
-  Formed:       2026-09-04
+  Range:        $955.48 - $1003.79
+  Size:         $48.31
+  Distance:     $0.00
+  Formed:       2026-06-26
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($991.07 >= zone $960.43)
+  Notes:        STALE - Price reached zone ($997.50 >= zone $955.48)
 
 TRADE METRICS:
-  Stop Loss Distance:  $115.47
-  Profit Target (PT):  $-30.64
-  Risk:Reward Ratio:   1:-0.27
+  Stop Loss Distance:  $121.90
+  Profit Target (PT):  $-42.02
+  Risk:Reward Ratio:   1:-0.34

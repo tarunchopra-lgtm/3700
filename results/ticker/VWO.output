@@ -3,27 +3,27 @@ TICKER: VWO
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $60.39
-  ATR (14-day): $0.75
+  Price:        $61.67
+  ATR (14-day): $0.70
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $59.80 - $60.35
-  Size:         $0.55
-  Distance:     $0.04 (5% of ATR)
-  Formed:       2026-08-24
-  FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $59.91)
+  Range:        $57.35 - $58.64
+  Size:         $1.29
+  Distance:     $3.03 (432% of ATR)
+  Formed:       2026-06-10
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $59.90 - $61.20
-  Size:         $1.30
-  Distance:     $0.00
-  Formed:       2026-09-10
+  Range:        $61.04 - $61.53
+  Size:         $0.49
+  Distance:     $0.14
+  Formed:       2026-09-04
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($60.39 >= zone $59.90)
+  Notes:        STALE - Price reached zone ($61.67 >= zone $61.04)
 
 TRADE METRICS:
-  Stop Loss Distance:  $0.59
-  Profit Target (PT):  $-0.49
-  Risk:Reward Ratio:   1:-0.83
+  Stop Loss Distance:  $4.32
+  Profit Target (PT):  $-0.63
+  Risk:Reward Ratio:   1:-0.15

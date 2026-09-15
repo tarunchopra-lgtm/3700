@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: MO
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $73.87
+  ATR (14-day): $2.19
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $66.83 - $69.77
+  Size:         $2.94
+  Distance:     $4.10 (187% of ATR)
+  Formed:       2026-07-31
+  FRESHNESS:    STALE
+  Notes:        STALE - Daily candle tested zone yesterday (low $68.43)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $71.14 - $73.75
+  Size:         $2.61
+  Distance:     $0.12
+  Formed:       2026-06-12
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($73.87 >= zone $71.14)
+
+TRADE METRICS:
+  Stop Loss Distance:  $7.04
+  Profit Target (PT):  $-2.73
+  Risk:Reward Ratio:   1:-0.39

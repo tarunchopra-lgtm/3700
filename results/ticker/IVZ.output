@@ -3,27 +3,27 @@ TICKER: IVZ
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $35.41
+  Price:        $34.33
   ATR (14-day): $0.92
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $31.20 - $32.32
-  Size:         $1.12
-  Distance:     $3.09 (335% of ATR)
-  Formed:       2026-08-21
-  FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $31.70)
+  Range:        $25.59 - $27.07
+  Size:         $1.48
+  Distance:     $7.26 (785% of ATR)
+  Formed:       2026-06-24
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $32.08 - $33.26
-  Size:         $1.18
-  Distance:     $2.15
-  Formed:       2026-09-09
+  Range:        $32.50 - $33.66
+  Size:         $1.16
+  Distance:     $0.67
+  Formed:       2026-08-31
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($35.41 >= zone $32.08)
+  Notes:        STALE - Price reached zone ($34.33 >= zone $32.50)
 
 TRADE METRICS:
-  Stop Loss Distance:  $4.21
-  Profit Target (PT):  $-3.33
-  Risk:Reward Ratio:   1:-0.79
+  Stop Loss Distance:  $8.74
+  Profit Target (PT):  $-1.83
+  Risk:Reward Ratio:   1:-0.21

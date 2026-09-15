@@ -3,27 +3,27 @@ TICKER: IBKR
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $95.46
+  Price:        $94.81
   ATR (14-day): $3.40
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $88.53 - $91.35
-  Size:         $2.82
-  Distance:     $4.11 (121% of ATR)
-  Formed:       2026-09-02
-  FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $88.89)
+  Range:        $83.12 - $88.30
+  Size:         $5.17
+  Distance:     $6.52 (192% of ATR)
+  Formed:       2026-06-10
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $94.81 - $98.75
-  Size:         $3.94
+  Range:        $92.16 - $96.59
+  Size:         $4.43
   Distance:     $0.00
-  Formed:       2026-08-26
+  Formed:       2026-06-24
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($95.46 >= zone $94.81)
+  Notes:        STALE - Price reached zone ($94.81 >= zone $92.16)
 
 TRADE METRICS:
-  Stop Loss Distance:  $6.93
-  Profit Target (PT):  $-0.65
-  Risk:Reward Ratio:   1:-0.09
+  Stop Loss Distance:  $11.69
+  Profit Target (PT):  $-2.65
+  Risk:Reward Ratio:   1:-0.23

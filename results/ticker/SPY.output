@@ -3,27 +3,27 @@ TICKER: SPY
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $764.33
-  ATR (14-day): $9.10
+  Price:        $781.93
+  ATR (14-day): $8.83
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $737.68 - $748.89
-  Size:         $11.22
-  Distance:     $15.44 (170% of ATR)
-  Formed:       2026-07-31
+  Range:        $722.59 - $738.38
+  Size:         $15.79
+  Distance:     $43.55 (493% of ATR)
+  Formed:       2026-06-10
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $760.94 - $769.70
-  Size:         $8.76
-  Distance:     $0.00
-  Formed:       2026-09-09
+  Range:        $758.58 - $773.41
+  Size:         $14.83
+  Distance:     $8.52
+  Formed:       2026-08-04
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($764.33 >= zone $760.94)
+  Notes:        STALE - Price reached zone ($781.93 >= zone $758.58)
 
 TRADE METRICS:
-  Stop Loss Distance:  $26.65
-  Profit Target (PT):  $-3.39
-  Risk:Reward Ratio:   1:-0.13
+  Stop Loss Distance:  $59.34
+  Profit Target (PT):  $-23.35
+  Risk:Reward Ratio:   1:-0.39

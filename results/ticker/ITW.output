@@ -3,27 +3,27 @@ TICKER: ITW
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $295.70
-  ATR (14-day): $6.94
+  Price:        $284.38
+  ATR (14-day): $6.88
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $261.35 - $265.54
-  Size:         $4.19
-  Distance:     $30.16 (434% of ATR)
-  Formed:       2026-09-10
-  FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $261.53)
+  Range:        $250.11 - $256.03
+  Size:         $5.92
+  Distance:     $28.35 (412% of ATR)
+  Formed:       2026-06-11
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $265.89 - $276.76
-  Size:         $10.87
-  Distance:     $18.94
-  Formed:       2026-09-02
+  Range:        $265.86 - $275.60
+  Size:         $9.74
+  Distance:     $8.78
+  Formed:       2026-07-01
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($295.70 >= zone $265.89)
+  Notes:        STALE - Price reached zone ($284.38 >= zone $265.86)
 
 TRADE METRICS:
-  Stop Loss Distance:  $34.35
-  Profit Target (PT):  $-29.81
-  Risk:Reward Ratio:   1:-0.87
+  Stop Loss Distance:  $34.27
+  Profit Target (PT):  $-18.52
+  Risk:Reward Ratio:   1:-0.54

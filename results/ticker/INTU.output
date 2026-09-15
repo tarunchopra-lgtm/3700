@@ -3,27 +3,27 @@ TICKER: INTU
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $337.03
-  ATR (14-day): $14.97
+  Price:        $346.92
+  ATR (14-day): $14.56
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $309.80 - $330.12
-  Size:         $20.32
-  Distance:     $6.91 (46% of ATR)
-  Formed:       2026-09-08
-  FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $310.00)
+  Range:        $273.27 - $292.38
+  Size:         $19.11
+  Distance:     $54.54 (375% of ATR)
+  Formed:       2026-06-10
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $312.80 - $327.00
-  Size:         $14.20
-  Distance:     $10.03
-  Formed:       2026-09-09
+  Range:        $303.80 - $336.94
+  Size:         $33.14
+  Distance:     $9.98
+  Formed:       2026-07-30
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($337.03 >= zone $312.80)
+  Notes:        STALE - Price reached zone ($346.92 >= zone $303.80)
 
 TRADE METRICS:
-  Stop Loss Distance:  $27.23
-  Profit Target (PT):  $-24.23
-  Risk:Reward Ratio:   1:-0.89
+  Stop Loss Distance:  $73.65
+  Profit Target (PT):  $-43.12
+  Risk:Reward Ratio:   1:-0.59

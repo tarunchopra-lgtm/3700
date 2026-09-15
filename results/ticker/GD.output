@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: GD
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $375.90
+  ATR (14-day): $8.14
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $341.00 - $349.00
+  Size:         $8.00
+  Distance:     $26.90 (331% of ATR)
+  Formed:       2026-06-10
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $356.15 - $363.83
+  Size:         $7.68
+  Distance:     $12.07
+  Formed:       2026-06-12
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($375.90 >= zone $356.15)
+
+TRADE METRICS:
+  Stop Loss Distance:  $34.90
+  Profit Target (PT):  $-19.75
+  Risk:Reward Ratio:   1:-0.57

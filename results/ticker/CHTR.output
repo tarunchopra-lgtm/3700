@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: CHTR
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $153.03
+  ATR (14-day): $7.81
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $124.05 - $132.00
+  Size:         $7.95
+  Distance:     $21.03 (269% of ATR)
+  Formed:       2026-06-18
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $138.83 - $168.11
+  Size:         $29.28
+  Distance:     $0.00
+  Formed:       2026-06-30
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($153.03 >= zone $138.83)
+
+TRADE METRICS:
+  Stop Loss Distance:  $28.98
+  Profit Target (PT):  $-14.20
+  Risk:Reward Ratio:   1:-0.49

@@ -3,27 +3,27 @@ TICKER: UNP
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $302.40
-  ATR (14-day): $7.08
+  Price:        $301.04
+  ATR (14-day): $6.92
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $280.16 - $285.43
-  Size:         $5.27
-  Distance:     $16.97 (240% of ATR)
-  Formed:       2026-07-09
-  FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $283.94)
+  Range:        $264.56 - $269.75
+  Size:         $5.19
+  Distance:     $31.29 (452% of ATR)
+  Formed:       2026-06-11
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $287.10 - $292.58
-  Size:         $5.48
-  Distance:     $9.82
-  Formed:       2026-09-08
+  Range:        $298.10 - $303.15
+  Size:         $5.05
+  Distance:     $0.00
+  Formed:       2026-07-17
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($302.40 >= zone $287.10)
+  Notes:        STALE - Price reached zone ($301.04 >= zone $298.10)
 
 TRADE METRICS:
-  Stop Loss Distance:  $22.24
-  Profit Target (PT):  $-15.30
-  Risk:Reward Ratio:   1:-0.69
+  Stop Loss Distance:  $36.48
+  Profit Target (PT):  $-2.94
+  Risk:Reward Ratio:   1:-0.08

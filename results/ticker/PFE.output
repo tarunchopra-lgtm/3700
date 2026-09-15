@@ -3,27 +3,27 @@ TICKER: PFE
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $29.19
-  ATR (14-day): $0.52
+  Price:        $29.48
+  ATR (14-day): $0.54
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $26.42 - $26.95
-  Size:         $0.53
-  Distance:     $2.24 (430% of ATR)
-  Formed:       2026-08-14
+  Range:        $23.62 - $24.34
+  Size:         $0.72
+  Distance:     $5.14 (946% of ATR)
+  Formed:       2026-06-25
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $27.57 - $28.14
-  Size:         $0.57
+  Range:        $27.64 - $28.43
+  Size:         $0.79
   Distance:     $1.05
-  Formed:       2026-09-09
+  Formed:       2026-08-20
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($29.19 >= zone $27.57)
+  Notes:        STALE - Price reached zone ($29.48 >= zone $27.64)
 
 TRADE METRICS:
-  Stop Loss Distance:  $2.77
-  Profit Target (PT):  $-1.62
-  Risk:Reward Ratio:   1:-0.58
+  Stop Loss Distance:  $5.86
+  Profit Target (PT):  $-1.84
+  Risk:Reward Ratio:   1:-0.31

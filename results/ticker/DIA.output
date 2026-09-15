@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: DIA
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $539.95
+  ATR (14-day): $6.29
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $515.30 - $519.52
+  Size:         $4.22
+  Distance:     $20.43 (325% of ATR)
+  Formed:       2026-06-18
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $520.03 - $532.54
+  Size:         $12.51
+  Distance:     $7.41
+  Formed:       2026-07-08
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($539.95 >= zone $520.03)
+
+TRADE METRICS:
+  Stop Loss Distance:  $24.65
+  Profit Target (PT):  $-19.92
+  Risk:Reward Ratio:   1:-0.81

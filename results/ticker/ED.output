@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: ED
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $112.87
+  ATR (14-day): $2.07
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $105.90 - $108.57
+  Size:         $2.67
+  Distance:     $4.30 (208% of ATR)
+  Formed:       2026-08-11
+  FRESHNESS:    STALE
+  Notes:        STALE - Daily candle tested zone yesterday (low $106.74)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $106.70 - $109.02
+  Size:         $2.32
+  Distance:     $3.85
+  Formed:       2026-06-10
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($112.87 >= zone $106.70)
+
+TRADE METRICS:
+  Stop Loss Distance:  $6.97
+  Profit Target (PT):  $-6.17
+  Risk:Reward Ratio:   1:-0.89

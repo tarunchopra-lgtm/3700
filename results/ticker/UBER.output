@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: UBER
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $75.39
+  ATR (14-day): $2.79
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $65.41 - $68.34
+  Size:         $2.93
+  Distance:     $7.05 (253% of ATR)
+  Formed:       2026-07-27
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $72.11 - $76.39
+  Size:         $4.28
+  Distance:     $0.00
+  Formed:       2026-06-25
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($75.39 >= zone $72.11)
+
+TRADE METRICS:
+  Stop Loss Distance:  $9.98
+  Profit Target (PT):  $-3.28
+  Risk:Reward Ratio:   1:-0.33

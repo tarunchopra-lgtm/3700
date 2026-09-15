@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: MCK
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $939.75
+  ATR (14-day): $29.04
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $744.58 - $760.70
+  Size:         $16.12
+  Distance:     $179.05 (617% of ATR)
+  Formed:       2026-06-30
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $887.61 - $907.00
+  Size:         $19.39
+  Distance:     $32.75
+  Formed:       2026-07-29
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($939.75 >= zone $887.61)
+
+TRADE METRICS:
+  Stop Loss Distance:  $195.17
+  Profit Target (PT):  $-52.14
+  Risk:Reward Ratio:   1:-0.27

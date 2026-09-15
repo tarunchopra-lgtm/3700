@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: V
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $392.22
+  ATR (14-day): $7.49
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $317.96 - $326.44
+  Size:         $8.48
+  Distance:     $65.79 (879% of ATR)
+  Formed:       2026-06-11
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $360.10 - $373.97
+  Size:         $13.87
+  Distance:     $18.25
+  Formed:       2026-07-30
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($392.22 >= zone $360.10)
+
+TRADE METRICS:
+  Stop Loss Distance:  $74.26
+  Profit Target (PT):  $-32.12
+  Risk:Reward Ratio:   1:-0.43

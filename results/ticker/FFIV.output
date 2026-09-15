@@ -3,27 +3,27 @@ TICKER: FFIV
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $431.45
-  ATR (14-day): $15.30
+  Price:        $443.09
+  ATR (14-day): $15.84
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $396.88 - $412.00
-  Size:         $15.12
-  Distance:     $19.45 (127% of ATR)
-  Formed:       2026-09-10
-  FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $397.10)
+  Range:        $374.40 - $392.00
+  Size:         $17.60
+  Distance:     $51.09 (323% of ATR)
+  Formed:       2026-06-17
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $390.81 - $420.05
-  Size:         $29.24
-  Distance:     $11.40
-  Formed:       2026-08-17
+  Range:        $407.00 - $427.54
+  Size:         $20.54
+  Distance:     $15.55
+  Formed:       2026-06-30
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($431.45 >= zone $390.81)
+  Notes:        STALE - Price reached zone ($443.09 >= zone $407.00)
 
 TRADE METRICS:
-  Stop Loss Distance:  $34.57
-  Profit Target (PT):  $-40.64
-  Risk:Reward Ratio:   1:-1.18
+  Stop Loss Distance:  $68.69
+  Profit Target (PT):  $-36.09
+  Risk:Reward Ratio:   1:-0.53

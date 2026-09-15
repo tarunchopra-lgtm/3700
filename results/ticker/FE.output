@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: FE
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $49.35
+  ATR (14-day): $0.91
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $45.32 - $46.30
+  Size:         $0.98
+  Distance:     $3.05 (334% of ATR)
+  Formed:       2026-08-31
+  FRESHNESS:    STALE
+  Notes:        STALE - Daily candle tested zone yesterday (low $46.01)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $47.30 - $48.10
+  Size:         $0.80
+  Distance:     $1.25
+  Formed:       2026-06-16
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($49.35 >= zone $47.30)
+
+TRADE METRICS:
+  Stop Loss Distance:  $4.03
+  Profit Target (PT):  $-2.05
+  Risk:Reward Ratio:   1:-0.51

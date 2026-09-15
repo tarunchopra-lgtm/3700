@@ -3,27 +3,27 @@ TICKER: PYPL
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $56.38
-  ATR (14-day): $1.40
+  Price:        $56.68
+  ATR (14-day): $1.36
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $46.43 - $48.43
-  Size:         $2.00
-  Distance:     $7.95 (568% of ATR)
-  Formed:       2026-07-14
+  Range:        $40.87 - $41.59
+  Size:         $0.72
+  Distance:     $15.09 (1111% of ATR)
+  Formed:       2026-06-12
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $53.03 - $56.14
-  Size:         $3.11
-  Distance:     $0.24
-  Formed:       2026-09-08
+  Range:        $55.28 - $57.67
+  Size:         $2.39
+  Distance:     $0.00
+  Formed:       2026-07-17
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($56.38 >= zone $53.03)
+  Notes:        STALE - Price reached zone ($56.68 >= zone $55.28)
 
 TRADE METRICS:
-  Stop Loss Distance:  $9.95
-  Profit Target (PT):  $-3.35
-  Risk:Reward Ratio:   1:-0.34
+  Stop Loss Distance:  $15.81
+  Profit Target (PT):  $-1.40
+  Risk:Reward Ratio:   1:-0.09

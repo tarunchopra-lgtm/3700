@@ -3,27 +3,27 @@ TICKER: TMO
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $645.75
-  ATR (14-day): $18.90
+  Price:        $655.20
+  ATR (14-day): $17.26
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $569.63 - $580.31
-  Size:         $10.68
-  Distance:     $65.44 (346% of ATR)
-  Formed:       2026-08-06
+  Range:        $466.80 - $484.24
+  Size:         $17.44
+  Distance:     $170.96 (990% of ATR)
+  Formed:       2026-06-11
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $626.33 - $637.13
-  Size:         $10.80
-  Distance:     $8.62
-  Formed:       2026-08-27
+  Range:        $607.37 - $634.70
+  Size:         $27.33
+  Distance:     $20.50
+  Formed:       2026-08-20
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($645.75 >= zone $626.33)
+  Notes:        STALE - Price reached zone ($655.20 >= zone $607.37)
 
 TRADE METRICS:
-  Stop Loss Distance:  $76.12
-  Profit Target (PT):  $-19.42
-  Risk:Reward Ratio:   1:-0.26
+  Stop Loss Distance:  $188.41
+  Profit Target (PT):  $-47.83
+  Risk:Reward Ratio:   1:-0.25

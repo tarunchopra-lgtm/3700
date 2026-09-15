@@ -3,27 +3,27 @@ TICKER: EQIX
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $1092.00
-  ATR (14-day): $34.11
+  Price:        $1102.50
+  ATR (14-day): $33.99
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $1023.00 - $1053.97
-  Size:         $30.98
-  Distance:     $38.03 (111% of ATR)
-  Formed:       2026-09-09
+  Range:        $993.80 - $1045.54
+  Size:         $51.74
+  Distance:     $56.96 (168% of ATR)
+  Formed:       2026-07-01
   FRESHNESS:    STALE
   Notes:        STALE - Daily candle tested zone yesterday (low $1023.03)
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $1021.97 - $1053.97
-  Size:         $32.00
-  Distance:     $38.03
-  Formed:       2026-09-04
+  Range:        $1080.94 - $1107.22
+  Size:         $26.28
+  Distance:     $0.00
+  Formed:       2026-06-17
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($1092.00 >= zone $1021.97)
+  Notes:        STALE - Price reached zone ($1102.50 >= zone $1080.94)
 
 TRADE METRICS:
-  Stop Loss Distance:  $69.00
-  Profit Target (PT):  $-70.03
-  Risk:Reward Ratio:   1:-1.01
+  Stop Loss Distance:  $108.70
+  Profit Target (PT):  $-21.56
+  Risk:Reward Ratio:   1:-0.20

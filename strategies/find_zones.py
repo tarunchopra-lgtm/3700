@@ -284,10 +284,16 @@ def dbr(candles: List[Candle],
             if not all_small:
                 break  # Larger candle means no more consolidation possible
             
-            # Check for up candle (rally) after consolidation
+            # Check for up candle (rally) after consolidation with similar strength
             up_candle = candles[consol_end + 1]
             if not up_candle.is_up():
                 continue
+            
+            # Verify 3rd leg (confirmation) has similar strength as 1st leg
+            up_move_size_3rd = up_candle.close - up_candle.open
+            up_move_pct_3rd = (up_move_size_3rd / up_candle.open) * 100
+            if up_move_pct_3rd < min_prior_move_pct:
+                continue  # Confirmation move too weak
             
             # Found pattern!
             zone_size = zone_high - zone_low
@@ -355,10 +361,16 @@ def rbr(candles: List[Candle],
             if not all_small:
                 break  # Larger candle means no more consolidation possible
             
-            # Check for up candle (confirmation) after consolidation
+            # Check for up candle (confirmation) after consolidation with similar strength
             up_candle_2 = candles[consol_end + 1]
             if not up_candle_2.is_up():
                 continue
+            
+            # Verify 3rd leg (confirmation) has similar strength as 1st leg
+            up_move_size_3rd = up_candle_2.close - up_candle_2.open
+            up_move_pct_3rd = (up_move_size_3rd / up_candle_2.open) * 100
+            if up_move_pct_3rd < min_prior_move_pct:
+                continue  # Confirmation move too weak
             
             # Found pattern!
             zone_size = zone_high - zone_low
@@ -426,10 +438,16 @@ def rbd(candles: List[Candle],
             if not all_small:
                 break  # Larger candle means no more consolidation possible
             
-            # Check for down candle after consolidation
+            # Check for down candle after consolidation with similar strength
             down_candle = candles[consol_end + 1]
             if not down_candle.is_down():
                 continue
+            
+            # Verify 3rd leg (confirmation) has similar strength as 1st leg
+            down_move_size_3rd = down_candle.open - down_candle.close
+            down_move_pct_3rd = (down_move_size_3rd / down_candle.open) * 100
+            if down_move_pct_3rd < min_prior_move_pct:
+                continue  # Confirmation move too weak
             
             # Found pattern!
             zone_size = zone_high - zone_low
@@ -497,13 +515,19 @@ def dbd(candles: List[Candle],
             if not all_small:
                 break  # Larger candle means no more consolidation possible
             
-            # Check for down candle after consolidation - must be lower
+            # Check for down candle after consolidation - must be lower with similar strength
             down_candle_2 = candles[consol_end + 1]
             if not down_candle_2.is_down():
                 continue
             
             if down_candle_2.close >= down_candle.close:
                 continue  # Must be lower (continuation, not bounce)
+            
+            # Verify 3rd leg (confirmation) has similar strength as 1st leg
+            down_move_size_3rd = down_candle_2.open - down_candle_2.close
+            down_move_pct_3rd = (down_move_size_3rd / down_candle_2.open) * 100
+            if down_move_pct_3rd < min_prior_move_pct:
+                continue  # Confirmation move too weak
             
             # Found pattern!
             zone_size = zone_high - zone_low
@@ -646,6 +670,42 @@ def get_zone_freshness_info(zone: Zone, candles: List[Candle]) -> dict:
         }
 
 
+def calculate_atr(candles: List[Candle], period: int = 14) -> float | None:
+    """
+    Calculate Average True Range (ATR) volatility indicator
+    
+    Args:
+        candles: List of Candle objects
+        period: Number of periods for ATR calculation (default 14)
+    
+    Returns:
+        ATR value or None if insufficient data
+    """
+    if len(candles) < period + 1:
+        return None
+    
+    # Calculate True Range for each candle
+    true_ranges = []
+    for i in range(1, len(candles)):
+        current = candles[i]
+        previous = candles[i - 1]
+        
+        # True Range = max(high - low, abs(high - prev_close), abs(low - prev_close))
+        tr = max(
+            current.high - current.low,
+            abs(current.high - previous.close),
+            abs(current.low - previous.close)
+        )
+        true_ranges.append(tr)
+    
+    # Calculate ATR as average of most recent TR values
+    if len(true_ranges) < period:
+        return None
+    
+    atr = sum(true_ranges[-period:]) / period
+    return atr
+
+
 def is_demand_zone_fresh(zone: Zone, candles: List[Candle], days_threshold: int = 5) -> bool:
     """
     Demand zone is FRESH if price has NOT reached it within last N days.
@@ -739,7 +799,7 @@ def find_best_zones(candles: List[Candle],
 
 def analyze_zones(symbol: str, 
                   lookback_days: int = 50,
-                  sensitivity: str = "balanced") -> tuple[Zone | None, Zone | None]:
+                  sensitivity: str = "balanced") -> tuple[Zone | None, Zone | None, float | None, float | None]:
     """
     Main analysis function - finds best demand and supply zones
     
@@ -749,7 +809,7 @@ def analyze_zones(symbol: str,
         sensitivity: "conservative", "balanced", or "aggressive"
     
     Returns:
-        (demand_zone, supply_zone) or (None, None) if not found
+        (demand_zone, supply_zone, current_price, atr) or (None, None, None, None) if not found
     """
     
     # Configure parameters based on sensitivity
@@ -780,12 +840,18 @@ def analyze_zones(symbol: str,
     candles = fetch_daily_bars(symbol, lookback_days)
     
     if not candles:
-        return None, None
+        return None, None, None, None
+    
+    # Get current price (last candle close)
+    current_price = candles[-1].close
+    
+    # Calculate ATR (14-period)
+    atr = calculate_atr(candles, period=14)
     
     # Find best zones
     demand_zone, supply_zone = find_best_zones(candles, config)
     
-    return demand_zone, supply_zone
+    return demand_zone, supply_zone, current_price, atr
 
 
 # ============================================================================
@@ -843,14 +909,18 @@ def main():
             i += 1
     
     # Run analysis and get zones
-    demand_zone, supply_zone = analyze_zones(symbol, lookback_days, sensitivity)
+    demand_zone, supply_zone, current_price, atr = analyze_zones(symbol, lookback_days, sensitivity)
     
     # Print results
-    if demand_zone or supply_zone:
+    if demand_zone or supply_zone or current_price:
         print(f"\n{'='*80}")
         print(f"ZONE ANALYSIS - {symbol}")
         print(f"{'='*80}")
         print(f"Lookback: {lookback_days} days | Sensitivity: {sensitivity}")
+        if current_price:
+            print(f"Current Price: ${current_price:.2f}")
+        if atr:
+            print(f"ATR (14):      ${atr:.2f}")
         print()
         
         if demand_zone:
@@ -869,15 +939,22 @@ def main():
             print("✗ No fresh SUPPLY zone found (all recent supply zones were tested)")
             print()
         
-        if demand_zone and supply_zone:
+        if demand_zone and supply_zone and current_price:
             spread = supply_zone.low - demand_zone.high
+            distance_to_demand = current_price - demand_zone.high
+            distance_to_supply = supply_zone.low - current_price
             print(f"TRADE SETUP:")
+            print(f"  Current Price:  ${current_price:.2f}")
             print(f"  Entry Range:    ${demand_zone.low:.2f} - ${demand_zone.high:.2f}")
             print(f"  Target:         ${supply_zone.low:.2f}")
             print(f"  Risk/Reward:    ${spread:.2f} (spread from demand high to supply low)")
+            print(f"  Distance to Entry: ${distance_to_demand:.2f} (current to demand high)")
+            print(f"  Distance to Target: ${distance_to_supply:.2f} (current to supply low)")
+            if atr:
+                print(f"  ATR (14):       ${atr:.2f}")
             print(f"{'='*80}")
         else:
-            print("❌ Cannot setup trade: Missing demand or supply zone")
+            print("❌ Cannot setup trade: Missing demand zone, supply zone, or current price")
             print(f"{'='*80}")
     else:
         print(f"No zones found for {symbol} in the last {lookback_days} days")

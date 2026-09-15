@@ -3,27 +3,27 @@ TICKER: VEA
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $72.99
-  ATR (14-day): $0.97
+  Price:        $74.13
+  ATR (14-day): $0.91
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $70.06 - $71.08
-  Size:         $1.02
-  Distance:     $1.91 (196% of ATR)
-  Formed:       2026-08-03
+  Range:        $68.60 - $69.96
+  Size:         $1.36
+  Distance:     $4.17 (458% of ATR)
+  Formed:       2026-06-10
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $71.83 - $73.38
-  Size:         $1.55
-  Distance:     $0.00
-  Formed:       2026-09-10
+  Range:        $72.77 - $73.91
+  Size:         $1.14
+  Distance:     $0.22
+  Formed:       2026-09-09
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($72.99 >= zone $71.83)
+  Notes:        STALE - Price reached zone ($74.13 >= zone $72.77)
 
 TRADE METRICS:
-  Stop Loss Distance:  $2.93
-  Profit Target (PT):  $-1.16
-  Risk:Reward Ratio:   1:-0.40
+  Stop Loss Distance:  $5.53
+  Profit Target (PT):  $-1.36
+  Risk:Reward Ratio:   1:-0.25

@@ -271,3 +271,29 @@
 [2026-09-13 12:50:08] ============================================================
 
 [2026-09-13 12:50:10] ✓ Email report sent to tarun.chopra@gmail.com
+[2026-09-14 12:50:04] 
+============================================================
+[2026-09-14 12:50:04] 🔔 CLOSING BELL - Closing all positions...
+[2026-09-14 12:50:04] ============================================================
+[2026-09-14 12:50:04] Found 3 open position(s). Starting closeout...
+[2026-09-14 12:50:04] 
+[GS] Qty: 1, Value: $988.33
+[2026-09-14 12:50:04]   Bid: $975.00, Ask: $989.19, Midpoint: $982.10
+[2026-09-14 12:50:04]   ✗ Error submitting limit order for GS: {"available":"0","code":40310000,"existing_qty":"1","held_for_orders":"1","message":"insufficient qty available for order (requested: 1, available: 0)","related_orders":["2ecb09e8-4322-4607-95af-f7f9f14da717"],"symbol":"GS"}
+[2026-09-14 12:50:04]   ✗ Error submitting market order for GS: {"available":"0","code":40310000,"existing_qty":"1","held_for_orders":"1","message":"insufficient qty available for order (requested: 1, available: 0)","related_orders":["2ecb09e8-4322-4607-95af-f7f9f14da717"],"symbol":"GS"}
+[2026-09-14 12:50:04] 
+[NVDA] Qty: 1, Value: $211.97
+[2026-09-14 12:50:04]   Bid: $211.77, Ask: $211.95, Midpoint: $211.86
+[2026-09-14 12:50:04]   ✗ Error submitting limit order for NVDA: {"available":"0","code":40310000,"existing_qty":"1","held_for_orders":"1","message":"insufficient qty available for order (requested: 1, available: 0)","related_orders":["54526ef7-5d03-4b52-988c-23c575283268"],"symbol":"NVDA"}
+[2026-09-14 12:50:05]   ✗ Error submitting market order for NVDA: {"available":"0","code":40310000,"existing_qty":"1","held_for_orders":"1","message":"insufficient qty available for order (requested: 1, available: 0)","related_orders":["54526ef7-5d03-4b52-988c-23c575283268"],"symbol":"NVDA"}
+[2026-09-14 12:50:05] 
+[SPY] Qty: 1, Value: $761.58
+[2026-09-14 12:50:05]   Bid: $761.41, Ask: $761.56, Midpoint: $761.48
+[2026-09-14 12:50:05]   ✗ Error submitting limit order for SPY: {"available":"0","code":40310000,"existing_qty":"1","held_for_orders":"1","message":"insufficient qty available for order (requested: 1, available: 0)","related_orders":["6cfcab14-912d-4f1b-bead-f7a7cac647df"],"symbol":"SPY"}
+[2026-09-14 12:50:05]   ✗ Error submitting market order for SPY: {"available":"0","code":40310000,"existing_qty":"1","held_for_orders":"1","message":"insufficient qty available for order (requested: 1, available: 0)","related_orders":["6cfcab14-912d-4f1b-bead-f7a7cac647df"],"symbol":"SPY"}
+[2026-09-14 12:50:05] 
+============================================================
+[2026-09-14 12:50:05] Closeout Summary: 0 successful, 3 failed
+[2026-09-14 12:50:05] ============================================================
+
+[2026-09-14 12:50:06] ✓ Email report sent to tarun.chopra@gmail.com

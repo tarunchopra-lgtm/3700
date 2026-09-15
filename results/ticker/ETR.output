@@ -3,27 +3,27 @@ TICKER: ETR
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $111.43
-  ATR (14-day): $2.50
+  Price:        $111.47
+  ATR (14-day): $2.53
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $104.86 - $106.72
-  Size:         $1.86
-  Distance:     $4.71 (188% of ATR)
-  Formed:       2026-08-31
+  Range:        $104.31 - $107.14
+  Size:         $2.82
+  Distance:     $4.33 (171% of ATR)
+  Formed:       2026-08-24
   FRESHNESS:    STALE
   Notes:        STALE - Daily candle tested zone yesterday (low $105.75)
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $105.72 - $108.81
-  Size:         $3.09
-  Distance:     $2.62
-  Formed:       2026-09-10
+  Range:        $109.76 - $111.96
+  Size:         $2.20
+  Distance:     $0.00
+  Formed:       2026-06-10
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($111.43 >= zone $105.72)
+  Notes:        STALE - Price reached zone ($111.47 >= zone $109.76)
 
 TRADE METRICS:
-  Stop Loss Distance:  $6.57
-  Profit Target (PT):  $-5.71
-  Risk:Reward Ratio:   1:-0.87
+  Stop Loss Distance:  $7.16
+  Profit Target (PT):  $-1.71
+  Risk:Reward Ratio:   1:-0.24

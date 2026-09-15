@@ -3,27 +3,27 @@ TICKER: BNY
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $173.15
+  Price:        $172.68
   ATR (14-day): $2.58
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $157.15 - $161.01
-  Size:         $3.86
-  Distance:     $12.14 (471% of ATR)
-  Formed:       2026-08-20
+  Range:        $139.68 - $146.45
+  Size:         $6.77
+  Distance:     $26.23 (1019% of ATR)
+  Formed:       2026-06-11
   FRESHNESS:    FRESH
-  Notes:        Limited data
+  Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
   Range:        $163.58 - $165.84
   Size:         $2.26
-  Distance:     $7.31
+  Distance:     $6.84
   Formed:       2026-09-04
-  FRESHNESS:    FRESH
-  Notes:        Limited data
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($172.68 >= zone $163.58)
 
 TRADE METRICS:
-  Stop Loss Distance:  $16.00
-  Profit Target (PT):  $-9.57
-  Risk:Reward Ratio:   1:-0.60
+  Stop Loss Distance:  $33.00
+  Profit Target (PT):  $-9.10
+  Risk:Reward Ratio:   1:-0.28

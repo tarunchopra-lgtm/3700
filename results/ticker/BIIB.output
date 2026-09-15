@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: BIIB
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $229.95
+  ATR (14-day): $5.86
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $194.04 - $203.45
+  Size:         $9.41
+  Distance:     $26.50 (452% of ATR)
+  Formed:       2026-06-12
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $214.16 - $222.15
+  Size:         $7.99
+  Distance:     $7.80
+  Formed:       2026-08-20
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($229.95 >= zone $214.16)
+
+TRADE METRICS:
+  Stop Loss Distance:  $35.91
+  Profit Target (PT):  $-15.79
+  Risk:Reward Ratio:   1:-0.44

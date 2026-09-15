@@ -3,17 +3,17 @@ TICKER: SOLV
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $91.82
-  ATR (14-day): $2.61
+  Price:        $93.19
+  ATR (14-day): $2.76
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $86.64 - $89.75
-  Size:         $3.11
-  Distance:     $2.07 (79% of ATR)
-  Formed:       2026-08-17
-  FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $87.64)
+  Range:        $74.30 - $77.83
+  Size:         $3.53
+  Distance:     $15.36 (556% of ATR)
+  Formed:       2026-06-16
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
   Range:        $90.75 - $94.16
@@ -21,9 +21,9 @@ SUPPLY ZONE (Sell Zone):
   Distance:     $0.00
   Formed:       2026-09-02
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($91.82 >= zone $90.75)
+  Notes:        STALE - Price reached zone ($93.19 >= zone $90.75)
 
 TRADE METRICS:
-  Stop Loss Distance:  $5.18
-  Profit Target (PT):  $-1.07
-  Risk:Reward Ratio:   1:-0.21
+  Stop Loss Distance:  $18.89
+  Profit Target (PT):  $-2.44
+  Risk:Reward Ratio:   1:-0.13

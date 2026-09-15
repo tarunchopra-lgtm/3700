@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: EG
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $396.08
+  ATR (14-day): $8.59
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $333.60 - $339.91
+  Size:         $6.31
+  Distance:     $56.17 (654% of ATR)
+  Formed:       2026-06-12
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $368.86 - $378.86
+  Size:         $10.00
+  Distance:     $17.22
+  Formed:       2026-07-10
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($396.08 >= zone $368.86)
+
+TRADE METRICS:
+  Stop Loss Distance:  $62.48
+  Profit Target (PT):  $-27.22
+  Risk:Reward Ratio:   1:-0.44

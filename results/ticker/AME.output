@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: AME
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $258.62
+  ATR (14-day): $5.01
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $221.00 - $229.15
+  Size:         $8.16
+  Distance:     $29.47 (588% of ATR)
+  Formed:       2026-06-11
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $235.46 - $244.71
+  Size:         $9.25
+  Distance:     $13.91
+  Formed:       2026-06-26
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($258.62 >= zone $235.46)
+
+TRADE METRICS:
+  Stop Loss Distance:  $37.62
+  Profit Target (PT):  $-23.16
+  Risk:Reward Ratio:   1:-0.62

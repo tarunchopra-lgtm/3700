@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: PCG
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $14.55
+  ATR (14-day): $0.52
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $13.09 - $15.84
+  Size:         $2.75
+  Distance:     $0.00 (0% of ATR)
+  Formed:       2026-08-31
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($14.55 <= zone $15.84)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $17.18 - $17.43
+  Size:         $0.25
+  Distance:     $2.63
+  Formed:       2026-06-29
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+TRADE METRICS:
+  Stop Loss Distance:  $1.46
+  Profit Target (PT):  $2.63
+  Risk:Reward Ratio:   1:1.80

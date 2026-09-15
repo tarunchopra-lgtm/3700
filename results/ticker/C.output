@@ -3,27 +3,27 @@ TICKER: C
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $144.98
-  ATR (14-day): $3.36
+  Price:        $144.59
+  ATR (14-day): $3.13
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $129.61 - $132.25
-  Size:         $2.64
-  Distance:     $12.73 (379% of ATR)
-  Formed:       2026-08-21
+  Range:        $127.08 - $131.27
+  Size:         $4.19
+  Distance:     $13.32 (425% of ATR)
+  Formed:       2026-07-17
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $131.77 - $144.28
-  Size:         $12.51
-  Distance:     $0.70
-  Formed:       2026-07-15
+  Range:        $140.76 - $145.09
+  Size:         $4.34
+  Distance:     $0.00
+  Formed:       2026-06-29
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($144.98 >= zone $131.77)
+  Notes:        STALE - Price reached zone ($144.59 >= zone $140.76)
 
 TRADE METRICS:
-  Stop Loss Distance:  $15.37
-  Profit Target (PT):  $-13.21
-  Risk:Reward Ratio:   1:-0.86
+  Stop Loss Distance:  $17.51
+  Profit Target (PT):  $-3.83
+  Risk:Reward Ratio:   1:-0.22

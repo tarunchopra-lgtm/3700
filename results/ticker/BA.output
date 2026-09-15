@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: BA
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $219.30
+  ATR (14-day): $7.72
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $203.90 - $211.70
+  Size:         $7.80
+  Distance:     $7.60 (98% of ATR)
+  Formed:       2026-07-21
+  FRESHNESS:    STALE
+  Notes:        STALE - Daily candle tested zone yesterday (low $204.73)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $216.70 - $231.34
+  Size:         $14.64
+  Distance:     $0.00
+  Formed:       2026-06-12
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($219.30 >= zone $216.70)
+
+TRADE METRICS:
+  Stop Loss Distance:  $15.40
+  Profit Target (PT):  $-2.60
+  Risk:Reward Ratio:   1:-0.17

@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: INCY
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $128.10
+  ATR (14-day): $4.18
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $96.09 - $103.33
+  Size:         $7.24
+  Distance:     $24.77 (593% of ATR)
+  Formed:       2026-06-16
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $125.83 - $132.60
+  Size:         $6.77
+  Distance:     $0.00
+  Formed:       2026-07-29
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($128.10 >= zone $125.83)
+
+TRADE METRICS:
+  Stop Loss Distance:  $32.01
+  Profit Target (PT):  $-2.27
+  Risk:Reward Ratio:   1:-0.07

@@ -3,27 +3,27 @@ TICKER: NWSA
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $30.98
-  ATR (14-day): $0.96
+  Price:        $31.65
+  ATR (14-day): $0.94
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $28.20 - $28.62
-  Size:         $0.42
-  Distance:     $2.36 (245% of ATR)
-  Formed:       2026-08-10
+  Range:        $25.28 - $25.82
+  Size:         $0.54
+  Distance:     $5.82 (622% of ATR)
+  Formed:       2026-06-15
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $29.22 - $30.89
-  Size:         $1.67
-  Distance:     $0.09
-  Formed:       2026-09-08
+  Range:        $30.90 - $31.66
+  Size:         $0.76
+  Distance:     $0.00
+  Formed:       2026-08-28
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($30.98 >= zone $29.22)
+  Notes:        STALE - Price reached zone ($31.65 >= zone $30.90)
 
 TRADE METRICS:
-  Stop Loss Distance:  $2.78
-  Profit Target (PT):  $-1.76
-  Risk:Reward Ratio:   1:-0.63
+  Stop Loss Distance:  $6.37
+  Profit Target (PT):  $-0.75
+  Risk:Reward Ratio:   1:-0.12

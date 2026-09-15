@@ -2,7 +2,7 @@
 """
 zone_scan.py - Batch Zone Scanning with Individual Ticker Reports
 
-Scans stocks from watchlists in batches of 100 (25 parallel workers),
+Scans stocks from watchlists in batches of 100 (10 parallel workers),
 finds demand/supply zones, and generates individual ticker reports.
 Post-processes to create top 10 picks sorted by distance metrics.
 
@@ -12,6 +12,7 @@ Usage:
 Output:
     results/ticker/SYMBOL.output - Individual reports per stock
     results/pick.output - Top 10 picks (within ATR, sorted by distance)
+    results/daily_report.txt - All stocks sorted by ratio metric
 """
 
 import subprocess
@@ -119,7 +120,7 @@ def run_find_zones(symbol: str) -> dict | None:
     try:
         from strategies.find_zones import analyze_zones
         
-        demand_zone, supply_zone = analyze_zones(symbol, lookback_days=100, sensitivity='balanced')
+        demand_zone, supply_zone, current_price, atr = analyze_zones(symbol, lookback_days=100, sensitivity='balanced')
         
         if not demand_zone or not supply_zone:
             return None
@@ -379,12 +380,12 @@ def scan_stock(symbol: str, client: StockHistoricalDataClient, ticker_dir: Path)
 
 
 def process_batch(batch_symbols: list, batch_num: int, client: StockHistoricalDataClient, ticker_dir: Path) -> list:
-    """Process a batch of stocks in parallel (25 workers)"""
+    """Process a batch of stocks in parallel (10 workers)"""
     batch_setups = []
     
     print(f"\n[BATCH {batch_num}] Processing {len(batch_symbols)} stocks...")
     
-    with ThreadPoolExecutor(max_workers=25) as executor:
+    with ThreadPoolExecutor(max_workers=10) as executor:
         futures = {
             executor.submit(scan_stock, symbol, client, ticker_dir): symbol 
             for symbol in batch_symbols
@@ -406,6 +407,88 @@ def process_batch(batch_symbols: list, batch_num: int, client: StockHistoricalDa
                 print(f"  [{i:2d}/{len(batch_symbols)}] {symbol:6s} - Error: {str(e)[:30]}")
     
     return batch_setups
+
+
+def compile_daily_report(all_setups: list, report_path: Path) -> None:
+    """
+    Compile daily report with analysis metrics sorted by demand/gap ratio.
+    
+    Report shows:
+    TICKER CURRENT_PRICE ATR DEMAND_ZONE SUPPLY_ZONE GAP SIZE_DEMAND RATIO_DEMAND_vs_GAP
+    
+    Sorted by: ratio_of_demand_zone_vs_gap (ascending - tighter zones first)
+    """
+    if not all_setups:
+        with open(report_path, 'w', encoding='utf-8') as f:
+            f.write("No stocks found with demand/supply zones.\n")
+        return
+    
+    # Calculate metrics for each setup
+    report_data = []
+    for setup in all_setups:
+        gap = setup.supply_zone_low - setup.demand_zone_high
+        size_demand = setup.demand_zone_size
+        
+        # Ratio = demand zone size / gap between zones
+        # Lower ratio = smaller demand zone relative to gap = tighter setup
+        ratio = size_demand / gap if gap > 0 else 0
+        
+        report_data.append({
+            'ticker': setup.symbol,
+            'current_price': setup.current_price,
+            'atr': setup.atr,
+            'demand_zone': f"${setup.demand_zone_low:.2f}-${setup.demand_zone_high:.2f}",
+            'supply_zone': f"${setup.supply_zone_low:.2f}-${setup.supply_zone_high:.2f}",
+            'gap': gap,
+            'size_demand': size_demand,
+            'ratio': ratio,
+            'setup': setup  # Keep reference for additional info
+        })
+    
+    # Sort by ratio (ascending - smaller ratios first = tighter zones)
+    report_data.sort(key=lambda x: x['ratio'])
+    
+    # Write report
+    with open(report_path, 'w', encoding='utf-8') as f:
+        # Header with column names
+        f.write(f"{'TICKER':<8} {'PRICE':<10} {'ATR':<8} {'DEMAND_ZONE':<25} {'SUPPLY_ZONE':<25} {'GAP':<8} {'D_SIZE':<8} {'RATIO':<8}\n")
+        f.write("="*120 + "\n")
+        
+        # Data rows
+        for data in report_data:
+            f.write(
+                f"{data['ticker']:<8} "
+                f"${data['current_price']:<9.2f} "
+                f"${data['atr']:<7.2f} "
+                f"{data['demand_zone']:<25} "
+                f"{data['supply_zone']:<25} "
+                f"${data['gap']:<7.2f} "
+                f"${data['size_demand']:<7.2f} "
+                f"{data['ratio']:<7.3f}\n"
+            )
+        
+        # Footer with stats
+        f.write("="*120 + "\n")
+        f.write(f"Total Stocks Analyzed: {len(report_data)}\n")
+        if report_data:
+            avg_ratio = sum(d['ratio'] for d in report_data) / len(report_data)
+            min_ratio = min(d['ratio'] for d in report_data)
+            max_ratio = max(d['ratio'] for d in report_data)
+            f.write(f"Ratio Statistics:\n")
+            f.write(f"  Min:  {min_ratio:.3f} ({report_data[0]['ticker']})\n")
+            f.write(f"  Avg:  {avg_ratio:.3f}\n")
+            f.write(f"  Max:  {max_ratio:.3f}\n")
+        
+        f.write(f"\nGenerated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+        f.write(f"\nColumn Definitions:\n")
+        f.write(f"  TICKER: Stock symbol\n")
+        f.write(f"  PRICE: Current price\n")
+        f.write(f"  ATR: 14-day Average True Range\n")
+        f.write(f"  DEMAND_ZONE: Buy zone range (low-high)\n")
+        f.write(f"  SUPPLY_ZONE: Sell zone range (low-high)\n")
+        f.write(f"  GAP: Distance from demand zone high to supply zone low\n")
+        f.write(f"  D_SIZE: Size of demand zone\n")
+        f.write(f"  RATIO: Demand zone size / Gap (lower = tighter setup)\n")
 
 
 def compile_top_picks(all_setups: list, pick_path: Path) -> None:
@@ -548,8 +631,13 @@ def main():
     pick_path = Path(__file__).parent.parent / "results" / "pick.output"
     compile_top_picks(all_setups, pick_path)
     
+    # Create daily report file
+    report_path = Path(__file__).parent.parent / "results" / "daily_report.txt"
+    compile_daily_report(all_setups, report_path)
+    
     print(f"\n[OK] Individual ticker files:  results/ticker/*.output ({len(all_setups)} files)")
     print(f"[OK] Top 10 picks file:       results/pick.output")
+    print(f"[OK] Daily report file:       results/daily_report.txt")
     
     # Console summary
     if actionable:
@@ -574,9 +662,10 @@ if __name__ == "__main__":
         print("  --help, -h        Show this help message")
         print("\nDESCRIPTION:")
         print("  Scans all stocks from watchlist files in batches of 100 stocks")
-        print("  Uses 25 parallel workers per batch for fast processing")
+        print("  Uses 10 parallel workers per batch for processing")
         print("  Creates individual ticker report files for each stock with zones")
         print("  Generates top 10 picks sorted by proximity metrics")
+        print("  Generates daily report sorted by demand/gap ratio")
         print("\nWATCHLIST FILES:")
         print("  lists/etf.txt - Exchange Traded Funds")
         print("  lists/spy.txt - S&P 500 stocks")
@@ -587,7 +676,7 @@ if __name__ == "__main__":
         print("\nEXAMPLE:")
         print("  python strategies/zone_scan.py")
         print("\nEXECUTION TIME:")
-        print("  ~30-45 minutes for full scan of 541 stocks (batched, parallel)")
+        print("  ~45-60 minutes for full scan of 541 stocks (batched, 10 parallel workers)")
         print()
         sys.exit(0)
     

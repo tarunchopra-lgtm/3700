@@ -3,27 +3,27 @@ TICKER: WELL
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $247.22
-  ATR (14-day): $5.35
+  Price:        $250.64
+  ATR (14-day): $5.15
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $233.52 - $237.89
-  Size:         $4.37
-  Distance:     $9.33 (174% of ATR)
-  Formed:       2026-08-31
-  FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $234.94)
+  Range:        $207.90 - $214.33
+  Size:         $6.43
+  Distance:     $36.31 (705% of ATR)
+  Formed:       2026-06-10
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $234.72 - $240.35
-  Size:         $5.63
-  Distance:     $6.87
-  Formed:       2026-09-09
+  Range:        $241.79 - $247.45
+  Size:         $5.66
+  Distance:     $3.19
+  Formed:       2026-07-17
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($247.22 >= zone $234.72)
+  Notes:        STALE - Price reached zone ($250.64 >= zone $241.79)
 
 TRADE METRICS:
-  Stop Loss Distance:  $13.70
-  Profit Target (PT):  $-12.50
-  Risk:Reward Ratio:   1:-0.91
+  Stop Loss Distance:  $42.74
+  Profit Target (PT):  $-8.85
+  Risk:Reward Ratio:   1:-0.21

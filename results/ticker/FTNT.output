@@ -3,27 +3,27 @@ TICKER: FTNT
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $163.20
-  ATR (14-day): $6.86
+  Price:        $169.94
+  ATR (14-day): $6.88
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $151.80 - $162.28
-  Size:         $10.47
-  Distance:     $0.92 (13% of ATR)
-  Formed:       2026-09-02
-  FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $155.35)
+  Range:        $133.05 - $141.30
+  Size:         $8.25
+  Distance:     $28.64 (416% of ATR)
+  Formed:       2026-06-10
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $154.00 - $161.98
-  Size:         $7.98
-  Distance:     $1.22
-  Formed:       2026-09-09
+  Range:        $152.25 - $164.01
+  Size:         $11.76
+  Distance:     $5.93
+  Formed:       2026-07-07
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($163.20 >= zone $154.00)
+  Notes:        STALE - Price reached zone ($169.94 >= zone $152.25)
 
 TRADE METRICS:
-  Stop Loss Distance:  $11.40
-  Profit Target (PT):  $-9.20
-  Risk:Reward Ratio:   1:-0.81
+  Stop Loss Distance:  $36.89
+  Profit Target (PT):  $-17.69
+  Risk:Reward Ratio:   1:-0.48

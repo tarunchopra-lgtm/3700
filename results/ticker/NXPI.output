@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: NXPI
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $239.40
+  ATR (14-day): $11.55
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $218.24 - $229.06
+  Size:         $10.82
+  Distance:     $10.34 (90% of ATR)
+  Formed:       2026-08-03
+  FRESHNESS:    STALE
+  Notes:        STALE - Daily candle tested zone yesterday (low $219.30)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $298.12 - $320.97
+  Size:         $22.85
+  Distance:     $58.72
+  Formed:       2026-06-12
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+TRADE METRICS:
+  Stop Loss Distance:  $21.16
+  Profit Target (PT):  $58.72
+  Risk:Reward Ratio:   1:2.78

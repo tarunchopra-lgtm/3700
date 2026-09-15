@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: STLD
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $256.78
+  ATR (14-day): $8.06
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $216.36 - $236.12
+  Size:         $19.76
+  Distance:     $20.66 (256% of ATR)
+  Formed:       2026-06-30
+  FRESHNESS:    STALE
+  Notes:        STALE - Daily candle tested zone today (low $235.63)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $279.65 - $285.88
+  Size:         $6.23
+  Distance:     $22.87
+  Formed:       2026-06-12
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+TRADE METRICS:
+  Stop Loss Distance:  $40.42
+  Profit Target (PT):  $22.87
+  Risk:Reward Ratio:   1:0.57

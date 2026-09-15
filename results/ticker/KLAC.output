@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: KLAC
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $175.62
+  ATR (14-day): $12.43
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $169.81 - $190.00
+  Size:         $20.19
+  Distance:     $0.00 (0% of ATR)
+  Formed:       2026-07-30
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($175.62 <= zone $190.00)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $236.00 - $2431.29
+  Size:         $2195.29
+  Distance:     $60.38
+  Formed:       2026-06-12
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+TRADE METRICS:
+  Stop Loss Distance:  $5.81
+  Profit Target (PT):  $60.38
+  Risk:Reward Ratio:   1:10.39

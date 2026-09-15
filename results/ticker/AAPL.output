@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: AAPL
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $350.86
+  ATR (14-day): $9.37
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $287.38 - $294.75
+  Size:         $7.37
+  Distance:     $56.11 (599% of ATR)
+  Formed:       2026-06-10
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $334.02 - $342.89
+  Size:         $8.87
+  Distance:     $7.97
+  Formed:       2026-07-27
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($350.86 >= zone $334.02)
+
+TRADE METRICS:
+  Stop Loss Distance:  $63.48
+  Profit Target (PT):  $-16.84
+  Risk:Reward Ratio:   1:-0.27

@@ -3,27 +3,27 @@ TICKER: BF.B
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $27.58
-  ATR (14-day): $0.92
-  Within ATR:   YES
+  Price:        $28.19
+  ATR (14-day): $0.94
+  Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $26.08 - $27.36
-  Size:         $1.28
-  Distance:     $0.22 (24% of ATR)
-  Formed:       2026-09-08
-  FRESHNESS:    FRESH
-  Notes:        Limited data
+  Range:        $25.27 - $26.84
+  Size:         $1.57
+  Distance:     $1.35 (143% of ATR)
+  Formed:       2026-06-18
+  FRESHNESS:    STALE
+  Notes:        STALE - Daily candle tested zone yesterday (low $26.09)
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $26.08 - $27.36
-  Size:         $1.28
-  Distance:     $0.22
-  Formed:       2026-09-09
-  FRESHNESS:    FRESH
-  Notes:        Limited data
+  Range:        $26.45 - $27.58
+  Size:         $1.13
+  Distance:     $0.61
+  Formed:       2026-06-22
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($28.19 >= zone $26.45)
 
 TRADE METRICS:
-  Stop Loss Distance:  $1.50
-  Profit Target (PT):  $-1.50
-  Risk:Reward Ratio:   1:-1.00
+  Stop Loss Distance:  $2.92
+  Profit Target (PT):  $-1.75
+  Risk:Reward Ratio:   1:-0.60

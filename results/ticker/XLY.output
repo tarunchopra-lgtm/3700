@@ -3,27 +3,27 @@ TICKER: XLY
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $116.49
-  ATR (14-day): $2.12
+  Price:        $115.67
+  ATR (14-day): $2.13
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $108.29 - $111.36
-  Size:         $3.07
-  Distance:     $5.13 (242% of ATR)
-  Formed:       2026-07-24
+  Range:        $108.29 - $115.23
+  Size:         $6.94
+  Distance:     $0.44 (21% of ATR)
+  Formed:       2026-07-21
   FRESHNESS:    STALE
   Notes:        STALE - Daily candle tested zone yesterday (low $111.02)
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $114.25 - $117.06
-  Size:         $2.81
+  Range:        $114.81 - $119.51
+  Size:         $4.70
   Distance:     $0.00
-  Formed:       2026-09-02
+  Formed:       2026-06-12
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($116.49 >= zone $114.25)
+  Notes:        STALE - Price reached zone ($115.67 >= zone $114.81)
 
 TRADE METRICS:
-  Stop Loss Distance:  $8.20
-  Profit Target (PT):  $-2.24
-  Risk:Reward Ratio:   1:-0.27
+  Stop Loss Distance:  $7.38
+  Profit Target (PT):  $-0.86
+  Risk:Reward Ratio:   1:-0.12

@@ -3,27 +3,27 @@ TICKER: FIX
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $1751.30
-  ATR (14-day): $115.20
+  Price:        $1666.37
+  ATR (14-day): $112.88
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $1578.56 - $1629.97
-  Size:         $51.41
-  Distance:     $121.33 (105% of ATR)
-  Formed:       2026-09-10
+  Range:        $1491.24 - $1802.00
+  Size:         $310.76
+  Distance:     $0.00 (0% of ATR)
+  Formed:       2026-07-27
   FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $1579.73)
+  Notes:        STALE - Price reached zone ($1666.37 <= zone $1802.00)
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $1578.34 - $1711.30
-  Size:         $132.96
-  Distance:     $40.00
-  Formed:       2026-08-24
-  FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($1751.30 >= zone $1578.34)
+  Range:        $1845.19 - $1912.87
+  Size:         $67.68
+  Distance:     $178.82
+  Formed:       2026-06-12
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $172.74
-  Profit Target (PT):  $-172.96
-  Risk:Reward Ratio:   1:-1.00
+  Stop Loss Distance:  $175.13
+  Profit Target (PT):  $178.82
+  Risk:Reward Ratio:   1:1.02

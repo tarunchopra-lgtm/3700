@@ -3,27 +3,27 @@ TICKER: RSG
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $236.25
-  ATR (14-day): $4.70
+  Price:        $236.76
+  ATR (14-day): $4.40
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $218.86 - $222.63
-  Size:         $3.77
-  Distance:     $13.62 (290% of ATR)
-  Formed:       2026-08-27
-  FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $221.11)
+  Range:        $207.93 - $214.04
+  Size:         $6.11
+  Distance:     $22.72 (516% of ATR)
+  Formed:       2026-06-10
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $219.52 - $228.22
-  Size:         $8.70
-  Distance:     $8.03
-  Formed:       2026-07-20
+  Range:        $220.41 - $228.22
+  Size:         $7.81
+  Distance:     $8.54
+  Formed:       2026-07-17
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($236.25 >= zone $219.52)
+  Notes:        STALE - Price reached zone ($236.76 >= zone $220.41)
 
 TRADE METRICS:
-  Stop Loss Distance:  $17.39
-  Profit Target (PT):  $-16.73
-  Risk:Reward Ratio:   1:-0.96
+  Stop Loss Distance:  $28.83
+  Profit Target (PT):  $-16.35
+  Risk:Reward Ratio:   1:-0.57

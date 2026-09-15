@@ -3,27 +3,27 @@ TICKER: TTD
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $15.07
-  ATR (14-day): $1.27
+  Price:        $15.24
+  ATR (14-day): $1.29
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $12.83 - $14.57
   Size:         $1.74
-  Distance:     $0.50 (39% of ATR)
+  Distance:     $0.67 (52% of ATR)
   Formed:       2026-08-10
   FRESHNESS:    STALE
   Notes:        STALE - Daily candle tested zone yesterday (low $13.71)
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $13.82 - $15.26
-  Size:         $1.44
-  Distance:     $0.00
-  Formed:       2026-09-08
-  FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($15.07 >= zone $13.82)
+  Range:        $19.20 - $20.59
+  Size:         $1.39
+  Distance:     $3.96
+  Formed:       2026-06-10
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $2.24
-  Profit Target (PT):  $-1.25
-  Risk:Reward Ratio:   1:-0.56
+  Stop Loss Distance:  $2.41
+  Profit Target (PT):  $3.96
+  Risk:Reward Ratio:   1:1.64

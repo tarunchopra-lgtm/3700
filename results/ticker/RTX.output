@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: RTX
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $206.57
+  ATR (14-day): $5.67
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $176.93 - $186.46
+  Size:         $9.53
+  Distance:     $20.11 (355% of ATR)
+  Formed:       2026-06-11
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $197.96 - $202.55
+  Size:         $4.59
+  Distance:     $4.02
+  Formed:       2026-07-06
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($206.57 >= zone $197.96)
+
+TRADE METRICS:
+  Stop Loss Distance:  $29.64
+  Profit Target (PT):  $-8.61
+  Risk:Reward Ratio:   1:-0.29

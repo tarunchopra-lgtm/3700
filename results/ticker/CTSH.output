@@ -3,27 +3,27 @@ TICKER: CTSH
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $61.88
-  ATR (14-day): $2.87
+  Price:        $66.45
+  ATR (14-day): $2.95
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $57.89 - $62.38
-  Size:         $4.49
-  Distance:     $0.00 (0% of ATR)
-  Formed:       2026-09-08
-  FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($61.88 <= zone $62.38)
+  Range:        $40.77 - $44.57
+  Size:         $3.80
+  Distance:     $21.88 (743% of ATR)
+  Formed:       2026-06-22
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $58.08 - $62.38
-  Size:         $4.30
-  Distance:     $0.00
-  Formed:       2026-09-09
+  Range:        $62.71 - $65.42
+  Size:         $2.71
+  Distance:     $1.03
+  Formed:       2026-09-01
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($61.88 >= zone $58.08)
+  Notes:        STALE - Price reached zone ($66.45 >= zone $62.71)
 
 TRADE METRICS:
-  Stop Loss Distance:  $3.99
-  Profit Target (PT):  $-3.80
-  Risk:Reward Ratio:   1:-0.95
+  Stop Loss Distance:  $25.68
+  Profit Target (PT):  $-3.74
+  Risk:Reward Ratio:   1:-0.15

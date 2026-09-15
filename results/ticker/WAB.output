@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: WAB
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $311.85
+  ATR (14-day): $8.09
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $254.44 - $272.75
+  Size:         $18.31
+  Distance:     $39.10 (483% of ATR)
+  Formed:       2026-06-11
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $291.49 - $302.96
+  Size:         $11.47
+  Distance:     $8.89
+  Formed:       2026-07-23
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($311.85 >= zone $291.49)
+
+TRADE METRICS:
+  Stop Loss Distance:  $57.41
+  Profit Target (PT):  $-20.36
+  Risk:Reward Ratio:   1:-0.35

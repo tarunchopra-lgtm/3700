@@ -3,27 +3,27 @@ TICKER: NDAQ
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $95.83
+  Price:        $97.65
   ATR (14-day): $2.07
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $90.10 - $92.93
-  Size:         $2.83
-  Distance:     $2.90 (140% of ATR)
-  Formed:       2026-07-24
-  FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $91.73)
+  Range:        $76.76 - $79.85
+  Size:         $3.09
+  Distance:     $17.80 (862% of ATR)
+  Formed:       2026-06-26
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $93.90 - $96.25
-  Size:         $2.35
-  Distance:     $0.00
-  Formed:       2026-09-09
+  Range:        $93.26 - $96.87
+  Size:         $3.61
+  Distance:     $0.78
+  Formed:       2026-07-29
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($95.83 >= zone $93.90)
+  Notes:        STALE - Price reached zone ($97.65 >= zone $93.26)
 
 TRADE METRICS:
-  Stop Loss Distance:  $5.73
-  Profit Target (PT):  $-1.93
-  Risk:Reward Ratio:   1:-0.34
+  Stop Loss Distance:  $20.89
+  Profit Target (PT):  $-4.39
+  Risk:Reward Ratio:   1:-0.21

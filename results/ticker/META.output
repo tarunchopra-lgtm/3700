@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: META
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $687.75
+  ATR (14-day): $22.41
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $557.01 - $576.07
+  Size:         $19.06
+  Distance:     $111.68 (498% of ATR)
+  Formed:       2026-06-11
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $633.27 - $677.86
+  Size:         $44.59
+  Distance:     $9.89
+  Formed:       2026-07-10
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($687.75 >= zone $633.27)
+
+TRADE METRICS:
+  Stop Loss Distance:  $130.74
+  Profit Target (PT):  $-54.48
+  Risk:Reward Ratio:   1:-0.42

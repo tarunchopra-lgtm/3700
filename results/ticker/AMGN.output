@@ -3,27 +3,27 @@ TICKER: AMGN
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $400.15
-  ATR (14-day): $12.01
-  Within ATR:   YES
+  Price:        $397.95
+  ATR (14-day): $12.32
+  Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $375.96 - $390.92
-  Size:         $14.96
-  Distance:     $9.23 (77% of ATR)
-  Formed:       2026-08-04
+  Range:        $334.05 - $349.40
+  Size:         $15.35
+  Distance:     $48.55 (394% of ATR)
+  Formed:       2026-06-22
   FRESHNESS:    FRESH
-  Notes:        Limited data
+  Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $389.28 - $410.02
-  Size:         $20.75
-  Distance:     $0.00
-  Formed:       2026-09-09
+  Range:        $401.07 - $418.40
+  Size:         $17.33
+  Distance:     $3.12
+  Formed:       2026-08-06
   FRESHNESS:    FRESH
-  Notes:        Limited data
+  Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $24.19
-  Profit Target (PT):  $-10.87
-  Risk:Reward Ratio:   1:-0.45
+  Stop Loss Distance:  $63.90
+  Profit Target (PT):  $3.12
+  Risk:Reward Ratio:   1:0.05

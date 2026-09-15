@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: ALB
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $121.41
+  ATR (14-day): $4.75
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $112.22 - $118.56
+  Size:         $6.34
+  Distance:     $2.85 (60% of ATR)
+  Formed:       2026-07-30
+  FRESHNESS:    STALE
+  Notes:        STALE - Daily candle tested zone today (low $117.24)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $159.74 - $174.33
+  Size:         $14.59
+  Distance:     $38.33
+  Formed:       2026-06-12
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+TRADE METRICS:
+  Stop Loss Distance:  $9.19
+  Profit Target (PT):  $38.33
+  Risk:Reward Ratio:   1:4.17

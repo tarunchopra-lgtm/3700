@@ -3,27 +3,27 @@ TICKER: EFA
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $106.70
-  ATR (14-day): $1.30
+  Price:        $109.57
+  ATR (14-day): $1.22
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $104.60 - $106.32
-  Size:         $1.72
-  Distance:     $0.38 (29% of ATR)
-  Formed:       2026-07-31
-  FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $105.50)
+  Range:        $101.34 - $102.90
+  Size:         $1.56
+  Distance:     $6.67 (546% of ATR)
+  Formed:       2026-06-10
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $106.50 - $108.41
-  Size:         $1.91
-  Distance:     $0.00
-  Formed:       2026-09-09
+  Range:        $107.61 - $108.82
+  Size:         $1.21
+  Distance:     $0.75
+  Formed:       2026-08-27
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($106.70 >= zone $106.50)
+  Notes:        STALE - Price reached zone ($109.57 >= zone $107.61)
 
 TRADE METRICS:
-  Stop Loss Distance:  $2.10
-  Profit Target (PT):  $-0.20
-  Risk:Reward Ratio:   1:-0.10
+  Stop Loss Distance:  $8.23
+  Profit Target (PT):  $-1.96
+  Risk:Reward Ratio:   1:-0.24

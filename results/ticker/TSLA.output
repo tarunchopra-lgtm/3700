@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: TSLA
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $376.80
+  ATR (14-day): $14.23
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $304.28 - $322.96
+  Size:         $18.68
+  Distance:     $53.84 (378% of ATR)
+  Formed:       2026-07-24
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $386.76 - $406.68
+  Size:         $19.92
+  Distance:     $9.96
+  Formed:       2026-06-12
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+TRADE METRICS:
+  Stop Loss Distance:  $72.52
+  Profit Target (PT):  $9.96
+  Risk:Reward Ratio:   1:0.14

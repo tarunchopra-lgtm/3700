@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: WAT
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $444.00
+  ATR (14-day): $12.46
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $353.63 - $365.00
+  Size:         $11.37
+  Distance:     $79.00 (634% of ATR)
+  Formed:       2026-06-11
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $404.77 - $420.26
+  Size:         $15.49
+  Distance:     $23.74
+  Formed:       2026-08-11
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($444.00 >= zone $404.77)
+
+TRADE METRICS:
+  Stop Loss Distance:  $90.37
+  Profit Target (PT):  $-39.23
+  Risk:Reward Ratio:   1:-0.43

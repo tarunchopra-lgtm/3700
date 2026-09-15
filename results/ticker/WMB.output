@@ -3,27 +3,27 @@ TICKER: WMB
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $76.44
-  ATR (14-day): $1.92
+  Price:        $77.69
+  ATR (14-day): $1.89
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $69.60 - $71.49
-  Size:         $1.89
-  Distance:     $4.95 (258% of ATR)
-  Formed:       2026-08-24
+  Range:        $70.77 - $72.17
+  Size:         $1.41
+  Distance:     $5.52 (292% of ATR)
+  Formed:       2026-06-16
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $73.75 - $78.48
-  Size:         $4.73
+  Range:        $74.59 - $79.00
+  Size:         $4.41
   Distance:     $0.00
-  Formed:       2026-06-30
+  Formed:       2026-06-24
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($76.44 >= zone $73.75)
+  Notes:        STALE - Price reached zone ($77.69 >= zone $74.59)
 
 TRADE METRICS:
-  Stop Loss Distance:  $6.84
-  Profit Target (PT):  $-2.69
-  Risk:Reward Ratio:   1:-0.39
+  Stop Loss Distance:  $6.92
+  Profit Target (PT):  $-3.10
+  Risk:Reward Ratio:   1:-0.45

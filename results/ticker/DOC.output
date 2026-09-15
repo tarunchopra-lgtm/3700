@@ -3,27 +3,27 @@ TICKER: DOC
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $21.47
+  Price:        $21.62
   ATR (14-day): $0.50
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $19.31 - $19.73
   Size:         $0.42
-  Distance:     $1.74 (350% of ATR)
+  Distance:     $1.89 (377% of ATR)
   Formed:       2026-06-18
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $20.45 - $21.15
-  Size:         $0.70
-  Distance:     $0.32
-  Formed:       2026-09-08
+  Range:        $20.28 - $20.82
+  Size:         $0.54
+  Distance:     $0.80
+  Formed:       2026-06-10
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($21.47 >= zone $20.45)
+  Notes:        STALE - Price reached zone ($21.62 >= zone $20.28)
 
 TRADE METRICS:
-  Stop Loss Distance:  $2.16
-  Profit Target (PT):  $-1.02
-  Risk:Reward Ratio:   1:-0.47
+  Stop Loss Distance:  $2.31
+  Profit Target (PT):  $-1.34
+  Risk:Reward Ratio:   1:-0.58

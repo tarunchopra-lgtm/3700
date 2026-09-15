@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: MS
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $223.65
+  ATR (14-day): $5.50
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $205.83 - $210.24
+  Size:         $4.41
+  Distance:     $13.41 (244% of ATR)
+  Formed:       2026-06-10
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $222.12 - $230.47
+  Size:         $8.35
+  Distance:     $0.00
+  Formed:       2026-06-22
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($223.65 >= zone $222.12)
+
+TRADE METRICS:
+  Stop Loss Distance:  $17.82
+  Profit Target (PT):  $-1.53
+  Risk:Reward Ratio:   1:-0.09

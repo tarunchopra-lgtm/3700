@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: FERG
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $236.48
+  ATR (14-day): $7.82
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $218.05 - $229.01
+  Size:         $10.96
+  Distance:     $7.47 (96% of ATR)
+  Formed:       2026-08-31
+  FRESHNESS:    STALE
+  Notes:        STALE - Daily candle tested zone yesterday (low $220.22)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $225.58 - $237.57
+  Size:         $11.99
+  Distance:     $0.00
+  Formed:       2026-06-12
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($236.48 >= zone $225.58)
+
+TRADE METRICS:
+  Stop Loss Distance:  $18.43
+  Profit Target (PT):  $-10.90
+  Risk:Reward Ratio:   1:-0.59

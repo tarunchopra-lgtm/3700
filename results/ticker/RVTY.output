@@ -3,27 +3,27 @@ TICKER: RVTY
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $131.70
-  ATR (14-day): $4.02
+  Price:        $132.30
+  ATR (14-day): $3.59
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $120.89 - $123.23
-  Size:         $2.34
-  Distance:     $8.47 (211% of ATR)
-  Formed:       2026-09-10
-  FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $120.96)
+  Range:        $98.42 - $103.03
+  Size:         $4.61
+  Distance:     $29.28 (816% of ATR)
+  Formed:       2026-06-15
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $127.78 - $133.00
-  Size:         $5.22
-  Distance:     $0.00
-  Formed:       2026-09-03
+  Range:        $125.46 - $130.07
+  Size:         $4.61
+  Distance:     $2.23
+  Formed:       2026-08-27
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($131.70 >= zone $127.78)
+  Notes:        STALE - Price reached zone ($132.30 >= zone $125.46)
 
 TRADE METRICS:
-  Stop Loss Distance:  $10.81
-  Profit Target (PT):  $-3.92
-  Risk:Reward Ratio:   1:-0.36
+  Stop Loss Distance:  $33.88
+  Profit Target (PT):  $-6.84
+  Risk:Reward Ratio:   1:-0.20

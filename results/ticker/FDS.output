@@ -3,27 +3,27 @@ TICKER: FDS
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $277.57
-  ATR (14-day): $10.69
+  Price:        $291.88
+  ATR (14-day): $10.99
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $207.96 - $224.26
-  Size:         $16.30
-  Distance:     $53.31 (498% of ATR)
-  Formed:       2026-06-24
+  Range:        $226.86 - $236.32
+  Size:         $9.46
+  Distance:     $55.56 (506% of ATR)
+  Formed:       2026-06-29
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $281.35 - $295.58
-  Size:         $14.23
-  Distance:     $3.78
-  Formed:       2026-07-29
+  Range:        $279.16 - $302.79
+  Size:         $23.63
+  Distance:     $0.00
+  Formed:       2026-09-09
   FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (high $282.50)
+  Notes:        STALE - Price reached zone ($291.88 >= zone $279.16)
 
 TRADE METRICS:
-  Stop Loss Distance:  $69.61
-  Profit Target (PT):  $3.78
-  Risk:Reward Ratio:   1:0.05
+  Stop Loss Distance:  $65.02
+  Profit Target (PT):  $-12.72
+  Risk:Reward Ratio:   1:-0.20

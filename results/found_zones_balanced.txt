@@ -1,0 +1,75 @@
+========================================================================================================================
+FOUND ZONES - BALANCED SENSITIVITY
+Generated: 2026-09-17 10:42:50
+========================================================================================================================
+
+Total Zones Found: 58
+Sorted by: Distance to Demand Zone (closest first)
+
+  1. ALAB   | $  288.00 | Demand: $244.61-$299.23 | Supply: $360.06-$398.13 | Dist: $  0.00 (  0% ATR) [ ] | RR: 1:1.66 | Fresh: D✗S✓
+  2. CRWD   | $  247.00 | Demand: $190.61-$786.00 | Supply: $188.55-$786.00 | Dist: $  0.00 (  0% ATR) [ ] | RR: 1:-1.04 | Fresh: D✗S✗
+  3. CRWV   | $   79.59 | Demand: $72.08-$80.64 | Supply: $114.12-$122.00 | Dist: $  0.00 (  0% ATR) [ ] | RR: 1:4.60 | Fresh: D✗S✓
+  4. CVNA   | $   66.28 | Demand: $62.41-$69.16 | Supply: $68.84-$71.89 | Dist: $  0.00 (  0% ATR) [ ] | RR: 1:0.66 | Fresh: D✗S✓
+  5. EIX    | $   56.22 | Demand: $53.11-$68.94 | Supply: $72.65-$75.04 | Dist: $  0.00 (  0% ATR) [ ] | RR: 1:5.28 | Fresh: D✗S✓
+  6. FIX    | $ 1579.31 | Demand: $1491.24-$1803.35 | Supply: $1925.01-$1998.81 | Dist: $  0.00 (  0% ATR) [ ] | RR: 1:3.93 | Fresh: D✗S✓
+  7. JBL    | $  309.50 | Demand: $285.80-$328.40 | Supply: $374.77-$386.64 | Dist: $  0.00 (  0% ATR) [ ] | RR: 1:2.75 | Fresh: D✗S✓
+  8. MU     | $  974.49 | Demand: $891.66-$1019.00 | Supply: $960.19-$1097.47 | Dist: $  0.00 (  0% ATR) [ ] | RR: 1:-0.17 | Fresh: D✗S✗
+  9. RKLB   | $   67.54 | Demand: $58.20-$68.34 | Supply: $94.89-$107.40 | Dist: $  0.00 (  0% ATR) [ ] | RR: 1:2.93 | Fresh: D✗S✓
+ 10. SNDK   | $ 1594.49 | Demand: $1485.02-$1837.77 | Supply: $1865.11-$2119.90 | Dist: $  0.00 (  0% ATR) [ ] | RR: 1:2.47 | Fresh: D✗S✓
+ 11. TPL    | $  349.65 | Demand: $340.23-$360.84 | Supply: $421.19-$440.28 | Dist: $  0.00 (  0% ATR) [ ] | RR: 1:7.59 | Fresh: D✗S✓
+ 12. TTD    | $   14.29 | Demand: $12.83-$14.57 | Supply: $18.71-$19.55 | Dist: $  0.00 (  0% ATR) [ ] | RR: 1:3.03 | Fresh: D✗S✓
+ 13. VRT    | $  243.19 | Demand: $220.92-$251.71 | Supply: $295.10-$319.84 | Dist: $  0.00 (  0% ATR) [ ] | RR: 1:2.33 | Fresh: D✗S✓
+ 14. CPRT   | $   29.62 | Demand: $27.84-$29.21 | Supply: $29.57-$32.05 | Dist: $  0.41 ( 40% ATR) [✓] | RR: 1:-0.03 | Fresh: D✓S✗
+ 15. KKR    | $   99.05 | Demand: $94.13-$98.07 | Supply: $109.10-$116.57 | Dist: $  0.98 ( 25% ATR) [ ] | RR: 1:2.04 | Fresh: D✗S✓
+ 16. STX    | $  800.01 | Demand: $739.47-$798.96 | Supply: $983.00-$1145.00 | Dist: $  1.05 (  1% ATR) [ ] | RR: 1:3.02 | Fresh: D✗S✓
+ 17. CMG    | $   33.84 | Demand: $30.45-$32.41 | Supply: $36.87-$39.09 | Dist: $  1.43 ( 92% ATR) [✓] | RR: 1:0.89 | Fresh: D✓S✓
+ 18. SLB    | $   52.27 | Demand: $48.30-$49.95 | Supply: $54.67-$60.46 | Dist: $  2.32 (140% ATR) [ ] | RR: 1:0.60 | Fresh: D✓S✓
+ 19. ECHO   | $   94.67 | Demand: $84.77-$91.86 | Supply: $106.56-$131.22 | Dist: $  2.81 ( 68% ATR) [✓] | RR: 1:1.20 | Fresh: D✓S✓
+ 20. CHRW   | $  154.41 | Demand: $143.16-$151.22 | Supply: $164.08-$186.11 | Dist: $  3.19 ( 41% ATR) [✓] | RR: 1:0.86 | Fresh: D✓S✓
+ 21. BAX    | $   23.29 | Demand: $19.38-$20.09 | Supply: $27.48-$28.38 | Dist: $  3.20 (233% ATR) [ ] | RR: 1:1.07 | Fresh: D✓S✓
+ 22. CHTR   | $  136.04 | Demand: $124.05-$132.00 | Supply: $149.47-$160.70 | Dist: $  4.03 ( 54% ATR) [✓] | RR: 1:1.12 | Fresh: D✓S✓
+ 23. NUE    | $  266.44 | Demand: $251.25-$261.60 | Supply: $250.00-$270.90 | Dist: $  4.84 ( 62% ATR) [ ] | RR: 1:-1.08 | Fresh: D✗S✗
+ 24. CNC    | $   67.49 | Demand: $59.83-$62.55 | Supply: $67.05-$69.63 | Dist: $  4.94 (167% ATR) [ ] | RR: 1:-0.06 | Fresh: D✓S✗
+ 25. TRI    | $   99.42 | Demand: $89.33-$94.35 | Supply: $105.25-$112.77 | Dist: $  5.07 ( 81% ATR) [✓] | RR: 1:0.58 | Fresh: D✓S✓
+ 26. KEYS   | $  334.67 | Demand: $306.01-$328.58 | Supply: $334.11-$354.99 | Dist: $  6.09 ( 48% ATR) [ ] | RR: 1:-0.02 | Fresh: D✗S✗
+ 27. APO    | $  127.86 | Demand: $116.57-$121.30 | Supply: $136.93-$144.33 | Dist: $  6.56 (134% ATR) [ ] | RR: 1:0.80 | Fresh: D✓S✓
+ 28. DLTR   | $  118.61 | Demand: $105.22-$110.67 | Supply: $116.25-$123.09 | Dist: $  7.94 (246% ATR) [ ] | RR: 1:-0.18 | Fresh: D✓S✗
+ 29. ARES   | $  126.37 | Demand: $105.79-$118.16 | Supply: $137.79-$143.25 | Dist: $  8.21 (153% ATR) [ ] | RR: 1:0.55 | Fresh: D✗S✗
+ 30. STLD   | $  245.58 | Demand: $216.36-$236.12 | Supply: $265.20-$288.74 | Dist: $  9.46 (124% ATR) [ ] | RR: 1:0.67 | Fresh: D✗S✓
+ 31. HPQ    | $   34.10 | Demand: $23.25-$24.18 | Supply: $33.37-$36.23 | Dist: $  9.93 (653% ATR) [ ] | RR: 1:-0.07 | Fresh: D✓S✗
+ 32. XYZ    | $   80.37 | Demand: $68.68-$70.15 | Supply: $83.67-$86.75 | Dist: $ 10.22 (376% ATR) [ ] | RR: 1:0.28 | Fresh: D✓S✓
+ 33. COHR   | $  294.41 | Demand: $220.68-$281.99 | Supply: $365.01-$439.68 | Dist: $ 12.42 ( 33% ATR) [ ] | RR: 1:0.96 | Fresh: D✗S✓
+ 34. CBOE   | $  268.48 | Demand: $241.00-$254.22 | Supply: $279.89-$290.99 | Dist: $ 14.27 (140% ATR) [ ] | RR: 1:0.42 | Fresh: D✓S✓
+ 35. IBM    | $  238.58 | Demand: $211.03-$223.81 | Supply: $284.44-$311.80 | Dist: $ 14.77 (209% ATR) [ ] | RR: 1:1.66 | Fresh: D✓S✓
+ 36. INTC   | $  110.89 | Demand: $81.79-$94.98 | Supply: $126.66-$132.61 | Dist: $ 15.91 (226% ATR) [ ] | RR: 1:0.54 | Fresh: D✓S✓
+ 37. PTC    | $  134.63 | Demand: $108.50-$118.71 | Supply: $132.63-$147.73 | Dist: $ 15.92 (273% ATR) [ ] | RR: 1:-0.08 | Fresh: D✓S✗
+ 38. TSLA   | $  368.55 | Demand: $331.12-$351.26 | Supply: $406.00-$432.86 | Dist: $ 17.29 (160% ATR) [ ] | RR: 1:1.00 | Fresh: D✓S✓
+ 39. CDW    | $  151.24 | Demand: $123.08-$133.72 | Supply: $149.16-$158.04 | Dist: $ 17.52 (228% ATR) [ ] | RR: 1:-0.07 | Fresh: D✓S✗
+ 40. DPZ    | $  312.00 | Demand: $282.00-$294.36 | Supply: $310.64-$334.09 | Dist: $ 17.64 (147% ATR) [ ] | RR: 1:-0.05 | Fresh: D✓S✗
+ 41. TER    | $  356.39 | Demand: $317.74-$335.39 | Supply: $380.00-$437.77 | Dist: $ 21.00 ( 69% ATR) [✓] | RR: 1:0.61 | Fresh: D✓S✓
+ 42. DASH   | $  194.96 | Demand: $164.59-$173.53 | Supply: $211.18-$232.00 | Dist: $ 21.43 (264% ATR) [ ] | RR: 1:0.53 | Fresh: D✓S✓
+ 43. COIN   | $  174.00 | Demand: $141.48-$152.19 | Supply: $178.33-$195.85 | Dist: $ 21.81 (251% ATR) [ ] | RR: 1:0.13 | Fresh: D✓S✓
+ 44. ANET   | $  199.34 | Demand: $162.59-$177.20 | Supply: $189.43-$214.89 | Dist: $ 22.14 (192% ATR) [ ] | RR: 1:-0.27 | Fresh: D✓S✗
+ 45. ERIE   | $  256.83 | Demand: $210.78-$233.95 | Supply: $260.17-$271.47 | Dist: $ 22.88 (236% ATR) [ ] | RR: 1:0.07 | Fresh: D✓S✓
+ 46. CF     | $  134.17 | Demand: $106.17-$110.11 | Supply: $132.00-$141.66 | Dist: $ 24.06 (498% ATR) [ ] | RR: 1:-0.08 | Fresh: D✓S✗
+ 47. EXPE   | $  297.99 | Demand: $250.54-$270.51 | Supply: $312.75-$326.99 | Dist: $ 27.48 (190% ATR) [ ] | RR: 1:0.31 | Fresh: D✓S✓
+ 48. ALNY   | $  241.12 | Demand: $197.81-$207.99 | Supply: $293.78-$380.00 | Dist: $ 33.13 (220% ATR) [ ] | RR: 1:1.22 | Fresh: D✓S✓
+ 49. SPCX   | $  154.94 | Demand: $108.66-$118.55 | Supply: $193.00-$225.64 | Dist: $ 36.39 (343% ATR) [ ] | RR: 1:0.82 | Fresh: D✓S✓
+ 50. QCOM   | $  193.00 | Demand: $146.00-$155.00 | Supply: $200.10-$226.46 | Dist: $ 38.00 (546% ATR) [ ] | RR: 1:0.15 | Fresh: D✓S✓
+ 51. MSTR   | $  133.98 | Demand: $81.81-$94.72 | Supply: $135.38-$144.92 | Dist: $ 39.26 (752% ATR) [ ] | RR: 1:0.03 | Fresh: D✓S✓
+ 52. MRVL   | $  242.59 | Demand: $186.15-$201.94 | Supply: $267.31-$312.98 | Dist: $ 40.65 (238% ATR) [ ] | RR: 1:0.44 | Fresh: D✓S✓
+ 53. PANW   | $  380.00 | Demand: $314.95-$336.80 | Supply: $375.93-$398.88 | Dist: $ 43.20 (304% ATR) [ ] | RR: 1:-0.06 | Fresh: D✓S✗
+ 54. CIEN   | $  373.00 | Demand: $311.60-$328.85 | Supply: $424.33-$463.55 | Dist: $ 44.15 (138% ATR) [ ] | RR: 1:0.84 | Fresh: D✗S✓
+ 55. PLTR   | $  174.97 | Demand: $106.37-$120.94 | Supply: $179.75-$188.37 | Dist: $ 54.03 (554% ATR) [ ] | RR: 1:0.07 | Fresh: D✓S✓
+ 56. FDS    | $  291.88 | Demand: $226.86-$236.32 | Supply: $279.16-$302.79 | Dist: $ 55.56 (506% ATR) [ ] | RR: 1:-0.20 | Fresh: D✓S✗
+ 57. ISRG   | $  400.00 | Demand: $328.57-$341.83 | Supply: $378.50-$405.50 | Dist: $ 58.17 (529% ATR) [ ] | RR: 1:-0.30 | Fresh: D✓S✗
+ 58. AMD    | $  546.86 | Demand: $424.03-$476.93 | Supply: $490.46-$558.37 | Dist: $ 69.93 (204% ATR) [ ] | RR: 1:-0.46 | Fresh: D✓S✗
+
+========================================================================================================================
+LEGEND:
+  [✓] Within 1 ATR from demand zone (actionable)
+  Dist: Distance from current price to demand zone
+  ATR %: Distance as percentage of Average True Range
+  RR: Risk:Reward ratio (higher is better)
+  Fresh: D=Demand zone fresh, S=Supply zone fresh
+  ✓ = Fresh (not tested), ✗ = Stale (already tested)

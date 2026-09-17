@@ -3,27 +3,27 @@ TICKER: DOC
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $21.49
+  Price:        $21.30
   ATR (14-day): $0.49
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $19.31 - $19.73
-  Size:         $0.42
-  Distance:     $1.76 (358% of ATR)
-  Formed:       2026-06-18
+  Range:        $19.31 - $20.11
+  Size:         $0.80
+  Distance:     $1.19 (243% of ATR)
+  Formed:       2026-06-17
+  FRESHNESS:    STALE
+  Notes:        STALE - Daily candle tested zone yesterday (low $20.03)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $22.14 - $22.72
+  Size:         $0.58
+  Distance:     $0.84
+  Formed:       2026-07-17
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
-SUPPLY ZONE (Sell Zone):
-  Range:        $20.28 - $20.82
-  Size:         $0.54
-  Distance:     $0.67
-  Formed:       2026-06-10
-  FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($21.49 >= zone $20.28)
-
 TRADE METRICS:
-  Stop Loss Distance:  $2.18
-  Profit Target (PT):  $-1.21
-  Risk:Reward Ratio:   1:-0.56
+  Stop Loss Distance:  $1.99
+  Profit Target (PT):  $0.84
+  Risk:Reward Ratio:   1:0.42

@@ -3,27 +3,27 @@ TICKER: TYL
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $369.79
-  ATR (14-day): $14.06
+  Price:        $339.50
+  ATR (14-day): $14.95
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $294.08 - $305.66
-  Size:         $11.58
-  Distance:     $64.13 (456% of ATR)
-  Formed:       2026-06-11
+  Range:        $286.00 - $300.00
+  Size:         $14.00
+  Distance:     $39.50 (264% of ATR)
+  Formed:       2026-06-15
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $367.76 - $382.39
-  Size:         $14.63
-  Distance:     $0.00
-  Formed:       2026-08-31
+  Range:        $343.80 - $380.87
+  Size:         $37.07
+  Distance:     $4.30
+  Formed:       2026-09-08
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($369.79 >= zone $367.76)
+  Notes:        STALE - Daily candle tested zone yesterday (high $350.34)
 
 TRADE METRICS:
-  Stop Loss Distance:  $75.71
-  Profit Target (PT):  $-2.03
-  Risk:Reward Ratio:   1:-0.03
+  Stop Loss Distance:  $53.50
+  Profit Target (PT):  $4.30
+  Risk:Reward Ratio:   1:0.08

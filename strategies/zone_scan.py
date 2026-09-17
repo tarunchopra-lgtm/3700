@@ -110,18 +110,26 @@ def load_watchlist(filename: str) -> list[str]:
     return symbols
 
 
-def run_find_zones(symbol: str) -> dict | None:
+def run_find_zones(symbol: str, sensitivity: str = 'balanced') -> dict | None:
     """
     Find demand and supply zones using corrected freshness logic.
     
     Demand zone: RBR or DBR that has NOT been touched in last 5 days
     Supply zone: RBD or DBD that has NOT been touched in last 3 days
     Returns spread: distance from demand high to supply low
+    
+    Args:
+        symbol: Stock symbol to analyze
+        sensitivity: 'conservative', 'balanced', or 'aggressive'
     """
     try:
         from strategies.find_zones import analyze_zones
         
-        demand_zone, supply_zone, current_price, atr = analyze_zones(symbol, lookback_days=100, sensitivity='balanced')
+        demand_zone, supply_zone, current_price, atr, _ = analyze_zones(
+            symbol, 
+            lookback_days=100, 
+            sensitivity=sensitivity
+        )
         
         if not demand_zone or not supply_zone:
             return None
@@ -287,11 +295,11 @@ def check_zone_freshness(symbol: str, demand_low: float, demand_high: float,
         return False, f"Check failed: {error_msg}", False, f"Check failed: {error_msg}"
 
 
-def scan_stock(symbol: str, client: StockHistoricalDataClient, ticker_dir: Path) -> StockSetup | None:
+def scan_stock(symbol: str, client: StockHistoricalDataClient, ticker_dir: Path, sensitivity: str = 'balanced') -> StockSetup | None:
     """Scan a single stock and write results to individual ticker file"""
     try:
-        # Get zones
-        zones = run_find_zones(symbol)
+        # Get zones with specified sensitivity
+        zones = run_find_zones(symbol, sensitivity=sensitivity)
         if not zones:
             return None
         
@@ -380,15 +388,15 @@ def scan_stock(symbol: str, client: StockHistoricalDataClient, ticker_dir: Path)
         return None
 
 
-def process_batch(batch_symbols: list, batch_num: int, client: StockHistoricalDataClient, ticker_dir: Path) -> list:
+def process_batch(batch_symbols: list, batch_num: int, client: StockHistoricalDataClient, ticker_dir: Path, sensitivity: str = 'balanced') -> list:
     """Process a batch of stocks in parallel (10 workers)"""
     batch_setups = []
     
-    print(f"\n[BATCH {batch_num}] Processing {len(batch_symbols)} stocks...")
+    print(f"\n[BATCH {batch_num}] Processing {len(batch_symbols)} stocks ({sensitivity})...")
     
     with ThreadPoolExecutor(max_workers=10) as executor:
         futures = {
-            executor.submit(scan_stock, symbol, client, ticker_dir): symbol 
+            executor.submit(scan_stock, symbol, client, ticker_dir, sensitivity): symbol 
             for symbol in batch_symbols
         }
         
@@ -410,7 +418,7 @@ def process_batch(batch_symbols: list, batch_num: int, client: StockHistoricalDa
     return batch_setups
 
 
-def create_found_zones_report(all_setups: list, report_path: Path) -> None:
+def create_found_zones_report(all_setups: list, report_path: Path, sensitivity: str = 'balanced') -> None:
     """
     Create found_zones.output by consolidating all ticker files into a single summary.
     Shows all found zones with key metrics sorted by proximity.
@@ -425,7 +433,7 @@ def create_found_zones_report(all_setups: list, report_path: Path) -> None:
     
     with open(report_path, 'w', encoding='utf-8') as f:
         f.write("="*120 + "\n")
-        f.write("FOUND ZONES - CONSOLIDATED REPORT\n")
+        f.write(f"FOUND ZONES - {sensitivity.upper()} SENSITIVITY\n")
         f.write(f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
         f.write("="*120 + "\n\n")
         
@@ -458,7 +466,7 @@ def create_found_zones_report(all_setups: list, report_path: Path) -> None:
         f.write("  ✓ = Fresh (not tested), ✗ = Stale (already tested)\n")
 
 
-def compile_daily_report(all_setups: list, report_path: Path) -> None:
+def compile_daily_report(all_setups: list, report_path: Path, sensitivity: str = 'balanced') -> None:
     """
     Compile daily report with analysis metrics sorted by demand/gap ratio.
     
@@ -499,6 +507,9 @@ def compile_daily_report(all_setups: list, report_path: Path) -> None:
     
     # Write report
     with open(report_path, 'w', encoding='utf-8') as f:
+        f.write(f"DAILY REPORT - {sensitivity.upper()} SENSITIVITY\n")
+        f.write(f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+        f.write("="*120 + "\n\n")
         # Header with column names
         f.write(f"{'TICKER':<8} {'PRICE':<10} {'ATR':<8} {'DEMAND_ZONE':<25} {'SUPPLY_ZONE':<25} {'GAP':<8} {'D_SIZE':<8} {'RATIO':<8}\n")
         f.write("="*120 + "\n")
@@ -540,7 +551,7 @@ def compile_daily_report(all_setups: list, report_path: Path) -> None:
         f.write(f"  RATIO: Demand zone size / Gap (lower = tighter setup)\n")
 
 
-def compile_top_picks(all_setups: list, pick_path: Path) -> None:
+def compile_top_picks(all_setups: list, pick_path: Path, sensitivity: str = 'balanced') -> None:
     """
     Filter and sort setups for top 10 picks:
     1. Filter: must be within ATR reach AND have FRESH zones (not tested recently)
@@ -553,7 +564,7 @@ def compile_top_picks(all_setups: list, pick_path: Path) -> None:
     if not actionable:
         with open(pick_path, 'w', encoding='utf-8') as f:
             f.write("="*120 + "\n")
-            f.write("TOP 10 TRADING PICKS - WITHIN ATR (FRESH ZONES ONLY)\n")
+            f.write(f"TOP 10 TRADING PICKS - {sensitivity.upper()} SENSITIVITY (WITHIN ATR, FRESH ZONES ONLY)\n")
             f.write(f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
             f.write("="*120 + "\n\n")
             f.write("No stocks with FRESH zones (within 1 ATR and not recently tested) found.\n")
@@ -566,7 +577,7 @@ def compile_top_picks(all_setups: list, pick_path: Path) -> None:
     # Write top 10 to pick.output
     with open(pick_path, 'w', encoding='utf-8') as f:
         f.write("="*120 + "\n")
-        f.write("TOP 10 TRADING PICKS - FRESH ZONES (Within 1 ATR, Not Recently Tested)\n")
+        f.write(f"TOP 10 TRADING PICKS - {sensitivity.upper()} SENSITIVITY (Fresh Zones, Within 1 ATR)\n")
         f.write(f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
         f.write("="*120 + "\n\n")
         f.write(f"Total Actionable Stocks (within 1 ATR + FRESH): {len(actionable)}\n")
@@ -609,7 +620,7 @@ def compile_top_picks(all_setups: list, pick_path: Path) -> None:
 def main():
     """Main entry point"""
     print("\n" + "="*100)
-    print("ZONE SCANNER - BATCH PROCESSING (100 stocks per batch)")
+    print("ZONE SCANNER - GENERATING 3 SENSITIVITY REPORTS (aggressive, balanced, conservative)")
     print("="*100)
     
     # Load all watchlists
@@ -627,7 +638,8 @@ def main():
     
     print(f"\nTotal unique stocks to scan: {len(all_symbols)}")
     print(f"Batch size: 100 stocks")
-    print(f"Workers per batch: 25 parallel")
+    print(f"Workers per batch: 10 parallel")
+    print(f"Sensitivity levels: aggressive, balanced, conservative")
     
     # Initialize Alpaca client
     try:
@@ -641,94 +653,139 @@ def main():
     ticker_dir = Path(__file__).parent.parent / "results" / "ticker"
     ticker_dir.mkdir(parents=True, exist_ok=True)
     
-    # Process in batches of 100
-    all_setups = []
-    batch_size = 100
-    num_batches = (len(all_symbols) + batch_size - 1) // batch_size
+    # Results directory for reports
+    results_dir = Path(__file__).parent.parent / "results"
+    results_dir.mkdir(parents=True, exist_ok=True)
     
-    print(f"\n[INFO] Starting scan in {num_batches} batches...")
-    print("="*100)
+    # Process each sensitivity level
+    sensitivities = ['aggressive', 'balanced', 'conservative']
+    all_summaries = {}
     
-    start_time = datetime.now()
-    
-    for batch_num in range(num_batches):
-        batch_start = batch_num * batch_size
-        batch_end = min(batch_start + batch_size, len(all_symbols))
-        batch_symbols = all_symbols[batch_start:batch_end]
+    for sensitivity in sensitivities:
+        print(f"\n" + "="*100)
+        print(f"SCANNING WITH {sensitivity.upper()} SENSITIVITY")
+        print("="*100)
         
-        batch_setups = process_batch(batch_symbols, batch_num + 1, client, ticker_dir)
-        all_setups.extend(batch_setups)
+        # Process in batches of 100
+        all_setups = []
+        batch_size = 100
+        num_batches = (len(all_symbols) + batch_size - 1) // batch_size
         
-        print(f"[BATCH {batch_num + 1}] Completed: {len(batch_setups)} setups found\n")
+        print(f"\n[INFO] Starting {sensitivity} scan in {num_batches} batches...")
+        
+        start_time = datetime.now()
+        
+        for batch_num in range(num_batches):
+            batch_start = batch_num * batch_size
+            batch_end = min(batch_start + batch_size, len(all_symbols))
+            batch_symbols = all_symbols[batch_start:batch_end]
+            
+            batch_setups = process_batch(batch_symbols, batch_num + 1, client, ticker_dir, sensitivity)
+            all_setups.extend(batch_setups)
+            
+            print(f"[BATCH {batch_num + 1}] Completed: {len(batch_setups)} setups found\n")
+        
+        elapsed = datetime.now() - start_time
+        
+        # Compile statistics
+        actionable = [s for s in all_setups if s.is_demand_in_atr_reach()]
+        fresh_actionable = [s for s in all_setups if s.is_demand_in_atr_reach() and s.demand_is_fresh and s.supply_is_fresh]
+        
+        print("="*100)
+        print(f"SCAN COMPLETE - {sensitivity.upper()}")
+        print("="*100)
+        print(f"Total Stocks Scanned:        {len(all_symbols)}")
+        print(f"Stocks with Zones:           {len(all_setups)}")
+        print(f"Stocks Within 1 ATR:         {len(actionable)}")
+        print(f"Stocks with FRESH Zones:     {len(fresh_actionable)}")
+        print(f"Time Elapsed:                {elapsed}")
+        
+        # Store summary for later
+        all_summaries[sensitivity] = {
+            'setups': all_setups,
+            'actionable': len(actionable),
+            'fresh_actionable': len(fresh_actionable),
+            'time': elapsed,
+            'total_scanned': len(all_symbols)
+        }
+        
+        # Create reports for this sensitivity level
+        pick_path = results_dir / f"pick_{sensitivity}.txt"
+        report_path = results_dir / f"daily_report_{sensitivity}.txt"
+        found_zones_path = results_dir / f"found_zones_{sensitivity}.txt"
+        
+        compile_top_picks(all_setups, pick_path, sensitivity)
+        compile_daily_report(all_setups, report_path, sensitivity)
+        create_found_zones_report(all_setups, found_zones_path, sensitivity)
+        
+        print(f"\n[OK] Pick file:              {pick_path.name}")
+        print(f"[OK] Daily report file:      {report_path.name}")
+        print(f"[OK] Found zones file:       {found_zones_path.name}")
     
-    elapsed = datetime.now() - start_time
-    
-    # Compile statistics
-    actionable = [s for s in all_setups if s.is_demand_in_atr_reach()]
-    fresh_actionable = [s for s in all_setups if s.is_demand_in_atr_reach() and s.demand_is_fresh and s.supply_is_fresh]
-    
+    # Print final summary comparing all 3 sensitivities
+    print(f"\n" + "="*100)
+    print("FINAL SUMMARY - ALL 3 SENSITIVITY LEVELS")
     print("="*100)
-    print("SCAN COMPLETE")
-    print("="*100)
-    print(f"Total Stocks Scanned:        {len(all_symbols)}")
-    print(f"Stocks with Zones:           {len(all_setups)}")
-    print(f"Stocks Within 1 ATR:         {len(actionable)}")
-    print(f"Stocks with FRESH Zones:     {len(fresh_actionable)}")
-    print(f"Time Elapsed:                {elapsed}")
+    print(f"{'Sensitivity':<15} {'Total':<8} {'Zones':<8} {'In ATR':<8} {'Fresh':<8} {'Time':<15}")
+    print("-"*100)
+    for sensitivity in sensitivities:
+        summary = all_summaries[sensitivity]
+        print(f"{sensitivity:<15} {summary['total_scanned']:<8} {len(summary['setups']):<8} "
+              f"{summary['actionable']:<8} {summary['fresh_actionable']:<8} {str(summary['time']):<15}")
     
-    # Create top 10 picks file
-    pick_path = Path(__file__).parent.parent / "results" / "pick.txt"
-    compile_top_picks(all_setups, pick_path)
+    print("\n[REPORTS GENERATED]")
+    print("  Aggressive sensitivity:  pick_aggressive.txt, daily_report_aggressive.txt, found_zones_aggressive.txt")
+    print("  Balanced sensitivity:    pick_balanced.txt, daily_report_balanced.txt, found_zones_balanced.txt")
+    print("  Conservative sensitivity: pick_conservative.txt, daily_report_conservative.txt, found_zones_conservative.txt")
     
-    # Create daily report file
-    report_path = Path(__file__).parent.parent / "results" / "daily_report.txt"
-    compile_daily_report(all_setups, report_path)
-    
-    # Create found_zones.txt by consolidating all ticker files
-    found_zones_path = Path(__file__).parent.parent / "results" / "found_zones.txt"
-    create_found_zones_report(all_setups, found_zones_path)
-    
-    print(f"\n[OK] Individual ticker files:  results/ticker/*.output ({len(all_setups)} files)")
-    print(f"[OK] Found zones report:      results/found_zones.txt")
-    print(f"[OK] Top 10 picks file:       results/pick.txt")
-    print(f"[OK] Daily report file:       results/daily_report.txt")
-    
-    # Send emails with report files
+    # Send emails with all report files
     try:
-        attachments = [report_path, found_zones_path, pick_path]
+        attachments = [
+            results_dir / "pick_aggressive.txt",
+            results_dir / "daily_report_aggressive.txt",
+            results_dir / "found_zones_aggressive.txt",
+            results_dir / "pick_balanced.txt",
+            results_dir / "daily_report_balanced.txt",
+            results_dir / "found_zones_balanced.txt",
+            results_dir / "pick_conservative.txt",
+            results_dir / "daily_report_conservative.txt",
+            results_dir / "found_zones_conservative.txt"
+        ]
+        
         recipient = send_email_with_attachments(
-            subject=f"Zone Scan Report - {datetime.now().strftime('%Y-%m-%d %H:%M')}",
-            body=f"""Zone Scan Complete
+            subject=f"Zone Scan Report (3 Sensitivities) - {datetime.now().strftime('%Y-%m-%d %H:%M')}",
+            body=f"""Zone Scan Complete - All 3 Sensitivity Levels
 
-Total Stocks Scanned:        {len(all_symbols)}
-Stocks with Zones:           {len(all_setups)}
-Stocks Within 1 ATR:         {len(actionable)}
-Stocks with FRESH Zones:     {len(fresh_actionable)}
-Time Elapsed:                {elapsed}
+AGGRESSIVE SENSITIVITY:
+  Total Scanned: {all_summaries['aggressive']['total_scanned']}
+  With Zones: {len(all_summaries['aggressive']['setups'])}
+  Within 1 ATR: {all_summaries['aggressive']['actionable']}
+  Fresh + In ATR: {all_summaries['aggressive']['fresh_actionable']}
 
-Attachments:
-1. daily_report.txt - All stocks sorted by demand/gap ratio
-2. found_zones.txt - Summary of all found zones
-3. pick.txt - Top 10 actionable setups (fresh + within ATR)
+BALANCED SENSITIVITY (DEFAULT):
+  Total Scanned: {all_summaries['balanced']['total_scanned']}
+  With Zones: {len(all_summaries['balanced']['setups'])}
+  Within 1 ATR: {all_summaries['balanced']['actionable']}
+  Fresh + In ATR: {all_summaries['balanced']['fresh_actionable']}
+
+CONSERVATIVE SENSITIVITY:
+  Total Scanned: {all_summaries['conservative']['total_scanned']}
+  With Zones: {len(all_summaries['conservative']['setups'])}
+  Within 1 ATR: {all_summaries['conservative']['actionable']}
+  Fresh + In ATR: {all_summaries['conservative']['fresh_actionable']}
+
+Reports Included:
+- pick_aggressive.txt / pick_balanced.txt / pick_conservative.txt
+- daily_report_aggressive.txt / daily_report_balanced.txt / daily_report_conservative.txt
+- found_zones_aggressive.txt / found_zones_balanced.txt / found_zones_conservative.txt
 
 Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
 """,
             attachments=attachments
         )
-        print(f"\n[EMAIL SENT] Reports sent to {recipient}")
+        print(f"\n[EMAIL SENT] All reports sent to {recipient}")
     except Exception as e:
         print(f"\n[EMAIL ERROR] Failed to send reports: {e}")
-    
-    # Console summary
-    if actionable:
-        actionable.sort(key=lambda x: (x.distance_to_demand(), x.distance_to_supply()))
-        print(f"\n" + "="*100)
-        print("QUICK PREVIEW - TOP 5 CLOSEST TO DEMAND")
-        print("="*100)
-        for rank, setup in enumerate(actionable[:5], 1):
-            dist = setup.distance_to_demand()
-            pct = (dist / setup.atr) * 100
-            print(f"{rank}. {setup.symbol:6s} | ${setup.current_price:8.2f} | ${dist:6.2f} away ({pct:3.0f}% ATR) | Supply: ${setup.distance_to_supply():6.2f}")
 
 
 if __name__ == "__main__":
@@ -738,25 +795,28 @@ if __name__ == "__main__":
         print("SYNTAX:")
         print("  python strategies/zone_scan.py [OPTIONS]")
         print("\nOPTIONS:")
-        print("  (No command-line options - uses watchlist files from lists/ directory)")
+        print("  (No command-line options - generates 3 reports automatically)")
         print("  --help, -h        Show this help message")
         print("\nDESCRIPTION:")
-        print("  Scans all stocks from watchlist files in batches of 100 stocks")
-        print("  Uses 10 parallel workers per batch for processing")
-        print("  Creates individual ticker report files for each stock with zones")
-        print("  Generates top 10 picks sorted by proximity metrics")
-        print("  Generates daily report sorted by demand/gap ratio")
+        print("  Scans all stocks from watchlist files in 3 passes:")
+        print("  1. AGGRESSIVE sensitivity - catches more zones, more false signals")
+        print("  2. BALANCED sensitivity (default) - tuned to your real zone data")
+        print("  3. CONSERVATIVE sensitivity - only cleanest, highest quality zones")
+        print("  ")
+        print("  Each pass uses 10 parallel workers per batch of 100 stocks")
+        print("  Generates separate reports for each sensitivity level")
         print("\nWATCHLIST FILES:")
         print("  lists/etf.txt - Exchange Traded Funds")
         print("  lists/spy.txt - S&P 500 stocks")
         print("  lists/nasdaq.txt - NASDAQ stocks")
-        print("\nOUTPUT FILES:")
-        print("  results/ticker/*.output - Individual stock reports with zone details")
-        print("  results/pick.output - Top 10 actionable setups")
+        print("\nOUTPUT FILES (for each sensitivity):")
+        print("  results/pick_{sensitivity}.txt - Top 10 actionable setups")
+        print("  results/daily_report_{sensitivity}.txt - All stocks with zones")
+        print("  results/found_zones_{sensitivity}.txt - Summary by proximity")
         print("\nEXAMPLE:")
         print("  python strategies/zone_scan.py")
         print("\nEXECUTION TIME:")
-        print("  ~45-60 minutes for full scan of 541 stocks (batched, 10 parallel workers)")
+        print("  ~2-3 hours for full 3x scan of 541 stocks per sensitivity (batched, 10 parallel workers)")
         print()
         sys.exit(0)
     

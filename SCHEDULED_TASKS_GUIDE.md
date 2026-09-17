@@ -293,7 +293,7 @@ Get-ScheduledTask | Where-Object { $_.TaskName -match "ClosingBell|3700|spray|fo
     }
 } | Format-Table -AutoSize
 
-Get-ScheduledTask | Where-Object { $_.TaskName -match "ClosingBell|3700|spray|fomo|zone|CimJob" } | ForEach-Object { 
+Get-ScheduledTask | Where-Object { $_.TaskName -match "ClosingBell|3700|spray|fomo|zone_|CimJob" } | ForEach-Object { 
     $info = Get-ScheduledTaskInfo -TaskName $_.TaskName
     [PSCustomObject]@{
         TaskName = $_.TaskName
@@ -305,7 +305,7 @@ Get-ScheduledTask | Where-Object { $_.TaskName -match "ClosingBell|3700|spray|fo
 
 
 
-$Time = "06:31"; $Trigger = New-ScheduledTaskTrigger -Daily -At $Time; Set-ScheduledTask -TaskName "3700 Daily Breakout Email" -Trigger $Trigger; Write-Host "✓ Updated to $Time"
+$Time = "06:31"; $Trigger = New-ScheduledTaskTrigger -Daily -At $Time; Set-ScheduledTask -TaskName "zone_scan" -Trigger $Trigger; Write-Host "✓ Updated to $Time"
 
 $Time = "12:50"; $Trigger = New-ScheduledTaskTrigger -Daily -At $Time; Set-ScheduledTask -TaskName "ClosingBell" -Trigger $Trigger; Write-Host "✓ Updated to $Time"
 

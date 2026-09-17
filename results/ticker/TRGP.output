@@ -3,27 +3,27 @@ TICKER: TRGP
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $288.64
-  ATR (14-day): $8.17
+  Price:        $301.46
+  ATR (14-day): $7.71
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $268.69 - $276.26
-  Size:         $7.57
-  Distance:     $12.38 (152% of ATR)
-  Formed:       2026-06-11
+  Range:        $260.25 - $268.82
+  Size:         $8.57
+  Distance:     $32.64 (423% of ATR)
+  Formed:       2026-06-23
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
   Range:        $292.03 - $306.73
   Size:         $14.70
-  Distance:     $3.39
+  Distance:     $0.00
   Formed:       2026-08-19
   FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (high $294.30)
+  Notes:        STALE - Price reached zone ($301.46 >= zone $292.03)
 
 TRADE METRICS:
-  Stop Loss Distance:  $19.95
-  Profit Target (PT):  $3.39
-  Risk:Reward Ratio:   1:0.17
+  Stop Loss Distance:  $41.21
+  Profit Target (PT):  $-9.43
+  Risk:Reward Ratio:   1:-0.23

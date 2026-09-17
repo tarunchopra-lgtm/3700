@@ -3,27 +3,27 @@ TICKER: SPGI
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $439.83
-  ATR (14-day): $11.14
+  Price:        $407.01
+  ATR (14-day): $11.32
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $395.00 - $413.00
   Size:         $18.00
-  Distance:     $26.83 (241% of ATR)
+  Distance:     $0.00 (0% of ATR)
   Formed:       2026-06-24
   FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone today (low $412.88)
+  Notes:        STALE - Price reached zone ($407.01 <= zone $413.00)
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $421.05 - $430.27
-  Size:         $9.22
-  Distance:     $9.56
-  Formed:       2026-06-10
-  FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($439.83 >= zone $421.05)
+  Range:        $439.20 - $457.55
+  Size:         $18.35
+  Distance:     $32.19
+  Formed:       2026-07-15
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $44.83
-  Profit Target (PT):  $-18.78
-  Risk:Reward Ratio:   1:-0.42
+  Stop Loss Distance:  $12.01
+  Profit Target (PT):  $32.19
+  Risk:Reward Ratio:   1:2.68

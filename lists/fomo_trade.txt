@@ -6,7 +6,10 @@
 # NVDA 2 250 240 260 280
 
 # Active trade configuration (first non-comment line will be used):
-mu 2 929 920 940 972
-nvda 2 212 210 214 217
-cohr 2 271 270 272 285
-dia 4 524 522 525 540
+mu 2 975 970 980 999
+nvda 2 219 218 220 225
+spy 2 761 760 767 770
+intc 2 111 110 112 125
+aapl 2 335 333 337 340
+googl 2 345 340 350 355
+gld 2 399 398 401 405

@@ -3,14 +3,14 @@ TICKER: AXP
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $337.27
-  ATR (14-day): $7.62
+  Price:        $339.15
+  ATR (14-day): $7.30
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $309.64 - $319.53
   Size:         $9.89
-  Distance:     $17.74 (233% of ATR)
+  Distance:     $19.62 (269% of ATR)
   Formed:       2026-06-11
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
@@ -21,9 +21,9 @@ SUPPLY ZONE (Sell Zone):
   Distance:     $0.00
   Formed:       2026-06-16
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($337.27 >= zone $335.45)
+  Notes:        STALE - Price reached zone ($339.15 >= zone $335.45)
 
 TRADE METRICS:
-  Stop Loss Distance:  $27.63
-  Profit Target (PT):  $-1.82
-  Risk:Reward Ratio:   1:-0.07
+  Stop Loss Distance:  $29.51
+  Profit Target (PT):  $-3.70
+  Risk:Reward Ratio:   1:-0.13

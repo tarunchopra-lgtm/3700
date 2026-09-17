@@ -3,8 +3,8 @@ TICKER: SBAC
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $183.99
-  ATR (14-day): $6.88
+  Price:        $181.85
+  ATR (14-day): $6.52
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
@@ -13,17 +13,17 @@ DEMAND ZONE (Buy Zone):
   Distance:     $0.00 (0% of ATR)
   Formed:       2026-06-26
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($183.99 <= zone $186.93)
+  Notes:        STALE - Price reached zone ($181.85 <= zone $186.93)
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $204.46 - $207.85
-  Size:         $3.39
-  Distance:     $20.47
-  Formed:       2026-06-10
+  Range:        $201.06 - $207.28
+  Size:         $6.22
+  Distance:     $19.21
+  Formed:       2026-06-12
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $9.83
-  Profit Target (PT):  $20.47
-  Risk:Reward Ratio:   1:2.08
+  Stop Loss Distance:  $7.69
+  Profit Target (PT):  $19.21
+  Risk:Reward Ratio:   1:2.50

@@ -240,12 +240,15 @@ def _try_pattern(candles: List[Candle],
 def dbr(candles: List[Candle], 
         min_consolidation: int = 1,
         consolidation_range_pct: float = 2.0,
-        min_prior_move_pct: float = 0.5) -> List[Zone]:
+        min_prior_move_pct: float = 0.5,
+        max_prior_move_pct: float = 100.0) -> List[Zone]:
     """
     DBR (Drop Base Rally) - DEMAND ZONE
     
     Pattern: Sharp down move → 1-3 small candles → sharp up move
     Zone = the consolidation area (support where buyers stepped in)
+    
+    Filters: Down move must be between min_prior_move_pct and max_prior_move_pct
     """
     zones = []
     
@@ -257,7 +260,7 @@ def dbr(candles: List[Candle],
         down_move_size = down_candle.open - down_candle.close
         down_move_pct = (down_move_size / down_candle.open) * 100
         
-        if down_move_pct < min_prior_move_pct:
+        if down_move_pct < min_prior_move_pct or down_move_pct > max_prior_move_pct:
             continue
         
         max_range = down_move_size * consolidation_range_pct
@@ -317,12 +320,15 @@ def dbr(candles: List[Candle],
 def rbr(candles: List[Candle],
         min_consolidation: int = 1,
         consolidation_range_pct: float = 2.0,
-        min_prior_move_pct: float = 0.5) -> List[Zone]:
+        min_prior_move_pct: float = 0.5,
+        max_prior_move_pct: float = 100.0) -> List[Zone]:
     """
     RBR (Rally Base Rally) - DEMAND ZONE (continuation)
     
     Pattern: Sharp up move → 1-3 small candles → sharp up move (higher)
     Zone = the consolidation area (support where buyers defended and broke higher)
+    
+    Filters: Up move must be between min_prior_move_pct and max_prior_move_pct
     """
     zones = []
     
@@ -334,7 +340,7 @@ def rbr(candles: List[Candle],
         up_move_size = up_candle.close - up_candle.open
         up_move_pct = (up_move_size / up_candle.open) * 100
         
-        if up_move_pct < min_prior_move_pct:
+        if up_move_pct < min_prior_move_pct or up_move_pct > max_prior_move_pct:
             continue
         
         max_range = up_move_size * consolidation_range_pct
@@ -394,12 +400,15 @@ def rbr(candles: List[Candle],
 def rbd(candles: List[Candle],
         min_consolidation: int = 1,
         consolidation_range_pct: float = 2.0,
-        min_prior_move_pct: float = 0.5) -> List[Zone]:
+        min_prior_move_pct: float = 0.5,
+        max_prior_move_pct: float = 100.0) -> List[Zone]:
     """
     RBD (Rally Base Drop) - SUPPLY ZONE
     
     Pattern: Sharp up move → 1-3 small candles → sharp down move
     Zone = the consolidation area (resistance where sellers rejected)
+    
+    Filters: Up move must be between min_prior_move_pct and max_prior_move_pct
     """
     zones = []
     
@@ -411,7 +420,7 @@ def rbd(candles: List[Candle],
         up_move_size = up_candle.close - up_candle.open
         up_move_pct = (up_move_size / up_candle.open) * 100
         
-        if up_move_pct < min_prior_move_pct:
+        if up_move_pct < min_prior_move_pct or up_move_pct > max_prior_move_pct:
             continue
         
         max_range = up_move_size * consolidation_range_pct
@@ -471,12 +480,15 @@ def rbd(candles: List[Candle],
 def dbd(candles: List[Candle],
         min_consolidation: int = 1,
         consolidation_range_pct: float = 2.0,
-        min_prior_move_pct: float = 0.5) -> List[Zone]:
+        min_prior_move_pct: float = 0.5,
+        max_prior_move_pct: float = 100.0) -> List[Zone]:
     """
     DBD (Drop Base Drop) - SUPPLY ZONE (continuation)
     
     Pattern: Sharp down move → 1-3 small candles → sharp down move (lower)
     Zone = the consolidation area (resistance where sellers broke through)
+    
+    Filters: Down move must be between min_prior_move_pct and max_prior_move_pct
     """
     zones = []
     
@@ -488,7 +500,7 @@ def dbd(candles: List[Candle],
         down_move_size = down_candle.open - down_candle.close
         down_move_pct = (down_move_size / down_candle.open) * 100
         
-        if down_move_pct < min_prior_move_pct:
+        if down_move_pct < min_prior_move_pct or down_move_pct > max_prior_move_pct:
             continue
         
         max_range = down_move_size * consolidation_range_pct
@@ -706,38 +718,44 @@ def calculate_atr(candles: List[Candle], period: int = 14) -> float | None:
     return atr
 
 
-def is_demand_zone_fresh(zone: Zone, candles: List[Candle], days_threshold: int = 5) -> bool:
+def is_demand_zone_fresh(zone: Zone, candles: List[Candle], days_threshold: int = 10) -> bool:
     """
-    Demand zone is FRESH if price has NOT reached it within last N days.
-    This means it's an untested support level (fresh opportunity).
+    Demand zone is FRESH if:
+    - Price has NOT been BELOW zone.low recently (within days_threshold)
+    
+    Interpretation: Untested support (consolidation intact, not already tested/broken)
+    Note: Formation date is NOT a constraint - sharp move + consolidation quality matters
     """
     if zone.zone_type != "DEMAND":
         return False
     
     info = get_zone_freshness_info(zone, candles)
     if not info["was_reached"]:
-        return True  # Never reached = fresh
+        return True  # Never reached = definitely fresh
     
     days_since = info["days_since_price_reached"]
-    # Fresh if NOT reached in last N days (reached > N days ago or never)
+    # Fresh if NOT broken in last N days (reached > N days ago or never)
     return days_since is not None and days_since > days_threshold
 
 
-def is_supply_zone_fresh(zone: Zone, candles: List[Candle], days_threshold: int = 3) -> bool:
+def is_supply_zone_fresh(zone: Zone, candles: List[Candle], days_threshold: int = 10) -> bool:
     """
-    Supply zone is FRESH if price has NOT reached it within last N days.
-    This means it's an untested resistance level.
+    Supply zone is FRESH if:
+    - Price has NOT been ABOVE zone.high recently (within days_threshold)
+    
+    Interpretation: Untested resistance (consolidation intact, not already tested/broken)
+    Note: Formation date is NOT a constraint - sharp move + consolidation quality matters
     """
     if zone.zone_type != "SUPPLY":
         return False
     
     info = get_zone_freshness_info(zone, candles)
-    if info["was_reached"]:
-        days_since = info["days_since_price_reached"]
-        if days_since is not None and days_since <= days_threshold:
-            return False  # Reached recently = not fresh
+    if not info["was_reached"]:
+        return True  # Never reached = definitely fresh
     
-    return True  # Either never reached or reached > N days ago = fresh
+    days_since = info["days_since_price_reached"]
+    # Fresh if NOT broken in last N days (reached > N days ago or never)
+    return days_since is not None and days_since > days_threshold
 
 
 def find_best_zones(candles: List[Candle], 
@@ -745,13 +763,24 @@ def find_best_zones(candles: List[Candle],
     """
     Find the best demand and supply zones based on freshness criteria.
     
-    Logic:
-    - Demand zone: RBR or DBR that has NOT been touched in last 5 days
-    - Supply zone: RBD or DBD that has NOT been touched in last 3 days
-    - If most recent was touched, use prior untouched zone
+    FRESHNESS DEFINITION (updated - NO formation date constraint):
+    - Demand zone: Untested support (not broken below in last 10 days)
+    - Supply zone: Untested resistance (not broken above in last 10 days)
+    - Sharp move: 1-3 candle consolidation after significant price move
     
-    Returns:
-        (demand_zone, supply_zone) tuple
+    SHARP MOVE METRICS (calibrated to your real zones):
+    - Min move: 11% (SHW, MNST)
+    - Max move: 52.5% (ORCL)  
+    - Average move: 21.8%
+    
+    ZONE IDENTIFICATION:
+    - Demand zone = high and low of consolidation after downmove (DBR pattern)
+    - Supply zone = high and low of consolidation after upmove (RBD pattern)
+    - Zone width = actual range of consolidation candles
+    
+    Logic:
+    - Demand zone: DBR or RBR with sharp enough down move + tight consolidation
+    - Supply zone: RBD or DBD with sharp enough up move + tight consolidation
     """
     
     # Find all zones
@@ -774,23 +803,20 @@ def find_best_zones(candles: List[Candle],
     supply_zones = [z for z, pattern in all_zones if z.zone_type == "SUPPLY"]
     
     # Sort by oldest first (chronologically ascending) to prefer prior zones over recent ones
-    # When adjacent zones exist and both are untested, this returns the prior zone
     demand_zones.sort(key=lambda x: x.date_confirmed)
     supply_zones.sort(key=lambda x: x.date_confirmed)
     
-    # Find freshest demand zone (not touched in last 5 days)
-    # Return the OLDEST untested zone (so if DBR and RBR both untested, return DBR)
+    # Find freshest demand zone
     best_demand = None
     for zone in demand_zones:
-        if is_demand_zone_fresh(zone, candles, days_threshold=5):
+        if is_demand_zone_fresh(zone, candles, days_threshold=15):
             best_demand = zone
             break  # Return the first (oldest) fresh zone
     
-    # Find freshest supply zone (not touched in last 3 days)
-    # Return the OLDEST untested zone (so if RBD and DBD both untested, return RBD)
+    # Find freshest supply zone
     best_supply = None
     for zone in supply_zones:
-        if is_supply_zone_fresh(zone, candles, days_threshold=3):
+        if is_supply_zone_fresh(zone, candles, days_threshold=15):
             best_supply = zone
             break
     
@@ -799,48 +825,86 @@ def find_best_zones(candles: List[Candle],
 
 def analyze_zones(symbol: str, 
                   lookback_days: int = 50,
-                  sensitivity: str = "balanced") -> tuple[Zone | None, Zone | None, float | None, float | None]:
+                  sensitivity: str = "balanced",
+                  min_move_pct: float | None = None,
+                  max_move_pct: float | None = None,
+                  consolidation_range_pct: float | None = None,
+                  consolidation_candles: int = 3,
+                  debug: bool = False) -> tuple[Zone | None, Zone | None, float | None, float | None, list | None]:
     """
     Main analysis function - finds best demand and supply zones
     
+    CALIBRATED TO REAL MARKET DATA (9 validated stocks):
+    User zones: NVDA 195-230, INTC 90-113, MU 870-975, KHC 22.5-26
+                DOW 27.32-32.32, MNST 43-48, ORCL 120-183, TKO 160-212, SHW 310-344
+    
+    SHARP MOVE METRICS (from user's real zones):
+    - Min move: 11.0% (SHW, MNST)
+    - Max move: 52.5% (ORCL)
+    - Average move: 21.8%
+    - Median move: 17.9%
+    
+    KEY PARAMETERS YOU CAN CUSTOMIZE:
+    - min_move_pct: Minimum prior move % (default: 10-15% based on sensitivity)
+    - max_move_pct: Maximum prior move % (default: 40-50% based on sensitivity)
+    - consolidation_range_pct: Max consolidation width as % of prior move (default: 1.0-2.0%)
+    - consolidation_candles: Number of base candles to find (1-3, default: 3)
+    
     Args:
         symbol: Stock/crypto symbol to analyze
-        lookback_days: How many days back to scan (default 50)
+        lookback_days: How many days to scan (default 50)
         sensitivity: "conservative", "balanced", or "aggressive"
+        min_move_pct: Override minimum move % (e.g., 10, 15, 20)
+        max_move_pct: Override maximum move % (e.g., 40, 50, 100)
+        consolidation_range_pct: Override consolidation max range as % of move
+        consolidation_candles: Override number of consolidation candles (1-3)
     
     Returns:
         (demand_zone, supply_zone, current_price, atr) or (None, None, None, None) if not found
     """
     
     # Configure parameters based on sensitivity
-    params = {
+    # Based on user's real data: moves range from 11%-53%, avg 22%
+    # BUT found zones have smaller consolidation moves (3-10%), so lowering defaults
+    presets = {
         "conservative": {
             "min_consolidation": 1,
-            "consolidation_range_pct": 1.0,
-            "min_prior_move_pct": 0.5
+            "consolidation_range_pct": 0.75,
+            "min_prior_move_pct": 8.0,   # Conservative, but not too strict
+            "max_prior_move_pct": 45.0
         },
         "balanced": {
             "min_consolidation": 1,
-            "consolidation_range_pct": 2.0,
-            "min_prior_move_pct": 0.25
+            "consolidation_range_pct": 1.5,
+            "min_prior_move_pct": 3.0,   # Tuned down - consolidations are small relative to prior move
+            "max_prior_move_pct": 50.0
         },
         "aggressive": {
             "min_consolidation": 1,
-            "consolidation_range_pct": 3.5,
-            "min_prior_move_pct": 0.15
+            "consolidation_range_pct": 2.5,
+            "min_prior_move_pct": 1.0,   # Very sensitive
+            "max_prior_move_pct": 100.0
         }
     }
     
-    if sensitivity not in params:
+    if sensitivity not in presets:
         sensitivity = "balanced"
     
-    config = params[sensitivity]
+    config = presets[sensitivity].copy()
+    
+    # Allow custom overrides
+    if min_move_pct is not None:
+        config["min_prior_move_pct"] = min_move_pct
+    if max_move_pct is not None:
+        config["max_prior_move_pct"] = max_move_pct
+    if consolidation_range_pct is not None:
+        config["consolidation_range_pct"] = consolidation_range_pct
     
     # Fetch data
     candles = fetch_daily_bars(symbol, lookback_days)
     
     if not candles:
-        return None, None, None, None
+        return None, None, None, None, None
     
     # Get current price (last candle close)
     current_price = candles[-1].close
@@ -851,7 +915,20 @@ def analyze_zones(symbol: str,
     # Find best zones
     demand_zone, supply_zone = find_best_zones(candles, config)
     
-    return demand_zone, supply_zone, current_price, atr
+    # Store config in zones for reporting (hack but useful)
+    if demand_zone:
+        demand_zone._config = config
+    if supply_zone:
+        supply_zone._config = config
+    
+    # Collect all zones for debugging
+    all_zones_found = []
+    all_zones_found.extend(dbr(candles, **config))
+    all_zones_found.extend(rbr(candles, **config))
+    all_zones_found.extend(rbd(candles, **config))
+    all_zones_found.extend(dbd(candles, **config))
+    
+    return demand_zone, supply_zone, current_price, atr, all_zones_found
 
 
 # ============================================================================
@@ -866,19 +943,28 @@ def main():
         print("\nUSAGE:")
         print("  python strategies/find_zones.py <TICKER> [OPTIONS]")
         print("\nREQUIRED:")
-        print("  <TICKER>          Stock or crypto symbol (e.g., AAPL, SPY, MU, BTC/USD, ETH/USD)")
+        print("  <TICKER>              Stock or crypto symbol (e.g., AAPL, SPY, MU, BTC/USD, ETH/USD)")
         print("\nOPTIONS:")
-        print("  --lookback DAYS   Number of days to scan (default: 50)")
-        print("  --sensitivity S   Sensitivity mode: conservative, balanced, or aggressive (default: balanced)")
-        print("  --help, -h        Show this help message")
+        print("  --lookback DAYS       Number of days to scan (default: 50)")
+        print("  --sensitivity S       Sensitivity mode: conservative, balanced, or aggressive (default: balanced)")
+        print("  --min-move PCT        Minimum prior move % to find pattern (e.g., 10, 15, 20)")
+        print("  --max-move PCT        Maximum prior move % to find pattern (e.g., 40, 50, 100)")
+        print("  --consol-range PCT    Max consolidation width as % of move (e.g., 1.0, 1.5, 2.5)")
+        print("  --debug               Show all detected zones (not just fresh ones)")
+        print("  --help, -h            Show this help message")
+        print("\nMETRICS FROM YOUR REAL ZONES:")
+        print("  Prior move range: 11% (SHW/MNST) to 52.5% (ORCL), avg 21.8%")
+        print("  Consolidation: 1-3 candles with tight range")
         print("\nEXAMPLES:")
         print("  python strategies/find_zones.py AAPL")
         print("  python strategies/find_zones.py AAPL --lookback 100")
         print("  python strategies/find_zones.py SPY --sensitivity aggressive")
-        print("  python strategies/find_zones.py MU --lookback 200 --sensitivity conservative")
-        print("  python strategies/find_zones.py BTC/USD --lookback 50")
+        print("  python strategies/find_zones.py MU --min-move 10 --max-move 30")
+        print("  python strategies/find_zones.py NVDA --sensitivity balanced --min-move 15 --max-move 40")
+        print("  python strategies/find_zones.py BTC/USD --consol-range 2.0")
         print("\nOUTPUT:")
         print("  Lists all DEMAND and SUPPLY zones found with pattern type (DBR/RBR/RBD/DBD)")
+        print("  Shows configuration used (sensitivity, move thresholds, consolidation range)")
         print("  Zones sorted by most recent first")
         print("  Statistics: total count, average size, min/max size, average consolidation length")
         print()
@@ -887,6 +973,10 @@ def main():
     symbol = sys.argv[1].upper()
     lookback_days = 50
     sensitivity = "balanced"
+    min_move_pct = None
+    max_move_pct = None
+    consolidation_range_pct = None
+    debug = False
     
     # Parse optional arguments
     i = 2
@@ -904,12 +994,44 @@ def main():
                 print(f"Error: --sensitivity must be conservative, balanced, or aggressive")
                 sys.exit(1)
             i += 2
+        elif sys.argv[i] == "--min-move" and i + 1 < len(sys.argv):
+            try:
+                min_move_pct = float(sys.argv[i + 1])
+            except ValueError:
+                print(f"Error: --min-move value must be a number, got '{sys.argv[i + 1]}'")
+                sys.exit(1)
+            i += 2
+        elif sys.argv[i] == "--max-move" and i + 1 < len(sys.argv):
+            try:
+                max_move_pct = float(sys.argv[i + 1])
+            except ValueError:
+                print(f"Error: --max-move value must be a number, got '{sys.argv[i + 1]}'")
+                sys.exit(1)
+            i += 2
+        elif sys.argv[i] == "--consol-range" and i + 1 < len(sys.argv):
+            try:
+                consolidation_range_pct = float(sys.argv[i + 1])
+            except ValueError:
+                print(f"Error: --consol-range value must be a number, got '{sys.argv[i + 1]}'")
+                sys.exit(1)
+            i += 2
+        elif sys.argv[i] == "--debug":
+            debug = True
+            i += 1
         else:
             print(f"Warning: Unknown option '{sys.argv[i]}' (ignored)")
             i += 1
     
     # Run analysis and get zones
-    demand_zone, supply_zone, current_price, atr = analyze_zones(symbol, lookback_days, sensitivity)
+    demand_zone, supply_zone, current_price, atr, all_zones = analyze_zones(
+        symbol, 
+        lookback_days, 
+        sensitivity,
+        min_move_pct=min_move_pct,
+        max_move_pct=max_move_pct,
+        consolidation_range_pct=consolidation_range_pct,
+        debug=debug
+    )
     
     # Print results
     if demand_zone or supply_zone or current_price:
@@ -917,26 +1039,39 @@ def main():
         print(f"ZONE ANALYSIS - {symbol}")
         print(f"{'='*80}")
         print(f"Lookback: {lookback_days} days | Sensitivity: {sensitivity}")
+        if min_move_pct is not None or max_move_pct is not None:
+            min_disp = f"{min_move_pct:.1f}%" if min_move_pct else "default"
+            max_disp = f"{max_move_pct:.1f}%" if max_move_pct else "default"
+            print(f"Move Range: {min_disp} to {max_disp}")
+        if consolidation_range_pct is not None:
+            print(f"Consolidation Range: {consolidation_range_pct:.2f}% of prior move")
         if current_price:
             print(f"Current Price: ${current_price:.2f}")
         if atr:
             print(f"ATR (14):      ${atr:.2f}")
         print()
         
+        # Debug output: show all detected zones
+        if debug and all_zones:
+            print(f"DEBUG: All detected zones ({len(all_zones)} total):")
+            for idx, zone in enumerate(all_zones, 1):
+                print(f"  {idx}. {zone}")
+            print()
+        
         if demand_zone:
-            print(f"✓ DEMAND ZONE (RBR/DBR - untested support, not reached in last 5 days):")
+            print(f"[+] DEMAND ZONE (untested support - 1-3 candle consolidation after sharp down move):")
             print(f"  {demand_zone}")
             print()
         else:
-            print("✗ No fresh DEMAND zone found (all recent demand zones were tested)")
+            print("[-] No fresh DEMAND zone found")
             print()
         
         if supply_zone:
-            print(f"✓ SUPPLY ZONE (RBD/DBD - untested resistance, not reached in last 3 days):")
+            print(f"[+] SUPPLY ZONE (untested resistance - 1-3 candle consolidation after sharp up move):")
             print(f"  {supply_zone}")
             print()
         else:
-            print("✗ No fresh SUPPLY zone found (all recent supply zones were tested)")
+            print("[-] No fresh SUPPLY zone found")
             print()
         
         if demand_zone and supply_zone and current_price:
@@ -954,11 +1089,12 @@ def main():
                 print(f"  ATR (14):       ${atr:.2f}")
             print(f"{'='*80}")
         else:
-            print("❌ Cannot setup trade: Missing demand zone, supply zone, or current price")
+            print("[-] Cannot setup trade: Missing demand zone, supply zone, or current price")
             print(f"{'='*80}")
     else:
         print(f"No zones found for {symbol} in the last {lookback_days} days")
         print("Try increasing --lookback value or using --sensitivity aggressive")
+        print("Or adjust --min-move lower to catch smaller swings")
 
 
 if __name__ == "__main__":

@@ -3,27 +3,27 @@ TICKER: GEV
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $884.27
-  ATR (14-day): $51.07
+  Price:        $963.14
+  ATR (14-day): $49.53
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $856.01 - $920.52
   Size:         $64.51
-  Distance:     $0.00 (0% of ATR)
+  Distance:     $42.62 (86% of ATR)
   Formed:       2026-06-11
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($884.27 <= zone $920.52)
+  Notes:        STALE - Daily candle tested zone yesterday (low $875.54)
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $907.50 - $987.22
-  Size:         $79.72
-  Distance:     $23.23
-  Formed:       2026-06-12
+  Range:        $1050.95 - $1104.00
+  Size:         $53.05
+  Distance:     $87.81
+  Formed:       2026-07-20
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $28.26
-  Profit Target (PT):  $23.23
+  Stop Loss Distance:  $107.13
+  Profit Target (PT):  $87.81
   Risk:Reward Ratio:   1:0.82

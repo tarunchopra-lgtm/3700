@@ -3,27 +3,27 @@ TICKER: DVA
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $188.89
-  ATR (14-day): $9.10
+  Price:        $189.60
+  ATR (14-day): $9.13
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $178.90 - $188.24
-  Size:         $9.34
-  Distance:     $0.65 (7% of ATR)
-  Formed:       2026-08-06
-  FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $185.30)
+  Range:        $175.29 - $179.34
+  Size:         $4.05
+  Distance:     $10.26 (112% of ATR)
+  Formed:       2026-08-25
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $204.98 - $211.80
-  Size:         $6.82
-  Distance:     $16.09
-  Formed:       2026-06-15
+  Range:        $204.06 - $211.80
+  Size:         $7.74
+  Distance:     $14.46
+  Formed:       2026-06-12
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $9.99
-  Profit Target (PT):  $16.09
-  Risk:Reward Ratio:   1:1.61
+  Stop Loss Distance:  $14.31
+  Profit Target (PT):  $14.46
+  Risk:Reward Ratio:   1:1.01

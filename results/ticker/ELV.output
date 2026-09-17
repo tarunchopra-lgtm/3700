@@ -3,27 +3,27 @@ TICKER: ELV
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $421.84
-  ATR (14-day): $10.22
+  Price:        $436.47
+  ATR (14-day): $10.21
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $395.00 - $406.92
-  Size:         $11.92
-  Distance:     $14.92 (146% of ATR)
-  Formed:       2026-06-11
+  Range:        $387.08 - $396.89
+  Size:         $9.81
+  Distance:     $39.58 (388% of ATR)
+  Formed:       2026-06-17
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
   Range:        $414.68 - $427.19
   Size:         $12.51
-  Distance:     $0.00
+  Distance:     $9.28
   Formed:       2026-07-02
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($421.84 >= zone $414.68)
+  Notes:        STALE - Price reached zone ($436.47 >= zone $414.68)
 
 TRADE METRICS:
-  Stop Loss Distance:  $26.84
-  Profit Target (PT):  $-7.16
-  Risk:Reward Ratio:   1:-0.27
+  Stop Loss Distance:  $49.39
+  Profit Target (PT):  $-21.79
+  Risk:Reward Ratio:   1:-0.44

@@ -3,8 +3,8 @@ TICKER: GLW
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $148.00
-  ATR (14-day): $12.03
+  Price:        $148.17
+  ATR (14-day): $12.15
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
@@ -13,17 +13,17 @@ DEMAND ZONE (Buy Zone):
   Distance:     $0.00 (0% of ATR)
   Formed:       2026-07-27
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($148.00 <= zone $148.69)
+  Notes:        STALE - Price reached zone ($148.17 <= zone $148.69)
 
 SUPPLY ZONE (Sell Zone):
   Range:        $173.41 - $190.00
   Size:         $16.59
-  Distance:     $25.41
+  Distance:     $25.24
   Formed:       2026-06-12
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $11.69
-  Profit Target (PT):  $25.41
-  Risk:Reward Ratio:   1:2.17
+  Stop Loss Distance:  $11.86
+  Profit Target (PT):  $25.24
+  Risk:Reward Ratio:   1:2.13

@@ -3,27 +3,27 @@ TICKER: SPCX
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $146.61
-  ATR (14-day): $10.04
+  Price:        $154.94
+  ATR (14-day): $10.62
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $119.68 - $125.70
-  Size:         $6.02
-  Distance:     $20.91 (208% of ATR)
-  Formed:       2026-07-20
+  Range:        $108.66 - $118.55
+  Size:         $9.89
+  Distance:     $36.39 (343% of ATR)
+  Formed:       2026-07-23
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
   Range:        $193.00 - $225.64
   Size:         $32.64
-  Distance:     $46.39
+  Distance:     $38.06
   Formed:       2026-06-16
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $26.93
-  Profit Target (PT):  $46.39
-  Risk:Reward Ratio:   1:1.72
+  Stop Loss Distance:  $46.28
+  Profit Target (PT):  $38.06
+  Risk:Reward Ratio:   1:0.82

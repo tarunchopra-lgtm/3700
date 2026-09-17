@@ -3,27 +3,27 @@ TICKER: DPZ
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $318.80
-  ATR (14-day): $12.14
+  Price:        $312.00
+  ATR (14-day): $11.96
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $282.00 - $294.36
   Size:         $12.36
-  Distance:     $24.44 (201% of ATR)
+  Distance:     $17.64 (147% of ATR)
   Formed:       2026-06-23
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $316.14 - $326.85
-  Size:         $10.71
+  Range:        $310.64 - $334.09
+  Size:         $23.45
   Distance:     $0.00
-  Formed:       2026-06-15
+  Formed:       2026-09-10
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($318.80 >= zone $316.14)
+  Notes:        STALE - Price reached zone ($312.00 >= zone $310.64)
 
 TRADE METRICS:
-  Stop Loss Distance:  $36.80
-  Profit Target (PT):  $-2.66
-  Risk:Reward Ratio:   1:-0.07
+  Stop Loss Distance:  $30.00
+  Profit Target (PT):  $-1.36
+  Risk:Reward Ratio:   1:-0.05

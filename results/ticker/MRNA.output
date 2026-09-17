@@ -3,27 +3,27 @@ TICKER: MRNA
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $146.40
-  ATR (14-day): $3.44
+  Price:        $153.00
+  ATR (14-day): $3.63
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $49.62 - $51.75
-  Size:         $2.13
-  Distance:     $94.65 (2749% of ATR)
+  Range:        $49.62 - $52.23
+  Size:         $2.61
+  Distance:     $100.77 (2775% of ATR)
   Formed:       2026-06-12
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $128.61 - $176.66
-  Size:         $48.05
+  Range:        $139.70 - $154.69
+  Size:         $14.99
   Distance:     $0.00
-  Formed:       2026-08-20
+  Formed:       2026-09-08
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($146.40 >= zone $128.61)
+  Notes:        STALE - Price reached zone ($153.00 >= zone $139.70)
 
 TRADE METRICS:
-  Stop Loss Distance:  $96.78
-  Profit Target (PT):  $-17.79
-  Risk:Reward Ratio:   1:-0.18
+  Stop Loss Distance:  $103.38
+  Profit Target (PT):  $-13.30
+  Risk:Reward Ratio:   1:-0.13

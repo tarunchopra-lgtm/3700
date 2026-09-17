@@ -3,27 +3,27 @@ TICKER: HSIC
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $98.13
-  ATR (14-day): $1.96
+  Price:        $85.99
+  ATR (14-day): $2.03
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $78.78 - $80.51
-  Size:         $1.73
-  Distance:     $17.62 (901% of ATR)
-  Formed:       2026-06-11
+  Range:        $78.62 - $80.55
+  Size:         $1.92
+  Distance:     $5.44 (269% of ATR)
+  Formed:       2026-06-23
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $84.70 - $89.34
-  Size:         $4.64
-  Distance:     $8.79
-  Formed:       2026-07-14
+  Range:        $87.06 - $92.18
+  Size:         $5.12
+  Distance:     $1.07
+  Formed:       2026-08-05
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($98.13 >= zone $84.70)
+  Notes:        STALE - Daily candle tested zone yesterday (high $88.28)
 
 TRADE METRICS:
-  Stop Loss Distance:  $19.35
-  Profit Target (PT):  $-13.43
-  Risk:Reward Ratio:   1:-0.69
+  Stop Loss Distance:  $7.37
+  Profit Target (PT):  $1.07
+  Risk:Reward Ratio:   1:0.15

@@ -3,27 +3,27 @@ TICKER: BLDR
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $62.76
-  ATR (14-day): $3.64
+  Price:        $64.32
+  ATR (14-day): $3.79
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $58.13 - $61.02
   Size:         $2.89
-  Distance:     $1.74 (48% of ATR)
+  Distance:     $3.30 (87% of ATR)
   Formed:       2026-09-11
   FRESHNESS:    STALE
   Notes:        STALE - Daily candle tested zone yesterday (low $59.53)
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $72.66 - $78.75
-  Size:         $6.09
-  Distance:     $9.90
-  Formed:       2026-06-10
+  Range:        $77.45 - $79.76
+  Size:         $2.31
+  Distance:     $13.13
+  Formed:       2026-06-12
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $4.63
-  Profit Target (PT):  $9.90
-  Risk:Reward Ratio:   1:2.14
+  Stop Loss Distance:  $6.19
+  Profit Target (PT):  $13.13
+  Risk:Reward Ratio:   1:2.12

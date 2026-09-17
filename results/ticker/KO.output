@@ -3,27 +3,27 @@ TICKER: KO
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $88.40
+  Price:        $88.12
   ATR (14-day): $1.83
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $78.74 - $80.33
-  Size:         $1.59
-  Distance:     $8.07 (440% of ATR)
-  Formed:       2026-06-17
+  Range:        $79.83 - $81.58
+  Size:         $1.75
+  Distance:     $6.55 (358% of ATR)
+  Formed:       2026-06-24
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $88.95 - $92.21
-  Size:         $3.25
-  Distance:     $0.55
+  Range:        $88.60 - $92.21
+  Size:         $3.61
+  Distance:     $0.48
   Formed:       2026-08-27
   FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (high $90.22)
+  Notes:        STALE - Daily candle tested zone yesterday (high $88.64)
 
 TRADE METRICS:
-  Stop Loss Distance:  $9.66
-  Profit Target (PT):  $0.55
+  Stop Loss Distance:  $8.29
+  Profit Target (PT):  $0.48
   Risk:Reward Ratio:   1:0.06

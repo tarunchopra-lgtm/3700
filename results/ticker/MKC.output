@@ -3,27 +3,27 @@ TICKER: MKC
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $50.27
-  ATR (14-day): $1.49
+  Price:        $50.26
+  ATR (14-day): $1.44
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $45.72 - $47.62
-  Size:         $1.90
-  Distance:     $2.65 (177% of ATR)
-  Formed:       2026-06-23
+  Range:        $45.72 - $47.58
+  Size:         $1.86
+  Distance:     $2.68 (186% of ATR)
+  Formed:       2026-06-17
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $52.55 - $53.88
-  Size:         $1.33
-  Distance:     $2.28
-  Formed:       2026-07-02
-  FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (high $52.84)
+  Range:        $54.85 - $56.87
+  Size:         $2.02
+  Distance:     $4.59
+  Formed:       2026-08-20
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $4.55
-  Profit Target (PT):  $2.28
-  Risk:Reward Ratio:   1:0.50
+  Stop Loss Distance:  $4.54
+  Profit Target (PT):  $4.59
+  Risk:Reward Ratio:   1:1.01

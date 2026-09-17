@@ -3,27 +3,27 @@ TICKER: GPN
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $95.32
-  ATR (14-day): $2.84
+  Price:        $90.99
+  ATR (14-day): $3.31
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $65.53 - $70.50
-  Size:         $4.97
-  Distance:     $24.82 (873% of ATR)
-  Formed:       2026-06-12
+  Range:        $63.66 - $67.98
+  Size:         $4.32
+  Distance:     $23.01 (694% of ATR)
+  Formed:       2026-06-18
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $85.69 - $90.85
-  Size:         $5.16
-  Distance:     $4.47
-  Formed:       2026-08-05
-  FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($95.32 >= zone $85.69)
+  Range:        $92.00 - $95.58
+  Size:         $3.58
+  Distance:     $1.01
+  Formed:       2026-08-14
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $29.79
-  Profit Target (PT):  $-9.62
-  Risk:Reward Ratio:   1:-0.32
+  Stop Loss Distance:  $27.33
+  Profit Target (PT):  $1.01
+  Risk:Reward Ratio:   1:0.04

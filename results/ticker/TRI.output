@@ -3,27 +3,27 @@ TICKER: TRI
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $103.33
-  ATR (14-day): $6.25
-  Within ATR:   NO
+  Price:        $99.42
+  ATR (14-day): $6.29
+  Within ATR:   YES
 
 DEMAND ZONE (Buy Zone):
-  Range:        $80.43 - $83.53
-  Size:         $3.10
-  Distance:     $19.80 (317% of ATR)
-  Formed:       2026-06-15
+  Range:        $89.33 - $94.35
+  Size:         $5.02
+  Distance:     $5.07 (81% of ATR)
+  Formed:       2026-07-14
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $90.77 - $108.29
-  Size:         $17.52
-  Distance:     $0.00
-  Formed:       2026-07-27
-  FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($103.33 >= zone $90.77)
+  Range:        $105.25 - $112.77
+  Size:         $7.52
+  Distance:     $5.83
+  Formed:       2026-09-04
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $22.90
-  Profit Target (PT):  $-12.56
-  Risk:Reward Ratio:   1:-0.55
+  Stop Loss Distance:  $10.09
+  Profit Target (PT):  $5.83
+  Risk:Reward Ratio:   1:0.58

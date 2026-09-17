@@ -3,27 +3,27 @@ TICKER: DD
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $123.75
-  ATR (14-day): $4.11
+  Price:        $129.62
+  ATR (14-day): $3.99
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $44.93 - $46.88
-  Size:         $1.95
-  Distance:     $76.87 (1870% of ATR)
-  Formed:       2026-06-11
+  Range:        $47.40 - $49.48
+  Size:         $2.09
+  Distance:     $80.14 (2006% of ATR)
+  Formed:       2026-06-17
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $131.14 - $144.84
-  Size:         $13.70
-  Distance:     $7.39
-  Formed:       2026-06-25
+  Range:        $134.12 - $138.60
+  Size:         $4.48
+  Distance:     $4.50
+  Formed:       2026-07-10
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $78.82
-  Profit Target (PT):  $7.39
-  Risk:Reward Ratio:   1:0.09
+  Stop Loss Distance:  $82.22
+  Profit Target (PT):  $4.50
+  Risk:Reward Ratio:   1:0.05

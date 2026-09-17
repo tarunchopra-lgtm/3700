@@ -3,17 +3,17 @@ TICKER: XLK
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $184.86
-  ATR (14-day): $5.19
+  Price:        $188.00
+  ATR (14-day): $5.14
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $172.88 - $182.41
-  Size:         $9.53
-  Distance:     $2.45 (47% of ATR)
-  Formed:       2026-06-10
+  Range:        $179.76 - $183.11
+  Size:         $3.35
+  Distance:     $4.89 (95% of ATR)
+  Formed:       2026-06-26
   FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $182.10)
+  Notes:        STALE - Daily candle tested zone yesterday (low $182.47)
 
 SUPPLY ZONE (Sell Zone):
   Range:        $181.64 - $192.08
@@ -21,9 +21,9 @@ SUPPLY ZONE (Sell Zone):
   Distance:     $0.00
   Formed:       2026-06-12
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($184.86 >= zone $181.64)
+  Notes:        STALE - Price reached zone ($188.00 >= zone $181.64)
 
 TRADE METRICS:
-  Stop Loss Distance:  $11.98
-  Profit Target (PT):  $-3.22
-  Risk:Reward Ratio:   1:-0.27
+  Stop Loss Distance:  $8.24
+  Profit Target (PT):  $-6.36
+  Risk:Reward Ratio:   1:-0.77

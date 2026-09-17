@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: HPQ
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $34.10
+  ATR (14-day): $1.52
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $23.25 - $24.18
+  Size:         $0.92
+  Distance:     $9.93 (653% of ATR)
+  Formed:       2026-07-16
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $33.37 - $36.23
+  Size:         $2.86
+  Distance:     $0.00
+  Formed:       2026-09-14
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($34.10 >= zone $33.37)
+
+TRADE METRICS:
+  Stop Loss Distance:  $10.85
+  Profit Target (PT):  $-0.73
+  Risk:Reward Ratio:   1:-0.07

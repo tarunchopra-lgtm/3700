@@ -3,27 +3,27 @@ TICKER: STE
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $212.23
-  ATR (14-day): $6.12
-  Within ATR:   NO
+  Price:        $209.40
+  ATR (14-day): $6.13
+  Within ATR:   YES
 
 DEMAND ZONE (Buy Zone):
-  Range:        $198.01 - $203.05
-  Size:         $5.04
-  Distance:     $9.18 (150% of ATR)
+  Range:        $198.01 - $203.62
+  Size:         $5.61
+  Distance:     $5.78 (94% of ATR)
   Formed:       2026-06-18
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $212.10 - $217.00
-  Size:         $4.90
-  Distance:     $0.00
-  Formed:       2026-06-29
-  FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($212.23 >= zone $212.10)
+  Range:        $234.15 - $237.62
+  Size:         $3.48
+  Distance:     $24.75
+  Formed:       2026-08-13
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $14.22
-  Profit Target (PT):  $-0.13
-  Risk:Reward Ratio:   1:-0.01
+  Stop Loss Distance:  $11.39
+  Profit Target (PT):  $24.75
+  Risk:Reward Ratio:   1:2.17

@@ -401,3 +401,179 @@
 [2026-09-15 12:59:08] ============================================================
 
 [2026-09-15 12:59:10] ✓ Email report sent to tarun.chopra@gmail.com
+[2026-09-16 12:50:04] 
+============================================================
+[2026-09-16 12:50:04] 🔔 CLOSING BELL - Closing all positions...
+[2026-09-16 12:50:04] ============================================================
+[2026-09-16 12:50:04] Found 3 open position(s). Starting closeout...
+[2026-09-16 12:50:04] 
+[INTC] Qty: 2, Value: $201.98
+[2026-09-16 12:50:05]   ✓ Cancelled pending order @ $103.00
+[2026-09-16 12:50:05]   ✓ Cancelled pending order @ $103.00
+[2026-09-16 12:50:05]   Bid: $100.95, Ask: $100.99, Midpoint: $100.97
+[2026-09-16 12:50:05]   ✗ Error submitting limit order for INTC: {"available":"0","code":40310000,"existing_qty":"2","held_for_orders":"2","message":"insufficient qty available for order (requested: 2, available: 0)","related_orders":["91e81f1b-da5e-4aad-9a1c-70cbc28e104c","6bb61346-e672-4dbd-a18f-ce01bd5d3913"],"symbol":"INTC"}
+[2026-09-16 12:50:05]   ✗ Error submitting market order for INTC: {"available":"0","code":40310000,"existing_qty":"2","held_for_orders":"2","message":"insufficient qty available for order (requested: 2, available: 0)","related_orders":["91e81f1b-da5e-4aad-9a1c-70cbc28e104c","6bb61346-e672-4dbd-a18f-ce01bd5d3913"],"symbol":"INTC"}
+[2026-09-16 12:50:05] 
+[MU] Qty: 2, Value: $1849.10
+[2026-09-16 12:50:05]   ✓ Cancelled pending order @ $930.00
+[2026-09-16 12:50:05]   Bid: $912.00, Ask: $924.62, Midpoint: $918.31
+[2026-09-16 12:50:06]   ✗ Error submitting limit order for MU: {"available":"1","code":40310000,"existing_qty":"2","held_for_orders":"1","message":"insufficient qty available for order (requested: 2, available: 1)","related_orders":["3b4d362d-b630-4977-b86b-34ef5b49e362"],"symbol":"MU"}
+[2026-09-16 12:50:06]   ✗ Error submitting market order for MU: {"available":"1","code":40310000,"existing_qty":"2","held_for_orders":"1","message":"insufficient qty available for order (requested: 2, available: 1)","related_orders":["3b4d362d-b630-4977-b86b-34ef5b49e362"],"symbol":"MU"}
+[2026-09-16 12:50:06] 
+[SPY] Qty: 2, Value: $1507.26
+[2026-09-16 12:50:06]   ✓ Cancelled pending order @ $759.00
+[2026-09-16 12:50:06]   Bid: $753.71, Ask: $753.72, Midpoint: $753.72
+[2026-09-16 12:50:06]   ✗ Error submitting limit order for SPY: {"available":"1","code":40310000,"existing_qty":"2","held_for_orders":"1","message":"insufficient qty available for order (requested: 2, available: 1)","related_orders":["3820ca0c-5421-4289-a56e-aadad2c2d4ea"],"symbol":"SPY"}
+[2026-09-16 12:50:06]   ✗ Error submitting market order for SPY: {"available":"1","code":40310000,"existing_qty":"2","held_for_orders":"1","message":"insufficient qty available for order (requested: 2, available: 1)","related_orders":["3820ca0c-5421-4289-a56e-aadad2c2d4ea"],"symbol":"SPY"}
+[2026-09-16 12:50:06] 
+============================================================
+[2026-09-16 12:50:06] Closeout Summary: 0 successful, 3 failed
+[2026-09-16 12:50:06] ============================================================
+
+[2026-09-16 12:50:07] ✓ Email report sent to tarun.chopra@gmail.com
+[2026-09-16 19:40:22] 
+============================================================
+[2026-09-16 19:40:22] 🔔 CLOSING BELL - Closing all positions...
+[2026-09-16 19:40:22] ============================================================
+[2026-09-16 19:40:22] Found 4 open position(s). Starting closeout...
+[2026-09-16 19:40:22] 
+[ETHUSD] Qty: 0.9975, Value: $2411.46
+[2026-09-16 19:40:26]   ⚠ Could not get bid/ask, proceeding to market order
+[2026-09-16 19:40:26]   ✗ Error submitting market order for ETHUSD: invalid literal for int() with base 10: '0.9975'
+[2026-09-16 19:40:26] 
+[INTC] Qty: 2, Value: $204.94
+[2026-09-16 19:40:29]   Bid: $94.33, Ask: $104.53, Midpoint: $99.43
+[2026-09-16 19:40:29]   → Submitted limit order 37dfee56-bb0a-4633-b3d1-21d952b99327 for 2 INTC @ $99.43
+[2026-09-16 19:41:30]   ✗ Limit order did not fill in 60 seconds, canceling...
+[2026-09-16 19:41:30]   ✓ Market sell order submitted for 2 INTC (Order ID: 75b3797c-12a7-4d0d-b3d0-0d46bc9271d7)
+[2026-09-16 19:41:30] 
+[MU] Qty: 2, Value: $1868.00
+[2026-09-16 19:41:30]   Bid: $887.17, Ask: $980.70, Midpoint: $933.93
+[2026-09-16 19:41:30]   → Submitted limit order 5a824ca5-d35a-4919-a97e-5352e1263c5f for 2 MU @ $933.93
+[2026-09-16 19:42:31]   ✗ Limit order did not fill in 60 seconds, canceling...
+[2026-09-16 19:42:32]   ✓ Market sell order submitted for 2 MU (Order ID: 5c10c23f-53ca-409b-847d-2bd32656c194)
+[2026-09-16 19:42:32] 
+[SPY] Qty: 2, Value: $1517.26
+[2026-09-16 19:42:32]   Bid: $729.24, Ask: $774.86, Midpoint: $752.05
+[2026-09-16 19:42:32]   → Submitted limit order 4cf71118-399a-451e-a2e8-55ee332d746d for 2 SPY @ $752.05
+[2026-09-16 19:43:30] 
+============================================================
+[2026-09-16 19:43:30] 🔔 CLOSING BELL - Closing all positions...
+[2026-09-16 19:43:30] ============================================================
+[2026-09-16 19:43:30] Found 4 open position(s). Starting closeout...
+[2026-09-16 19:43:30] 
+[ETHUSD] Qty: 0.9975, Value: $2423.88
+[2026-09-16 19:43:30]   ⚠ Could not get bid/ask, proceeding to market order
+[2026-09-16 19:43:30]   ✗ Error submitting market order for ETHUSD: invalid literal for int() with base 10: '0.9975'
+[2026-09-16 19:43:30] 
+[INTC] Qty: 2, Value: $205.00
+[2026-09-16 19:43:30]   ⚠ Could not cancel order 75b3797c-12a7-4d0d-b3d0-0d46bc9271d7: float() argument must be a string or a real number, not 'NoneType'
+[2026-09-16 19:43:30]   Bid: $94.33, Ask: $104.53, Midpoint: $99.43
+[2026-09-16 19:43:31]   → Submitted limit order 57f00659-7f7c-480f-9ec7-422e3bf6c7a6 for 2 INTC @ $99.43
+[2026-09-16 19:43:36]   ✗ Limit order did not fill in 5 seconds, canceling...
+[2026-09-16 19:43:36]   ✓ Market sell order submitted for 2 INTC (Order ID: c0cd3dfc-ee86-4900-bebd-d52051c0c9cd)
+[2026-09-16 19:43:36] 
+[MU] Qty: 2, Value: $1867.00
+[2026-09-16 19:43:36]   ⚠ Could not cancel order 5c10c23f-53ca-409b-847d-2bd32656c194: float() argument must be a string or a real number, not 'NoneType'
+[2026-09-16 19:43:36]   Bid: $887.17, Ask: $980.70, Midpoint: $933.93
+[2026-09-16 19:43:36]   → Submitted limit order e0b33220-c577-4623-9d0c-dd017a55068a for 2 MU @ $933.93
+[2026-09-16 19:43:41]   ✗ Limit order did not fill in 5 seconds, canceling...
+[2026-09-16 19:43:41]   ✓ Market sell order submitted for 2 MU (Order ID: 16e5e63c-6dd2-4aa7-a751-d6f4b2ba5bee)
+[2026-09-16 19:43:41] 
+[SPY] Qty: 2, Value: $1517.50
+[2026-09-16 19:43:41]   ✓ Cancelled pending order @ $752.05
+[2026-09-16 19:43:42]   Bid: $729.24, Ask: $774.86, Midpoint: $752.05
+[2026-09-16 19:43:42]   → Submitted limit order ea101cfb-32d6-421e-8e3f-f8fcb22cb502 for 2 SPY @ $752.05
+[2026-09-16 19:43:47]   ✗ Limit order did not fill in 5 seconds, canceling...
+[2026-09-16 19:43:47]   ✓ Market sell order submitted for 2 SPY (Order ID: 510d8315-48fb-4ac8-a77d-d866ab680123)
+[2026-09-16 19:43:47] 
+============================================================
+[2026-09-16 19:43:47] Closeout Summary: 3 successful, 1 failed
+[2026-09-16 19:43:47] ============================================================
+
+[2026-09-16 19:43:49] ✓ Email report sent to tarun.chopra@gmail.com
+[2026-09-16 19:46:39] 
+============================================================
+[2026-09-16 19:46:39] 🔔 CLOSING BELL - Closing all positions...
+[2026-09-16 19:46:39] ============================================================
+[2026-09-16 19:46:39] Found 4 open position(s). Starting closeout...
+[2026-09-16 19:46:39] 
+[ETHUSD] Qty: 0.9975, Value: $2421.61
+[2026-09-16 19:46:39]   ⚠ Could not get bid/ask, proceeding to market order
+[2026-09-16 19:46:39]   ✗ Error submitting market order for ETHUSD: invalid literal for int() with base 10: '0.9975'
+[2026-09-16 19:46:39] 
+[INTC] Qty: 2, Value: $204.80
+[2026-09-16 19:46:40]   ⚠ Could not cancel order c0cd3dfc-ee86-4900-bebd-d52051c0c9cd: float() argument must be a string or a real number, not 'NoneType'
+[2026-09-16 19:46:40]   Bid: $94.33, Ask: $104.53, Midpoint: $99.43
+[2026-09-16 19:46:40]   → Submitted limit order cec55e59-25dc-4f1d-b0b6-49a1411a26e6 for 2 INTC @ $99.43
+[2026-09-16 19:46:45]   ✗ Limit order did not fill in 5 seconds, canceling...
+[2026-09-16 19:46:45]   ✓ Market sell order submitted for 2 INTC (Order ID: ad6b9e82-bf7b-4024-8689-7ae513c28ec9)
+[2026-09-16 19:46:45] 
+[MU] Qty: 2, Value: $1864.88
+[2026-09-16 19:46:45]   ⚠ Could not cancel order 16e5e63c-6dd2-4aa7-a751-d6f4b2ba5bee: float() argument must be a string or a real number, not 'NoneType'
+[2026-09-16 19:46:45]   Bid: $887.17, Ask: $980.70, Midpoint: $933.93
+[2026-09-16 19:46:45]   → Submitted limit order 86937c32-ded2-4715-a2d8-9bde0fc161da for 2 MU @ $933.93
+[2026-09-16 19:46:50]   ✗ Limit order did not fill in 5 seconds, canceling...
+[2026-09-16 19:46:51]   ✓ Market sell order submitted for 2 MU (Order ID: e24995c0-7777-433f-b8e4-14ff10cc586e)
+[2026-09-16 19:46:51] 
+[SPY] Qty: 2, Value: $1517.50
+[2026-09-16 19:46:51]   ⚠ Could not cancel order 510d8315-48fb-4ac8-a77d-d866ab680123: float() argument must be a string or a real number, not 'NoneType'
+[2026-09-16 19:46:51]   Bid: $729.24, Ask: $774.86, Midpoint: $752.05
+[2026-09-16 19:46:51]   → Submitted limit order 9efe6075-8ad6-4489-a8ad-476b06407953 for 2 SPY @ $752.05
+[2026-09-16 19:46:56]   ✗ Limit order did not fill in 5 seconds, canceling...
+[2026-09-16 19:46:56]   ✓ Market sell order submitted for 2 SPY (Order ID: 561bf5b6-1007-4b41-8975-3c364dea1e0e)
+[2026-09-16 19:46:56] 
+============================================================
+[2026-09-16 19:46:56] Closeout Summary: 3 successful, 1 failed
+[2026-09-16 19:46:56] ============================================================
+
+[2026-09-16 19:46:58] ✓ Email report sent to tarun.chopra@gmail.com
+[2026-09-16 19:48:58] 
+============================================================
+[2026-09-16 19:48:58] 🔔 CLOSING BELL - Closing all positions...
+[2026-09-16 19:48:58] ============================================================
+[2026-09-16 19:48:58] Found 4 open position(s). Starting closeout...
+[2026-09-16 19:48:58] 
+[ETHUSD] Qty: 0.9975, Value: $2421.61
+[2026-09-16 19:48:58]   ⚠ Could not get bid/ask, proceeding to market order
+[2026-09-16 19:48:58]   ✗ Error submitting market order for ETHUSD: invalid literal for int() with base 10: '0.9975'
+[2026-09-16 19:48:58]   DEBUG: Traceback (most recent call last):
+  File "C:\Users\TarunChopra\3700\strategies\closing_bell.py", line 294, in _sell_at_market
+    normalized_qty = _normalize_qty(qty, symbol)
+  File "C:\Users\TarunChopra\3700\strategies\closing_bell.py", line 163, in _normalize_qty
+    return int(qty)
+ValueError: invalid literal for int() with base 10: '0.9975'
+
+[2026-09-16 19:48:58] 
+[INTC] Qty: 2, Value: $204.82
+[2026-09-16 19:48:58]   ⚠ Could not cancel order ad6b9e82-bf7b-4024-8689-7ae513c28ec9: float() argument must be a string or a real number, not 'NoneType'
+[2026-09-16 19:48:59]   Bid: $94.33, Ask: $104.53, Midpoint: $99.43
+[2026-09-16 19:48:59]   → Normalizing qty: 2 (str) for INTC → 2 (int)
+[2026-09-16 19:48:59]   → Submitted limit order eb12360e-f040-4d8f-8d62-40dcc4246995 for 2 INTC @ $99.43
+[2026-09-16 19:49:04]   ✗ Limit order did not fill in 5 seconds, canceling...
+[2026-09-16 19:49:04]   → Normalizing qty: 2 (str) for INTC → 2 (int)
+[2026-09-16 19:49:04]   ✓ Market sell order submitted for 2 INTC (Order ID: b3e2e011-5263-40a4-863e-a49b228cafd9)
+[2026-09-16 19:49:04] 
+[MU] Qty: 2, Value: $1864.72
+[2026-09-16 19:49:04]   ⚠ Could not cancel order e24995c0-7777-433f-b8e4-14ff10cc586e: float() argument must be a string or a real number, not 'NoneType'
+[2026-09-16 19:49:04]   Bid: $887.17, Ask: $980.70, Midpoint: $933.93
+[2026-09-16 19:49:04]   → Normalizing qty: 2 (str) for MU → 2 (int)
+[2026-09-16 19:49:04]   → Submitted limit order 88ccb7ad-b9fd-408f-89ac-d0c981dd0853 for 2 MU @ $933.93
+[2026-09-16 19:49:09]   ✗ Limit order did not fill in 5 seconds, canceling...
+[2026-09-16 19:49:09]   → Normalizing qty: 2 (str) for MU → 2 (int)
+[2026-09-16 19:49:09]   ✓ Market sell order submitted for 2 MU (Order ID: f7289cbc-d0d9-4ef6-9aa0-3752e41afe03)
+[2026-09-16 19:49:09] 
+[SPY] Qty: 2, Value: $1517.16
+[2026-09-16 19:49:10]   ⚠ Could not cancel order 561bf5b6-1007-4b41-8975-3c364dea1e0e: float() argument must be a string or a real number, not 'NoneType'
+[2026-09-16 19:49:10]   Bid: $729.24, Ask: $774.86, Midpoint: $752.05
+[2026-09-16 19:49:10]   → Normalizing qty: 2 (str) for SPY → 2 (int)
+[2026-09-16 19:49:10]   → Submitted limit order 1ddaef19-0c68-42c6-9f97-be01812d3935 for 2 SPY @ $752.05
+[2026-09-16 19:49:15]   ✗ Limit order did not fill in 5 seconds, canceling...
+[2026-09-16 19:49:15]   → Normalizing qty: 2 (str) for SPY → 2 (int)
+[2026-09-16 19:49:15]   ✓ Market sell order submitted for 2 SPY (Order ID: be3a467b-96ba-4b90-81af-5f3ea5dee667)
+[2026-09-16 19:49:15] 
+============================================================
+[2026-09-16 19:49:15] Closeout Summary: 3 successful, 1 failed
+[2026-09-16 19:49:15] ============================================================
+
+[2026-09-16 19:49:16] ✓ Email report sent to tarun.chopra@gmail.com

@@ -3,27 +3,27 @@ TICKER: COF
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $218.21
-  ATR (14-day): $4.70
+  Price:        $204.40
+  ATR (14-day): $4.42
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $174.24 - $182.35
-  Size:         $8.11
-  Distance:     $35.86 (762% of ATR)
-  Formed:       2026-06-11
+  Range:        $181.70 - $185.50
+  Size:         $3.80
+  Distance:     $18.90 (427% of ATR)
+  Formed:       2026-06-12
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $202.55 - $210.10
-  Size:         $7.55
-  Distance:     $8.11
-  Formed:       2026-06-26
-  FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($218.21 >= zone $202.55)
+  Range:        $221.19 - $228.14
+  Size:         $6.95
+  Distance:     $16.79
+  Formed:       2026-08-13
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $43.97
-  Profit Target (PT):  $-15.66
-  Risk:Reward Ratio:   1:-0.36
+  Stop Loss Distance:  $22.70
+  Profit Target (PT):  $16.79
+  Risk:Reward Ratio:   1:0.74

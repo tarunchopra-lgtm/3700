@@ -3,27 +3,27 @@ TICKER: BAX
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $23.42
-  ATR (14-day): $1.36
+  Price:        $23.29
+  ATR (14-day): $1.37
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $20.04 - $20.98
-  Size:         $0.95
-  Distance:     $2.44 (180% of ATR)
-  Formed:       2026-06-11
+  Range:        $19.38 - $20.09
+  Size:         $0.71
+  Distance:     $3.20 (233% of ATR)
+  Formed:       2026-06-18
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $23.39 - $24.93
-  Size:         $1.53
-  Distance:     $0.00
-  Formed:       2026-07-28
-  FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($23.42 >= zone $23.39)
+  Range:        $27.48 - $28.38
+  Size:         $0.89
+  Distance:     $4.19
+  Formed:       2026-08-04
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $3.39
-  Profit Target (PT):  $-0.03
-  Risk:Reward Ratio:   1:-0.01
+  Stop Loss Distance:  $3.91
+  Profit Target (PT):  $4.19
+  Risk:Reward Ratio:   1:1.07

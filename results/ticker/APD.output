@@ -3,27 +3,27 @@ TICKER: APD
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $295.49
-  ATR (14-day): $6.32
+  Price:        $285.79
+  ATR (14-day): $6.35
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $276.38 - $281.75
-  Size:         $5.38
-  Distance:     $13.74 (217% of ATR)
-  Formed:       2026-06-11
-  FRESHNESS:    FRESH
-  Notes:        Fresh - not tested recently
+  Range:        $278.29 - $284.85
+  Size:         $6.56
+  Distance:     $0.94 (15% of ATR)
+  Formed:       2026-06-16
+  FRESHNESS:    STALE
+  Notes:        STALE - Daily candle tested zone yesterday (low $284.42)
 
 SUPPLY ZONE (Sell Zone):
   Range:        $303.83 - $314.28
   Size:         $10.45
-  Distance:     $8.34
+  Distance:     $18.04
   Formed:       2026-07-02
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $19.11
-  Profit Target (PT):  $8.34
-  Risk:Reward Ratio:   1:0.44
+  Stop Loss Distance:  $7.50
+  Profit Target (PT):  $18.04
+  Risk:Reward Ratio:   1:2.41

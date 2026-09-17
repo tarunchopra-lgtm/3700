@@ -3,27 +3,27 @@ TICKER: COIN
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $189.97
-  ATR (14-day): $8.92
+  Price:        $174.00
+  ATR (14-day): $8.69
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $141.48 - $152.19
   Size:         $10.71
-  Distance:     $37.78 (424% of ATR)
+  Distance:     $21.81 (251% of ATR)
   Formed:       2026-06-25
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $179.43 - $193.81
-  Size:         $14.38
-  Distance:     $0.00
-  Formed:       2026-08-26
-  FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($189.97 >= zone $179.43)
+  Range:        $178.33 - $195.85
+  Size:         $17.52
+  Distance:     $4.33
+  Formed:       2026-09-04
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $48.49
-  Profit Target (PT):  $-10.54
-  Risk:Reward Ratio:   1:-0.22
+  Stop Loss Distance:  $32.52
+  Profit Target (PT):  $4.33
+  Risk:Reward Ratio:   1:0.13

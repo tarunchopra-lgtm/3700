@@ -3,27 +3,27 @@ TICKER: COHR
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $290.84
-  ATR (14-day): $35.87
+  Price:        $294.41
+  ATR (14-day): $37.11
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $220.68 - $283.20
-  Size:         $62.52
-  Distance:     $7.64 (21% of ATR)
-  Formed:       2026-07-27
+  Range:        $220.68 - $281.99
+  Size:         $61.31
+  Distance:     $12.42 (33% of ATR)
+  Formed:       2026-07-30
   FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $265.50)
+  Notes:        STALE - Daily candle tested zone yesterday (low $278.02)
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $376.55 - $439.68
-  Size:         $63.13
-  Distance:     $85.71
-  Formed:       2026-06-17
+  Range:        $365.01 - $439.68
+  Size:         $74.67
+  Distance:     $70.60
+  Formed:       2026-06-23
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $70.16
-  Profit Target (PT):  $85.71
-  Risk:Reward Ratio:   1:1.22
+  Stop Loss Distance:  $73.73
+  Profit Target (PT):  $70.60
+  Risk:Reward Ratio:   1:0.96

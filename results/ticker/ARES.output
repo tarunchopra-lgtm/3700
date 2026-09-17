@@ -3,27 +3,29 @@ TICKER: ARES
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $139.65
-  ATR (14-day): $5.34
+  Price:        $126.37
+  ATR (14-day): $5.35
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $105.79 - $118.16
   Size:         $12.37
-  Distance:     $21.49 (402% of ATR)
+  Distance:     $8.21 (153% of ATR)
   Formed:       2026-06-25
-  FRESHNESS:    FRESH
-  Notes:        Fresh - not tested recently
+  FRESHNESS:    STALE
+  Notes:        Check failed: {"message": "too many requests."}
+
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $132.89 - $137.50
-  Size:         $4.61
-  Distance:     $2.15
-  Formed:       2026-06-12
+  Range:        $137.79 - $143.25
+  Size:         $5.46
+  Distance:     $11.42
+  Formed:       2026-08-04
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($139.65 >= zone $132.89)
+  Notes:        Check failed: {"message": "too many requests."}
+
 
 TRADE METRICS:
-  Stop Loss Distance:  $33.86
-  Profit Target (PT):  $-6.76
-  Risk:Reward Ratio:   1:-0.20
+  Stop Loss Distance:  $20.58
+  Profit Target (PT):  $11.42
+  Risk:Reward Ratio:   1:0.55

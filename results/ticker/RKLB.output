@@ -3,8 +3,8 @@ TICKER: RKLB
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $64.80
-  ATR (14-day): $6.00
+  Price:        $67.54
+  ATR (14-day): $6.01
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
@@ -13,17 +13,17 @@ DEMAND ZONE (Buy Zone):
   Distance:     $0.00 (0% of ATR)
   Formed:       2026-07-27
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($64.80 <= zone $68.34)
+  Notes:        STALE - Price reached zone ($67.54 <= zone $68.34)
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $101.20 - $119.79
-  Size:         $18.59
-  Distance:     $36.40
-  Formed:       2026-06-10
+  Range:        $94.89 - $107.40
+  Size:         $12.52
+  Distance:     $27.34
+  Formed:       2026-06-23
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $6.60
-  Profit Target (PT):  $36.40
-  Risk:Reward Ratio:   1:5.52
+  Stop Loss Distance:  $9.34
+  Profit Target (PT):  $27.34
+  Risk:Reward Ratio:   1:2.93

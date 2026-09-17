@@ -1,0 +1,16 @@
+{
+  "symbol": "NVDA",
+  "qty": 2,
+  "entry_price": 219.0,
+  "brackets": {
+    "bracket1": {
+      "status": "pending"
+    },
+    "bracket2": {
+      "status": "pending"
+    }
+  },
+  "current_price": 219.0,
+  "current_pnl": null,
+  "last_updated": "2026-09-17T11:33:10.169046"
+}

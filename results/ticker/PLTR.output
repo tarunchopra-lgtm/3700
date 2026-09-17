@@ -3,27 +3,27 @@ TICKER: PLTR
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $172.30
-  ATR (14-day): $9.28
+  Price:        $174.97
+  ATR (14-day): $9.75
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $127.35 - $133.19
-  Size:         $5.84
-  Distance:     $39.12 (422% of ATR)
-  Formed:       2026-06-10
+  Range:        $106.37 - $120.94
+  Size:         $14.57
+  Distance:     $54.03 (554% of ATR)
+  Formed:       2026-06-23
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $170.87 - $179.60
-  Size:         $8.73
-  Distance:     $0.00
-  Formed:       2026-08-10
-  FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($172.30 >= zone $170.87)
+  Range:        $179.75 - $188.37
+  Size:         $8.62
+  Distance:     $4.78
+  Formed:       2026-08-28
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $44.95
-  Profit Target (PT):  $-1.43
-  Risk:Reward Ratio:   1:-0.03
+  Stop Loss Distance:  $68.60
+  Profit Target (PT):  $4.78
+  Risk:Reward Ratio:   1:0.07

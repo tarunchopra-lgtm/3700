@@ -3,8 +3,8 @@ TICKER: EIX
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $57.00
-  ATR (14-day): $2.32
+  Price:        $56.22
+  ATR (14-day): $2.38
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
@@ -13,17 +13,17 @@ DEMAND ZONE (Buy Zone):
   Distance:     $0.00 (0% of ATR)
   Formed:       2026-08-31
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($57.00 <= zone $68.94)
+  Notes:        STALE - Price reached zone ($56.22 <= zone $68.94)
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $74.11 - $75.90
-  Size:         $1.79
-  Distance:     $17.11
-  Formed:       2026-06-25
+  Range:        $72.65 - $75.04
+  Size:         $2.39
+  Distance:     $16.43
+  Formed:       2026-08-25
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $3.89
-  Profit Target (PT):  $17.11
-  Risk:Reward Ratio:   1:4.40
+  Stop Loss Distance:  $3.11
+  Profit Target (PT):  $16.43
+  Risk:Reward Ratio:   1:5.28

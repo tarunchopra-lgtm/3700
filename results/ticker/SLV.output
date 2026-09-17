@@ -3,27 +3,27 @@ TICKER: SLV
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $57.65
-  ATR (14-day): $1.78
+  Price:        $59.26
+  ATR (14-day): $1.71
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $50.31 - $53.20
-  Size:         $2.89
-  Distance:     $4.45 (251% of ATR)
-  Formed:       2026-06-25
+  Range:        $50.02 - $53.94
+  Size:         $3.91
+  Distance:     $5.32 (312% of ATR)
+  Formed:       2026-07-14
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
   Range:        $59.87 - $61.83
   Size:         $1.96
-  Distance:     $2.22
+  Distance:     $0.61
   Formed:       2026-06-12
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $7.34
-  Profit Target (PT):  $2.22
-  Risk:Reward Ratio:   1:0.30
+  Stop Loss Distance:  $9.24
+  Profit Target (PT):  $0.61
+  Risk:Reward Ratio:   1:0.07

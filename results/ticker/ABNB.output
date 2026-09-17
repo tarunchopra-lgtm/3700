@@ -3,27 +3,27 @@ TICKER: ABNB
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $169.36
-  ATR (14-day): $6.47
+  Price:        $166.10
+  ATR (14-day): $6.60
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $128.39 - $132.25
-  Size:         $3.86
-  Distance:     $37.11 (574% of ATR)
-  Formed:       2026-06-10
+  Range:        $128.82 - $132.72
+  Size:         $3.90
+  Distance:     $33.38 (506% of ATR)
+  Formed:       2026-06-12
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $177.43 - $187.12
-  Size:         $9.69
-  Distance:     $8.07
-  Formed:       2026-08-10
+  Range:        $184.05 - $191.49
+  Size:         $7.44
+  Distance:     $17.95
+  Formed:       2026-08-28
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $40.97
-  Profit Target (PT):  $8.07
-  Risk:Reward Ratio:   1:0.20
+  Stop Loss Distance:  $37.28
+  Profit Target (PT):  $17.95
+  Risk:Reward Ratio:   1:0.48

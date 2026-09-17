@@ -3,27 +3,27 @@ TICKER: NTAP
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $191.46
-  ATR (14-day): $7.67
+  Price:        $202.65
+  ATR (14-day): $7.55
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $157.06 - $166.11
-  Size:         $9.05
-  Distance:     $25.35 (331% of ATR)
-  Formed:       2026-06-10
+  Range:        $157.06 - $161.61
+  Size:         $4.55
+  Distance:     $41.04 (544% of ATR)
+  Formed:       2026-06-11
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $192.30 - $206.20
-  Size:         $13.90
-  Distance:     $0.84
-  Formed:       2026-08-20
+  Range:        $200.62 - $207.96
+  Size:         $7.33
+  Distance:     $0.00
+  Formed:       2026-08-18
   FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (high $194.03)
+  Notes:        STALE - Price reached zone ($202.65 >= zone $200.62)
 
 TRADE METRICS:
-  Stop Loss Distance:  $34.40
-  Profit Target (PT):  $0.84
-  Risk:Reward Ratio:   1:0.02
+  Stop Loss Distance:  $45.59
+  Profit Target (PT):  $-2.03
+  Risk:Reward Ratio:   1:-0.04

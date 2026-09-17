@@ -3,27 +3,27 @@ TICKER: CRL
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $288.75
-  ATR (14-day): $10.51
+  Price:        $290.00
+  ATR (14-day): $9.82
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $178.92 - $186.30
-  Size:         $7.38
-  Distance:     $102.45 (975% of ATR)
-  Formed:       2026-06-18
+  Range:        $178.92 - $191.34
+  Size:         $12.42
+  Distance:     $98.66 (1004% of ATR)
+  Formed:       2026-06-17
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $265.49 - $288.02
-  Size:         $22.53
-  Distance:     $0.73
-  Formed:       2026-08-10
+  Range:        $272.06 - $285.94
+  Size:         $13.88
+  Distance:     $4.06
+  Formed:       2026-09-09
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($288.75 >= zone $265.49)
+  Notes:        STALE - Price reached zone ($290.00 >= zone $272.06)
 
 TRADE METRICS:
-  Stop Loss Distance:  $109.83
-  Profit Target (PT):  $-23.26
-  Risk:Reward Ratio:   1:-0.21
+  Stop Loss Distance:  $111.08
+  Profit Target (PT):  $-17.94
+  Risk:Reward Ratio:   1:-0.16

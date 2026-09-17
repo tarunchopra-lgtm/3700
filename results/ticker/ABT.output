@@ -3,27 +3,27 @@ TICKER: ABT
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $101.92
-  ATR (14-day): $2.72
+  Price:        $102.00
+  ATR (14-day): $2.76
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $87.07 - $90.37
-  Size:         $3.30
-  Distance:     $11.55 (425% of ATR)
-  Formed:       2026-06-11
+  Range:        $87.07 - $89.16
+  Size:         $2.09
+  Distance:     $12.84 (465% of ATR)
+  Formed:       2026-06-15
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $104.92 - $109.33
-  Size:         $4.41
-  Distance:     $3.00
-  Formed:       2026-08-04
+  Range:        $115.03 - $117.34
+  Size:         $2.31
+  Distance:     $13.03
+  Formed:       2026-08-24
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $14.85
-  Profit Target (PT):  $3.00
-  Risk:Reward Ratio:   1:0.20
+  Stop Loss Distance:  $14.93
+  Profit Target (PT):  $13.03
+  Risk:Reward Ratio:   1:0.87

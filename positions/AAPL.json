@@ -1,0 +1,16 @@
+{
+  "symbol": "AAPL",
+  "qty": 2,
+  "entry_price": 335.0,
+  "brackets": {
+    "bracket1": {
+      "status": "pending"
+    },
+    "bracket2": {
+      "status": "pending"
+    }
+  },
+  "current_price": 335.0,
+  "current_pnl": null,
+  "last_updated": "2026-09-17T11:33:11.481935"
+}

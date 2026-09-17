@@ -3,27 +3,27 @@ TICKER: WSM
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $241.95
-  ATR (14-day): $6.60
+  Price:        $229.48
+  ATR (14-day): $6.55
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $206.94 - $215.72
-  Size:         $8.78
-  Distance:     $26.23 (397% of ATR)
-  Formed:       2026-06-10
-  FRESHNESS:    FRESH
-  Notes:        Fresh - not tested recently
+  Range:        $214.19 - $221.90
+  Size:         $7.72
+  Distance:     $7.58 (116% of ATR)
+  Formed:       2026-07-14
+  FRESHNESS:    STALE
+  Notes:        STALE - Daily candle tested zone yesterday (low $220.87)
 
 SUPPLY ZONE (Sell Zone):
   Range:        $222.75 - $230.95
   Size:         $8.20
-  Distance:     $11.00
+  Distance:     $0.00
   Formed:       2026-06-16
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($241.95 >= zone $222.75)
+  Notes:        STALE - Price reached zone ($229.48 >= zone $222.75)
 
 TRADE METRICS:
-  Stop Loss Distance:  $35.01
-  Profit Target (PT):  $-19.20
-  Risk:Reward Ratio:   1:-0.55
+  Stop Loss Distance:  $15.29
+  Profit Target (PT):  $-6.73
+  Risk:Reward Ratio:   1:-0.44

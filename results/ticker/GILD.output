@@ -3,27 +3,27 @@ TICKER: GILD
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $153.18
-  ATR (14-day): $3.94
+  Price:        $149.59
+  ATR (14-day): $3.95
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $121.39 - $125.64
-  Size:         $4.25
-  Distance:     $27.55 (700% of ATR)
-  Formed:       2026-06-10
+  Range:        $122.70 - $127.37
+  Size:         $4.67
+  Distance:     $22.22 (562% of ATR)
+  Formed:       2026-06-12
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $143.89 - $148.97
-  Size:         $5.08
-  Distance:     $4.21
-  Formed:       2026-08-19
+  Range:        $143.67 - $151.19
+  Size:         $7.52
+  Distance:     $0.00
+  Formed:       2026-09-08
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($153.18 >= zone $143.89)
+  Notes:        STALE - Price reached zone ($149.59 >= zone $143.67)
 
 TRADE METRICS:
-  Stop Loss Distance:  $31.79
-  Profit Target (PT):  $-9.29
-  Risk:Reward Ratio:   1:-0.29
+  Stop Loss Distance:  $26.89
+  Profit Target (PT):  $-5.92
+  Risk:Reward Ratio:   1:-0.22

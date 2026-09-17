@@ -3,27 +3,27 @@ TICKER: MO
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $68.62
-  ATR (14-day): $2.12
+  Price:        $73.21
+  ATR (14-day): $2.09
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $66.83 - $69.77
-  Size:         $2.94
-  Distance:     $0.00 (0% of ATR)
-  Formed:       2026-07-31
-  FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($68.62 <= zone $69.77)
-
-SUPPLY ZONE (Sell Zone):
-  Range:        $71.14 - $73.75
-  Size:         $2.61
-  Distance:     $2.52
-  Formed:       2026-06-12
+  Range:        $63.92 - $65.45
+  Size:         $1.53
+  Distance:     $7.76 (371% of ATR)
+  Formed:       2026-08-18
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
+SUPPLY ZONE (Sell Zone):
+  Range:        $72.85 - $74.14
+  Size:         $1.30
+  Distance:     $0.00
+  Formed:       2026-06-26
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($73.21 >= zone $72.85)
+
 TRADE METRICS:
-  Stop Loss Distance:  $1.79
-  Profit Target (PT):  $2.52
-  Risk:Reward Ratio:   1:1.41
+  Stop Loss Distance:  $9.29
+  Profit Target (PT):  $-0.36
+  Risk:Reward Ratio:   1:-0.04

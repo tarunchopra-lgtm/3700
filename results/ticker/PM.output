@@ -3,15 +3,15 @@ TICKER: PM
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $201.30
-  ATR (14-day): $4.92
+  Price:        $189.42
+  ATR (14-day): $4.68
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $179.16 - $184.91
-  Size:         $5.75
-  Distance:     $16.39 (333% of ATR)
-  Formed:       2026-06-10
+  Range:        $172.29 - $180.07
+  Size:         $7.78
+  Distance:     $9.35 (200% of ATR)
+  Formed:       2026-06-23
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
@@ -21,9 +21,9 @@ SUPPLY ZONE (Sell Zone):
   Distance:     $0.00
   Formed:       2026-07-30
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($201.30 >= zone $188.95)
+  Notes:        STALE - Price reached zone ($189.42 >= zone $188.95)
 
 TRADE METRICS:
-  Stop Loss Distance:  $22.14
-  Profit Target (PT):  $-12.35
-  Risk:Reward Ratio:   1:-0.56
+  Stop Loss Distance:  $17.13
+  Profit Target (PT):  $-0.47
+  Risk:Reward Ratio:   1:-0.03

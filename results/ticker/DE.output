@@ -3,27 +3,27 @@ TICKER: DE
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $689.69
-  ATR (14-day): $16.46
+  Price:        $710.90
+  ATR (14-day): $15.89
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $556.62 - $571.72
-  Size:         $15.10
-  Distance:     $117.97 (717% of ATR)
-  Formed:       2026-06-11
+  Range:        $574.73 - $593.35
+  Size:         $18.62
+  Distance:     $117.55 (740% of ATR)
+  Formed:       2026-06-15
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $677.66 - $700.64
-  Size:         $22.98
-  Distance:     $0.00
-  Formed:       2026-09-02
+  Range:        $668.00 - $692.69
+  Size:         $24.69
+  Distance:     $18.21
+  Formed:       2026-09-14
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($689.69 >= zone $677.66)
+  Notes:        STALE - Price reached zone ($710.90 >= zone $668.00)
 
 TRADE METRICS:
-  Stop Loss Distance:  $133.07
-  Profit Target (PT):  $-12.03
-  Risk:Reward Ratio:   1:-0.09
+  Stop Loss Distance:  $136.17
+  Profit Target (PT):  $-42.90
+  Risk:Reward Ratio:   1:-0.32

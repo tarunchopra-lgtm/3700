@@ -3,27 +3,27 @@ TICKER: CME
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $275.99
-  ATR (14-day): $5.65
+  Price:        $283.40
+  ATR (14-day): $5.55
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $256.23 - $267.41
-  Size:         $11.18
-  Distance:     $8.58 (152% of ATR)
-  Formed:       2026-06-10
+  Range:        $218.31 - $225.72
+  Size:         $7.41
+  Distance:     $57.67 (1039% of ATR)
+  Formed:       2026-06-26
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
   Range:        $282.87 - $289.90
   Size:         $7.03
-  Distance:     $6.88
+  Distance:     $0.00
   Formed:       2026-08-31
-  FRESHNESS:    FRESH
-  Notes:        Fresh - not tested recently
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($283.40 >= zone $282.87)
 
 TRADE METRICS:
-  Stop Loss Distance:  $19.76
-  Profit Target (PT):  $6.88
-  Risk:Reward Ratio:   1:0.35
+  Stop Loss Distance:  $65.09
+  Profit Target (PT):  $-0.53
+  Risk:Reward Ratio:   1:-0.01

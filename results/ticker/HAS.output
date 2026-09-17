@@ -3,27 +3,27 @@ TICKER: HAS
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $95.08
-  ATR (14-day): $2.42
+  Price:        $89.67
+  ATR (14-day): $2.45
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $82.16 - $84.75
-  Size:         $2.59
-  Distance:     $10.33 (426% of ATR)
-  Formed:       2026-06-11
+  Range:        $82.40 - $84.64
+  Size:         $2.24
+  Distance:     $5.03 (205% of ATR)
+  Formed:       2026-06-24
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $87.78 - $93.05
-  Size:         $5.27
-  Distance:     $2.03
-  Formed:       2026-07-22
-  FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($95.08 >= zone $87.78)
+  Range:        $93.04 - $97.00
+  Size:         $3.96
+  Distance:     $3.37
+  Formed:       2026-07-29
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $12.92
-  Profit Target (PT):  $-7.30
-  Risk:Reward Ratio:   1:-0.57
+  Stop Loss Distance:  $7.27
+  Profit Target (PT):  $3.37
+  Risk:Reward Ratio:   1:0.46

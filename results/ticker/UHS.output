@@ -3,27 +3,27 @@ TICKER: UHS
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $172.64
-  ATR (14-day): $6.75
+  Price:        $188.79
+  ATR (14-day): $6.98
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $143.21 - $146.84
-  Size:         $3.63
-  Distance:     $25.80 (382% of ATR)
-  Formed:       2026-06-10
+  Range:        $140.26 - $142.41
+  Size:         $2.15
+  Distance:     $46.38 (665% of ATR)
+  Formed:       2026-06-18
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
   Range:        $174.59 - $179.94
   Size:         $5.35
-  Distance:     $1.95
+  Distance:     $8.85
   Formed:       2026-08-24
   FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (high $177.55)
+  Notes:        STALE - Price reached zone ($188.79 >= zone $174.59)
 
 TRADE METRICS:
-  Stop Loss Distance:  $29.43
-  Profit Target (PT):  $1.95
-  Risk:Reward Ratio:   1:0.07
+  Stop Loss Distance:  $48.53
+  Profit Target (PT):  $-14.20
+  Risk:Reward Ratio:   1:-0.29

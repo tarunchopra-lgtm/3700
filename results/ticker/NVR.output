@@ -3,27 +3,27 @@ TICKER: NVR
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $6316.77
-  ATR (14-day): $194.59
+  Price:        $6219.45
+  ATR (14-day): $162.40
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $6057.84 - $6191.97
   Size:         $134.13
-  Distance:     $124.80 (64% of ATR)
+  Distance:     $27.48 (17% of ATR)
   Formed:       2026-09-11
   FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $6182.91)
+  Notes:        STALE - Daily candle tested zone yesterday (low $6150.57)
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $6254.93 - $6479.70
-  Size:         $224.77
-  Distance:     $0.00
-  Formed:       2026-06-10
-  FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($6316.77 >= zone $6254.93)
+  Range:        $6374.93 - $6525.00
+  Size:         $150.07
+  Distance:     $155.48
+  Formed:       2026-06-12
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $258.93
-  Profit Target (PT):  $-61.84
-  Risk:Reward Ratio:   1:-0.24
+  Stop Loss Distance:  $161.61
+  Profit Target (PT):  $155.48
+  Risk:Reward Ratio:   1:0.96

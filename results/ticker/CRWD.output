@@ -3,27 +3,27 @@ TICKER: CRWD
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $238.33
-  ATR (14-day): $8.69
+  Price:        $247.00
+  ATR (14-day): $8.75
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $185.30 - $195.66
-  Size:         $10.36
-  Distance:     $42.67 (491% of ATR)
-  Formed:       2026-07-08
-  FRESHNESS:    FRESH
-  Notes:        Fresh - not tested recently
+  Range:        $190.61 - $786.00
+  Size:         $595.39
+  Distance:     $0.00 (0% of ATR)
+  Formed:       2026-06-30
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($247.00 <= zone $786.00)
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $668.86 - $702.17
-  Size:         $33.31
-  Distance:     $430.53
-  Formed:       2026-06-12
-  FRESHNESS:    FRESH
-  Notes:        Fresh - not tested recently
+  Range:        $188.55 - $786.00
+  Size:         $597.45
+  Distance:     $0.00
+  Formed:       2026-07-01
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($247.00 >= zone $188.55)
 
 TRADE METRICS:
-  Stop Loss Distance:  $53.03
-  Profit Target (PT):  $430.53
-  Risk:Reward Ratio:   1:8.12
+  Stop Loss Distance:  $56.39
+  Profit Target (PT):  $-58.45
+  Risk:Reward Ratio:   1:-1.04

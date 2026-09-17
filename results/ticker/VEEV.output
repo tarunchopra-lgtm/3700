@@ -3,27 +3,27 @@ TICKER: VEEV
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $263.28
-  ATR (14-day): $7.81
+  Price:        $275.10
+  ATR (14-day): $8.45
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $156.22 - $166.90
-  Size:         $10.68
-  Distance:     $96.38 (1234% of ATR)
-  Formed:       2026-06-15
+  Range:        $150.39 - $156.63
+  Size:         $6.24
+  Distance:     $118.47 (1402% of ATR)
+  Formed:       2026-06-18
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $276.05 - $290.47
-  Size:         $14.42
-  Distance:     $12.77
-  Formed:       2026-09-01
-  FRESHNESS:    FRESH
-  Notes:        Fresh - not tested recently
+  Range:        $273.60 - $296.24
+  Size:         $22.64
+  Distance:     $0.00
+  Formed:       2026-08-28
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($275.10 >= zone $273.60)
 
 TRADE METRICS:
-  Stop Loss Distance:  $107.06
-  Profit Target (PT):  $12.77
-  Risk:Reward Ratio:   1:0.12
+  Stop Loss Distance:  $124.71
+  Profit Target (PT):  $-1.50
+  Risk:Reward Ratio:   1:-0.01

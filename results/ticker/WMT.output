@@ -3,14 +3,14 @@ TICKER: WMT
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $108.54
-  ATR (14-day): $2.54
-  Within ATR:   NO
+  Price:        $106.79
+  ATR (14-day): $2.63
+  Within ATR:   YES
 
 DEMAND ZONE (Buy Zone):
   Range:        $102.15 - $104.28
   Size:         $2.13
-  Distance:     $4.26 (168% of ATR)
+  Distance:     $2.51 (96% of ATR)
   Formed:       2026-08-21
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
@@ -18,12 +18,12 @@ DEMAND ZONE (Buy Zone):
 SUPPLY ZONE (Sell Zone):
   Range:        $115.09 - $118.58
   Size:         $3.49
-  Distance:     $6.55
+  Distance:     $8.30
   Formed:       2026-06-26
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $6.39
-  Profit Target (PT):  $6.55
-  Risk:Reward Ratio:   1:1.03
+  Stop Loss Distance:  $4.64
+  Profit Target (PT):  $8.30
+  Risk:Reward Ratio:   1:1.79

@@ -2,9 +2,11 @@
 """
 Closing Bell - Close all open positions
 
-Sells every open position:
-1. First attempts to sell at the midpoint of bid/ask for each position
-2. If the order doesn't fill within 1 minute, cancels and sells at market price
+Closes every open position with support for bracket orders:
+1. First cancels any bracket orders from fomo_trade.py system (stop + target orders)
+2. Then attempts to sell at the midpoint of bid/ask for each position
+3. If the order doesn't fill within 1 minute, cancels and sells at market price
+4. Cleans up all position tracking files
 
 Usage:
     python strategies/closing_bell.py [--help]
@@ -17,7 +19,7 @@ import sys
 import time
 from datetime import datetime
 from pathlib import Path
-from typing import Optional
+from typing import Optional, Union
 
 from alpaca.trading.requests import (
     LimitOrderRequest,
@@ -37,9 +39,10 @@ from roles.credentials import bootstrap_trading_auth
 from roles.email_notify import send_email
 
 # ── Configuration ────────────────────────────────────────────────────────────
-LIMIT_ORDER_TIMEOUT = 60  # seconds to wait for limit order to fill
+LIMIT_ORDER_TIMEOUT = 5  # seconds to wait for limit order to fill
 LOG_FILE = os.path.join(os.path.dirname(__file__), "closing_bell_log.txt")
 ORDER_TIME_IN_FORCE = TimeInForce.DAY
+POSITIONS_DIR = WORKSPACE_ROOT / "positions"
 
 
 def _log(message: str) -> None:
@@ -51,10 +54,113 @@ def _log(message: str) -> None:
         f.write(log_entry + "\n")
 
 
+def _load_bracket_file(symbol: str, bracket_num: int) -> Optional[dict]:
+    """Load bracket tracking file if it exists."""
+    import json
+    
+    bracket_file = POSITIONS_DIR / f"{symbol}_bracket{bracket_num}.txt"
+    
+    if not bracket_file.exists():
+        return None
+    
+    try:
+        with open(bracket_file, 'r') as f:
+            return json.load(f)
+    except Exception:
+        return None
+
+
+def _remove_bracket_files(symbol: str) -> None:
+    """Remove bracket tracking files for a symbol."""
+    for bracket_num in [1, 2]:
+        bracket_file = POSITIONS_DIR / f"{symbol}_bracket{bracket_num}.txt"
+        try:
+            if bracket_file.exists():
+                bracket_file.unlink()
+                _log(f"  ✓ Cleaned up bracket {bracket_num} tracking file")
+        except Exception:
+            pass
+
+
+def _remove_position_status_file(symbol: str) -> None:
+    """Remove position status file for a symbol."""
+    position_file = POSITIONS_DIR / f"{symbol}_position.txt"
+    try:
+        if position_file.exists():
+            position_file.unlink()
+            _log(f"  ✓ Cleaned up position status file")
+    except Exception:
+        pass
+
+
+def _cancel_bracket_orders(trading_client, symbol: str) -> bool:
+    """Cancel all bracket orders (stop + target) for a symbol."""
+    cancelled_any = False
+    
+    for bracket_num in [1, 2]:
+        bracket_data = _load_bracket_file(symbol, bracket_num)
+        
+        if not bracket_data:
+            continue
+        
+        # Cancel stop order if it exists
+        stop_order_id = bracket_data.get("stop_order_id")
+        if stop_order_id and stop_order_id.startswith("alpaca_"):
+            try:
+                trading_client.cancel_order_by_id(stop_order_id)
+                _log(f"  ✓ Cancelled bracket {bracket_num} stop order ({stop_order_id})")
+                cancelled_any = True
+            except Exception as e:
+                _log(f"  ⚠ Could not cancel bracket {bracket_num} stop: {e}")
+        
+        # Cancel target order if it exists
+        target_order_id = bracket_data.get("target_order_id")
+        if target_order_id and target_order_id.startswith("alpaca_"):
+            try:
+                trading_client.cancel_order_by_id(target_order_id)
+                _log(f"  ✓ Cancelled bracket {bracket_num} target order ({target_order_id})")
+                cancelled_any = True
+            except Exception as e:
+                _log(f"  ⚠ Could not cancel bracket {bracket_num} target: {e}")
+        
+        # Cancel entry order if it exists and not yet filled
+        entry_order_id = bracket_data.get("entry_order_id")
+        if entry_order_id and entry_order_id.startswith("alpaca_"):
+            try:
+                trading_client.cancel_order_by_id(entry_order_id)
+                _log(f"  ✓ Cancelled bracket {bracket_num} entry order ({entry_order_id})")
+                cancelled_any = True
+            except Exception:
+                pass  # Silently skip if entry already filled
+    
+    return cancelled_any
+
+
 
 def _is_crypto(symbol: str) -> bool:
     """Check if symbol is a crypto pair (contains /)."""
     return "/" in symbol
+
+
+def _normalize_qty(qty: float, symbol: str) -> Union[float, int]:
+    """
+    Normalize quantity for order submission.
+    - Stocks: Return as int
+    - Crypto: Return as float with 8 decimal places
+    
+    Args:
+        qty: Quantity as float
+        symbol: Trading symbol
+    
+    Returns:
+        qty as int (stocks) or float (crypto)
+    """
+    if _is_crypto(symbol):
+        # Crypto: keep as float, round to 8 decimals
+        return round(float(qty), 8)
+    else:
+        # Stocks: convert to int (remove decimals)
+        return int(qty)
 
 
 def _get_bid_ask(trading_client, symbol: str, stock_data_client, crypto_data_client) -> Optional[tuple[float, float]]:
@@ -133,9 +239,13 @@ def _sell_at_limit(
     Waits for timeout_seconds for the order to fill, then returns.
     """
     try:
+        # Debug: show what we're normalizing
+        normalized_qty = _normalize_qty(qty, symbol)
+        _log(f"  → Normalizing qty: {qty} ({type(qty).__name__}) for {symbol} → {normalized_qty} ({type(normalized_qty).__name__})")
+        
         order = LimitOrderRequest(
             symbol=symbol,
-            qty=int(qty) if qty == int(qty) else qty,
+            qty=normalized_qty,
             side=OrderSide.SELL,
             time_in_force=ORDER_TIME_IN_FORCE,
             limit_price=round(limit_price, 2),
@@ -180,9 +290,13 @@ def _sell_at_market(
 ) -> bool:
     """Sell at market price. Returns True if successful."""
     try:
+        # Debug: show what we're normalizing
+        normalized_qty = _normalize_qty(qty, symbol)
+        _log(f"  → Normalizing qty: {qty} ({type(qty).__name__}) for {symbol} → {normalized_qty} ({type(normalized_qty).__name__})")
+        
         order = MarketOrderRequest(
             symbol=symbol,
-            qty=int(qty) if qty == int(qty) else qty,
+            qty=normalized_qty,
             side=OrderSide.SELL,
             time_in_force=ORDER_TIME_IN_FORCE,
         )
@@ -191,6 +305,8 @@ def _sell_at_market(
         return True
     except Exception as e:
         _log(f"  ✗ Error submitting market order for {symbol}: {e}")
+        import traceback
+        _log(f"  DEBUG: {traceback.format_exc()}")
         return False
 
 
@@ -254,7 +370,15 @@ def close_all_positions(trading_client, stock_data_client, crypto_data_client) -
         
         _log(f"\n[{symbol}] Qty: {qty}, Value: ${market_value:.2f}")
         
-        # FIRST: Cancel any pending SELL orders to free up qty
+        # FIRST: Cancel any BRACKET ORDERS (from fomo_trade.py system)
+        # This is critical - bracket orders hold the position via stop/target orders
+        if _cancel_bracket_orders(trading_client, symbol):
+            _log(f"  📌 Bracket orders cancelled for {symbol}")
+            _remove_bracket_files(symbol)
+            _remove_position_status_file(symbol)
+            time.sleep(2)  # Give Alpaca time to process cancellations
+        
+        # SECOND: Cancel any other pending SELL orders to free up qty
         _cancel_all_pending_sell_orders(trading_client, symbol)
         
         # Try to get bid/ask for midpoint calculation
@@ -306,7 +430,23 @@ DESCRIPTION:
   Emergency program to close all open trading positions
   Executes at market close or on-demand to flatten account
   Uses intelligent exit strategy: limit order → market order
-  Useful for end-of-day cleanup or risk management
+  
+  NOW WITH BRACKET ORDER SUPPORT:
+  - Automatically cancels bracket orders from fomo_trade.py system
+  - Cleans up bracket1/bracket2 tracking files
+  - Clears position territory tracking
+  - Then closes any remaining positions
+
+EXECUTION SEQUENCE:
+  1. Identify all open positions
+  2. For each position:
+     a. Cancel all bracket orders (stop + target from fomo_trade.py)
+     b. Clean up bracket tracking files
+     c. Cancel any pending sell orders
+     d. Place limit order at midpoint (60-second timeout)
+     e. If limit fails, sell at market price
+  3. Send email report
+  4. Clean up all position tracking files
 
 EXIT STRATEGY:
   1. Get bid/ask quotes for each position

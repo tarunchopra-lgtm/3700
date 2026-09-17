@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: DVN
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $48.48
+  ATR (14-day): $1.40
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $44.01 - $45.53
+  Size:         $1.52
+  Distance:     $2.95 (211% of ATR)
+  Formed:       2026-06-12
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $49.60 - $51.70
+  Size:         $2.10
+  Distance:     $1.12
+  Formed:       2026-09-15
+  FRESHNESS:    STALE
+  Notes:        STALE - Daily candle tested zone yesterday (high $50.24)
+
+TRADE METRICS:
+  Stop Loss Distance:  $4.47
+  Profit Target (PT):  $1.12
+  Risk:Reward Ratio:   1:0.25

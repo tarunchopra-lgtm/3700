@@ -3,27 +3,27 @@ TICKER: AXON
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $487.34
-  ATR (14-day): $37.70
+  Price:        $458.00
+  ATR (14-day): $41.10
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $436.36 - $462.99
-  Size:         $26.63
-  Distance:     $24.35 (65% of ATR)
-  Formed:       2026-06-10
+  Range:        $429.84 - $468.04
+  Size:         $38.20
+  Distance:     $0.00 (0% of ATR)
+  Formed:       2026-06-24
   FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone today (low $452.82)
+  Notes:        STALE - Price reached zone ($458.00 <= zone $468.04)
 
 SUPPLY ZONE (Sell Zone):
   Range:        $623.96 - $665.07
   Size:         $41.11
-  Distance:     $136.62
+  Distance:     $165.96
   Formed:       2026-07-07
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $50.98
-  Profit Target (PT):  $136.62
-  Risk:Reward Ratio:   1:2.68
+  Stop Loss Distance:  $28.16
+  Profit Target (PT):  $165.96
+  Risk:Reward Ratio:   1:5.89

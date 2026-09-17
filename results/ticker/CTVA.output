@@ -3,27 +3,27 @@ TICKER: CTVA
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $81.64
-  ATR (14-day): $2.61
+  Price:        $93.44
+  ATR (14-day): $2.62
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $74.42 - $75.89
   Size:         $1.47
-  Distance:     $5.75 (220% of ATR)
+  Distance:     $17.55 (670% of ATR)
   Formed:       2026-06-11
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $81.01 - $85.17
-  Size:         $4.16
-  Distance:     $0.00
-  Formed:       2026-06-26
+  Range:        $89.20 - $90.97
+  Size:         $1.77
+  Distance:     $2.47
+  Formed:       2026-07-30
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($81.64 >= zone $81.01)
+  Notes:        STALE - Price reached zone ($93.44 >= zone $89.20)
 
 TRADE METRICS:
-  Stop Loss Distance:  $7.22
-  Profit Target (PT):  $-0.63
-  Risk:Reward Ratio:   1:-0.09
+  Stop Loss Distance:  $19.02
+  Profit Target (PT):  $-4.24
+  Risk:Reward Ratio:   1:-0.22

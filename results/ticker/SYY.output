@@ -3,27 +3,27 @@ TICKER: SYY
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $81.75
-  ATR (14-day): $1.90
+  Price:        $83.62
+  ATR (14-day): $1.97
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $77.79 - $79.08
-  Size:         $1.29
-  Distance:     $2.67 (141% of ATR)
-  Formed:       2026-06-10
-  FRESHNESS:    FRESH
-  Notes:        Fresh - not tested recently
+  Range:        $77.94 - $79.58
+  Size:         $1.64
+  Distance:     $4.04 (205% of ATR)
+  Formed:       2026-06-22
+  FRESHNESS:    STALE
+  Notes:        STALE - Daily candle tested zone yesterday (low $78.37)
 
 SUPPLY ZONE (Sell Zone):
   Range:        $83.03 - $85.31
   Size:         $2.28
-  Distance:     $1.28
+  Distance:     $0.00
   Formed:       2026-07-06
   FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (high $84.44)
+  Notes:        STALE - Price reached zone ($83.62 >= zone $83.03)
 
 TRADE METRICS:
-  Stop Loss Distance:  $3.96
-  Profit Target (PT):  $1.28
-  Risk:Reward Ratio:   1:0.32
+  Stop Loss Distance:  $5.68
+  Profit Target (PT):  $-0.59
+  Risk:Reward Ratio:   1:-0.10

@@ -3,27 +3,27 @@ TICKER: DXCM
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $88.24
-  ATR (14-day): $3.21
+  Price:        $92.70
+  ATR (14-day): $3.15
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $68.55 - $73.69
-  Size:         $5.14
-  Distance:     $14.55 (454% of ATR)
-  Formed:       2026-06-18
+  Range:        $82.29 - $84.81
+  Size:         $2.52
+  Distance:     $7.89 (250% of ATR)
+  Formed:       2026-09-10
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
   Range:        $91.03 - $92.59
   Size:         $1.56
-  Distance:     $2.79
+  Distance:     $0.11
   Formed:       2026-08-24
-  FRESHNESS:    FRESH
-  Notes:        Fresh - not tested recently
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($92.70 >= zone $91.03)
 
 TRADE METRICS:
-  Stop Loss Distance:  $19.69
-  Profit Target (PT):  $2.79
-  Risk:Reward Ratio:   1:0.14
+  Stop Loss Distance:  $10.41
+  Profit Target (PT):  $-1.67
+  Risk:Reward Ratio:   1:-0.16

@@ -1,0 +1,6 @@
+TOP 20 - BALANCED FRESH DEMAND ZONES
+Generated: 2026-09-17 21:49:49
+Filter: demand is fresh, price is within one ATR, closest first.
+=========================================================================================================
+
+No fresh demand zones within one ATR were found.

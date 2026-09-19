@@ -3,27 +3,27 @@ TICKER: CFG
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $70.89
-  ATR (14-day): $1.40
+  Price:        $71.03
+  ATR (14-day): $1.30
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $64.93 - $66.58
-  Size:         $1.65
-  Distance:     $4.31 (308% of ATR)
-  Formed:       2026-06-11
-  FRESHNESS:    FRESH
-  Notes:        Fresh - not tested recently
+  Range:        $64.93 - $66.86
+  Size:         $1.93
+  Distance:     $4.17 (321% of ATR)
+  Formed:       2026-06-10
+  FRESHNESS:    STALE
+  Notes:        STALE - Daily candle tested zone yesterday (low $65.66)
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $69.00 - $71.20
-  Size:         $2.20
+  Range:        $70.35 - $72.94
+  Size:         $2.59
   Distance:     $0.00
-  Formed:       2026-06-24
+  Formed:       2026-07-02
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($70.89 >= zone $69.00)
+  Notes:        STALE - Price reached zone ($71.03 >= zone $70.35)
 
 TRADE METRICS:
-  Stop Loss Distance:  $5.96
-  Profit Target (PT):  $-1.89
-  Risk:Reward Ratio:   1:-0.32
+  Stop Loss Distance:  $6.10
+  Profit Target (PT):  $-0.68
+  Risk:Reward Ratio:   1:-0.11

@@ -3,27 +3,27 @@ TICKER: PAYX
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $116.37
-  ATR (14-day): $3.69
+  Price:        $121.43
+  ATR (14-day): $3.73
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $93.02 - $100.19
-  Size:         $7.17
-  Distance:     $16.18 (438% of ATR)
-  Formed:       2026-06-25
-  FRESHNESS:    FRESH
-  Notes:        Fresh - not tested recently
+  Range:        $114.51 - $115.81
+  Size:         $1.30
+  Distance:     $5.62 (151% of ATR)
+  Formed:       2026-09-10
+  FRESHNESS:    STALE
+  Notes:        STALE - Daily candle tested zone today (low $115.22)
 
 SUPPLY ZONE (Sell Zone):
   Range:        $125.56 - $127.92
   Size:         $2.36
-  Distance:     $9.19
+  Distance:     $4.12
   Formed:       2026-08-28
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $23.35
-  Profit Target (PT):  $9.19
-  Risk:Reward Ratio:   1:0.39
+  Stop Loss Distance:  $6.92
+  Profit Target (PT):  $4.12
+  Risk:Reward Ratio:   1:0.60

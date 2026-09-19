@@ -3,27 +3,27 @@ TICKER: OKE
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $93.48
-  ATR (14-day): $2.57
+  Price:        $97.33
+  ATR (14-day): $2.48
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $85.65 - $88.19
-  Size:         $2.54
-  Distance:     $5.29 (206% of ATR)
-  Formed:       2026-06-23
+  Range:        $83.48 - $87.73
+  Size:         $4.25
+  Distance:     $9.60 (388% of ATR)
+  Formed:       2026-08-04
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
   Range:        $94.96 - $99.30
   Size:         $4.34
-  Distance:     $1.48
+  Distance:     $0.00
   Formed:       2026-09-10
-  FRESHNESS:    FRESH
-  Notes:        Fresh - not tested recently
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($97.33 >= zone $94.96)
 
 TRADE METRICS:
-  Stop Loss Distance:  $7.83
-  Profit Target (PT):  $1.48
-  Risk:Reward Ratio:   1:0.19
+  Stop Loss Distance:  $13.85
+  Profit Target (PT):  $-2.37
+  Risk:Reward Ratio:   1:-0.17

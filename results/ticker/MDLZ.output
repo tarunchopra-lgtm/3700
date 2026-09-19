@@ -3,27 +3,27 @@ TICKER: MDLZ
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $62.28
-  ATR (14-day): $1.76
-  Within ATR:   YES
+  Price:        $64.74
+  ATR (14-day): $1.72
+  Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $57.78 - $61.24
-  Size:         $3.46
-  Distance:     $1.04 (59% of ATR)
-  Formed:       2026-06-29
-  FRESHNESS:    FRESH
-  Notes:        Fresh - not tested recently
+  Range:        $60.47 - $61.89
+  Size:         $1.42
+  Distance:     $2.85 (166% of ATR)
+  Formed:       2026-09-08
+  FRESHNESS:    STALE
+  Notes:        STALE - Daily candle tested zone today (low $61.47)
 
 SUPPLY ZONE (Sell Zone):
   Range:        $62.24 - $64.35
   Size:         $2.11
-  Distance:     $0.00
+  Distance:     $0.39
   Formed:       2026-06-12
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($62.28 >= zone $62.24)
+  Notes:        STALE - Price reached zone ($64.74 >= zone $62.24)
 
 TRADE METRICS:
-  Stop Loss Distance:  $4.50
-  Profit Target (PT):  $-0.04
-  Risk:Reward Ratio:   1:-0.01
+  Stop Loss Distance:  $4.27
+  Profit Target (PT):  $-2.50
+  Risk:Reward Ratio:   1:-0.58

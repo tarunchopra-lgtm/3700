@@ -3,27 +3,27 @@ TICKER: AVY
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $183.59
-  ATR (14-day): $5.37
+  Price:        $194.25
+  ATR (14-day): $5.38
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $156.61 - $159.65
-  Size:         $3.04
-  Distance:     $23.94 (446% of ATR)
-  Formed:       2026-06-22
+  Range:        $165.39 - $167.88
+  Size:         $2.49
+  Distance:     $26.37 (490% of ATR)
+  Formed:       2026-07-29
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
   Range:        $172.05 - $181.94
   Size:         $9.89
-  Distance:     $1.65
+  Distance:     $12.31
   Formed:       2026-08-10
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($183.59 >= zone $172.05)
+  Notes:        STALE - Price reached zone ($194.25 >= zone $172.05)
 
 TRADE METRICS:
-  Stop Loss Distance:  $26.98
-  Profit Target (PT):  $-11.54
-  Risk:Reward Ratio:   1:-0.43
+  Stop Loss Distance:  $28.86
+  Profit Target (PT):  $-22.20
+  Risk:Reward Ratio:   1:-0.77

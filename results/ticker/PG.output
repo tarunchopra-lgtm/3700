@@ -3,27 +3,27 @@ TICKER: PG
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $147.39
-  ATR (14-day): $3.39
+  Price:        $155.72
+  ATR (14-day): $3.29
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $141.46 - $147.15
-  Size:         $5.69
-  Distance:     $0.24 (7% of ATR)
-  Formed:       2026-07-30
-  FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $146.50)
+  Range:        $141.86 - $143.51
+  Size:         $1.65
+  Distance:     $12.21 (371% of ATR)
+  Formed:       2026-09-10
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
   Range:        $150.55 - $153.02
   Size:         $2.47
-  Distance:     $3.16
+  Distance:     $2.70
   Formed:       2026-06-16
-  FRESHNESS:    FRESH
-  Notes:        Fresh - not tested recently
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($155.72 >= zone $150.55)
 
 TRADE METRICS:
-  Stop Loss Distance:  $5.93
-  Profit Target (PT):  $3.16
-  Risk:Reward Ratio:   1:0.53
+  Stop Loss Distance:  $13.86
+  Profit Target (PT):  $-5.17
+  Risk:Reward Ratio:   1:-0.37

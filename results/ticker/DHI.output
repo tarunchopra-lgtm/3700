@@ -3,27 +3,27 @@ TICKER: DHI
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $140.75
-  ATR (14-day): $4.72
+  Price:        $146.99
+  ATR (14-day): $4.53
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $133.88 - $138.74
-  Size:         $4.86
-  Distance:     $2.01 (43% of ATR)
-  Formed:       2026-09-11
+  Range:        $133.88 - $137.60
+  Size:         $3.72
+  Distance:     $9.39 (207% of ATR)
+  Formed:       2026-09-10
   FRESHNESS:    STALE
   Notes:        STALE - Daily candle tested zone yesterday (low $137.59)
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $152.17 - $155.62
-  Size:         $3.45
-  Distance:     $11.42
-  Formed:       2026-06-12
-  FRESHNESS:    FRESH
-  Notes:        Fresh - not tested recently
+  Range:        $145.31 - $151.34
+  Size:         $6.03
+  Distance:     $0.00
+  Formed:       2026-08-10
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($146.99 >= zone $145.31)
 
 TRADE METRICS:
-  Stop Loss Distance:  $6.87
-  Profit Target (PT):  $11.42
-  Risk:Reward Ratio:   1:1.66
+  Stop Loss Distance:  $13.11
+  Profit Target (PT):  $-1.68
+  Risk:Reward Ratio:   1:-0.13

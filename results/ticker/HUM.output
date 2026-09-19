@@ -4,16 +4,16 @@ TICKER: HUM
 
 CURRENT STATUS:
   Price:        $405.79
-  ATR (14-day): $15.07
+  ATR (14-day): $14.87
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $372.61 - $385.49
-  Size:         $12.88
-  Distance:     $20.30 (135% of ATR)
-  Formed:       2026-06-26
-  FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $383.18)
+  Range:        $353.69 - $367.92
+  Size:         $14.23
+  Distance:     $37.87 (255% of ATR)
+  Formed:       2026-08-05
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
   Range:        $386.83 - $419.97
@@ -24,6 +24,6 @@ SUPPLY ZONE (Sell Zone):
   Notes:        STALE - Price reached zone ($405.79 >= zone $386.83)
 
 TRADE METRICS:
-  Stop Loss Distance:  $33.19
+  Stop Loss Distance:  $52.10
   Profit Target (PT):  $-18.96
-  Risk:Reward Ratio:   1:-0.57
+  Risk:Reward Ratio:   1:-0.36

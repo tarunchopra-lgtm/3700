@@ -3,27 +3,27 @@ TICKER: SWK
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $89.88
-  ATR (14-day): $3.11
+  Price:        $93.87
+  ATR (14-day): $2.96
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $82.19 - $88.25
-  Size:         $6.05
-  Distance:     $1.63 (53% of ATR)
-  Formed:       2026-06-18
+  Range:        $84.86 - $88.38
+  Size:         $3.52
+  Distance:     $5.49 (186% of ATR)
+  Formed:       2026-07-08
   FRESHNESS:    STALE
   Notes:        STALE - Daily candle tested zone yesterday (low $88.08)
 
 SUPPLY ZONE (Sell Zone):
   Range:        $98.13 - $103.65
   Size:         $5.52
-  Distance:     $8.25
+  Distance:     $4.26
   Formed:       2026-08-04
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $7.69
-  Profit Target (PT):  $8.25
-  Risk:Reward Ratio:   1:1.07
+  Stop Loss Distance:  $9.02
+  Profit Target (PT):  $4.26
+  Risk:Reward Ratio:   1:0.47

@@ -3,27 +3,27 @@ TICKER: VRT
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $243.19
-  ATR (14-day): $19.58
+  Price:        $258.09
+  ATR (14-day): $18.55
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $220.92 - $251.71
-  Size:         $30.79
-  Distance:     $0.00 (0% of ATR)
-  Formed:       2026-07-30
+  Range:        $226.94 - $241.30
+  Size:         $14.36
+  Distance:     $16.79 (91% of ATR)
+  Formed:       2026-09-14
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($243.19 <= zone $251.71)
+  Notes:        STALE - Daily candle tested zone yesterday (low $237.66)
 
 SUPPLY ZONE (Sell Zone):
   Range:        $295.10 - $319.84
   Size:         $24.74
-  Distance:     $51.91
+  Distance:     $37.01
   Formed:       2026-06-12
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $22.27
-  Profit Target (PT):  $51.91
-  Risk:Reward Ratio:   1:2.33
+  Stop Loss Distance:  $31.15
+  Profit Target (PT):  $37.01
+  Risk:Reward Ratio:   1:1.19

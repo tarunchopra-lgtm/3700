@@ -4,16 +4,16 @@ TICKER: JKHY
 
 CURRENT STATUS:
   Price:        $167.07
-  ATR (14-day): $4.37
+  ATR (14-day): $4.31
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $121.04 - $126.96
-  Size:         $5.92
-  Distance:     $40.11 (918% of ATR)
-  Formed:       2026-06-18
-  FRESHNESS:    FRESH
-  Notes:        Fresh - not tested recently
+  Range:        $149.19 - $152.68
+  Size:         $3.49
+  Distance:     $14.39 (333% of ATR)
+  Formed:       2026-08-17
+  FRESHNESS:    STALE
+  Notes:        STALE - Daily candle tested zone yesterday (low $152.65)
 
 SUPPLY ZONE (Sell Zone):
   Range:        $167.97 - $174.99
@@ -24,6 +24,6 @@ SUPPLY ZONE (Sell Zone):
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $46.03
+  Stop Loss Distance:  $17.88
   Profit Target (PT):  $0.90
-  Risk:Reward Ratio:   1:0.02
+  Risk:Reward Ratio:   1:0.05

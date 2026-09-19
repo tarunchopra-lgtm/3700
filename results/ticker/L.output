@@ -3,27 +3,27 @@ TICKER: L
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $109.11
-  ATR (14-day): $1.91
+  Price:        $117.72
+  ATR (14-day): $1.66
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $106.92 - $108.41
-  Size:         $1.48
-  Distance:     $0.70 (37% of ATR)
-  Formed:       2026-06-12
+  Range:        $106.58 - $107.95
+  Size:         $1.37
+  Distance:     $9.77 (588% of ATR)
+  Formed:       2026-06-18
   FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone today (low $108.25)
+  Notes:        STALE - Daily candle tested zone yesterday (low $107.93)
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $110.35 - $112.31
-  Size:         $1.96
-  Distance:     $1.24
-  Formed:       2026-06-24
-  FRESHNESS:    FRESH
-  Notes:        Fresh - not tested recently
+  Range:        $115.78 - $119.10
+  Size:         $3.32
+  Distance:     $0.00
+  Formed:       2026-07-06
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($117.72 >= zone $115.78)
 
 TRADE METRICS:
-  Stop Loss Distance:  $2.19
-  Profit Target (PT):  $1.24
-  Risk:Reward Ratio:   1:0.57
+  Stop Loss Distance:  $11.14
+  Profit Target (PT):  $-1.94
+  Risk:Reward Ratio:   1:-0.17

@@ -3,27 +3,27 @@ TICKER: KHC
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $24.83
-  ATR (14-day): $0.88
+  Price:        $25.95
+  ATR (14-day): $0.85
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $22.00 - $23.14
-  Size:         $1.14
-  Distance:     $1.69 (193% of ATR)
-  Formed:       2026-06-18
+  Range:        $22.00 - $22.72
+  Size:         $0.71
+  Distance:     $3.23 (379% of ATR)
+  Formed:       2026-06-22
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
   Range:        $25.61 - $27.13
   Size:         $1.51
-  Distance:     $0.79
+  Distance:     $0.00
   Formed:       2026-07-20
-  FRESHNESS:    FRESH
-  Notes:        Fresh - not tested recently
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($25.95 >= zone $25.61)
 
 TRADE METRICS:
-  Stop Loss Distance:  $2.82
-  Profit Target (PT):  $0.79
-  Risk:Reward Ratio:   1:0.28
+  Stop Loss Distance:  $3.95
+  Profit Target (PT):  $-0.34
+  Risk:Reward Ratio:   1:-0.08

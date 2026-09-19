@@ -3,27 +3,27 @@ TICKER: VST
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $144.16
-  ATR (14-day): $6.79
+  Price:        $152.01
+  ATR (14-day): $6.49
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $135.62 - $141.10
-  Size:         $5.48
-  Distance:     $3.06 (45% of ATR)
-  Formed:       2026-08-28
-  FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $139.65)
+  Range:        $134.90 - $139.28
+  Size:         $4.38
+  Distance:     $12.73 (196% of ATR)
+  Formed:       2026-09-01
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $159.14 - $171.35
-  Size:         $12.21
-  Distance:     $14.98
-  Formed:       2026-06-23
+  Range:        $165.01 - $169.06
+  Size:         $4.05
+  Distance:     $13.00
+  Formed:       2026-07-23
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $8.54
-  Profit Target (PT):  $14.98
-  Risk:Reward Ratio:   1:1.75
+  Stop Loss Distance:  $17.11
+  Profit Target (PT):  $13.00
+  Risk:Reward Ratio:   1:0.76

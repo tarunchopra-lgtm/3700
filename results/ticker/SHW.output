@@ -3,27 +3,27 @@ TICKER: SHW
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $321.65
-  ATR (14-day): $10.41
+  Price:        $347.82
+  ATR (14-day): $9.93
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $312.17 - $329.88
-  Size:         $17.71
-  Distance:     $0.00 (0% of ATR)
-  Formed:       2026-06-18
-  FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($321.65 <= zone $329.88)
+  Range:        $301.10 - $315.79
+  Size:         $14.69
+  Distance:     $32.03 (323% of ATR)
+  Formed:       2026-07-23
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
   Range:        $344.36 - $353.61
   Size:         $9.25
-  Distance:     $22.71
+  Distance:     $0.00
   Formed:       2026-07-06
-  FRESHNESS:    FRESH
-  Notes:        Fresh - not tested recently
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($347.82 >= zone $344.36)
 
 TRADE METRICS:
-  Stop Loss Distance:  $9.48
-  Profit Target (PT):  $22.71
-  Risk:Reward Ratio:   1:2.40
+  Stop Loss Distance:  $46.72
+  Profit Target (PT):  $-3.46
+  Risk:Reward Ratio:   1:-0.07

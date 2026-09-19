@@ -1,0 +1,15 @@
+# Manual demand-zone anchors for strategies/find_zones.py
+# Format: SYMBOL YYYY-MM-DD
+# The exact daily candle LOW through HIGH becomes the demand zone.
+# Multiple lines for one symbol preserve multiple demand zones.
+
+INTC 2026-09-03
+INTC 2026-09-14
+AAPL 2026-09-09
+MU 2026-08-12
+MU 2026-09-16
+GLD 2026-08-04
+SLV 2026-08-04
+SPY 2026-07-30
+NVDA 2026-09-14
+NVDA 2026-07-31

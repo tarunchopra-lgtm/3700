@@ -89,6 +89,9 @@ from pathlib import Path
 # Add parent directory to path for imports
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
+WORKSPACE_ROOT = Path(__file__).resolve().parent.parent
+MANUAL_DEMAND_ZONES_FILE = WORKSPACE_ROOT / "lists" / "manual_demand_zones.txt"
+
 try:
     from alpaca.data.historical import StockHistoricalDataClient
     from alpaca.data.requests import StockBarsRequest
@@ -162,6 +165,119 @@ class Zone:
             f"Formed: {self.date_formed.strftime('%Y-%m-%d')} | "
             f"Candles: {self.consolidation_candles}"
         )
+
+
+def load_manual_demand_zone_dates() -> dict[str, list[str]]:
+    """Load exact daily-candle dates to use as manual demand zones."""
+    anchors: dict[str, list[str]] = {}
+    if not MANUAL_DEMAND_ZONES_FILE.exists():
+        return anchors
+
+    with open(MANUAL_DEMAND_ZONES_FILE, encoding="utf-8") as file:
+        for line_number, raw_line in enumerate(file, start=1):
+            line = raw_line.strip()
+            if not line or line.startswith("#"):
+                continue
+            parts = line.split()
+            if len(parts) != 2:
+                print(f"Warning: ignored invalid manual zone line {line_number}: {line}")
+                continue
+            symbol, date_text = parts
+            try:
+                datetime.strptime(date_text, "%Y-%m-%d")
+            except ValueError:
+                print(f"Warning: ignored invalid manual zone date on line {line_number}: {date_text}")
+                continue
+            anchors.setdefault(symbol.upper(), []).append(date_text)
+    return anchors
+
+
+def get_manual_demand_zones(symbol: str, candles: List[Candle]) -> List[Zone]:
+    """Create demand zones from the high/low of configured exact daily candles."""
+    dates = load_manual_demand_zone_dates().get(symbol.upper(), [])
+    candles_by_date = {candle.timestamp.date().isoformat(): candle for candle in candles}
+    zones = []
+    for date_text in dates:
+        candle = candles_by_date.get(date_text)
+        if candle is None:
+            print(f"Warning: {symbol} has no daily candle for manual zone date {date_text}")
+            continue
+        zones.append(
+            Zone(
+                pattern_type="MANUAL",
+                zone_type="DEMAND",
+                high=candle.high,
+                low=candle.low,
+                size=candle.range(),
+                date_formed=candle.timestamp,
+                date_confirmed=candle.timestamp,
+                consolidation_candles=1,
+                prior_move_size=candle.body(),
+            )
+        )
+    return zones
+
+
+def select_manual_demand_zone(zones: List[Zone], current_price: float) -> Zone | None:
+    """Choose the closest configured demand zone at or below current price."""
+    if not zones:
+        return None
+    reachable_zones = [zone for zone in zones if zone.high <= current_price]
+    if reachable_zones:
+        return max(reachable_zones, key=lambda zone: zone.high)
+    return min(zones, key=lambda zone: abs(zone.center() - current_price))
+
+
+def find_fresh_bullish_origin_demand_zones(candles: List[Candle], min_rally_pct: float = 3.0,
+                                            rally_window: int = 10) -> List[Zone]:
+    """Find candle ranges that originated a meaningful bullish move, regardless of candle color."""
+    zones = []
+    for index, candle in enumerate(candles[:-1]):
+        rally_candles = candles[index + 1:index + 1 + rally_window]
+        if not rally_candles:
+            continue
+        rally_high = max(rally_candle.high for rally_candle in rally_candles)
+        rally_pct = ((rally_high - candle.high) / candle.high) * 100
+        if rally_pct < min_rally_pct:
+            continue
+        later_candles = candles[index + 1:]
+        if any(later_candle.low <= candle.low for later_candle in later_candles):
+            continue
+        zones.append(
+            Zone(
+                pattern_type="ORIGIN",
+                zone_type="DEMAND",
+                high=candle.high,
+                low=candle.low,
+                size=candle.range(),
+                date_formed=candle.timestamp,
+                date_confirmed=max(rally_candles, key=lambda rally_candle: rally_candle.high).timestamp,
+                consolidation_candles=1,
+                prior_move_size=rally_high - candle.high,
+            )
+        )
+    return zones
+
+
+def select_bullish_origin_demand_zone(zones: List[Zone], current_price: float) -> Zone | None:
+    """Select the most recent distinct move's earliest fresh origin candle."""
+    reachable_zones = [zone for zone in zones if zone.high <= current_price]
+    if not reachable_zones:
+        return None
+
+    ordered_zones = sorted(reachable_zones, key=lambda zone: zone.date_formed)
+    move_clusters: List[List[Zone]] = []
+    for zone in ordered_zones:
+        if not move_clusters:
+            move_clusters.append([zone])
+            continue
+        previous_zone = move_clusters[-1][-1]
+        days_apart = (zone.date_formed.date() - previous_zone.date_formed.date()).days
+        if days_apart <= 5 and zone.low <= previous_zone.high and zone.high >= previous_zone.low:
+            move_clusters[-1].append(zone)
+        else:
+            move_clusters.append([zone])
+    return move_clusters[-1][0]
 
 
 # ============================================================================
@@ -824,7 +940,7 @@ def find_best_zones(candles: List[Candle],
 
 
 def analyze_zones(symbol: str, 
-                  lookback_days: int = 50,
+                  lookback_days: int = 90,
                   sensitivity: str = "balanced",
                   min_move_pct: float | None = None,
                   max_move_pct: float | None = None,
@@ -912,8 +1028,15 @@ def analyze_zones(symbol: str,
     # Calculate ATR (14-period)
     atr = calculate_atr(candles, period=14)
     
-    # Find best zones
-    demand_zone, supply_zone = find_best_zones(candles, config)
+    # Manual anchors override automatic detection. Otherwise use bullish-move origins.
+    manual_demand_zones = get_manual_demand_zones(symbol, candles)
+    automatic_demand_zone, supply_zone = find_best_zones(candles, config)
+    origin_demand_zones = find_fresh_bullish_origin_demand_zones(candles)
+    demand_zone = select_manual_demand_zone(manual_demand_zones, current_price)
+    if demand_zone is None:
+        demand_zone = select_bullish_origin_demand_zone(origin_demand_zones, current_price)
+    if demand_zone is None:
+        demand_zone = automatic_demand_zone
     
     # Store config in zones for reporting (hack but useful)
     if demand_zone:
@@ -922,7 +1045,7 @@ def analyze_zones(symbol: str,
         supply_zone._config = config
     
     # Collect all zones for debugging
-    all_zones_found = []
+    all_zones_found = list(manual_demand_zones) + origin_demand_zones
     all_zones_found.extend(dbr(candles, **config))
     all_zones_found.extend(rbr(candles, **config))
     all_zones_found.extend(rbd(candles, **config))
@@ -971,7 +1094,7 @@ def main():
         sys.exit(0 if len(sys.argv) > 1 else 1)
     
     symbol = sys.argv[1].upper()
-    lookback_days = 50
+    lookback_days = 90
     sensitivity = "balanced"
     min_move_pct = None
     max_move_pct = None
@@ -1059,7 +1182,12 @@ def main():
             print()
         
         if demand_zone:
-            print(f"[+] DEMAND ZONE (untested support - 1-3 candle consolidation after sharp down move):")
+            if demand_zone.pattern_type == "MANUAL":
+                print("[+] DEMAND ZONE (manual anchor: selected daily candle low-to-high range):")
+            elif demand_zone.pattern_type == "ORIGIN":
+                print("[+] DEMAND ZONE (fresh bullish-move origin: selected candle low-to-high range):")
+            else:
+                print("[+] DEMAND ZONE (automatic pattern detection):")
             print(f"  {demand_zone}")
             print()
         else:

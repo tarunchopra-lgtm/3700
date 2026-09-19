@@ -1,16 +1,27 @@
 {
   "symbol": "NVDA",
   "qty": 2,
-  "entry_price": 219.0,
+  "entry_price": 218.0,
+  "entry_time": "2026-09-18T06:38:55.496533",
   "brackets": {
     "bracket1": {
+      "entry_order_id": "f4bed10a-9472-443f-a7a9-2540d618a475",
+      "stop_order_id": null,
+      "target_order_id": null,
+      "qty": 1,
+      "target_price": 220.0,
+      "stop_price": 216.0,
       "status": "pending"
     },
     "bracket2": {
+      "entry_order_id": "708917b3-8a9d-4bd4-a575-a40bd3850dbd",
+      "stop_order_id": null,
+      "target_order_id": null,
+      "qty": 1,
+      "target_price": 225.0,
+      "stop_price": 216.0,
       "status": "pending"
     }
   },
-  "current_price": 219.0,
-  "current_pnl": null,
-  "last_updated": "2026-09-17T11:33:10.169046"
+  "last_updated": "2026-09-18T06:38:55.506202"
 }

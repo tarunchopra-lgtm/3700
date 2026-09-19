@@ -3,27 +3,27 @@ TICKER: GDDY
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $103.19
-  ATR (14-day): $5.93
+  Price:        $105.47
+  ATR (14-day): $6.09
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $71.59 - $79.51
-  Size:         $7.92
-  Distance:     $23.68 (399% of ATR)
-  Formed:       2026-06-12
+  Range:        $91.60 - $94.31
+  Size:         $2.70
+  Distance:     $11.16 (183% of ATR)
+  Formed:       2026-09-09
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
   Range:        $101.60 - $104.90
   Size:         $3.30
-  Distance:     $0.00
+  Distance:     $0.57
   Formed:       2026-09-15
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($103.19 >= zone $101.60)
+  Notes:        STALE - Price reached zone ($105.47 >= zone $101.60)
 
 TRADE METRICS:
-  Stop Loss Distance:  $31.60
-  Profit Target (PT):  $-1.59
-  Risk:Reward Ratio:   1:-0.05
+  Stop Loss Distance:  $13.87
+  Profit Target (PT):  $-3.87
+  Risk:Reward Ratio:   1:-0.28

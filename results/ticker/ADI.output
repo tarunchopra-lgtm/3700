@@ -3,27 +3,27 @@ TICKER: ADI
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $362.73
-  ATR (14-day): $13.02
+  Price:        $383.07
+  ATR (14-day): $12.15
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $352.73 - $376.73
-  Size:         $24.00
-  Distance:     $0.00 (0% of ATR)
-  Formed:       2026-07-30
-  FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($362.73 <= zone $376.73)
+  Range:        $348.00 - $357.27
+  Size:         $9.27
+  Distance:     $25.80 (212% of ATR)
+  Formed:       2026-09-03
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $406.40 - $422.23
-  Size:         $15.83
-  Distance:     $43.67
-  Formed:       2026-06-12
+  Range:        $403.20 - $431.87
+  Size:         $28.67
+  Distance:     $20.13
+  Formed:       2026-06-24
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $10.00
-  Profit Target (PT):  $43.67
-  Risk:Reward Ratio:   1:4.37
+  Stop Loss Distance:  $35.07
+  Profit Target (PT):  $20.13
+  Risk:Reward Ratio:   1:0.57

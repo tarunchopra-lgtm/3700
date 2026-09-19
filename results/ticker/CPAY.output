@@ -3,27 +3,27 @@ TICKER: CPAY
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $407.36
-  ATR (14-day): $11.76
+  Price:        $450.03
+  ATR (14-day): $11.45
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $337.95 - $353.94
-  Size:         $15.99
-  Distance:     $53.42 (454% of ATR)
-  Formed:       2026-06-18
+  Range:        $374.74 - $382.78
+  Size:         $8.04
+  Distance:     $67.25 (587% of ATR)
+  Formed:       2026-07-27
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
   Range:        $407.48 - $416.13
   Size:         $8.65
-  Distance:     $0.12
+  Distance:     $33.90
   Formed:       2026-09-14
   FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (high $407.57)
+  Notes:        STALE - Price reached zone ($450.03 >= zone $407.48)
 
 TRADE METRICS:
-  Stop Loss Distance:  $69.41
-  Profit Target (PT):  $0.12
-  Risk:Reward Ratio:   1:0.00
+  Stop Loss Distance:  $75.29
+  Profit Target (PT):  $-42.55
+  Risk:Reward Ratio:   1:-0.57

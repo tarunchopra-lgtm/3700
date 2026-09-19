@@ -3,27 +3,27 @@ TICKER: EVRG
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $81.06
-  ATR (14-day): $1.49
+  Price:        $85.15
+  ATR (14-day): $1.43
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $79.85 - $81.80
   Size:         $1.95
-  Distance:     $0.00 (0% of ATR)
+  Distance:     $3.35 (235% of ATR)
   Formed:       2026-08-31
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($81.06 <= zone $81.80)
+  Notes:        STALE - Daily candle tested zone yesterday (low $80.11)
 
 SUPPLY ZONE (Sell Zone):
   Range:        $85.75 - $88.62
   Size:         $2.87
-  Distance:     $4.69
+  Distance:     $0.60
   Formed:       2026-07-06
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $1.21
-  Profit Target (PT):  $4.69
-  Risk:Reward Ratio:   1:3.88
+  Stop Loss Distance:  $5.30
+  Profit Target (PT):  $0.60
+  Risk:Reward Ratio:   1:0.11

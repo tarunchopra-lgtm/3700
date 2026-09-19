@@ -3,27 +3,27 @@ TICKER: MMM
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $165.41
-  ATR (14-day): $3.85
+  Price:        $174.30
+  ATR (14-day): $3.56
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $157.21 - $164.30
-  Size:         $7.09
-  Distance:     $1.11 (29% of ATR)
-  Formed:       2026-06-16
-  FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $161.43)
+  Range:        $153.56 - $156.49
+  Size:         $2.93
+  Distance:     $17.81 (500% of ATR)
+  Formed:       2026-07-08
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
   Range:        $178.97 - $184.90
   Size:         $5.92
-  Distance:     $13.56
+  Distance:     $4.67
   Formed:       2026-07-28
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $8.20
-  Profit Target (PT):  $13.56
-  Risk:Reward Ratio:   1:1.65
+  Stop Loss Distance:  $20.74
+  Profit Target (PT):  $4.67
+  Risk:Reward Ratio:   1:0.23

@@ -3,27 +3,27 @@ TICKER: ZBRA
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $345.65
-  ATR (14-day): $15.60
+  Price:        $365.57
+  ATR (14-day): $15.66
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $220.71 - $228.77
-  Size:         $8.06
-  Distance:     $116.88 (749% of ATR)
-  Formed:       2026-06-12
+  Range:        $250.32 - $260.73
+  Size:         $10.41
+  Distance:     $104.84 (670% of ATR)
+  Formed:       2026-07-15
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
   Range:        $373.38 - $385.11
   Size:         $11.73
-  Distance:     $27.73
+  Distance:     $7.81
   Formed:       2026-08-10
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $124.94
-  Profit Target (PT):  $27.73
-  Risk:Reward Ratio:   1:0.22
+  Stop Loss Distance:  $115.25
+  Profit Target (PT):  $7.81
+  Risk:Reward Ratio:   1:0.07

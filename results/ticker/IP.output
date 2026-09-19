@@ -3,27 +3,27 @@ TICKER: IP
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $37.06
-  ATR (14-day): $1.75
+  Price:        $37.44
+  ATR (14-day): $1.42
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $31.78 - $35.23
-  Size:         $3.45
-  Distance:     $1.84 (105% of ATR)
-  Formed:       2026-06-11
+  Range:        $33.48 - $34.63
+  Size:         $1.16
+  Distance:     $2.81 (197% of ATR)
+  Formed:       2026-09-16
   FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $33.63)
+  Notes:        STALE - Daily candle tested zone yesterday (low $33.49)
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $38.06 - $38.91
-  Size:         $0.85
-  Distance:     $1.00
-  Formed:       2026-07-06
+  Range:        $40.79 - $43.99
+  Size:         $3.20
+  Distance:     $3.35
+  Formed:       2026-08-03
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $5.28
-  Profit Target (PT):  $1.00
-  Risk:Reward Ratio:   1:0.19
+  Stop Loss Distance:  $3.96
+  Profit Target (PT):  $3.35
+  Risk:Reward Ratio:   1:0.84

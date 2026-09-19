@@ -1,281 +1,224 @@
 ========================================================================================================================
 FOUND ZONES - AGGRESSIVE SENSITIVITY
-Generated: 2026-09-17 10:39:00
+Generated: 2026-09-17 21:45:33
 ========================================================================================================================
 
-Total Zones Found: 270
+Total Zones Found: 213
 Sorted by: Distance to Demand Zone (closest first)
 
-  1. ALAB   | $  288.00 | Demand: $244.61-$299.23 | Supply: $360.06-$398.13 | Dist: $  0.00 (  0% ATR) [ ] | RR: 1:1.66 | Fresh: D✗S✓
-  2. AXON   | $  458.00 | Demand: $429.84-$468.04 | Supply: $623.96-$665.07 | Dist: $  0.00 (  0% ATR) [ ] | RR: 1:5.89 | Fresh: D✗S✓
-  3. BAC    | $   58.31 | Demand: $56.84-$58.34 | Supply: $63.71-$64.95 | Dist: $  0.00 (  0% ATR) [ ] | RR: 1:3.67 | Fresh: D✗S✓
-  4. ARM    | $  263.45 | Demand: $222.56-$268.48 | Supply: $344.68-$416.17 | Dist: $  0.00 (  0% ATR) [ ] | RR: 1:1.99 | Fresh: D✗S✓
-  5. CCEP   | $  101.82 | Demand: $99.50-$102.73 | Supply: $108.85-$113.67 | Dist: $  0.00 (  0% ATR) [ ] | RR: 1:3.03 | Fresh: D✗S✓
-  6. CCI    | $   73.80 | Demand: $69.72-$76.47 | Supply: $91.43-$93.65 | Dist: $  0.00 (  0% ATR) [ ] | RR: 1:4.32 | Fresh: D✗S✓
-  7. CI     | $  278.23 | Demand: $270.91-$279.89 | Supply: $284.11-$295.72 | Dist: $  0.00 (  0% ATR) [ ] | RR: 1:0.80 | Fresh: D✗S✗
-  8. CPRT   | $   29.64 | Demand: $29.41-$30.29 | Supply: $33.42-$34.62 | Dist: $  0.00 (  0% ATR) [ ] | RR: 1:16.43 | Fresh: D✗S✓
-  9. CRWV   | $   79.65 | Demand: $72.08-$85.91 | Supply: $114.12-$122.00 | Dist: $  0.00 (  0% ATR) [ ] | RR: 1:4.55 | Fresh: D✗S✓
- 10. CSGP   | $   29.50 | Demand: $28.54-$30.89 | Supply: $31.63-$34.06 | Dist: $  0.00 (  0% ATR) [ ] | RR: 1:2.22 | Fresh: D✗S✓
- 11. CVNA   | $   66.55 | Demand: $62.41-$71.50 | Supply: $69.19-$76.45 | Dist: $  0.00 (  0% ATR) [ ] | RR: 1:0.64 | Fresh: D✗S✓
- 12. DLTR   | $  113.87 | Demand: $105.22-$114.88 | Supply: $132.28-$137.07 | Dist: $  0.00 (  0% ATR) [ ] | RR: 1:2.13 | Fresh: D✗S✓
- 13. EIX    | $   56.30 | Demand: $53.11-$68.94 | Supply: $73.96-$76.39 | Dist: $  0.00 (  0% ATR) [ ] | RR: 1:5.54 | Fresh: D✗S✓
- 14. EEM    | $   67.00 | Demand: $64.80-$67.79 | Supply: $67.08-$69.88 | Dist: $  0.00 (  0% ATR) [ ] | RR: 1:0.04 | Fresh: D✗S✓
- 15. EMR    | $  147.47 | Demand: $141.38-$149.57 | Supply: $152.28-$164.87 | Dist: $  0.00 (  0% ATR) [ ] | RR: 1:0.79 | Fresh: D✗S✓
- 16. EQT    | $   50.12 | Demand: $47.94-$50.24 | Supply: $52.52-$55.09 | Dist: $  0.00 (  0% ATR) [ ] | RR: 1:1.10 | Fresh: D✗S✗
- 17. EVRG   | $   81.06 | Demand: $79.85-$81.80 | Supply: $85.75-$88.62 | Dist: $  0.00 (  0% ATR) [ ] | RR: 1:3.88 | Fresh: D✗S✓
- 18. FANG   | $  195.01 | Demand: $189.44-$195.43 | Supply: $209.15-$216.90 | Dist: $  0.00 (  0% ATR) [ ] | RR: 1:2.54 | Fresh: D✗S✓
- 19. ETN    | $  410.41 | Demand: $358.12-$420.00 | Supply: $400.51-$436.74 | Dist: $  0.00 (  0% ATR) [ ] | RR: 1:-0.19 | Fresh: D✗S✗
- 20. FTV    | $   55.22 | Demand: $54.13-$55.34 | Supply: $60.39-$63.00 | Dist: $  0.00 (  0% ATR) [ ] | RR: 1:4.75 | Fresh: D✗S✓
- 21. FIX    | $ 1679.22 | Demand: $1491.24-$1803.35 | Supply: $1845.19-$1993.69 | Dist: $  0.00 (  0% ATR) [ ] | RR: 1:0.88 | Fresh: D✗S✓
- 22. GEHC   | $   64.90 | Demand: $60.78-$65.08 | Supply: $64.25-$72.04 | Dist: $  0.00 (  0% ATR) [ ] | RR: 1:-0.16 | Fresh: D✗S✗
- 23. GLW    | $  148.17 | Demand: $136.31-$148.69 | Supply: $173.41-$190.00 | Dist: $  0.00 (  0% ATR) [ ] | RR: 1:2.13 | Fresh: D✗S✓
- 24. GOOG   | $  341.48 | Demand: $314.89-$341.64 | Supply: $339.71-$358.20 | Dist: $  0.00 (  0% ATR) [ ] | RR: 1:-0.07 | Fresh: D✗S✗
- 25. HAL    | $   34.02 | Demand: $33.54-$35.41 | Supply: $39.31-$40.41 | Dist: $  0.00 (  0% ATR) [ ] | RR: 1:11.02 | Fresh: D✗S✓
- 26. HIG    | $  133.77 | Demand: $132.31-$135.38 | Supply: $139.69-$145.81 | Dist: $  0.00 (  0% ATR) [ ] | RR: 1:4.05 | Fresh: D✗S✓
- 27. IBM    | $  238.12 | Demand: $211.03-$297.50 | Supply: $267.68-$278.94 | Dist: $  0.00 (  0% ATR) [ ] | RR: 1:1.09 | Fresh: D✗S✓
- 28. ISRG   | $  386.92 | Demand: $344.55-$405.50 | Supply: $399.29-$418.24 | Dist: $  0.00 (  0% ATR) [ ] | RR: 1:0.29 | Fresh: D✗S✓
- 29. KDP    | $   31.90 | Demand: $30.36-$32.60 | Supply: $32.58-$33.82 | Dist: $  0.00 (  0% ATR) [ ] | RR: 1:0.44 | Fresh: D✗S✓
- 30. KR     | $   60.72 | Demand: $55.59-$61.27 | Supply: $62.94-$64.98 | Dist: $  0.00 (  0% ATR) [ ] | RR: 1:0.43 | Fresh: D✗S✓
- 31. LRCX   | $  269.89 | Demand: $250.50-$319.50 | Supply: $354.89-$393.07 | Dist: $  0.00 (  0% ATR) [ ] | RR: 1:4.38 | Fresh: D✗S✓
- 32. MAS    | $   68.16 | Demand: $67.19-$68.76 | Supply: $73.37-$74.91 | Dist: $  0.00 (  0% ATR) [ ] | RR: 1:5.37 | Fresh: D✗S✓
- 33. LYV    | $  169.26 | Demand: $167.48-$174.10 | Supply: $180.02-$187.63 | Dist: $  0.00 (  0% ATR) [ ] | RR: 1:6.05 | Fresh: D✗S✓
- 34. NBIS   | $  213.96 | Demand: $193.68-$224.97 | Supply: $275.57-$298.80 | Dist: $  0.00 (  0% ATR) [ ] | RR: 1:3.04 | Fresh: D✗S✓
- 35. ORLY   | $   84.79 | Demand: $82.71-$86.78 | Supply: $89.57-$92.91 | Dist: $  0.00 (  0% ATR) [ ] | RR: 1:2.30 | Fresh: D✗S✓
- 36. OTIS   | $   68.58 | Demand: $67.64-$69.53 | Supply: $71.86-$74.40 | Dist: $  0.00 (  0% ATR) [ ] | RR: 1:3.49 | Fresh: D✗S✓
- 37. PCAR   | $  118.26 | Demand: $116.31-$118.53 | Supply: $124.85-$128.25 | Dist: $  0.00 (  0% ATR) [ ] | RR: 1:3.39 | Fresh: D✗S✓
- 38. PWR    | $  618.37 | Demand: $554.12-$637.26 | Supply: $684.00-$738.00 | Dist: $  0.00 (  0% ATR) [ ] | RR: 1:1.02 | Fresh: D✗S✓
- 39. RKLB   | $   67.54 | Demand: $58.20-$68.34 | Supply: $99.61-$118.38 | Dist: $  0.00 (  0% ATR) [ ] | RR: 1:3.43 | Fresh: D✗S✓
- 40. SHW    | $  321.65 | Demand: $312.17-$329.88 | Supply: $344.36-$353.61 | Dist: $  0.00 (  0% ATR) [ ] | RR: 1:2.40 | Fresh: D✗S✓
- 41. SBAC   | $  181.85 | Demand: $174.16-$186.93 | Supply: $201.06-$207.28 | Dist: $  0.00 (  0% ATR) [ ] | RR: 1:2.50 | Fresh: D✗S✓
- 42. SNDK   | $ 1596.75 | Demand: $1485.02-$1837.77 | Supply: $1865.11-$2119.90 | Dist: $  0.00 (  0% ATR) [ ] | RR: 1:2.40 | Fresh: D✗S✓
- 43. SPGI   | $  407.01 | Demand: $395.00-$413.00 | Supply: $439.20-$457.55 | Dist: $  0.00 (  0% ATR) [ ] | RR: 1:2.68 | Fresh: D✗S✓
- 44. TEL    | $  204.06 | Demand: $194.28-$204.62 | Supply: $207.57-$218.99 | Dist: $  0.00 (  0% ATR) [ ] | RR: 1:0.36 | Fresh: D✗S✗
- 45. TTD    | $   14.25 | Demand: $12.83-$17.39 | Supply: $18.89-$19.99 | Dist: $  0.00 (  0% ATR) [ ] | RR: 1:3.26 | Fresh: D✗S✓
- 46. UAL    | $  107.79 | Demand: $104.15-$113.98 | Supply: $111.83-$124.79 | Dist: $  0.00 (  0% ATR) [ ] | RR: 1:1.11 | Fresh: D✗S✓
- 47. TMUS   | $  168.96 | Demand: $165.66-$173.71 | Supply: $184.01-$189.89 | Dist: $  0.00 (  0% ATR) [ ] | RR: 1:4.56 | Fresh: D✗S✓
- 48. TPL    | $  352.00 | Demand: $340.58-$360.84 | Supply: $380.80-$440.28 | Dist: $  0.00 (  0% ATR) [ ] | RR: 1:2.52 | Fresh: D✗S✓
- 49. VRT    | $  243.19 | Demand: $220.92-$251.71 | Supply: $295.10-$305.19 | Dist: $  0.00 (  0% ATR) [ ] | RR: 1:2.33 | Fresh: D✗S✓
- 50. WMB    | $   71.98 | Demand: $69.27-$73.84 | Supply: $74.59-$79.00 | Dist: $  0.00 (  0% ATR) [ ] | RR: 1:0.96 | Fresh: D✗S✓
- 51. ZTS    | $   72.79 | Demand: $71.47-$74.64 | Supply: $78.93-$82.40 | Dist: $  0.00 (  0% ATR) [ ] | RR: 1:4.65 | Fresh: D✗S✓
- 52. BF.B   | $   26.86 | Demand: $25.27-$26.84 | Supply: $27.18-$28.07 | Dist: $  0.02 (  2% ATR) [ ] | RR: 1:0.20 | Fresh: D✗S✓
- 53. HST    | $   22.04 | Demand: $21.51-$22.00 | Supply: $24.49-$24.89 | Dist: $  0.04 (  5% ATR) [ ] | RR: 1:4.62 | Fresh: D✗S✓
- 54. XLP    | $   83.48 | Demand: $82.77-$83.33 | Supply: $84.33-$87.88 | Dist: $  0.15 ( 10% ATR) [ ] | RR: 1:1.19 | Fresh: D✗S✓
- 55. DAL    | $   79.33 | Demand: $75.99-$79.15 | Supply: $80.93-$83.44 | Dist: $  0.18 (  7% ATR) [ ] | RR: 1:0.48 | Fresh: D✗S✓
- 56. PG     | $  147.39 | Demand: $141.46-$147.15 | Supply: $150.55-$153.02 | Dist: $  0.24 (  7% ATR) [ ] | RR: 1:0.53 | Fresh: D✗S✓
- 57. BEN    | $   33.18 | Demand: $31.84-$32.93 | Supply: $35.20-$35.86 | Dist: $  0.25 ( 27% ATR) [ ] | RR: 1:1.51 | Fresh: D✗S✓
- 58. XLB    | $   50.82 | Demand: $49.88-$50.55 | Supply: $51.94-$53.52 | Dist: $  0.27 ( 32% ATR) [ ] | RR: 1:1.19 | Fresh: D✗S✓
- 59. CMCSA  | $   23.18 | Demand: $22.12-$22.86 | Supply: $26.69-$27.35 | Dist: $  0.32 ( 40% ATR) [✓] | RR: 1:3.33 | Fresh: D✓S✓
- 60. HII    | $  277.60 | Demand: $263.62-$277.20 | Supply: $294.41-$303.48 | Dist: $  0.40 (  3% ATR) [ ] | RR: 1:1.20 | Fresh: D✗S✓
- 61. CMG    | $   33.87 | Demand: $31.63-$33.45 | Supply: $37.18-$39.09 | Dist: $  0.42 ( 27% ATR) [✓] | RR: 1:1.48 | Fresh: D✓S✓
- 62. FISV   | $   49.48 | Demand: $47.04-$48.95 | Supply: $49.77-$55.36 | Dist: $  0.53 ( 22% ATR) [✓] | RR: 1:0.12 | Fresh: D✓S✗
- 63. UBER   | $   70.77 | Demand: $67.40-$70.23 | Supply: $71.23-$78.99 | Dist: $  0.54 ( 20% ATR) [✓] | RR: 1:0.14 | Fresh: D✓S✗
- 64. PDD    | $   78.27 | Demand: $75.50-$77.72 | Supply: $80.82-$84.44 | Dist: $  0.55 ( 23% ATR) [ ] | RR: 1:0.92 | Fresh: D✗S✓
- 65. FOXA   | $   65.52 | Demand: $51.14-$64.80 | Supply: $53.24-$68.85 | Dist: $  0.72 ( 38% ATR) [✓] | RR: 1:-0.85 | Fresh: D✓S✗
- 66. APD    | $  285.79 | Demand: $278.29-$284.85 | Supply: $303.83-$314.28 | Dist: $  0.94 ( 15% ATR) [ ] | RR: 1:2.41 | Fresh: D✗S✓
- 67. NTRS   | $  178.41 | Demand: $172.25-$177.43 | Supply: $187.73-$191.47 | Dist: $  0.98 ( 30% ATR) [ ] | RR: 1:1.51 | Fresh: D✗S✓
- 68. MDLZ   | $   62.28 | Demand: $57.78-$61.24 | Supply: $62.24-$64.35 | Dist: $  1.04 ( 59% ATR) [✓] | RR: 1:-0.01 | Fresh: D✓S✗
- 69. MMM    | $  165.41 | Demand: $157.21-$164.30 | Supply: $178.97-$184.90 | Dist: $  1.11 ( 29% ATR) [ ] | RR: 1:1.65 | Fresh: D✗S✓
- 70. CSX    | $   48.07 | Demand: $45.15-$46.96 | Supply: $50.30-$51.28 | Dist: $  1.11 (116% ATR) [ ] | RR: 1:0.77 | Fresh: D✓S✓
- 71. JBL    | $  316.79 | Demand: $290.43-$315.63 | Supply: $374.77-$386.64 | Dist: $  1.16 (  7% ATR) [ ] | RR: 1:2.20 | Fresh: D✗S✓
- 72. BKR    | $   56.56 | Demand: $52.27-$55.39 | Supply: $57.24-$63.68 | Dist: $  1.17 ( 61% ATR) [✓] | RR: 1:0.16 | Fresh: D✓S✓
- 73. STX    | $  800.35 | Demand: $739.47-$798.96 | Supply: $946.24-$1032.52 | Dist: $  1.39 (  2% ATR) [ ] | RR: 1:2.40 | Fresh: D✗S✓
- 74. USB    | $   60.53 | Demand: $57.41-$59.10 | Supply: $62.40-$64.27 | Dist: $  1.43 (144% ATR) [ ] | RR: 1:0.60 | Fresh: D✗S✗
- 75. LUV    | $   40.48 | Demand: $37.58-$39.05 | Supply: $44.00-$45.70 | Dist: $  1.43 ( 89% ATR) [ ] | RR: 1:1.21 | Fresh: D✗S✓
- 76. C      | $  132.74 | Demand: $127.08-$131.27 | Supply: $138.26-$145.09 | Dist: $  1.47 ( 46% ATR) [ ] | RR: 1:0.98 | Fresh: D✗S✓
- 77. DOW    | $   29.66 | Demand: $26.80-$28.18 | Supply: $32.45-$33.39 | Dist: $  1.48 (132% ATR) [ ] | RR: 1:0.97 | Fresh: D✓S✓
- 78. SWK    | $   89.88 | Demand: $82.19-$88.25 | Supply: $98.13-$103.65 | Dist: $  1.63 ( 53% ATR) [ ] | RR: 1:1.07 | Fresh: D✗S✓
- 79. VTRS   | $   17.15 | Demand: $14.94-$15.52 | Supply: $16.65-$17.67 | Dist: $  1.63 (314% ATR) [ ] | RR: 1:-0.23 | Fresh: D✓S✗
- 80. NFLX   | $   75.62 | Demand: $70.86-$73.96 | Supply: $77.46-$81.02 | Dist: $  1.66 ( 73% ATR) [✓] | RR: 1:0.39 | Fresh: D✓S✗
- 81. KHC    | $   24.83 | Demand: $22.00-$23.14 | Supply: $25.61-$27.13 | Dist: $  1.69 (193% ATR) [ ] | RR: 1:0.28 | Fresh: D✓S✓
- 82. AMZN   | $  251.25 | Demand: $233.59-$249.51 | Supply: $273.23-$287.20 | Dist: $  1.74 ( 18% ATR) [ ] | RR: 1:1.24 | Fresh: D✗S✓
- 83. SYF    | $   74.80 | Demand: $70.65-$72.98 | Supply: $79.85-$81.92 | Dist: $  1.82 (104% ATR) [ ] | RR: 1:1.22 | Fresh: D✓S✓
- 84. DHI    | $  140.75 | Demand: $133.88-$138.74 | Supply: $152.17-$155.62 | Dist: $  2.01 ( 43% ATR) [ ] | RR: 1:1.66 | Fresh: D✗S✓
- 85. FAST   | $   48.83 | Demand: $44.64-$46.71 | Supply: $51.28-$52.91 | Dist: $  2.12 (179% ATR) [ ] | RR: 1:0.58 | Fresh: D✓S✓
- 86. SW     | $   45.64 | Demand: $41.13-$43.51 | Supply: $45.64-$47.86 | Dist: $  2.13 (121% ATR) [ ] | RR: 1:0.00 | Fresh: D✓S✗
- 87. WMT    | $  106.79 | Demand: $102.15-$104.28 | Supply: $115.09-$118.58 | Dist: $  2.51 ( 96% ATR) [✓] | RR: 1:1.79 | Fresh: D✓S✓
- 88. MKC    | $   50.26 | Demand: $45.72-$47.58 | Supply: $54.85-$56.87 | Dist: $  2.68 (186% ATR) [ ] | RR: 1:1.01 | Fresh: D✓S✓
- 89. GIS    | $   36.79 | Demand: $33.05-$34.06 | Supply: $40.66-$41.93 | Dist: $  2.73 (246% ATR) [ ] | RR: 1:1.04 | Fresh: D✓S✓
- 90. TSCO   | $   33.19 | Demand: $29.41-$30.32 | Supply: $34.96-$36.67 | Dist: $  2.87 (237% ATR) [ ] | RR: 1:0.47 | Fresh: D✓S✓
- 91. MOS    | $   25.59 | Demand: $21.55-$22.70 | Supply: $24.47-$26.50 | Dist: $  2.89 (288% ATR) [ ] | RR: 1:-0.28 | Fresh: D✓S✗
- 92. EW     | $   88.41 | Demand: $81.16-$85.51 | Supply: $89.33-$92.88 | Dist: $  2.90 (134% ATR) [ ] | RR: 1:0.13 | Fresh: D✗S✗
- 93. BALL   | $   61.32 | Demand: $56.35-$58.41 | Supply: $61.30-$63.94 | Dist: $  2.91 (198% ATR) [ ] | RR: 1:-0.00 | Fresh: D✓S✗
- 94. DVN    | $   48.48 | Demand: $44.01-$45.53 | Supply: $49.60-$51.70 | Dist: $  2.95 (211% ATR) [ ] | RR: 1:0.25 | Fresh: D✓S✗
- 95. VST    | $  144.16 | Demand: $135.62-$141.10 | Supply: $159.14-$171.35 | Dist: $  3.06 ( 45% ATR) [ ] | RR: 1:1.75 | Fresh: D✗S✓
- 96. PKG    | $  235.45 | Demand: $222.89-$232.36 | Supply: $250.29-$256.44 | Dist: $  3.09 ( 63% ATR) [ ] | RR: 1:1.18 | Fresh: D✗S✓
- 97. BAX    | $   23.26 | Demand: $19.38-$20.09 | Supply: $27.48-$28.38 | Dist: $  3.17 (231% ATR) [ ] | RR: 1:1.09 | Fresh: D✓S✓
- 98. BRO    | $   65.74 | Demand: $60.53-$62.34 | Supply: $71.87-$75.63 | Dist: $  3.40 (145% ATR) [ ] | RR: 1:1.18 | Fresh: D✓S✓
- 99. GOOGL  | $  345.16 | Demand: $314.90-$341.73 | Supply: $358.67-$372.33 | Dist: $  3.43 ( 29% ATR) [ ] | RR: 1:0.45 | Fresh: D✗S✓
-100. IVZ    | $   30.54 | Demand: $25.59-$27.07 | Supply: $32.37-$33.65 | Dist: $  3.47 (365% ATR) [ ] | RR: 1:0.37 | Fresh: D✓S✓
-101. DIS    | $  105.96 | Demand: $99.53-$102.40 | Supply: $109.76-$111.87 | Dist: $  3.56 (158% ATR) [ ] | RR: 1:0.59 | Fresh: D✓S✓
-102. SLB    | $   52.29 | Demand: $45.87-$48.69 | Supply: $54.67-$60.46 | Dist: $  3.60 (218% ATR) [ ] | RR: 1:0.37 | Fresh: D✓S✓
-103. DRI    | $  208.77 | Demand: $199.00-$205.16 | Supply: $222.37-$229.76 | Dist: $  3.61 ( 64% ATR) [✓] | RR: 1:1.39 | Fresh: D✓S✓
-104. NWSA   | $   30.37 | Demand: $25.14-$26.75 | Supply: $30.65-$31.66 | Dist: $  3.62 (408% ATR) [ ] | RR: 1:0.05 | Fresh: D✓S✓
-105. MCO    | $  464.60 | Demand: $438.17-$460.88 | Supply: $495.75-$519.09 | Dist: $  3.72 ( 37% ATR) [✓] | RR: 1:1.18 | Fresh: D✓S✓
-106. KEYS   | $  332.32 | Demand: $306.01-$328.58 | Supply: $339.40-$360.94 | Dist: $  3.74 ( 30% ATR) [ ] | RR: 1:0.27 | Fresh: D✗S✓
-107. EXE    | $   93.70 | Demand: $86.80-$89.71 | Supply: $94.80-$98.50 | Dist: $  3.99 (152% ATR) [ ] | RR: 1:0.16 | Fresh: D✗S✓
-108. SYY    | $   83.62 | Demand: $77.94-$79.58 | Supply: $83.03-$85.31 | Dist: $  4.04 (205% ATR) [ ] | RR: 1:-0.10 | Fresh: D✗S✗
-109. OMC    | $   82.96 | Demand: $75.37-$78.77 | Supply: $82.19-$84.80 | Dist: $  4.19 (126% ATR) [ ] | RR: 1:-0.10 | Fresh: D✓S✗
-110. LYB    | $   64.14 | Demand: $55.15-$59.51 | Supply: $60.85-$67.91 | Dist: $  4.63 (204% ATR) [ ] | RR: 1:-0.37 | Fresh: D✓S✗
-111. XLK    | $  188.00 | Demand: $179.76-$183.11 | Supply: $181.64-$192.08 | Dist: $  4.89 ( 95% ATR) [ ] | RR: 1:-0.77 | Fresh: D✗S✗
-112. HAS    | $   89.67 | Demand: $82.40-$84.64 | Supply: $93.04-$97.00 | Dist: $  5.03 (205% ATR) [ ] | RR: 1:0.46 | Fresh: D✓S✓
-113. BX     | $  130.53 | Demand: $112.06-$125.47 | Supply: $141.71-$148.36 | Dist: $  5.06 (108% ATR) [ ] | RR: 1:0.61 | Fresh: D✗S✓
-114. OKE    | $   93.48 | Demand: $85.65-$88.19 | Supply: $94.96-$99.30 | Dist: $  5.29 (206% ATR) [ ] | RR: 1:0.19 | Fresh: D✓S✓
-115. SLV    | $   59.26 | Demand: $50.02-$53.94 | Supply: $59.87-$61.83 | Dist: $  5.32 (312% ATR) [ ] | RR: 1:0.07 | Fresh: D✓S✓
-116. HSIC   | $   85.99 | Demand: $78.62-$80.55 | Supply: $87.06-$92.18 | Dist: $  5.44 (269% ATR) [ ] | RR: 1:0.15 | Fresh: D✓S✗
-117. CNC    | $   67.90 | Demand: $59.90-$62.41 | Supply: $67.05-$69.63 | Dist: $  5.49 (186% ATR) [ ] | RR: 1:-0.11 | Fresh: D✓S✗
-118. GM     | $   87.79 | Demand: $80.50-$82.12 | Supply: $83.76-$91.15 | Dist: $  5.67 (224% ATR) [ ] | RR: 1:-0.55 | Fresh: D✓S✗
-119. STE    | $  209.40 | Demand: $198.01-$203.62 | Supply: $234.15-$237.62 | Dist: $  5.78 ( 94% ATR) [✓] | RR: 1:2.17 | Fresh: D✓S✓
-120. GD     | $  354.64 | Demand: $340.81-$348.83 | Supply: $354.57-$377.27 | Dist: $  5.81 ( 79% ATR) [✓] | RR: 1:-0.00 | Fresh: D✓S✗
-121. CBRE   | $  140.28 | Demand: $128.55-$134.40 | Supply: $148.10-$152.64 | Dist: $  5.88 (128% ATR) [ ] | RR: 1:0.67 | Fresh: D✓S✓
-122. HSY    | $  180.37 | Demand: $167.77-$174.41 | Supply: $178.04-$184.47 | Dist: $  5.96 (144% ATR) [ ] | RR: 1:-0.18 | Fresh: D✗S✗
-123. HOOD   | $  108.10 | Demand: $90.22-$101.88 | Supply: $111.02-$121.42 | Dist: $  6.22 (130% ATR) [ ] | RR: 1:0.16 | Fresh: D✗S✓
-124. VTR    | $   88.99 | Demand: $81.02-$82.71 | Supply: $91.47-$94.60 | Dist: $  6.28 (230% ATR) [ ] | RR: 1:0.31 | Fresh: D✓S✓
-125. KKR    | $  103.95 | Demand: $88.23-$97.59 | Supply: $109.10-$116.57 | Dist: $  6.36 (160% ATR) [ ] | RR: 1:0.33 | Fresh: D✗S✓
-126. KO     | $   88.12 | Demand: $79.83-$81.58 | Supply: $88.60-$92.21 | Dist: $  6.55 (358% ATR) [ ] | RR: 1:0.06 | Fresh: D✓S✗
-127. BKNG   | $  175.01 | Demand: $161.69-$168.44 | Supply: $187.34-$204.61 | Dist: $  6.57 ( 81% ATR) [ ] | RR: 1:0.93 | Fresh: D✗S✓
-128. CINF   | $  178.21 | Demand: $166.73-$171.56 | Supply: $189.11-$192.09 | Dist: $  6.65 (179% ATR) [ ] | RR: 1:0.95 | Fresh: D✗S✓
-129. BG     | $  119.85 | Demand: $106.00-$113.10 | Supply: $124.14-$129.43 | Dist: $  6.75 (184% ATR) [ ] | RR: 1:0.31 | Fresh: D✓S✓
-130. RJF    | $  163.67 | Demand: $154.23-$156.89 | Supply: $174.35-$181.40 | Dist: $  6.78 (214% ATR) [ ] | RR: 1:1.13 | Fresh: D✓S✓
-131. BMY    | $   62.97 | Demand: $54.77-$56.19 | Supply: $64.74-$68.64 | Dist: $  6.78 (361% ATR) [ ] | RR: 1:0.22 | Fresh: D✓S✓
-132. XYZ    | $   77.10 | Demand: $68.68-$70.15 | Supply: $82.08-$84.81 | Dist: $  6.95 (256% ATR) [ ] | RR: 1:0.59 | Fresh: D✓S✓
-133. RTX    | $  193.68 | Demand: $181.87-$186.46 | Supply: $209.26-$220.39 | Dist: $  7.22 (160% ATR) [ ] | RR: 1:1.32 | Fresh: D✓S✓
-134. ECHO   | $   94.85 | Demand: $82.48-$87.03 | Supply: $106.56-$131.22 | Dist: $  7.82 (189% ATR) [ ] | RR: 1:0.95 | Fresh: D✓S✓
-135. ORCL   | $  149.78 | Demand: $137.54-$141.84 | Supply: $179.00-$195.32 | Dist: $  7.94 (108% ATR) [ ] | RR: 1:2.39 | Fresh: D✗S✓
-136. ARES   | $  126.27 | Demand: $105.79-$118.16 | Supply: $137.79-$143.25 | Dist: $  8.11 (151% ATR) [ ] | RR: 1:0.56 | Fresh: D✓S✓
-137. XLE    | $   64.33 | Demand: $54.36-$56.03 | Supply: $64.34-$66.17 | Dist: $  8.30 (591% ATR) [ ] | RR: 1:0.00 | Fresh: D✓S✗
-138. APO    | $  133.45 | Demand: $114.03-$125.09 | Supply: $134.46-$141.73 | Dist: $  8.36 (171% ATR) [ ] | RR: 1:0.05 | Fresh: D✗S✓
-139. AMT    | $  183.87 | Demand: $167.24-$175.29 | Supply: $183.69-$192.94 | Dist: $  8.58 (157% ATR) [ ] | RR: 1:-0.01 | Fresh: D✗S✗
-140. CHRW   | $  159.90 | Demand: $143.16-$151.22 | Supply: $191.75-$195.00 | Dist: $  8.68 (111% ATR) [ ] | RR: 1:1.90 | Fresh: D✓S✓
-141. MET    | $   97.77 | Demand: $85.38-$88.83 | Supply: $95.49-$100.93 | Dist: $  8.94 (546% ATR) [ ] | RR: 1:-0.18 | Fresh: D✓S✗
-142. IFF    | $   85.60 | Demand: $75.06-$76.56 | Supply: $85.88-$88.64 | Dist: $  9.04 (388% ATR) [ ] | RR: 1:0.03 | Fresh: D✓S✓
-143. HPQ    | $   34.06 | Demand: $23.16-$24.76 | Supply: $33.37-$36.23 | Dist: $  9.30 (612% ATR) [ ] | RR: 1:-0.06 | Fresh: D✓S✗
-144. STLD   | $  245.43 | Demand: $216.36-$236.12 | Supply: $279.65-$285.88 | Dist: $  9.31 (122% ATR) [ ] | RR: 1:1.18 | Fresh: D✗S✓
-145. PM     | $  189.42 | Demand: $172.29-$180.07 | Supply: $188.95-$202.57 | Dist: $  9.35 (200% ATR) [ ] | RR: 1:-0.03 | Fresh: D✓S✗
-146. CHTR   | $  141.60 | Demand: $124.05-$132.00 | Supply: $138.83-$168.11 | Dist: $  9.59 (127% ATR) [ ] | RR: 1:-0.16 | Fresh: D✓S✗
-147. PYPL   | $   53.25 | Demand: $40.87-$43.34 | Supply: $57.91-$59.79 | Dist: $  9.91 (715% ATR) [ ] | RR: 1:0.38 | Fresh: D✓S✓
-148. SMCI   | $   40.74 | Demand: $27.71-$30.75 | Supply: $38.15-$42.31 | Dist: $  9.99 (380% ATR) [ ] | RR: 1:-0.20 | Fresh: D✓S✗
-149. VLTO   | $  100.85 | Demand: $87.70-$90.62 | Supply: $96.93-$102.25 | Dist: $ 10.23 (430% ATR) [ ] | RR: 1:-0.30 | Fresh: D✓S✗
-150. AME    | $  245.14 | Demand: $229.59-$234.88 | Supply: $235.46-$244.71 | Dist: $ 10.26 (200% ATR) [ ] | RR: 1:-0.62 | Fresh: D✗S✗
-151. DVA    | $  189.60 | Demand: $175.29-$179.34 | Supply: $204.06-$211.80 | Dist: $ 10.26 (112% ATR) [ ] | RR: 1:1.01 | Fresh: D✓S✓
-152. ADM    | $   87.88 | Demand: $74.28-$77.52 | Supply: $86.07-$88.75 | Dist: $ 10.36 (422% ATR) [ ] | RR: 1:-0.13 | Fresh: D✓S✗
-153. DG     | $  124.12 | Demand: $107.91-$113.55 | Supply: $130.64-$133.76 | Dist: $ 10.57 (305% ATR) [ ] | RR: 1:0.40 | Fresh: D✓S✓
-154. MRVL   | $  242.59 | Demand: $186.15-$232.00 | Supply: $267.31-$312.98 | Dist: $ 10.59 ( 62% ATR) [ ] | RR: 1:0.44 | Fresh: D✗S✓
-155. PRU    | $  118.69 | Demand: $106.47-$108.00 | Supply: $124.38-$126.33 | Dist: $ 10.69 (429% ATR) [ ] | RR: 1:0.47 | Fresh: D✓S✓
-156. NOC    | $  523.42 | Demand: $493.84-$512.43 | Supply: $503.68-$553.50 | Dist: $ 10.99 ( 95% ATR) [✓] | RR: 1:-0.67 | Fresh: D✓S✗
-157. UNP    | $  281.83 | Demand: $255.49-$270.79 | Supply: $298.10-$303.15 | Dist: $ 11.04 (205% ATR) [ ] | RR: 1:0.62 | Fresh: D✓S✓
-158. EL     | $   94.11 | Demand: $76.83-$82.75 | Supply: $102.95-$108.38 | Dist: $ 11.36 (471% ATR) [ ] | RR: 1:0.51 | Fresh: D✓S✓
-159. NDAQ   | $   91.47 | Demand: $76.76-$79.85 | Supply: $93.90-$98.71 | Dist: $ 11.62 (617% ATR) [ ] | RR: 1:0.17 | Fresh: D✓S✓
-160. SYK    | $  298.80 | Demand: $277.00-$287.17 | Supply: $329.25-$334.75 | Dist: $ 11.63 (109% ATR) [ ] | RR: 1:1.40 | Fresh: D✗S✓
-161. ZBH    | $  100.67 | Demand: $86.58-$88.81 | Supply: $99.21-$101.98 | Dist: $ 11.86 (377% ATR) [ ] | RR: 1:-0.10 | Fresh: D✓S✗
-162. NVDA   | $  219.17 | Demand: $203.44-$207.07 | Supply: $217.20-$233.71 | Dist: $ 12.10 (161% ATR) [ ] | RR: 1:-0.13 | Fresh: D✓S✗
-163. EFX    | $  171.01 | Demand: $150.75-$158.62 | Supply: $162.91-$172.10 | Dist: $ 12.39 (194% ATR) [ ] | RR: 1:-0.40 | Fresh: D✓S✗
-164. SCHW   | $  104.83 | Demand: $90.76-$92.39 | Supply: $110.41-$112.20 | Dist: $ 12.44 (663% ATR) [ ] | RR: 1:0.40 | Fresh: D✓S✓
-165. PGR    | $  216.23 | Demand: $200.00-$203.61 | Supply: $222.42-$239.38 | Dist: $ 12.62 (288% ATR) [ ] | RR: 1:0.38 | Fresh: D✓S✓
-166. ABT    | $  102.00 | Demand: $87.07-$89.16 | Supply: $115.03-$117.34 | Dist: $ 12.84 (465% ATR) [ ] | RR: 1:0.87 | Fresh: D✓S✓
-167. MDT    | $   92.95 | Demand: $77.62-$79.87 | Supply: $90.58-$94.74 | Dist: $ 13.08 (587% ATR) [ ] | RR: 1:-0.15 | Fresh: D✓S✗
-168. EG     | $  378.08 | Demand: $352.14-$364.18 | Supply: $380.20-$388.02 | Dist: $ 13.90 (174% ATR) [ ] | RR: 1:0.08 | Fresh: D✓S✓
-169. ROST   | $  230.61 | Demand: $207.00-$216.63 | Supply: $239.16-$242.81 | Dist: $ 13.98 (309% ATR) [ ] | RR: 1:0.36 | Fresh: D✓S✓
-170. DXCM   | $   88.24 | Demand: $68.55-$73.69 | Supply: $91.03-$92.59 | Dist: $ 14.55 (454% ATR) [ ] | RR: 1:0.14 | Fresh: D✓S✓
-171. CEG    | $  262.93 | Demand: $228.63-$248.27 | Supply: $292.75-$305.80 | Dist: $ 14.66 (148% ATR) [ ] | RR: 1:0.87 | Fresh: D✓S✓
-172. CBOE   | $  280.07 | Demand: $246.96-$265.13 | Supply: $294.59-$308.84 | Dist: $ 14.94 (146% ATR) [ ] | RR: 1:0.44 | Fresh: D✗S✓
-173. HPE    | $   61.28 | Demand: $43.13-$46.10 | Supply: $58.90-$63.44 | Dist: $ 15.18 (448% ATR) [ ] | RR: 1:-0.13 | Fresh: D✓S✗
-174. DLR    | $  193.20 | Demand: $172.01-$177.47 | Supply: $191.53-$196.92 | Dist: $ 15.73 (294% ATR) [ ] | RR: 1:-0.08 | Fresh: D✓S✗
-175. ALL    | $  253.08 | Demand: $230.00-$237.10 | Supply: $258.90-$277.22 | Dist: $ 15.98 (221% ATR) [ ] | RR: 1:0.25 | Fresh: D✓S✓
-176. INTC   | $  111.08 | Demand: $81.79-$94.98 | Supply: $126.66-$132.61 | Dist: $ 16.10 (228% ATR) [ ] | RR: 1:0.53 | Fresh: D✓S✓
-177. PAYX   | $  116.37 | Demand: $93.02-$100.19 | Supply: $125.56-$127.92 | Dist: $ 16.18 (438% ATR) [ ] | RR: 1:0.39 | Fresh: D✓S✓
-178. WAB    | $  280.15 | Demand: $255.76-$263.67 | Supply: $294.27-$306.10 | Dist: $ 16.48 (282% ATR) [ ] | RR: 1:0.58 | Fresh: D✓S✓
-179. SOLV   | $   92.55 | Demand: $73.04-$75.77 | Supply: $88.83-$94.12 | Dist: $ 16.78 (566% ATR) [ ] | RR: 1:-0.19 | Fresh: D✓S✗
-180. COHR   | $  300.00 | Demand: $220.68-$283.20 | Supply: $394.00-$420.57 | Dist: $ 16.80 ( 45% ATR) [ ] | RR: 1:1.19 | Fresh: D✗S✓
-181. SHOP   | $  128.42 | Demand: $106.98-$111.03 | Supply: $145.60-$155.62 | Dist: $ 17.39 (208% ATR) [ ] | RR: 1:0.80 | Fresh: D✓S✓
-182. DPZ    | $  312.00 | Demand: $282.00-$294.36 | Supply: $362.21-$372.16 | Dist: $ 17.64 (147% ATR) [ ] | RR: 1:1.67 | Fresh: D✓S✓
-183. CAH    | $  243.16 | Demand: $222.11-$224.88 | Supply: $238.41-$245.83 | Dist: $ 18.28 (289% ATR) [ ] | RR: 1:-0.23 | Fresh: D✓S✗
-184. SJM    | $  131.25 | Demand: $107.10-$112.65 | Supply: $122.86-$128.86 | Dist: $ 18.60 (620% ATR) [ ] | RR: 1:-0.35 | Fresh: D✓S✗
-185. TRI    | $   99.53 | Demand: $76.28-$80.91 | Supply: $105.25-$112.77 | Dist: $ 18.62 (296% ATR) [ ] | RR: 1:0.25 | Fresh: D✓S✓
-186. COF    | $  204.40 | Demand: $181.70-$185.50 | Supply: $221.19-$228.14 | Dist: $ 18.90 (427% ATR) [ ] | RR: 1:0.74 | Fresh: D✓S✓
-187. NEM    | $  127.99 | Demand: $97.37-$107.97 | Supply: $128.69-$132.34 | Dist: $ 20.02 (493% ATR) [ ] | RR: 1:0.02 | Fresh: D✓S✓
-188. MRSH   | $  184.41 | Demand: $160.00-$164.24 | Supply: $180.87-$198.49 | Dist: $ 20.17 (457% ATR) [ ] | RR: 1:-0.15 | Fresh: D✓S✗
-189. HUM    | $  405.79 | Demand: $372.61-$385.49 | Supply: $386.83-$419.97 | Dist: $ 20.30 (135% ATR) [ ] | RR: 1:-0.57 | Fresh: D✗S✗
-190. NUE    | $  266.37 | Demand: $237.50-$245.86 | Supply: $261.94-$268.80 | Dist: $ 20.51 (262% ATR) [ ] | RR: 1:-0.15 | Fresh: D✓S✗
-191. CDW    | $  149.91 | Demand: $123.08-$129.36 | Supply: $149.16-$158.04 | Dist: $ 20.55 (267% ATR) [ ] | RR: 1:-0.03 | Fresh: D✓S✗
-192. AMD    | $  549.38 | Demand: $424.03-$528.00 | Supply: $490.46-$558.37 | Dist: $ 21.38 ( 62% ATR) [ ] | RR: 1:-0.47 | Fresh: D✗S✗
-193. TER    | $  356.92 | Demand: $317.74-$335.39 | Supply: $380.00-$437.77 | Dist: $ 21.53 ( 71% ATR) [✓] | RR: 1:0.59 | Fresh: D✓S✓
-194. COIN   | $  174.00 | Demand: $141.48-$152.19 | Supply: $178.33-$195.85 | Dist: $ 21.81 (251% ATR) [ ] | RR: 1:0.13 | Fresh: D✓S✓
-195. PTC    | $  140.54 | Demand: $108.50-$118.71 | Supply: $151.35-$156.03 | Dist: $ 21.83 (374% ATR) [ ] | RR: 1:0.34 | Fresh: D✓S✓
-196. GILD   | $  149.59 | Demand: $122.70-$127.37 | Supply: $143.67-$151.19 | Dist: $ 22.22 (562% ATR) [ ] | RR: 1:-0.22 | Fresh: D✓S✗
-197. ADSK   | $  231.03 | Demand: $194.47-$208.74 | Supply: $242.86-$259.36 | Dist: $ 22.29 (217% ATR) [ ] | RR: 1:0.32 | Fresh: D✓S✓
-198. INCY   | $  126.07 | Demand: $96.09-$103.33 | Supply: $121.63-$132.60 | Dist: $ 22.74 (562% ATR) [ ] | RR: 1:-0.15 | Fresh: D✓S✗
-199. GPN    | $   90.99 | Demand: $63.66-$67.98 | Supply: $92.00-$95.58 | Dist: $ 23.01 (694% ATR) [ ] | RR: 1:0.04 | Fresh: D✓S✓
-200. GDDY   | $  103.19 | Demand: $71.59-$79.51 | Supply: $101.60-$104.90 | Dist: $ 23.68 (399% ATR) [ ] | RR: 1:-0.05 | Fresh: D✓S✗
-201. AVY    | $  183.59 | Demand: $156.61-$159.65 | Supply: $172.05-$181.94 | Dist: $ 23.94 (446% ATR) [ ] | RR: 1:-0.43 | Fresh: D✓S✗
-202. CF     | $  134.12 | Demand: $106.17-$110.11 | Supply: $132.00-$141.66 | Dist: $ 24.02 (497% ATR) [ ] | RR: 1:-0.08 | Fresh: D✓S✗
-203. TGT    | $  158.73 | Demand: $127.66-$134.65 | Supply: $154.50-$170.75 | Dist: $ 24.08 (629% ATR) [ ] | RR: 1:-0.14 | Fresh: D✓S✗
-204. SPCX   | $  154.95 | Demand: $119.68-$130.74 | Supply: $193.00-$225.64 | Dist: $ 24.21 (228% ATR) [ ] | RR: 1:1.08 | Fresh: D✓S✓
-205. NDSN   | $  312.93 | Demand: $284.01-$288.46 | Supply: $328.87-$339.12 | Dist: $ 24.47 (503% ATR) [ ] | RR: 1:0.55 | Fresh: D✓S✓
-206. ALLE   | $  160.88 | Demand: $128.74-$135.96 | Supply: $156.83-$164.25 | Dist: $ 24.92 (639% ATR) [ ] | RR: 1:-0.13 | Fresh: D✓S✗
-207. ITW    | $  282.66 | Demand: $254.15-$257.48 | Supply: $265.86-$275.60 | Dist: $ 25.18 (364% ATR) [ ] | RR: 1:-0.59 | Fresh: D✓S✗
-208. AJG    | $  243.09 | Demand: $208.08-$217.87 | Supply: $242.70-$258.39 | Dist: $ 25.22 (320% ATR) [ ] | RR: 1:-0.01 | Fresh: D✓S✗
-209. AMGN   | $  379.65 | Demand: $334.05-$353.66 | Supply: $389.28-$410.02 | Dist: $ 25.99 (216% ATR) [ ] | RR: 1:0.21 | Fresh: D✓S✓
-210. ICE    | $  153.94 | Demand: $121.79-$127.86 | Supply: $161.05-$164.66 | Dist: $ 26.08 (696% ATR) [ ] | RR: 1:0.22 | Fresh: D✓S✓
-211. A      | $  155.62 | Demand: $123.69-$128.65 | Supply: $152.12-$160.51 | Dist: $ 26.97 (931% ATR) [ ] | RR: 1:-0.11 | Fresh: D✓S✗
-212. NSC    | $  332.85 | Demand: $297.45-$305.75 | Supply: $337.72-$342.53 | Dist: $ 27.10 (478% ATR) [ ] | RR: 1:0.14 | Fresh: D✓S✓
-213. NVR    | $ 6219.45 | Demand: $6057.84-$6191.97 | Supply: $6374.93-$6525.00 | Dist: $ 27.48 ( 17% ATR) [ ] | RR: 1:0.96 | Fresh: D✗S✓
-214. LDOS   | $  131.41 | Demand: $99.53-$103.67 | Supply: $140.02-$147.33 | Dist: $ 27.74 (561% ATR) [ ] | RR: 1:0.27 | Fresh: D✓S✓
-215. CTAS   | $  198.35 | Demand: $167.82-$170.51 | Supply: $196.69-$207.09 | Dist: $ 27.84 (605% ATR) [ ] | RR: 1:-0.05 | Fresh: D✓S✗
-216. AIZ    | $  296.67 | Demand: $260.69-$265.57 | Supply: $292.25-$303.94 | Dist: $ 31.10 (508% ATR) [ ] | RR: 1:-0.12 | Fresh: D✓S✗
-217. GPC    | $  139.32 | Demand: $104.81-$107.68 | Supply: $132.34-$138.20 | Dist: $ 31.64 (973% ATR) [ ] | RR: 1:-0.20 | Fresh: D✓S✗
-218. TRGP   | $  301.46 | Demand: $260.25-$268.82 | Supply: $292.03-$306.73 | Dist: $ 32.64 (423% ATR) [ ] | RR: 1:-0.23 | Fresh: D✓S✗
-219. ABNB   | $  166.10 | Demand: $128.82-$132.72 | Supply: $184.05-$191.49 | Dist: $ 33.38 (506% ATR) [ ] | RR: 1:0.48 | Fresh: D✓S✓
-220. ANET   | $  199.29 | Demand: $157.07-$165.25 | Supply: $189.43-$214.89 | Dist: $ 34.04 (296% ATR) [ ] | RR: 1:-0.23 | Fresh: D✓S✗
-221. BR     | $  173.70 | Demand: $133.83-$139.50 | Supply: $178.22-$186.91 | Dist: $ 34.20 (511% ATR) [ ] | RR: 1:0.11 | Fresh: D✓S✓
-222. ERIE   | $  256.83 | Demand: $210.78-$222.30 | Supply: $260.17-$271.47 | Dist: $ 34.53 (357% ATR) [ ] | RR: 1:0.07 | Fresh: D✓S✓
-223. QCOM   | $  190.30 | Demand: $146.00-$155.00 | Supply: $200.10-$226.46 | Dist: $ 35.30 (507% ATR) [ ] | RR: 1:0.22 | Fresh: D✓S✓
-224. NOW    | $  138.57 | Demand: $98.92-$103.21 | Supply: $137.80-$149.60 | Dist: $ 35.36 (524% ATR) [ ] | RR: 1:-0.02 | Fresh: D✓S✗
-225. GLD    | $  412.29 | Demand: $364.05-$376.28 | Supply: $418.43-$428.14 | Dist: $ 36.01 (497% ATR) [ ] | RR: 1:0.13 | Fresh: D✓S✓
-226. QQQ    | $  716.47 | Demand: $661.14-$680.05 | Supply: $711.28-$744.76 | Dist: $ 36.42 (267% ATR) [ ] | RR: 1:-0.09 | Fresh: D✓S✗
-227. ROP    | $  374.85 | Demand: $330.64-$338.11 | Supply: $393.65-$419.21 | Dist: $ 36.75 (296% ATR) [ ] | RR: 1:0.43 | Fresh: D✓S✓
-228. MSTR   | $  133.18 | Demand: $81.81-$94.72 | Supply: $135.38-$144.92 | Dist: $ 38.46 (737% ATR) [ ] | RR: 1:0.04 | Fresh: D✓S✓
-229. ABBV   | $  262.13 | Demand: $215.37-$223.50 | Supply: $259.18-$266.96 | Dist: $ 38.63 (598% ATR) [ ] | RR: 1:-0.06 | Fresh: D✓S✗
-230. LITE   | $  945.00 | Demand: $812.80-$906.18 | Supply: $914.65-$994.50 | Dist: $ 38.82 ( 45% ATR) [ ] | RR: 1:-0.23 | Fresh: D✗S✗
-231. DASH   | $  194.96 | Demand: $147.15-$155.71 | Supply: $227.00-$238.52 | Dist: $ 39.25 (483% ATR) [ ] | RR: 1:0.67 | Fresh: D✓S✓
-232. TYL    | $  339.50 | Demand: $286.00-$300.00 | Supply: $343.80-$380.87 | Dist: $ 39.50 (264% ATR) [ ] | RR: 1:0.08 | Fresh: D✓S✗
-233. ELV    | $  436.47 | Demand: $387.08-$396.89 | Supply: $414.68-$427.19 | Dist: $ 39.58 (388% ATR) [ ] | RR: 1:-0.44 | Fresh: D✓S✗
-234. PH     | $  972.63 | Demand: $896.02-$932.99 | Supply: $955.48-$982.40 | Dist: $ 39.64 (148% ATR) [ ] | RR: 1:-0.22 | Fresh: D✗S✗
-235. JKHY   | $  167.07 | Demand: $121.04-$126.96 | Supply: $167.97-$174.99 | Dist: $ 40.11 (918% ATR) [ ] | RR: 1:0.02 | Fresh: D✓S✓
-236. CIEN   | $  369.85 | Demand: $311.60-$328.85 | Supply: $424.33-$463.55 | Dist: $ 41.00 (128% ATR) [ ] | RR: 1:0.94 | Fresh: D✗S✓
-237. ADBE   | $  255.00 | Demand: $201.31-$213.66 | Supply: $285.48-$294.53 | Dist: $ 41.34 (331% ATR) [ ] | RR: 1:0.57 | Fresh: D✓S✓
-238. RMD    | $  236.80 | Demand: $184.65-$193.85 | Supply: $235.01-$241.71 | Dist: $ 42.95 (546% ATR) [ ] | RR: 1:-0.03 | Fresh: D✓S✗
-239. PLTR   | $  175.32 | Demand: $126.65-$131.52 | Supply: $178.01-$188.37 | Dist: $ 43.80 (449% ATR) [ ] | RR: 1:0.06 | Fresh: D✓S✓
-240. ADP    | $  272.64 | Demand: $216.04-$226.70 | Supply: $284.93-$287.86 | Dist: $ 45.94 (554% ATR) [ ] | RR: 1:0.22 | Fresh: D✓S✓
-241. ALNY   | $  255.08 | Demand: $197.81-$207.99 | Supply: $281.36-$291.28 | Dist: $ 47.09 (312% ATR) [ ] | RR: 1:0.46 | Fresh: D✓S✓
-242. LMT    | $  558.04 | Demand: $490.05-$510.00 | Supply: $527.01-$550.86 | Dist: $ 48.04 (350% ATR) [ ] | RR: 1:-0.46 | Fresh: D✓S✗
-243. INTU   | $  318.00 | Demand: $252.84-$269.87 | Supply: $358.38-$372.98 | Dist: $ 48.13 (324% ATR) [ ] | RR: 1:0.62 | Fresh: D✓S✓
-244. CRWD   | $  247.00 | Demand: $185.30-$195.66 | Supply: $668.86-$702.17 | Dist: $ 51.34 (587% ATR) [ ] | RR: 1:6.84 | Fresh: D✓S✓
-245. TSLA   | $  368.55 | Demand: $297.38-$317.00 | Supply: $386.76-$416.00 | Dist: $ 51.55 (476% ATR) [ ] | RR: 1:0.26 | Fresh: D✓S✓
-246. TRV    | $  378.01 | Demand: $316.41-$325.89 | Supply: $386.66-$398.69 | Dist: $ 52.12 (676% ATR) [ ] | RR: 1:0.14 | Fresh: D✓S✓
-247. CPAY   | $  407.36 | Demand: $337.95-$353.94 | Supply: $407.48-$416.13 | Dist: $ 53.42 (454% ATR) [ ] | RR: 1:0.00 | Fresh: D✓S✗
-248. WTW    | $  312.43 | Demand: $250.24-$258.92 | Supply: $333.48-$344.33 | Dist: $ 53.51 (581% ATR) [ ] | RR: 1:0.34 | Fresh: D✓S✓
-249. GRMN   | $  293.58 | Demand: $230.86-$239.12 | Supply: $288.03-$309.92 | Dist: $ 54.46 (494% ATR) [ ] | RR: 1:-0.09 | Fresh: D✓S✗
-250. CME    | $  283.40 | Demand: $218.31-$225.72 | Supply: $282.87-$289.90 | Dist: $ 57.67 (1039% ATR) [ ] | RR: 1:-0.01 | Fresh: D✓S✗
-251. COR    | $  333.40 | Demand: $269.30-$274.12 | Supply: $317.96-$327.90 | Dist: $ 59.28 (641% ATR) [ ] | RR: 1:-0.24 | Fresh: D✓S✗
-252. IT     | $  198.73 | Demand: $124.25-$135.40 | Supply: $189.61-$203.03 | Dist: $ 63.33 (542% ATR) [ ] | RR: 1:-0.12 | Fresh: D✓S✗
-253. HCA    | $  456.75 | Demand: $385.13-$393.00 | Supply: $424.50-$436.50 | Dist: $ 63.75 (537% ATR) [ ] | RR: 1:-0.45 | Fresh: D✓S✗
-254. LH     | $  324.94 | Demand: $253.05-$260.32 | Supply: $318.57-$328.06 | Dist: $ 64.62 (846% ATR) [ ] | RR: 1:-0.09 | Fresh: D✓S✗
-255. VRSN   | $  317.10 | Demand: $244.74-$251.04 | Supply: $289.51-$303.00 | Dist: $ 66.06 (765% ATR) [ ] | RR: 1:-0.38 | Fresh: D✓S✗
-256. EXPE   | $  297.99 | Demand: $220.49-$229.74 | Supply: $312.75-$326.99 | Dist: $ 68.25 (471% ATR) [ ] | RR: 1:0.19 | Fresh: D✓S✓
-257. WDAY   | $  197.91 | Demand: $113.51-$120.50 | Supply: $189.31-$227.49 | Dist: $ 77.41 (592% ATR) [ ] | RR: 1:-0.10 | Fresh: D✓S✗
-258. DD     | $  129.62 | Demand: $47.40-$49.48 | Supply: $134.12-$138.60 | Dist: $ 80.14 (2006% ATR) [ ] | RR: 1:0.05 | Fresh: D✓S✓
-259. AMP    | $  547.31 | Demand: $459.17-$467.09 | Supply: $557.64-$572.56 | Dist: $ 80.22 (844% ATR) [ ] | RR: 1:0.12 | Fresh: D✓S✓
-260. CRM    | $  243.38 | Demand: $146.32-$154.47 | Supply: $245.89-$263.60 | Dist: $ 88.91 (1028% ATR) [ ] | RR: 1:0.03 | Fresh: D✓S✗
-261. PANW   | $  374.32 | Demand: $271.49-$281.98 | Supply: $375.93-$398.88 | Dist: $ 92.34 (649% ATR) [ ] | RR: 1:0.02 | Fresh: D✓S✗
-262. CRL    | $  290.00 | Demand: $178.92-$191.34 | Supply: $272.06-$285.94 | Dist: $ 98.66 (1004% ATR) [ ] | RR: 1:-0.16 | Fresh: D✓S✗
-263. META   | $  678.31 | Demand: $540.18-$572.20 | Supply: $626.00-$686.08 | Dist: $106.11 (483% ATR) [ ] | RR: 1:-0.38 | Fresh: D✓S✗
-264. BLK    | $ 1110.90 | Demand: $947.21-$1002.47 | Supply: $1145.08-$1186.74 | Dist: $108.43 (487% ATR) [ ] | RR: 1:0.21 | Fresh: D✓S✓
-265. ZBRA   | $  345.65 | Demand: $220.71-$228.77 | Supply: $373.38-$385.11 | Dist: $116.88 (749% ATR) [ ] | RR: 1:0.22 | Fresh: D✓S✓
-266. DE     | $  710.90 | Demand: $574.73-$593.35 | Supply: $668.00-$692.69 | Dist: $117.55 (740% ATR) [ ] | RR: 1:-0.32 | Fresh: D✓S✗
-267. VEEV   | $  275.10 | Demand: $150.39-$156.63 | Supply: $273.60-$296.24 | Dist: $118.47 (1402% ATR) [ ] | RR: 1:-0.01 | Fresh: D✓S✗
-268. REGN   | $  821.08 | Demand: $598.19-$616.24 | Supply: $792.00-$841.54 | Dist: $204.84 (952% ATR) [ ] | RR: 1:-0.13 | Fresh: D✓S✗
-269. MELI   | $ 1890.00 | Demand: $1565.98-$1673.50 | Supply: $1908.00-$2066.00 | Dist: $216.50 (332% ATR) [ ] | RR: 1:0.06 | Fresh: D✓S✓
-270. MTD    | $ 1479.43 | Demand: $1146.01-$1175.52 | Supply: $1421.68-$1457.56 | Dist: $303.91 (918% ATR) [ ] | RR: 1:-0.17 | Fresh: D✓S✗
+  1. EIX    | $   58.17 | Demand: $53.11-$68.94 | Supply: $73.96-$76.39 | Dist: $  0.00 (  0% ATR) [ ] | RR: 1:3.12 | Fresh: D✗S✓
+  2. LRCX   | $  284.52 | Demand: $250.50-$319.50 | Supply: $354.89-$393.07 | Dist: $  0.00 (  0% ATR) [ ] | RR: 1:2.07 | Fresh: D✗S✓
+  3. UAL    | $  113.29 | Demand: $104.15-$113.98 | Supply: $111.83-$124.79 | Dist: $  0.00 (  0% ATR) [ ] | RR: 1:-0.16 | Fresh: D✗S✗
+  4. CSGP   | $   31.18 | Demand: $28.54-$30.89 | Supply: $31.63-$34.06 | Dist: $  0.29 ( 18% ATR) [ ] | RR: 1:0.17 | Fresh: D✗S✓
+  5. HST    | $   23.03 | Demand: $21.51-$22.00 | Supply: $24.49-$24.89 | Dist: $  1.03 (159% ATR) [ ] | RR: 1:0.96 | Fresh: D✗S✓
+  6. EEM    | $   67.00 | Demand: $64.47-$65.56 | Supply: $67.08-$69.88 | Dist: $  1.44 (116% ATR) [ ] | RR: 1:0.03 | Fresh: D✗S✓
+  7. DOC    | $   21.63 | Demand: $19.31-$20.11 | Supply: $22.14-$22.72 | Dist: $  1.52 (320% ATR) [ ] | RR: 1:0.22 | Fresh: D✗S✓
+  8. VTRS   | $   18.04 | Demand: $16.15-$16.51 | Supply: $16.65-$17.67 | Dist: $  1.53 (299% ATR) [ ] | RR: 1:-0.74 | Fresh: D✓S✗
+  9. DOW    | $   30.91 | Demand: $28.23-$29.22 | Supply: $32.45-$33.39 | Dist: $  1.69 (158% ATR) [ ] | RR: 1:0.57 | Fresh: D✗S✓
+ 10. GEN    | $   31.76 | Demand: $29.55-$30.05 | Supply: $30.52-$31.50 | Dist: $  1.71 (179% ATR) [ ] | RR: 1:-0.56 | Fresh: D✓S✗
+ 11. JBL    | $  317.37 | Demand: $290.43-$315.63 | Supply: $374.77-$386.64 | Dist: $  1.74 ( 11% ATR) [ ] | RR: 1:2.13 | Fresh: D✗S✓
+ 12. NWSA   | $   31.62 | Demand: $29.07-$29.67 | Supply: $30.65-$31.66 | Dist: $  1.95 (228% ATR) [ ] | RR: 1:-0.38 | Fresh: D✓S✗
+ 13. CPRT   | $   31.18 | Demand: $28.68-$29.20 | Supply: $33.42-$34.62 | Dist: $  1.98 (189% ATR) [ ] | RR: 1:0.89 | Fresh: D✓S✓
+ 14. BSX    | $   45.91 | Demand: $42.80-$43.55 | Supply: $50.02-$52.34 | Dist: $  2.36 (127% ATR) [ ] | RR: 1:1.32 | Fresh: D✗S✓
+ 15. ORLY   | $   89.36 | Demand: $82.71-$86.78 | Supply: $89.57-$92.91 | Dist: $  2.58 (113% ATR) [ ] | RR: 1:0.03 | Fresh: D✗S✓
+ 16. GIS    | $   38.96 | Demand: $35.39-$36.38 | Supply: $40.66-$41.93 | Dist: $  2.58 (242% ATR) [ ] | RR: 1:0.48 | Fresh: D✓S✓
+ 17. KDP    | $   33.87 | Demand: $30.01-$31.15 | Supply: $32.58-$33.82 | Dist: $  2.72 (254% ATR) [ ] | RR: 1:-0.33 | Fresh: D✓S✗
+ 18. IP     | $   37.44 | Demand: $33.48-$34.63 | Supply: $36.22-$37.81 | Dist: $  2.81 (197% ATR) [ ] | RR: 1:-0.31 | Fresh: D✗S✗
+ 19. BAX    | $   25.46 | Demand: $21.89-$22.64 | Supply: $27.48-$28.38 | Dist: $  2.82 (211% ATR) [ ] | RR: 1:0.57 | Fresh: D✓S✓
+ 20. XLP    | $   86.16 | Demand: $82.77-$83.33 | Supply: $84.33-$87.88 | Dist: $  2.83 (206% ATR) [ ] | RR: 1:-0.54 | Fresh: D✗S✗
+ 21. MDLZ   | $   64.74 | Demand: $60.47-$61.89 | Supply: $62.24-$64.35 | Dist: $  2.85 (166% ATR) [ ] | RR: 1:-0.58 | Fresh: D✗S✗
+ 22. TRMB   | $   60.22 | Demand: $55.60-$57.18 | Supply: $54.71-$62.00 | Dist: $  3.04 (137% ATR) [ ] | RR: 1:-1.19 | Fresh: D✗S✗
+ 23. CMG    | $   35.34 | Demand: $31.64-$32.23 | Supply: $37.18-$39.09 | Dist: $  3.11 (204% ATR) [ ] | RR: 1:0.50 | Fresh: D✓S✓
+ 24. KHC    | $   25.95 | Demand: $22.00-$22.72 | Supply: $25.61-$27.13 | Dist: $  3.23 (379% ATR) [ ] | RR: 1:-0.08 | Fresh: D✓S✗
+ 25. IVZ    | $   32.67 | Demand: $27.86-$29.37 | Supply: $32.37-$33.65 | Dist: $  3.30 (353% ATR) [ ] | RR: 1:-0.06 | Fresh: D✓S✗
+ 26. EVRG   | $   85.15 | Demand: $79.85-$81.80 | Supply: $85.75-$88.62 | Dist: $  3.35 (235% ATR) [ ] | RR: 1:0.11 | Fresh: D✗S✓
+ 27. FISV   | $   52.50 | Demand: $47.23-$49.11 | Supply: $49.77-$55.36 | Dist: $  3.39 (139% ATR) [ ] | RR: 1:-0.52 | Fresh: D✗S✗
+ 28. BAC    | $   61.40 | Demand: $56.84-$57.75 | Supply: $63.71-$64.95 | Dist: $  3.65 (391% ATR) [ ] | RR: 1:0.51 | Fresh: D✗S✓
+ 29. HPQ    | $   36.07 | Demand: $30.89-$32.34 | Supply: $33.37-$36.23 | Dist: $  3.73 (239% ATR) [ ] | RR: 1:-0.52 | Fresh: D✓S✗
+ 30. BEN    | $   36.75 | Demand: $31.73-$32.89 | Supply: $35.20-$35.86 | Dist: $  3.86 (439% ATR) [ ] | RR: 1:-0.31 | Fresh: D✗S✗
+ 31. XLY    | $  114.58 | Demand: $108.29-$110.59 | Supply: $114.81-$119.51 | Dist: $  3.99 (232% ATR) [ ] | RR: 1:0.04 | Fresh: D✗S✓
+ 32. HAL    | $   35.76 | Demand: $30.98-$31.70 | Supply: $39.31-$40.41 | Dist: $  4.06 (428% ATR) [ ] | RR: 1:0.74 | Fresh: D✓S✓
+ 33. CFG    | $   71.03 | Demand: $64.93-$66.86 | Supply: $70.35-$72.46 | Dist: $  4.17 (321% ATR) [ ] | RR: 1:-0.11 | Fresh: D✗S✗
+ 34. KR     | $   63.71 | Demand: $55.65-$59.49 | Supply: $62.94-$64.98 | Dist: $  4.22 (300% ATR) [ ] | RR: 1:-0.10 | Fresh: D✓S✗
+ 35. SYY    | $   83.63 | Demand: $77.79-$79.08 | Supply: $83.03-$85.31 | Dist: $  4.55 (233% ATR) [ ] | RR: 1:-0.10 | Fresh: D✗S✗
+ 36. XYZ    | $   80.37 | Demand: $73.68-$75.75 | Supply: $82.08-$84.81 | Dist: $  4.62 (185% ATR) [ ] | RR: 1:0.26 | Fresh: D✓S✓
+ 37. WRB    | $   73.16 | Demand: $67.36-$68.42 | Supply: $74.87-$77.45 | Dist: $  4.74 (380% ATR) [ ] | RR: 1:0.29 | Fresh: D✓S✓
+ 38. BKR    | $   59.12 | Demand: $52.27-$54.35 | Supply: $57.24-$63.68 | Dist: $  4.77 (288% ATR) [ ] | RR: 1:-0.27 | Fresh: D✓S✗
+ 39. HSIC   | $   89.83 | Demand: $83.19-$84.95 | Supply: $87.06-$92.18 | Dist: $  4.88 (249% ATR) [ ] | RR: 1:-0.42 | Fresh: D✗S✗
+ 40. MO     | $   73.34 | Demand: $67.39-$68.39 | Supply: $72.85-$74.14 | Dist: $  4.95 (237% ATR) [ ] | RR: 1:-0.08 | Fresh: D✓S✗
+ 41. IBKR   | $   93.35 | Demand: $84.65-$88.30 | Supply: $92.16-$96.59 | Dist: $  5.05 (167% ATR) [ ] | RR: 1:-0.14 | Fresh: D✗S✗
+ 42. TXT    | $   84.89 | Demand: $78.12-$79.82 | Supply: $92.17-$95.03 | Dist: $  5.07 (194% ATR) [ ] | RR: 1:1.08 | Fresh: D✓S✓
+ 43. SCHW   | $  109.44 | Demand: $102.36-$104.29 | Supply: $110.41-$112.20 | Dist: $  5.15 (279% ATR) [ ] | RR: 1:0.14 | Fresh: D✗S✓
+ 44. PCAR   | $  123.74 | Demand: $116.31-$118.53 | Supply: $124.85-$128.25 | Dist: $  5.21 (160% ATR) [ ] | RR: 1:0.15 | Fresh: D✗S✓
+ 45. SMCI   | $   42.36 | Demand: $35.36-$37.12 | Supply: $38.15-$42.31 | Dist: $  5.24 (202% ATR) [ ] | RR: 1:-0.60 | Fresh: D✗S✗
+ 46. KO     | $   92.56 | Demand: $85.66-$87.29 | Supply: $88.60-$92.21 | Dist: $  5.27 (302% ATR) [ ] | RR: 1:-0.57 | Fresh: D✓S✗
+ 47. SW     | $   48.16 | Demand: $41.70-$42.83 | Supply: $45.64-$47.86 | Dist: $  5.33 (313% ATR) [ ] | RR: 1:-0.39 | Fresh: D✓S✗
+ 48. SLB    | $   55.08 | Demand: $48.30-$49.74 | Supply: $54.67-$60.46 | Dist: $  5.34 (320% ATR) [ ] | RR: 1:-0.06 | Fresh: D✓S✗
+ 49. FOXA   | $   68.45 | Demand: $61.36-$63.11 | Supply: $53.24-$68.85 | Dist: $  5.34 (269% ATR) [ ] | RR: 1:-2.14 | Fresh: D✓S✗
+ 50. AIG    | $   80.56 | Demand: $73.81-$75.19 | Supply: $75.89-$78.04 | Dist: $  5.37 (373% ATR) [ ] | RR: 1:-0.69 | Fresh: D✗S✗
+ 51. SWK    | $   93.87 | Demand: $84.86-$88.38 | Supply: $98.13-$103.65 | Dist: $  5.49 (186% ATR) [ ] | RR: 1:0.47 | Fresh: D✗S✓
+ 52. PAYX   | $  121.43 | Demand: $114.51-$115.81 | Supply: $125.56-$127.92 | Dist: $  5.62 (151% ATR) [ ] | RR: 1:0.60 | Fresh: D✗S✓
+ 53. FTV    | $   61.16 | Demand: $54.13-$55.34 | Supply: $60.39-$63.00 | Dist: $  5.82 (372% ATR) [ ] | RR: 1:-0.11 | Fresh: D✗S✗
+ 54. ABT    | $  107.88 | Demand: $94.99-$101.87 | Supply: $115.03-$117.34 | Dist: $  6.01 (227% ATR) [ ] | RR: 1:0.56 | Fresh: D✗S✓
+ 55. FLEX   | $  114.55 | Demand: $102.25-$108.26 | Supply: $148.36-$152.52 | Dist: $  6.29 ( 79% ATR) [ ] | RR: 1:2.75 | Fresh: D✗S✓
+ 56. HPE    | $   64.60 | Demand: $55.02-$58.14 | Supply: $58.90-$63.44 | Dist: $  6.46 (195% ATR) [ ] | RR: 1:-0.59 | Fresh: D✗S✗
+ 57. FCX    | $   73.97 | Demand: $65.57-$67.46 | Supply: $78.17-$80.24 | Dist: $  6.51 (248% ATR) [ ] | RR: 1:0.50 | Fresh: D✓S✓
+ 58. SLV    | $   60.84 | Demand: $53.58-$54.27 | Supply: $59.87-$61.83 | Dist: $  6.57 (378% ATR) [ ] | RR: 1:-0.13 | Fresh: D✓S✗
+ 59. CTVA   | $   86.06 | Demand: $78.40-$79.48 | Supply: $89.20-$90.97 | Dist: $  6.58 (256% ATR) [ ] | RR: 1:0.41 | Fresh: D✓S✓
+ 60. ZBH    | $  100.67 | Demand: $91.45-$94.05 | Supply: $99.21-$101.98 | Dist: $  6.62 (211% ATR) [ ] | RR: 1:-0.16 | Fresh: D✓S✗
+ 61. EW     | $   92.73 | Demand: $84.47-$86.03 | Supply: $89.33-$92.88 | Dist: $  6.70 (326% ATR) [ ] | RR: 1:-0.41 | Fresh: D✗S✗
+ 62. BMY    | $   66.07 | Demand: $56.78-$59.14 | Supply: $64.74-$68.64 | Dist: $  6.93 (370% ATR) [ ] | RR: 1:-0.14 | Fresh: D✓S✗
+ 63. SYF    | $   78.79 | Demand: $70.65-$71.81 | Supply: $79.85-$81.92 | Dist: $  6.98 (424% ATR) [ ] | RR: 1:0.13 | Fresh: D✓S✓
+ 64. IFF    | $   89.57 | Demand: $80.86-$82.46 | Supply: $85.88-$88.64 | Dist: $  7.11 (311% ATR) [ ] | RR: 1:-0.42 | Fresh: D✓S✗
+ 65. WMT    | $  113.40 | Demand: $105.16-$106.14 | Supply: $115.09-$118.58 | Dist: $  7.26 (286% ATR) [ ] | RR: 1:0.21 | Fresh: D✓S✓
+ 66. VTR    | $   93.45 | Demand: $83.56-$85.69 | Supply: $91.47-$94.60 | Dist: $  7.76 (284% ATR) [ ] | RR: 1:-0.20 | Fresh: D✓S✗
+ 67. RDDT   | $  159.26 | Demand: $135.22-$151.38 | Supply: $174.72-$182.41 | Dist: $  7.88 ( 67% ATR) [ ] | RR: 1:0.64 | Fresh: D✗S✓
+ 68. DXCM   | $   92.70 | Demand: $82.29-$84.81 | Supply: $91.03-$92.59 | Dist: $  7.89 (250% ATR) [ ] | RR: 1:-0.16 | Fresh: D✓S✗
+ 69. HOOD   | $  113.69 | Demand: $100.68-$105.47 | Supply: $111.02-$121.42 | Dist: $  8.22 (178% ATR) [ ] | RR: 1:-0.21 | Fresh: D✗S✗
+ 70. DLTR   | $  118.61 | Demand: $105.22-$110.29 | Supply: $132.28-$137.07 | Dist: $  8.32 (280% ATR) [ ] | RR: 1:1.02 | Fresh: D✓S✓
+ 71. ACGL   | $  101.28 | Demand: $90.91-$92.74 | Supply: $101.03-$105.09 | Dist: $  8.54 (437% ATR) [ ] | RR: 1:-0.02 | Fresh: D✓S✗
+ 72. SOLV   | $   92.55 | Demand: $81.22-$83.69 | Supply: $88.83-$94.12 | Dist: $  8.86 (295% ATR) [ ] | RR: 1:-0.33 | Fresh: D✓S✗
+ 73. HAS    | $   97.91 | Demand: $86.70-$88.73 | Supply: $93.04-$97.00 | Dist: $  9.18 (381% ATR) [ ] | RR: 1:-0.43 | Fresh: D✓S✗
+ 74. DHI    | $  146.99 | Demand: $133.88-$137.60 | Supply: $152.17-$155.62 | Dist: $  9.39 (207% ATR) [ ] | RR: 1:0.39 | Fresh: D✗S✓
+ 75. VLTO   | $  100.85 | Demand: $89.35-$91.37 | Supply: $96.93-$102.25 | Dist: $  9.48 (410% ATR) [ ] | RR: 1:-0.34 | Fresh: D✓S✗
+ 76. OKE    | $   97.33 | Demand: $83.48-$87.73 | Supply: $94.96-$99.30 | Dist: $  9.60 (388% ATR) [ ] | RR: 1:-0.17 | Fresh: D✓S✗
+ 77. PTC    | $  140.54 | Demand: $126.79-$130.89 | Supply: $151.35-$156.03 | Dist: $  9.65 (169% ATR) [ ] | RR: 1:0.79 | Fresh: D✗S✓
+ 78. L      | $  117.72 | Demand: $106.58-$107.95 | Supply: $115.78-$119.10 | Dist: $  9.77 (588% ATR) [ ] | RR: 1:-0.17 | Fresh: D✗S✗
+ 79. GLW    | $  156.11 | Demand: $139.25-$146.33 | Supply: $173.41-$190.00 | Dist: $  9.78 ( 82% ATR) [ ] | RR: 1:1.03 | Fresh: D✗S✓
+ 80. NFLX   | $   79.33 | Demand: $65.08-$69.49 | Supply: $77.46-$81.02 | Dist: $  9.84 (444% ATR) [ ] | RR: 1:-0.13 | Fresh: D✓S✗
+ 81. PRU    | $  125.48 | Demand: $113.64-$115.52 | Supply: $124.38-$126.33 | Dist: $  9.96 (421% ATR) [ ] | RR: 1:-0.09 | Fresh: D✗S✗
+ 82. DG     | $  133.89 | Demand: $120.44-$123.81 | Supply: $130.64-$133.76 | Dist: $ 10.08 (325% ATR) [ ] | RR: 1:-0.24 | Fresh: D✗S✗
+ 83. HONA   | $  175.05 | Demand: $158.10-$164.62 | Supply: $269.95-$297.50 | Dist: $ 10.43 ( 83% ATR) [ ] | RR: 1:5.60 | Fresh: D✗S✓
+ 84. KKR    | $  108.05 | Demand: $94.13-$97.50 | Supply: $109.10-$116.57 | Dist: $ 10.55 (267% ATR) [ ] | RR: 1:0.08 | Fresh: D✗S✓
+ 85. ICE    | $  162.51 | Demand: $149.42-$151.90 | Supply: $161.05-$164.66 | Dist: $ 10.61 (294% ATR) [ ] | RR: 1:-0.11 | Fresh: D✓S✗
+ 86. BRO    | $   69.76 | Demand: $58.05-$59.11 | Supply: $71.87-$75.63 | Dist: $ 10.65 (475% ATR) [ ] | RR: 1:0.18 | Fresh: D✓S✓
+ 87. ORCL   | $  157.20 | Demand: $139.00-$146.52 | Supply: $179.00-$195.32 | Dist: $ 10.68 (144% ATR) [ ] | RR: 1:1.20 | Fresh: D✗S✓
+ 88. PODD   | $  146.66 | Demand: $131.24-$135.57 | Supply: $148.02-$160.92 | Dist: $ 11.09 (135% ATR) [ ] | RR: 1:0.09 | Fresh: D✓S✓
+ 89. GDDY   | $  105.47 | Demand: $91.60-$94.31 | Supply: $101.60-$104.90 | Dist: $ 11.16 (183% ATR) [ ] | RR: 1:-0.28 | Fresh: D✓S✗
+ 90. XLK    | $  193.06 | Demand: $178.81-$181.88 | Supply: $181.64-$192.08 | Dist: $ 11.18 (231% ATR) [ ] | RR: 1:-0.80 | Fresh: D✓S✗
+ 91. TSLA   | $  373.94 | Demand: $354.05-$362.39 | Supply: $386.76-$416.00 | Dist: $ 11.55 (104% ATR) [ ] | RR: 1:0.64 | Fresh: D✗S✓
+ 92. NOW    | $  146.37 | Demand: $130.39-$134.45 | Supply: $137.80-$149.60 | Dist: $ 11.92 (183% ATR) [ ] | RR: 1:-0.54 | Fresh: D✓S✗
+ 93. GM     | $   92.06 | Demand: $74.80-$80.10 | Supply: $83.76-$91.15 | Dist: $ 11.96 (524% ATR) [ ] | RR: 1:-0.48 | Fresh: D✓S✗
+ 94. SJM    | $  131.25 | Demand: $115.81-$119.26 | Supply: $122.86-$128.86 | Dist: $ 11.99 (419% ATR) [ ] | RR: 1:-0.54 | Fresh: D✓S✗
+ 95. ADM    | $   91.71 | Demand: $75.86-$79.64 | Supply: $86.07-$88.75 | Dist: $ 12.07 (524% ATR) [ ] | RR: 1:-0.36 | Fresh: D✓S✗
+ 96. APO    | $  133.45 | Demand: $116.57-$121.30 | Supply: $134.46-$141.73 | Dist: $ 12.15 (247% ATR) [ ] | RR: 1:0.06 | Fresh: D✓S✓
+ 97. PG     | $  155.72 | Demand: $141.86-$143.51 | Supply: $150.55-$153.02 | Dist: $ 12.21 (371% ATR) [ ] | RR: 1:-0.37 | Fresh: D✓S✗
+ 98. CTAS   | $  208.95 | Demand: $186.00-$196.69 | Supply: $196.69-$207.09 | Dist: $ 12.26 (284% ATR) [ ] | RR: 1:-0.53 | Fresh: D✗S✗
+ 99. CHRW   | $  159.90 | Demand: $144.02-$147.63 | Supply: $191.75-$195.00 | Dist: $ 12.27 (173% ATR) [ ] | RR: 1:2.01 | Fresh: D✓S✓
+100. PM     | $  199.71 | Demand: $181.01-$187.36 | Supply: $188.95-$202.57 | Dist: $ 12.35 (267% ATR) [ ] | RR: 1:-0.58 | Fresh: D✓S✗
+101. CAH    | $  238.61 | Demand: $220.54-$226.01 | Supply: $238.41-$245.83 | Dist: $ 12.60 (193% ATR) [ ] | RR: 1:-0.01 | Fresh: D✓S✗
+102. NTRS   | $  188.70 | Demand: $172.25-$176.00 | Supply: $187.73-$191.47 | Dist: $ 12.70 (413% ATR) [ ] | RR: 1:-0.06 | Fresh: D✗S✗
+103. VST    | $  152.01 | Demand: $134.90-$139.28 | Supply: $159.14-$171.35 | Dist: $ 12.73 (196% ATR) [ ] | RR: 1:0.42 | Fresh: D✓S✓
+104. SPCX   | $  161.58 | Demand: $142.87-$148.54 | Supply: $193.00-$225.64 | Dist: $ 13.04 (121% ATR) [ ] | RR: 1:1.68 | Fresh: D✗S✓
+105. CDW    | $  158.65 | Demand: $140.91-$145.58 | Supply: $149.16-$158.04 | Dist: $ 13.07 (173% ATR) [ ] | RR: 1:-0.53 | Fresh: D✓S✗
+106. VRSK   | $  187.79 | Demand: $168.18-$174.50 | Supply: $187.63-$203.03 | Dist: $ 13.29 (169% ATR) [ ] | RR: 1:-0.01 | Fresh: D✓S✗
+107. BG     | $  132.30 | Demand: $109.82-$118.34 | Supply: $124.14-$129.43 | Dist: $ 13.96 (406% ATR) [ ] | RR: 1:-0.36 | Fresh: D✗S✗
+108. COF    | $  214.28 | Demand: $195.89-$200.30 | Supply: $221.19-$228.14 | Dist: $ 13.98 (323% ATR) [ ] | RR: 1:0.38 | Fresh: D✓S✓
+109. JKHY   | $  167.07 | Demand: $149.19-$152.68 | Supply: $167.97-$174.99 | Dist: $ 14.39 (333% ATR) [ ] | RR: 1:0.05 | Fresh: D✗S✓
+110. MSTR   | $  139.20 | Demand: $121.38-$124.66 | Supply: $135.38-$144.92 | Dist: $ 14.54 (287% ATR) [ ] | RR: 1:-0.21 | Fresh: D✗S✗
+111. PKG    | $  247.80 | Demand: $222.74-$233.14 | Supply: $250.29-$256.44 | Dist: $ 14.66 (314% ATR) [ ] | RR: 1:0.10 | Fresh: D✗S✓
+112. TRI    | $  114.19 | Demand: $95.66-$99.00 | Supply: $105.25-$112.77 | Dist: $ 15.19 (252% ATR) [ ] | RR: 1:-0.48 | Fresh: D✗S✗
+113. INTC   | $  114.30 | Demand: $94.52-$98.86 | Supply: $126.66-$132.61 | Dist: $ 15.44 (226% ATR) [ ] | RR: 1:0.62 | Fresh: D✓S✓
+114. BX     | $  134.59 | Demand: $116.80-$119.14 | Supply: $141.71-$148.36 | Dist: $ 15.45 (328% ATR) [ ] | RR: 1:0.40 | Fresh: D✓S✓
+115. LDOS   | $  145.53 | Demand: $126.76-$129.83 | Supply: $140.02-$147.33 | Dist: $ 15.70 (321% ATR) [ ] | RR: 1:-0.29 | Fresh: D✗S✗
+116. CHTR   | $  141.60 | Demand: $111.55-$125.74 | Supply: $138.83-$168.11 | Dist: $ 15.86 (220% ATR) [ ] | RR: 1:-0.09 | Fresh: D✓S✗
+117. EFX    | $  171.01 | Demand: $150.75-$155.07 | Supply: $162.91-$172.10 | Dist: $ 15.94 (257% ATR) [ ] | RR: 1:-0.40 | Fresh: D✓S✗
+118. HON    | $  217.51 | Demand: $196.98-$201.54 | Supply: $226.89-$232.88 | Dist: $ 15.97 (253% ATR) [ ] | RR: 1:0.46 | Fresh: D✓S✓
+119. TXN    | $  270.94 | Demand: $248.13-$254.57 | Supply: $295.85-$315.86 | Dist: $ 16.37 (164% ATR) [ ] | RR: 1:1.09 | Fresh: D✓S✓
+120. FANG   | $  205.54 | Demand: $184.79-$189.07 | Supply: $209.15-$216.90 | Dist: $ 16.47 (271% ATR) [ ] | RR: 1:0.17 | Fresh: D✓S✓
+121. VRT    | $  258.09 | Demand: $226.94-$241.30 | Supply: $295.10-$305.19 | Dist: $ 16.79 ( 91% ATR) [ ] | RR: 1:1.19 | Fresh: D✗S✓
+122. WSM    | $  231.21 | Demand: $206.94-$213.85 | Supply: $222.75-$230.95 | Dist: $ 17.36 (294% ATR) [ ] | RR: 1:-0.35 | Fresh: D✓S✗
+123. IBM    | $  250.81 | Demand: $230.20-$233.40 | Supply: $267.68-$278.94 | Dist: $ 17.41 (247% ATR) [ ] | RR: 1:0.82 | Fresh: D✓S✓
+124. NEM    | $  131.52 | Demand: $110.00-$113.77 | Supply: $128.69-$132.34 | Dist: $ 17.76 (421% ATR) [ ] | RR: 1:-0.13 | Fresh: D✓S✗
+125. MMM    | $  174.30 | Demand: $153.56-$156.49 | Supply: $178.97-$184.90 | Dist: $ 17.81 (500% ATR) [ ] | RR: 1:0.23 | Fresh: D✓S✓
+126. CCEP   | $  116.02 | Demand: $95.96-$98.07 | Supply: $108.85-$113.67 | Dist: $ 17.95 (745% ATR) [ ] | RR: 1:-0.36 | Fresh: D✓S✗
+127. TGT    | $  167.91 | Demand: $145.50-$149.80 | Supply: $154.50-$170.75 | Dist: $ 18.11 (491% ATR) [ ] | RR: 1:-0.60 | Fresh: D✓S✗
+128. GL     | $  181.81 | Demand: $159.81-$163.50 | Supply: $182.10-$186.10 | Dist: $ 18.31 (536% ATR) [ ] | RR: 1:0.01 | Fresh: D✓S✓
+129. QCOM   | $  200.23 | Demand: $170.51-$181.71 | Supply: $200.10-$226.46 | Dist: $ 18.52 (272% ATR) [ ] | RR: 1:-0.00 | Fresh: D✓S✗
+130. COR    | $  327.16 | Demand: $301.23-$308.33 | Supply: $317.96-$327.90 | Dist: $ 18.83 (193% ATR) [ ] | RR: 1:-0.35 | Fresh: D✓S✗
+131. ADSK   | $  231.03 | Demand: $206.33-$212.03 | Supply: $242.86-$259.36 | Dist: $ 19.00 (197% ATR) [ ] | RR: 1:0.48 | Fresh: D✓S✓
+132. RTX    | $  205.03 | Demand: $180.97-$185.71 | Supply: $209.26-$220.39 | Dist: $ 19.32 (462% ATR) [ ] | RR: 1:0.18 | Fresh: D✓S✓
+133. DASH   | $  204.94 | Demand: $177.29-$185.55 | Supply: $227.00-$238.52 | Dist: $ 19.39 (255% ATR) [ ] | RR: 1:0.80 | Fresh: D✓S✓
+134. NTAP   | $  205.94 | Demand: $182.23-$186.16 | Supply: $200.62-$207.96 | Dist: $ 19.78 (259% ATR) [ ] | RR: 1:-0.22 | Fresh: D✓S✗
+135. STLD   | $  255.91 | Demand: $229.04-$236.11 | Supply: $279.65-$285.88 | Dist: $ 19.80 (256% ATR) [ ] | RR: 1:0.88 | Fresh: D✗S✓
+136. RJF    | $  170.91 | Demand: $146.64-$151.02 | Supply: $174.35-$181.40 | Dist: $ 19.89 (673% ATR) [ ] | RR: 1:0.14 | Fresh: D✓S✓
+137. CME    | $  283.40 | Demand: $256.83-$263.39 | Supply: $282.87-$289.90 | Dist: $ 20.01 (360% ATR) [ ] | RR: 1:-0.02 | Fresh: D✓S✗
+138. MRSH   | $  184.41 | Demand: $160.00-$164.24 | Supply: $180.87-$198.49 | Dist: $ 20.17 (476% ATR) [ ] | RR: 1:-0.15 | Fresh: D✓S✗
+139. CEG    | $  274.67 | Demand: $244.95-$254.29 | Supply: $292.75-$305.80 | Dist: $ 20.38 (207% ATR) [ ] | RR: 1:0.61 | Fresh: D✓S✓
+140. INTU   | $  330.65 | Demand: $299.63-$310.12 | Supply: $358.38-$372.98 | Dist: $ 20.53 (136% ATR) [ ] | RR: 1:0.89 | Fresh: D✓S✓
+141. NDSN   | $  331.80 | Demand: $302.92-$311.00 | Supply: $328.87-$339.12 | Dist: $ 20.80 (437% ATR) [ ] | RR: 1:-0.10 | Fresh: D✗S✗
+142. RMD    | $  242.21 | Demand: $215.80-$221.25 | Supply: $235.01-$241.71 | Dist: $ 20.96 (276% ATR) [ ] | RR: 1:-0.27 | Fresh: D✓S✗
+143. ROP    | $  390.24 | Demand: $354.17-$369.15 | Supply: $393.65-$419.21 | Dist: $ 21.09 (170% ATR) [ ] | RR: 1:0.09 | Fresh: D✓S✓
+144. ADBE   | $  263.48 | Demand: $229.79-$242.05 | Supply: $285.48-$294.53 | Dist: $ 21.43 (177% ATR) [ ] | RR: 1:0.65 | Fresh: D✓S✓
+145. CI     | $  293.95 | Demand: $263.11-$272.52 | Supply: $284.11-$295.72 | Dist: $ 21.43 (253% ATR) [ ] | RR: 1:-0.32 | Fresh: D✓S✗
+146. WDAY   | $  208.83 | Demand: $183.53-$187.25 | Supply: $189.31-$227.49 | Dist: $ 21.59 (167% ATR) [ ] | RR: 1:-0.77 | Fresh: D✗S✗
+147. ALL    | $  265.61 | Demand: $236.22-$243.84 | Supply: $258.90-$277.22 | Dist: $ 21.77 (301% ATR) [ ] | RR: 1:-0.23 | Fresh: D✓S✗
+148. SYK    | $  298.80 | Demand: $267.00-$277.00 | Supply: $329.25-$334.75 | Dist: $ 21.80 (207% ATR) [ ] | RR: 1:0.96 | Fresh: D✓S✓
+149. ECL    | $  288.30 | Demand: $261.50-$265.47 | Supply: $275.72-$286.46 | Dist: $ 22.83 (387% ATR) [ ] | RR: 1:-0.47 | Fresh: D✓S✗
+150. DPZ    | $  317.27 | Demand: $282.00-$294.36 | Supply: $362.21-$372.16 | Dist: $ 22.91 (204% ATR) [ ] | RR: 1:1.27 | Fresh: D✓S✓
+151. A      | $  167.25 | Demand: $141.25-$144.15 | Supply: $152.12-$160.51 | Dist: $ 23.10 (813% ATR) [ ] | RR: 1:-0.58 | Fresh: D✓S✗
+152. DVA    | $  202.26 | Demand: $175.47-$179.04 | Supply: $204.06-$211.80 | Dist: $ 23.22 (254% ATR) [ ] | RR: 1:0.07 | Fresh: D✓S✓
+153. EXPE   | $  297.99 | Demand: $261.43-$274.37 | Supply: $312.75-$326.99 | Dist: $ 23.62 (176% ATR) [ ] | RR: 1:0.40 | Fresh: D✓S✓
+154. SHOP   | $  145.90 | Demand: $115.27-$122.25 | Supply: $145.60-$155.62 | Dist: $ 23.65 (303% ATR) [ ] | RR: 1:-0.01 | Fresh: D✓S✗
+155. DHR    | $  228.04 | Demand: $199.09-$203.81 | Supply: $208.21-$220.67 | Dist: $ 24.23 (437% ATR) [ ] | RR: 1:-0.68 | Fresh: D✓S✗
+156. ALLE   | $  164.24 | Demand: $134.63-$139.12 | Supply: $156.83-$164.25 | Dist: $ 25.12 (677% ATR) [ ] | RR: 1:-0.25 | Fresh: D✓S✗
+157. ADI    | $  383.07 | Demand: $348.00-$357.27 | Supply: $406.40-$433.00 | Dist: $ 25.80 (212% ATR) [ ] | RR: 1:0.67 | Fresh: D✓S✓
+158. DRI    | $  230.90 | Demand: $200.03-$204.71 | Supply: $222.37-$229.76 | Dist: $ 26.19 (505% ATR) [ ] | RR: 1:-0.28 | Fresh: D✓S✗
+159. AVY    | $  194.25 | Demand: $165.39-$167.88 | Supply: $172.05-$181.94 | Dist: $ 26.37 (490% ATR) [ ] | RR: 1:-0.77 | Fresh: D✓S✗
+160. IEX    | $  248.37 | Demand: $215.51-$221.62 | Supply: $224.71-$231.70 | Dist: $ 26.75 (504% ATR) [ ] | RR: 1:-0.72 | Fresh: D✗S✗
+161. TRV    | $  394.62 | Demand: $359.87-$367.58 | Supply: $386.66-$398.69 | Dist: $ 27.04 (359% ATR) [ ] | RR: 1:-0.23 | Fresh: D✓S✗
+162. VEEV   | $  275.10 | Demand: $238.93-$247.70 | Supply: $273.60-$296.24 | Dist: $ 27.40 (330% ATR) [ ] | RR: 1:-0.04 | Fresh: D✓S✗
+163. MRVL   | $  252.21 | Demand: $213.63-$224.10 | Supply: $267.31-$312.98 | Dist: $ 28.11 (173% ATR) [ ] | RR: 1:0.39 | Fresh: D✓S✓
+164. CRL    | $  304.47 | Demand: $269.93-$276.09 | Supply: $272.06-$285.94 | Dist: $ 28.38 (287% ATR) [ ] | RR: 1:-0.94 | Fresh: D✗S✗
+165. BR     | $  188.44 | Demand: $156.47-$159.72 | Supply: $178.22-$186.91 | Dist: $ 28.72 (442% ATR) [ ] | RR: 1:-0.32 | Fresh: D✓S✗
+166. ROST   | $  243.08 | Demand: $209.00-$214.17 | Supply: $239.16-$242.81 | Dist: $ 28.91 (656% ATR) [ ] | RR: 1:-0.12 | Fresh: D✓S✗
+167. IT     | $  202.91 | Demand: $166.01-$172.70 | Supply: $189.61-$203.03 | Dist: $ 30.21 (262% ATR) [ ] | RR: 1:-0.36 | Fresh: D✓S✗
+168. CRWD   | $  269.66 | Demand: $216.05-$239.37 | Supply: $668.86-$702.17 | Dist: $ 30.29 (340% ATR) [ ] | RR: 1:7.45 | Fresh: D✗S✓
+169. GRMN   | $  303.95 | Demand: $269.71-$273.56 | Supply: $288.03-$309.92 | Dist: $ 30.39 (279% ATR) [ ] | RR: 1:-0.46 | Fresh: D✓S✗
+170. CB     | $  360.50 | Demand: $322.00-$329.95 | Supply: $349.60-$365.29 | Dist: $ 30.55 (530% ATR) [ ] | RR: 1:-0.28 | Fresh: D✓S✗
+171. ERIE   | $  275.17 | Demand: $235.95-$244.37 | Supply: $260.17-$271.47 | Dist: $ 30.80 (330% ATR) [ ] | RR: 1:-0.38 | Fresh: D✗S✗
+172. AMZN   | $  263.70 | Demand: $226.16-$232.82 | Supply: $273.23-$287.20 | Dist: $ 30.88 (317% ATR) [ ] | RR: 1:0.25 | Fresh: D✓S✓
+173. COIN   | $  182.47 | Demand: $146.02-$150.73 | Supply: $178.33-$195.85 | Dist: $ 31.74 (376% ATR) [ ] | RR: 1:-0.11 | Fresh: D✓S✗
+174. UNP    | $  294.62 | Demand: $255.22-$262.64 | Supply: $298.10-$303.15 | Dist: $ 31.98 (621% ATR) [ ] | RR: 1:0.09 | Fresh: D✓S✓
+175. ISRG   | $  406.51 | Demand: $363.56-$374.48 | Supply: $399.29-$418.24 | Dist: $ 32.03 (321% ATR) [ ] | RR: 1:-0.17 | Fresh: D✓S✗
+176. SHW    | $  347.82 | Demand: $301.10-$315.79 | Supply: $344.36-$353.61 | Dist: $ 32.03 (323% ATR) [ ] | RR: 1:-0.07 | Fresh: D✓S✗
+177. EG     | $  402.98 | Demand: $361.70-$370.01 | Supply: $380.20-$388.02 | Dist: $ 32.97 (416% ATR) [ ] | RR: 1:-0.55 | Fresh: D✓S✗
+178. GOOGL  | $  366.22 | Demand: $327.74-$333.23 | Supply: $358.67-$372.33 | Dist: $ 32.99 (287% ATR) [ ] | RR: 1:-0.20 | Fresh: D✓S✗
+179. GOOG   | $  362.38 | Demand: $325.63-$329.34 | Supply: $339.71-$358.20 | Dist: $ 33.04 (302% ATR) [ ] | RR: 1:-0.62 | Fresh: D✓S✗
+180. CIEN   | $  365.95 | Demand: $318.43-$332.32 | Supply: $424.33-$463.55 | Dist: $ 33.63 (107% ATR) [ ] | RR: 1:1.23 | Fresh: D✗S✓
+181. NSC    | $  342.86 | Demand: $297.45-$308.87 | Supply: $337.72-$342.53 | Dist: $ 33.99 (632% ATR) [ ] | RR: 1:-0.11 | Fresh: D✓S✗
+182. MCO    | $  486.32 | Demand: $437.51-$451.85 | Supply: $495.75-$519.09 | Dist: $ 34.47 (373% ATR) [ ] | RR: 1:0.19 | Fresh: D✓S✓
+183. TYL    | $  374.83 | Demand: $333.34-$340.31 | Supply: $343.80-$380.87 | Dist: $ 34.52 (250% ATR) [ ] | RR: 1:-0.75 | Fresh: D✗S✗
+184. TER    | $  373.48 | Demand: $326.37-$338.48 | Supply: $380.00-$437.77 | Dist: $ 35.00 (119% ATR) [ ] | RR: 1:0.14 | Fresh: D✗S✓
+185. GLD    | $  412.29 | Demand: $373.71-$376.69 | Supply: $418.43-$428.14 | Dist: $ 35.60 (487% ATR) [ ] | RR: 1:0.16 | Fresh: D✓S✓
+186. GD     | $  384.30 | Demand: $340.81-$348.18 | Supply: $354.57-$377.27 | Dist: $ 36.12 (501% ATR) [ ] | RR: 1:-0.68 | Fresh: D✓S✗
+187. QQQ    | $  716.42 | Demand: $661.14-$680.05 | Supply: $711.28-$744.76 | Dist: $ 36.37 (282% ATR) [ ] | RR: 1:-0.09 | Fresh: D✓S✗
+188. LMT    | $  558.04 | Demand: $512.00-$521.00 | Supply: $527.01-$550.86 | Dist: $ 37.04 (268% ATR) [ ] | RR: 1:-0.67 | Fresh: D✗S✗
+189. HUM    | $  405.79 | Demand: $353.69-$367.92 | Supply: $386.83-$419.97 | Dist: $ 37.87 (255% ATR) [ ] | RR: 1:-0.36 | Fresh: D✓S✗
+190. NOC    | $  552.76 | Demand: $479.02-$514.14 | Supply: $503.68-$553.50 | Dist: $ 38.62 (330% ATR) [ ] | RR: 1:-0.67 | Fresh: D✓S✗
+191. PANW   | $  391.30 | Demand: $321.39-$350.67 | Supply: $375.93-$398.88 | Dist: $ 40.63 (284% ATR) [ ] | RR: 1:-0.22 | Fresh: D✓S✗
+192. CBOE   | $  287.23 | Demand: $227.15-$246.25 | Supply: $294.59-$308.84 | Dist: $ 40.98 (428% ATR) [ ] | RR: 1:0.12 | Fresh: D✓S✓
+193. CAT    | $  838.53 | Demand: $771.39-$793.94 | Supply: $970.05-$1057.07 | Dist: $ 44.59 (122% ATR) [ ] | RR: 1:1.96 | Fresh: D✗S✓
+194. CRM    | $  257.15 | Demand: $198.95-$206.44 | Supply: $245.89-$263.60 | Dist: $ 50.71 (613% ATR) [ ] | RR: 1:-0.19 | Fresh: D✓S✗
+195. AXON   | $  481.52 | Demand: $402.00-$428.05 | Supply: $623.96-$665.07 | Dist: $ 53.47 (133% ATR) [ ] | RR: 1:1.79 | Fresh: D✓S✓
+196. WTW    | $  347.24 | Demand: $283.77-$291.23 | Supply: $333.48-$344.33 | Dist: $ 56.01 (633% ATR) [ ] | RR: 1:-0.22 | Fresh: D✓S✗
+197. PH     | $  972.63 | Demand: $875.60-$916.18 | Supply: $955.48-$982.40 | Dist: $ 56.45 (219% ATR) [ ] | RR: 1:-0.18 | Fresh: D✗S✗
+198. AJG    | $  273.18 | Demand: $208.08-$216.12 | Supply: $242.70-$258.39 | Dist: $ 57.06 (752% ATR) [ ] | RR: 1:-0.47 | Fresh: D✓S✗
+199. STX    | $  836.96 | Demand: $698.99-$777.10 | Supply: $946.24-$1032.52 | Dist: $ 59.86 ( 79% ATR) [ ] | RR: 1:0.79 | Fresh: D✗S✓
+200. CPAY   | $  450.03 | Demand: $374.74-$382.78 | Supply: $407.48-$416.13 | Dist: $ 67.25 (587% ATR) [ ] | RR: 1:-0.57 | Fresh: D✓S✗
+201. URI    | $ 1065.77 | Demand: $981.29-$995.65 | Supply: $1111.69-$1143.69 | Dist: $ 70.12 (237% ATR) [ ] | RR: 1:0.54 | Fresh: D✗S✓
+202. LLY    | $ 1208.55 | Demand: $1109.16-$1135.83 | Supply: $1203.14-$1238.00 | Dist: $ 72.72 (172% ATR) [ ] | RR: 1:-0.05 | Fresh: D✗S✗
+203. AMD    | $  571.44 | Demand: $480.33-$498.39 | Supply: $490.46-$558.37 | Dist: $ 73.05 (221% ATR) [ ] | RR: 1:-0.89 | Fresh: D✓S✗
+204. MU     | $ 1022.48 | Demand: $917.64-$941.20 | Supply: $960.19-$1097.47 | Dist: $ 81.28 (109% ATR) [ ] | RR: 1:-0.59 | Fresh: D✗S✗
+205. HCA    | $  456.75 | Demand: $366.51-$374.18 | Supply: $424.50-$436.50 | Dist: $ 82.57 (705% ATR) [ ] | RR: 1:-0.36 | Fresh: D✓S✗
+206. LITE   | $  944.65 | Demand: $832.11-$856.00 | Supply: $914.65-$994.50 | Dist: $ 88.65 (101% ATR) [ ] | RR: 1:-0.27 | Fresh: D✓S✗
+207. MSI    | $  508.28 | Demand: $401.58-$411.39 | Supply: $466.48-$478.84 | Dist: $ 96.89 (770% ATR) [ ] | RR: 1:-0.39 | Fresh: D✓S✗
+208. ZBRA   | $  365.57 | Demand: $250.32-$260.73 | Supply: $373.38-$385.11 | Dist: $104.84 (670% ATR) [ ] | RR: 1:0.07 | Fresh: D✓S✓
+209. EME    | $  817.36 | Demand: $668.82-$711.08 | Supply: $811.44-$853.02 | Dist: $106.28 (305% ATR) [ ] | RR: 1:-0.04 | Fresh: D✓S✗
+210. FIX    | $ 1679.22 | Demand: $1505.73-$1549.31 | Supply: $1845.19-$1993.69 | Dist: $129.91 (130% ATR) [ ] | RR: 1:0.96 | Fresh: D✓S✓
+211. ASML   | $ 1868.57 | Demand: $1530.64-$1621.46 | Supply: $1839.00-$1913.70 | Dist: $247.11 (351% ATR) [ ] | RR: 1:-0.09 | Fresh: D✗S✗
+212. MTD    | $ 1553.40 | Demand: $1266.55-$1296.65 | Supply: $1421.68-$1457.56 | Dist: $256.75 (764% ATR) [ ] | RR: 1:-0.46 | Fresh: D✓S✗
+213. MELI   | $ 2085.86 | Demand: $1759.21-$1813.99 | Supply: $1908.00-$2066.00 | Dist: $271.87 (420% ATR) [ ] | RR: 1:-0.54 | Fresh: D✗S✗
 
 ========================================================================================================================
 LEGEND:

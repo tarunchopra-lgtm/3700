@@ -3,27 +3,27 @@ TICKER: MRVL
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $242.59
-  ATR (14-day): $17.10
+  Price:        $252.21
+  ATR (14-day): $16.26
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $186.15 - $201.94
-  Size:         $15.79
-  Distance:     $40.65 (238% of ATR)
-  Formed:       2026-07-16
+  Range:        $213.63 - $224.10
+  Size:         $10.47
+  Distance:     $28.11 (173% of ATR)
+  Formed:       2026-09-14
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
   Range:        $267.31 - $312.98
   Size:         $45.67
-  Distance:     $24.72
+  Distance:     $15.10
   Formed:       2026-06-12
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $56.44
-  Profit Target (PT):  $24.72
-  Risk:Reward Ratio:   1:0.44
+  Stop Loss Distance:  $38.58
+  Profit Target (PT):  $15.10
+  Risk:Reward Ratio:   1:0.39

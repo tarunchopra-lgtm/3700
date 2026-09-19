@@ -617,6 +617,31 @@ def compile_top_picks(all_setups: list, pick_path: Path, sensitivity: str = 'bal
             f.write(f"  RISK:REWARD:       1:{rr_ratio:.2f}\n\n")
 
 
+def compile_balanced_top_20(all_setups: list, report_path: Path) -> None:
+    """Write the 20 closest fresh balanced demand-zone setups within one ATR."""
+    candidates = [setup for setup in all_setups if setup.is_demand_in_atr_reach()]
+    candidates.sort(key=lambda setup: setup.distance_to_demand())
+
+    with open(report_path, 'w', encoding='utf-8') as file:
+        file.write("TOP 20 - BALANCED FRESH DEMAND ZONES\n")
+        file.write(f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+        file.write("Filter: demand is fresh, price is within one ATR, closest first.\n")
+        file.write("=" * 105 + "\n\n")
+        if not candidates:
+            file.write("No fresh demand zones within one ATR were found.\n")
+            return
+
+        file.write(f"{'#':<4}{'TICKER':<9}{'PRICE':<12}{'DEMAND ZONE':<24}{'DISTANCE':<14}{'ATR':<12}{'R:R':<10}\n")
+        file.write("-" * 105 + "\n")
+        for rank, setup in enumerate(candidates[:20], start=1):
+            demand_range = f"${setup.demand_zone_low:.2f}-${setup.demand_zone_high:.2f}"
+            file.write(
+                f"{rank:<4}{setup.symbol:<9}${setup.current_price:<11.2f}"
+                f"{demand_range:<24}${setup.distance_to_demand():<13.2f}"
+                f"${setup.atr:<11.2f}1:{setup.stop_loss_to_profit_target_ratio():<8.2f}\n"
+            )
+
+
 def main():
     """Main entry point"""
     print("\n" + "="*100)
@@ -717,10 +742,14 @@ def main():
         compile_top_picks(all_setups, pick_path, sensitivity)
         compile_daily_report(all_setups, report_path, sensitivity)
         create_found_zones_report(all_setups, found_zones_path, sensitivity)
+        if sensitivity == 'balanced':
+            compile_balanced_top_20(all_setups, results_dir / "top-20.txt")
         
         print(f"\n[OK] Pick file:              {pick_path.name}")
         print(f"[OK] Daily report file:      {report_path.name}")
         print(f"[OK] Found zones file:       {found_zones_path.name}")
+        if sensitivity == 'balanced':
+            print("[OK] Top 20 file:            top-20.txt")
     
     # Print final summary comparing all 3 sensitivities
     print(f"\n" + "="*100)

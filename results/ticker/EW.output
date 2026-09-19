@@ -3,27 +3,27 @@ TICKER: EW
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $88.41
-  ATR (14-day): $2.17
+  Price:        $92.73
+  ATR (14-day): $2.06
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $81.16 - $85.51
-  Size:         $4.36
-  Distance:     $2.90 (134% of ATR)
-  Formed:       2026-07-27
+  Range:        $84.47 - $86.03
+  Size:         $1.56
+  Distance:     $6.70 (326% of ATR)
+  Formed:       2026-09-15
   FRESHNESS:    STALE
   Notes:        STALE - Daily candle tested zone yesterday (low $84.84)
 
 SUPPLY ZONE (Sell Zone):
   Range:        $89.33 - $92.88
   Size:         $3.55
-  Distance:     $0.92
+  Distance:     $0.00
   Formed:       2026-06-25
   FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (high $89.68)
+  Notes:        STALE - Price reached zone ($92.73 >= zone $89.33)
 
 TRADE METRICS:
-  Stop Loss Distance:  $7.25
-  Profit Target (PT):  $0.92
-  Risk:Reward Ratio:   1:0.13
+  Stop Loss Distance:  $8.26
+  Profit Target (PT):  $-3.40
+  Risk:Reward Ratio:   1:-0.41

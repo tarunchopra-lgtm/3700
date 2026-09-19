@@ -3,27 +3,27 @@ TICKER: IFF
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $85.60
-  ATR (14-day): $2.33
+  Price:        $89.57
+  ATR (14-day): $2.28
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $75.06 - $76.56
-  Size:         $1.50
-  Distance:     $9.04 (388% of ATR)
-  Formed:       2026-06-29
+  Range:        $80.86 - $82.46
+  Size:         $1.59
+  Distance:     $7.11 (311% of ATR)
+  Formed:       2026-08-18
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
   Range:        $85.88 - $88.64
   Size:         $2.76
-  Distance:     $0.28
+  Distance:     $0.93
   Formed:       2026-08-26
-  FRESHNESS:    FRESH
-  Notes:        Fresh - not tested recently
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($89.57 >= zone $85.88)
 
 TRADE METRICS:
-  Stop Loss Distance:  $10.53
-  Profit Target (PT):  $0.28
-  Risk:Reward Ratio:   1:0.03
+  Stop Loss Distance:  $8.70
+  Profit Target (PT):  $-3.69
+  Risk:Reward Ratio:   1:-0.42

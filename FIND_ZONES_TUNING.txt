@@ -1,0 +1,176 @@
+FIND_ZONES.PY - SIMPLE TUNING GUIDE
+=====================================
+
+PURPOSE
+-------
+find_zones.py scans DAILY candles and finds historical support (demand) and
+resistance (supply) zones. A zone is the small "base" between two directional
+moves. It is not a prediction. It is a price area where the chart previously
+paused, then moved away.
+
+WHAT THE PROGRAM LOOKS FOR
+--------------------------
+DBR = Drop -> Base -> Rally. Demand zone. Buyers held the base after a drop.
+RBR = Rally -> Base -> Rally. Demand zone. Buyers held the base in an uptrend.
+RBD = Rally -> Base -> Drop. Supply zone. Sellers took control at the base.
+DBD = Drop -> Base -> Drop. Supply zone. Sellers held the base in a downtrend.
+
+For every accepted pattern:
+  zone_low  = lowest LOW of the base candles
+  zone_high = highest HIGH of the base candles
+  zone_size = zone_high - zone_low
+
+The program currently returns the OLDEST fresh demand zone and the OLDEST
+fresh supply zone found in the selected lookback period.
+
+CURRENT DEFAULT SETTINGS
+------------------------
+Command default:
+  lookback_days = 90
+  sensitivity   = balanced
+
+MANUAL DEMAND ZONES (DEFAULT FOR CONFIGURED SYMBOLS)
+----------------------------------------------------
+File: lists/manual_demand_zones.txt
+Format: SYMBOL YYYY-MM-DD
+
+Each configured date becomes one demand zone using that daily candle's exact
+LOW through HIGH. These manual zones replace automatic demand detection for
+that symbol; automatic supply detection still runs normally.
+
+When a symbol has more than one manual date, the program selects the closest
+manual zone at or below current price for its primary trade setup. Run with
+--debug to see every configured manual zone. Use an exact market day; a date
+without an Alpaca daily candle is reported and skipped.
+
+AUTOMATIC IMPULSE-ORIGIN DEMAND ZONES (DEFAULT OTHERWISE)
+---------------------------------------------------------
+For symbols without a manual anchor, the program finds either bullish or
+bearish daily candles that originated a meaningful upward move. It measures the
+highest price reached in the following 10 trading sessions and requires at
+least a 3% rally above the candidate candle's high. That candle's LOW through
+HIGH is the demand range because it marks where the upward move originated.
+
+The zone remains fresh until a later daily candle reaches the ORIGIN LOW. A
+pullback into the upper part of the candle range does not invalidate it. When
+more than one fresh origin exists, overlapping candles within five calendar
+days are treated as one move and the first candle is selected. The most recent
+distinct move is selected; use --debug to view every candidate.
+
+FRESH REVERSAL-ORIGIN DEMAND ZONES
+----------------------------------
+The program also finds a final bearish daily candle followed immediately by a
+bullish candle with at least a 1% body. The red candle's LOW through HIGH is
+treated as demand because it marks the final selling before the upward reversal.
+It stays fresh until a later daily low reaches the red candle's low.
+
+Selection priority is: manual anchor, reversal origin, bullish impulse origin,
+then the older pattern detector. This keeps a red origin candle such as ZM on
+2026-07-23 from being replaced by the next day's green reversal candle.
+
+Balanced preset actually used by the code:
+  min_prior_move_pct       = 3.0
+  max_prior_move_pct       = 50.0
+  consolidation_range_pct  = 1.5
+
+Conservative preset:
+  min_prior_move_pct       = 8.0
+  max_prior_move_pct       = 45.0
+  consolidation_range_pct  = 0.75
+
+Aggressive preset:
+  min_prior_move_pct       = 1.0
+  max_prior_move_pct       = 100.0
+  consolidation_range_pct  = 2.5
+
+BASE CANDLES
+------------
+The current code tests bases of exactly 1, 2, or 3 daily candles. It keeps the
+first valid length at each location. There is no command-line setting for base
+length at this time, even though older documentation may mention one.
+
+HOW THE FILTERS WORK
+--------------------
+1. Initial move percentage
+   Formula: abs(close - open) / open * 100
+
+   The first directional candle must be between min_prior_move_pct and
+   max_prior_move_pct. Raising the minimum removes small/noisy moves. Lowering
+   it finds more patterns, including weaker ones.
+
+2. Base candle range
+   Formula currently used: maximum allowed base range = initial move in dollars
+   multiplied by consolidation_range_pct.
+
+   Example: initial move = $4.00, setting = 1.5
+   Maximum allowed range for each base candle = $6.00.
+
+   Important: despite its name, this is currently a MULTIPLIER, not a percent.
+   A setting of 1.5 means 1.5 times the initial move, not 1.5% of the move.
+   Lower this value to require tighter bases. Raise it to accept wider bases.
+
+3. Confirmation candle
+   DBR/RBR need an up candle after the base.
+   RBD/DBD need a down candle after the base.
+   The confirmation candle must also meet min_prior_move_pct.
+
+4. Freshness
+   A demand zone is rejected if price touched/broke its low within 15 days.
+   A supply zone is rejected if price touched/broke its high within 15 days.
+   Older, untouched zones can therefore be selected over newer zones.
+
+HOW TO TUNE
+-----------
+Problem: Too few zones
+Request: "Make find_zones more sensitive: use min move 1%, maximum move 100%,
+and allow wider bases. Keep daily candles and 50-day lookback."
+
+Problem: Too many weak/noisy zones
+Request: "Make find_zones stricter: require at least an 8% initial move, cap
+it at 45%, and require a tighter base range multiplier of 0.75."
+
+Problem: I want older levels
+Request: "Change the default lookback from 50 days to 200 days."
+
+Problem: I only want recent levels
+Request: "Use a 30-day lookback and keep the balanced filters."
+
+Problem: Bases are too wide
+Request: "Reduce consolidation_range_pct from 1.5 to 0.5."
+
+Problem: Bases are too strict
+Request: "Increase consolidation_range_pct from 1.5 to 2.0."
+
+Problem: I want zones untouched for longer
+Request: "Increase the freshness requirement from 15 days to 30 days."
+
+RUN COMMANDS
+------------
+python strategies/find_zones.py AAPL
+python strategies/find_zones.py AAPL --lookback 200
+python strategies/find_zones.py AAPL --sensitivity conservative
+python strategies/find_zones.py AAPL --sensitivity aggressive
+python strategies/find_zones.py AAPL --min-move 5 --max-move 40 --consol-range 0.75
+
+EDUCATION: HOW TO READ A ZONE
+-----------------------------
+Demand is a possible support area, not an automatic buy. Wait for price to
+approach the range and decide whether price action confirms buyers are active.
+Supply is a possible resistance area, not an automatic short. Watch whether
+price rejects the range or breaks through it.
+
+A narrow zone gives a more precise level but can be easier for normal price
+movement to cross. A wide zone gives a less precise level but can represent
+more price acceptance. Use the zone range, not only one exact price.
+
+Suggested questions before using a zone:
+  - Is current price close enough to the zone to be actionable?
+  - Is the zone fresh, or has price already tested it?
+  - Is there enough distance from entry to the next opposing zone for reward?
+  - Where is the invalidation point if price moves through the whole zone?
+
+COPY-AND-SEND TEMPLATE
+----------------------
+"For find_zones.py, change [setting] from [current value] to [new value].
+My goal is [fewer stronger zones / more zones / tighter bases / older zones].
+Keep [daily candles / current freshness rule / current lookback] unchanged."

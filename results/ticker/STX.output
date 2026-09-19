@@ -3,27 +3,27 @@ TICKER: STX
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $800.01
-  ATR (14-day): $77.21
+  Price:        $836.96
+  ATR (14-day): $75.79
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $739.47 - $798.96
-  Size:         $59.49
-  Distance:     $1.05 (1% of ATR)
-  Formed:       2026-07-16
+  Range:        $698.99 - $777.10
+  Size:         $78.11
+  Distance:     $59.86 (79% of ATR)
+  Formed:       2026-07-28
   FRESHNESS:    STALE
   Notes:        STALE - Daily candle tested zone yesterday (low $772.75)
 
 SUPPLY ZONE (Sell Zone):
   Range:        $983.00 - $1145.00
   Size:         $162.00
-  Distance:     $182.99
+  Distance:     $146.04
   Formed:       2026-06-22
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $60.54
-  Profit Target (PT):  $182.99
-  Risk:Reward Ratio:   1:3.02
+  Stop Loss Distance:  $137.97
+  Profit Target (PT):  $146.04
+  Risk:Reward Ratio:   1:1.06

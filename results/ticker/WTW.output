@@ -3,27 +3,27 @@ TICKER: WTW
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $312.43
-  ATR (14-day): $9.21
+  Price:        $347.24
+  ATR (14-day): $8.85
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $250.24 - $258.92
-  Size:         $8.68
-  Distance:     $53.51 (581% of ATR)
-  Formed:       2026-06-22
+  Range:        $283.77 - $291.23
+  Size:         $7.46
+  Distance:     $56.01 (633% of ATR)
+  Formed:       2026-07-22
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
   Range:        $333.48 - $344.33
   Size:         $10.85
-  Distance:     $21.05
+  Distance:     $2.91
   Formed:       2026-08-04
-  FRESHNESS:    FRESH
-  Notes:        Fresh - not tested recently
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($347.24 >= zone $333.48)
 
 TRADE METRICS:
-  Stop Loss Distance:  $62.19
-  Profit Target (PT):  $21.05
-  Risk:Reward Ratio:   1:0.34
+  Stop Loss Distance:  $63.47
+  Profit Target (PT):  $-13.76
+  Risk:Reward Ratio:   1:-0.22

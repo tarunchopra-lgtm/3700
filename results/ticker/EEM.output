@@ -4,16 +4,16 @@ TICKER: EEM
 
 CURRENT STATUS:
   Price:        $67.00
-  ATR (14-day): $1.29
+  ATR (14-day): $1.24
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $64.80 - $67.79
-  Size:         $2.99
-  Distance:     $0.00 (0% of ATR)
-  Formed:       2026-07-06
+  Range:        $64.47 - $65.56
+  Size:         $1.09
+  Distance:     $1.44 (116% of ATR)
+  Formed:       2026-08-06
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($67.00 <= zone $67.79)
+  Notes:        STALE - Daily candle tested zone yesterday (low $65.29)
 
 SUPPLY ZONE (Sell Zone):
   Range:        $67.08 - $69.88
@@ -24,6 +24,6 @@ SUPPLY ZONE (Sell Zone):
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $2.20
+  Stop Loss Distance:  $2.53
   Profit Target (PT):  $0.08
-  Risk:Reward Ratio:   1:0.04
+  Risk:Reward Ratio:   1:0.03

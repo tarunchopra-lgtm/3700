@@ -3,27 +3,27 @@ TICKER: SMCI
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $40.74
-  ATR (14-day): $2.63
+  Price:        $42.36
+  ATR (14-day): $2.60
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $27.71 - $30.75
-  Size:         $3.04
-  Distance:     $9.99 (380% of ATR)
-  Formed:       2026-06-16
-  FRESHNESS:    FRESH
-  Notes:        Fresh - not tested recently
+  Range:        $35.36 - $37.12
+  Size:         $1.76
+  Distance:     $5.24 (202% of ATR)
+  Formed:       2026-09-16
+  FRESHNESS:    STALE
+  Notes:        STALE - Daily candle tested zone yesterday (low $35.37)
 
 SUPPLY ZONE (Sell Zone):
   Range:        $38.15 - $42.31
   Size:         $4.16
-  Distance:     $0.00
+  Distance:     $0.05
   Formed:       2026-08-13
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($40.74 >= zone $38.15)
+  Notes:        STALE - Price reached zone ($42.36 >= zone $38.15)
 
 TRADE METRICS:
-  Stop Loss Distance:  $13.03
-  Profit Target (PT):  $-2.59
-  Risk:Reward Ratio:   1:-0.20
+  Stop Loss Distance:  $7.00
+  Profit Target (PT):  $-4.21
+  Risk:Reward Ratio:   1:-0.60

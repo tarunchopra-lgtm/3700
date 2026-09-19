@@ -2,15 +2,26 @@
   "symbol": "AAPL",
   "qty": 2,
   "entry_price": 335.0,
+  "entry_time": "2026-09-18T06:38:56.744769",
   "brackets": {
     "bracket1": {
+      "entry_order_id": "ac204904-5d57-4d1d-ba3d-0240d1450d45",
+      "stop_order_id": "a58836f0-c098-4241-8b2d-7c464aea4cb0",
+      "target_order_id": "170cda01-da8a-46aa-b4d6-8ec3271c27a5",
+      "qty": 1,
+      "target_price": 337.0,
+      "stop_price": 333.0,
       "status": "pending"
     },
     "bracket2": {
+      "entry_order_id": "69f39c84-a805-4c56-950f-73985936cb28",
+      "stop_order_id": "e22aee6f-700e-4a62-88f9-dbc83f7a0ef2",
+      "target_order_id": "97552167-ad8e-4f84-9813-d0ec869d4a92",
+      "qty": 1,
+      "target_price": 340.0,
+      "stop_price": 333.0,
       "status": "pending"
     }
   },
-  "current_price": 335.0,
-  "current_pnl": null,
-  "last_updated": "2026-09-17T11:33:11.481935"
+  "last_updated": "2026-09-18T06:56:37.938493"
 }

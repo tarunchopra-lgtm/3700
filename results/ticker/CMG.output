@@ -3,27 +3,27 @@ TICKER: CMG
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $33.84
-  ATR (14-day): $1.55
-  Within ATR:   YES
+  Price:        $35.34
+  ATR (14-day): $1.52
+  Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $30.45 - $32.41
-  Size:         $1.96
-  Distance:     $1.43 (92% of ATR)
-  Formed:       2026-06-23
+  Range:        $31.64 - $32.23
+  Size:         $0.60
+  Distance:     $3.11 (204% of ATR)
+  Formed:       2026-08-11
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
   Range:        $36.87 - $39.09
   Size:         $2.22
-  Distance:     $3.03
+  Distance:     $1.53
   Formed:       2026-07-31
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $3.39
-  Profit Target (PT):  $3.03
-  Risk:Reward Ratio:   1:0.89
+  Stop Loss Distance:  $3.71
+  Profit Target (PT):  $1.53
+  Risk:Reward Ratio:   1:0.41

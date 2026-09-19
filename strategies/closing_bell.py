@@ -210,21 +210,50 @@ def _cancel_order(trading_client, order_id: str) -> bool:
 
 
 def _cancel_all_pending_sell_orders(trading_client, symbol: str) -> None:
-    """Cancel all pending SELL orders for a symbol to free up qty."""
+    """Cancel every live order for a symbol so it cannot reserve closeout quantity."""
     try:
         orders = trading_client.get_orders(
             filter=GetOrdersRequest(status=QueryOrderStatus.OPEN, limit=100)
         )
-        sell_orders = [o for o in orders if o.symbol == symbol and o.side == OrderSide.SELL]
+        symbol_orders = [o for o in orders if o.symbol == symbol]
         
-        for order in sell_orders:
+        for order in symbol_orders:
             try:
                 trading_client.cancel_order_by_id(order.id)
-                _log(f"  ✓ Cancelled pending order @ ${float(order.limit_price):.2f}")
+                _log(f"  ✓ Cancelled open {order.side} order ({order.id})")
             except Exception as e:
                 _log(f"  ⚠ Could not cancel order {order.id}: {e}")
     except Exception as e:
         _log(f"  ⚠ Error fetching orders for {symbol}: {e}")
+
+
+def _wait_for_order_cancellations(trading_client, symbol: str, timeout_seconds: int = 10) -> bool:
+    """Wait until Alpaca confirms that no live orders reserve this position."""
+    deadline = time.time() + timeout_seconds
+    while time.time() < deadline:
+        try:
+            orders = trading_client.get_orders(
+                filter=GetOrdersRequest(status=QueryOrderStatus.OPEN, limit=100)
+            )
+            remaining = [order for order in orders if order.symbol == symbol]
+            if not remaining:
+                return True
+            _log(f"  ⏳ Waiting for {len(remaining)} cancellation(s) to settle...")
+        except Exception as e:
+            _log(f"  ⚠ Could not verify cancellations for {symbol}: {e}")
+        time.sleep(1)
+    return False
+
+
+def _remove_position_tracking(symbol: str) -> None:
+    """Remove the current JSON tracker after a closeout order is accepted."""
+    position_file = POSITIONS_DIR / f"{symbol}.json"
+    try:
+        if position_file.exists():
+            position_file.unlink()
+            _log(f"  ✓ Cleaned up position tracker ({position_file.name})")
+    except Exception as e:
+        _log(f"  ⚠ Could not remove position tracker for {symbol}: {e}")
 
 
 def _sell_at_limit(
@@ -370,37 +399,20 @@ def close_all_positions(trading_client, stock_data_client, crypto_data_client) -
         
         _log(f"\n[{symbol}] Qty: {qty}, Value: ${market_value:.2f}")
         
-        # FIRST: Cancel any BRACKET ORDERS (from fomo_trade.py system)
-        # This is critical - bracket orders hold the position via stop/target orders
-        if _cancel_bracket_orders(trading_client, symbol):
-            _log(f"  📌 Bracket orders cancelled for {symbol}")
+        # Cancel every live order, including OCO parent/leg orders from fomo_trade.py.
+        # An open exit order reserves position quantity and blocks liquidation.
+        _cancel_all_pending_sell_orders(trading_client, symbol)
+        if not _wait_for_order_cancellations(trading_client, symbol):
+            _log(f"  ✗ Skipping {symbol}: open orders still reserve its quantity")
+            failed_closes += 1
+            continue
+
+        # Closing Bell must flatten the position; do not leave a midpoint limit order open.
+        if _sell_at_market(trading_client, symbol, qty):
             _remove_bracket_files(symbol)
             _remove_position_status_file(symbol)
-            time.sleep(2)  # Give Alpaca time to process cancellations
-        
-        # SECOND: Cancel any other pending SELL orders to free up qty
-        _cancel_all_pending_sell_orders(trading_client, symbol)
-        
-        # Try to get bid/ask for midpoint calculation
-        bid_ask = _get_bid_ask(trading_client, symbol, stock_data_client, crypto_data_client)
-        
-        if bid_ask:
-            bid, ask = bid_ask
-            midpoint = (bid + ask) / 2.0
-            close_price = midpoint
-            _log(f"  Bid: ${bid:.2f}, Ask: ${ask:.2f}, Midpoint: ${midpoint:.2f}")
-            
-            # Try limit order at midpoint first
-            if _sell_at_limit(trading_client, symbol, qty, midpoint, LIMIT_ORDER_TIMEOUT):
-                closed_positions.append({"symbol": symbol, "qty": qty, "price": close_price})
-                successful_closes += 1
-                continue
-        else:
-            _log(f"  ⚠ Could not get bid/ask, proceeding to market order")
-        
-        # If limit order failed or bid/ask unavailable, use market order
-        if _sell_at_market(trading_client, symbol, qty):
-            closed_positions.append({"symbol": symbol, "qty": qty, "price": close_price})
+            _remove_position_tracking(symbol)
+            closed_positions.append({"symbol": symbol, "qty": qty, "price": None})
             successful_closes += 1
         else:
             failed_closes += 1

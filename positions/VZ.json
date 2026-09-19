@@ -1,0 +1,27 @@
+{
+  "symbol": "VZ",
+  "qty": 2,
+  "entry_price": 47.07,
+  "entry_time": "2026-09-18T06:43:52.730144",
+  "brackets": {
+    "bracket1": {
+      "entry_order_id": "130a565f-9dc3-4d1f-8b5a-b83546eb4d57",
+      "stop_order_id": null,
+      "target_order_id": null,
+      "qty": 1,
+      "target_price": 49.0,
+      "stop_price": 46.0,
+      "status": "pending"
+    },
+    "bracket2": {
+      "entry_order_id": "ce5b19b5-dc0d-4d81-a884-e06d9903e3a7",
+      "stop_order_id": null,
+      "target_order_id": null,
+      "qty": 1,
+      "target_price": 50.0,
+      "stop_price": 46.0,
+      "status": "pending"
+    }
+  },
+  "last_updated": "2026-09-18T06:43:52.746362"
+}

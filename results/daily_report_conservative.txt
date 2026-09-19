@@ -1,1 +1,25 @@
-No stocks found with demand/supply zones.
+DAILY REPORT - CONSERVATIVE SENSITIVITY
+Generated: 2026-09-17 21:52:31
+========================================================================================================================
+
+TICKER   PRICE      ATR      DEMAND_ZONE               SUPPLY_ZONE               GAP      D_SIZE   RATIO   
+========================================================================================================================
+FLEX     $114.55    $7.94    $102.25-$108.26           $149.17-$165.82           $40.91   $6.01    0.147  
+========================================================================================================================
+Total Stocks Analyzed: 1
+Ratio Statistics:
+  Min:  0.147 (FLEX)
+  Avg:  0.147
+  Max:  0.147
+
+Generated: 2026-09-17 21:52:31
+
+Column Definitions:
+  TICKER: Stock symbol
+  PRICE: Current price
+  ATR: 14-day Average True Range
+  DEMAND_ZONE: Buy zone range (low-high)
+  SUPPLY_ZONE: Sell zone range (low-high)
+  GAP: Distance from demand zone high to supply zone low
+  D_SIZE: Size of demand zone
+  RATIO: Demand zone size / Gap (lower = tighter setup)

@@ -3,27 +3,27 @@ TICKER: ADBE
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $255.00
-  ATR (14-day): $12.48
+  Price:        $263.48
+  ATR (14-day): $12.09
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $201.31 - $213.66
-  Size:         $12.35
-  Distance:     $41.34 (331% of ATR)
-  Formed:       2026-06-29
+  Range:        $229.79 - $242.05
+  Size:         $12.26
+  Distance:     $21.43 (177% of ATR)
+  Formed:       2026-07-27
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
   Range:        $285.48 - $294.53
   Size:         $9.05
-  Distance:     $30.48
+  Distance:     $22.00
   Formed:       2026-08-28
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $53.69
-  Profit Target (PT):  $30.48
-  Risk:Reward Ratio:   1:0.57
+  Stop Loss Distance:  $33.69
+  Profit Target (PT):  $22.00
+  Risk:Reward Ratio:   1:0.65

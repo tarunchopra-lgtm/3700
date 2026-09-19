@@ -3,27 +3,27 @@ TICKER: GM
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $87.79
-  ATR (14-day): $2.53
+  Price:        $92.06
+  ATR (14-day): $2.28
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $80.50 - $82.12
-  Size:         $1.62
-  Distance:     $5.67 (224% of ATR)
-  Formed:       2026-06-12
+  Range:        $74.80 - $80.10
+  Size:         $5.30
+  Distance:     $11.96 (524% of ATR)
+  Formed:       2026-07-21
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
   Range:        $83.76 - $91.15
   Size:         $7.39
-  Distance:     $0.00
+  Distance:     $0.91
   Formed:       2026-07-27
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($87.79 >= zone $83.76)
+  Notes:        STALE - Price reached zone ($92.06 >= zone $83.76)
 
 TRADE METRICS:
-  Stop Loss Distance:  $7.29
-  Profit Target (PT):  $-4.03
-  Risk:Reward Ratio:   1:-0.55
+  Stop Loss Distance:  $17.26
+  Profit Target (PT):  $-8.30
+  Risk:Reward Ratio:   1:-0.48

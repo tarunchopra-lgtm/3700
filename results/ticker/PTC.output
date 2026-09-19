@@ -3,17 +3,17 @@ TICKER: PTC
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $134.63
-  ATR (14-day): $5.84
+  Price:        $140.54
+  ATR (14-day): $5.70
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $108.50 - $118.71
-  Size:         $10.21
-  Distance:     $15.92 (273% of ATR)
-  Formed:       2026-06-12
-  FRESHNESS:    FRESH
-  Notes:        Fresh - not tested recently
+  Range:        $126.79 - $130.89
+  Size:         $4.10
+  Distance:     $9.65 (169% of ATR)
+  Formed:       2026-09-10
+  FRESHNESS:    STALE
+  Notes:        STALE - Daily candle tested zone yesterday (low $130.38)
 
 SUPPLY ZONE (Sell Zone):
   Range:        $132.63 - $147.73
@@ -21,9 +21,9 @@ SUPPLY ZONE (Sell Zone):
   Distance:     $0.00
   Formed:       2026-09-08
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($134.63 >= zone $132.63)
+  Notes:        STALE - Price reached zone ($140.54 >= zone $132.63)
 
 TRADE METRICS:
-  Stop Loss Distance:  $26.13
-  Profit Target (PT):  $-2.00
-  Risk:Reward Ratio:   1:-0.08
+  Stop Loss Distance:  $13.75
+  Profit Target (PT):  $-7.91
+  Risk:Reward Ratio:   1:-0.58

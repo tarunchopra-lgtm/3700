@@ -3,27 +3,27 @@ TICKER: KR
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $60.72
-  ATR (14-day): $1.48
+  Price:        $63.71
+  ATR (14-day): $1.41
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $55.59 - $61.27
-  Size:         $5.68
-  Distance:     $0.00 (0% of ATR)
-  Formed:       2026-06-18
-  FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($60.72 <= zone $61.27)
+  Range:        $55.65 - $59.49
+  Size:         $3.84
+  Distance:     $4.22 (300% of ATR)
+  Formed:       2026-09-11
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
   Range:        $62.94 - $64.98
   Size:         $2.04
-  Distance:     $2.22
+  Distance:     $0.00
   Formed:       2026-06-15
-  FRESHNESS:    FRESH
-  Notes:        Fresh - not tested recently
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($63.71 >= zone $62.94)
 
 TRADE METRICS:
-  Stop Loss Distance:  $5.12
-  Profit Target (PT):  $2.22
-  Risk:Reward Ratio:   1:0.43
+  Stop Loss Distance:  $8.06
+  Profit Target (PT):  $-0.77
+  Risk:Reward Ratio:   1:-0.10

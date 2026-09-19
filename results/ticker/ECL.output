@@ -3,27 +3,27 @@ TICKER: ECL
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $293.90
-  ATR (14-day): $6.06
+  Price:        $288.30
+  ATR (14-day): $5.90
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $255.09 - $271.15
-  Size:         $16.06
-  Distance:     $22.75 (376% of ATR)
-  Formed:       2026-06-11
+  Range:        $261.50 - $265.47
+  Size:         $3.97
+  Distance:     $22.83 (387% of ATR)
+  Formed:       2026-07-23
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
   Range:        $275.72 - $286.46
   Size:         $10.74
-  Distance:     $7.44
+  Distance:     $1.84
   Formed:       2026-08-03
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($293.90 >= zone $275.72)
+  Notes:        STALE - Price reached zone ($288.30 >= zone $275.72)
 
 TRADE METRICS:
-  Stop Loss Distance:  $38.81
-  Profit Target (PT):  $-18.18
+  Stop Loss Distance:  $26.80
+  Profit Target (PT):  $-12.58
   Risk:Reward Ratio:   1:-0.47

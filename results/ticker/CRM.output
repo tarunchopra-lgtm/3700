@@ -3,27 +3,27 @@ TICKER: CRM
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $243.38
-  ATR (14-day): $8.65
+  Price:        $257.15
+  ATR (14-day): $8.28
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $146.32 - $154.47
-  Size:         $8.15
-  Distance:     $88.91 (1028% of ATR)
-  Formed:       2026-06-18
+  Range:        $198.95 - $206.44
+  Size:         $7.49
+  Distance:     $50.71 (613% of ATR)
+  Formed:       2026-08-26
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
   Range:        $245.89 - $263.60
   Size:         $17.71
-  Distance:     $2.51
+  Distance:     $0.00
   Formed:       2026-09-08
   FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (high $256.26)
+  Notes:        STALE - Price reached zone ($257.15 >= zone $245.89)
 
 TRADE METRICS:
-  Stop Loss Distance:  $97.06
-  Profit Target (PT):  $2.51
-  Risk:Reward Ratio:   1:0.03
+  Stop Loss Distance:  $58.20
+  Profit Target (PT):  $-11.26
+  Risk:Reward Ratio:   1:-0.19

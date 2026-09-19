@@ -577,3 +577,186 @@ ValueError: invalid literal for int() with base 10: '0.9975'
 [2026-09-16 19:49:15] ============================================================
 
 [2026-09-16 19:49:16] ✓ Email report sent to tarun.chopra@gmail.com
+[2026-09-17 12:50:04] 
+============================================================
+[2026-09-17 12:50:04] 🔔 CLOSING BELL - Closing all positions...
+[2026-09-17 12:50:04] ============================================================
+[2026-09-17 12:50:04] Found 3 open position(s). Starting closeout...
+[2026-09-17 12:50:04] 
+[GLD] Qty: 2, Value: $796.52
+[2026-09-17 12:50:04]   ✓ Cancelled pending order @ $401.00
+[2026-09-17 12:50:04]   ⚠ Could not cancel order ebced562-aa7a-490f-9920-6c31ecbffa53: float() argument must be a string or a real number, not 'NoneType'
+[2026-09-17 12:50:05]   Bid: $398.25, Ask: $398.28, Midpoint: $398.26
+[2026-09-17 12:50:05]   → Normalizing qty: 2 (str) for GLD → 2 (int)
+[2026-09-17 12:50:05]   ✗ Error submitting limit order for GLD: {"available":"0","code":40310000,"existing_qty":"2","held_for_orders":"2","message":"insufficient qty available for order (requested: 2, available: 0)","related_orders":["ebced562-aa7a-490f-9920-6c31ecbffa53","758ad3d8-8302-487c-9aca-46f55a22139f"],"symbol":"GLD"}
+[2026-09-17 12:50:05]   → Normalizing qty: 2 (str) for GLD → 2 (int)
+[2026-09-17 12:50:05]   ✗ Error submitting market order for GLD: {"available":"0","code":40310000,"existing_qty":"2","held_for_orders":"2","message":"insufficient qty available for order (requested: 2, available: 0)","related_orders":["ebced562-aa7a-490f-9920-6c31ecbffa53","758ad3d8-8302-487c-9aca-46f55a22139f"],"symbol":"GLD"}
+[2026-09-17 12:50:05]   DEBUG: Traceback (most recent call last):
+  File "c:\Users\TarunChopra\3700\.venv\Lib\site-packages\alpaca\common\rest.py", line 198, in _one_request
+    response.raise_for_status()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "c:\Users\TarunChopra\3700\.venv\Lib\site-packages\requests\models.py", line 1167, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 403 Client Error: Forbidden for url: https://paper-api.alpaca.markets/v2/orders
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\TarunChopra\3700\strategies\closing_bell.py", line 303, in _sell_at_market
+    response = trading_client.submit_order(order_data=order)
+  File "c:\Users\TarunChopra\3700\.venv\Lib\site-packages\alpaca\trading\client.py", line 100, in submit_order
+    response = self.post("/orders", data)
+  File "c:\Users\TarunChopra\3700\.venv\Lib\site-packages\alpaca\common\rest.py", line 240, in post
+    return self._request("POST", path, data)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\TarunChopra\3700\.venv\Lib\site-packages\alpaca\common\rest.py", line 131, in _request
+    return self._one_request(method, url, opts, retry)
+           ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\TarunChopra\3700\.venv\Lib\site-packages\alpaca\common\rest.py", line 207, in _one_request
+    raise APIError(error, http_error)
+alpaca.common.exceptions.APIError: {"available":"0","code":40310000,"existing_qty":"2","held_for_orders":"2","message":"insufficient qty available for order (requested: 2, available: 0)","related_orders":["ebced562-aa7a-490f-9920-6c31ecbffa53","758ad3d8-8302-487c-9aca-46f55a22139f"],"symbol":"GLD"}
+
+[2026-09-17 12:50:05] 
+[INTC] Qty: 1, Value: $109.38
+[2026-09-17 12:50:05]   ✓ Cancelled pending order @ $112.00
+[2026-09-17 12:50:05]   Bid: $109.36, Ask: $109.37, Midpoint: $109.37
+[2026-09-17 12:50:05]   → Normalizing qty: 1 (str) for INTC → 1 (int)
+[2026-09-17 12:50:05]   ✗ Error submitting limit order for INTC: {"available":"0","code":40310000,"existing_qty":"1","held_for_orders":"1","message":"insufficient qty available for order (requested: 1, available: 0)","related_orders":["e292999b-ab66-4ade-92e4-8734591bca47"],"symbol":"INTC"}
+[2026-09-17 12:50:05]   → Normalizing qty: 1 (str) for INTC → 1 (int)
+[2026-09-17 12:50:05]   ✗ Error submitting market order for INTC: {"available":"0","code":40310000,"existing_qty":"1","held_for_orders":"1","message":"insufficient qty available for order (requested: 1, available: 0)","related_orders":["e292999b-ab66-4ade-92e4-8734591bca47"],"symbol":"INTC"}
+[2026-09-17 12:50:05]   DEBUG: Traceback (most recent call last):
+  File "c:\Users\TarunChopra\3700\.venv\Lib\site-packages\alpaca\common\rest.py", line 198, in _one_request
+    response.raise_for_status()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "c:\Users\TarunChopra\3700\.venv\Lib\site-packages\requests\models.py", line 1167, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 403 Client Error: Forbidden for url: https://paper-api.alpaca.markets/v2/orders
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\TarunChopra\3700\strategies\closing_bell.py", line 303, in _sell_at_market
+    response = trading_client.submit_order(order_data=order)
+  File "c:\Users\TarunChopra\3700\.venv\Lib\site-packages\alpaca\trading\client.py", line 100, in submit_order
+    response = self.post("/orders", data)
+  File "c:\Users\TarunChopra\3700\.venv\Lib\site-packages\alpaca\common\rest.py", line 240, in post
+    return self._request("POST", path, data)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\TarunChopra\3700\.venv\Lib\site-packages\alpaca\common\rest.py", line 131, in _request
+    return self._one_request(method, url, opts, retry)
+           ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\TarunChopra\3700\.venv\Lib\site-packages\alpaca\common\rest.py", line 207, in _one_request
+    raise APIError(error, http_error)
+alpaca.common.exceptions.APIError: {"available":"0","code":40310000,"existing_qty":"1","held_for_orders":"1","message":"insufficient qty available for order (requested: 1, available: 0)","related_orders":["e292999b-ab66-4ade-92e4-8734591bca47"],"symbol":"INTC"}
+
+[2026-09-17 12:50:05] 
+[MU] Qty: 2, Value: $1957.22
+[2026-09-17 12:50:06]   ✓ Cancelled pending order @ $980.00
+[2026-09-17 12:50:06]   ⚠ Could not cancel order 6e256df5-f56f-42ca-a259-5a04f12fd292: float() argument must be a string or a real number, not 'NoneType'
+[2026-09-17 12:50:06]   Bid: $973.00, Ask: $978.62, Midpoint: $975.81
+[2026-09-17 12:50:06]   → Normalizing qty: 2 (str) for MU → 2 (int)
+[2026-09-17 12:50:06]   ✗ Error submitting limit order for MU: {"available":"0","code":40310000,"existing_qty":"2","held_for_orders":"2","message":"insufficient qty available for order (requested: 2, available: 0)","related_orders":["6e256df5-f56f-42ca-a259-5a04f12fd292","7fa4d80a-7644-4766-98c3-6884e74fafba"],"symbol":"MU"}
+[2026-09-17 12:50:06]   → Normalizing qty: 2 (str) for MU → 2 (int)
+[2026-09-17 12:50:06]   ✗ Error submitting market order for MU: {"available":"0","code":40310000,"existing_qty":"2","held_for_orders":"2","message":"insufficient qty available for order (requested: 2, available: 0)","related_orders":["6e256df5-f56f-42ca-a259-5a04f12fd292","7fa4d80a-7644-4766-98c3-6884e74fafba"],"symbol":"MU"}
+[2026-09-17 12:50:06]   DEBUG: Traceback (most recent call last):
+  File "c:\Users\TarunChopra\3700\.venv\Lib\site-packages\alpaca\common\rest.py", line 198, in _one_request
+    response.raise_for_status()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "c:\Users\TarunChopra\3700\.venv\Lib\site-packages\requests\models.py", line 1167, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 403 Client Error: Forbidden for url: https://paper-api.alpaca.markets/v2/orders
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\TarunChopra\3700\strategies\closing_bell.py", line 303, in _sell_at_market
+    response = trading_client.submit_order(order_data=order)
+  File "c:\Users\TarunChopra\3700\.venv\Lib\site-packages\alpaca\trading\client.py", line 100, in submit_order
+    response = self.post("/orders", data)
+  File "c:\Users\TarunChopra\3700\.venv\Lib\site-packages\alpaca\common\rest.py", line 240, in post
+    return self._request("POST", path, data)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\TarunChopra\3700\.venv\Lib\site-packages\alpaca\common\rest.py", line 131, in _request
+    return self._one_request(method, url, opts, retry)
+           ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\TarunChopra\3700\.venv\Lib\site-packages\alpaca\common\rest.py", line 207, in _one_request
+    raise APIError(error, http_error)
+alpaca.common.exceptions.APIError: {"available":"0","code":40310000,"existing_qty":"2","held_for_orders":"2","message":"insufficient qty available for order (requested: 2, available: 0)","related_orders":["6e256df5-f56f-42ca-a259-5a04f12fd292","7fa4d80a-7644-4766-98c3-6884e74fafba"],"symbol":"MU"}
+
+[2026-09-17 12:50:06] 
+============================================================
+[2026-09-17 12:50:06] Closeout Summary: 0 successful, 3 failed
+[2026-09-17 12:50:06] ============================================================
+
+[2026-09-17 12:50:07] ✓ Email report sent to tarun.chopra@gmail.com
+[2026-09-17 19:59:35] 
+============================================================
+[2026-09-17 19:59:35] 🔔 CLOSING BELL - Closing all positions...
+[2026-09-17 19:59:35] ============================================================
+[2026-09-17 19:59:35] Found 5 open position(s). Starting closeout...
+[2026-09-17 19:59:35] 
+[ETHUSD] Qty: 0.9975, Value: $2454.65
+[2026-09-17 19:59:35]   ✗ Error submitting market order for ETHUSD: invalid literal for int() with base 10: '0.9975'
+[2026-09-17 19:59:35]   DEBUG: Traceback (most recent call last):
+  File "C:\Users\TarunChopra\3700\strategies\closing_bell.py", line 323, in _sell_at_market
+    normalized_qty = _normalize_qty(qty, symbol)
+  File "C:\Users\TarunChopra\3700\strategies\closing_bell.py", line 163, in _normalize_qty
+    return int(qty)
+ValueError: invalid literal for int() with base 10: '0.9975'
+
+[2026-09-17 19:59:35] 
+[GLD] Qty: 2, Value: $797.08
+[2026-09-17 19:59:36]   → Normalizing qty: 2 (str) for GLD → 2 (int)
+[2026-09-17 19:59:36]   ✓ Market sell order submitted for 2 GLD (Order ID: eff00486-a730-4297-8215-e984826c397f)
+[2026-09-17 19:59:36] 
+[INTC] Qty: 1, Value: $109.39
+[2026-09-17 19:59:36]   → Normalizing qty: 1 (str) for INTC → 1 (int)
+[2026-09-17 19:59:36]   ✓ Market sell order submitted for 1 INTC (Order ID: 421dcf1f-28a5-4a96-b608-85f6e14c67c1)
+[2026-09-17 19:59:36] 
+[MU] Qty: 2, Value: $1962.98
+[2026-09-17 19:59:36]   → Normalizing qty: 2 (str) for MU → 2 (int)
+[2026-09-17 19:59:36]   ✓ Market sell order submitted for 2 MU (Order ID: 30a8e125-9dd0-4a27-8c28-221eb9b4e75d)
+[2026-09-17 19:59:36] 
+[NVDA] Qty: 2, Value: $439.26
+[2026-09-17 19:59:36]   → Normalizing qty: 2 (str) for NVDA → 2 (int)
+[2026-09-17 19:59:36]   ✓ Market sell order submitted for 2 NVDA (Order ID: ad8f2185-5c69-4bdd-8237-0f04ebb8c433)
+[2026-09-17 19:59:36] 
+============================================================
+[2026-09-17 19:59:36] Closeout Summary: 4 successful, 1 failed
+[2026-09-17 19:59:36] ============================================================
+
+[2026-09-17 19:59:38] ✓ Email report sent to tarun.chopra@gmail.com
+[2026-09-18 12:50:05] 
+============================================================
+[2026-09-18 12:50:05] 🔔 CLOSING BELL - Closing all positions...
+[2026-09-18 12:50:05] ============================================================
+[2026-09-18 12:50:05] Found 2 open position(s). Starting closeout...
+[2026-09-18 12:50:05] 
+[GLD] Qty: 1, Value: $401.72
+[2026-09-18 12:50:05]   ✓ Cancelled open OrderSide.SELL order (fd0b6f36-1596-42ad-ac94-b1eddcfe1127)
+[2026-09-18 12:50:05]   ⏳ Waiting for 1 cancellation(s) to settle...
+[2026-09-18 12:50:06]   ⏳ Waiting for 1 cancellation(s) to settle...
+[2026-09-18 12:50:07]   ⏳ Waiting for 1 cancellation(s) to settle...
+[2026-09-18 12:50:09]   ⏳ Waiting for 1 cancellation(s) to settle...
+[2026-09-18 12:50:10]   ⏳ Waiting for 1 cancellation(s) to settle...
+[2026-09-18 12:50:11]   → Normalizing qty: 1 (str) for GLD → 1 (int)
+[2026-09-18 12:50:11]   ✓ Market sell order submitted for 1 GLD (Order ID: 506f0b9c-b1e3-4ca4-aef8-d715a032c430)
+[2026-09-18 12:50:11]   ✓ Cleaned up position tracker (GLD.json)
+[2026-09-18 12:50:11] 
+[GOOGL] Qty: 2, Value: $699.08
+[2026-09-18 12:50:11]   ✓ Cancelled open OrderSide.SELL order (23440396-b167-4533-b2e2-7fc7c5adb43f)
+[2026-09-18 12:50:11]   ✓ Cancelled open OrderSide.SELL order (9a4db636-c8ec-42db-a559-0331abbafc39)
+[2026-09-18 12:50:11]   ⏳ Waiting for 2 cancellation(s) to settle...
+[2026-09-18 12:50:12]   ⏳ Waiting for 2 cancellation(s) to settle...
+[2026-09-18 12:50:13]   ⏳ Waiting for 2 cancellation(s) to settle...
+[2026-09-18 12:50:14]   ⏳ Waiting for 2 cancellation(s) to settle...
+[2026-09-18 12:50:16]   ⏳ Waiting for 2 cancellation(s) to settle...
+[2026-09-18 12:50:17]   → Normalizing qty: 2 (str) for GOOGL → 2 (int)
+[2026-09-18 12:50:17]   ✓ Market sell order submitted for 2 GOOGL (Order ID: 794d50a5-b818-4c72-a166-a654bd4b3f90)
+[2026-09-18 12:50:17]   ✓ Cleaned up position tracker (GOOGL.json)
+[2026-09-18 12:50:17] 
+============================================================
+[2026-09-18 12:50:17] Closeout Summary: 2 successful, 0 failed
+[2026-09-18 12:50:17] ============================================================
+
+[2026-09-18 12:50:20] ✓ Email report sent to tarun.chopra@gmail.com

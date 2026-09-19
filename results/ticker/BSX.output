@@ -3,27 +3,27 @@ TICKER: BSX
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $46.79
-  ATR (14-day): $1.92
+  Price:        $45.91
+  ATR (14-day): $1.86
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $42.25 - $43.76
-  Size:         $1.51
-  Distance:     $3.03 (158% of ATR)
-  Formed:       2026-06-30
+  Range:        $42.80 - $43.55
+  Size:         $0.75
+  Distance:     $2.36 (127% of ATR)
+  Formed:       2026-09-11
   FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $43.68)
+  Notes:        STALE - Daily candle tested zone today (low $42.95)
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $50.02 - $52.34
-  Size:         $2.31
-  Distance:     $3.23
-  Formed:       2026-08-11
+  Range:        $50.45 - $52.56
+  Size:         $2.11
+  Distance:     $4.54
+  Formed:       2026-08-19
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $4.54
-  Profit Target (PT):  $3.23
-  Risk:Reward Ratio:   1:0.71
+  Stop Loss Distance:  $3.11
+  Profit Target (PT):  $4.54
+  Risk:Reward Ratio:   1:1.46

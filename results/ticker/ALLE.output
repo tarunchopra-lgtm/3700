@@ -3,15 +3,15 @@ TICKER: ALLE
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $160.88
-  ATR (14-day): $3.90
+  Price:        $164.24
+  ATR (14-day): $3.71
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $128.74 - $135.96
-  Size:         $7.22
-  Distance:     $24.92 (639% of ATR)
-  Formed:       2026-06-18
+  Range:        $134.63 - $139.12
+  Size:         $4.49
+  Distance:     $25.12 (677% of ATR)
+  Formed:       2026-07-20
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
@@ -21,9 +21,9 @@ SUPPLY ZONE (Sell Zone):
   Distance:     $0.00
   Formed:       2026-07-28
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($160.88 >= zone $156.83)
+  Notes:        STALE - Price reached zone ($164.24 >= zone $156.83)
 
 TRADE METRICS:
-  Stop Loss Distance:  $32.14
-  Profit Target (PT):  $-4.05
-  Risk:Reward Ratio:   1:-0.13
+  Stop Loss Distance:  $29.61
+  Profit Target (PT):  $-7.41
+  Risk:Reward Ratio:   1:-0.25

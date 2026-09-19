@@ -3,27 +3,27 @@ TICKER: ROP
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $374.85
-  ATR (14-day): $12.40
+  Price:        $390.24
+  ATR (14-day): $12.43
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $330.64 - $338.11
-  Size:         $7.47
-  Distance:     $36.75 (296% of ATR)
-  Formed:       2026-06-15
+  Range:        $354.17 - $369.15
+  Size:         $14.98
+  Distance:     $21.09 (170% of ATR)
+  Formed:       2026-07-23
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
   Range:        $393.65 - $419.21
   Size:         $25.56
-  Distance:     $18.80
+  Distance:     $3.41
   Formed:       2026-09-08
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $44.21
-  Profit Target (PT):  $18.80
-  Risk:Reward Ratio:   1:0.43
+  Stop Loss Distance:  $36.07
+  Profit Target (PT):  $3.41
+  Risk:Reward Ratio:   1:0.09

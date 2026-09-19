@@ -3,27 +3,27 @@ TICKER: QCOM
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $193.00
-  ATR (14-day): $6.96
+  Price:        $200.23
+  ATR (14-day): $6.81
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $146.00 - $155.00
-  Size:         $9.00
-  Distance:     $38.00 (546% of ATR)
-  Formed:       2026-07-30
+  Range:        $170.51 - $181.71
+  Size:         $11.20
+  Distance:     $18.52 (272% of ATR)
+  Formed:       2026-09-14
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
   Range:        $200.10 - $226.46
   Size:         $26.36
-  Distance:     $7.10
+  Distance:     $0.00
   Formed:       2026-06-12
-  FRESHNESS:    FRESH
-  Notes:        Fresh - not tested recently
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($200.23 >= zone $200.10)
 
 TRADE METRICS:
-  Stop Loss Distance:  $47.00
-  Profit Target (PT):  $7.10
-  Risk:Reward Ratio:   1:0.15
+  Stop Loss Distance:  $29.72
+  Profit Target (PT):  $-0.13
+  Risk:Reward Ratio:   1:-0.00

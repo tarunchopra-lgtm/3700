@@ -3,27 +3,27 @@ TICKER: EME
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $786.45
-  ATR (14-day): $36.65
+  Price:        $817.36
+  ATR (14-day): $34.88
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $668.82 - $839.99
-  Size:         $171.17
-  Distance:     $0.00 (0% of ATR)
-  Formed:       2026-07-30
-  FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($786.45 <= zone $839.99)
+  Range:        $668.82 - $711.08
+  Size:         $42.25
+  Distance:     $106.28 (305% of ATR)
+  Formed:       2026-07-29
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
   Range:        $796.62 - $841.73
   Size:         $45.11
-  Distance:     $10.17
+  Distance:     $0.00
   Formed:       2026-06-29
-  FRESHNESS:    FRESH
-  Notes:        Fresh - not tested recently
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($817.36 >= zone $796.62)
 
 TRADE METRICS:
-  Stop Loss Distance:  $117.63
-  Profit Target (PT):  $10.17
-  Risk:Reward Ratio:   1:0.09
+  Stop Loss Distance:  $148.54
+  Profit Target (PT):  $-20.74
+  Risk:Reward Ratio:   1:-0.14

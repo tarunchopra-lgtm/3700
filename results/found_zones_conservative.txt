@@ -1,1 +1,18 @@
-No stocks found with demand/supply zones.
+========================================================================================================================
+FOUND ZONES - CONSERVATIVE SENSITIVITY
+Generated: 2026-09-17 21:52:31
+========================================================================================================================
+
+Total Zones Found: 1
+Sorted by: Distance to Demand Zone (closest first)
+
+  1. FLEX   | $  114.55 | Demand: $102.25-$108.26 | Supply: $149.17-$165.82 | Dist: $  6.29 ( 79% ATR) [ ] | RR: 1:2.81 | Fresh: D✗S✓
+
+========================================================================================================================
+LEGEND:
+  [✓] Within 1 ATR from demand zone (actionable)
+  Dist: Distance from current price to demand zone
+  ATR %: Distance as percentage of Average True Range
+  RR: Risk:Reward ratio (higher is better)
+  Fresh: D=Demand zone fresh, S=Supply zone fresh
+  ✓ = Fresh (not tested), ✗ = Stale (already tested)

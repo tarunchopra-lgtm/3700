@@ -3,8 +3,8 @@ import re
 import sys
 import requests
 from alpaca.common.exceptions import APIError
-from alpaca.trading.requests import LimitOrderRequest, MarketOrderRequest, GetOrdersRequest, StopOrderRequest
-from alpaca.trading.enums import OrderSide, TimeInForce, QueryOrderStatus
+from alpaca.trading.requests import GetOrderByIdRequest, GetOrdersRequest, LimitOrderRequest, MarketOrderRequest, ReplaceOrderRequest, StopLossRequest, StopOrderRequest, TakeProfitRequest
+from alpaca.trading.enums import OrderClass, OrderSide, TimeInForce, QueryOrderStatus
 from alpaca.data.enums import DataFeed, OptionsFeed
 from alpaca.data.historical import CryptoHistoricalDataClient, StockHistoricalDataClient, OptionHistoricalDataClient
 from alpaca.data.requests import CryptoLatestTradeRequest, StockLatestTradeRequest, OptionLatestTradeRequest, OptionLatestQuoteRequest
@@ -476,6 +476,97 @@ def _create_stop_order(symbol: str, qty: float, side: OrderSide, stop_price: flo
     return StopOrderRequest(**order_dict)
 
 
+def _submit_oco_exit(symbol: str, qty: float, stop_price: float, target_price: float,
+                     time_in_force: TimeInForce) -> tuple[str, str]:
+    """Submit a linked one-cancels-other sell exit and return target and stop IDs."""
+    order = LimitOrderRequest(
+        symbol=symbol,
+        qty=qty,
+        side=OrderSide.SELL,
+        type="limit",
+        time_in_force=time_in_force,
+        limit_price=round(target_price, 2),
+        order_class=OrderClass.OCO,
+        take_profit=TakeProfitRequest(limit_price=round(target_price, 2)),
+        stop_loss=StopLossRequest(stop_price=round(stop_price, 2)),
+    )
+    parent = trading_client.submit_order(order_data=order)
+    order_with_legs = trading_client.get_order_by_id(
+        str(parent.id),
+        filter=GetOrderByIdRequest(nested=True),
+    )
+    target_id = str(parent.id)
+    stop_id = next(
+        (
+            str(leg.id)
+            for leg in (getattr(order_with_legs, "legs", None) or [])
+            if getattr(leg, "stop_price", None) is not None
+        ),
+        None,
+    )
+    if stop_id is None:
+        raise RuntimeError(f"OCO exit {parent.id} was created without a stop-loss leg")
+    return target_id, stop_id
+
+
+def _get_linked_exit_ids(entry_order_id: str) -> tuple[str | None, str | None]:
+    """Return the target and stop leg IDs attached to an Alpaca bracket parent order."""
+    order = trading_client.get_order_by_id(
+        entry_order_id,
+        filter=GetOrderByIdRequest(nested=True),
+    )
+    target_id = None
+    stop_id = None
+    for leg in getattr(order, "legs", None) or []:
+        if getattr(leg, "stop_price", None) is not None:
+            stop_id = str(leg.id)
+        elif getattr(leg, "limit_price", None) is not None:
+            target_id = str(leg.id)
+    return target_id, stop_id
+
+
+def _update_tracked_oco_exits(symbol: str, cfg: dict, state: dict) -> None:
+    """Replace open OCO target and stop legs using their persisted Alpaca IDs."""
+    for bracket_num in (1, 2):
+        bracket = state[f"bracket{bracket_num}"]
+        target_price = cfg["target1_price"] if bracket_num == 1 else cfg["target2_price"]
+        target_id = bracket["target_order_id"]
+        stop_id = bracket["stop_order_id"]
+        if not target_id or not stop_id:
+            continue
+        target_order = trading_client.get_order_by_id(target_id)
+        stop_order = trading_client.get_order_by_id(stop_id)
+        current_target = float(target_order.limit_price)
+        current_stop = float(stop_order.stop_price)
+
+        if abs(current_target - target_price) >= 0.005:
+            target_response = trading_client.replace_order_by_id(
+                target_id,
+                ReplaceOrderRequest(limit_price=round(target_price, 2)),
+            )
+            bracket["target_order_id"] = str(target_response.id)
+            print(f"[{symbol}] Updated B{bracket_num} OCO target: ${current_target:.2f} -> ${target_price:.2f}")
+
+        if abs(current_stop - cfg["stop_price"]) >= 0.005:
+            stop_response = trading_client.replace_order_by_id(
+                stop_id,
+                ReplaceOrderRequest(stop_price=round(cfg["stop_price"], 2)),
+            )
+            bracket["stop_order_id"] = str(stop_response.id)
+            print(f"[{symbol}] Updated B{bracket_num} OCO stop: ${current_stop:.2f} -> ${cfg['stop_price']:.2f}")
+
+        save_bracket_file(
+            symbol, bracket_num,
+            entry_order_id=bracket["entry_order_id"],
+            stop_order_id=bracket["stop_order_id"],
+            target_order_id=bracket["target_order_id"],
+            entry_price=cfg["entry_price"],
+            stop_price=cfg["stop_price"],
+            target_price=target_price,
+            qty=cfg["bracket_qty"],
+        )
+
+
 def _find_position_for_symbol(symbol: str, retries: int = 3, delay_seconds: float = 1.0):
     target = _normalize_symbol(symbol)
     for attempt in range(1, retries + 1):
@@ -765,14 +856,9 @@ def _remove_trade(symbol: str):
 
 def _place_entry_orders_for_symbols(symbols_to_place):
     """
-    Place TWO bracket entry orders simultaneously for specified symbols.
-    Each bracket = 50% qty with its own stop loss and target.
-    
-    Bracket 1: Entry (50%), Stop Loss, Target 1
-    Bracket 2: Entry (50%), Stop Loss, Target 2
-    
-    CRITICAL: BOTH brackets must be placed at SAME entry price so both can fill simultaneously.
-    This is two-phase: Phase 1 places only entry orders, Phase 2 (monitoring loop) places stops/targets.
+    Place two half-size limit entry orders at the configured entry price.
+
+    Their OCO exit pairs are submitted after both entries fill.
     """
     for symbol in symbols_to_place:
         if symbol not in trade_states:
@@ -791,47 +877,39 @@ def _place_entry_orders_for_symbols(symbols_to_place):
                 print(f"[{symbol}] ✓ Existing position: {existing_pos.qty} shares\n")
                 continue
             
-            # ====== BRACKET 1: Place Entry Order ======
+            # ====== ENTRY 1 ======
             bracket1_placed = False
             try:
                 entry1_order = _create_limit_order(
-                    symbol=symbol,
-                    qty=float(cfg["bracket_qty"]),
-                    side=OrderSide.BUY,
-                    limit_price=cfg["entry_price"],
-                    time_in_force=cfg["order_time_in_force"],
-                    is_stock=not cfg["is_crypto"] and not cfg["is_option"]
+                    symbol, float(cfg["bracket_qty"]), OrderSide.BUY, cfg["entry_price"],
+                    cfg["order_time_in_force"], not cfg["is_crypto"] and not cfg["is_option"]
                 )
-                entry1_resp = _timed("submit_order(bracket1_entry)", trading_client.submit_order, order_data=entry1_order)
-                if entry1_resp and entry1_resp.id:
-                    state["bracket1"]["entry_order_id"] = str(entry1_resp.id)
+                entry1_id = str(trading_client.submit_order(order_data=entry1_order).id)
+                if entry1_id:
+                    state["bracket1"]["entry_order_id"] = entry1_id
                     bracket1_placed = True
-                    print(f"[{symbol}] ✓ Bracket 1 Entry: BUY {cfg['bracket_qty']} @ ${cfg['entry_price']:.2f} (ID: {entry1_resp.id})")
+                    print(f"[{symbol}] ✓ Bracket 1: BUY {cfg['bracket_qty']} @ ${cfg['entry_price']:.2f} (ID: {entry1_id})")
                 else:
-                    print(f"[{symbol}] ✗ Bracket 1 Entry: No response ID")
+                    print(f"[{symbol}] ✗ Bracket 1: No response ID")
             except Exception as e:
-                print(f"[{symbol}] ✗ Bracket 1 Entry ERROR: {e}")
-            
-            # ====== BRACKET 2: Place Entry Order ======
+                print(f"[{symbol}] ✗ Bracket 1 ERROR: {e}")
+
+            # ====== ENTRY 2 ======
             bracket2_placed = False
             try:
                 entry2_order = _create_limit_order(
-                    symbol=symbol,
-                    qty=float(cfg["bracket_qty"]),
-                    side=OrderSide.BUY,
-                    limit_price=cfg["entry_price"],
-                    time_in_force=cfg["order_time_in_force"],
-                    is_stock=not cfg["is_crypto"] and not cfg["is_option"]
+                    symbol, float(cfg["bracket_qty"]), OrderSide.BUY, cfg["entry_price"],
+                    cfg["order_time_in_force"], not cfg["is_crypto"] and not cfg["is_option"]
                 )
-                entry2_resp = _timed("submit_order(bracket2_entry)", trading_client.submit_order, order_data=entry2_order)
-                if entry2_resp and entry2_resp.id:
-                    state["bracket2"]["entry_order_id"] = str(entry2_resp.id)
+                entry2_id = str(trading_client.submit_order(order_data=entry2_order).id)
+                if entry2_id:
+                    state["bracket2"]["entry_order_id"] = entry2_id
                     bracket2_placed = True
-                    print(f"[{symbol}] ✓ Bracket 2 Entry: BUY {cfg['bracket_qty']} @ ${cfg['entry_price']:.2f} (ID: {entry2_resp.id})")
+                    print(f"[{symbol}] ✓ Bracket 2: BUY {cfg['bracket_qty']} @ ${cfg['entry_price']:.2f} (ID: {entry2_id})")
                 else:
-                    print(f"[{symbol}] ✗ Bracket 2 Entry: No response ID")
+                    print(f"[{symbol}] ✗ Bracket 2: No response ID")
             except Exception as e:
-                print(f"[{symbol}] ✗ Bracket 2 Entry ERROR: {e}")
+                print(f"[{symbol}] ✗ Bracket 2 ERROR: {e}")
             
             # ====== SAVE TRACKING ======
             if bracket1_placed:
@@ -845,7 +923,6 @@ def _place_entry_orders_for_symbols(symbols_to_place):
                     target_price=cfg["target1_price"],
                     qty=cfg["bracket_qty"]
                 )
-            
             if bracket2_placed:
                 save_bracket_file(
                     symbol, 2,
@@ -857,21 +934,8 @@ def _place_entry_orders_for_symbols(symbols_to_place):
                     target_price=cfg["target2_price"],
                     qty=cfg["bracket_qty"]
                 )
-            
             if bracket1_placed and bracket2_placed:
-                save_position_status(
-                    symbol,
-                    qty=cfg["num_stocks"],
-                    entry_price=cfg["entry_price"],
-                    bracket1_status="pending",
-                    bracket2_status="pending",
-                    current_price=cfg["entry_price"]
-                )
-                print(f"[{symbol}] ✓ Both bracket entries placed! Waiting for fills...\n")
-            elif bracket1_placed or bracket2_placed:
-                print(f"[{symbol}] ⚠ Only {1 if bracket1_placed else 2} bracket entry placed! (Expected 2)\n")
-            else:
-                print(f"[{symbol}] ✗ No bracket entries were placed!\n")
+                print(f"[{symbol}] ✓ Both native bracket entries placed.\n")
                 
         except Exception as e:
             print(f"[{symbol}] ✗ Critical error in placement: {e}\n")
@@ -926,7 +990,7 @@ for symbol in list(trade_states.keys()):
         pos_qty = _normalize_position_qty(float(existing_pos.qty))
         print(f"[STARTUP] [{symbol}] Found position: {pos_qty} shares @ ${existing_pos.avg_entry_price:.2f}")
     elif not bracket1_data and not bracket2_data:
-        print(f"[STARTUP] [{symbol}] No position or bracket files - will place bracket orders")
+        print(f"[STARTUP] [{symbol}] No position or tracker - will place entry orders")
 
 print()
 
@@ -957,6 +1021,25 @@ if not trade_states:
     print("Error: No valid trades loaded")
     sys.exit(1)
 
+# Restore persistent JSON tracking after the configured symbols exist in memory.
+# This must happen before stale-order cleanup so active OCO and entry IDs are preserved.
+for symbol, trade_data in trade_states.items():
+    state = trade_data["state"]
+    for bracket_num in (1, 2):
+        bracket_data = load_bracket_file(symbol, bracket_num)
+        if not bracket_data:
+            continue
+        bracket = state[f"bracket{bracket_num}"]
+        bracket["entry_order_id"] = bracket_data.get("entry_order_id")
+        bracket["stop_order_id"] = bracket_data.get("stop_order_id")
+        bracket["target_order_id"] = bracket_data.get("target_order_id")
+        bracket["filled"] = bracket_data.get("filled", False)
+        print(
+            f"[STARTUP] [{symbol}] Restored B{bracket_num}: "
+            f"entry={bracket['entry_order_id']}, stop={bracket['stop_order_id']}, "
+            f"target={bracket['target_order_id']}"
+        )
+
 print(f"[INFO] Loaded {len(trade_states)} initial trade configuration(s):\n")
 for symbol, trade_data in trade_states.items():
     cfg = trade_data["config"]
@@ -964,8 +1047,8 @@ for symbol, trade_data in trade_states.items():
     print(f"    Entry: ${cfg['entry_price']:.2f} | Shares: {cfg['num_stocks']} | Stop: ${cfg['stop_price']:.2f}")
     print(f"    Target1: ${cfg['target1_price']:.2f} | Target2: ${cfg['target2_price']:.2f}\n")
 
-# ========== CANCEL ONLY DUPLICATE/STALE ORDERS (Preserve tracked bracket orders) ==========
-print(f"[INFO] Cleaning up duplicate/stale orders (preserving tracked bracket orders)...\n")
+# ========== CANCEL ONLY DUPLICATE/STALE ORDERS (Preserve tracked entry/OCO orders) ==========
+print(f"[INFO] Cleaning up duplicate/stale orders (preserving tracked entry/OCO orders)...\n")
 
 # Collect all order IDs we're actively tracking from bracket files
 tracked_order_ids = set()
@@ -996,7 +1079,7 @@ try:
                 print(f"  ⚠ Could not cancel {order.id}: {e}")
     
     if tracked_order_ids:
-        print(f"[INFO] ✓ Preserved {len(tracked_order_ids)} tracked bracket orders\n")
+        print(f"[INFO] ✓ Preserved {len(tracked_order_ids)} tracked entry/OCO orders\n")
     
     if cancelled_count > 0:
         print(f"[INFO] Cancelled {cancelled_count} duplicate/stale orders\n")
@@ -1008,7 +1091,7 @@ try:
 except Exception as e:
     print(f"[INFO] ⚠ Could not fetch/cancel orders: {e}\n")
 
-print(f"[INFO] Placing new bracket entry orders...\n")
+print(f"[INFO] Placing new 50/50 entry orders...\n")
 
 # Create data client
 if all(trade_states[s]["config"]["is_crypto"] for s in trade_states):
@@ -1030,7 +1113,7 @@ for symbol in trade_states:
     
     if bracket1_entry or bracket2_entry:
         # Entry orders already tracked from previous run
-        print(f"[STARTUP] [{symbol}] Skipping entry (bracket orders already tracked from previous run)\n")
+        print(f"[STARTUP] [{symbol}] Skipping entry (tracked order IDs restored from previous run)\n")
     elif not pos:  # No position - need entry order
         existing_entry_orders = _get_open_orders_for_symbol(symbol)
         existing_entry_orders = [o for o in existing_entry_orders if o.side == OrderSide.BUY]
@@ -1053,7 +1136,7 @@ else:
     print(f"[INFO] All entry orders already in place or filled\n")
 
 print(f"[INFO] Monitoring started (unified 10s check for market & config)...\n")
-print(f"[INFO] Bracket tracking files: positions/TICKER_bracket1.txt & positions/TICKER_bracket2.txt\n")
+print(f"[INFO] Position trackers: positions/TICKER.json (entry and OCO IDs)\n")
 
 try:
     # ========== MONITORING LOOP ==========
@@ -1114,8 +1197,16 @@ try:
                     pos = _find_position_for_symbol(symbol, retries=1, delay_seconds=0.0)
                     
                     if pos:
-                        # Position already filled - don't modify, just note the change
-                        print(f"  ⚠ {symbol}: Position filled, config change ignored")
+                        if (num_stocks, entry_price) != prev_config[:2]:
+                            print(f"  ⚠ {symbol}: Filled position keeps its original quantity and entry price")
+                        cfg["stop_price"] = stop_price
+                        cfg["target1_price"] = target1_price
+                        cfg["target2_price"] = target2_price
+                        try:
+                            _update_tracked_oco_exits(symbol, cfg, state)
+                            print(f"  ✓ {symbol}: Updated tracked OCO stops/targets by trading ID")
+                        except Exception as e:
+                            print(f"  ✗ {symbol}: Could not update tracked OCO orders: {e}")
                     else:
                         # No position yet - check if bracket entry orders exist and cancel them
                         cancelled_count = 0
@@ -1184,21 +1275,20 @@ try:
             if b1_entry_id and not b2_entry_id:
                 try:
                     entry2_order = _create_limit_order(
-                        symbol=symbol, qty=float(cfg["bracket_qty"]), side=OrderSide.BUY,
-                        limit_price=cfg["entry_price"], time_in_force=cfg["order_time_in_force"],
-                        is_stock=not cfg["is_crypto"] and not cfg["is_option"]
+                        symbol, float(cfg["bracket_qty"]), OrderSide.BUY, cfg["entry_price"],
+                        cfg["order_time_in_force"], not cfg["is_crypto"] and not cfg["is_option"]
                     )
-                    entry2_resp = trading_client.submit_order(order_data=entry2_order)
-                    if entry2_resp and entry2_resp.id:
-                        state["bracket2"]["entry_order_id"] = str(entry2_resp.id)
-                        save_bracket_file(symbol, 2, entry_order_id=str(entry2_resp.id), 
+                    entry2_id = str(trading_client.submit_order(order_data=entry2_order).id)
+                    if entry2_id:
+                        state["bracket2"]["entry_order_id"] = entry2_id
+                        save_bracket_file(symbol, 2, entry_order_id=entry2_id,
                                         entry_price=cfg["entry_price"], stop_price=cfg["stop_price"],
                                         target_price=cfg["target2_price"], qty=cfg["bracket_qty"])
-                        print(f"[{symbol}] ✓ Bracket 2 entry placed: {entry2_resp.id}")
+                        print(f"[{symbol}] ✓ Bracket 2 entry placed: {entry2_id}")
                 except Exception as e:
                     print(f"[{symbol}] ✗ Failed to place bracket 2 entry: {e}")
         
-        # STEP 2: Check if BOTH entries have filled, and place stops/targets together
+        # STEP 2: Submit and track one OCO exit pair for each filled half-position.
         for symbol in list(trade_states.keys()):
             cfg = trade_states[symbol]["config"]
             state = trade_states[symbol]["state"]
@@ -1209,23 +1299,47 @@ try:
             b1 = state["bracket1"]
             b2 = state["bracket2"]
             
-            # Both entries must be placed and neither should have stops yet
-            if b1["entry_order_id"] and b2["entry_order_id"] and not b1["stop_order_id"] and not b2["stop_order_id"]:
+            position = _find_position_for_symbol(symbol, retries=1, delay_seconds=0.0)
+            if not position or _normalize_position_qty(float(position.qty)) < cfg["num_stocks"] * 0.9:
+                continue
+
+            for bracket_num, bracket, target_price in (
+                (1, b1, cfg["target1_price"]),
+                (2, b2, cfg["target2_price"]),
+            ):
+                if not bracket["entry_order_id"] or bracket["target_order_id"] or bracket["stop_order_id"]:
+                    continue
+                try:
+                    target_id, stop_id = _submit_oco_exit(
+                        symbol, float(cfg["bracket_qty"]), cfg["stop_price"],
+                        target_price, cfg["order_time_in_force"]
+                    )
+                    bracket["target_order_id"] = target_id
+                    bracket["stop_order_id"] = stop_id
+                    save_bracket_file(
+                        symbol, bracket_num,
+                        entry_order_id=bracket["entry_order_id"],
+                        stop_order_id=stop_id,
+                        target_order_id=target_id,
+                        entry_price=cfg["entry_price"],
+                        stop_price=cfg["stop_price"],
+                        target_price=target_price,
+                        qty=cfg["bracket_qty"],
+                    )
+                    print(f"[{symbol}] ✓ B{bracket_num} OCO: stop ${cfg['stop_price']:.2f} | target ${target_price:.2f}")
+                except Exception as e:
+                    print(f"[{symbol}] ✗ B{bracket_num} OCO error: {e}")
+            
+            # BRACKET 1: Check if entry placed but stops/targets not yet
+            if False and b1["entry_order_id"] and not b1["stop_order_id"] and not b1["target_order_id"]:
+                # Check if B1 entry filled
                 pos = _find_position_for_symbol(symbol, retries=1, delay_seconds=0.0)
                 if pos:
                     qty = _normalize_position_qty(float(pos.qty))
-                    print(f"[DEBUG] [{symbol}] Checking placement: qty={qty}, need>={cfg['num_stocks'] * 0.9}, has_stop={bool(b1['stop_order_id'])}")
                     
-                    # Both filled when position qty >= total qty * 0.9
-                    if qty >= cfg["num_stocks"] * 0.9:
-                        print(f"[{current_time.strftime('%H:%M:%S')}] [{symbol}] ✓ Both entries FILLED @ ${float(pos.avg_entry_price):.2f}")
-                        
-                        # FIX: Place bracket orders SEQUENTIALLY to avoid qty conflicts
-                        # Bracket 1: Stop + Target
-                        # Wait 1 second
-                        # Bracket 2: Stop + Target
-                        
-                        print(f"  ⏳ Placing Bracket 1 orders (stop + target)...")
+                    if qty >= cfg["bracket_qty"] * 0.9:  # B1 filled
+                        print(f"[{current_time.strftime('%H:%M:%S')}] [{symbol}] ✓ B1 FILLED @ ${float(pos.avg_entry_price):.2f}")
+                        print(f"  ⏳ Placing B1 stop + target...")
                         
                         # Place B1 STOP
                         try:
@@ -1234,9 +1348,11 @@ try:
                                                         not cfg["is_crypto"] and not cfg["is_option"])
                             sr_b1 = trading_client.submit_order(order_data=stop_b1)
                             b1["stop_order_id"] = str(sr_b1.id)
-                            print(f"  ✓ B1 Stop @ ${cfg['stop_price']:.2f} (ID: {sr_b1.id})")
+                            print(f"    ✓ B1 Stop @ ${cfg['stop_price']:.2f}")
                         except Exception as e:
-                            print(f"  ✗ B1 Stop Error: {e}")
+                            print(f"    ✗ B1 Stop Error: {e}")
+                        
+                        time.sleep(1)
                         
                         # Place B1 TARGET
                         try:
@@ -1245,21 +1361,53 @@ try:
                                                            not cfg["is_crypto"] and not cfg["is_option"])
                             tr_b1 = trading_client.submit_order(order_data=target_b1)
                             b1["target_order_id"] = str(tr_b1.id)
-                            print(f"  ✓ B1 Target @ ${cfg['target1_price']:.2f} (ID: {tr_b1.id})")
+                            print(f"    ✓ B1 Target @ ${cfg['target1_price']:.2f}\n")
                         except Exception as e:
-                            print(f"  ✗ B1 Target Error: {e}")
+                            print(f"    ✗ B1 Target Error: {e}\n")
                         
-                        # Save B1 tracking
+                        # Save B1
                         save_bracket_file(symbol, 1, entry_order_id=b1["entry_order_id"],
                                         stop_order_id=b1["stop_order_id"], target_order_id=b1["target_order_id"],
                                         entry_price=cfg["entry_price"], stop_price=cfg["stop_price"],
                                         target_price=cfg["target1_price"], qty=cfg["bracket_qty"])
-                        
-                        # Wait before placing Bracket 2 orders
-                        import time
-                        time.sleep(1)
-                        
-                        print(f"  ⏳ Placing Bracket 2 orders (stop + target)...")
+            
+            # BRACKET 2: Check if B1 is complete before placing B2
+            # (Only place B2 entry if B1 entry already exists and B2 entry doesn't)
+            if False and b1["entry_order_id"] and not b2["entry_order_id"] and b1["stop_order_id"]:
+                # B1 is now protected (has stops/targets) → Safe to place B2
+                print(f"[{current_time.strftime('%H:%M:%S')}] [{symbol}] ⏳ B1 protected, placing B2 entry...")
+                
+                try:
+                    entry2_order = _create_limit_order(
+                        symbol=symbol,
+                        qty=float(cfg["bracket_qty"]),
+                        side=OrderSide.BUY,
+                        limit_price=cfg["entry_price"],
+                        time_in_force=cfg["order_time_in_force"],
+                        is_stock=not cfg["is_crypto"] and not cfg["is_option"]
+                    )
+                    entry2_resp = trading_client.submit_order(order_data=entry2_order)
+                    b2["entry_order_id"] = str(entry2_resp.id)
+                    print(f"  ✓ B2 Entry @ ${cfg['entry_price']:.2f}\n")
+                    
+                    save_bracket_file(symbol, 2, entry_order_id=b2["entry_order_id"],
+                                    stop_order_id=None, target_order_id=None,
+                                    entry_price=cfg["entry_price"], stop_price=cfg["stop_price"],
+                                    target_price=cfg["target2_price"], qty=cfg["bracket_qty"])
+                except Exception as e:
+                    print(f"  ✗ B2 Entry Error: {e}\n")
+            
+            # BRACKET 2: Check if entry placed but stops/targets not yet
+            if False and b2["entry_order_id"] and not b2["stop_order_id"] and not b2["target_order_id"]:
+                # Check if B2 entry filled
+                pos = _find_position_for_symbol(symbol, retries=1, delay_seconds=0.0)
+                if pos:
+                    qty = _normalize_position_qty(float(pos.qty))
+                    
+                    # B2 filled when total qty >= 2 (B1 + B2)
+                    if qty >= cfg["num_stocks"] * 0.9:
+                        print(f"[{current_time.strftime('%H:%M:%S')}] [{symbol}] ✓ B2 FILLED @ ${float(pos.avg_entry_price):.2f}")
+                        print(f"  ⏳ Placing B2 stop + target...")
                         
                         # Place B2 STOP
                         try:
@@ -1268,9 +1416,11 @@ try:
                                                         not cfg["is_crypto"] and not cfg["is_option"])
                             sr_b2 = trading_client.submit_order(order_data=stop_b2)
                             b2["stop_order_id"] = str(sr_b2.id)
-                            print(f"  ✓ B2 Stop @ ${cfg['stop_price']:.2f} (ID: {sr_b2.id})")
+                            print(f"    ✓ B2 Stop @ ${cfg['stop_price']:.2f}")
                         except Exception as e:
-                            print(f"  ✗ B2 Stop Error: {e}")
+                            print(f"    ✗ B2 Stop Error: {e}")
+                        
+                        time.sleep(1)
                         
                         # Place B2 TARGET
                         try:
@@ -1279,11 +1429,11 @@ try:
                                                            not cfg["is_crypto"] and not cfg["is_option"])
                             tr_b2 = trading_client.submit_order(order_data=target_b2)
                             b2["target_order_id"] = str(tr_b2.id)
-                            print(f"  ✓ B2 Target @ ${cfg['target2_price']:.2f} (ID: {tr_b2.id})\n")
+                            print(f"    ✓ B2 Target @ ${cfg['target2_price']:.2f}\n")
                         except Exception as e:
-                            print(f"  ✗ B2 Target Error: {e}\n")
+                            print(f"    ✗ B2 Target Error: {e}\n")
                         
-                        # Save B2 tracking
+                        # Save B2
                         save_bracket_file(symbol, 2, entry_order_id=b2["entry_order_id"],
                                         stop_order_id=b2["stop_order_id"], target_order_id=b2["target_order_id"],
                                         entry_price=cfg["entry_price"], stop_price=cfg["stop_price"],
@@ -1314,16 +1464,12 @@ try:
                     print(f"[{symbol}] ⚠ Bracket 2 missing entry order! Placing now...")
                     try:
                         entry2_order = _create_limit_order(
-                            symbol=symbol,
-                            qty=float(cfg["bracket_qty"]),
-                            side=OrderSide.BUY,
-                            limit_price=cfg["entry_price"],
-                            time_in_force=cfg["order_time_in_force"],
-                            is_stock=not cfg["is_crypto"] and not cfg["is_option"]
+                            symbol, float(cfg["bracket_qty"]), OrderSide.BUY, cfg["entry_price"],
+                            cfg["order_time_in_force"], not cfg["is_crypto"] and not cfg["is_option"]
                         )
-                        entry2_resp = _timed("submit_order(bracket2_entry_retry)", trading_client.submit_order, order_data=entry2_order)
-                        if entry2_resp and entry2_resp.id:
-                            entry_id = str(entry2_resp.id)
+                        entry2_id = str(trading_client.submit_order(order_data=entry2_order).id)
+                        if entry2_id:
+                            entry_id = entry2_id
                             bracket["entry_order_id"] = entry_id
                             print(f"[{symbol}] ✓ Bracket 2 Entry placed: {entry_id}")
                             

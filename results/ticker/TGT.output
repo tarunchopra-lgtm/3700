@@ -3,15 +3,15 @@ TICKER: TGT
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $158.73
-  ATR (14-day): $3.83
+  Price:        $167.91
+  ATR (14-day): $3.69
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $127.66 - $134.65
-  Size:         $6.99
-  Distance:     $24.08 (629% of ATR)
-  Formed:       2026-06-16
+  Range:        $145.50 - $149.80
+  Size:         $4.30
+  Distance:     $18.11 (491% of ATR)
+  Formed:       2026-08-07
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
@@ -21,9 +21,9 @@ SUPPLY ZONE (Sell Zone):
   Distance:     $0.00
   Formed:       2026-08-20
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($158.73 >= zone $154.50)
+  Notes:        STALE - Price reached zone ($167.91 >= zone $154.50)
 
 TRADE METRICS:
-  Stop Loss Distance:  $31.07
-  Profit Target (PT):  $-4.23
-  Risk:Reward Ratio:   1:-0.14
+  Stop Loss Distance:  $22.41
+  Profit Target (PT):  $-13.41
+  Risk:Reward Ratio:   1:-0.60

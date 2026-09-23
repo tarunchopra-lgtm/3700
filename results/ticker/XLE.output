@@ -3,27 +3,27 @@ TICKER: XLE
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $64.33
-  ATR (14-day): $1.40
+  Price:        $66.46
+  ATR (14-day): $1.32
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $54.36 - $56.03
-  Size:         $1.67
-  Distance:     $8.30 (591% of ATR)
-  Formed:       2026-07-08
+  Range:        $60.03 - $61.16
+  Size:         $1.13
+  Distance:     $5.29 (402% of ATR)
+  Formed:       2026-08-11
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $64.34 - $66.17
-  Size:         $1.83
-  Distance:     $0.01
+  Range:        $64.35 - $66.13
+  Size:         $1.78
+  Distance:     $0.33
   Formed:       2026-09-11
   FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (high $65.11)
+  Notes:        STALE - Price reached zone ($66.46 >= zone $64.35)
 
 TRADE METRICS:
-  Stop Loss Distance:  $9.97
-  Profit Target (PT):  $0.01
-  Risk:Reward Ratio:   1:0.00
+  Stop Loss Distance:  $6.43
+  Profit Target (PT):  $-2.11
+  Risk:Reward Ratio:   1:-0.33

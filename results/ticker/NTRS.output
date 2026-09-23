@@ -3,17 +3,17 @@ TICKER: NTRS
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $188.70
+  Price:        $187.91
   ATR (14-day): $3.07
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $172.25 - $176.00
-  Size:         $3.75
-  Distance:     $12.70 (413% of ATR)
-  Formed:       2026-06-26
+  Range:        $172.25 - $177.43
+  Size:         $5.18
+  Distance:     $10.48 (341% of ATR)
+  Formed:       2026-06-29
   FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $174.95)
+  Notes:        STALE - Daily candle tested zone yesterday (low $175.81)
 
 SUPPLY ZONE (Sell Zone):
   Range:        $187.73 - $191.47
@@ -21,9 +21,9 @@ SUPPLY ZONE (Sell Zone):
   Distance:     $0.00
   Formed:       2026-07-15
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($188.70 >= zone $187.73)
+  Notes:        STALE - Price reached zone ($187.91 >= zone $187.73)
 
 TRADE METRICS:
-  Stop Loss Distance:  $16.45
-  Profit Target (PT):  $-0.97
-  Risk:Reward Ratio:   1:-0.06
+  Stop Loss Distance:  $15.66
+  Profit Target (PT):  $-0.18
+  Risk:Reward Ratio:   1:-0.01

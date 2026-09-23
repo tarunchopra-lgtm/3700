@@ -3,27 +3,27 @@ TICKER: KDP
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $33.87
-  ATR (14-day): $1.07
+  Price:        $32.88
+  ATR (14-day): $0.72
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $30.01 - $31.15
-  Size:         $1.14
-  Distance:     $2.72 (254% of ATR)
-  Formed:       2026-08-13
-  FRESHNESS:    FRESH
-  Notes:        Fresh - not tested recently
+  Range:        $30.36 - $32.59
+  Size:         $2.23
+  Distance:     $0.29 (40% of ATR)
+  Formed:       2026-07-07
+  FRESHNESS:    STALE
+  Notes:        STALE - Daily candle tested zone yesterday (low $31.42)
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $32.58 - $33.82
-  Size:         $1.24
-  Distance:     $0.05
+  Range:        $32.58 - $33.81
+  Size:         $1.23
+  Distance:     $0.00
   Formed:       2026-06-26
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($33.87 >= zone $32.58)
+  Notes:        STALE - Price reached zone ($32.88 >= zone $32.58)
 
 TRADE METRICS:
-  Stop Loss Distance:  $3.86
-  Profit Target (PT):  $-1.29
-  Risk:Reward Ratio:   1:-0.33
+  Stop Loss Distance:  $2.52
+  Profit Target (PT):  $-0.30
+  Risk:Reward Ratio:   1:-0.12

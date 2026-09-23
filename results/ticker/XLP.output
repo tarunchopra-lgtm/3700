@@ -3,27 +3,27 @@ TICKER: XLP
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $86.16
-  ATR (14-day): $1.38
+  Price:        $85.99
+  ATR (14-day): $0.87
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $82.77 - $83.33
-  Size:         $0.56
-  Distance:     $2.83 (206% of ATR)
+  Range:        $82.79 - $83.33
+  Size:         $0.53
+  Distance:     $2.66 (307% of ATR)
   Formed:       2026-07-01
   FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $83.31)
+  Notes:        STALE - Daily candle tested zone yesterday (low $83.00)
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $84.33 - $87.88
-  Size:         $3.55
-  Distance:     $0.00
-  Formed:       2026-07-30
+  Range:        $84.80 - $85.86
+  Size:         $1.06
+  Distance:     $0.13
+  Formed:       2026-08-05
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($86.16 >= zone $84.33)
+  Notes:        STALE - Price reached zone ($85.99 >= zone $84.80)
 
 TRADE METRICS:
-  Stop Loss Distance:  $3.39
-  Profit Target (PT):  $-1.83
-  Risk:Reward Ratio:   1:-0.54
+  Stop Loss Distance:  $3.20
+  Profit Target (PT):  $-1.19
+  Risk:Reward Ratio:   1:-0.37

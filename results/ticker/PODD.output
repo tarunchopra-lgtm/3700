@@ -3,27 +3,27 @@ TICKER: PODD
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $146.66
-  ATR (14-day): $8.24
+  Price:        $147.34
+  ATR (14-day): $4.72
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $131.24 - $135.57
-  Size:         $4.33
-  Distance:     $11.09 (135% of ATR)
-  Formed:       2026-09-11
-  FRESHNESS:    FRESH
-  Notes:        Fresh - not tested recently
+  Range:        $130.12 - $139.47
+  Size:         $9.35
+  Distance:     $7.87 (166% of ATR)
+  Formed:       2026-08-06
+  FRESHNESS:    STALE
+  Notes:        STALE - Recent cached daily candle tested demand zone
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $147.96 - $155.17
-  Size:         $7.21
-  Distance:     $1.30
-  Formed:       2026-08-19
-  FRESHNESS:    FRESH
-  Notes:        Fresh - not tested recently
+  Range:        $142.66 - $149.94
+  Size:         $7.27
+  Distance:     $0.00
+  Formed:       2026-06-18
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($147.34 >= zone $142.66)
 
 TRADE METRICS:
-  Stop Loss Distance:  $15.42
-  Profit Target (PT):  $1.30
-  Risk:Reward Ratio:   1:0.08
+  Stop Loss Distance:  $17.22
+  Profit Target (PT):  $-4.68
+  Risk:Reward Ratio:   1:-0.27

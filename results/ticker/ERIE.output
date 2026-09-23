@@ -3,27 +3,27 @@ TICKER: ERIE
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $275.17
-  ATR (14-day): $9.34
+  Price:        $247.11
+  ATR (14-day): $6.89
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $235.95 - $244.37
-  Size:         $8.42
-  Distance:     $30.80 (330% of ATR)
-  Formed:       2026-09-09
-  FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $244.14)
+  Range:        $209.97 - $214.53
+  Size:         $4.56
+  Distance:     $32.58 (473% of ATR)
+  Formed:       2026-07-22
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $260.17 - $271.47
-  Size:         $11.30
-  Distance:     $3.70
-  Formed:       2026-08-20
-  FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($275.17 >= zone $260.17)
+  Range:        $248.75 - $254.53
+  Size:         $5.78
+  Distance:     $1.64
+  Formed:       2026-09-14
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $39.22
-  Profit Target (PT):  $-15.00
-  Risk:Reward Ratio:   1:-0.38
+  Stop Loss Distance:  $37.14
+  Profit Target (PT):  $1.64
+  Risk:Reward Ratio:   1:0.04

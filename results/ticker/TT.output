@@ -3,27 +3,27 @@ TICKER: TT
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $459.90
-  ATR (14-day): $14.65
+  Price:        $448.00
+  ATR (14-day): $9.85
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $434.00 - $442.59
-  Size:         $8.59
-  Distance:     $17.31 (118% of ATR)
-  Formed:       2026-09-02
+  Range:        $413.97 - $428.95
+  Size:         $14.98
+  Distance:     $19.05 (193% of ATR)
+  Formed:       2026-09-16
   FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $436.17)
+  Notes:        STALE - Daily candle tested zone yesterday (low $418.24)
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $468.98 - $487.74
-  Size:         $18.76
-  Distance:     $9.08
-  Formed:       2026-07-06
+  Range:        $473.64 - $483.08
+  Size:         $9.44
+  Distance:     $25.64
+  Formed:       2026-08-13
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $25.90
-  Profit Target (PT):  $9.08
-  Risk:Reward Ratio:   1:0.35
+  Stop Loss Distance:  $34.03
+  Profit Target (PT):  $25.64
+  Risk:Reward Ratio:   1:0.75

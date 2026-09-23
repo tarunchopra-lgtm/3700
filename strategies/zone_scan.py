@@ -17,11 +17,14 @@ Output:
 
 import subprocess
 import sys
+import json
+import argparse
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from dataclasses import dataclass
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import threading
+from zoneinfo import ZoneInfo
 
 # Add parent directory to path so we can import roles and indicator modules
 sys.path.insert(0, str(Path(__file__).parent.parent))
@@ -33,10 +36,14 @@ from alpaca.data.requests import StockLatestQuoteRequest, StockBarsRequest
 from alpaca.data.timeframe import TimeFrame
 from alpaca.data.enums import DataFeed
 from indicator.atr import _calculate_atr
+from strategies.find_zones import Candle, analyze_zones, calculate_atr
 
 # Thread-safe locks
 output_lock = threading.Lock()
 stats_lock = threading.Lock()
+CACHE_DIR = Path(__file__).resolve().parent.parent / "reports" / "track"
+DEFAULT_LOOKBACK_DAYS = 90
+EASTERN_TZ = ZoneInfo("America/New_York")
 
 
 @dataclass
@@ -110,7 +117,8 @@ def load_watchlist(filename: str) -> list[str]:
     return symbols
 
 
-def run_find_zones(symbol: str, sensitivity: str = 'balanced') -> dict | None:
+def run_find_zones(symbol: str, sensitivity: str = 'balanced', candles: list[Candle] | None = None,
+                   lookback_days: int = DEFAULT_LOOKBACK_DAYS) -> dict | None:
     """
     Find demand and supply zones using corrected freshness logic.
     
@@ -123,12 +131,11 @@ def run_find_zones(symbol: str, sensitivity: str = 'balanced') -> dict | None:
         sensitivity: 'conservative', 'balanced', or 'aggressive'
     """
     try:
-        from strategies.find_zones import analyze_zones
-        
         demand_zone, supply_zone, current_price, atr, _ = analyze_zones(
             symbol, 
-            lookback_days=100, 
-            sensitivity=sensitivity
+            lookback_days=lookback_days,
+            sensitivity=sensitivity,
+            candles=candles,
         )
         
         if not demand_zone or not supply_zone:
@@ -158,6 +165,95 @@ def run_find_zones(symbol: str, sensitivity: str = 'balanced') -> dict | None:
         return None
 
 
+def _bar_to_dict(bar) -> dict:
+    return {
+        "date": bar.timestamp.date().isoformat(),
+        "open": float(bar.open),
+        "high": float(bar.high),
+        "low": float(bar.low),
+        "close": float(bar.close),
+        "volume": int(bar.volume),
+    }
+
+
+def _dict_to_candle(bar: dict) -> Candle:
+    return Candle(
+        timestamp=datetime.fromisoformat(bar["date"]),
+        open=float(bar["open"]),
+        high=float(bar["high"]),
+        low=float(bar["low"]),
+        close=float(bar["close"]),
+        volume=int(bar.get("volume", 0)),
+    )
+
+
+def load_cached_candles(symbol: str, lookback_days: int = DEFAULT_LOOKBACK_DAYS) -> list[Candle] | None:
+    cache_file = CACHE_DIR / f"{symbol.upper()}.json"
+    if not cache_file.exists():
+        return None
+    try:
+        payload = json.loads(cache_file.read_text(encoding="utf-8"))
+        candles = [_dict_to_candle(bar) for bar in payload.get("bars", [])]
+        return sorted(candles, key=lambda candle: candle.timestamp)[-lookback_days:]
+    except Exception as error:
+        print(f"[CACHE] Could not read {cache_file.name}: {error}")
+        return None
+
+
+def refresh_cached_candles(symbols: list[str], client: StockHistoricalDataClient,
+                           lookback_days: int = DEFAULT_LOOKBACK_DAYS) -> None:
+    CACHE_DIR.mkdir(parents=True, exist_ok=True)
+    end = datetime.now(timezone.utc)
+    start = end - timedelta(days=lookback_days + 10)
+    for symbol in symbols:
+        cache_file = CACHE_DIR / f"{symbol.upper()}.json"
+        existing = {}
+        if cache_file.exists():
+            try:
+                existing = {bar["date"]: bar for bar in json.loads(cache_file.read_text(encoding="utf-8")).get("bars", [])}
+            except Exception:
+                existing = {}
+        try:
+            response = client.get_stock_bars(StockBarsRequest(
+                symbol_or_symbols=[symbol],
+                timeframe=TimeFrame.Day,
+                start=start,
+                end=end,
+                feed=DataFeed.IEX,
+            ))
+            data = getattr(response, "data", {})
+            bars = data.get(symbol, []) if isinstance(data, dict) else []
+            actual_today = None
+            for bar in bars:
+                converted = _bar_to_dict(bar)
+                existing[converted["date"]] = converted
+                if converted["date"] == datetime.now(EASTERN_TZ).date().isoformat():
+                    actual_today = converted
+
+            current_price = get_current_price(symbol, client)
+            if current_price is not None:
+                _merge_today_quote(
+                    existing,
+                    symbol,
+                    float(current_price),
+                    _is_regular_market_open(),
+                    actual_today,
+                )
+            ordered = [existing[key] for key in sorted(existing)][-lookback_days:]
+            cache_file.write_text(json.dumps({
+                "symbol": symbol.upper(),
+                "timeframe": "1Day",
+                "feed": "IEX",
+                "lookback_days": lookback_days,
+                "last_updated": datetime.now(timezone.utc).isoformat(),
+                "last_candle_date": ordered[-1]["date"] if ordered else None,
+                "bars": ordered,
+            }, indent=2), encoding="utf-8")
+            print(f"[CACHE] {symbol}: stored {len(ordered)} daily candles")
+        except Exception as error:
+            print(f"[CACHE] {symbol}: refresh failed: {error}")
+
+
 def get_current_price(symbol: str, client: StockHistoricalDataClient) -> float | None:
     """Get current price for a stock"""
     try:
@@ -171,8 +267,44 @@ def get_current_price(symbol: str, client: StockHistoricalDataClient) -> float |
         return None
 
 
-def get_atr(symbol: str, client: StockHistoricalDataClient) -> float | None:
-    """Get ATR for a stock"""
+def _is_regular_market_open(now: datetime | None = None) -> bool:
+    """Return whether the US regular stock session is currently open."""
+    eastern_now = (now or datetime.now(timezone.utc)).astimezone(EASTERN_TZ)
+    if eastern_now.weekday() >= 5:
+        return False
+    session_open = eastern_now.replace(hour=9, minute=30, second=0, microsecond=0)
+    session_close = eastern_now.replace(hour=16, minute=0, second=0, microsecond=0)
+    return session_open <= eastern_now < session_close
+
+
+def _merge_today_quote(existing: dict[str, dict], symbol: str, current_price: float,
+                       market_open: bool, actual_today: dict | None) -> None:
+    """Merge today's price without overwriting closed-session OHLC unnecessarily."""
+    today = datetime.now(EASTERN_TZ).date().isoformat()
+    stored = existing.get(today, {
+        "date": today,
+        "open": current_price,
+        "high": current_price,
+        "low": current_price,
+        "close": current_price,
+        "volume": 0,
+    })
+    if market_open and actual_today:
+        stored.update(actual_today)
+        stored["high"] = max(float(stored["high"]), current_price)
+        stored["low"] = min(float(stored["low"]), current_price)
+        stored["close"] = current_price
+    else:
+        # Outside regular hours, preserve today's finalized/high-low-close values.
+        stored["open"] = current_price
+    existing[today] = stored
+
+
+def get_atr(symbol: str, client: StockHistoricalDataClient,
+            candles: list[Candle] | None = None) -> float | None:
+    """Get ATR locally from cached candles, with API fallback for legacy callers."""
+    if candles is not None:
+        return calculate_atr(candles)
     try:
         return _calculate_atr(client, symbol, is_crypto=False)
     except:
@@ -295,34 +427,68 @@ def check_zone_freshness(symbol: str, demand_low: float, demand_high: float,
         return False, f"Check failed: {error_msg}", False, f"Check failed: {error_msg}"
 
 
-def scan_stock(symbol: str, client: StockHistoricalDataClient, ticker_dir: Path, sensitivity: str = 'balanced') -> StockSetup | None:
+def check_cached_zone_freshness(demand_low: float, demand_high: float,
+                               supply_low: float, supply_high: float,
+                               current_price: float,
+                               candles: list[Candle]) -> tuple[bool, str, bool, str]:
+    """Check freshness using the cached daily candles only."""
+    recent_candles = candles[-3:]
+    demand_is_fresh = current_price > demand_high
+    supply_is_fresh = current_price < supply_low
+
+    if not demand_is_fresh:
+        demand_notes = f"STALE - Price reached zone (${current_price:.2f} <= zone ${demand_high:.2f})"
+    elif any(candle.low <= demand_high and candle.low > demand_low * 0.95 for candle in recent_candles):
+        demand_is_fresh = False
+        demand_notes = "STALE - Recent cached daily candle tested demand zone"
+    else:
+        demand_notes = "Fresh - not tested recently"
+
+    if not supply_is_fresh:
+        supply_notes = f"STALE - Price reached zone (${current_price:.2f} >= zone ${supply_low:.2f})"
+    elif any(candle.high >= supply_low and candle.high < supply_high * 1.05 for candle in recent_candles):
+        supply_is_fresh = False
+        supply_notes = "STALE - Recent cached daily candle tested supply zone"
+    else:
+        supply_notes = "Fresh - not tested recently"
+
+    return demand_is_fresh, demand_notes, supply_is_fresh, supply_notes
+
+
+def scan_stock(symbol: str, client: StockHistoricalDataClient, ticker_dir: Path,
+               sensitivity: str = 'balanced', lookback_days: int = DEFAULT_LOOKBACK_DAYS,
+               cached_candles: list[Candle] | None = None) -> StockSetup | None:
     """Scan a single stock and write results to individual ticker file"""
     try:
         # Get zones with specified sensitivity
-        zones = run_find_zones(symbol, sensitivity=sensitivity)
+        candles = cached_candles or load_cached_candles(symbol, lookback_days)
+        if not candles:
+            return None
+        zones = run_find_zones(symbol, sensitivity=sensitivity, candles=candles, lookback_days=lookback_days)
         if not zones:
             return None
         
         # Get current price
-        price = get_current_price(symbol, client)
+        price = candles[-1].close if client is None else get_current_price(symbol, client)
         if not price:
             return None
         
         # Get ATR
-        atr = get_atr(symbol, client)
+        atr = get_atr(symbol, client, candles)
         if not atr:
             return None
         
         # Check zone freshness
-        demand_fresh, demand_notes, supply_fresh, supply_notes = check_zone_freshness(
-            symbol,
-            zones['demand']['low'],
-            zones['demand']['high'],
-            zones['supply']['low'],
-            zones['supply']['high'],
-            price,
-            client
-        )
+        if client is None:
+            demand_fresh, demand_notes, supply_fresh, supply_notes = check_cached_zone_freshness(
+                zones['demand']['low'], zones['demand']['high'],
+                zones['supply']['low'], zones['supply']['high'], price, candles
+            )
+        else:
+            demand_fresh, demand_notes, supply_fresh, supply_notes = check_zone_freshness(
+                symbol, zones['demand']['low'], zones['demand']['high'],
+                zones['supply']['low'], zones['supply']['high'], price, client
+            )
         
         # Create setup
         setup = StockSetup(
@@ -388,7 +554,8 @@ def scan_stock(symbol: str, client: StockHistoricalDataClient, ticker_dir: Path,
         return None
 
 
-def process_batch(batch_symbols: list, batch_num: int, client: StockHistoricalDataClient, ticker_dir: Path, sensitivity: str = 'balanced') -> list:
+def process_batch(batch_symbols: list, batch_num: int, client: StockHistoricalDataClient, ticker_dir: Path,
+                  sensitivity: str = 'balanced', lookback_days: int = DEFAULT_LOOKBACK_DAYS) -> list:
     """Process a batch of stocks in parallel (10 workers)"""
     batch_setups = []
     
@@ -396,7 +563,7 @@ def process_batch(batch_symbols: list, batch_num: int, client: StockHistoricalDa
     
     with ThreadPoolExecutor(max_workers=10) as executor:
         futures = {
-            executor.submit(scan_stock, symbol, client, ticker_dir, sensitivity): symbol 
+            executor.submit(scan_stock, symbol, client, ticker_dir, sensitivity, lookback_days): symbol
             for symbol in batch_symbols
         }
         
@@ -416,6 +583,34 @@ def process_batch(batch_symbols: list, batch_num: int, client: StockHistoricalDa
                 print(f"  [{i:2d}/{len(batch_symbols)}] {symbol:6s} - Error: {str(e)[:30]}")
     
     return batch_setups
+
+
+def process_cached_sensitivities(symbols: list[str], cached_candles: dict[str, list[Candle]],
+                                 ticker_dir: Path, sensitivities: list[str],
+                                 lookback_days: int) -> dict[str, list[StockSetup]]:
+    """Run every symbol/sensitivity combination concurrently from memory."""
+    results = {sensitivity: [] for sensitivity in sensitivities}
+    with ThreadPoolExecutor(max_workers=min(32, max(1, len(symbols) * len(sensitivities)))) as executor:
+        jobs = {
+            executor.submit(
+                scan_stock, symbol, None, ticker_dir, sensitivity, lookback_days,
+                cached_candles[symbol]
+            ): (symbol, sensitivity)
+            for sensitivity in sensitivities
+            for symbol in symbols
+            if symbol in cached_candles and cached_candles[symbol]
+        }
+
+        for future in as_completed(jobs):
+            symbol, sensitivity = jobs[future]
+            try:
+                setup = future.result()
+                if setup:
+                    results[sensitivity].append(setup)
+            except Exception as error:
+                print(f"[{sensitivity}] {symbol}: {str(error)[:80]}")
+
+    return results
 
 
 def create_found_zones_report(all_setups: list, report_path: Path, sensitivity: str = 'balanced') -> None:
@@ -642,10 +837,11 @@ def compile_balanced_top_20(all_setups: list, report_path: Path) -> None:
             )
 
 
-def main():
+def main(cache_daily_bars: bool = False, sensitivities: list[str] | None = None,
+         lookback_days: int = DEFAULT_LOOKBACK_DAYS):
     """Main entry point"""
     print("\n" + "="*100)
-    print("ZONE SCANNER - GENERATING 3 SENSITIVITY REPORTS (aggressive, balanced, conservative)")
+    print("ZONE SCANNER - CACHED DAILY DATA")
     print("="*100)
     
     # Load all watchlists
@@ -666,13 +862,30 @@ def main():
     print(f"Workers per batch: 10 parallel")
     print(f"Sensitivity levels: aggressive, balanced, conservative")
     
-    # Initialize Alpaca client
-    try:
-        creds = CredentialsRole()
-        client = StockHistoricalDataClient(creds.api_key, creds.secret_key)
-    except Exception as e:
-        print(f"Error: Failed to initialize Alpaca client: {e}")
-        return
+    client = None
+    if cache_daily_bars:
+        print(f"\n[CACHE] Refreshing {lookback_days} daily candles for {len(all_symbols)} symbols...")
+        try:
+            creds = CredentialsRole()
+            client = StockHistoricalDataClient(creds.api_key, creds.secret_key)
+        except Exception as e:
+            print(f"Error: Failed to initialize Alpaca client: {e}")
+            return
+        refresh_cached_candles(all_symbols, client, lookback_days)
+    else:
+        missing_cache = [symbol for symbol in all_symbols if not (CACHE_DIR / f"{symbol.upper()}.json").exists()]
+        if missing_cache:
+            print(f"\n[CACHE] Missing cached data for {len(missing_cache)} symbols.")
+            print("[CACHE] Run with --cache_daily_bars before scanning.")
+            return
+
+    print(f"\n[CACHE] Loading {len(all_symbols)} ticker files once from {CACHE_DIR}...")
+    cached_candles = {}
+    for symbol in all_symbols:
+        candles = load_cached_candles(symbol, lookback_days)
+        if candles:
+            cached_candles[symbol] = candles
+    print(f"[CACHE] Loaded {len(cached_candles)}/{len(all_symbols)} ticker files")
     
     # Create ticker directory for individual outputs
     ticker_dir = Path(__file__).parent.parent / "results" / "ticker"
@@ -682,35 +895,22 @@ def main():
     results_dir = Path(__file__).parent.parent / "results"
     results_dir.mkdir(parents=True, exist_ok=True)
     
-    # Process each sensitivity level
-    sensitivities = ['aggressive', 'balanced', 'conservative']
+    # Process every selected sensitivity concurrently over the shared cache.
+    sensitivities = sensitivities or ['balanced']
     all_summaries = {}
-    
+    scan_started = datetime.now()
+    setups_by_sensitivity = process_cached_sensitivities(
+        all_symbols, cached_candles, ticker_dir, sensitivities, lookback_days
+    )
+    print(f"[SCAN] Parallel scan completed in {datetime.now() - scan_started}")
+
     for sensitivity in sensitivities:
         print(f"\n" + "="*100)
         print(f"SCANNING WITH {sensitivity.upper()} SENSITIVITY")
         print("="*100)
         
-        # Process in batches of 100
-        all_setups = []
-        batch_size = 100
-        num_batches = (len(all_symbols) + batch_size - 1) // batch_size
-        
-        print(f"\n[INFO] Starting {sensitivity} scan in {num_batches} batches...")
-        
-        start_time = datetime.now()
-        
-        for batch_num in range(num_batches):
-            batch_start = batch_num * batch_size
-            batch_end = min(batch_start + batch_size, len(all_symbols))
-            batch_symbols = all_symbols[batch_start:batch_end]
-            
-            batch_setups = process_batch(batch_symbols, batch_num + 1, client, ticker_dir, sensitivity)
-            all_setups.extend(batch_setups)
-            
-            print(f"[BATCH {batch_num + 1}] Completed: {len(batch_setups)} setups found\n")
-        
-        elapsed = datetime.now() - start_time
+        all_setups = setups_by_sensitivity[sensitivity]
+        elapsed = datetime.now() - scan_started
         
         # Compile statistics
         actionable = [s for s in all_setups if s.is_demand_in_atr_reach()]
@@ -751,9 +951,9 @@ def main():
         if sensitivity == 'balanced':
             print("[OK] Top 20 file:            top-20.txt")
     
-    # Print final summary comparing all 3 sensitivities
+    # Print final summary for the sensitivities selected for this run.
     print(f"\n" + "="*100)
-    print("FINAL SUMMARY - ALL 3 SENSITIVITY LEVELS")
+    print("FINAL SUMMARY - SELECTED SENSITIVITY LEVELS")
     print("="*100)
     print(f"{'Sensitivity':<15} {'Total':<8} {'Zones':<8} {'In ATR':<8} {'Fresh':<8} {'Time':<15}")
     print("-"*100)
@@ -763,90 +963,80 @@ def main():
               f"{summary['actionable']:<8} {summary['fresh_actionable']:<8} {str(summary['time']):<15}")
     
     print("\n[REPORTS GENERATED]")
-    print("  Aggressive sensitivity:  pick_aggressive.txt, daily_report_aggressive.txt, found_zones_aggressive.txt")
-    print("  Balanced sensitivity:    pick_balanced.txt, daily_report_balanced.txt, found_zones_balanced.txt")
-    print("  Conservative sensitivity: pick_conservative.txt, daily_report_conservative.txt, found_zones_conservative.txt")
+    for sensitivity in sensitivities:
+        print(
+            f"  {sensitivity.capitalize()} sensitivity:  "
+            f"pick_{sensitivity}.txt, daily_report_{sensitivity}.txt, "
+            f"found_zones_{sensitivity}.txt"
+        )
     
-    # Send emails with all report files
+    # Send every report generated during this run.
     try:
-        attachments = [
-            results_dir / "pick_aggressive.txt",
-            results_dir / "daily_report_aggressive.txt",
-            results_dir / "found_zones_aggressive.txt",
-            results_dir / "pick_balanced.txt",
-            results_dir / "daily_report_balanced.txt",
-            results_dir / "found_zones_balanced.txt",
-            results_dir / "pick_conservative.txt",
-            results_dir / "daily_report_conservative.txt",
-            results_dir / "found_zones_conservative.txt"
-        ]
+        attachments = []
+        report_lines = []
+        for sensitivity in sensitivities:
+            summary = all_summaries[sensitivity]
+            report_lines.append(
+                f"{sensitivity.upper()} SENSITIVITY:\n"
+                f"  Total Scanned: {summary['total_scanned']}\n"
+                f"  With Zones: {len(summary['setups'])}\n"
+                f"  Within 1 ATR: {summary['actionable']}\n"
+                f"  Fresh + In ATR: {summary['fresh_actionable']}"
+            )
+            attachments.extend([
+                results_dir / f"pick_{sensitivity}.txt",
+                results_dir / f"daily_report_{sensitivity}.txt",
+                results_dir / f"found_zones_{sensitivity}.txt",
+            ])
+
+        top_20_path = results_dir / "top-20.txt"
+        if top_20_path.exists():
+            attachments.append(top_20_path)
+
+        attachment_lines = "\n".join(f"- {path.name}" for path in attachments)
         
         recipient = send_email_with_attachments(
-            subject=f"Zone Scan Report (3 Sensitivities) - {datetime.now().strftime('%Y-%m-%d %H:%M')}",
-            body=f"""Zone Scan Complete - All 3 Sensitivity Levels
-
-AGGRESSIVE SENSITIVITY:
-  Total Scanned: {all_summaries['aggressive']['total_scanned']}
-  With Zones: {len(all_summaries['aggressive']['setups'])}
-  Within 1 ATR: {all_summaries['aggressive']['actionable']}
-  Fresh + In ATR: {all_summaries['aggressive']['fresh_actionable']}
-
-BALANCED SENSITIVITY (DEFAULT):
-  Total Scanned: {all_summaries['balanced']['total_scanned']}
-  With Zones: {len(all_summaries['balanced']['setups'])}
-  Within 1 ATR: {all_summaries['balanced']['actionable']}
-  Fresh + In ATR: {all_summaries['balanced']['fresh_actionable']}
-
-CONSERVATIVE SENSITIVITY:
-  Total Scanned: {all_summaries['conservative']['total_scanned']}
-  With Zones: {len(all_summaries['conservative']['setups'])}
-  Within 1 ATR: {all_summaries['conservative']['actionable']}
-  Fresh + In ATR: {all_summaries['conservative']['fresh_actionable']}
-
-Reports Included:
-- pick_aggressive.txt / pick_balanced.txt / pick_conservative.txt
-- daily_report_aggressive.txt / daily_report_balanced.txt / daily_report_conservative.txt
-- found_zones_aggressive.txt / found_zones_balanced.txt / found_zones_conservative.txt
-
-Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
-""",
+            subject=f"Zone Scan Report ({', '.join(sensitivities)}) - {datetime.now().strftime('%Y-%m-%d %H:%M')}",
+            body=(
+                "Zone Scan Complete\n\n"
+                + "\n\n".join(report_lines)
+                + "\n\nReports Attached:\n"
+                + attachment_lines
+                + f"\n\nGenerated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n"
+            ),
             attachments=attachments
         )
-        print(f"\n[EMAIL SENT] All reports sent to {recipient}")
+        print(f"\n[EMAIL SENT] {len(attachments)} reports sent to {recipient}")
     except Exception as e:
         print(f"\n[EMAIL ERROR] Failed to send reports: {e}")
 
 
 if __name__ == "__main__":
-    # Handle help flag
-    if len(sys.argv) > 1 and sys.argv[1] in ["--help", "-h", "help"]:
-        print(__doc__)
-        print("SYNTAX:")
-        print("  python strategies/zone_scan.py [OPTIONS]")
-        print("\nOPTIONS:")
-        print("  (No command-line options - generates 3 reports automatically)")
-        print("  --help, -h        Show this help message")
-        print("\nDESCRIPTION:")
-        print("  Scans all stocks from watchlist files in 3 passes:")
-        print("  1. AGGRESSIVE sensitivity - catches more zones, more false signals")
-        print("  2. BALANCED sensitivity (default) - tuned to your real zone data")
-        print("  3. CONSERVATIVE sensitivity - only cleanest, highest quality zones")
-        print("  ")
-        print("  Each pass uses 10 parallel workers per batch of 100 stocks")
-        print("  Generates separate reports for each sensitivity level")
-        print("\nWATCHLIST FILES:")
-        print("  lists/etf.txt - Exchange Traded Funds")
-        print("  lists/spy.txt - S&P 500 stocks")
-        print("  lists/nasdaq.txt - NASDAQ stocks")
-        print("\nOUTPUT FILES (for each sensitivity):")
-        print("  results/pick_{sensitivity}.txt - Top 10 actionable setups")
-        print("  results/daily_report_{sensitivity}.txt - All stocks with zones")
-        print("  results/found_zones_{sensitivity}.txt - Summary by proximity")
-        print("\nEXAMPLE:")
-        print("  python strategies/zone_scan.py")
-        print("\nEXECUTION TIME:")
-        print("  ~2-3 hours for full 3x scan of 541 stocks per sensitivity (batched, 10 parallel workers)")
-        print()
-        sys.exit(0)
-    
-    main()
+    parser = argparse.ArgumentParser(description="Scan cached daily candles for supply/demand zones.")
+    parser.add_argument(
+        "--cache_daily_bars",
+        action="store_true",
+        help="refresh reports/track/*.json from Alpaca before scanning",
+    )
+    parser.add_argument("--lookback", type=int, default=DEFAULT_LOOKBACK_DAYS)
+    sensitivity_group = parser.add_mutually_exclusive_group()
+    sensitivity_group.add_argument("--balanced", action="store_true", help="run the balanced scan")
+    sensitivity_group.add_argument("--conservative", action="store_true", help="run the conservative scan")
+    sensitivity_group.add_argument("--aggressive", action="store_true", help="run the aggressive scan")
+    sensitivity_group.add_argument("--all-sensitivities", action="store_true", help="run all three scans")
+    args = parser.parse_args()
+
+    if args.all_sensitivities:
+        selected_sensitivities = ["aggressive", "balanced", "conservative"]
+    elif args.conservative:
+        selected_sensitivities = ["conservative"]
+    elif args.aggressive:
+        selected_sensitivities = ["aggressive"]
+    else:
+        selected_sensitivities = ["balanced"]
+
+    main(
+        cache_daily_bars=args.cache_daily_bars,
+        sensitivities=selected_sensitivities,
+        lookback_days=args.lookback,
+    )

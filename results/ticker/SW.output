@@ -3,27 +3,27 @@ TICKER: SW
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $48.16
-  ATR (14-day): $1.70
+  Price:        $47.92
+  ATR (14-day): $1.59
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $41.70 - $42.83
-  Size:         $1.13
-  Distance:     $5.33 (313% of ATR)
-  Formed:       2026-09-10
+  Range:        $42.90 - $44.15
+  Size:         $1.25
+  Distance:     $3.77 (237% of ATR)
+  Formed:       2026-09-14
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $48.25 - $50.19
-  Size:         $1.94
-  Distance:     $0.09
+  Range:        $48.27 - $50.19
+  Size:         $1.92
+  Distance:     $0.34
   Formed:       2026-08-12
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $6.46
-  Profit Target (PT):  $0.09
-  Risk:Reward Ratio:   1:0.01
+  Stop Loss Distance:  $5.02
+  Profit Target (PT):  $0.34
+  Risk:Reward Ratio:   1:0.07

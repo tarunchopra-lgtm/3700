@@ -3,27 +3,27 @@ TICKER: VTR
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $93.45
-  ATR (14-day): $2.73
+  Price:        $91.74
+  ATR (14-day): $1.90
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $83.56 - $85.69
-  Size:         $2.13
-  Distance:     $7.76 (284% of ATR)
-  Formed:       2026-06-23
+  Range:        $80.82 - $83.16
+  Size:         $2.34
+  Distance:     $8.58 (451% of ATR)
+  Formed:       2026-06-18
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $96.92 - $101.60
-  Size:         $4.68
-  Distance:     $3.47
-  Formed:       2026-07-29
-  FRESHNESS:    FRESH
-  Notes:        Fresh - not tested recently
+  Range:        $91.47 - $94.52
+  Size:         $3.05
+  Distance:     $0.00
+  Formed:       2026-07-06
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($91.74 >= zone $91.47)
 
 TRADE METRICS:
-  Stop Loss Distance:  $9.89
-  Profit Target (PT):  $3.47
-  Risk:Reward Ratio:   1:0.35
+  Stop Loss Distance:  $10.92
+  Profit Target (PT):  $-0.27
+  Risk:Reward Ratio:   1:-0.02

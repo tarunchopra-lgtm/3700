@@ -3,27 +3,27 @@ TICKER: NDSN
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $331.80
-  ATR (14-day): $4.76
-  Within ATR:   NO
+  Price:        $316.79
+  ATR (14-day): $5.83
+  Within ATR:   YES
 
 DEMAND ZONE (Buy Zone):
-  Range:        $302.92 - $311.00
-  Size:         $8.08
-  Distance:     $20.80 (437% of ATR)
-  Formed:       2026-08-19
-  FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $306.19)
+  Range:        $307.04 - $311.10
+  Size:         $4.06
+  Distance:     $5.69 (98% of ATR)
+  Formed:       2026-09-14
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $328.87 - $339.12
-  Size:         $10.25
-  Distance:     $0.00
-  Formed:       2026-08-24
-  FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($331.80 >= zone $328.87)
+  Range:        $332.64 - $337.63
+  Size:         $4.99
+  Distance:     $15.85
+  Formed:       2026-08-25
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $28.88
-  Profit Target (PT):  $-2.93
-  Risk:Reward Ratio:   1:-0.10
+  Stop Loss Distance:  $9.75
+  Profit Target (PT):  $15.85
+  Risk:Reward Ratio:   1:1.63

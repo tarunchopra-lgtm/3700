@@ -3,27 +3,27 @@ TICKER: EL
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $94.11
-  ATR (14-day): $2.41
+  Price:        $105.23
+  ATR (14-day): $3.04
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $76.83 - $82.75
-  Size:         $5.92
-  Distance:     $11.36 (471% of ATR)
-  Formed:       2026-06-26
+  Range:        $83.97 - $85.66
+  Size:         $1.69
+  Distance:     $19.58 (645% of ATR)
+  Formed:       2026-08-17
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $102.95 - $108.38
-  Size:         $5.43
-  Distance:     $8.84
+  Range:        $103.00 - $108.37
+  Size:         $5.37
+  Distance:     $0.00
   Formed:       2026-08-25
-  FRESHNESS:    FRESH
-  Notes:        Fresh - not tested recently
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($105.23 >= zone $103.00)
 
 TRADE METRICS:
-  Stop Loss Distance:  $17.28
-  Profit Target (PT):  $8.84
-  Risk:Reward Ratio:   1:0.51
+  Stop Loss Distance:  $21.26
+  Profit Target (PT):  $-2.23
+  Risk:Reward Ratio:   1:-0.10

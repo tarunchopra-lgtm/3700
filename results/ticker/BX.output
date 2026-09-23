@@ -3,27 +3,27 @@ TICKER: BX
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $134.59
-  ATR (14-day): $4.71
+  Price:        $131.85
+  ATR (14-day): $4.04
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $116.80 - $119.14
-  Size:         $2.34
-  Distance:     $15.45 (328% of ATR)
-  Formed:       2026-07-08
+  Range:        $112.10 - $117.58
+  Size:         $5.48
+  Distance:     $14.27 (354% of ATR)
+  Formed:       2026-06-25
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $141.71 - $150.24
-  Size:         $8.53
-  Distance:     $7.12
-  Formed:       2026-08-11
+  Range:        $134.51 - $137.59
+  Size:         $3.08
+  Distance:     $2.66
+  Formed:       2026-08-04
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $17.79
-  Profit Target (PT):  $7.12
-  Risk:Reward Ratio:   1:0.40
+  Stop Loss Distance:  $19.75
+  Profit Target (PT):  $2.66
+  Risk:Reward Ratio:   1:0.13

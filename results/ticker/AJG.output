@@ -3,27 +3,27 @@ TICKER: AJG
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $273.18
-  ATR (14-day): $7.58
+  Price:        $241.10
+  ATR (14-day): $6.99
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $208.08 - $216.12
-  Size:         $8.04
-  Distance:     $57.06 (752% of ATR)
-  Formed:       2026-06-22
+  Range:        $208.10 - $217.72
+  Size:         $9.62
+  Distance:     $23.38 (334% of ATR)
+  Formed:       2026-06-23
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $242.70 - $258.39
-  Size:         $15.69
-  Distance:     $14.79
-  Formed:       2026-09-09
-  FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($273.18 >= zone $242.70)
+  Range:        $253.88 - $261.19
+  Size:         $7.31
+  Distance:     $12.78
+  Formed:       2026-07-14
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $65.10
-  Profit Target (PT):  $-30.48
-  Risk:Reward Ratio:   1:-0.47
+  Stop Loss Distance:  $33.00
+  Profit Target (PT):  $12.78
+  Risk:Reward Ratio:   1:0.39

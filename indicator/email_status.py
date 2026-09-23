@@ -24,6 +24,7 @@ from roles.credentials import bootstrap_trading_auth
 
 POLL_SECONDS = 60
 DEFAULT_TO_EMAIL = "tarun.chopra@gmail.com"
+POSITIONS_DIR = WORKSPACE_ROOT / "positions"
 
 
 @dataclass(frozen=True)
@@ -135,8 +136,9 @@ def _build_change_lines(
     curr_positions: dict[str, PositionSnapshot],
     prev_orders: dict[str, OrderSnapshot],
     curr_orders: dict[str, OrderSnapshot],
-) -> list[str]:
+) -> tuple[list[str], set[str]]:
     lines: list[str] = []
+    touched_symbols: set[str] = set()
 
     prev_pos_symbols = set(prev_positions)
     curr_pos_symbols = set(curr_positions)
@@ -150,10 +152,12 @@ def _build_change_lines(
         lines.append(
             f"NEW POSITION: {symbol} qty={p.qty:g} avg={_format_money(p.avg_entry_price)} mv={_format_money(p.market_value)}"
         )
+        touched_symbols.add(symbol)
 
     for symbol in closed_positions:
         p = prev_positions[symbol]
         lines.append(f"POSITION CLOSED: {symbol} previous_qty={p.qty:g}")
+        touched_symbols.add(symbol)
 
     for symbol in common_positions:
         prev = prev_positions[symbol]
@@ -163,6 +167,7 @@ def _build_change_lines(
                 lines.append(f"POSITION REDUCED: {symbol} qty {prev.qty:g} -> {curr.qty:g}")
             else:
                 lines.append(f"POSITION INCREASED: {symbol} qty {prev.qty:g} -> {curr.qty:g}")
+            touched_symbols.add(symbol)
 
     prev_order_ids = set(prev_orders)
     curr_order_ids = set(curr_orders)
@@ -176,6 +181,7 @@ def _build_change_lines(
         lines.append(
             f"NEW ORDER: {o.symbol} {o.side} qty={o.qty:g} type={o.order_type} price={price_text} status={o.status} id={order_id}"
         )
+        touched_symbols.add(o.symbol)
 
     for order_id in common_order_ids:
         prev = prev_orders[order_id]
@@ -184,8 +190,22 @@ def _build_change_lines(
             lines.append(
                 f"ORDER STATUS CHANGE: {curr.symbol} {curr.side} id={order_id} {prev.status} -> {curr.status}"
             )
+            touched_symbols.add(curr.symbol)
 
-    return lines
+    return lines, touched_symbols
+
+
+def _find_position_files(symbols: set[str]) -> list[Path]:
+    # A closing trade may still have a position file if it holds re-entry state.
+    if not POSITIONS_DIR.exists():
+        return []
+    files: list[Path] = []
+    for symbol in symbols:
+        exact = POSITIONS_DIR / f"{symbol}.json"
+        if exact.exists():
+            files.append(exact)
+        files.extend(sorted(POSITIONS_DIR.glob(f"{symbol}_*.json")))
+    return files
 
 
 def _load_email_config() -> tuple[str, str, str]:
@@ -200,12 +220,27 @@ def _load_email_config() -> tuple[str, str, str]:
     return from_email, to_email, app_password
 
 
-def _send_email(from_email: str, to_email: str, app_password: str, subject: str, body: str) -> None:
+def _send_email(
+    from_email: str,
+    to_email: str,
+    app_password: str,
+    subject: str,
+    body: str,
+    attachments: list[Path] | None = None,
+) -> None:
     msg = EmailMessage()
     msg["From"] = from_email
     msg["To"] = to_email
     msg["Subject"] = subject
     msg.set_content(body)
+
+    for path in attachments or []:
+        try:
+            msg.add_attachment(
+                path.read_bytes(), maintype="application", subtype="json", filename=path.name
+            )
+        except OSError as exc:
+            print(f"Could not attach {path.name}: {exc}")
 
     with smtplib.SMTP_SSL("smtp.gmail.com", 465) as smtp:
         smtp.login(from_email, app_password)
@@ -303,7 +338,7 @@ NOTES:
             try:
                 curr_positions = _snapshot_positions(trading_client)
                 curr_orders = _snapshot_orders(trading_client)
-                change_lines = _build_change_lines(prev_positions, curr_positions, prev_orders, curr_orders)
+                change_lines, touched_symbols = _build_change_lines(prev_positions, curr_positions, prev_orders, curr_orders)
             except Exception as exc:
                 print(f"[{datetime.now().strftime('%H:%M:%S')}] Poll failed: {exc}")
                 continue
@@ -318,9 +353,10 @@ NOTES:
                         *change_lines,
                     ]
                 )
+                attachments = _find_position_files(touched_symbols)
                 try:
-                    _send_email(from_email, to_email, app_password, subject, body)
-                    print(f"[{datetime.now().strftime('%H:%M:%S')}] Alert email sent ({len(change_lines)} change(s)).")
+                    _send_email(from_email, to_email, app_password, subject, body, attachments)
+                    print(f"[{datetime.now().strftime('%H:%M:%S')}] Alert email sent ({len(change_lines)} change(s), {len(attachments)} attachment(s)).")
                 except Exception as exc:
                     print(f"[{datetime.now().strftime('%H:%M:%S')}] Failed to send email: {exc}")
 

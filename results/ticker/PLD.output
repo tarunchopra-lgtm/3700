@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: PLD
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $142.93
+  ATR (14-day): $2.42
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $133.55 - $135.56
+  Size:         $2.00
+  Distance:     $7.38 (305% of ATR)
+  Formed:       2026-09-17
+  FRESHNESS:    STALE
+  Notes:        STALE - Recent cached daily candle tested demand zone
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $143.75 - $145.99
+  Size:         $2.24
+  Distance:     $0.82
+  Formed:       2026-06-23
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+TRADE METRICS:
+  Stop Loss Distance:  $9.38
+  Profit Target (PT):  $0.82
+  Risk:Reward Ratio:   1:0.09

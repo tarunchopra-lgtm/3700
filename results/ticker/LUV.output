@@ -3,27 +3,27 @@ TICKER: LUV
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $40.48
-  ATR (14-day): $1.60
+  Price:        $44.09
+  ATR (14-day): $1.23
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $37.58 - $39.05
-  Size:         $1.47
-  Distance:     $1.43 (89% of ATR)
+  Range:        $37.59 - $39.05
+  Size:         $1.46
+  Distance:     $5.04 (410% of ATR)
   Formed:       2026-09-01
-  FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $38.17)
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $44.00 - $45.70
-  Size:         $1.70
-  Distance:     $3.52
-  Formed:       2026-06-12
+  Range:        $49.62 - $52.13
+  Size:         $2.52
+  Distance:     $5.53
+  Formed:       2026-07-02
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $2.90
-  Profit Target (PT):  $3.52
-  Risk:Reward Ratio:   1:1.21
+  Stop Loss Distance:  $6.51
+  Profit Target (PT):  $5.53
+  Risk:Reward Ratio:   1:0.85

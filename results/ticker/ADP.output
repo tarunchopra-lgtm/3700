@@ -3,27 +3,27 @@ TICKER: ADP
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $272.64
-  ATR (14-day): $8.30
+  Price:        $284.31
+  ATR (14-day): $5.74
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $216.04 - $226.70
-  Size:         $10.66
-  Distance:     $45.94 (554% of ATR)
-  Formed:       2026-06-26
-  FRESHNESS:    FRESH
-  Notes:        Fresh - not tested recently
+  Range:        $268.01 - $272.01
+  Size:         $4.00
+  Distance:     $12.30 (214% of ATR)
+  Formed:       2026-09-18
+  FRESHNESS:    STALE
+  Notes:        STALE - Recent cached daily candle tested demand zone
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $284.93 - $287.86
-  Size:         $2.94
-  Distance:     $12.29
+  Range:        $285.25 - $287.85
+  Size:         $2.60
+  Distance:     $0.94
   Formed:       2026-08-28
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $56.60
-  Profit Target (PT):  $12.29
-  Risk:Reward Ratio:   1:0.22
+  Stop Loss Distance:  $16.30
+  Profit Target (PT):  $0.94
+  Risk:Reward Ratio:   1:0.06

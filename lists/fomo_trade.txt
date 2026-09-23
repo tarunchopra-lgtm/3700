@@ -1,18 +1,30 @@
 # fomo_trade.py configuration file
 # Format: SYMBOL NUM_STOCKS ENTRY_PRICE STOP_PRICE TARGET1_PRICE TARGET2_PRICE
+# Repeating a ticker creates independent trackers: SPY_1.json, SPY_2.json, etc.
+# Keep repeated ticker lines in a stable order so each tracker retains its identity.
 # Example lines (uncomment and modify as needed):
 # MU 2 780 770 800 900
 # INTC 2 55 50 60 70
 # NVDA 2 250 240 260 280
 
 # Active trade configuration (first non-comment line will be used):
-mu 2 960 950 970 999
-nvda 2 218 216 220 225
-spy 2 759 758 760 765
-intc 2 106 105 107 109
-aapl 2 335 333 337 340
-googl 2 350 340 355 360
-gld 2 399 398 401 405
-zm 2 86 84 88 94
-vz 2 47.07 46 49 50
-iwm 2 283.7 282.7 284.7 286
+# supply and demand
+mu 2 940 930 950 1032
+nvda 2 212 210 214 231
+intc 2 99 97 101 131
+#aapl 2 335 333 337 340
+googl 2 333 330 336 394
+gld 2 376 372 380 420
+zm 2 87 86 88 97
+vz 2 48.24 47 49 51
+ste 2 203 199 207 230
+axon 2 403 397 409 600
+### gap up
+### spy
+spy 2 773.6 773.5 773.7 773.8
+spy 2 773.4 774.3 774.9 774
+### etf
+iwm 2 285 284 286 294
+## trend up
+sofi 100 17.25 16.85 17.75 18.25
+kkr 10 99 98 100 103

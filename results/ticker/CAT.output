@@ -3,27 +3,27 @@ TICKER: CAT
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $838.53
-  ATR (14-day): $36.40
+  Price:        $849.60
+  ATR (14-day): $21.85
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $771.39 - $793.94
-  Size:         $22.55
-  Distance:     $44.59 (122% of ATR)
-  Formed:       2026-09-02
+  Range:        $775.14 - $813.19
+  Size:         $38.05
+  Distance:     $36.41 (167% of ATR)
+  Formed:       2026-09-17
   FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $775.14)
+  Notes:        STALE - Recent cached daily candle tested demand zone
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $989.64 - $1073.46
-  Size:         $83.82
-  Distance:     $151.11
-  Formed:       2026-06-26
+  Range:        $970.70 - $1056.87
+  Size:         $86.16
+  Distance:     $121.10
+  Formed:       2026-06-23
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $67.14
-  Profit Target (PT):  $151.11
-  Risk:Reward Ratio:   1:2.25
+  Stop Loss Distance:  $74.46
+  Profit Target (PT):  $121.10
+  Risk:Reward Ratio:   1:1.63

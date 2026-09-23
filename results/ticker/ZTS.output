@@ -3,27 +3,27 @@ TICKER: ZTS
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $72.79
-  ATR (14-day): $3.11
+  Price:        $75.20
+  ATR (14-day): $1.76
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $71.47 - $74.64
-  Size:         $3.17
-  Distance:     $0.00 (0% of ATR)
-  Formed:       2026-06-30
+  Range:        $71.02 - $74.46
+  Size:         $3.44
+  Distance:     $0.74 (42% of ATR)
+  Formed:       2026-08-17
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($72.79 <= zone $74.64)
+  Notes:        STALE - Daily candle tested zone yesterday (low $72.08)
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $78.93 - $82.40
-  Size:         $3.47
-  Distance:     $6.14
-  Formed:       2026-06-15
+  Range:        $76.85 - $79.97
+  Size:         $3.12
+  Distance:     $1.65
+  Formed:       2026-06-18
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $1.32
-  Profit Target (PT):  $6.14
-  Risk:Reward Ratio:   1:4.65
+  Stop Loss Distance:  $4.18
+  Profit Target (PT):  $1.65
+  Risk:Reward Ratio:   1:0.39

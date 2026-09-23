@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: CHD
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $102.56
+  ATR (14-day): $1.85
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $94.03 - $95.73
+  Size:         $1.70
+  Distance:     $6.83 (369% of ATR)
+  Formed:       2026-09-18
+  FRESHNESS:    STALE
+  Notes:        STALE - Recent cached daily candle tested demand zone
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $100.87 - $103.65
+  Size:         $2.78
+  Distance:     $0.00
+  Formed:       2026-08-11
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($102.56 >= zone $100.87)
+
+TRADE METRICS:
+  Stop Loss Distance:  $8.53
+  Profit Target (PT):  $-1.69
+  Risk:Reward Ratio:   1:-0.20

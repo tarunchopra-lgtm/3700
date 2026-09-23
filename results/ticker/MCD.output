@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: MCD
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $263.34
+  ATR (14-day): $4.44
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $247.69 - $250.50
+  Size:         $2.81
+  Distance:     $12.84 (289% of ATR)
+  Formed:       2026-09-17
+  FRESHNESS:    STALE
+  Notes:        STALE - Recent cached daily candle tested demand zone
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $270.12 - $284.46
+  Size:         $14.33
+  Distance:     $6.79
+  Formed:       2026-06-22
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+TRADE METRICS:
+  Stop Loss Distance:  $15.65
+  Profit Target (PT):  $6.79
+  Risk:Reward Ratio:   1:0.43

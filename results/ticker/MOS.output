@@ -3,27 +3,27 @@ TICKER: MOS
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $25.59
-  ATR (14-day): $1.00
+  Price:        $26.19
+  ATR (14-day): $1.11
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $21.55 - $22.70
-  Size:         $1.15
-  Distance:     $2.89 (288% of ATR)
-  Formed:       2026-06-16
+  Range:        $20.82 - $21.67
+  Size:         $0.85
+  Distance:     $4.52 (408% of ATR)
+  Formed:       2026-08-17
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $24.47 - $26.50
-  Size:         $2.03
+  Range:        $25.40 - $26.95
+  Size:         $1.55
   Distance:     $0.00
-  Formed:       2026-09-11
+  Formed:       2026-09-10
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($25.59 >= zone $24.47)
+  Notes:        STALE - Price reached zone ($26.19 >= zone $25.40)
 
 TRADE METRICS:
-  Stop Loss Distance:  $4.04
-  Profit Target (PT):  $-1.12
-  Risk:Reward Ratio:   1:-0.28
+  Stop Loss Distance:  $5.37
+  Profit Target (PT):  $-0.79
+  Risk:Reward Ratio:   1:-0.15

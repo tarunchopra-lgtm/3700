@@ -3,27 +3,27 @@ TICKER: AMAT
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $446.30
-  ATR (14-day): $35.06
+  Price:        $487.41
+  ATR (14-day): $18.75
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $436.33 - $495.00
-  Size:         $58.67
-  Distance:     $0.00 (0% of ATR)
-  Formed:       2026-07-28
-  FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($446.30 <= zone $495.00)
+  Range:        $411.60 - $428.14
+  Size:         $16.54
+  Distance:     $59.27 (316% of ATR)
+  Formed:       2026-09-17
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $544.07 - $569.95
-  Size:         $25.88
-  Distance:     $97.77
-  Formed:       2026-06-12
+  Range:        $639.33 - $739.60
+  Size:         $100.27
+  Distance:     $151.92
+  Formed:       2026-06-30
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $9.97
-  Profit Target (PT):  $97.77
-  Risk:Reward Ratio:   1:9.81
+  Stop Loss Distance:  $75.81
+  Profit Target (PT):  $151.92
+  Risk:Reward Ratio:   1:2.00

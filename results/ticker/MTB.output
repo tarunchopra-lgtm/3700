@@ -3,27 +3,27 @@ TICKER: MTB
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $247.74
-  ATR (14-day): $3.54
+  Price:        $238.01
+  ATR (14-day): $4.87
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $224.05 - $228.94
-  Size:         $4.89
-  Distance:     $18.80 (531% of ATR)
-  Formed:       2026-06-18
+  Range:        $224.87 - $227.76
+  Size:         $2.89
+  Distance:     $10.25 (210% of ATR)
+  Formed:       2026-09-17
+  FRESHNESS:    STALE
+  Notes:        STALE - Recent cached daily candle tested demand zone
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $251.62 - $255.64
+  Size:         $4.02
+  Distance:     $13.61
+  Formed:       2026-08-11
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
-SUPPLY ZONE (Sell Zone):
-  Range:        $236.62 - $242.95
-  Size:         $6.33
-  Distance:     $4.79
-  Formed:       2026-06-30
-  FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($247.74 >= zone $236.62)
-
 TRADE METRICS:
-  Stop Loss Distance:  $23.69
-  Profit Target (PT):  $-11.12
-  Risk:Reward Ratio:   1:-0.47
+  Stop Loss Distance:  $13.14
+  Profit Target (PT):  $13.61
+  Risk:Reward Ratio:   1:1.04

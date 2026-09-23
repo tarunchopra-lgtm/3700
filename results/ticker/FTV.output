@@ -3,27 +3,27 @@ TICKER: FTV
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $61.16
-  ATR (14-day): $1.57
+  Price:        $61.89
+  ATR (14-day): $1.38
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $54.13 - $55.34
-  Size:         $1.21
-  Distance:     $5.82 (372% of ATR)
-  Formed:       2026-09-11
+  Range:        $54.38 - $55.66
+  Size:         $1.27
+  Distance:     $6.23 (453% of ATR)
+  Formed:       2026-09-17
   FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $54.74)
+  Notes:        STALE - Recent cached daily candle tested demand zone
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $60.39 - $63.00
-  Size:         $2.61
+  Range:        $60.41 - $63.00
+  Size:         $2.59
   Distance:     $0.00
   Formed:       2026-06-18
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($61.16 >= zone $60.39)
+  Notes:        STALE - Price reached zone ($61.89 >= zone $60.41)
 
 TRADE METRICS:
-  Stop Loss Distance:  $7.03
-  Profit Target (PT):  $-0.77
-  Risk:Reward Ratio:   1:-0.11
+  Stop Loss Distance:  $7.51
+  Profit Target (PT):  $-1.48
+  Risk:Reward Ratio:   1:-0.20

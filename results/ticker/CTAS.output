@@ -3,27 +3,27 @@ TICKER: CTAS
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $208.95
-  ATR (14-day): $4.31
+  Price:        $206.08
+  ATR (14-day): $3.48
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $186.00 - $196.69
-  Size:         $10.69
-  Distance:     $12.26 (284% of ATR)
-  Formed:       2026-07-15
-  FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone today (low $196.37)
+  Range:        $180.14 - $183.27
+  Size:         $3.13
+  Distance:     $22.81 (655% of ATR)
+  Formed:       2026-07-07
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $196.69 - $207.09
-  Size:         $10.40
-  Distance:     $1.86
+  Range:        $196.53 - $207.03
+  Size:         $10.50
+  Distance:     $0.00
   Formed:       2026-07-16
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($208.95 >= zone $196.69)
+  Notes:        STALE - Price reached zone ($206.08 >= zone $196.53)
 
 TRADE METRICS:
-  Stop Loss Distance:  $22.95
-  Profit Target (PT):  $-12.26
-  Risk:Reward Ratio:   1:-0.53
+  Stop Loss Distance:  $25.94
+  Profit Target (PT):  $-9.55
+  Risk:Reward Ratio:   1:-0.37

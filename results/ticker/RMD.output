@@ -3,27 +3,27 @@ TICKER: RMD
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $242.21
-  ATR (14-day): $7.59
+  Price:        $237.78
+  ATR (14-day): $6.25
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $215.80 - $221.25
-  Size:         $5.45
-  Distance:     $20.96 (276% of ATR)
-  Formed:       2026-09-10
+  Range:        $217.08 - $221.07
+  Size:         $3.99
+  Distance:     $16.71 (267% of ATR)
+  Formed:       2026-09-09
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $235.01 - $241.71
-  Size:         $6.70
-  Distance:     $0.50
-  Formed:       2026-08-28
+  Range:        $232.90 - $241.54
+  Size:         $8.64
+  Distance:     $0.00
+  Formed:       2026-08-27
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($242.21 >= zone $235.01)
+  Notes:        STALE - Price reached zone ($237.78 >= zone $232.90)
 
 TRADE METRICS:
-  Stop Loss Distance:  $26.41
-  Profit Target (PT):  $-7.20
-  Risk:Reward Ratio:   1:-0.27
+  Stop Loss Distance:  $20.70
+  Profit Target (PT):  $-4.88
+  Risk:Reward Ratio:   1:-0.24

@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: TDY
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $661.61
+  ATR (14-day): $10.95
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $593.62 - $604.40
+  Size:         $10.78
+  Distance:     $57.21 (522% of ATR)
+  Formed:       2026-09-14
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $675.33 - $685.74
+  Size:         $10.40
+  Distance:     $13.72
+  Formed:       2026-08-14
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+TRADE METRICS:
+  Stop Loss Distance:  $67.99
+  Profit Target (PT):  $13.72
+  Risk:Reward Ratio:   1:0.20

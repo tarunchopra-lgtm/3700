@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: HWM
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $236.98
+  ATR (14-day): $8.09
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $223.38 - $229.25
+  Size:         $5.87
+  Distance:     $7.73 (96% of ATR)
+  Formed:       2026-09-16
+  FRESHNESS:    STALE
+  Notes:        STALE - Recent cached daily candle tested demand zone
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $249.21 - $256.50
+  Size:         $7.29
+  Distance:     $12.23
+  Formed:       2026-09-01
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+TRADE METRICS:
+  Stop Loss Distance:  $13.60
+  Profit Target (PT):  $12.23
+  Risk:Reward Ratio:   1:0.90

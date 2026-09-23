@@ -3,27 +3,27 @@ TICKER: XYZ
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $80.37
-  ATR (14-day): $2.49
+  Price:        $81.63
+  ATR (14-day): $2.20
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $73.68 - $75.75
-  Size:         $2.07
-  Distance:     $4.62 (185% of ATR)
-  Formed:       2026-06-25
+  Range:        $71.70 - $75.27
+  Size:         $3.57
+  Distance:     $6.36 (289% of ATR)
+  Formed:       2026-06-18
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $83.67 - $86.75
-  Size:         $3.08
-  Distance:     $3.30
-  Formed:       2026-08-05
-  FRESHNESS:    FRESH
-  Notes:        Fresh - not tested recently
+  Range:        $80.62 - $83.91
+  Size:         $3.29
+  Distance:     $0.00
+  Formed:       2026-07-28
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($81.63 >= zone $80.62)
 
 TRADE METRICS:
-  Stop Loss Distance:  $6.69
-  Profit Target (PT):  $3.30
-  Risk:Reward Ratio:   1:0.49
+  Stop Loss Distance:  $9.93
+  Profit Target (PT):  $-1.01
+  Risk:Reward Ratio:   1:-0.10

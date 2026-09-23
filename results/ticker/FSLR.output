@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: FSLR
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $210.07
+  ATR (14-day): $9.38
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $189.48 - $203.49
+  Size:         $14.01
+  Distance:     $6.58 (70% of ATR)
+  Formed:       2026-09-17
+  FRESHNESS:    STALE
+  Notes:        STALE - Daily candle tested zone yesterday (low $194.32)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $225.76 - $252.56
+  Size:         $26.80
+  Distance:     $15.69
+  Formed:       2026-08-04
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+TRADE METRICS:
+  Stop Loss Distance:  $20.59
+  Profit Target (PT):  $15.69
+  Risk:Reward Ratio:   1:0.76

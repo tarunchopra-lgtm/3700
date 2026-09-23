@@ -6,11 +6,19 @@ import os
 import smtplib
 from email.message import EmailMessage
 from pathlib import Path
+from dotenv import load_dotenv
 
 DEFAULT_EMAIL = "tarun.chopra@gmail.com"
 
 
 def load_email_config() -> tuple[str, str, str]:
+    workspace_root = Path(__file__).resolve().parent.parent
+    credentials_file = workspace_root / "env" / "credentials"
+    if credentials_file.exists():
+        load_dotenv(dotenv_path=credentials_file)
+    else:
+        load_dotenv(dotenv_path=workspace_root / ".env")
+
     from_email = (os.getenv("EMAIL_FROM") or DEFAULT_EMAIL).strip() or DEFAULT_EMAIL
     to_email = (os.getenv("ALERT_TO_EMAIL") or DEFAULT_EMAIL).strip() or DEFAULT_EMAIL
     # Gmail app passwords are often stored with spaces for readability.

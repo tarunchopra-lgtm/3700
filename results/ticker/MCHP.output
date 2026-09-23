@@ -3,27 +3,27 @@ TICKER: MCHP
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $76.06
-  ATR (14-day): $4.58
+  Price:        $77.16
+  ATR (14-day): $2.62
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $70.45 - $74.06
-  Size:         $3.61
-  Distance:     $2.00 (44% of ATR)
-  Formed:       2026-08-31
+  Range:        $68.80 - $71.73
+  Size:         $2.94
+  Distance:     $5.42 (207% of ATR)
+  Formed:       2026-09-17
   FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $70.70)
+  Notes:        STALE - Daily candle tested zone yesterday (low $70.15)
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $91.90 - $100.96
-  Size:         $9.06
-  Distance:     $15.84
-  Formed:       2026-06-12
+  Range:        $100.87 - $104.00
+  Size:         $3.12
+  Distance:     $23.71
+  Formed:       2026-06-22
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $5.61
-  Profit Target (PT):  $15.84
-  Risk:Reward Ratio:   1:2.82
+  Stop Loss Distance:  $8.36
+  Profit Target (PT):  $23.71
+  Risk:Reward Ratio:   1:2.84

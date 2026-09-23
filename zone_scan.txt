@@ -1,0 +1,403 @@
+ZONE_SCAN.PY - CONFIGURATION AND EXPERIMENT GUIDE
+=================================================
+
+PURPOSE
+-------
+Use this file as a tuning worksheet for zone_scan.py and find_zones.py.
+Change one or two values at a time, run a scan, and compare:
+  results/found_zones_balanced.txt
+  results/daily_report_balanced.txt
+  results/top-20.txt
+  results/ticker/*.output
+
+The scanner uses cached daily candles. Refresh the cache first when needed:
+  python strategies/zone_scan.py --cache_daily_bars --balanced
+
+Then repeat analysis without historical downloads:
+  python strategies/zone_scan.py --balanced
+
+Run other sensitivity passes:
+  python strategies/zone_scan.py --conservative
+  python strategies/zone_scan.py --aggressive
+  python strategies/zone_scan.py --all-sensitivities
+
+The current implementation reads the origin-zone values from:
+  lists/zone_origin_config.txt
+
+The command-line values below control zone_scan.py execution.
+
+
+1. CACHE AND DATA PARAMETERS
+============================
+
+CACHE_REFRESH
+-------------
+Command flag:
+  --cache_daily_bars
+
+Meaning:
+  Download/update daily OHLCV data in reports/track/SYMBOL.json before scanning.
+
+Use when:
+  - Running the first scan.
+  - Starting a new week.
+  - You need the latest completed daily candle.
+
+Do not use when:
+  - You only want to experiment with zone rules locally.
+  - The cache already contains the history you need.
+
+Examples:
+  python strategies/zone_scan.py --cache_daily_bars --balanced
+  python strategies/zone_scan.py --cache_daily_bars --lookback 180
+
+TODAY'S CANDLE UPDATE
+---------------------
+During --cache_daily_bars, the program also requests the current quote.
+
+When the regular US market is open:
+  - Actual daily open/high/low/close are used when Alpaca provides today's bar.
+  - The current quote can raise today's high, lower today's low, and update close.
+
+When the regular US market is closed:
+  - Today's open is set to the current quote.
+  - An existing today's high, low, and close are preserved.
+  - If today's record does not exist, high/low/close start at the current quote
+    because there is no finalized OHLC data available yet.
+
+This means a Sunday or after-hours refresh can create/update today's record
+without destroying the last known high, low, or close.
+
+LOOKBACK_DAYS
+-------------
+Command option:
+  --lookback DAYS
+
+Current default: 90
+
+Meaning:
+  Number of daily candles used for local zone analysis and retained by cache refresh.
+
+Typical experiments:
+  30  = recent short-term zones; fewer historical opportunities
+  60  = recent swing zones
+  90  = current balanced default
+  180 = more swing history and older zones
+  365 = long-term structural zones
+
+Important:
+  If you scan with a larger lookback than the cache contains, refresh first:
+  python strategies/zone_scan.py --cache_daily_bars --lookback 180
+
+
+2. SENSITIVITY MODES
+====================
+
+BALANCED
+--------
+Command:
+  --balanced
+
+Use for normal scanning. It still uses the same origin-zone configuration from
+lists/zone_origin_config.txt. The older DBR/RBR/RBD/DBD detector uses its own
+balanced values inside find_zones.py.
+
+CONSERVATIVE
+------------
+Command:
+  --conservative
+
+Purpose:
+  Fewer results and stricter older-pattern filters. Useful for comparison.
+
+AGGRESSIVE
+----------
+Command:
+  --aggressive
+
+Purpose:
+  More results and looser older-pattern filters. Useful for exploration.
+
+ALL SENSITIVITIES
+-----------------
+Command:
+  --all-sensitivities
+
+Runs aggressive, balanced, and conservative reports in one run.
+
+
+3. ORIGIN-ZONE PARAMETERS
+=========================
+File:
+  lists/zone_origin_config.txt
+
+These parameters control the newer default origin-zone detector. It evaluates
+small daily bases followed by sharp one-directional moves. Demand and supply
+use the same rules in opposite directions.
+
+MIN_BASE_CANDLES
+----------------
+Current balanced default: 1
+
+Meaning:
+  Minimum number of consecutive daily candles in the base/consolidation.
+
+Try:
+  1 = allows single-candle bases; many more candidates and more noise
+  2 = balanced starting point
+  3 = requires a more established base
+  4 = strict and selective
+
+Higher value:
+  Fewer, more established zones.
+
+MAX_BASE_CANDLES
+----------------
+Current balanced default: 5
+
+Meaning:
+  Maximum number of consecutive candles considered as the base.
+
+Try:
+  3 = only short consolidations
+  5 = balanced current setting
+  7 = allows longer bases
+  10 = broad structural bases; more overlap and noise possible
+
+The detector tests every base length between MIN_BASE_CANDLES and
+MAX_BASE_CANDLES.
+
+MAX_DEPARTURE_CANDLES
+---------------------
+Current balanced default: 5
+
+Meaning:
+  Maximum number of daily candles allowed for the sharp move to develop.
+
+Try:
+  1 = only one-candle explosive moves
+  3 = fast moves
+  5 = balanced multi-candle moves
+  7 = slower moves
+  10 = broad departure window; more candidates
+
+A departure may contain one or several candles. It does not need to be one
+large candle.
+
+MIN_DEPARTURE_PCT
+-----------------
+Current balanced default: 2.0
+
+Meaning:
+  Minimum percentage move from the base boundary to the best departure price.
+
+Demand formula:
+  (highest departure high - base high) / base high * 100
+
+Supply formula:
+  (base low - lowest departure low) / base low * 100
+
+Try:
+  1.0 = sensitive; many weaker moves
+  3.0 = balanced
+  5.0 = stronger moves only
+  8.0 = very selective
+  10.0 = major moves only
+
+Higher value means fewer but sharper zones.
+
+MIN_DEPARTURE_ATR
+------------------
+Current balanced default: 2.0
+
+Meaning:
+  The departure must be at least this many ATRs away from the base boundary.
+  ATR is calculated from the most recent 14 daily true ranges.
+
+Try:
+  1.0 = sensitive
+  1.5 = moderate
+  2.0 = balanced
+  3.0 = strong move only
+  4.0 = very selective
+
+This prevents a 3% move from qualifying when the stock is extremely volatile.
+
+MAX_ZONE_TO_DEPARTURE_RATIO
+----------------------------
+Current balanced default: 0.65
+
+Meaning:
+  Base width divided by departure size must be less than or equal to this value.
+
+Formula:
+  base range / departure range <= MAX_ZONE_TO_DEPARTURE_RATIO
+
+Example:
+  Base range = $1.00
+  Departure = $4.00
+  Ratio = 1.00 / 4.00 = 0.25
+  0.25 qualifies under the default 0.35.
+
+Try:
+  0.15 = very tight bases only
+  0.25 = tight
+  0.35 = balanced
+  0.50 = wider bases allowed
+  0.75 = loose; more noise
+
+Lower value means the base must be small compared with the move.
+
+
+4. OLD PATTERN-DETECTOR PARAMETERS
+==================================
+These values are selected by --balanced, --conservative, and --aggressive
+inside strategies/find_zones.py. They apply only as fallback when no manual or
+new origin zone is selected.
+
+MIN_PRIOR_MOVE_PCT
+------------------
+Meaning:
+  Minimum percentage body size of the first directional candle in DBR/RBR/RBD/DBD.
+
+Balanced: 3.0
+Conservative: 8.0
+Aggressive: 1.0
+
+Higher = fewer, stronger older-pattern zones.
+Lower = more sensitive, noisier results.
+
+MAX_PRIOR_MOVE_PCT
+------------------
+Meaning:
+  Maximum percentage body size accepted for the first directional candle.
+
+Balanced: 50.0
+Conservative: 45.0
+Aggressive: 100.0
+
+This avoids treating unusually large gaps or extreme candles as normal patterns.
+
+CONSOLIDATION_RANGE_PCT
+-----------------------
+Meaning in the current code:
+  A multiplier applied to the initial move to determine the maximum range of
+  each consolidation candle in the old detector.
+
+Balanced: 1.5
+Conservative: 0.75
+Aggressive: 2.5
+
+Important:
+  Despite the name, this is currently a multiplier, not a literal percentage.
+  It is not the main control for the new origin detector.
+
+
+5. FRESHNESS RULES
+==================
+
+Origin-zone freshness:
+  Demand becomes stale when a later daily low reaches the demand zone high.
+  Supply becomes stale when a later daily high reaches the supply zone low.
+  This treats the full zone as tested, not only its extreme low/high.
+
+Old-pattern freshness:
+  The older detector uses its existing 15-day freshness selection logic.
+
+Live report freshness:
+  zone_scan.py also checks current price and recent daily/hourly candles before
+  marking a setup fresh in the report.
+
+Current-price behavior:
+  A zone is not actionable if price is already inside or beyond it.
+
+
+6. EXPERIMENT PRESETS
+=====================
+
+TIGHT AND SELECTIVE
+-------------------
+MIN_BASE_CANDLES=3
+MAX_BASE_CANDLES=5
+MAX_DEPARTURE_CANDLES=5
+MIN_DEPARTURE_PCT=5.0
+MIN_DEPARTURE_ATR=3.0
+MAX_ZONE_TO_DEPARTURE_RATIO=0.20
+
+Expected result:
+  Few zones, compact bases, large departures, low noise.
+
+BALANCED STARTING POINT
+-----------------------
+MIN_BASE_CANDLES=1
+MAX_BASE_CANDLES=5
+MAX_DEPARTURE_CANDLES=5
+MIN_DEPARTURE_PCT=3.0
+MIN_DEPARTURE_ATR=2.0
+MAX_ZONE_TO_DEPARTURE_RATIO=0.35
+
+Expected result:
+  Moderate number of zones with meaningful departures.
+
+MORE SENSITIVE
+--------------
+MIN_BASE_CANDLES=1
+MAX_BASE_CANDLES=7
+MAX_DEPARTURE_CANDLES=7
+MIN_DEPARTURE_PCT=2.0
+MIN_DEPARTURE_ATR=1.5
+MAX_ZONE_TO_DEPARTURE_RATIO=0.50
+
+Expected result:
+  More zones and more possible noise.
+
+LONG-TERM STRUCTURAL
+--------------------
+MIN_BASE_CANDLES=3
+MAX_BASE_CANDLES=10
+MAX_DEPARTURE_CANDLES=10
+MIN_DEPARTURE_PCT=5.0
+MIN_DEPARTURE_ATR=2.0
+MAX_ZONE_TO_DEPARTURE_RATIO=0.35
+
+Run with:
+  python strategies/zone_scan.py --cache_daily_bars --balanced --lookback 365
+
+
+7. RECOMMENDED EXPERIMENT METHOD
+=================================
+1. Refresh the cache once:
+   python strategies/zone_scan.py --cache_daily_bars --balanced --lookback 180
+
+2. Change one or two values in lists/zone_origin_config.txt.
+
+3. Re-run without downloading:
+   python strategies/zone_scan.py --balanced --lookback 180
+
+4. Compare:
+   results/found_zones_balanced.txt
+   results/daily_report_balanced.txt
+   results/top-20.txt
+   results/ticker/SYMBOL.output
+
+5. Record which settings produced useful manual-like zones.
+
+Do not change all six settings at once. Otherwise it becomes difficult to know
+which parameter improved or degraded the results.
+
+
+8. COPY-AND-SEND TUNING REQUESTS
+================================
+
+"Make zones tighter: set MAX_ZONE_TO_DEPARTURE_RATIO=0.20."
+
+"Find only stronger moves: set MIN_DEPARTURE_PCT=5.0 and
+MIN_DEPARTURE_ATR=3.0."
+
+"Allow longer consolidations and slower moves: set MAX_BASE_CANDLES=10 and
+MAX_DEPARTURE_CANDLES=10."
+
+"Find more zones: set MIN_BASE_CANDLES=1, MIN_DEPARTURE_PCT=2.0, and
+MAX_ZONE_TO_DEPARTURE_RATIO=0.50."
+
+"Use 365 days of cached daily history but keep balanced zone rules."

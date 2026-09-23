@@ -3,27 +3,27 @@ TICKER: ALAB
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $288.00
-  ATR (14-day): $32.71
+  Price:        $384.09
+  ATR (14-day): $23.62
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $244.61 - $299.23
-  Size:         $54.62
-  Distance:     $0.00 (0% of ATR)
-  Formed:       2026-07-27
-  FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($288.00 <= zone $299.23)
+  Range:        $251.75 - $271.70
+  Size:         $19.95
+  Distance:     $112.39 (476% of ATR)
+  Formed:       2026-09-14
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $360.06 - $398.13
-  Size:         $38.07
-  Distance:     $72.06
-  Formed:       2026-06-12
+  Range:        $385.66 - $440.03
+  Size:         $54.37
+  Distance:     $1.57
+  Formed:       2026-06-22
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $43.39
-  Profit Target (PT):  $72.06
-  Risk:Reward Ratio:   1:1.66
+  Stop Loss Distance:  $132.34
+  Profit Target (PT):  $1.57
+  Risk:Reward Ratio:   1:0.01

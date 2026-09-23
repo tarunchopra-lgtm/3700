@@ -3,27 +3,27 @@ TICKER: ISRG
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $406.51
-  ATR (14-day): $9.99
+  Price:        $425.00
+  ATR (14-day): $12.22
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $363.56 - $374.48
-  Size:         $10.92
-  Distance:     $32.03 (321% of ATR)
-  Formed:       2026-09-11
+  Range:        $377.62 - $387.97
+  Size:         $10.35
+  Distance:     $37.03 (303% of ATR)
+  Formed:       2026-09-16
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $378.50 - $405.50
-  Size:         $27.00
-  Distance:     $1.01
-  Formed:       2026-07-15
+  Range:        $420.79 - $440.17
+  Size:         $19.38
+  Distance:     $0.00
+  Formed:       2026-07-06
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($406.51 >= zone $378.50)
+  Notes:        STALE - Price reached zone ($425.00 >= zone $420.79)
 
 TRADE METRICS:
-  Stop Loss Distance:  $42.95
-  Profit Target (PT):  $-28.01
-  Risk:Reward Ratio:   1:-0.65
+  Stop Loss Distance:  $47.38
+  Profit Target (PT):  $-4.21
+  Risk:Reward Ratio:   1:-0.09

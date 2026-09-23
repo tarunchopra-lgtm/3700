@@ -3,27 +3,27 @@ TICKER: EOG
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $151.84
-  ATR (14-day): $4.58
+  Price:        $151.76
+  ATR (14-day): $3.66
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $134.44 - $138.82
-  Size:         $4.38
-  Distance:     $13.02 (284% of ATR)
-  Formed:       2026-06-12
+  Range:        $129.10 - $131.01
+  Size:         $1.91
+  Distance:     $20.75 (567% of ATR)
+  Formed:       2026-07-02
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $142.76 - $153.38
-  Size:         $10.62
-  Distance:     $0.00
-  Formed:       2026-08-25
+  Range:        $143.74 - $149.63
+  Size:         $5.89
+  Distance:     $2.13
+  Formed:       2026-09-17
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($151.84 >= zone $142.76)
+  Notes:        STALE - Price reached zone ($151.76 >= zone $143.74)
 
 TRADE METRICS:
-  Stop Loss Distance:  $17.40
-  Profit Target (PT):  $-9.08
-  Risk:Reward Ratio:   1:-0.52
+  Stop Loss Distance:  $22.66
+  Profit Target (PT):  $-8.02
+  Risk:Reward Ratio:   1:-0.35

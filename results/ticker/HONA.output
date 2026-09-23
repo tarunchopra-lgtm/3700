@@ -3,27 +3,27 @@ TICKER: HONA
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $175.05
-  ATR (14-day): $12.61
+  Price:        $175.68
+  ATR (14-day): $6.01
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $158.10 - $164.62
-  Size:         $6.52
-  Distance:     $10.43 (83% of ATR)
-  Formed:       2026-09-15
+  Range:        $158.17 - $169.36
+  Size:         $11.19
+  Distance:     $6.32 (105% of ATR)
+  Formed:       2026-09-16
   FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $159.25)
+  Notes:        STALE - Recent cached daily candle tested demand zone
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $269.95 - $297.50
-  Size:         $27.55
-  Distance:     $94.90
-  Formed:       2026-06-17
+  Range:        $270.00 - $272.50
+  Size:         $2.50
+  Distance:     $94.32
+  Formed:       2026-06-18
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $16.95
-  Profit Target (PT):  $94.90
-  Risk:Reward Ratio:   1:5.60
+  Stop Loss Distance:  $17.51
+  Profit Target (PT):  $94.32
+  Risk:Reward Ratio:   1:5.39

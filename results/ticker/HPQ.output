@@ -3,27 +3,27 @@ TICKER: HPQ
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $36.07
-  ATR (14-day): $1.56
+  Price:        $32.85
+  ATR (14-day): $1.65
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $30.89 - $32.34
-  Size:         $1.46
-  Distance:     $3.73 (239% of ATR)
-  Formed:       2026-09-08
+  Range:        $24.02 - $24.89
+  Size:         $0.87
+  Distance:     $7.96 (484% of ATR)
+  Formed:       2026-07-20
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $33.37 - $36.23
-  Size:         $2.86
-  Distance:     $0.00
+  Range:        $33.42 - $36.23
+  Size:         $2.80
+  Distance:     $0.57
   Formed:       2026-09-14
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($36.07 >= zone $33.37)
+  Notes:        STALE - Daily candle tested zone yesterday (high $34.91)
 
 TRADE METRICS:
-  Stop Loss Distance:  $5.18
-  Profit Target (PT):  $-2.70
-  Risk:Reward Ratio:   1:-0.52
+  Stop Loss Distance:  $8.83
+  Profit Target (PT):  $0.57
+  Risk:Reward Ratio:   1:0.06

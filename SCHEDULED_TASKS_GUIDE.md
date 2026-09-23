@@ -326,7 +326,7 @@ Register-ScheduledTask -TaskName "spray" -Action $Action2 -Trigger $Trigger2 -De
 Write-Host "✓ Task 'spray' created - runs daily at 6:32 AM"
 
 # Task 3: zone_scan.py at 6:31 AM
-$Action3 = New-ScheduledTaskAction -Execute "python.exe" -Argument "strategies/zone_scan.py" -WorkingDirectory "C:\Users\TarunChopra\3700"
+$Action3 = New-ScheduledTaskAction -Execute "python.exe" -Argument "strategies/zone_scan.py --all-sensitivities" -WorkingDirectory "C:\Users\TarunChopra\3700"
 $Trigger3 = New-ScheduledTaskTrigger -Daily -At 06:31
 Register-ScheduledTask -TaskName "zone_scan" -Action $Action3 -Trigger $Trigger3 -Description "Scan demand/supply zones on all symbols, update result files, and email report" -AsJob
 Write-Host "✓ Task 'zone_scan' created - runs daily at 6:31 AM (emails: daily_report.txt, found_zones.txt, pick.txt)"
@@ -348,6 +348,6 @@ Enable-ScheduledTask -TaskName "spray"
 Enable-ScheduledTask -TaskName "zone_scan"
 
 
-$Action3 = New-ScheduledTaskAction -Execute "python.exe" -Argument "strategies/zone_scan.py" -WorkingDirectory "C:\Users\TarunChopra\3700"
+$Action3 = New-ScheduledTaskAction -Execute "python.exe" -Argument "strategies/zone_scan.py " -WorkingDirectory "C:\Users\TarunChopra\3700"
 $Trigger3 = New-ScheduledTaskTrigger -Daily -At 06:31
 Register-ScheduledTask -TaskName "zone_scan" -Action $Action3 -Trigger $Trigger3 -Description "Scan demand/supply zones on all symbols, update result files, and email report" -AsJob

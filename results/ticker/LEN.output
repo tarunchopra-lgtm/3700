@@ -3,27 +3,27 @@ TICKER: LEN
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $84.48
-  ATR (14-day): $2.65
+  Price:        $86.84
+  ATR (14-day): $2.92
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $76.63 - $80.50
-  Size:         $3.87
-  Distance:     $3.98 (150% of ATR)
-  Formed:       2026-09-11
+  Range:        $75.73 - $78.35
+  Size:         $2.62
+  Distance:     $8.49 (291% of ATR)
+  Formed:       2026-09-21
   FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $78.68)
+  Notes:        STALE - Recent cached daily candle tested demand zone
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $89.68 - $95.22
-  Size:         $5.54
-  Distance:     $5.20
-  Formed:       2026-06-12
+  Range:        $93.03 - $95.97
+  Size:         $2.93
+  Distance:     $6.19
+  Formed:       2026-06-25
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $7.85
-  Profit Target (PT):  $5.20
-  Risk:Reward Ratio:   1:0.66
+  Stop Loss Distance:  $11.11
+  Profit Target (PT):  $6.19
+  Risk:Reward Ratio:   1:0.56

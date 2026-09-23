@@ -3,27 +3,27 @@ TICKER: CSX
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $48.07
+  Price:        $48.63
   ATR (14-day): $0.96
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $45.15 - $46.96
-  Size:         $1.81
-  Distance:     $1.11 (116% of ATR)
+  Range:        $45.16 - $46.85
+  Size:         $1.69
+  Distance:     $1.78 (186% of ATR)
   Formed:       2026-06-17
-  FRESHNESS:    FRESH
-  Notes:        Fresh - not tested recently
+  FRESHNESS:    STALE
+  Notes:        STALE - Recent cached daily candle tested demand zone
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $50.30 - $51.28
-  Size:         $0.98
-  Distance:     $2.23
-  Formed:       2026-07-17
+  Range:        $50.99 - $51.88
+  Size:         $0.89
+  Distance:     $2.36
+  Formed:       2026-08-27
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $2.92
-  Profit Target (PT):  $2.23
-  Risk:Reward Ratio:   1:0.77
+  Stop Loss Distance:  $3.47
+  Profit Target (PT):  $2.36
+  Risk:Reward Ratio:   1:0.68

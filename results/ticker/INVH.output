@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: INVH
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $28.75
+  ATR (14-day): $0.52
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $26.84 - $27.27
+  Size:         $0.43
+  Distance:     $1.48 (287% of ATR)
+  Formed:       2026-09-18
+  FRESHNESS:    STALE
+  Notes:        STALE - Recent cached daily candle tested demand zone
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $29.84 - $30.71
+  Size:         $0.87
+  Distance:     $1.09
+  Formed:       2026-07-07
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+TRADE METRICS:
+  Stop Loss Distance:  $1.91
+  Profit Target (PT):  $1.09
+  Risk:Reward Ratio:   1:0.57

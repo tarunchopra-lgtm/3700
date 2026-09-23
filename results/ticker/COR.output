@@ -3,27 +3,27 @@ TICKER: COR
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $327.16
-  ATR (14-day): $9.75
+  Price:        $322.72
+  ATR (14-day): $7.27
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $301.23 - $308.33
-  Size:         $7.10
-  Distance:     $18.83 (193% of ATR)
-  Formed:       2026-08-04
+  Range:        $270.07 - $273.82
+  Size:         $3.75
+  Distance:     $48.90 (673% of ATR)
+  Formed:       2026-06-22
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $317.96 - $327.90
-  Size:         $9.94
+  Range:        $319.53 - $333.91
+  Size:         $14.38
   Distance:     $0.00
-  Formed:       2026-09-11
+  Formed:       2026-08-10
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($327.16 >= zone $317.96)
+  Notes:        STALE - Price reached zone ($322.72 >= zone $319.53)
 
 TRADE METRICS:
-  Stop Loss Distance:  $25.93
-  Profit Target (PT):  $-9.20
-  Risk:Reward Ratio:   1:-0.35
+  Stop Loss Distance:  $52.65
+  Profit Target (PT):  $-3.19
+  Risk:Reward Ratio:   1:-0.06

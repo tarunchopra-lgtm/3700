@@ -3,27 +3,27 @@ TICKER: MELI
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $2085.86
-  ATR (14-day): $64.67
+  Price:        $2044.02
+  ATR (14-day): $71.12
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $1759.21 - $1813.99
-  Size:         $54.78
-  Distance:     $271.87 (420% of ATR)
-  Formed:       2026-08-18
+  Range:        $1797.06 - $1853.50
+  Size:         $56.44
+  Distance:     $190.52 (268% of ATR)
+  Formed:       2026-09-16
   FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $1797.06)
+  Notes:        STALE - Daily candle tested zone yesterday (low $1802.31)
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $1908.00 - $2066.00
-  Size:         $158.00
-  Distance:     $19.86
-  Formed:       2026-09-04
+  Range:        $1968.82 - $2064.22
+  Size:         $95.40
+  Distance:     $0.00
+  Formed:       2026-09-03
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($2085.86 >= zone $1908.00)
+  Notes:        STALE - Price reached zone ($2044.02 >= zone $1968.82)
 
 TRADE METRICS:
-  Stop Loss Distance:  $326.65
-  Profit Target (PT):  $-177.86
-  Risk:Reward Ratio:   1:-0.54
+  Stop Loss Distance:  $246.96
+  Profit Target (PT):  $-75.20
+  Risk:Reward Ratio:   1:-0.30

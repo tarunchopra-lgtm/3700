@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: CVX
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $212.09
+  ATR (14-day): $4.94
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $194.32 - $197.44
+  Size:         $3.12
+  Distance:     $14.65 (297% of ATR)
+  Formed:       2026-08-11
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $207.72 - $217.74
+  Size:         $10.02
+  Distance:     $0.00
+  Formed:       2026-09-16
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($212.09 >= zone $207.72)
+
+TRADE METRICS:
+  Stop Loss Distance:  $17.77
+  Profit Target (PT):  $-4.37
+  Risk:Reward Ratio:   1:-0.25

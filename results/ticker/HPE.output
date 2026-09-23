@@ -3,27 +3,27 @@ TICKER: HPE
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $64.60
-  ATR (14-day): $3.31
+  Price:        $63.57
+  ATR (14-day): $4.06
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $55.02 - $58.14
-  Size:         $3.12
-  Distance:     $6.46 (195% of ATR)
-  Formed:       2026-09-16
-  FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $55.04)
+  Range:        $43.13 - $46.10
+  Size:         $2.97
+  Distance:     $17.47 (430% of ATR)
+  Formed:       2026-06-26
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $58.90 - $63.44
-  Size:         $4.54
-  Distance:     $1.16
+  Range:        $58.89 - $63.44
+  Size:         $4.55
+  Distance:     $0.13
   Formed:       2026-08-13
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($64.60 >= zone $58.90)
+  Notes:        STALE - Price reached zone ($63.57 >= zone $58.89)
 
 TRADE METRICS:
-  Stop Loss Distance:  $9.58
-  Profit Target (PT):  $-5.70
-  Risk:Reward Ratio:   1:-0.59
+  Stop Loss Distance:  $20.44
+  Profit Target (PT):  $-4.68
+  Risk:Reward Ratio:   1:-0.23

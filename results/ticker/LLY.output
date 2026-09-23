@@ -3,27 +3,27 @@ TICKER: LLY
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $1208.55
-  ATR (14-day): $42.34
+  Price:        $1233.31
+  ATR (14-day): $28.38
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $1109.16 - $1135.83
-  Size:         $26.67
-  Distance:     $72.72 (172% of ATR)
-  Formed:       2026-08-04
+  Range:        $1140.19 - $1159.51
+  Size:         $19.32
+  Distance:     $73.80 (260% of ATR)
+  Formed:       2026-09-17
   FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $1132.73)
+  Notes:        STALE - Recent cached daily candle tested demand zone
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $1203.14 - $1238.00
-  Size:         $34.86
+  Range:        $1203.34 - $1237.55
+  Size:         $34.21
   Distance:     $0.00
   Formed:       2026-06-29
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($1208.55 >= zone $1203.14)
+  Notes:        STALE - Price reached zone ($1233.31 >= zone $1203.34)
 
 TRADE METRICS:
-  Stop Loss Distance:  $99.39
-  Profit Target (PT):  $-5.41
-  Risk:Reward Ratio:   1:-0.05
+  Stop Loss Distance:  $93.12
+  Profit Target (PT):  $-29.97
+  Risk:Reward Ratio:   1:-0.32

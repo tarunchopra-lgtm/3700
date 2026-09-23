@@ -3,27 +3,27 @@ TICKER: ESS
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $276.11
-  ATR (14-day): $4.80
+  Price:        $290.06
+  ATR (14-day): $4.53
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $270.45 - $274.31
-  Size:         $3.86
-  Distance:     $1.80 (38% of ATR)
-  Formed:       2026-09-11
+  Range:        $268.74 - $272.07
+  Size:         $3.33
+  Distance:     $17.99 (397% of ATR)
+  Formed:       2026-09-18
   FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $272.00)
+  Notes:        STALE - Recent cached daily candle tested demand zone
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $284.21 - $287.64
-  Size:         $3.43
-  Distance:     $8.10
-  Formed:       2026-06-10
+  Range:        $295.50 - $303.23
+  Size:         $7.74
+  Distance:     $5.44
+  Formed:       2026-07-06
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $5.66
-  Profit Target (PT):  $8.10
-  Risk:Reward Ratio:   1:1.43
+  Stop Loss Distance:  $21.32
+  Profit Target (PT):  $5.44
+  Risk:Reward Ratio:   1:0.25

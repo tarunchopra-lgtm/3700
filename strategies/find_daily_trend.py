@@ -1,25 +1,26 @@
 #!/usr/bin/env python3
-"""Find symbols breaking descending daily resistance today across lists/*.txt.
+"""Find symbols breaking descending daily resistance from cached daily bars.
 
 Usage:
-    python strategies/find_daily_trend.py                    # Scan all lists
-    python strategies/find_daily_trend.py nasdaq.txt spy.txt # Scan specific lists
+    python strategies/find_daily_trend.py                    # Scan reports/track JSON
     python strategies/find_daily_trend.py --email            # Scan & email results
     python strategies/find_daily_trend.py INTC               # Detailed analysis for INTC
     python strategies/find_daily_trend.py BKR                # Show chart & trend for BKR
 
-With no arguments, every .txt file in lists/ is scanned and the top 5 matches
-are written to lists/today-breakout. When a ticker symbol is provided, detailed
-analysis with ASCII chart is shown instead.
+With no arguments, every reports/track/*.json file is scanned and all matches
+are written to results/found_trend_line_break.txt. When a ticker symbol is
+provided, detailed analysis with ASCII chart is shown instead.
 """
 
 from __future__ import annotations
 
 import sys
+import json
 from collections import defaultdict
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from zoneinfo import ZoneInfo
+from types import SimpleNamespace
 
 from alpaca.data.enums import DataFeed
 from alpaca.data.historical import StockHistoricalDataClient
@@ -28,6 +29,8 @@ from alpaca.data.timeframe import TimeFrame
 
 WORKSPACE_ROOT = Path(__file__).resolve().parent.parent
 LISTS_DIR = WORKSPACE_ROOT / "lists"
+TRACK_DIR = WORKSPACE_ROOT / "reports" / "track"
+TREND_BREAK_FILE = WORKSPACE_ROOT / "results" / "found_trend_line_break.txt"
 if str(WORKSPACE_ROOT) not in sys.path:
     sys.path.insert(0, str(WORKSPACE_ROOT))
 
@@ -147,6 +150,33 @@ def _fetch_current_prices(
     return current_prices
 
 
+def _load_cached_bars() -> tuple[dict[str, list], list[str]]:
+    """Load daily bars from every zone-scan tracking JSON file."""
+    bars_by_symbol: dict[str, list] = {}
+    unavailable: list[str] = []
+    if not TRACK_DIR.exists():
+        return bars_by_symbol, unavailable
+
+    for cache_file in sorted(TRACK_DIR.glob("*.json")):
+        try:
+            payload = json.loads(cache_file.read_text(encoding="utf-8"))
+            symbol = str(payload.get("symbol") or cache_file.stem).upper()
+            bars = []
+            for raw_bar in payload.get("bars", []):
+                bars.append(SimpleNamespace(
+                    timestamp=datetime.fromisoformat(raw_bar["date"]).replace(tzinfo=ET),
+                    open=float(raw_bar["open"]),
+                    high=float(raw_bar["high"]),
+                    low=float(raw_bar["low"]),
+                    close=float(raw_bar["close"]),
+                    volume=int(raw_bar.get("volume", 0)),
+                ))
+            bars_by_symbol[symbol] = sorted(bars, key=lambda bar: bar.timestamp)
+        except Exception as exc:
+            unavailable.append(f"{cache_file.stem} ({exc})")
+    return bars_by_symbol, unavailable
+
+
 def _today_breakout(bars: list, today_et: date, current_price: float | None = None):
     completed = [bar for bar in bars if _bar_date_et(bar) and _bar_date_et(bar) < today_et]
     today_bars = [bar for bar in bars if _bar_date_et(bar) == today_et]
@@ -179,10 +209,13 @@ def _today_breakout(bars: list, today_et: date, current_price: float | None = No
     if current_price is None:
         current_price = float(getattr(today_bar, "close"))
 
-    # Verify the breakout: 
-    # 1. Yesterday must close BELOW the trend line at yesterday's position
-    # 2. Today must open ABOVE the trend line at today's position
-    if yesterday_close >= yesterday_trend_value or today_open < trigger:
+    # Verify the breakout:
+    # 1. Yesterday must close BELOW the trend line at yesterday's position.
+    # 2. Today must open ABOVE the projected trend line.
+    # 3. Today must also open ABOVE yesterday's actual high.
+    if (yesterday_close >= yesterday_trend_value or
+            today_open < trigger or
+            today_open <= float(getattr(prior[-1], "high"))):
         return None
 
     return {
@@ -490,32 +523,25 @@ NOTES:
             print(f"Could not analyze {ticker_symbol}: {exc}")
             return 1
     
-    # Normal mode: scan all lists
+    # Normal mode: scan cached zone-scan JSON files
     try:
-        files = _resolve_list_files(list_arguments)
-        symbols, memberships = _load_universe(files)
+        bars_by_symbol, unavailable = _load_cached_bars()
+        symbols = sorted(bars_by_symbol)
+        memberships = defaultdict(set)
+        files = [TRACK_DIR]
     except Exception as exc:
-        print(f"Could not load ticker lists: {exc}")
-        return 1
-
-    try:
-        credentials, _ = bootstrap_trading_auth("find_daily_trend.py")
-        data_client = StockHistoricalDataClient(credentials.api_key, credentials.secret_key)
-        bars_by_symbol = _fetch_daily_bars(data_client, symbols)
-        current_prices = _fetch_current_prices(data_client, symbols)
-    except Exception as exc:
-        print(f"Could not load market data: {exc}")
+        print(f"Could not load cached zone data: {exc}")
         return 1
 
     today_et = datetime.now(ET).date()
     matches = []
-    unavailable = []
     for symbol in symbols:
         bars = bars_by_symbol.get(symbol, [])
         if not bars:
             unavailable.append(symbol)
             continue
-        current_price = current_prices.get(symbol)
+        today_bars = [bar for bar in bars if _bar_date_et(bar) == today_et]
+        current_price = float(today_bars[-1].close) if today_bars else None
         breakout = _today_breakout(bars, today_et, current_price)
         if breakout is not None:
             matches.append((symbol, breakout))
@@ -534,7 +560,7 @@ NOTES:
         lines.append("No symbols are currently above a newly broken descending 15-day high trend today.")
     else:
         for symbol, breakout in ranked:
-            sources = ",".join(sorted(memberships[symbol]))
+            sources = "reports/track"
             lines.append(
                 f"{symbol} [{sources}]: TODAY BREAK ${breakout['trigger']:.2f} | "
                 f"TODAY OPEN ${breakout['today_open']:.2f} | "
@@ -543,11 +569,13 @@ NOTES:
             )
 
     top_symbols = [symbol for symbol, _ in top_matches]
-    BREAKOUT_FILE.write_text(
-        "\n".join(top_symbols) + ("\n" if top_symbols else ""), encoding="utf-8"
+    TREND_BREAK_FILE.parent.mkdir(parents=True, exist_ok=True)
+    TREND_BREAK_FILE.write_text(
+        "\n".join(symbol for symbol, _ in ranked) + ("\n" if ranked else ""),
+        encoding="utf-8",
     )
     lines.append(
-        f"Top {len(top_symbols)} written to {BREAKOUT_FILE.name}: "
+        f"Top {len(top_symbols)} written to {TREND_BREAK_FILE}: "
         f"{', '.join(top_symbols) if top_symbols else 'none'}"
     )
 

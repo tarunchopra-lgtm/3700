@@ -3,27 +3,27 @@ TICKER: CVNA
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $66.28
-  ATR (14-day): $4.09
+  Price:        $69.35
+  ATR (14-day): $3.03
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $62.41 - $69.16
-  Size:         $6.75
-  Distance:     $0.00 (0% of ATR)
+  Range:        $62.41 - $69.14
+  Size:         $6.73
+  Distance:     $0.21 (7% of ATR)
   Formed:       2026-06-18
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($66.28 <= zone $69.16)
+  Notes:        STALE - Recent cached daily candle tested demand zone
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $68.84 - $71.89
-  Size:         $3.05
-  Distance:     $2.56
+  Range:        $69.06 - $71.78
+  Size:         $2.72
+  Distance:     $0.00
   Formed:       2026-09-14
-  FRESHNESS:    FRESH
-  Notes:        Fresh - not tested recently
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($69.35 >= zone $69.06)
 
 TRADE METRICS:
-  Stop Loss Distance:  $3.87
-  Profit Target (PT):  $2.56
-  Risk:Reward Ratio:   1:0.66
+  Stop Loss Distance:  $6.94
+  Profit Target (PT):  $-0.29
+  Risk:Reward Ratio:   1:-0.04

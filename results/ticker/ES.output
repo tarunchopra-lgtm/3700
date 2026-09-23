@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: ES
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $66.74
+  ATR (14-day): $1.40
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $67.11 - $68.08
+  Size:         $0.97
+  Distance:     $0.37 (26% of ATR)
+  Formed:       2026-09-15
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($66.74 <= zone $68.08)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $74.55 - $75.66
+  Size:         $1.11
+  Distance:     $7.81
+  Formed:       2026-07-24
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+TRADE METRICS:
+  Stop Loss Distance:  $-0.37
+  Profit Target (PT):  $7.81
+  Risk:Reward Ratio:   1:0.00

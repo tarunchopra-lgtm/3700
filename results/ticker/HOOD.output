@@ -3,27 +3,27 @@ TICKER: HOOD
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $113.69
+  Price:        $126.37
   ATR (14-day): $4.62
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $100.68 - $105.47
-  Size:         $4.79
-  Distance:     $8.22 (178% of ATR)
-  Formed:       2026-08-31
-  FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $101.72)
+  Range:        $92.80 - $99.19
+  Size:         $6.39
+  Distance:     $27.18 (588% of ATR)
+  Formed:       2026-06-25
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
   Range:        $111.02 - $121.42
   Size:         $10.40
-  Distance:     $0.00
+  Distance:     $4.95
   Formed:       2026-09-10
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($113.69 >= zone $111.02)
+  Notes:        STALE - Price reached zone ($126.37 >= zone $111.02)
 
 TRADE METRICS:
-  Stop Loss Distance:  $13.01
-  Profit Target (PT):  $-2.67
-  Risk:Reward Ratio:   1:-0.21
+  Stop Loss Distance:  $33.57
+  Profit Target (PT):  $-15.35
+  Risk:Reward Ratio:   1:-0.46

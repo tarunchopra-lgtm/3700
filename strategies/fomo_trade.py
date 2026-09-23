@@ -224,26 +224,8 @@ def load_bracket_file(symbol: str, bracket_num: int) -> dict | None:
 
 
 def remove_bracket_file(symbol: str, bracket_num: int) -> bool:
-    """Legacy wrapper: removes bracket from JSON, deletes file if empty"""
-    pos_data = load_position_tracking(symbol)
-    
-    if not pos_data:
-        return False
-    
-    if "brackets" in pos_data and f"bracket{bracket_num}" in pos_data["brackets"]:
-        del pos_data["brackets"][f"bracket{bracket_num}"]
-        
-        # If both brackets done, remove file
-        other_bracket = 2 if bracket_num == 1 else 1
-        if f"bracket{other_bracket}" not in pos_data["brackets"] or \
-           pos_data["brackets"][f"bracket{other_bracket}"].get("status") in ["target_filled", "stopped_out"]:
-            remove_position_tracking(symbol)
-            return True
-        else:
-            save_position_tracking(symbol, pos_data)
-            return True
-    
-    return False
+    """Legacy wrapper retained for compatibility; status updates preserve IDs."""
+    return load_position_tracking(symbol) is not None
 
 
 def remove_all_brackets_for_symbol(symbol: str) -> bool:
@@ -254,18 +236,17 @@ def remove_all_brackets_for_symbol(symbol: str) -> bool:
 def save_position_status(symbol: str, qty: float, entry_price: float, 
                         bracket1_status: str = "pending", bracket2_status: str = "pending",
                         current_price: float = None, current_pnl: float = None) -> None:
-    """Legacy wrapper: saves position status to JSON"""
-    pos_data = {
+    """Legacy wrapper: updates status without deleting tracked order IDs."""
+    pos_data = load_position_tracking(symbol) or {
         "symbol": symbol,
-        "qty": qty,
-        "entry_price": entry_price,
-        "brackets": {
-            "bracket1": {"status": bracket1_status},
-            "bracket2": {"status": bracket2_status}
-        },
-        "current_price": current_price,
-        "current_pnl": current_pnl
+        "brackets": {"bracket1": {}, "bracket2": {}},
     }
+    pos_data["qty"] = qty
+    pos_data["entry_price"] = entry_price
+    pos_data.setdefault("brackets", {}).setdefault("bracket1", {})["status"] = bracket1_status
+    pos_data.setdefault("brackets", {}).setdefault("bracket2", {})["status"] = bracket2_status
+    pos_data["current_price"] = current_price
+    pos_data["current_pnl"] = current_pnl
     save_position_tracking(symbol, pos_data)
 
 
@@ -401,6 +382,12 @@ def _normalize_symbol(symbol: str) -> str:
     return symbol.replace("/", "").replace("-", "").upper()
 
 
+def _broker_symbol(trade_id_or_symbol: str) -> str:
+    """Resolve a local tracking ID such as SPY_2 to its Alpaca ticker SPY."""
+    trade = trade_states.get(trade_id_or_symbol)
+    return trade["config"]["symbol"] if trade else trade_id_or_symbol
+
+
 def _timed(label: str, fn, *args, **kwargs):
     started = time.perf_counter()
     result = fn(*args, **kwargs)
@@ -427,7 +414,7 @@ def _create_limit_order(symbol: str, qty: float, side: OrderSide, limit_price: f
         LimitOrderRequest configured for extended hours if applicable
     """
     order_dict = {
-        "symbol": symbol,
+        "symbol": _broker_symbol(symbol),
         "qty": qty,
         "side": side,
         "time_in_force": time_in_force,
@@ -462,7 +449,7 @@ def _create_stop_order(symbol: str, qty: float, side: OrderSide, stop_price: flo
         StopOrderRequest configured for stop-loss execution (regular hours only)
     """
     order_dict = {
-        "symbol": symbol,
+        "symbol": _broker_symbol(symbol),
         "qty": qty,
         "side": side,
         "time_in_force": time_in_force,
@@ -480,7 +467,7 @@ def _submit_oco_exit(symbol: str, qty: float, stop_price: float, target_price: f
                      time_in_force: TimeInForce) -> tuple[str, str]:
     """Submit a linked one-cancels-other sell exit and return target and stop IDs."""
     order = LimitOrderRequest(
-        symbol=symbol,
+        symbol=_broker_symbol(symbol),
         qty=qty,
         side=OrderSide.SELL,
         type="limit",
@@ -491,15 +478,11 @@ def _submit_oco_exit(symbol: str, qty: float, stop_price: float, target_price: f
         stop_loss=StopLossRequest(stop_price=round(stop_price, 2)),
     )
     parent = trading_client.submit_order(order_data=order)
-    order_with_legs = trading_client.get_order_by_id(
-        str(parent.id),
-        filter=GetOrderByIdRequest(nested=True),
-    )
     target_id = str(parent.id)
     stop_id = next(
         (
             str(leg.id)
-            for leg in (getattr(order_with_legs, "legs", None) or [])
+            for leg in (getattr(parent, "legs", None) or [])
             if getattr(leg, "stop_price", None) is not None
         ),
         None,
@@ -536,10 +519,18 @@ def _update_tracked_oco_exits(symbol: str, cfg: dict, state: dict) -> None:
             continue
         target_order = trading_client.get_order_by_id(target_id)
         stop_order = trading_client.get_order_by_id(stop_id)
+        target_status = str(target_order.status).lower()
+        stop_status = str(stop_order.status).lower()
+        target_is_live = any(status in target_status for status in ("new", "open", "accepted", "pending"))
+        stop_is_live = any(status in stop_status for status in ("new", "open", "accepted", "pending", "held"))
+
+        if not target_is_live and not stop_is_live:
+            continue
+
         current_target = float(target_order.limit_price)
         current_stop = float(stop_order.stop_price)
 
-        if abs(current_target - target_price) >= 0.005:
+        if target_is_live and abs(current_target - target_price) >= 0.005:
             target_response = trading_client.replace_order_by_id(
                 target_id,
                 ReplaceOrderRequest(limit_price=round(target_price, 2)),
@@ -547,7 +538,7 @@ def _update_tracked_oco_exits(symbol: str, cfg: dict, state: dict) -> None:
             bracket["target_order_id"] = str(target_response.id)
             print(f"[{symbol}] Updated B{bracket_num} OCO target: ${current_target:.2f} -> ${target_price:.2f}")
 
-        if abs(current_stop - cfg["stop_price"]) >= 0.005:
+        if stop_is_live and abs(current_stop - cfg["stop_price"]) >= 0.005:
             stop_response = trading_client.replace_order_by_id(
                 stop_id,
                 ReplaceOrderRequest(stop_price=round(cfg["stop_price"], 2)),
@@ -567,12 +558,118 @@ def _update_tracked_oco_exits(symbol: str, cfg: dict, state: dict) -> None:
         )
 
 
+def _ensure_oco_exits_for_trade(trade_id: str) -> None:
+    """Create missing OCO exits for every individually filled tracked entry."""
+    cfg = trade_states[trade_id]["config"]
+    state = trade_states[trade_id]["state"]
+    for bracket_num, bracket, target_price in (
+        (1, state["bracket1"], cfg["target1_price"]),
+        (2, state["bracket2"], cfg["target2_price"]),
+    ):
+        if not bracket["entry_order_id"]:
+            continue
+        entry_status = _check_order_status(bracket["entry_order_id"])
+        if entry_status != "filled":
+            continue
+        if bracket["target_order_id"] and bracket["stop_order_id"]:
+            continue
+
+        missing = []
+        if not bracket["stop_order_id"]:
+            missing.append("stop")
+        if not bracket["target_order_id"]:
+            missing.append("target")
+        print(f"[ALERT] [{trade_id}] B{bracket_num} entry is FILLED but missing {', '.join(missing)} tracking ID(s)")
+        try:
+            target_id, stop_id = _submit_oco_exit(
+                trade_id, float(cfg["bracket_qty"]), cfg["stop_price"],
+                target_price, cfg["order_time_in_force"]
+            )
+            bracket["target_order_id"] = target_id
+            bracket["stop_order_id"] = stop_id
+            save_bracket_file(
+                trade_id, bracket_num,
+                entry_order_id=bracket["entry_order_id"],
+                stop_order_id=stop_id,
+                target_order_id=target_id,
+                entry_price=cfg["entry_price"],
+                stop_price=cfg["stop_price"],
+                target_price=target_price,
+                qty=cfg["bracket_qty"],
+            )
+            print(f"[{trade_id}] ✓ B{bracket_num} OCO protection created: stop ${cfg['stop_price']:.2f} | target ${target_price:.2f}")
+        except Exception as error:
+            print(f"[{trade_id}] ✗ B{bracket_num} OCO protection error: {error}")
+
+
+def _recover_missing_entry_ids_for_trade(trade_id: str) -> None:
+    """Restore missing filled entry IDs from recent Alpaca buy order history."""
+    cfg = trade_states[trade_id]["config"]
+    state = trade_states[trade_id]["state"]
+    if state["bracket1"].get("entry_order_id") and state["bracket2"].get("entry_order_id"):
+        return
+
+    used_entry_ids = {
+        bracket.get("entry_order_id")
+        for trade in trade_states.values()
+        for bracket in trade["state"].values()
+        if bracket.get("entry_order_id")
+    }
+
+    try:
+        orders = trading_client.get_orders(
+            filter=GetOrdersRequest(status=QueryOrderStatus.CLOSED, limit=200, symbols=[cfg["symbol"]])
+        )
+    except Exception as error:
+        print(f"[{trade_id}] Could not recover missing entry IDs: {error}")
+        return
+
+    candidates = []
+    for order in orders:
+        order_id = str(getattr(order, "id", ""))
+        side = getattr(order, "side", "")
+        side_text = side.value if hasattr(side, "value") else str(side)
+        status = str(getattr(order, "status", "")).lower()
+        limit_price = getattr(order, "limit_price", None)
+        qty = _as_float(getattr(order, "qty", None)) if "_as_float" in globals() else float(getattr(order, "qty", 0) or 0)
+        if (not order_id or order_id in used_entry_ids or side_text.lower() != "buy" or
+                "filled" not in status or limit_price in (None, "")):
+            continue
+        if abs(float(limit_price) - cfg["entry_price"]) < 0.005 and abs(qty - float(cfg["bracket_qty"])) < 1e-9:
+            submitted_at = getattr(order, "submitted_at", None)
+            candidates.append((submitted_at, order_id))
+
+    candidates.sort(key=lambda item: item[0] or datetime.min)
+    for bracket_num in (1, 2):
+        bracket = state[f"bracket{bracket_num}"]
+        if bracket.get("entry_order_id"):
+            continue
+        if not candidates:
+            print(f"[ALERT] [{trade_id}] B{bracket_num} missing entry ID; no matching filled buy found")
+            return
+        _, recovered_id = candidates.pop(0)
+        bracket["entry_order_id"] = recovered_id
+        target_price = cfg["target1_price"] if bracket_num == 1 else cfg["target2_price"]
+        save_bracket_file(
+            trade_id, bracket_num,
+            entry_order_id=recovered_id,
+            stop_order_id=bracket.get("stop_order_id"),
+            target_order_id=bracket.get("target_order_id"),
+            entry_price=cfg["entry_price"],
+            stop_price=cfg["stop_price"],
+            target_price=target_price,
+            qty=cfg["bracket_qty"],
+        )
+        print(f"[{trade_id}] Recovered B{bracket_num} entry ID: {recovered_id}")
+
+
 def _find_position_for_symbol(symbol: str, retries: int = 3, delay_seconds: float = 1.0):
-    target = _normalize_symbol(symbol)
+    broker_symbol = _broker_symbol(symbol)
+    target = _normalize_symbol(broker_symbol)
     for attempt in range(1, retries + 1):
         try:
             # Fast path: ask Alpaca directly for this symbol instead of scanning all positions.
-            pos = _timed("get_open_position", trading_client.get_open_position, symbol)
+            pos = _timed("get_open_position", trading_client.get_open_position, broker_symbol)
             if _normalize_symbol(getattr(pos, "symbol", "")) == target:
                 return pos
         except Exception:
@@ -590,7 +687,7 @@ def _find_position_for_symbol(symbol: str, retries: int = 3, delay_seconds: floa
 
 
 def _get_open_orders_for_symbol(symbol: str):
-    target = _normalize_symbol(symbol)
+    target = _normalize_symbol(_broker_symbol(symbol))
     orders = list(
         _timed(
             "get_orders(open)",
@@ -599,6 +696,67 @@ def _get_open_orders_for_symbol(symbol: str):
         )
     )
     return [o for o in orders if _normalize_symbol(getattr(o, "symbol", "")) == target]
+
+
+def _reset_trade_order_tracking(trade_id: str) -> None:
+    """Clear in-memory order IDs after a trade has fully exited."""
+    state = trade_states[trade_id]["state"]
+    for bracket_num in (1, 2):
+        state[f"bracket{bracket_num}"] = {
+            "entry_order_id": None,
+            "stop_order_id": None,
+            "target_order_id": None,
+            "filled": False,
+        }
+
+
+def _reconcile_trade_tracker(trade_id: str) -> bool:
+    """Remove a tracker only after no position or live buy entry remains."""
+    cfg = trade_states[trade_id]["config"]
+    state = trade_states[trade_id]["state"]
+
+    if _find_position_for_symbol(trade_id, retries=1, delay_seconds=0.0):
+        return False
+
+    try:
+        open_orders = _get_open_orders_for_symbol(trade_id)
+    except Exception as error:
+        print(f"[RECONCILE] [{trade_id}] Could not inspect open orders: {error}")
+        return False
+
+    # A live buy may still be waiting to fill. Keep its tracker so the next
+    # cycle does not submit a duplicate entry.
+    live_buy_ids = {
+        str(getattr(order, "id", ""))
+        for order in open_orders
+        if str(getattr(order, "side", "")).lower().endswith("buy")
+    }
+    tracked_entry_ids = {
+        state[f"bracket{bracket_num}"].get("entry_order_id")
+        for bracket_num in (1, 2)
+    }
+    if live_buy_ids & tracked_entry_ids or live_buy_ids:
+        return False
+
+    # No position and no live buy means any remaining tracked exits are stale.
+    # Cancel them before deleting the file so an old OCO cannot sell a future
+    # position opened by the same configured trade.
+    open_order_ids = {str(getattr(order, "id", "")) for order in open_orders}
+    for bracket_num in (1, 2):
+        bracket = state[f"bracket{bracket_num}"]
+        for order_id in (bracket.get("stop_order_id"), bracket.get("target_order_id")):
+            if order_id and order_id in open_order_ids:
+                try:
+                    trading_client.cancel_order_by_id(order_id)
+                    print(f"[RECONCILE] [{trade_id}] Cancelled stale exit {order_id}")
+                except Exception as error:
+                    print(f"[RECONCILE] [{trade_id}] Could not cancel stale exit {order_id}: {error}")
+
+    if remove_position_tracking(trade_id):
+        _reset_trade_order_tracking(trade_id)
+        print(f"[RECONCILE] [{trade_id}] No broker position remains; removed completed tracker")
+        return True
+    return False
 
 
 def _check_order_status(order_id: str) -> str | None:
@@ -615,7 +773,7 @@ def _check_order_status(order_id: str) -> str | None:
         None if order not found or error
     """
     try:
-        order = trading_client.get_order(order_id)
+        order = trading_client.get_order_by_id(order_id)
         if hasattr(order, 'status'):
             status = str(order.status).lower()
             if 'filled' in status:
@@ -696,6 +854,7 @@ def _get_bracket_outcome(symbol: str, bracket_num: int, cfg: dict, state: dict) 
 
 
 def _get_current_price(symbol: str) -> float:
+    symbol = _broker_symbol(symbol)
     is_crypto = "/" in symbol
     is_option = _is_option_symbol(symbol)
     
@@ -765,8 +924,19 @@ def _read_config_from_file() -> list[tuple]:
         if not configs:
             print("Error: No valid configuration lines found in lists/fomo_trade.txt")
             sys.exit(1)
-        
-        return configs
+
+        symbol_counts = {}
+        for symbol, *_ in configs:
+            symbol_counts[symbol] = symbol_counts.get(symbol, 0) + 1
+
+        symbol_indexes = {}
+        identified_configs = []
+        for symbol, num_stocks, entry_price, stop_price, target1_price, target2_price in configs:
+            symbol_indexes[symbol] = symbol_indexes.get(symbol, 0) + 1
+            trade_id = symbol if symbol_counts[symbol] == 1 else f"{symbol}_{symbol_indexes[symbol]}"
+            identified_configs.append((trade_id, symbol, num_stocks, entry_price, stop_price, target1_price, target2_price))
+
+        return identified_configs
     except Exception as e:
         print(f"Error reading configuration file: {e}")
         sys.exit(1)
@@ -782,10 +952,10 @@ trade_states = {}  # {symbol: {config, state_data}}
 previous_configs = {}  # Track previous config to detect changes
 
 
-def _validate_and_add_trade(symbol: str, num_stocks: int, entry_price: float, stop_price: float, 
+def _validate_and_add_trade(trade_id: str, symbol: str, num_stocks: int, entry_price: float, stop_price: float,
                             target1_price: float, target2_price: float, data_client=None) -> bool:
     """Validate trade config and add to trade_states. Returns True if added successfully."""
-    if symbol in trade_states:
+    if trade_id in trade_states:
         return False  # Already exists
     
     if num_stocks <= 0:
@@ -812,9 +982,11 @@ def _validate_and_add_trade(symbol: str, num_stocks: int, entry_price: float, st
     
     bracket_qty = num_stocks // 2
     
-    trade_states[symbol] = {
+    trade_states[trade_id] = {
         "config": {
             "symbol": symbol,
+            "trade_id": trade_id,
+            "is_duplicate_ticker": trade_id != symbol,
             "num_stocks": num_stocks,
             "entry_price": entry_price,
             "stop_price": stop_price,
@@ -845,6 +1017,37 @@ def _validate_and_add_trade(symbol: str, num_stocks: int, entry_price: float, st
     return True
 
 
+def _restore_trade_tracking(trade_id: str) -> None:
+    """Load persisted entry and OCO IDs into one trade's in-memory state."""
+    state = trade_states[trade_id]["state"]
+    for bracket_num in (1, 2):
+        bracket_data = load_bracket_file(trade_id, bracket_num)
+        if not bracket_data:
+            continue
+        bracket = state[f"bracket{bracket_num}"]
+        bracket["entry_order_id"] = bracket_data.get("entry_order_id")
+        bracket["stop_order_id"] = bracket_data.get("stop_order_id")
+        bracket["target_order_id"] = bracket_data.get("target_order_id")
+        bracket["filled"] = bracket_data.get("filled", False)
+        print(
+            f"[STARTUP] [{trade_id}] Restored B{bracket_num}: "
+            f"entry={bracket['entry_order_id']}, stop={bracket['stop_order_id']}, "
+            f"target={bracket['target_order_id']}"
+        )
+
+
+def _migrate_single_tracker_for_duplicates(configs: list[tuple]) -> None:
+    """Rename SYMBOL.json to SYMBOL_1.json when that ticker gains a second config line."""
+    for trade_id, symbol, *_ in configs:
+        if trade_id != f"{symbol}_1":
+            continue
+        legacy_file = POSITIONS_DIR / f"{symbol}.json"
+        duplicate_file = POSITIONS_DIR / f"{trade_id}.json"
+        if legacy_file.exists() and not duplicate_file.exists():
+            legacy_file.rename(duplicate_file)
+            print(f"[CONFIG] Migrated {legacy_file.name} to {duplicate_file.name}")
+
+
 def _remove_trade(symbol: str):
     """Remove a trade from active tracking (it will finish its current orders)."""
     if symbol in trade_states:
@@ -873,43 +1076,53 @@ def _place_entry_orders_for_symbols(symbols_to_place):
             
             # Check for existing position
             existing_pos = _find_position_for_symbol(symbol, retries=1, delay_seconds=0.0)
-            if existing_pos:
+            if existing_pos and not cfg["is_duplicate_ticker"]:
                 print(f"[{symbol}] ✓ Existing position: {existing_pos.qty} shares\n")
                 continue
+            if existing_pos:
+                print(f"[{symbol}] Existing {cfg['symbol']} position belongs to another tracked trade; placing separate entries")
             
             # ====== ENTRY 1 ======
             bracket1_placed = False
-            try:
-                entry1_order = _create_limit_order(
-                    symbol, float(cfg["bracket_qty"]), OrderSide.BUY, cfg["entry_price"],
-                    cfg["order_time_in_force"], not cfg["is_crypto"] and not cfg["is_option"]
-                )
-                entry1_id = str(trading_client.submit_order(order_data=entry1_order).id)
-                if entry1_id:
-                    state["bracket1"]["entry_order_id"] = entry1_id
-                    bracket1_placed = True
-                    print(f"[{symbol}] ✓ Bracket 1: BUY {cfg['bracket_qty']} @ ${cfg['entry_price']:.2f} (ID: {entry1_id})")
-                else:
-                    print(f"[{symbol}] ✗ Bracket 1: No response ID")
-            except Exception as e:
-                print(f"[{symbol}] ✗ Bracket 1 ERROR: {e}")
+            b1_target_id = state["bracket1"].get("target_order_id")
+            if b1_target_id and _check_order_status(b1_target_id) == "filled":
+                print(f"[{symbol}] ⊘ Bracket 1 target already filled; skipping entry")
+            else:
+                try:
+                    entry1_order = _create_limit_order(
+                        symbol, float(cfg["bracket_qty"]), OrderSide.BUY, cfg["entry_price"],
+                        cfg["order_time_in_force"], not cfg["is_crypto"] and not cfg["is_option"]
+                    )
+                    entry1_id = str(trading_client.submit_order(order_data=entry1_order).id)
+                    if entry1_id:
+                        state["bracket1"]["entry_order_id"] = entry1_id
+                        bracket1_placed = True
+                        print(f"[{symbol}] ✓ Bracket 1: BUY {cfg['bracket_qty']} @ ${cfg['entry_price']:.2f} (ID: {entry1_id})")
+                    else:
+                        print(f"[{symbol}] ✗ Bracket 1: No response ID")
+                except Exception as e:
+                    print(f"[{symbol}] ✗ Bracket 1 ERROR: {e}")
 
             # ====== ENTRY 2 ======
             bracket2_placed = False
-            try:
-                entry2_order = _create_limit_order(
-                    symbol, float(cfg["bracket_qty"]), OrderSide.BUY, cfg["entry_price"],
-                    cfg["order_time_in_force"], not cfg["is_crypto"] and not cfg["is_option"]
-                )
-                entry2_id = str(trading_client.submit_order(order_data=entry2_order).id)
-                if entry2_id:
-                    state["bracket2"]["entry_order_id"] = entry2_id
-                    bracket2_placed = True
-                    print(f"[{symbol}] ✓ Bracket 2: BUY {cfg['bracket_qty']} @ ${cfg['entry_price']:.2f} (ID: {entry2_id})")
-                else:
-                    print(f"[{symbol}] ✗ Bracket 2: No response ID")
-            except Exception as e:
-                print(f"[{symbol}] ✗ Bracket 2 ERROR: {e}")
+            b2_target_id = state["bracket2"].get("target_order_id")
+            if b2_target_id and _check_order_status(b2_target_id) == "filled":
+                print(f"[{symbol}] ⊘ Bracket 2 target already filled; skipping entry")
+            else:
+                try:
+                    entry2_order = _create_limit_order(
+                        symbol, float(cfg["bracket_qty"]), OrderSide.BUY, cfg["entry_price"],
+                        cfg["order_time_in_force"], not cfg["is_crypto"] and not cfg["is_option"]
+                    )
+                    entry2_id = str(trading_client.submit_order(order_data=entry2_order).id)
+                    if entry2_id:
+                        state["bracket2"]["entry_order_id"] = entry2_id
+                        bracket2_placed = True
+                        print(f"[{symbol}] ✓ Bracket 2: BUY {cfg['bracket_qty']} @ ${cfg['entry_price']:.2f} (ID: {entry2_id})")
+                    else:
+                        print(f"[{symbol}] ✗ Bracket 2: No response ID")
+                except Exception as e:
+                    print(f"[{symbol}] ✗ Bracket 2 ERROR: {e}")
             
             # ====== SAVE TRACKING ======
             if bracket1_placed:
@@ -1013,9 +1226,10 @@ print(f"╚" + "═"*60 + "╝\n")
 
 # Read initial configuration
 initial_configs = _read_config_from_file()
-for symbol, num_stocks, entry_price, stop_price, target1_price, target2_price in initial_configs:
-    _validate_and_add_trade(symbol, num_stocks, entry_price, stop_price, target1_price, target2_price)
-    previous_configs[symbol] = (num_stocks, entry_price, stop_price, target1_price, target2_price)
+_migrate_single_tracker_for_duplicates(initial_configs)
+for trade_id, symbol, num_stocks, entry_price, stop_price, target1_price, target2_price in initial_configs:
+    _validate_and_add_trade(trade_id, symbol, num_stocks, entry_price, stop_price, target1_price, target2_price)
+    previous_configs[trade_id] = (symbol, num_stocks, entry_price, stop_price, target1_price, target2_price)
 
 if not trade_states:
     print("Error: No valid trades loaded")
@@ -1023,22 +1237,12 @@ if not trade_states:
 
 # Restore persistent JSON tracking after the configured symbols exist in memory.
 # This must happen before stale-order cleanup so active OCO and entry IDs are preserved.
-for symbol, trade_data in trade_states.items():
-    state = trade_data["state"]
-    for bracket_num in (1, 2):
-        bracket_data = load_bracket_file(symbol, bracket_num)
-        if not bracket_data:
-            continue
-        bracket = state[f"bracket{bracket_num}"]
-        bracket["entry_order_id"] = bracket_data.get("entry_order_id")
-        bracket["stop_order_id"] = bracket_data.get("stop_order_id")
-        bracket["target_order_id"] = bracket_data.get("target_order_id")
-        bracket["filled"] = bracket_data.get("filled", False)
-        print(
-            f"[STARTUP] [{symbol}] Restored B{bracket_num}: "
-            f"entry={bracket['entry_order_id']}, stop={bracket['stop_order_id']}, "
-            f"target={bracket['target_order_id']}"
-        )
+for trade_id in trade_states:
+    _restore_trade_tracking(trade_id)
+
+# Remove completed trackers before collecting IDs to preserve.
+for trade_id in list(trade_states):
+    _reconcile_trade_tracker(trade_id)
 
 print(f"[INFO] Loaded {len(trade_states)} initial trade configuration(s):\n")
 for symbol, trade_data in trade_states.items():
@@ -1065,14 +1269,14 @@ for symbol in trade_states:
 
 try:
     all_orders = list(trading_client.get_orders(filter=GetOrdersRequest(status=QueryOrderStatus.OPEN, limit=500)))
-    config_symbols = set(trade_states.keys())
+    config_symbols = {trade_data["config"]["symbol"] for trade_data in trade_states.values()}
     
     cancelled_count = 0
     for order in all_orders:
         # Only cancel if: symbol is in config AND order is NOT being tracked
         if order.symbol in config_symbols and str(order.id) not in tracked_order_ids:
             try:
-                trading_client.cancel_order(order.id)
+                trading_client.cancel_order_by_id(order.id)
                 print(f"  ✓ Cancelled duplicate order {order.id} ({order.symbol} {order.side} {order.qty} @ ${order.limit_price if hasattr(order, 'limit_price') else 'mkt'})")
                 cancelled_count += 1
             except Exception as e:
@@ -1101,10 +1305,25 @@ elif all(trade_states[s]["config"]["is_option"] for s in trade_states):
 else:
     data_client = StockHistoricalDataClient(credentials.api_key, credentials.secret_key)
 
+# Apply the current fomo_trade.txt stop/target prices to restored live OCO legs.
+# This covers edits made while the monitor was not running.
+for symbol, trade_data in trade_states.items():
+    if not _find_position_for_symbol(symbol, retries=1, delay_seconds=0.0):
+        continue
+    try:
+        _update_tracked_oco_exits(symbol, trade_data["config"], trade_data["state"])
+    except Exception as e:
+        print(f"[STARTUP] [{symbol}] Could not reconcile tracked OCO orders: {e}")
+
+for trade_id in trade_states:
+    _recover_missing_entry_ids_for_trade(trade_id)
+    _ensure_oco_exits_for_trade(trade_id)
+
 # Determine which symbols need entry orders placed (not already placed or filled)
 symbols_needing_entry_orders = []
 for symbol in trade_states:
     state = trade_states[symbol]["state"]
+    cfg = trade_states[symbol]["config"]
     pos = _find_position_for_symbol(symbol, retries=1, delay_seconds=0.0)
     
     # Check if we already have tracked entry orders
@@ -1124,8 +1343,12 @@ for symbol in trade_states:
         else:
             # Entry order exists, just waiting for fill
             print(f"[STARTUP] [{symbol}] Skipping entry (order already placed, waiting for fill)\n")
+    elif cfg["is_duplicate_ticker"]:
+        # Alpaca aggregates by ticker. This separately tracked duplicate is an
+        # explicit new trade, so it needs its own two entry orders.
+        symbols_needing_entry_orders.append(symbol)
+        print(f"[STARTUP] [{symbol}] Existing {cfg['symbol']} position belongs to another tracked trade; placing this trade's entries\n")
     else:
-        # Position exists
         print(f"[STARTUP] [{symbol}] Skipping entry (position already filled)\n")
 
 # SETUP PHASE: Place only MISSING entry orders
@@ -1149,6 +1372,7 @@ try:
         # CONFIG RELOAD CHECK (every 10 seconds)
         try:
             current_configs = _read_config_from_file()
+            _migrate_single_tracker_for_duplicates(current_configs)
             current_symbols = {cfg[0] for cfg in current_configs}
             previous_symbols = set(previous_configs.keys())
             
@@ -1156,15 +1380,21 @@ try:
             new_symbols = current_symbols - previous_symbols
             if new_symbols:
                 print(f"\n[CONFIG] 🆕 Found {len(new_symbols)} new trade(s):")
-                for symbol, num_stocks, entry_price, stop_price, target1_price, target2_price in current_configs:
-                    if symbol in new_symbols:
-                        if _validate_and_add_trade(symbol, num_stocks, entry_price, stop_price, target1_price, target2_price):
-                            previous_configs[symbol] = (num_stocks, entry_price, stop_price, target1_price, target2_price)
-                            cfg = trade_states[symbol]["config"]
-                            print(f"  ✓ {symbol}: Entry ${cfg['entry_price']:.2f} | Stop ${cfg['stop_price']:.2f}")
+                for trade_id, symbol, num_stocks, entry_price, stop_price, target1_price, target2_price in current_configs:
+                    if trade_id in new_symbols:
+                        if _validate_and_add_trade(trade_id, symbol, num_stocks, entry_price, stop_price, target1_price, target2_price):
+                            _restore_trade_tracking(trade_id)
+                            previous_configs[trade_id] = (symbol, num_stocks, entry_price, stop_price, target1_price, target2_price)
+                            cfg = trade_states[trade_id]["config"]
+                            print(f"  ✓ {trade_id} ({symbol}): Entry ${cfg['entry_price']:.2f} | Stop ${cfg['stop_price']:.2f}")
                 
-                # Place entry orders for new trades
-                _place_entry_orders_for_symbols(list(new_symbols))
+                # Place entries only for new trades that did not restore IDs.
+                new_trade_ids_to_place = [
+                    trade_id for trade_id in new_symbols
+                    if not trade_states[trade_id]["state"]["bracket1"]["entry_order_id"]
+                    and not trade_states[trade_id]["state"]["bracket2"]["entry_order_id"]
+                ]
+                _place_entry_orders_for_symbols(new_trade_ids_to_place)
                 print()
             
             # Find REMOVED trades
@@ -1180,45 +1410,66 @@ try:
             common_symbols = current_symbols & previous_symbols
             updated_symbols = []
             
-            for symbol, num_stocks, entry_price, stop_price, target1_price, target2_price in current_configs:
-                if symbol in common_symbols:
-                    prev_config = previous_configs[symbol]
+            for trade_id, symbol, num_stocks, entry_price, stop_price, target1_price, target2_price in current_configs:
+                if trade_id in common_symbols:
+                    prev_config = previous_configs[trade_id]
                     # Compare all parameters
-                    if (num_stocks, entry_price, stop_price, target1_price, target2_price) != prev_config:
-                        updated_symbols.append((symbol, num_stocks, entry_price, stop_price, target1_price, target2_price))
+                    if (symbol, num_stocks, entry_price, stop_price, target1_price, target2_price) != prev_config:
+                        updated_symbols.append((trade_id, symbol, num_stocks, entry_price, stop_price, target1_price, target2_price))
             
             if updated_symbols:
                 print(f"\n[CONFIG] 🔄 Found {len(updated_symbols)} updated trade(s):")
-                for symbol, num_stocks, entry_price, stop_price, target1_price, target2_price in updated_symbols:
-                    cfg = trade_states[symbol]["config"]
-                    state = trade_states[symbol]["state"]
+                for trade_id, symbol, num_stocks, entry_price, stop_price, target1_price, target2_price in updated_symbols:
+                    cfg = trade_states[trade_id]["config"]
+                    state = trade_states[trade_id]["state"]
+
+                    if (num_stocks <= 0 or num_stocks % 2 != 0 or
+                            stop_price >= entry_price or
+                            target1_price <= entry_price or
+                            target2_price <= target1_price):
+                        print(
+                            f"  ✗ {trade_id}: Invalid update skipped. Require even quantity, "
+                            "STOP < ENTRY < TARGET1 < TARGET2."
+                        )
+                        previous_configs[trade_id] = (
+                            symbol, num_stocks, entry_price, stop_price,
+                            target1_price, target2_price
+                        )
+                        continue
                     
                     # Check if position already filled
-                    pos = _find_position_for_symbol(symbol, retries=1, delay_seconds=0.0)
+                    pos = _find_position_for_symbol(trade_id, retries=1, delay_seconds=0.0)
                     
                     if pos:
-                        if (num_stocks, entry_price) != prev_config[:2]:
-                            print(f"  ⚠ {symbol}: Filled position keeps its original quantity and entry price")
+                        if (num_stocks, entry_price) != prev_config[1:3]:
+                            print(f"  ⚠ {trade_id}: Filled position keeps its original quantity and entry price")
                         cfg["stop_price"] = stop_price
                         cfg["target1_price"] = target1_price
                         cfg["target2_price"] = target2_price
                         try:
-                            _update_tracked_oco_exits(symbol, cfg, state)
-                            print(f"  ✓ {symbol}: Updated tracked OCO stops/targets by trading ID")
+                            _update_tracked_oco_exits(trade_id, cfg, state)
+                            print(f"  ✓ {trade_id}: Updated tracked OCO stops/targets by trading ID")
                         except Exception as e:
-                            print(f"  ✗ {symbol}: Could not update tracked OCO orders: {e}")
+                            print(f"  ✗ {trade_id}: Could not update tracked OCO orders: {e}")
                     else:
                         # No position yet - check if bracket entry orders exist and cancel them
                         cancelled_count = 0
+                        cancellation_failed = False
                         for bracket_num in [1, 2]:
                             entry_id = state[f"bracket{bracket_num}"]["entry_order_id"]
                             if entry_id:
                                 try:
-                                    trading_client.cancel_order(entry_id)
-                                    print(f"  ✓ {symbol}: Cancelled Bracket {bracket_num} entry order @ ${cfg['entry_price']:.2f}")
+                                    trading_client.cancel_order_by_id(entry_id)
+                                    print(f"  ✓ {trade_id}: Cancelled entry {bracket_num} @ ${cfg['entry_price']:.2f}")
                                     cancelled_count += 1
                                 except Exception as e:
-                                    print(f"  ✗ {symbol}: Error cancelling Bracket {bracket_num} entry: {e}")
+                                    cancellation_failed = True
+                                    print(f"  ✗ {trade_id}: Error cancelling entry {bracket_num}: {e}")
+
+                        if cancellation_failed:
+                            print(f"  ⚠ {trade_id}: Keeping existing tracking; no replacement entries placed")
+                            previous_configs[trade_id] = (symbol, num_stocks, entry_price, stop_price, target1_price, target2_price)
+                            continue
                         
                         # Update config with new values
                         bracket_qty = num_stocks // 2
@@ -1245,13 +1496,13 @@ try:
                         
                         # Place new bracket entry orders
                         try:
-                            _place_entry_orders_for_symbols([symbol])
-                            print(f"  ✓ {symbol}: Placed new bracket orders @ ${entry_price:.2f} (was ${prev_config[1]:.2f})")
+                            _place_entry_orders_for_symbols([trade_id])
+                            print(f"  ✓ {trade_id}: Placed new entry orders @ ${entry_price:.2f} (was ${prev_config[2]:.2f})")
                         except Exception as e:
-                            print(f"  ✗ {symbol}: Error placing new bracket orders: {e}")
+                            print(f"  ✗ {trade_id}: Error placing new entry orders: {e}")
                     
                     # Update previous config tracking
-                    previous_configs[symbol] = (num_stocks, entry_price, stop_price, target1_price, target2_price)
+                    previous_configs[trade_id] = (symbol, num_stocks, entry_price, stop_price, target1_price, target2_price)
                 
                 print()
         except Exception as e:
@@ -1259,17 +1510,26 @@ try:
         
         # ========== MONITOR ALL ACTIVE TRADES ==========
         # ========== MARKET MONITORING: TRACK BRACKET ORDERS ==========
+        for trade_id in list(trade_states):
+            _reconcile_trade_tracker(trade_id)
         
         # STEP 1: Ensure both bracket entries are placed for all symbols
         for symbol in list(trade_states.keys()):
             cfg = trade_states[symbol]["config"]
             state = trade_states[symbol]["state"]
             
-            if not is_trading_allowed(symbol, cfg):
-                continue
-            
             b1_entry_id = state["bracket1"]["entry_order_id"]
             b2_entry_id = state["bracket2"]["entry_order_id"]
+
+            if not b1_entry_id and not b2_entry_id:
+                if not _find_position_for_symbol(symbol, retries=1, delay_seconds=0.0):
+                    open_buy_orders = [
+                        order for order in _get_open_orders_for_symbol(symbol)
+                        if str(getattr(order, "side", "")).lower().endswith("buy")
+                    ]
+                    if not open_buy_orders:
+                        _place_entry_orders_for_symbols([symbol])
+                continue
             
             # Safety: If bracket 1 placed but bracket 2 missing, place bracket 2 now
             if b1_entry_id and not b2_entry_id:
@@ -1289,18 +1549,21 @@ try:
                     print(f"[{symbol}] ✗ Failed to place bracket 2 entry: {e}")
         
         # STEP 2: Submit and track one OCO exit pair for each filled half-position.
+        for trade_id in list(trade_states.keys()):
+            _recover_missing_entry_ids_for_trade(trade_id)
+            _ensure_oco_exits_for_trade(trade_id)
+
         for symbol in list(trade_states.keys()):
             cfg = trade_states[symbol]["config"]
             state = trade_states[symbol]["state"]
             
-            if not is_trading_allowed(symbol, cfg):
-                continue
-            
             b1 = state["bracket1"]
             b2 = state["bracket2"]
             
-            position = _find_position_for_symbol(symbol, retries=1, delay_seconds=0.0)
-            if not position or _normalize_position_qty(float(position.qty)) < cfg["num_stocks"] * 0.9:
+            if not b1["entry_order_id"] or not b2["entry_order_id"]:
+                continue
+            if (_check_order_status(b1["entry_order_id"]) != "filled" or
+                    _check_order_status(b2["entry_order_id"]) != "filled"):
                 continue
 
             for bracket_num, bracket, target_price in (
@@ -1443,10 +1706,6 @@ try:
         for symbol in list(trade_states.keys()):
             cfg = trade_states[symbol]["config"]
             state = trade_states[symbol]["state"]
-            
-            # Check if trading is allowed for this symbol at this time
-            if not is_trading_allowed(symbol, cfg):
-                continue
             
             # Monitor each bracket independently (Bracket 1 and Bracket 2)
             for bracket_num in [1, 2]:

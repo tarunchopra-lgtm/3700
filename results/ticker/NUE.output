@@ -3,27 +3,27 @@ TICKER: NUE
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $277.48
-  ATR (14-day): $7.83
-  Within ATR:   NO
+  Price:        $244.34
+  ATR (14-day): $7.36
+  Within ATR:   YES
 
 DEMAND ZONE (Buy Zone):
-  Range:        $252.01 - $256.78
-  Size:         $4.77
-  Distance:     $20.70 (264% of ATR)
-  Formed:       2026-09-10
+  Range:        $230.01 - $237.19
+  Size:         $7.18
+  Distance:     $7.15 (97% of ATR)
+  Formed:       2026-07-20
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $250.00 - $270.90
-  Size:         $20.90
-  Distance:     $6.58
-  Formed:       2026-06-16
-  FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($277.48 >= zone $250.00)
+  Range:        $269.00 - $274.49
+  Size:         $5.49
+  Distance:     $24.66
+  Formed:       2026-08-12
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $25.47
-  Profit Target (PT):  $-27.48
-  Risk:Reward Ratio:   1:-1.08
+  Stop Loss Distance:  $14.33
+  Profit Target (PT):  $24.66
+  Risk:Reward Ratio:   1:1.72

@@ -3,27 +3,27 @@ TICKER: ANET
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $199.34
-  ATR (14-day): $11.51
+  Price:        $206.19
+  ATR (14-day): $7.32
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $162.59 - $177.20
-  Size:         $14.61
-  Distance:     $22.14 (192% of ATR)
+  Range:        $162.62 - $177.11
+  Size:         $14.49
+  Distance:     $29.08 (397% of ATR)
   Formed:       2026-07-07
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $189.43 - $214.89
-  Size:         $25.46
+  Range:        $189.73 - $214.62
+  Size:         $24.89
   Distance:     $0.00
   Formed:       2026-08-06
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($199.34 >= zone $189.43)
+  Notes:        STALE - Price reached zone ($206.19 >= zone $189.73)
 
 TRADE METRICS:
-  Stop Loss Distance:  $36.75
-  Profit Target (PT):  $-9.91
-  Risk:Reward Ratio:   1:-0.27
+  Stop Loss Distance:  $43.57
+  Profit Target (PT):  $-16.46
+  Risk:Reward Ratio:   1:-0.38

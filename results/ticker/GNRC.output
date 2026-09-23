@@ -3,27 +3,27 @@ TICKER: GNRC
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $189.00
-  ATR (14-day): $10.81
+  Price:        $214.31
+  ATR (14-day): $10.51
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $178.19 - $186.50
-  Size:         $8.31
-  Distance:     $2.50 (23% of ATR)
-  Formed:       2026-08-31
-  FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $181.18)
+  Range:        $174.03 - $179.66
+  Size:         $5.63
+  Distance:     $34.65 (330% of ATR)
+  Formed:       2026-09-14
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $255.69 - $264.71
-  Size:         $9.02
-  Distance:     $66.69
-  Formed:       2026-06-12
+  Range:        $248.93 - $286.95
+  Size:         $38.02
+  Distance:     $34.62
+  Formed:       2026-07-02
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $10.81
-  Profit Target (PT):  $66.69
-  Risk:Reward Ratio:   1:6.17
+  Stop Loss Distance:  $40.28
+  Profit Target (PT):  $34.62
+  Risk:Reward Ratio:   1:0.86

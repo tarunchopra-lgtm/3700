@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: OXY
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $59.54
+  ATR (14-day): $1.72
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $47.77 - $48.97
+  Size:         $1.20
+  Distance:     $10.57 (614% of ATR)
+  Formed:       2026-07-01
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $58.52 - $62.40
+  Size:         $3.88
+  Distance:     $0.00
+  Formed:       2026-09-17
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($59.54 >= zone $58.52)
+
+TRADE METRICS:
+  Stop Loss Distance:  $11.77
+  Profit Target (PT):  $-1.02
+  Risk:Reward Ratio:   1:-0.09

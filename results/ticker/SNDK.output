@@ -3,27 +3,27 @@ TICKER: SNDK
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $1594.49
-  ATR (14-day): $166.53
+  Price:        $1957.79
+  ATR (14-day): $102.68
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $1485.02 - $1837.77
-  Size:         $352.75
-  Distance:     $0.00 (0% of ATR)
-  Formed:       2026-07-06
-  FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($1594.49 <= zone $1837.77)
-
-SUPPLY ZONE (Sell Zone):
-  Range:        $1865.11 - $2119.90
-  Size:         $254.79
-  Distance:     $270.62
-  Formed:       2026-06-12
+  Range:        $1505.00 - $1581.40
+  Size:         $76.40
+  Distance:     $376.39 (367% of ATR)
+  Formed:       2026-09-14
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
+SUPPLY ZONE (Sell Zone):
+  Range:        $1950.00 - $2353.12
+  Size:         $403.12
+  Distance:     $0.00
+  Formed:       2026-06-22
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($1957.79 >= zone $1950.00)
+
 TRADE METRICS:
-  Stop Loss Distance:  $109.47
-  Profit Target (PT):  $270.62
-  Risk:Reward Ratio:   1:2.47
+  Stop Loss Distance:  $452.79
+  Profit Target (PT):  $-7.79
+  Risk:Reward Ratio:   1:-0.02

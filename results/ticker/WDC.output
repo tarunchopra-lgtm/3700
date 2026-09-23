@@ -3,27 +3,27 @@ TICKER: WDC
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $439.43
-  ATR (14-day): $50.77
+  Price:        $489.09
+  ATR (14-day): $24.63
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $422.11 - $499.19
-  Size:         $77.08
-  Distance:     $0.00 (0% of ATR)
-  Formed:       2026-07-28
-  FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($439.43 <= zone $499.19)
+  Range:        $407.20 - $427.96
+  Size:         $20.75
+  Distance:     $61.13 (248% of ATR)
+  Formed:       2026-09-15
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $529.72 - $658.80
-  Size:         $129.08
-  Distance:     $90.29
-  Formed:       2026-06-12
+  Range:        $586.34 - $663.92
+  Size:         $77.58
+  Distance:     $97.25
+  Formed:       2026-06-30
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $17.32
-  Profit Target (PT):  $90.29
-  Risk:Reward Ratio:   1:5.21
+  Stop Loss Distance:  $81.88
+  Profit Target (PT):  $97.25
+  Risk:Reward Ratio:   1:1.19

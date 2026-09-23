@@ -3,27 +3,27 @@ TICKER: WAB
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $280.15
-  ATR (14-day): $5.85
+  Price:        $303.74
+  ATR (14-day): $5.43
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $255.76 - $263.67
-  Size:         $7.91
-  Distance:     $16.48 (282% of ATR)
-  Formed:       2026-07-21
-  FRESHNESS:    FRESH
-  Notes:        Fresh - not tested recently
+  Range:        $276.37 - $281.28
+  Size:         $4.91
+  Distance:     $22.46 (414% of ATR)
+  Formed:       2026-09-17
+  FRESHNESS:    STALE
+  Notes:        STALE - Recent cached daily candle tested demand zone
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $294.27 - $306.10
-  Size:         $11.83
-  Distance:     $14.12
+  Range:        $294.50 - $305.96
+  Size:         $11.46
+  Distance:     $0.00
   Formed:       2026-07-24
-  FRESHNESS:    FRESH
-  Notes:        Fresh - not tested recently
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($303.74 >= zone $294.50)
 
 TRADE METRICS:
-  Stop Loss Distance:  $24.39
-  Profit Target (PT):  $14.12
-  Risk:Reward Ratio:   1:0.58
+  Stop Loss Distance:  $27.38
+  Profit Target (PT):  $-9.24
+  Risk:Reward Ratio:   1:-0.34

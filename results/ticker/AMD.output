@@ -3,27 +3,27 @@ TICKER: AMD
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $571.44
-  ATR (14-day): $33.00
+  Price:        $630.78
+  ATR (14-day): $22.11
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $480.33 - $498.39
-  Size:         $18.06
-  Distance:     $73.05 (221% of ATR)
-  Formed:       2026-09-14
+  Range:        $452.37 - $461.68
+  Size:         $9.31
+  Distance:     $169.10 (765% of ATR)
+  Formed:       2026-09-01
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $490.46 - $558.37
-  Size:         $67.91
-  Distance:     $13.07
-  Formed:       2026-06-12
+  Range:        $538.84 - $584.62
+  Size:         $45.78
+  Distance:     $46.16
+  Formed:       2026-07-01
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($571.44 >= zone $490.46)
+  Notes:        STALE - Price reached zone ($630.78 >= zone $538.84)
 
 TRADE METRICS:
-  Stop Loss Distance:  $91.11
-  Profit Target (PT):  $-80.98
-  Risk:Reward Ratio:   1:-0.89
+  Stop Loss Distance:  $178.41
+  Profit Target (PT):  $-91.94
+  Risk:Reward Ratio:   1:-0.52

@@ -3,27 +3,27 @@ TICKER: LMT
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $558.04
-  ATR (14-day): $13.82
-  Within ATR:   NO
+  Price:        $529.18
+  ATR (14-day): $11.24
+  Within ATR:   YES
 
 DEMAND ZONE (Buy Zone):
-  Range:        $512.00 - $521.00
-  Size:         $9.00
-  Distance:     $37.04 (268% of ATR)
-  Formed:       2026-07-22
-  FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone today (low $520.42)
+  Range:        $511.31 - $519.99
+  Size:         $8.68
+  Distance:     $9.19 (82% of ATR)
+  Formed:       2026-07-15
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $527.01 - $550.86
-  Size:         $23.85
-  Distance:     $7.18
-  Formed:       2026-06-15
-  FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($558.04 >= zone $527.01)
+  Range:        $558.56 - $568.42
+  Size:         $9.87
+  Distance:     $29.38
+  Formed:       2026-08-26
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $46.04
-  Profit Target (PT):  $-31.03
-  Risk:Reward Ratio:   1:-0.67
+  Stop Loss Distance:  $17.87
+  Profit Target (PT):  $29.38
+  Risk:Reward Ratio:   1:1.64

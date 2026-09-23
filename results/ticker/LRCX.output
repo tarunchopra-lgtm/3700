@@ -3,27 +3,27 @@ TICKER: LRCX
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $284.52
-  ATR (14-day): $22.58
+  Price:        $325.22
+  ATR (14-day): $14.91
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $250.50 - $319.50
-  Size:         $69.00
-  Distance:     $0.00 (0% of ATR)
-  Formed:       2026-07-30
-  FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($284.52 <= zone $319.50)
+  Range:        $265.40 - $280.01
+  Size:         $14.61
+  Distance:     $45.21 (303% of ATR)
+  Formed:       2026-09-14
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $354.89 - $393.07
-  Size:         $38.18
-  Distance:     $70.37
-  Formed:       2026-06-12
+  Range:        $414.66 - $438.36
+  Size:         $23.70
+  Distance:     $89.44
+  Formed:       2026-06-30
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $34.02
-  Profit Target (PT):  $70.37
-  Risk:Reward Ratio:   1:2.07
+  Stop Loss Distance:  $59.82
+  Profit Target (PT):  $89.44
+  Risk:Reward Ratio:   1:1.50

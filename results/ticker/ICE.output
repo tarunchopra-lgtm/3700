@@ -3,27 +3,27 @@ TICKER: ICE
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $162.51
-  ATR (14-day): $3.60
+  Price:        $161.66
+  ATR (14-day): $3.55
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $149.42 - $151.90
-  Size:         $2.48
-  Distance:     $10.61 (294% of ATR)
-  Formed:       2026-08-12
+  Range:        $149.43 - $151.88
+  Size:         $2.45
+  Distance:     $9.78 (275% of ATR)
+  Formed:       2026-08-11
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $161.05 - $164.66
-  Size:         $3.61
+  Range:        $161.10 - $164.64
+  Size:         $3.54
   Distance:     $0.00
   Formed:       2026-09-04
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($162.51 >= zone $161.05)
+  Notes:        STALE - Price reached zone ($161.66 >= zone $161.10)
 
 TRADE METRICS:
-  Stop Loss Distance:  $13.09
-  Profit Target (PT):  $-1.46
-  Risk:Reward Ratio:   1:-0.11
+  Stop Loss Distance:  $12.23
+  Profit Target (PT):  $-0.56
+  Risk:Reward Ratio:   1:-0.05

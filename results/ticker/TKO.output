@@ -3,27 +3,27 @@ TICKER: TKO
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $192.26
-  ATR (14-day): $5.11
-  Within ATR:   YES
+  Price:        $199.87
+  ATR (14-day): $5.82
+  Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $180.41 - $189.79
-  Size:         $9.38
-  Distance:     $2.47 (48% of ATR)
-  Formed:       2026-07-10
+  Range:        $178.55 - $183.01
+  Size:         $4.46
+  Distance:     $16.86 (290% of ATR)
+  Formed:       2026-07-21
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $198.81 - $216.70
-  Size:         $17.88
-  Distance:     $6.56
-  Formed:       2026-06-15
+  Range:        $209.71 - $218.42
+  Size:         $8.71
+  Distance:     $9.84
+  Formed:       2026-06-29
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $11.85
-  Profit Target (PT):  $6.56
-  Risk:Reward Ratio:   1:0.55
+  Stop Loss Distance:  $21.32
+  Profit Target (PT):  $9.84
+  Risk:Reward Ratio:   1:0.46

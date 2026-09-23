@@ -3,27 +3,27 @@ TICKER: EMR
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $147.47
-  ATR (14-day): $4.84
+  Price:        $157.49
+  ATR (14-day): $3.89
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $141.38 - $149.57
-  Size:         $8.19
-  Distance:     $0.00 (0% of ATR)
-  Formed:       2026-06-12
-  FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($147.47 <= zone $149.57)
+  Range:        $140.91 - $144.61
+  Size:         $3.70
+  Distance:     $12.88 (331% of ATR)
+  Formed:       2026-06-24
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $152.28 - $164.87
-  Size:         $12.59
-  Distance:     $4.81
-  Formed:       2026-08-04
+  Range:        $159.85 - $166.14
+  Size:         $6.29
+  Distance:     $2.36
+  Formed:       2026-08-13
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $6.09
-  Profit Target (PT):  $4.81
-  Risk:Reward Ratio:   1:0.79
+  Stop Loss Distance:  $16.58
+  Profit Target (PT):  $2.36
+  Risk:Reward Ratio:   1:0.14

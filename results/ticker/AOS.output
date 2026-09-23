@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: AOS
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $60.89
+  ATR (14-day): $1.18
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $56.50 - $57.46
+  Size:         $0.96
+  Distance:     $3.43 (290% of ATR)
+  Formed:       2026-09-17
+  FRESHNESS:    STALE
+  Notes:        STALE - Recent cached daily candle tested demand zone
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $61.66 - $63.03
+  Size:         $1.37
+  Distance:     $0.77
+  Formed:       2026-07-01
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+TRADE METRICS:
+  Stop Loss Distance:  $4.39
+  Profit Target (PT):  $0.77
+  Risk:Reward Ratio:   1:0.18

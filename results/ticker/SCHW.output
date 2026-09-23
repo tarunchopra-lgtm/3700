@@ -3,27 +3,27 @@ TICKER: SCHW
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $109.44
-  ATR (14-day): $1.85
+  Price:        $110.25
+  ATR (14-day): $2.21
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $102.36 - $104.29
-  Size:         $1.93
-  Distance:     $5.15 (279% of ATR)
-  Formed:       2026-07-27
-  FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $103.91)
+  Range:        $87.63 - $94.13
+  Size:         $6.50
+  Distance:     $16.12 (729% of ATR)
+  Formed:       2026-06-26
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $110.41 - $112.20
-  Size:         $1.79
-  Distance:     $0.97
+  Range:        $110.50 - $112.19
+  Size:         $1.69
+  Distance:     $0.25
   Formed:       2026-08-17
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $7.08
-  Profit Target (PT):  $0.97
-  Risk:Reward Ratio:   1:0.14
+  Stop Loss Distance:  $22.62
+  Profit Target (PT):  $0.25
+  Risk:Reward Ratio:   1:0.01

@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: GWW
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $1393.06
+  ATR (14-day): $30.60
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $1253.18 - $1279.18
+  Size:         $26.00
+  Distance:     $113.88 (372% of ATR)
+  Formed:       2026-09-15
+  FRESHNESS:    STALE
+  Notes:        STALE - Recent cached daily candle tested demand zone
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $1377.52 - $1400.00
+  Size:         $22.48
+  Distance:     $0.00
+  Formed:       2026-07-13
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($1393.06 >= zone $1377.52)
+
+TRADE METRICS:
+  Stop Loss Distance:  $139.88
+  Profit Target (PT):  $-15.54
+  Risk:Reward Ratio:   1:-0.11

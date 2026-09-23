@@ -3,27 +3,27 @@ TICKER: DLR
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $193.20
-  ATR (14-day): $5.35
+  Price:        $195.30
+  ATR (14-day): $4.67
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $172.01 - $177.47
-  Size:         $5.46
-  Distance:     $15.73 (294% of ATR)
-  Formed:       2026-07-02
+  Range:        $181.48 - $185.02
+  Size:         $3.54
+  Distance:     $10.28 (220% of ATR)
+  Formed:       2026-09-17
+  FRESHNESS:    STALE
+  Notes:        STALE - Recent cached daily candle tested demand zone
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $197.91 - $201.40
+  Size:         $3.49
+  Distance:     $2.61
+  Formed:       2026-08-14
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
-SUPPLY ZONE (Sell Zone):
-  Range:        $191.53 - $196.92
-  Size:         $5.39
-  Distance:     $0.00
-  Formed:       2026-06-23
-  FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($193.20 >= zone $191.53)
-
 TRADE METRICS:
-  Stop Loss Distance:  $21.19
-  Profit Target (PT):  $-1.67
-  Risk:Reward Ratio:   1:-0.08
+  Stop Loss Distance:  $13.82
+  Profit Target (PT):  $2.61
+  Risk:Reward Ratio:   1:0.19

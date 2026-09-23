@@ -3,27 +3,27 @@ TICKER: DGX
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $249.95
-  ATR (14-day): $6.19
+  Price:        $245.70
+  ATR (14-day): $5.67
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $192.83 - $195.16
-  Size:         $2.33
-  Distance:     $54.79 (884% of ATR)
-  Formed:       2026-06-22
+  Range:        $205.62 - $210.90
+  Size:         $5.28
+  Distance:     $34.80 (614% of ATR)
+  Formed:       2026-07-20
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $242.27 - $247.19
-  Size:         $4.92
-  Distance:     $2.76
-  Formed:       2026-08-28
+  Range:        $244.02 - $248.56
+  Size:         $4.53
+  Distance:     $0.00
+  Formed:       2026-09-16
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($249.95 >= zone $242.27)
+  Notes:        STALE - Price reached zone ($245.70 >= zone $244.02)
 
 TRADE METRICS:
-  Stop Loss Distance:  $57.12
-  Profit Target (PT):  $-7.68
-  Risk:Reward Ratio:   1:-0.13
+  Stop Loss Distance:  $40.08
+  Profit Target (PT):  $-1.68
+  Risk:Reward Ratio:   1:-0.04

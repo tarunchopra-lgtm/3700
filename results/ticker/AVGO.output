@@ -3,27 +3,27 @@ TICKER: AVGO
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $364.46
-  ATR (14-day): $15.96
+  Price:        $381.00
+  ATR (14-day): $11.81
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $350.06 - $362.99
-  Size:         $12.93
-  Distance:     $1.47 (9% of ATR)
-  Formed:       2026-08-25
-  FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $357.83)
+  Range:        $335.89 - $347.11
+  Size:         $11.22
+  Distance:     $33.89 (287% of ATR)
+  Formed:       2026-09-15
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $377.00 - $389.50
-  Size:         $12.50
-  Distance:     $12.54
-  Formed:       2026-06-12
+  Range:        $400.60 - $412.65
+  Size:         $12.05
+  Distance:     $19.60
+  Formed:       2026-06-18
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $14.40
-  Profit Target (PT):  $12.54
-  Risk:Reward Ratio:   1:0.87
+  Stop Loss Distance:  $45.11
+  Profit Target (PT):  $19.60
+  Risk:Reward Ratio:   1:0.43

@@ -3,27 +3,27 @@ TICKER: IRM
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $123.93
-  ATR (14-day): $4.52
+  Price:        $126.36
+  ATR (14-day): $3.20
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $110.77 - $116.83
-  Size:         $6.06
-  Distance:     $7.10 (157% of ATR)
-  Formed:       2026-08-31
+  Range:        $112.04 - $115.19
+  Size:         $3.15
+  Distance:     $11.17 (349% of ATR)
+  Formed:       2026-09-16
   FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $112.54)
+  Notes:        STALE - Recent cached daily candle tested demand zone
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $125.69 - $130.70
-  Size:         $5.01
-  Distance:     $1.76
-  Formed:       2026-06-16
-  FRESHNESS:    FRESH
-  Notes:        Fresh - not tested recently
+  Range:        $126.22 - $130.04
+  Size:         $3.83
+  Distance:     $0.00
+  Formed:       2026-08-17
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($126.36 >= zone $126.22)
 
 TRADE METRICS:
-  Stop Loss Distance:  $13.16
-  Profit Target (PT):  $1.76
-  Risk:Reward Ratio:   1:0.13
+  Stop Loss Distance:  $14.32
+  Profit Target (PT):  $-0.14
+  Risk:Reward Ratio:   1:-0.01

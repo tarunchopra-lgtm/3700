@@ -3,27 +3,27 @@ TICKER: APO
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $133.45
-  ATR (14-day): $4.92
+  Price:        $133.92
+  ATR (14-day): $3.93
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $116.57 - $121.30
-  Size:         $4.73
-  Distance:     $12.15 (247% of ATR)
+  Range:        $116.70 - $121.23
+  Size:         $4.53
+  Distance:     $12.69 (323% of ATR)
   Formed:       2026-07-30
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $136.93 - $144.33
-  Size:         $7.40
-  Distance:     $3.48
+  Range:        $136.94 - $144.07
+  Size:         $7.13
+  Distance:     $3.02
   Formed:       2026-08-12
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $16.88
-  Profit Target (PT):  $3.48
-  Risk:Reward Ratio:   1:0.21
+  Stop Loss Distance:  $17.22
+  Profit Target (PT):  $3.02
+  Risk:Reward Ratio:   1:0.18

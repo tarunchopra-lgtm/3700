@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: SPG
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $217.39
+  ATR (14-day): $3.57
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $202.94 - $205.96
+  Size:         $3.02
+  Distance:     $11.43 (320% of ATR)
+  Formed:       2026-09-17
+  FRESHNESS:    STALE
+  Notes:        STALE - Recent cached daily candle tested demand zone
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $218.84 - $221.53
+  Size:         $2.69
+  Distance:     $1.45
+  Formed:       2026-08-24
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+TRADE METRICS:
+  Stop Loss Distance:  $14.45
+  Profit Target (PT):  $1.45
+  Risk:Reward Ratio:   1:0.10

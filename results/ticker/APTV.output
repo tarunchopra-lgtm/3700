@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: APTV
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $65.00
+  ATR (14-day): $2.74
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $43.00 - $45.29
+  Size:         $2.29
+  Distance:     $19.71 (720% of ATR)
+  Formed:       2026-09-14
+  FRESHNESS:    STALE
+  Notes:        STALE - Recent cached daily candle tested demand zone
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $62.57 - $65.70
+  Size:         $3.13
+  Distance:     $0.00
+  Formed:       2026-06-18
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($65.00 >= zone $62.57)
+
+TRADE METRICS:
+  Stop Loss Distance:  $22.00
+  Profit Target (PT):  $-2.43
+  Risk:Reward Ratio:   1:-0.11

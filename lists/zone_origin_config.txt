@@ -1,0 +1,14 @@
+# Origin-zone defaults for strategies/find_zones.py
+# A zone is a single daily candle that starts a sharp move away from its range.
+# Format: SETTING=VALUE
+
+# Balanced settings (default)
+MIN_BASE_CANDLES=2
+MAX_BASE_CANDLES=5
+MAX_DEPARTURE_CANDLES=5
+MIN_DEPARTURE_PCT=3.0
+MIN_DEPARTURE_ATR=2.0
+MAX_ZONE_TO_DEPARTURE_RATIO=0.35
+
+# A zone is fresh only if no later daily candle trades back into its full range.
+# Demand retest: later low <= zone high. Supply retest: later high >= zone low.

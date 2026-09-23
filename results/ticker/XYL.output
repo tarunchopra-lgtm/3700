@@ -3,27 +3,27 @@ TICKER: XYL
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $106.69
-  ATR (14-day): $3.22
+  Price:        $112.29
+  ATR (14-day): $2.45
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $105.47 - $109.14
-  Size:         $3.66
-  Distance:     $0.00 (0% of ATR)
+  Range:        $105.54 - $108.31
+  Size:         $2.77
+  Distance:     $3.98 (162% of ATR)
   Formed:       2026-09-02
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($106.69 <= zone $109.14)
+  Notes:        STALE - Recent cached daily candle tested demand zone
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $108.80 - $110.41
-  Size:         $1.61
-  Distance:     $2.11
-  Formed:       2026-06-12
+  Range:        $119.28 - $121.39
+  Size:         $2.11
+  Distance:     $6.99
+  Formed:       2026-08-13
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $1.22
-  Profit Target (PT):  $2.11
-  Risk:Reward Ratio:   1:1.74
+  Stop Loss Distance:  $6.75
+  Profit Target (PT):  $6.99
+  Risk:Reward Ratio:   1:1.04

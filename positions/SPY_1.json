@@ -1,0 +1,28 @@
+{
+  "symbol": "SPY_1",
+  "qty": 1,
+  "entry_price": 773.6,
+  "brackets": {
+    "bracket1": {
+      "entry_order_id": "4eddcf44-a11e-4ea1-95af-4a62b63553dd",
+      "stop_order_id": "8694e452-c389-40f7-ae25-1c5f62d650b0",
+      "target_order_id": "ca1931b8-5be6-4bf2-8f49-2f9938065125",
+      "qty": 1,
+      "target_price": 773.7,
+      "stop_price": 773.5,
+      "status": "stopped_out"
+    },
+    "bracket2": {
+      "entry_order_id": "a202d93f-fed1-4b87-bca8-d3fc76bb97a7",
+      "stop_order_id": "bdf8fe86-dc18-40cb-aa4f-21ecebe714aa",
+      "target_order_id": "d53a8f65-7cd5-43d5-825d-1439aa96f2e2",
+      "qty": 1,
+      "target_price": 773.8,
+      "stop_price": 773.5,
+      "status": "stopped_out"
+    }
+  },
+  "current_price": 773.5,
+  "current_pnl": null,
+  "last_updated": "2026-09-22T08:19:06.463640"
+}

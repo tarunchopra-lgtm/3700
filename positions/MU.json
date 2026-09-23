@@ -1,27 +1,27 @@
 {
   "symbol": "MU",
   "qty": 2,
-  "entry_price": 960.0,
-  "entry_time": "2026-09-18T06:38:55.080287",
+  "entry_price": 940.0,
+  "entry_time": "2026-09-21T06:30:13.531485",
   "brackets": {
     "bracket1": {
-      "entry_order_id": "3660a158-25fb-4af2-999b-1b6f2bbc551a",
+      "entry_order_id": "9cfc26b4-0dfa-4989-8f13-3519a5d320d5",
       "stop_order_id": null,
       "target_order_id": null,
       "qty": 1,
-      "target_price": 970.0,
-      "stop_price": 950.0,
+      "target_price": 950.0,
+      "stop_price": 930.0,
       "status": "pending"
     },
     "bracket2": {
-      "entry_order_id": "c9ee66ad-8826-4450-835b-22a2411eb55e",
+      "entry_order_id": "865d21ef-3f92-4d78-9a6c-498c21217230",
       "stop_order_id": null,
       "target_order_id": null,
       "qty": 1,
-      "target_price": 999.0,
-      "stop_price": 950.0,
+      "target_price": 1032.0,
+      "stop_price": 930.0,
       "status": "pending"
     }
   },
-  "last_updated": "2026-09-18T06:38:55.099171"
+  "last_updated": "2026-09-21T06:30:13.557497"
 }

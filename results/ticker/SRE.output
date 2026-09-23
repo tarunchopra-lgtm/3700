@@ -3,27 +3,27 @@ TICKER: SRE
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $86.60
-  ATR (14-day): $1.76
+  Price:        $85.53
+  ATR (14-day): $1.54
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $82.40 - $84.49
-  Size:         $2.09
-  Distance:     $2.11 (120% of ATR)
-  Formed:       2026-09-01
+  Range:        $80.84 - $81.71
+  Size:         $0.87
+  Distance:     $3.82 (249% of ATR)
+  Formed:       2026-09-18
   FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $82.83)
+  Notes:        STALE - Recent cached daily candle tested demand zone
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $92.90 - $94.56
-  Size:         $1.66
-  Distance:     $6.30
-  Formed:       2026-06-26
+  Range:        $88.37 - $89.69
+  Size:         $1.32
+  Distance:     $2.84
+  Formed:       2026-07-30
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $4.20
-  Profit Target (PT):  $6.30
-  Risk:Reward Ratio:   1:1.50
+  Stop Loss Distance:  $4.69
+  Profit Target (PT):  $2.84
+  Risk:Reward Ratio:   1:0.61

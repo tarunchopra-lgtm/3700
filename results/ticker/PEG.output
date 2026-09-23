@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: PEG
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $73.66
+  ATR (14-day): $1.29
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $70.06 - $70.94
+  Size:         $0.89
+  Distance:     $2.72 (211% of ATR)
+  Formed:       2026-09-15
+  FRESHNESS:    STALE
+  Notes:        STALE - Recent cached daily candle tested demand zone
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $75.47 - $76.43
+  Size:         $0.96
+  Distance:     $1.81
+  Formed:       2026-08-12
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+TRADE METRICS:
+  Stop Loss Distance:  $3.60
+  Profit Target (PT):  $1.81
+  Risk:Reward Ratio:   1:0.50

@@ -3,27 +3,27 @@ TICKER: ORCL
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $157.20
-  ATR (14-day): $7.42
+  Price:        $152.26
+  ATR (14-day): $7.89
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $139.00 - $146.52
-  Size:         $7.52
-  Distance:     $10.68 (144% of ATR)
-  Formed:       2026-09-16
-  FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $139.00)
+  Range:        $114.54 - $122.32
+  Size:         $7.78
+  Distance:     $29.94 (380% of ATR)
+  Formed:       2026-07-27
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $164.61 - $184.58
-  Size:         $19.97
-  Distance:     $7.41
+  Range:        $164.66 - $184.53
+  Size:         $19.88
+  Distance:     $12.40
   Formed:       2026-06-23
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $18.20
-  Profit Target (PT):  $7.41
-  Risk:Reward Ratio:   1:0.41
+  Stop Loss Distance:  $37.72
+  Profit Target (PT):  $12.40
+  Risk:Reward Ratio:   1:0.33

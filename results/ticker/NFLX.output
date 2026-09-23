@@ -3,27 +3,27 @@ TICKER: NFLX
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $79.33
-  ATR (14-day): $2.22
+  Price:        $74.84
+  ATR (14-day): $2.55
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $65.08 - $69.49
-  Size:         $4.41
-  Distance:     $9.84 (444% of ATR)
-  Formed:       2026-07-17
+  Range:        $66.70 - $69.46
+  Size:         $2.75
+  Distance:     $5.38 (211% of ATR)
+  Formed:       2026-07-20
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $77.46 - $81.02
-  Size:         $3.56
-  Distance:     $0.00
-  Formed:       2026-09-15
+  Range:        $76.12 - $81.91
+  Size:         $5.79
+  Distance:     $1.28
+  Formed:       2026-06-17
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($79.33 >= zone $77.46)
+  Notes:        STALE - Daily candle tested zone yesterday (high $76.89)
 
 TRADE METRICS:
-  Stop Loss Distance:  $14.25
-  Profit Target (PT):  $-1.87
-  Risk:Reward Ratio:   1:-0.13
+  Stop Loss Distance:  $8.14
+  Profit Target (PT):  $1.28
+  Risk:Reward Ratio:   1:0.16

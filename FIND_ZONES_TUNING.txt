@@ -29,6 +29,33 @@ Command default:
   lookback_days = 90
   sensitivity   = balanced
 
+BALANCED ORIGIN-ZONE DEFAULTS
+-----------------------------
+File: lists/zone_origin_config.txt
+
+  MIN_BASE_CANDLES=2
+  MAX_BASE_CANDLES=5
+  MAX_DEPARTURE_CANDLES=5
+  MIN_DEPARTURE_PCT=3.0
+  MIN_DEPARTURE_ATR=2.0
+  MAX_ZONE_TO_DEPARTURE_RATIO=0.35
+
+The scanner evaluates 2-5 consecutive daily candles as a possible base,
+whether the candles are green or red. Demand requires a later upward departure;
+supply requires a later downward departure. The departure may take 1-5 candles
+and must be at least 3% and 2 ATR. The full base high-low range must be no more
+than 35% of that departure, so a small base must produce a materially larger
+move away from it.
+
+Freshness is strict: after formation, no later candle may trade back into the
+zone range. For demand, a later low at or below the zone high invalidates it.
+For supply, a later high at or above the zone low invalidates it.
+
+Tune the text file, then run the scanner again:
+  Smaller MAX_ZONE_TO_DEPARTURE_RATIO = tighter, fewer zones.
+  Larger MIN_DEPARTURE_PCT = only stronger departures.
+  Larger RALLY_WINDOW_DAYS = allows slower moves to qualify.
+
 MANUAL DEMAND ZONES (DEFAULT FOR CONFIGURED SYMBOLS)
 ----------------------------------------------------
 File: lists/manual_demand_zones.txt

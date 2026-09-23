@@ -3,27 +3,27 @@ TICKER: BMY
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $66.07
-  ATR (14-day): $1.87
+  Price:        $66.15
+  ATR (14-day): $1.44
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $56.78 - $59.14
-  Size:         $2.36
-  Distance:     $6.93 (370% of ATR)
-  Formed:       2026-07-14
+  Range:        $56.98 - $58.19
+  Size:         $1.21
+  Distance:     $7.97 (554% of ATR)
+  Formed:       2026-07-08
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $64.74 - $68.64
-  Size:         $3.90
+  Range:        $63.27 - $66.31
+  Size:         $3.04
   Distance:     $0.00
-  Formed:       2026-08-18
+  Formed:       2026-08-05
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($66.07 >= zone $64.74)
+  Notes:        STALE - Price reached zone ($66.15 >= zone $63.27)
 
 TRADE METRICS:
-  Stop Loss Distance:  $9.29
-  Profit Target (PT):  $-1.33
-  Risk:Reward Ratio:   1:-0.14
+  Stop Loss Distance:  $9.17
+  Profit Target (PT):  $-2.88
+  Risk:Reward Ratio:   1:-0.31

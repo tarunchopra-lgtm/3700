@@ -3,27 +3,27 @@ TICKER: BEN
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $36.75
-  ATR (14-day): $0.88
+  Price:        $34.64
+  ATR (14-day): $0.82
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $31.73 - $32.89
-  Size:         $1.16
-  Distance:     $3.86 (439% of ATR)
+  Range:        $31.74 - $32.93
+  Size:         $1.19
+  Distance:     $1.71 (209% of ATR)
   Formed:       2026-07-21
   FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $32.07)
+  Notes:        STALE - Recent cached daily candle tested demand zone
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $35.20 - $35.86
-  Size:         $0.66
-  Distance:     $0.89
+  Range:        $35.33 - $35.85
+  Size:         $0.52
+  Distance:     $0.69
   Formed:       2026-08-04
-  FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($36.75 >= zone $35.20)
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $5.02
-  Profit Target (PT):  $-1.55
-  Risk:Reward Ratio:   1:-0.31
+  Stop Loss Distance:  $2.90
+  Profit Target (PT):  $0.69
+  Risk:Reward Ratio:   1:0.24

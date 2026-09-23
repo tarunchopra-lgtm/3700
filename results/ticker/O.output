@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: O
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $59.85
+  ATR (14-day): $1.08
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $56.55 - $57.31
+  Size:         $0.76
+  Distance:     $2.54 (235% of ATR)
+  Formed:       2026-09-18
+  FRESHNESS:    STALE
+  Notes:        STALE - Recent cached daily candle tested demand zone
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $62.88 - $64.73
+  Size:         $1.85
+  Distance:     $3.03
+  Formed:       2026-07-06
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+TRADE METRICS:
+  Stop Loss Distance:  $3.30
+  Profit Target (PT):  $3.03
+  Risk:Reward Ratio:   1:0.92

@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: APA
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $44.42
+  ATR (14-day): $1.59
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $39.08 - $40.51
+  Size:         $1.43
+  Distance:     $3.91 (247% of ATR)
+  Formed:       2026-08-12
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $44.19 - $47.44
+  Size:         $3.25
+  Distance:     $0.00
+  Formed:       2026-09-16
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($44.42 >= zone $44.19)
+
+TRADE METRICS:
+  Stop Loss Distance:  $5.34
+  Profit Target (PT):  $-0.23
+  Risk:Reward Ratio:   1:-0.04

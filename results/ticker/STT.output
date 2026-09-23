@@ -3,27 +3,27 @@ TICKER: STT
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $191.41
-  ATR (14-day): $3.96
+  Price:        $193.31
+  ATR (14-day): $4.02
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $165.42 - $170.54
-  Size:         $5.12
-  Distance:     $20.87 (527% of ATR)
-  Formed:       2026-06-12
+  Range:        $168.51 - $171.35
+  Size:         $2.84
+  Distance:     $21.96 (546% of ATR)
+  Formed:       2026-06-29
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $191.11 - $195.93
-  Size:         $4.82
+  Range:        $191.07 - $194.45
+  Size:         $3.38
   Distance:     $0.00
-  Formed:       2026-08-26
+  Formed:       2026-09-10
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($191.41 >= zone $191.11)
+  Notes:        STALE - Price reached zone ($193.31 >= zone $191.07)
 
 TRADE METRICS:
-  Stop Loss Distance:  $25.99
-  Profit Target (PT):  $-0.30
-  Risk:Reward Ratio:   1:-0.01
+  Stop Loss Distance:  $24.80
+  Profit Target (PT):  $-2.24
+  Risk:Reward Ratio:   1:-0.09

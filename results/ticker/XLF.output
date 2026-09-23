@@ -3,27 +3,27 @@ TICKER: XLF
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $56.85
-  ATR (14-day): $0.66
+  Price:        $54.86
+  ATR (14-day): $0.74
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $53.48 - $53.97
-  Size:         $0.49
-  Distance:     $2.88 (437% of ATR)
-  Formed:       2026-06-15
+  Range:        $53.40 - $54.02
+  Size:         $0.62
+  Distance:     $0.84 (114% of ATR)
+  Formed:       2026-06-29
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $56.38 - $57.60
-  Size:         $1.22
-  Distance:     $0.00
-  Formed:       2026-07-27
+  Range:        $55.44 - $56.84
+  Size:         $1.40
+  Distance:     $0.58
+  Formed:       2026-09-17
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($56.85 >= zone $56.38)
+  Notes:        STALE - Recent cached daily candle tested supply zone
 
 TRADE METRICS:
-  Stop Loss Distance:  $3.37
-  Profit Target (PT):  $-0.47
-  Risk:Reward Ratio:   1:-0.14
+  Stop Loss Distance:  $1.46
+  Profit Target (PT):  $0.58
+  Risk:Reward Ratio:   1:0.40

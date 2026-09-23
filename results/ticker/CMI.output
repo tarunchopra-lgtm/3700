@@ -3,27 +3,27 @@ TICKER: CMI
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $565.95
-  ATR (14-day): $24.94
+  Price:        $554.01
+  ATR (14-day): $15.31
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $543.89 - $556.37
-  Size:         $12.48
-  Distance:     $9.58 (38% of ATR)
-  Formed:       2026-09-03
+  Range:        $519.09 - $541.91
+  Size:         $22.82
+  Distance:     $12.10 (79% of ATR)
+  Formed:       2026-09-17
   FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $544.81)
+  Notes:        STALE - Recent cached daily candle tested demand zone
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $707.34 - $733.48
-  Size:         $26.14
-  Distance:     $141.39
-  Formed:       2026-06-17
+  Range:        $629.85 - $639.21
+  Size:         $9.36
+  Distance:     $75.84
+  Formed:       2026-08-13
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $22.06
-  Profit Target (PT):  $141.39
-  Risk:Reward Ratio:   1:6.41
+  Stop Loss Distance:  $34.92
+  Profit Target (PT):  $75.84
+  Risk:Reward Ratio:   1:2.17

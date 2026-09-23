@@ -3,27 +3,27 @@ TICKER: PDD
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $78.27
-  ATR (14-day): $2.40
+  Price:        $90.06
+  ATR (14-day): $1.65
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $75.50 - $77.72
-  Size:         $2.22
-  Distance:     $0.55 (23% of ATR)
-  Formed:       2026-06-30
-  FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $77.42)
-
-SUPPLY ZONE (Sell Zone):
-  Range:        $80.82 - $84.44
-  Size:         $3.62
-  Distance:     $2.55
-  Formed:       2026-06-16
+  Range:        $75.53 - $77.78
+  Size:         $2.26
+  Distance:     $12.28 (745% of ATR)
+  Formed:       2026-06-29
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
+SUPPLY ZONE (Sell Zone):
+  Range:        $81.28 - $82.59
+  Size:         $1.31
+  Distance:     $7.47
+  Formed:       2026-09-03
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($90.06 >= zone $81.28)
+
 TRADE METRICS:
-  Stop Loss Distance:  $2.77
-  Profit Target (PT):  $2.55
-  Risk:Reward Ratio:   1:0.92
+  Stop Loss Distance:  $14.53
+  Profit Target (PT):  $-8.78
+  Risk:Reward Ratio:   1:-0.60

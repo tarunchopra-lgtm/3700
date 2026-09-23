@@ -3,27 +3,27 @@ TICKER: MAS
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $68.16
-  ATR (14-day): $2.74
+  Price:        $78.53
+  ATR (14-day): $2.20
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $67.19 - $68.76
-  Size:         $1.57
-  Distance:     $0.00 (0% of ATR)
+  Range:        $67.59 - $69.72
+  Size:         $2.13
+  Distance:     $8.81 (400% of ATR)
   Formed:       2026-09-11
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($68.16 <= zone $68.76)
+  Notes:        STALE - Recent cached daily candle tested demand zone
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $73.37 - $74.91
-  Size:         $1.53
-  Distance:     $5.21
-  Formed:       2026-06-12
+  Range:        $78.79 - $82.08
+  Size:         $3.29
+  Distance:     $0.26
+  Formed:       2026-07-07
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $0.97
-  Profit Target (PT):  $5.21
-  Risk:Reward Ratio:   1:5.37
+  Stop Loss Distance:  $10.94
+  Profit Target (PT):  $0.26
+  Risk:Reward Ratio:   1:0.02

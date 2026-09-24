@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: DOV
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $198.48
+  ATR (14-day): $3.70
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $160.50 - $163.74
+  Size:         $3.23
+  Distance:     $34.74 (939% of ATR)
+  Formed:       2025-10-10
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $222.94 - $226.26
+  Size:         $3.32
+  Distance:     $24.46
+  Formed:       2026-06-29
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+TRADE METRICS:
+  Stop Loss Distance:  $37.97
+  Profit Target (PT):  $24.46
+  Risk:Reward Ratio:   1:0.64

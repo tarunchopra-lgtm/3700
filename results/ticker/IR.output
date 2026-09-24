@@ -3,27 +3,27 @@ TICKER: IR
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $83.90
-  ATR (14-day): $2.33
+  Price:        $78.41
+  ATR (14-day): $1.98
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $70.97 - $73.01
-  Size:         $2.04
-  Distance:     $10.89 (467% of ATR)
-  Formed:       2026-09-14
+  Range:        $71.57 - $72.89
+  Size:         $1.32
+  Distance:     $5.52 (279% of ATR)
+  Formed:       2026-09-18
   FRESHNESS:    STALE
   Notes:        STALE - Recent cached daily candle tested demand zone
 
 SUPPLY ZONE (Sell Zone):
   Range:        $86.97 - $90.35
   Size:         $3.38
-  Distance:     $3.06
+  Distance:     $8.56
   Formed:       2026-08-04
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $12.93
-  Profit Target (PT):  $3.06
-  Risk:Reward Ratio:   1:0.24
+  Stop Loss Distance:  $6.84
+  Profit Target (PT):  $8.56
+  Risk:Reward Ratio:   1:1.25

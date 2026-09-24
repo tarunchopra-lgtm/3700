@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: CSCO
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $111.45
+  ATR (14-day): $3.02
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $91.00 - $93.34
+  Size:         $2.34
+  Distance:     $18.11 (599% of ATR)
+  Formed:       2026-05-06
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $119.48 - $122.42
+  Size:         $2.94
+  Distance:     $8.03
+  Formed:       2026-08-06
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+TRADE METRICS:
+  Stop Loss Distance:  $20.45
+  Profit Target (PT):  $8.03
+  Risk:Reward Ratio:   1:0.39

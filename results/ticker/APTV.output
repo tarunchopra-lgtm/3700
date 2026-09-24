@@ -16,14 +16,14 @@ DEMAND ZONE (Buy Zone):
   Notes:        STALE - Recent cached daily candle tested demand zone
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $62.57 - $65.70
-  Size:         $3.13
-  Distance:     $0.00
-  Formed:       2026-06-18
-  FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($65.00 >= zone $62.57)
+  Range:        $66.78 - $78.48
+  Size:         $11.70
+  Distance:     $1.78
+  Formed:       2026-06-01
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 TRADE METRICS:
   Stop Loss Distance:  $22.00
-  Profit Target (PT):  $-2.43
-  Risk:Reward Ratio:   1:-0.11
+  Profit Target (PT):  $1.78
+  Risk:Reward Ratio:   1:0.08

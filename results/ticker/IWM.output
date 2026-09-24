@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: IWM
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $287.11
+  ATR (14-day): $3.16
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $277.63 - $290.82
+  Size:         $13.19
+  Distance:     $0.00 (0% of ATR)
+  Formed:       2026-06-08
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($287.11 <= zone $290.82)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $293.44 - $296.18
+  Size:         $2.74
+  Distance:     $6.33
+  Formed:       2026-09-03
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+TRADE METRICS:
+  Stop Loss Distance:  $9.48
+  Profit Target (PT):  $6.33
+  Risk:Reward Ratio:   1:0.67

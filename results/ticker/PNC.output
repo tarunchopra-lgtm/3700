@@ -3,27 +3,27 @@ TICKER: PNC
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $251.67
-  ATR (14-day): $5.63
+  Price:        $241.74
+  ATR (14-day): $5.07
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $229.99 - $233.81
-  Size:         $3.82
-  Distance:     $17.85 (317% of ATR)
-  Formed:       2026-09-17
-  FRESHNESS:    STALE
-  Notes:        STALE - Recent cached daily candle tested demand zone
+  Range:        $217.39 - $221.78
+  Size:         $4.40
+  Distance:     $19.96 (394% of ATR)
+  Formed:       2026-06-02
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
   Range:        $254.63 - $258.92
   Size:         $4.29
-  Distance:     $2.96
+  Distance:     $12.89
   Formed:       2026-08-13
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $21.68
-  Profit Target (PT):  $2.96
-  Risk:Reward Ratio:   1:0.14
+  Stop Loss Distance:  $24.35
+  Profit Target (PT):  $12.89
+  Risk:Reward Ratio:   1:0.53

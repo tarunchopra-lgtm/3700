@@ -3,27 +3,27 @@ TICKER: AIG
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $80.56
-  ATR (14-day): $1.44
+  Price:        $78.11
+  ATR (14-day): $1.38
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $73.81 - $75.19
-  Size:         $1.38
-  Distance:     $5.37 (373% of ATR)
-  Formed:       2026-06-18
+  Range:        $72.26 - $74.85
+  Size:         $2.59
+  Distance:     $3.26 (237% of ATR)
+  Formed:       2026-06-04
   FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $75.15)
+  Notes:        STALE - Recent cached daily candle tested demand zone
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $75.89 - $78.04
-  Size:         $2.15
-  Distance:     $2.52
-  Formed:       2026-06-23
+  Range:        $76.96 - $78.91
+  Size:         $1.95
+  Distance:     $0.00
+  Formed:       2026-05-19
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($80.56 >= zone $75.89)
+  Notes:        STALE - Price reached zone ($78.11 >= zone $76.96)
 
 TRADE METRICS:
-  Stop Loss Distance:  $6.75
-  Profit Target (PT):  $-4.67
-  Risk:Reward Ratio:   1:-0.69
+  Stop Loss Distance:  $5.85
+  Profit Target (PT):  $-1.15
+  Risk:Reward Ratio:   1:-0.20

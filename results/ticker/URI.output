@@ -3,27 +3,27 @@ TICKER: URI
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $1065.77
-  ATR (14-day): $29.54
+  Price:        $1100.40
+  ATR (14-day): $28.58
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $981.29 - $995.65
-  Size:         $14.37
-  Distance:     $70.12 (237% of ATR)
-  Formed:       2026-09-15
-  FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $991.72)
+  Range:        $911.33 - $940.86
+  Size:         $29.53
+  Distance:     $159.54 (558% of ATR)
+  Formed:       2026-05-19
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $1035.00 - $1106.00
-  Size:         $71.00
+  Range:        $1054.55 - $1105.46
+  Size:         $50.91
   Distance:     $0.00
-  Formed:       2026-07-15
+  Formed:       2026-06-05
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($1065.77 >= zone $1035.00)
+  Notes:        STALE - Price reached zone ($1100.40 >= zone $1054.55)
 
 TRADE METRICS:
-  Stop Loss Distance:  $84.48
-  Profit Target (PT):  $-30.77
-  Risk:Reward Ratio:   1:-0.36
+  Stop Loss Distance:  $189.07
+  Profit Target (PT):  $-45.85
+  Risk:Reward Ratio:   1:-0.24

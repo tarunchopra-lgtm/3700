@@ -3,14 +3,14 @@ TICKER: UAL
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $118.28
-  ATR (14-day): $3.65
+  Price:        $119.60
+  ATR (14-day): $3.70
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $107.19 - $109.80
   Size:         $2.61
-  Distance:     $8.48 (233% of ATR)
+  Distance:     $9.80 (265% of ATR)
   Formed:       2026-09-17
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
@@ -18,12 +18,12 @@ DEMAND ZONE (Buy Zone):
 SUPPLY ZONE (Sell Zone):
   Range:        $124.64 - $128.00
   Size:         $3.36
-  Distance:     $6.36
+  Distance:     $5.04
   Formed:       2026-08-13
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $11.09
-  Profit Target (PT):  $6.36
-  Risk:Reward Ratio:   1:0.57
+  Stop Loss Distance:  $12.41
+  Profit Target (PT):  $5.04
+  Risk:Reward Ratio:   1:0.41

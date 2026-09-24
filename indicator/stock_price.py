@@ -8,6 +8,7 @@ from alpaca.data.enums import DataFeed, OptionsFeed
 from alpaca.data.historical import StockHistoricalDataClient, OptionHistoricalDataClient
 from alpaca.data.requests import (
 	StockLatestTradeRequest,
+	StockLatestQuoteRequest,
 	StockBarsRequest,
 	OptionLatestTradeRequest,
 	OptionBarsRequest,
@@ -89,12 +90,29 @@ def _aggregate_high_low_from_bars(bars_list) -> tuple[str, str]:
 	return high, low
 
 
+def _get_extended_hours_price(client: StockHistoricalDataClient, ticker: str) -> float | None:
+	"""Return the latest IEX bid/ask midpoint when an extended-hours quote exists."""
+	quote_request = StockLatestQuoteRequest(symbol_or_symbols=ticker, feed=DataFeed.IEX)
+	quote = client.get_stock_latest_quote(quote_request)[ticker]
+	bid = float(getattr(quote, "bid_price", 0) or 0)
+	ask = float(getattr(quote, "ask_price", 0) or 0)
+	if bid <= 0 or ask <= 0:
+		return None
+	return (bid + ask) / 2
+
+
 def _get_stock_price_line(ticker: str, api_key: str, secret_key: str) -> str:
 	client = StockHistoricalDataClient(api_key, secret_key)
 
 	request_params = StockLatestTradeRequest(symbol_or_symbols=ticker, feed=DataFeed.IEX)
 	latest_trade = client.get_stock_latest_trade(request_params)
 	trade = latest_trade[ticker]
+	extended_price = None
+	try:
+		extended_price = _get_extended_hours_price(client, ticker)
+	except APIError:
+		pass
+
 
 	now_utc = datetime.now(timezone.utc)
 	now_et = now_utc.astimezone(ET)
@@ -112,7 +130,11 @@ def _get_stock_price_line(ticker: str, api_key: str, secret_key: str) -> str:
 
 	high, low = _aggregate_high_low_from_bars(bar_list)
 
-	return f"{ticker} | Current: ${float(trade.price):.2f} | High: {high} | Low: {low}"
+	extended_text = f"${extended_price:.2f}" if extended_price is not None else "Unavailable"
+	return (
+		f"{ticker} | Trade: ${float(trade.price):.2f} | "
+		f"Extended Hours: {extended_text} | High: {high} | Low: {low}"
+	)
 
 
 def _get_option_price_line(ticker: str, api_key: str, secret_key: str) -> str:

@@ -3,27 +3,27 @@ TICKER: VRSK
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $187.79
-  ATR (14-day): $7.84
+  Price:        $179.38
+  ATR (14-day): $6.03
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $168.18 - $174.50
-  Size:         $6.32
-  Distance:     $13.29 (169% of ATR)
-  Formed:       2026-06-22
+  Range:        $169.00 - $171.79
+  Size:         $2.79
+  Distance:     $7.59 (126% of ATR)
+  Formed:       2026-05-20
+  FRESHNESS:    STALE
+  Notes:        STALE - Recent cached daily candle tested demand zone
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $182.81 - $194.36
+  Size:         $11.55
+  Distance:     $3.43
+  Formed:       2026-07-02
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
-SUPPLY ZONE (Sell Zone):
-  Range:        $187.63 - $203.03
-  Size:         $15.40
-  Distance:     $0.00
-  Formed:       2026-07-14
-  FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($187.79 >= zone $187.63)
-
 TRADE METRICS:
-  Stop Loss Distance:  $19.61
-  Profit Target (PT):  $-0.16
-  Risk:Reward Ratio:   1:-0.01
+  Stop Loss Distance:  $10.38
+  Profit Target (PT):  $3.43
+  Risk:Reward Ratio:   1:0.33

@@ -3,14 +3,14 @@ TICKER: TDG
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $1187.55
-  ATR (14-day): $27.72
+  Price:        $1169.70
+  ATR (14-day): $26.58
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $1075.64 - $1096.90
   Size:         $21.26
-  Distance:     $90.65 (327% of ATR)
+  Distance:     $72.80 (274% of ATR)
   Formed:       2026-09-17
   FRESHNESS:    STALE
   Notes:        STALE - Recent cached daily candle tested demand zone
@@ -18,12 +18,12 @@ DEMAND ZONE (Buy Zone):
 SUPPLY ZONE (Sell Zone):
   Range:        $1234.13 - $1358.68
   Size:         $124.55
-  Distance:     $46.59
+  Distance:     $64.43
   Formed:       2026-08-05
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $111.91
-  Profit Target (PT):  $46.59
-  Risk:Reward Ratio:   1:0.42
+  Stop Loss Distance:  $94.06
+  Profit Target (PT):  $64.43
+  Risk:Reward Ratio:   1:0.69

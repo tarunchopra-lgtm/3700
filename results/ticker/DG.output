@@ -3,27 +3,27 @@ TICKER: DG
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $126.71
-  ATR (14-day): $3.61
+  Price:        $134.93
+  ATR (14-day): $4.14
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $107.98 - $116.50
-  Size:         $8.52
-  Distance:     $10.20 (283% of ATR)
-  Formed:       2026-06-18
-  FRESHNESS:    FRESH
-  Notes:        Fresh - not tested recently
+  Range:        $122.25 - $125.03
+  Size:         $2.78
+  Distance:     $9.90 (239% of ATR)
+  Formed:       2026-09-17
+  FRESHNESS:    STALE
+  Notes:        STALE - Recent cached daily candle tested demand zone
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $130.71 - $133.82
-  Size:         $3.12
-  Distance:     $4.00
-  Formed:       2026-09-02
-  FRESHNESS:    FRESH
-  Notes:        Fresh - not tested recently
+  Range:        $124.35 - $135.04
+  Size:         $10.69
+  Distance:     $0.00
+  Formed:       2025-12-05
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($134.93 >= zone $124.35)
 
 TRADE METRICS:
-  Stop Loss Distance:  $18.72
-  Profit Target (PT):  $4.00
-  Risk:Reward Ratio:   1:0.21
+  Stop Loss Distance:  $12.68
+  Profit Target (PT):  $-10.58
+  Risk:Reward Ratio:   1:-0.83

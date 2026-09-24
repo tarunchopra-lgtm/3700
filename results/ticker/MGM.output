@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: MGM
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $40.69
+  ATR (14-day): $0.86
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $35.38 - $36.85
+  Size:         $1.47
+  Distance:     $3.84 (446% of ATR)
+  Formed:       2026-05-20
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $43.12 - $43.67
+  Size:         $0.55
+  Distance:     $2.43
+  Formed:       2026-08-25
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+TRADE METRICS:
+  Stop Loss Distance:  $5.30
+  Profit Target (PT):  $2.43
+  Risk:Reward Ratio:   1:0.46

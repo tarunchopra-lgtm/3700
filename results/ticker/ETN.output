@@ -3,27 +3,27 @@ TICKER: ETN
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $459.65
-  ATR (14-day): $15.44
+  Price:        $442.23
+  ATR (14-day): $14.39
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $388.59 - $400.42
   Size:         $11.83
-  Distance:     $59.23 (384% of ATR)
+  Distance:     $41.81 (291% of ATR)
   Formed:       2026-09-14
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $459.25 - $477.79
-  Size:         $18.55
-  Distance:     $0.00
-  Formed:       2026-08-12
-  FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($459.65 >= zone $459.25)
+  Range:        $449.82 - $458.50
+  Size:         $8.68
+  Distance:     $7.59
+  Formed:       2026-08-13
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $71.06
-  Profit Target (PT):  $-0.40
-  Risk:Reward Ratio:   1:-0.01
+  Stop Loss Distance:  $53.64
+  Profit Target (PT):  $7.59
+  Risk:Reward Ratio:   1:0.14

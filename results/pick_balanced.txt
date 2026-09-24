@@ -1,8 +1,59 @@
 ========================================================================================================================
-TOP 10 TRADING PICKS - BALANCED SENSITIVITY (WITHIN ATR, FRESH ZONES ONLY)
-Generated: 2026-09-22 21:32:09
+TOP 10 TRADING PICKS - BALANCED SENSITIVITY (Fresh Zones, Within 1 ATR)
+Generated: 2026-09-23 06:35:35
 ========================================================================================================================
 
-No stocks with FRESH zones (within 1 ATR and not recently tested) found.
+Total Actionable Stocks (within 1 ATR + FRESH): 2
+Top 10 shown below (sorted by proximity to fresh demand zone)
 
-Note: Setups are filtered to exclude STALE zones that have been recently tested by price action.
+FRESHNESS CRITERIA:
+  - Zone must NOT be already reached by current price
+  - Zone must NOT be tested by recent candle wicks (last 2 hours)
+  - Zone must be within 1 ATR distance from current price
+
+1. PDD
+------------------------------------------------------------------------------------------------------------------------
+Current Price:       $79.30
+ATR (14-day):        $1.66
+
+DEMAND ZONE:         $75.53 - $77.78
+  Distance:          $1.52 (91% of ATR) [PRIMARY SORT]
+  Formed:            2026-06-29
+  Freshness:         ✓ FRESH - Fresh - not tested recently
+
+SUPPLY ZONE:         $81.28 - $82.59
+  Distance:          $1.98 [SECONDARY SORT]
+  Formed:            2026-09-03
+  Freshness:         ✓ FRESH - Fresh - not tested recently
+
+TRADE SETUP:
+  Entry Range:       $75.53 - $77.78
+  Stop Loss:         $75.52
+  Profit Target:     $81.28
+  Risk Amount:       $3.77
+  Reward Amount:     $1.98
+  RISK:REWARD:       1:0.52
+
+2. WDC
+------------------------------------------------------------------------------------------------------------------------
+Current Price:       $454.12
+ATR (14-day):        $23.81
+
+DEMAND ZONE:         $407.20 - $432.95
+  Distance:          $21.17 (89% of ATR) [PRIMARY SORT]
+  Formed:            2026-09-16
+  Freshness:         ✓ FRESH - Fresh - not tested recently
+
+SUPPLY ZONE:         $564.77 - $602.37
+  Distance:          $110.65 [SECONDARY SORT]
+  Formed:            2026-06-04
+  Freshness:         ✓ FRESH - Fresh - not tested recently
+
+TRADE SETUP:
+  Entry Range:       $407.20 - $432.95
+  Stop Loss:         $407.19
+  Profit Target:     $564.77
+  Risk Amount:       $46.92
+  Reward Amount:     $110.65
+  RISK:REWARD:       1:2.36
+

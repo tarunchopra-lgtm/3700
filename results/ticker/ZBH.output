@@ -3,27 +3,27 @@ TICKER: ZBH
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $99.77
+  Price:        $96.42
   ATR (14-day): $2.99
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $87.94 - $89.91
   Size:         $1.97
-  Distance:     $9.86 (329% of ATR)
+  Distance:     $6.51 (218% of ATR)
   Formed:       2026-07-21
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $97.61 - $101.11
-  Size:         $3.50
-  Distance:     $0.00
-  Formed:       2026-08-13
-  FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($99.77 >= zone $97.61)
+  Range:        $99.23 - $101.31
+  Size:         $2.08
+  Distance:     $2.81
+  Formed:       2026-08-27
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $11.83
-  Profit Target (PT):  $-2.16
-  Risk:Reward Ratio:   1:-0.18
+  Stop Loss Distance:  $8.48
+  Profit Target (PT):  $2.81
+  Risk:Reward Ratio:   1:0.33

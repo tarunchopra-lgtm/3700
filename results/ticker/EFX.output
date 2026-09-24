@@ -3,14 +3,14 @@ TICKER: EFX
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $173.25
-  ATR (14-day): $6.44
+  Price:        $165.97
+  ATR (14-day): $6.03
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $151.70 - $159.83
   Size:         $8.13
-  Distance:     $13.42 (208% of ATR)
+  Distance:     $6.14 (102% of ATR)
   Formed:       2026-06-26
   FRESHNESS:    STALE
   Notes:        STALE - Recent cached daily candle tested demand zone
@@ -18,12 +18,12 @@ DEMAND ZONE (Buy Zone):
 SUPPLY ZONE (Sell Zone):
   Range:        $184.05 - $189.91
   Size:         $5.85
-  Distance:     $10.80
+  Distance:     $18.08
   Formed:       2026-09-01
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $21.55
-  Profit Target (PT):  $10.80
-  Risk:Reward Ratio:   1:0.50
+  Stop Loss Distance:  $14.27
+  Profit Target (PT):  $18.08
+  Risk:Reward Ratio:   1:1.27

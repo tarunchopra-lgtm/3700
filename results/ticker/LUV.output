@@ -16,14 +16,14 @@ DEMAND ZONE (Buy Zone):
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $49.62 - $52.13
-  Size:         $2.52
-  Distance:     $5.53
-  Formed:       2026-07-02
-  FRESHNESS:    FRESH
-  Notes:        Fresh - not tested recently
+  Range:        $44.02 - $45.69
+  Size:         $1.67
+  Distance:     $0.00
+  Formed:       2026-06-12
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($44.09 >= zone $44.02)
 
 TRADE METRICS:
   Stop Loss Distance:  $6.51
-  Profit Target (PT):  $5.53
-  Risk:Reward Ratio:   1:0.85
+  Profit Target (PT):  $-0.07
+  Risk:Reward Ratio:   1:-0.01

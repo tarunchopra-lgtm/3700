@@ -3,27 +3,27 @@ TICKER: KEY
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $21.99
-  ATR (14-day): $0.39
+  Price:        $21.83
+  ATR (14-day): $0.50
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $21.14 - $21.89
-  Size:         $0.75
-  Distance:     $0.09 (24% of ATR)
-  Formed:       2026-08-31
-  FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $21.74)
-
-SUPPLY ZONE (Sell Zone):
-  Range:        $22.45 - $22.79
-  Size:         $0.34
-  Distance:     $0.46
-  Formed:       2026-06-12
+  Range:        $18.33 - $18.58
+  Size:         $0.25
+  Distance:     $3.25 (656% of ATR)
+  Formed:       2025-11-26
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
+SUPPLY ZONE (Sell Zone):
+  Range:        $20.61 - $22.43
+  Size:         $1.82
+  Distance:     $0.00
+  Formed:       2026-02-24
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($21.83 >= zone $20.61)
+
 TRADE METRICS:
-  Stop Loss Distance:  $0.84
-  Profit Target (PT):  $0.46
-  Risk:Reward Ratio:   1:0.54
+  Stop Loss Distance:  $3.50
+  Profit Target (PT):  $-1.22
+  Risk:Reward Ratio:   1:-0.35

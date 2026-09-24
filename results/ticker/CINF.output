@@ -3,27 +3,27 @@ TICKER: CINF
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $177.55
-  ATR (14-day): $3.58
+  Price:        $176.05
+  ATR (14-day): $2.82
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $166.73 - $171.56
-  Size:         $4.83
-  Distance:     $5.99 (168% of ATR)
-  Formed:       2026-08-19
-  FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $169.05)
-
-SUPPLY ZONE (Sell Zone):
-  Range:        $189.11 - $192.09
-  Size:         $2.98
-  Distance:     $11.56
-  Formed:       2026-07-06
+  Range:        $156.65 - $159.43
+  Size:         $2.78
+  Distance:     $16.62 (588% of ATR)
+  Formed:       2026-05-29
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
+SUPPLY ZONE (Sell Zone):
+  Range:        $173.53 - $183.33
+  Size:         $9.80
+  Distance:     $0.00
+  Formed:       2026-07-10
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($176.05 >= zone $173.53)
+
 TRADE METRICS:
-  Stop Loss Distance:  $10.82
-  Profit Target (PT):  $11.56
-  Risk:Reward Ratio:   1:1.07
+  Stop Loss Distance:  $19.40
+  Profit Target (PT):  $-2.52
+  Risk:Reward Ratio:   1:-0.13

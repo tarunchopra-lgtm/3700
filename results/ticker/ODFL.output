@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: ODFL
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $185.53
+  ATR (14-day): $4.90
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $156.73 - $160.64
+  Size:         $3.91
+  Distance:     $24.89 (508% of ATR)
+  Formed:       2025-12-30
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $197.80 - $202.14
+  Size:         $4.34
+  Distance:     $12.27
+  Formed:       2026-08-25
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+TRADE METRICS:
+  Stop Loss Distance:  $28.80
+  Profit Target (PT):  $12.27
+  Risk:Reward Ratio:   1:0.43

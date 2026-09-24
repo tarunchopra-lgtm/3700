@@ -3,27 +3,27 @@ TICKER: INTC
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $128.68
-  ATR (14-day): $6.64
+  Price:        $125.00
+  ATR (14-day): $6.50
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $94.53 - $98.85
   Size:         $4.32
-  Distance:     $29.83 (449% of ATR)
+  Distance:     $26.15 (402% of ATR)
   Formed:       2026-09-14
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $126.70 - $142.33
-  Size:         $15.63
+  Range:        $104.20 - $126.55
+  Size:         $22.35
   Distance:     $0.00
-  Formed:       2026-07-01
+  Formed:       2026-06-01
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($128.68 >= zone $126.70)
+  Notes:        STALE - Price reached zone ($125.00 >= zone $104.20)
 
 TRADE METRICS:
-  Stop Loss Distance:  $34.15
-  Profit Target (PT):  $-1.98
-  Risk:Reward Ratio:   1:-0.06
+  Stop Loss Distance:  $30.47
+  Profit Target (PT):  $-20.80
+  Risk:Reward Ratio:   1:-0.68

@@ -3,27 +3,27 @@ TICKER: PCAR
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $123.74
-  ATR (14-day): $3.25
+  Price:        $119.16
+  ATR (14-day): $2.84
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $116.31 - $118.53
-  Size:         $2.21
-  Distance:     $5.21 (160% of ATR)
-  Formed:       2026-06-24
+  Range:        $107.80 - $112.28
+  Size:         $4.48
+  Distance:     $6.88 (243% of ATR)
+  Formed:       2026-05-21
   FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $117.08)
+  Notes:        STALE - Recent cached daily candle tested demand zone
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $124.85 - $128.25
-  Size:         $3.41
-  Distance:     $1.11
-  Formed:       2026-07-17
+  Range:        $121.92 - $124.37
+  Size:         $2.45
+  Distance:     $2.77
+  Formed:       2026-09-10
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $7.42
-  Profit Target (PT):  $1.11
-  Risk:Reward Ratio:   1:0.15
+  Stop Loss Distance:  $11.36
+  Profit Target (PT):  $2.77
+  Risk:Reward Ratio:   1:0.24

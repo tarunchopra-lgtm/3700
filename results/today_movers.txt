@@ -1,0 +1,21 @@
+[AUTH] Script: today-movers.py
+[AUTH] Python executable: C:\Users\TarunChopra\3700\.venv\Scripts\python.exe
+[AUTH] Credentials file: C:\Users\TarunChopra\3700\env\credentials
+[AUTH] API key: PKLU...AJ3U (len=26)
+[AUTH] Secret key: DoMF...u8zk (len=44)
+[AUTH] Paper trading: True
+[AUTH] Authentication OK: account=a38a...edd4 status=AccountStatus.ACTIVE
+Top 10 stock gainers today
+Market data updated: 2026-09-23T13:35:00.259551648Z
+ #  Symbol          Price       Change    Percent
+-------------------------------------------------
+ 1  BENF     $      2.73 $      2.19    407.15%
+ 2  WHLR     $      5.70 $      3.83    204.81%
+ 3  IPDN     $      6.78 $      2.88     73.97%
+ 4  BENFW    $      0.01 $      0.01     68.67%
+ 5  VTGN     $      0.40 $      0.15     60.22%
+ 6  HCTI     $      1.28 $      0.42     48.03%
+ 7  STLNW    $      0.03 $      0.01     46.34%
+ 8  MSS      $      2.24 $      0.68     43.59%
+ 9  BFRGW    $      0.15 $      0.05     42.62%
+10  DCOY     $      4.42 $      1.32     42.52%

@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: KVUE
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $17.89
+  ATR (14-day): $0.30
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $16.67 - $17.18
+  Size:         $0.51
+  Distance:     $0.71 (236% of ATR)
+  Formed:       2026-06-04
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $19.27 - $20.12
+  Size:         $0.86
+  Distance:     $1.38
+  Formed:       2026-07-02
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+TRADE METRICS:
+  Stop Loss Distance:  $1.22
+  Profit Target (PT):  $1.38
+  Risk:Reward Ratio:   1:1.13

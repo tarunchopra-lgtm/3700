@@ -3,27 +3,27 @@ TICKER: ARE
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $55.89
-  ATR (14-day): $1.97
+  Price:        $57.48
+  ATR (14-day): $1.95
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $48.86 - $53.03
-  Size:         $4.17
-  Distance:     $2.86 (145% of ATR)
-  Formed:       2026-06-16
-  FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $51.24)
+  Range:        $49.24 - $50.94
+  Size:         $1.70
+  Distance:     $6.54 (336% of ATR)
+  Formed:       2026-09-09
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $52.56 - $54.35
-  Size:         $1.79
-  Distance:     $1.54
-  Formed:       2026-06-12
-  FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($55.89 >= zone $52.56)
+  Range:        $76.81 - $78.20
+  Size:         $1.39
+  Distance:     $19.33
+  Formed:       2025-10-22
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $7.03
-  Profit Target (PT):  $-3.33
-  Risk:Reward Ratio:   1:-0.47
+  Stop Loss Distance:  $8.24
+  Profit Target (PT):  $19.33
+  Risk:Reward Ratio:   1:2.35

@@ -3,27 +3,27 @@ TICKER: JBL
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $326.42
-  ATR (14-day): $10.85
+  Price:        $307.72
+  ATR (14-day): $9.74
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $286.01 - $325.83
   Size:         $39.82
-  Distance:     $0.59 (5% of ATR)
+  Distance:     $0.00 (0% of ATR)
   Formed:       2026-07-30
   FRESHNESS:    STALE
-  Notes:        STALE - Recent cached daily candle tested demand zone
+  Notes:        STALE - Price reached zone ($307.72 <= zone $325.83)
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $368.83 - $386.36
-  Size:         $17.53
-  Distance:     $42.41
-  Formed:       2026-06-30
+  Range:        $374.60 - $398.46
+  Size:         $23.86
+  Distance:     $66.88
+  Formed:       2026-06-12
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $40.41
-  Profit Target (PT):  $42.41
-  Risk:Reward Ratio:   1:1.05
+  Stop Loss Distance:  $21.71
+  Profit Target (PT):  $66.88
+  Risk:Reward Ratio:   1:3.08

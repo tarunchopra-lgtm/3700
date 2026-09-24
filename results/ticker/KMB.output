@@ -3,27 +3,27 @@ TICKER: KMB
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $104.78
-  ATR (14-day): $2.55
+  Price:        $104.69
+  ATR (14-day): $2.45
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $97.45 - $99.31
   Size:         $1.86
-  Distance:     $5.47 (215% of ATR)
+  Distance:     $5.38 (220% of ATR)
   Formed:       2026-09-16
   FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $96.86)
+  Notes:        STALE - Recent cached daily candle tested demand zone
 
 SUPPLY ZONE (Sell Zone):
   Range:        $106.78 - $108.81
   Size:         $2.03
-  Distance:     $2.00
+  Distance:     $2.09
   Formed:       2026-08-31
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $7.33
-  Profit Target (PT):  $2.00
-  Risk:Reward Ratio:   1:0.27
+  Stop Loss Distance:  $7.24
+  Profit Target (PT):  $2.09
+  Risk:Reward Ratio:   1:0.29

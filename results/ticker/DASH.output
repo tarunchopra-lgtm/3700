@@ -3,27 +3,27 @@ TICKER: DASH
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $201.60
-  ATR (14-day): $6.82
+  Price:        $190.60
+  ATR (14-day): $6.68
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $166.70 - $176.18
-  Size:         $9.48
-  Distance:     $25.42 (373% of ATR)
-  Formed:       2026-07-23
+  Range:        $164.62 - $173.48
+  Size:         $8.86
+  Distance:     $17.12 (256% of ATR)
+  Formed:       2026-06-16
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
   Range:        $211.21 - $231.94
   Size:         $20.73
-  Distance:     $9.61
+  Distance:     $20.61
   Formed:       2026-09-04
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $34.90
-  Profit Target (PT):  $9.61
-  Risk:Reward Ratio:   1:0.28
+  Stop Loss Distance:  $25.98
+  Profit Target (PT):  $20.61
+  Risk:Reward Ratio:   1:0.79

@@ -8,10 +8,10 @@ CURRENT STATUS:
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $75.44 - $77.77
-  Size:         $2.33
-  Distance:     $9.80 (376% of ATR)
-  Formed:       2026-06-30
+  Range:        $76.93 - $79.17
+  Size:         $2.23
+  Distance:     $8.40 (322% of ATR)
+  Formed:       2026-05-21
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
@@ -24,6 +24,6 @@ SUPPLY ZONE (Sell Zone):
   Notes:        STALE - Price reached zone ($87.57 >= zone $84.33)
 
 TRADE METRICS:
-  Stop Loss Distance:  $12.13
+  Stop Loss Distance:  $10.64
   Profit Target (PT):  $-3.24
-  Risk:Reward Ratio:   1:-0.27
+  Risk:Reward Ratio:   1:-0.30

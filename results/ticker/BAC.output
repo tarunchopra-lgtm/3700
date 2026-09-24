@@ -3,27 +3,27 @@ TICKER: BAC
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $61.88
-  ATR (14-day): $1.61
+  Price:        $59.87
+  ATR (14-day): $1.58
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $56.84 - $58.34
-  Size:         $1.49
-  Distance:     $3.55 (220% of ATR)
-  Formed:       2026-06-29
-  FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $57.42)
+  Range:        $50.64 - $51.49
+  Size:         $0.85
+  Distance:     $8.38 (530% of ATR)
+  Formed:       2026-05-28
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $62.23 - $63.83
-  Size:         $1.60
-  Distance:     $0.34
-  Formed:       2026-09-10
+  Range:        $61.97 - $62.91
+  Size:         $0.94
+  Distance:     $2.10
+  Formed:       2026-09-04
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $5.04
-  Profit Target (PT):  $0.34
-  Risk:Reward Ratio:   1:0.07
+  Stop Loss Distance:  $9.23
+  Profit Target (PT):  $2.10
+  Risk:Reward Ratio:   1:0.23

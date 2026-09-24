@@ -3,27 +3,27 @@ TICKER: HON
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $217.51
-  ATR (14-day): $6.30
+  Price:        $222.34
+  ATR (14-day): $4.61
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $196.98 - $201.54
-  Size:         $4.56
-  Distance:     $15.97 (253% of ATR)
-  Formed:       2026-09-14
-  FRESHNESS:    FRESH
-  Notes:        Fresh - not tested recently
+  Range:        $204.29 - $208.61
+  Size:         $4.32
+  Distance:     $13.73 (298% of ATR)
+  Formed:       2026-09-17
+  FRESHNESS:    STALE
+  Notes:        STALE - Recent cached daily candle tested demand zone
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $239.48 - $250.00
-  Size:         $10.52
-  Distance:     $21.97
-  Formed:       2026-08-07
+  Range:        $232.44 - $236.03
+  Size:         $3.59
+  Distance:     $10.10
+  Formed:       2026-08-13
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $20.53
-  Profit Target (PT):  $21.97
-  Risk:Reward Ratio:   1:1.07
+  Stop Loss Distance:  $18.05
+  Profit Target (PT):  $10.10
+  Risk:Reward Ratio:   1:0.56

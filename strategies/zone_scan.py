@@ -44,6 +44,7 @@ stats_lock = threading.Lock()
 CACHE_DIR = Path(__file__).resolve().parent.parent / "reports" / "track"
 DEFAULT_LOOKBACK_DAYS = 90
 EASTERN_TZ = ZoneInfo("America/New_York")
+WORKSPACE_ROOT = Path(__file__).resolve().parent.parent
 
 
 @dataclass
@@ -837,6 +838,27 @@ def compile_balanced_top_20(all_setups: list, report_path: Path) -> None:
             )
 
 
+def create_today_movers_report(report_path: Path) -> None:
+    """Run the Alpaca mover report and save its output for the zone email."""
+    mover_script = WORKSPACE_ROOT / "indicator" / "today-movers.py"
+    result = subprocess.run(
+        [sys.executable, str(mover_script), "--top", "10"],
+        cwd=WORKSPACE_ROOT,
+        capture_output=True,
+        text=True,
+        timeout=60,
+    )
+
+    report_path.write_text(
+        result.stdout
+        + (f"\nERROR (exit code {result.returncode}):\n{result.stderr}" if result.returncode else ""),
+        encoding="utf-8",
+    )
+
+    if result.returncode:
+        raise RuntimeError(f"today-movers.py exited with code {result.returncode}")
+
+
 def main(cache_daily_bars: bool = False, sensitivities: list[str] | None = None,
          lookback_days: int = DEFAULT_LOOKBACK_DAYS):
     """Main entry point"""
@@ -992,6 +1014,18 @@ def main(cache_daily_bars: bool = False, sensitivities: list[str] | None = None,
         top_20_path = results_dir / "top-20.txt"
         if top_20_path.exists():
             attachments.append(top_20_path)
+
+        today_movers_path = results_dir / "today_movers.txt"
+        try:
+            create_today_movers_report(today_movers_path)
+            attachments.append(today_movers_path)
+            report_lines.append("TODAY'S TOP MOVERS: included in today_movers.txt")
+            print(f"[OK] Today movers report: {today_movers_path.name}")
+        except Exception as e:
+            print(f"[MOVER REPORT ERROR] Failed to generate today movers: {e}")
+            if today_movers_path.exists():
+                attachments.append(today_movers_path)
+            report_lines.append(f"TODAY'S TOP MOVERS: unavailable ({e})")
 
         attachment_lines = "\n".join(f"- {path.name}" for path in attachments)
         

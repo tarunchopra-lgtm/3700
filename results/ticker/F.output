@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: F
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $13.06
+  ATR (14-day): $0.43
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $12.72 - $13.30
+  Size:         $0.58
+  Distance:     $0.00 (0% of ATR)
+  Formed:       2026-05-19
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($13.06 <= zone $13.30)
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $16.75 - $17.78
+  Size:         $1.03
+  Distance:     $3.69
+  Formed:       2026-05-29
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+TRADE METRICS:
+  Stop Loss Distance:  $0.34
+  Profit Target (PT):  $3.69
+  Risk:Reward Ratio:   1:10.85

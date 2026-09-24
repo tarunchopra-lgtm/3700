@@ -3,27 +3,27 @@ TICKER: BKNG
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $177.71
-  ATR (14-day): $6.56
+  Price:        $172.61
+  ATR (14-day): $6.86
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $164.13 - $174.43
-  Size:         $10.30
-  Distance:     $3.28 (50% of ATR)
-  Formed:       2026-06-18
-  FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $168.38)
+  Range:        $153.62 - $160.38
+  Size:         $6.76
+  Distance:     $12.23 (178% of ATR)
+  Formed:       2026-05-21
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
   Range:        $195.51 - $201.40
   Size:         $5.89
-  Distance:     $17.80
+  Distance:     $22.90
   Formed:       2026-09-01
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $13.58
-  Profit Target (PT):  $17.80
-  Risk:Reward Ratio:   1:1.31
+  Stop Loss Distance:  $18.99
+  Profit Target (PT):  $22.90
+  Risk:Reward Ratio:   1:1.21

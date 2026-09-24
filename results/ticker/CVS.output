@@ -3,27 +3,27 @@ TICKER: CVS
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $99.65
-  ATR (14-day): $2.91
+  Price:        $92.27
+  ATR (14-day): $2.39
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $92.35 - $94.39
-  Size:         $2.04
-  Distance:     $5.26 (181% of ATR)
-  Formed:       2026-08-20
-  FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone today (low $93.87)
+  Range:        $82.08 - $83.79
+  Size:         $1.72
+  Distance:     $8.48 (355% of ATR)
+  Formed:       2026-04-30
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $98.75 - $102.77
-  Size:         $4.02
-  Distance:     $0.00
-  Formed:       2026-06-12
-  FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($99.65 >= zone $98.75)
+  Range:        $93.87 - $96.06
+  Size:         $2.19
+  Distance:     $1.60
+  Formed:       2026-09-11
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $7.30
-  Profit Target (PT):  $-0.90
-  Risk:Reward Ratio:   1:-0.12
+  Stop Loss Distance:  $10.19
+  Profit Target (PT):  $1.60
+  Risk:Reward Ratio:   1:0.16

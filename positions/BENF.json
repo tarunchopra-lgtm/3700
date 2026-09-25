@@ -2,12 +2,12 @@
   "symbol": "BENF",
   "qty": 1000,
   "entry_price": 2.0,
-  "entry_time": "2026-09-23T18:24:07.032875",
+  "entry_time": "2026-09-24T18:42:13.877803",
   "brackets": {
     "bracket1": {
       "entry_order_id": "7391efdc-1b98-456e-aa6b-37d053e21c85",
-      "stop_order_id": "e13f8b76-8c0f-4b39-a1bd-f0b7a6adaddb",
-      "target_order_id": "63adc1ff-6b8e-4dbc-baf2-c6ba81086369",
+      "stop_order_id": null,
+      "target_order_id": null,
       "qty": 500,
       "target_price": 2.1,
       "stop_price": 1.9,
@@ -15,13 +15,13 @@
     },
     "bracket2": {
       "entry_order_id": "67ea5e90-d979-411c-a24f-e09e2b7d984c",
-      "stop_order_id": "83e02ea0-d329-4136-90b3-14586d84faf6",
-      "target_order_id": "3062133d-cc39-4f80-ad0a-d3a8ad723699",
+      "stop_order_id": null,
+      "target_order_id": null,
       "qty": 500,
       "target_price": 3.0,
       "stop_price": 1.9,
       "status": "pending"
     }
   },
-  "last_updated": "2026-09-23T18:24:07.817016"
+  "last_updated": "2026-09-24T18:42:13.898857"
 }

@@ -1,3 +1,89 @@
+"""FOMO trade monitor and two-bracket order manager.
+
+This file is intentionally written as a long-running script rather than as a
+small library. Reading it from top to bottom is useful because startup builds
+the objects used by the monitoring loop near the bottom of the file.
+
+BEGINNER MAP
+============
+
+1. Imports and paths
+    The imports bring in Python's standard-library tools, Alpaca request
+    classes, and the local credentials helper. WORKSPACE_ROOT makes file paths
+    independent of the directory from which Python was launched.
+
+2. Position persistence
+    Functions such as save_position_tracking() and load_bracket_file() read and
+    write JSON files under positions/. JSON is used as a small local database:
+    it lets the program remember Alpaca order IDs after a restart.
+
+3. Broker and order helpers
+    Functions beginning with _create_ build request objects. Functions
+    beginning with _submit_ send those requests to Alpaca. Keeping construction
+    and submission separate makes it easier to inspect or test an order before
+    sending it.
+
+4. Recovery and reconciliation
+    The recovery functions compare local JSON state with Alpaca's actual orders
+    and positions. The broker is the source of truth for whether an order filled;
+    the JSON file is the source of truth for which local bracket owns that order.
+
+5. Configuration parsing
+    _read_config_from_file() converts each active line in lists/fomo_trade.txt
+    into Python values. A line such as:
+
+         APUS 1000 5 4 8 11
+
+    becomes a tuple containing a symbol, quantity, entry, stop, and two targets.
+    _validate_and_add_trade() then converts that tuple into the trade_states
+    dictionary used by the rest of the program.
+
+6. Startup
+    The code below the STARTUP heading authenticates, reads the configuration,
+    restores JSON state, cleans stale orders, and places only missing entries.
+
+7. Monitoring loop
+    The while True loop runs every CHECK_INTERVAL seconds. Each pass reloads the
+    text configuration, detects new/removed/changed trades, checks positions,
+    creates missing OCO exits, and records target or stop outcomes.
+
+PYTHON CONCEPTS USED HERE
+=========================
+
+* A function is defined with def and returns a value with return.
+* Type hints such as symbol: str and -> bool document expected types; Python
+  does not require them at runtime.
+* A dictionary stores named values: cfg["entry_price"] reads one field.
+* A list stores an ordered collection; a set stores unique values and supports
+  fast membership checks with `in`.
+* A tuple is an immutable sequence. Configuration snapshots use tuples so the
+  old and new versions can be compared directly.
+* `for item in collection` repeats a block for every item. `if` chooses a path.
+* `try/except` prevents one broker or file error from terminating the monitor.
+* `getattr(order, "status", None)` safely reads an optional object attribute.
+* `Path` represents filesystem paths without manually joining strings.
+* The leading underscore in helper names is a convention meaning “internal
+  helper”; it does not make a function private in Python.
+
+ORDER LIFECYCLE IN THIS PROGRAM
+===============================
+
+An active trade normally follows this sequence:
+
+     text config -> validated trade_states -> two limit buy entries
+     -> confirmed filled entry -> one OCO target/stop per filled half
+     -> target or stop outcome -> persisted completion -> possible re-entry
+
+The program deliberately checks the exact entry order ID before assigning an
+OCO to a bracket. A symbol-level position alone cannot identify whether it
+belongs to bracket 1 or bracket 2.
+
+Useful learning approach: choose one symbol, such as APUS, and follow its
+value through _read_config_from_file(), _validate_and_add_trade(),
+_place_entry_orders_for_symbols(), _ensure_oco_exits_for_trade(), and the
+STEP 3 outcome code in the monitoring loop.
+"""
+
 import os
 import re
 import sys
@@ -26,6 +112,11 @@ POSITIONS_DIR = WORKSPACE_ROOT / "positions"
 POSITIONS_DIR.mkdir(exist_ok=True)
 
 REQUEST_TIMEOUT_SECONDS = float(os.getenv("ALPACA_HTTP_TIMEOUT", "15"))
+
+# These module-level values are created once when the script starts. Functions
+# below can read them without receiving them as parameters. This is convenient
+# for a monitor, but it also means the script must be treated as one connected
+# application rather than a collection of unrelated snippets.
 
 
 # ============================================================================
@@ -74,6 +165,10 @@ REQUEST_TIMEOUT_SECONDS = float(os.getenv("ALPACA_HTTP_TIMEOUT", "15"))
 # ============================================================================
 # POSITION TRACKING FUNCTIONS
 # ============================================================================
+
+# The JSON file stores broker IDs, not just prices. An order ID is the link
+# between a local bracket and the corresponding order at Alpaca. Losing that
+# link is why startup recovery exists later in the file.
 
 def save_position_tracking(symbol: str, position_data: dict) -> None:
     """
@@ -165,6 +260,10 @@ def get_all_active_position_statuses() -> list:
 # These map old bracket1/bracket2 file API to new single-JSON format
 # ============================================================================
 
+# These wrappers preserve older function names while using the newer single
+# JSON file. This is a compatibility layer: callers can keep using the old
+# names while the storage format remains consolidated.
+
 def save_bracket_file(symbol: str, bracket_num: int, entry_order_id: str = None, 
                       stop_order_id: str = None, target_order_id: str = None,
                       entry_price: float = None, stop_price: float = None, 
@@ -184,6 +283,14 @@ def save_bracket_file(symbol: str, bracket_num: int, entry_order_id: str = None,
                 "bracket2": {"status": "pending"}
             }
         }
+
+    # Keep symbol-level tracker values aligned with the active config when a
+    # new entry or updated bracket is persisted.
+    pos_data["symbol"] = symbol
+    if entry_price is not None:
+        pos_data["entry_price"] = entry_price
+    if qty is not None:
+        pos_data["qty"] = qty * 2
     
     pos_data["brackets"][f"bracket{bracket_num}"] = {
         "entry_order_id": entry_order_id,
@@ -373,6 +480,10 @@ def _install_http_timeout() -> None:
 
 _install_http_timeout()
 
+# Authentication happens at import/startup time in this script. If it fails,
+# there is no safe way for the monitor to submit or inspect broker orders, so
+# startup exits instead of entering a partially working state.
+
 DEBUG_TIMING = os.getenv("FOMO_DEBUG_TIMING", "1").strip().lower() not in ("0", "false", "no")
 
 # Alpaca does not support extended hours for bracket/OCO protection orders.
@@ -391,6 +502,15 @@ except Exception as exc:
 
 PAPER = credentials.paper
 OPTION_SYMBOL_PATTERN = re.compile(r"^[A-Z]{1,6}\d{6}[CP]\d{8}$")
+
+
+def _is_regular_market_open() -> bool:
+    """Return Alpaca's regular-session state, failing closed on API errors."""
+    try:
+        return bool(getattr(trading_client.get_clock(), "is_open", False))
+    except Exception as error:
+        print(f"[MARKET] Could not read Alpaca market clock: {error}")
+        return False
 
 
 def _is_option_symbol(symbol: str) -> bool:
@@ -456,6 +576,14 @@ def _create_limit_order(symbol: str, qty: float, side: OrderSide, limit_price: f
     return LimitOrderRequest(**order_dict)
 
 
+# Order helper pattern:
+#   1. validate local conditions,
+#   2. build an Alpaca request object,
+#   3. submit it in the caller,
+#   4. persist the returned broker ID.
+# The returned ID is essential for later status checks and cancellations.
+
+
 def _entry_price_is_reached(trade_id: str) -> bool:
     """Allow a buy only while both current price and ask are above its limit."""
     cfg = trade_states[trade_id]["config"]
@@ -473,6 +601,10 @@ def _entry_price_is_reached(trade_id: str) -> bool:
 def _submit_entry_order(trade_id: str, qty: float, limit_price: float,
                         time_in_force: TimeInForce, is_stock: bool):
     """Submit a buy entry only after a final live-price check."""
+    if is_stock and not _is_regular_market_open():
+        raise ValueError(
+            f"Entry blocked for {trade_id}: Alpaca regular market session is closed"
+        )
     if not _entry_price_is_reached(trade_id):
         raise ValueError(
             f"Entry blocked for {trade_id}: live price is below "
@@ -522,8 +654,14 @@ def _create_stop_order(symbol: str, qty: float, side: OrderSide, stop_price: flo
 def _submit_oco_exit(symbol: str, qty: float, stop_price: float, target_price: float,
                      time_in_force: TimeInForce) -> tuple[str, str]:
     """Submit a linked one-cancels-other sell exit and return target and stop IDs."""
+    broker_symbol = _broker_symbol(symbol)
+    if "/" not in broker_symbol and not _is_regular_market_open():
+        raise RuntimeError(
+            f"OCO protection deferred for {broker_symbol}: "
+            "Alpaca regular market session is closed"
+        )
     order = LimitOrderRequest(
-        symbol=_broker_symbol(symbol),
+        symbol=broker_symbol,
         qty=qty,
         side=OrderSide.SELL,
         type="limit",
@@ -585,6 +723,57 @@ def _has_available_position_qty(symbol: str, requested_qty: float) -> bool:
             return True
         return float(available) >= float(requested_qty)
     except Exception:
+        return False
+
+
+def _submit_fallback_stop(symbol: str, qty: float, target_order_id: str,
+                          stop_order_id: str) -> bool:
+    """Cancel an untriggered OCO and submit a market exit for the bracket."""
+    cancel_failed = False
+    cancelled_ids = set()
+    for order_id in (target_order_id, stop_order_id):
+        if not order_id or order_id in cancelled_ids:
+            continue
+        try:
+            trading_client.cancel_order_by_id(order_id)
+            cancelled_ids.add(order_id)
+        except Exception as error:
+            status = _check_order_status(order_id)
+            if status != "cancelled":
+                cancel_failed = True
+                print(f"[{symbol}] Fallback stop could not cancel {order_id}: {error}")
+
+    if cancel_failed:
+        return False
+
+    position = _find_position_for_symbol(symbol, retries=2, delay_seconds=0.5)
+    if not position:
+        return False
+
+    available_qty = getattr(position, "qty_available", None)
+    exit_qty = float(qty)
+    if available_qty not in (None, ""):
+        exit_qty = min(exit_qty, float(available_qty))
+    if exit_qty <= 0:
+        print(f"[{symbol}] Fallback stop waiting for shares to become available")
+        return False
+
+    try:
+        response = trading_client.submit_order(
+            order_data=MarketOrderRequest(
+                symbol=_broker_symbol(symbol),
+                qty=exit_qty,
+                side=OrderSide.SELL,
+                time_in_force=TimeInForce.DAY,
+            )
+        )
+        print(
+            f"[{symbol}] FALLBACK STOP submitted: SELL {exit_qty} shares "
+            f"after price crossed configured stop (order {response.id})"
+        )
+        return True
+    except Exception as error:
+        print(f"[{symbol}] Fallback stop market exit failed: {error}")
         return False
 
 
@@ -656,7 +845,6 @@ def _ensure_oco_exits_for_trade(trade_id: str) -> None:
             f"targets ${cfg['target1_price']:.2f}/${cfg['target2_price']:.2f})"
         )
         return
-    live_position = _find_position_for_symbol(trade_id, retries=1, delay_seconds=0.0)
     for bracket_num, bracket, target_price in (
         (1, state["bracket1"], cfg["target1_price"]),
         (2, state["bracket2"], cfg["target2_price"]),
@@ -665,8 +853,40 @@ def _ensure_oco_exits_for_trade(trade_id: str) -> None:
         # restart just because the other bracket still owns the position.
         if bracket.get("filled"):
             continue
-        if not bracket["entry_order_id"] and not live_position:
+
+        # A live symbol-level position cannot identify which half-entry it
+        # belongs to. Never assign that position to a bracket with no entry ID.
+        if not bracket["entry_order_id"]:
+            stale_exit_ids = {
+                bracket.get("target_order_id"),
+                bracket.get("stop_order_id"),
+            }
+            stale_exit_ids.discard(None)
+            if stale_exit_ids:
+                print(
+                    f"[ALERT] [{trade_id}] B{bracket_num} has exit IDs but no "
+                    "confirmed filled entry; cancelling stale exits"
+                )
+            cleanup_failed = False
+            for order_id in stale_exit_ids:
+                try:
+                    trading_client.cancel_order_by_id(order_id)
+                except Exception:
+                    if _check_order_status(order_id) != "cancelled":
+                        cleanup_failed = True
+            if not cleanup_failed and stale_exit_ids:
+                bracket["target_order_id"] = None
+                bracket["stop_order_id"] = None
+                save_bracket_file(
+                    trade_id,
+                    bracket_num,
+                    entry_price=cfg["entry_price"],
+                    stop_price=cfg["stop_price"],
+                    target_price=target_price,
+                    qty=cfg["bracket_qty"],
+                )
             continue
+
         if bracket["entry_order_id"] and _check_order_status(bracket["entry_order_id"]) != "filled":
             continue
         if bracket["target_order_id"] and bracket["stop_order_id"]:
@@ -1006,6 +1226,37 @@ def _get_bracket_outcome(symbol: str, bracket_num: int, cfg: dict, state: dict) 
             "exit_price": stop_price,
         }
     elif target_status == "open" or stop_status == "open":
+        try:
+            current_price = _get_current_price(symbol)
+        except Exception as error:
+            print(f"[{symbol}] Could not read price for fallback stop: {error}")
+            current_price = None
+
+        if (
+            current_price is not None
+            and current_price <= stop_price
+            and target_status != "filled"
+            and stop_status != "filled"
+            and (
+                "/" in _broker_symbol(symbol)
+                or _is_regular_market_open()
+            )
+        ):
+            fallback_submitted = _submit_fallback_stop(
+                symbol,
+                float(bracket.get("qty") or cfg["bracket_qty"]),
+                target_order_id,
+                stop_order_id,
+            )
+            if fallback_submitted:
+                return {
+                    "status": "stopped_out",
+                    "bracket": bracket_num,
+                    "stop_price": stop_price,
+                    "profit_loss": "loss",
+                    "exit_price": current_price,
+                }
+
         return {
             "status": "pending",
             "bracket": bracket_num,
@@ -1096,7 +1347,12 @@ def _normalize_position_qty(raw_qty: float) -> float | int:
 
 
 def _read_config_from_file() -> list[tuple]:
-    """Read ALL active (non-comment) lines from lists/fomo_trade.txt"""
+    """Read ALL active (non-comment) lines from lists/fomo_trade.txt.
+
+    This is deliberately a pure parsing step: it reads text and returns data,
+    but it does not submit or cancel orders. Keeping parsing separate from
+    broker actions makes the hot-reload logic easier to understand.
+    """
     config_path = WORKSPACE_ROOT / "lists" / "fomo_trade.txt"
     
     if not config_path.exists():
@@ -1162,6 +1418,9 @@ SINGLE_ENTRY_MODE = False
 CHECK_INTERVAL = 10  # Check market AND config every 10 seconds (unified)
 
 # Dynamic trade state management
+# `trade_states` is the live in-memory model. `previous_configs` is a snapshot
+# of the last successful configuration view. Comparing the two lets the loop
+# identify NEW, REMOVED, and UPDATED trades without rereading broker history.
 trade_states = {}  # {symbol: {config, state_data}}
 previous_configs = {}  # Track previous config to detect changes
 
@@ -1507,6 +1766,12 @@ def _cancel_pending_entries_below_limit(trade_id: str) -> None:
 # Reconcile with fomo_trade.txt and update trade_states
 # ============================================================================
 
+# Startup order matters:
+#   authenticate -> read config -> restore local IDs -> inspect broker state
+#   -> preserve valid orders -> create only what is missing.
+# Reversing these steps can create duplicate entries or attach exits to the
+# wrong position.
+
 print("\n[STARTUP] Reconciling with existing positions and orders...\n")
 
 # Get all open orders
@@ -1721,6 +1986,9 @@ try:
         print(f"\n[{current_time.strftime('%H:%M:%S')}] 🔍 Market & Config Check ({len(trade_states)} symbols)...")
         
         # CONFIG RELOAD CHECK (every 10 seconds)
+        # The text file is reread on every pass. The code below compares the
+        # new configuration with previous_configs, then performs the smallest
+        # required broker action: add, remove, or replace.
         try:
             current_configs = _read_config_from_file()
             _migrate_single_tracker_for_duplicates(current_configs)
@@ -1854,24 +2122,43 @@ try:
                         # Place new bracket entry orders
                         try:
                             _place_entry_orders_for_symbols([trade_id])
-                            print(f"  ✓ {trade_id}: Placed new entry orders @ ${entry_price:.2f} (was ${prev_config[2]:.2f})")
+                            replacement_placed = any(
+                                state[f"bracket{bracket_num}"].get("entry_order_id")
+                                for bracket_num in (1, 2)
+                            )
+                            if replacement_placed:
+                                print(f"  ✓ {trade_id}: Placed new entry orders @ ${entry_price:.2f} (was ${prev_config[2]:.2f})")
+                            else:
+                                print(
+                                    f"  ⚠ {trade_id}: Replacement entries were not placed; "
+                                    "the update will be retried"
+                                )
                         except Exception as e:
                             print(f"  ✗ {trade_id}: Error placing new entry orders: {e}")
+                            replacement_placed = False
+
+                        if not replacement_placed:
+                            continue
                     
                     # Update previous config tracking
                     previous_configs[trade_id] = (symbol, num_stocks, entry_price, stop_price, target1_price, target2_price)
                 
                 print()
         except Exception as e:
-            pass  # Ignore config read errors, will retry next cycle
+            print(f"[CONFIG] ⚠ Hot-reload failed; will retry next cycle: {e}")
         
         # ========== MONITOR ALL ACTIVE TRADES ==========
+        # Reconciliation is intentionally separate from config handling. A
+        # config update changes what should exist; reconciliation checks what
+        # actually exists at Alpaca and repairs missing state.
         # ========== MARKET MONITORING: TRACK BRACKET ORDERS ==========
         for trade_id in list(trade_states):
             _reconcile_trade_tracker(trade_id)
             _cancel_pending_entries_below_limit(trade_id)
         
-        # STEP 1: Ensure both bracket entries are placed for all symbols
+        # STEP 1: Ensure both bracket entries are placed for all symbols.
+        # Each entry is half the configured quantity. The two orders are
+        # independent, so one can fill while the other remains open.
         for symbol in list(trade_states.keys()):
             cfg = trade_states[symbol]["config"]
             state = trade_states[symbol]["state"]
@@ -1907,6 +2194,8 @@ try:
                     print(f"[{symbol}] ✗ Failed to place bracket 2 entry: {e}")
         
         # STEP 2: Submit and track one OCO exit pair for each filled half-position.
+        # OCO means One-Cancels-the-Other: target profit and stop loss are
+        # linked so execution of one cancels the other.
         for trade_id in list(trade_states.keys()):
             _recover_missing_entry_ids_for_trade(trade_id)
             _ensure_oco_exits_for_trade(trade_id)
@@ -2073,7 +2362,9 @@ try:
                                         entry_price=cfg["entry_price"], stop_price=cfg["stop_price"],
                                         target_price=cfg["target2_price"], qty=cfg["bracket_qty"])
         
-        # STEP 3: Monitor each bracket's outcome (existing per-bracket logic)
+        # STEP 3: Monitor each bracket's outcome (existing per-bracket logic).
+        # This is where broker statuses become local business outcomes such as
+        # target_filled or stopped_out and are written to the JSON tracker.
         for symbol in list(trade_states.keys()):
             cfg = trade_states[symbol]["config"]
             state = trade_states[symbol]["state"]

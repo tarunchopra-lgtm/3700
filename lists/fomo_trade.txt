@@ -22,6 +22,18 @@
 #sofi 100 17.25 16.85 17.75 18.25
 #kr 10 99 98 100 103
 #jagx 100 15 14 16 20
+# benf and whlr to be tested for over night #2 stock should be able to run over multiple days, specially when stock configuraiton is in fomo_trade.txt anyways
+
+#artl 100 12 11 13 14
+# 13 if trade is below buy limit price, it should buy only when trade goes above limit price, not fill before that. this needs lot of testing because it keeps giving me false entries
+# basically pick buy price above current price on following trade
+#
 benf 1000 2 1.9 2.1 3
 whlr 1000 5.20 5.05 5.35 7.25
-#artl 100 12 11 13 14
+# 9/24 today's high
+fsly 100 23 22 24 30
+secz 100 12 11 13 15
+
+# another one 
+apus 1000 5.5 5 8 11
+#srzn 100 30 29 31 35

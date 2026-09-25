@@ -1,0 +1,27 @@
+{
+  "symbol": "SECZ",
+  "qty": 100,
+  "entry_price": 12.0,
+  "entry_time": "2026-09-24T10:37:17.402426",
+  "brackets": {
+    "bracket1": {
+      "entry_order_id": "19c37d50-a643-4924-9e16-540683f88a85",
+      "stop_order_id": null,
+      "target_order_id": null,
+      "qty": 50,
+      "target_price": 13.0,
+      "stop_price": 11.0,
+      "status": "pending"
+    },
+    "bracket2": {
+      "entry_order_id": "912d684f-67ea-456f-aab7-2e1d5c10f189",
+      "stop_order_id": null,
+      "target_order_id": null,
+      "qty": 50,
+      "target_price": 15.0,
+      "stop_price": 11.0,
+      "status": "pending"
+    }
+  },
+  "last_updated": "2026-09-24T10:37:17.428656"
+}

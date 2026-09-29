@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: CARR
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $59.78
+  ATR (14-day): $1.90
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $54.80 - $55.73
+  Size:         $0.94
+  Distance:     $4.05 (213% of ATR)
+  Formed:       2026-09-22
+  FRESHNESS:    STALE
+  Notes:        STALE - Recent cached daily candle tested demand zone
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $67.88 - $69.48
+  Size:         $1.61
+  Distance:     $8.09
+  Formed:       2026-07-23
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+TRADE METRICS:
+  Stop Loss Distance:  $4.98
+  Profit Target (PT):  $8.09
+  Risk:Reward Ratio:   1:1.62

@@ -3,27 +3,27 @@ TICKER: EXPE
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $272.17
-  ATR (14-day): $11.20
+  Price:        $259.78
+  ATR (14-day): $11.42
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $238.56 - $246.48
   Size:         $7.92
-  Distance:     $25.69 (229% of ATR)
+  Distance:     $13.30 (116% of ATR)
   Formed:       2026-06-16
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $302.20 - $313.17
-  Size:         $10.97
-  Distance:     $30.03
-  Formed:       2026-09-02
+  Range:        $286.10 - $294.31
+  Size:         $8.21
+  Distance:     $26.32
+  Formed:       2026-09-15
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $33.62
-  Profit Target (PT):  $30.03
-  Risk:Reward Ratio:   1:0.89
+  Stop Loss Distance:  $21.22
+  Profit Target (PT):  $26.32
+  Risk:Reward Ratio:   1:1.24

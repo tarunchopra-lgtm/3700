@@ -3,8 +3,8 @@ TICKER: IBM
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $235.11
-  ATR (14-day): $7.19
+  Price:        $238.64
+  ATR (14-day): $7.98
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
@@ -13,17 +13,17 @@ DEMAND ZONE (Buy Zone):
   Distance:     $0.00 (0% of ATR)
   Formed:       2026-07-13
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($235.11 <= zone $297.00)
+  Notes:        STALE - Price reached zone ($238.64 <= zone $297.00)
 
 SUPPLY ZONE (Sell Zone):
   Range:        $300.84 - $332.40
   Size:         $31.56
-  Distance:     $65.73
+  Distance:     $62.20
   Formed:       2026-06-01
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $24.08
-  Profit Target (PT):  $65.73
-  Risk:Reward Ratio:   1:2.73
+  Stop Loss Distance:  $27.60
+  Profit Target (PT):  $62.20
+  Risk:Reward Ratio:   1:2.25

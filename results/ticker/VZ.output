@@ -3,27 +3,27 @@ TICKER: VZ
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $46.59
-  ATR (14-day): $1.00
+  Price:        $47.08
+  ATR (14-day): $1.12
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $42.91 - $43.87
-  Size:         $0.96
-  Distance:     $2.73 (273% of ATR)
+  Range:        $42.89 - $43.87
+  Size:         $0.98
+  Distance:     $3.21 (287% of ATR)
   Formed:       2026-07-20
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $50.94 - $51.66
-  Size:         $0.72
-  Distance:     $4.34
+  Range:        $50.91 - $51.66
+  Size:         $0.75
+  Distance:     $3.84
   Formed:       2026-09-14
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $3.68
-  Profit Target (PT):  $4.34
-  Risk:Reward Ratio:   1:1.18
+  Stop Loss Distance:  $4.19
+  Profit Target (PT):  $3.84
+  Risk:Reward Ratio:   1:0.92

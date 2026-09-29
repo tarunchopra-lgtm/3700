@@ -1,0 +1,2 @@
+# Settings for strategies/zone_scan.py
+TOP_N_TICKERS=10

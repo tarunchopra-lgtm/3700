@@ -3,27 +3,27 @@ TICKER: SNPS
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $433.65
-  ATR (14-day): $14.04
+  Price:        $425.76
+  ATR (14-day): $13.57
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $377.50 - $386.25
-  Size:         $8.75
-  Distance:     $47.40 (338% of ATR)
+  Range:        $377.36 - $386.68
+  Size:         $9.32
+  Distance:     $39.08 (288% of ATR)
   Formed:       2026-09-17
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $485.15 - $508.63
-  Size:         $23.48
-  Distance:     $51.50
-  Formed:       2026-06-03
-  FRESHNESS:    FRESH
-  Notes:        Fresh - not tested recently
+  Range:        $438.48 - $447.88
+  Size:         $9.40
+  Distance:     $12.72
+  Formed:       2026-07-10
+  FRESHNESS:    STALE
+  Notes:        STALE - Recent cached daily candle tested supply zone
 
 TRADE METRICS:
-  Stop Loss Distance:  $56.15
-  Profit Target (PT):  $51.50
-  Risk:Reward Ratio:   1:0.92
+  Stop Loss Distance:  $48.40
+  Profit Target (PT):  $12.72
+  Risk:Reward Ratio:   1:0.26

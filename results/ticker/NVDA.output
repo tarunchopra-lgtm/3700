@@ -3,27 +3,27 @@ TICKER: NVDA
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $225.96
-  ATR (14-day): $6.78
+  Price:        $230.53
+  ATR (14-day): $4.95
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $208.93 - $212.77
-  Size:         $3.84
-  Distance:     $13.19 (195% of ATR)
+  Range:        $208.94 - $212.75
+  Size:         $3.81
+  Distance:     $17.78 (359% of ATR)
   Formed:       2026-09-14
-  FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $212.50)
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $217.20 - $233.71
-  Size:         $16.51
+  Range:        $221.36 - $232.28
+  Size:         $10.92
   Distance:     $0.00
-  Formed:       2026-09-09
+  Formed:       2026-06-02
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($225.96 >= zone $217.20)
+  Notes:        STALE - Price reached zone ($230.53 >= zone $221.36)
 
 TRADE METRICS:
-  Stop Loss Distance:  $17.03
-  Profit Target (PT):  $-8.76
-  Risk:Reward Ratio:   1:-0.51
+  Stop Loss Distance:  $21.59
+  Profit Target (PT):  $-9.17
+  Risk:Reward Ratio:   1:-0.42

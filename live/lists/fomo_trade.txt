@@ -1,0 +1,22 @@
+# fomo_trade.py configuration file
+# Format: SYMBOL NUM_STOCKS ENTRY_PRICE STOP_PRICE TARGET1_PRICE TARGET2_PRICE
+# Repeating a ticker creates independent trackers: SPY_1.json, SPY_2.json, etc.
+# Active trade configuration (first non-comment line will be used):
+# supply and demand
+
+
+
+### multiple days so OCO etc are tracked as well
+#nvda 100 211 209 213 250
+#intc 100 90 88 92 132
+# following is to track multiple days of a trade
+benf 1000 1.5 1.2 1.8 3
+wtw 2 288.8 287 290 310
+
+### mu is to test limit order of buy below current price
+# mu 10 1100 1090 1110 1140
+#mu 2 1050 1040 1060 1090
+mu 2 1050 1040 1080 1100
+
+### intc is to test limit order of above current price
+intc 2 116 115.5 119 125

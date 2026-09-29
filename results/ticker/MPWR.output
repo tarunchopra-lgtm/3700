@@ -3,27 +3,27 @@ TICKER: MPWR
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $1449.00
-  ATR (14-day): $51.67
+  Price:        $1428.00
+  ATR (14-day): $55.06
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $1136.65 - $1185.88
   Size:         $49.23
-  Distance:     $263.12 (509% of ATR)
+  Distance:     $242.12 (440% of ATR)
   Formed:       2026-09-14
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $1518.37 - $1713.12
-  Size:         $194.75
-  Distance:     $69.37
-  Formed:       2026-05-21
+  Range:        $1576.82 - $1707.62
+  Size:         $130.80
+  Distance:     $148.82
+  Formed:       2026-05-28
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $312.35
-  Profit Target (PT):  $69.37
-  Risk:Reward Ratio:   1:0.22
+  Stop Loss Distance:  $291.35
+  Profit Target (PT):  $148.82
+  Risk:Reward Ratio:   1:0.51

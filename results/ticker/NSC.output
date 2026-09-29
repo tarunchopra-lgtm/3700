@@ -3,27 +3,27 @@ TICKER: NSC
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $329.54
-  ATR (14-day): $6.22
+  Price:        $334.17
+  ATR (14-day): $5.65
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $318.54 - $321.94
-  Size:         $3.40
-  Distance:     $7.60 (122% of ATR)
-  Formed:       2026-09-14
+  Range:        $313.13 - $317.16
+  Size:         $4.03
+  Distance:     $17.01 (301% of ATR)
+  Formed:       2026-09-23
   FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $314.01)
+  Notes:        STALE - Recent cached daily candle tested demand zone
 
 SUPPLY ZONE (Sell Zone):
   Range:        $346.48 - $351.20
   Size:         $4.72
-  Distance:     $16.94
+  Distance:     $12.31
   Formed:       2026-08-27
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $11.00
-  Profit Target (PT):  $16.94
-  Risk:Reward Ratio:   1:1.54
+  Stop Loss Distance:  $21.04
+  Profit Target (PT):  $12.31
+  Risk:Reward Ratio:   1:0.59

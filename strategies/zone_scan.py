@@ -42,9 +42,34 @@ from strategies.find_zones import Candle, analyze_zones, calculate_atr
 output_lock = threading.Lock()
 stats_lock = threading.Lock()
 CACHE_DIR = Path(__file__).resolve().parent.parent / "reports" / "track"
+ZONE_SCAN_CONFIG_FILE = Path(__file__).resolve().parent.parent / "lists" / "zone_scan_config.txt"
 DEFAULT_LOOKBACK_DAYS = 90
+DEFAULT_TOP_N_TICKERS = 10
+CACHE_REFRESH_BATCH_SIZE = 100
 EASTERN_TZ = ZoneInfo("America/New_York")
 WORKSPACE_ROOT = Path(__file__).resolve().parent.parent
+
+
+def load_zone_scan_config() -> dict[str, int]:
+    """Load report settings without changing the zone detection rules."""
+    config = {"TOP_N_TICKERS": DEFAULT_TOP_N_TICKERS}
+    if not ZONE_SCAN_CONFIG_FILE.exists():
+        return config
+
+    try:
+        for raw_line in ZONE_SCAN_CONFIG_FILE.read_text(encoding="utf-8").splitlines():
+            line = raw_line.strip()
+            if not line or line.startswith("#") or "=" not in line:
+                continue
+            name, value = (part.strip() for part in line.split("=", 1))
+            if name not in config:
+                continue
+            parsed_value = int(value)
+            if parsed_value > 0:
+                config[name] = parsed_value
+    except (OSError, ValueError) as error:
+        print(f"[CONFIG] Could not load {ZONE_SCAN_CONFIG_FILE.name}: {error}")
+    return config
 
 
 @dataclass
@@ -52,14 +77,14 @@ class StockSetup:
     """Represents a trading setup for a stock"""
     symbol: str
     current_price: float
-    demand_zone_low: float
-    demand_zone_high: float
-    demand_zone_size: float
-    demand_formed: str
-    supply_zone_low: float
-    supply_zone_high: float
-    supply_zone_size: float
-    supply_formed: str
+    demand_zone_low: float | None
+    demand_zone_high: float | None
+    demand_zone_size: float | None
+    demand_formed: str | None
+    supply_zone_low: float | None
+    supply_zone_high: float | None
+    supply_zone_size: float | None
+    supply_formed: str | None
     atr: float
     demand_is_fresh: bool = True  # NEW: zone hasn't been recently tested
     supply_is_fresh: bool = True  # NEW: zone hasn't been recently tested
@@ -68,6 +93,8 @@ class StockSetup:
     
     def distance_to_demand(self) -> float:
         """Distance from current price to demand zone"""
+        if self.demand_zone_low is None or self.demand_zone_high is None:
+            return float("inf")
         if self.current_price > self.demand_zone_high:
             return self.current_price - self.demand_zone_high
         elif self.current_price < self.demand_zone_low:
@@ -76,6 +103,8 @@ class StockSetup:
     
     def distance_to_supply(self) -> float:
         """Distance from current price to supply zone"""
+        if self.supply_zone_low is None or self.supply_zone_high is None:
+            return float("inf")
         if self.current_price < self.supply_zone_low:
             return self.supply_zone_low - self.current_price
         elif self.current_price > self.supply_zone_high:
@@ -88,6 +117,8 @@ class StockSetup:
     
     def stop_loss_to_profit_target_ratio(self) -> float:
         """R:R ratio - profit target / stop loss"""
+        if self.demand_zone_low is None or self.supply_zone_low is None:
+            return 0
         # Stop loss = below demand zone
         stop_loss = self.current_price - self.demand_zone_low
         
@@ -118,6 +149,29 @@ def load_watchlist(filename: str) -> list[str]:
     return symbols
 
 
+def load_all_list_symbols() -> list[str]:
+    """Load one-symbol-per-line tickers from every file under lists/."""
+    symbols = []
+    seen = set()
+    lists_dir = WORKSPACE_ROOT / "lists"
+    for path in sorted(lists_dir.iterdir()):
+        if not path.is_file():
+            continue
+        try:
+            lines = path.read_text(encoding="utf-8").splitlines()
+        except OSError:
+            continue
+        for raw_line in lines:
+            parts = raw_line.strip().split()
+            if len(parts) != 1 or parts[0].startswith("#") or "=" in parts[0]:
+                continue
+            symbol = parts[0].upper()
+            if symbol not in seen:
+                seen.add(symbol)
+                symbols.append(symbol)
+    return symbols
+
+
 def run_find_zones(symbol: str, sensitivity: str = 'balanced', candles: list[Candle] | None = None,
                    lookback_days: int = DEFAULT_LOOKBACK_DAYS) -> dict | None:
     """
@@ -139,10 +193,10 @@ def run_find_zones(symbol: str, sensitivity: str = 'balanced', candles: list[Can
             candles=candles,
         )
         
-        if not demand_zone or not supply_zone:
-            return None
-        
-        spread = supply_zone.low - demand_zone.high
+        spread = (
+            supply_zone.low - demand_zone.high
+            if demand_zone and supply_zone else None
+        )
         
         return {
             'demand': {
@@ -151,14 +205,14 @@ def run_find_zones(symbol: str, sensitivity: str = 'balanced', candles: list[Can
                 'date': demand_zone.date_formed.strftime('%Y-%m-%d'),
                 'size': demand_zone.size,
                 'pattern': demand_zone.pattern_type
-            },
+            } if demand_zone else None,
             'supply': {
                 'low': supply_zone.low,
                 'high': supply_zone.high,
                 'date': supply_zone.date_formed.strftime('%Y-%m-%d'),
                 'size': supply_zone.size,
                 'pattern': supply_zone.pattern_type
-            },
+            } if supply_zone else None,
             'spread': spread
         }
     
@@ -206,53 +260,79 @@ def refresh_cached_candles(symbols: list[str], client: StockHistoricalDataClient
     CACHE_DIR.mkdir(parents=True, exist_ok=True)
     end = datetime.now(timezone.utc)
     start = end - timedelta(days=lookback_days + 10)
-    for symbol in symbols:
-        cache_file = CACHE_DIR / f"{symbol.upper()}.json"
-        existing = {}
-        if cache_file.exists():
-            try:
-                existing = {bar["date"]: bar for bar in json.loads(cache_file.read_text(encoding="utf-8")).get("bars", [])}
-            except Exception:
-                existing = {}
+    today = datetime.now(EASTERN_TZ).date().isoformat()
+    market_open = _is_regular_market_open()
+
+    for batch_start in range(0, len(symbols), CACHE_REFRESH_BATCH_SIZE):
+        batch = symbols[batch_start:batch_start + CACHE_REFRESH_BATCH_SIZE]
+        batch_symbols = [symbol.upper() for symbol in batch]
+        print(
+            f"[CACHE] Fetching batch {batch_start // CACHE_REFRESH_BATCH_SIZE + 1} "
+            f"({len(batch_symbols)} symbols)..."
+        )
+        bars_by_symbol = {}
+        quotes_by_symbol = {}
         try:
             response = client.get_stock_bars(StockBarsRequest(
-                symbol_or_symbols=[symbol],
+                symbol_or_symbols=batch_symbols,
                 timeframe=TimeFrame.Day,
                 start=start,
                 end=end,
                 feed=DataFeed.IEX,
             ))
             data = getattr(response, "data", {})
-            bars = data.get(symbol, []) if isinstance(data, dict) else []
-            actual_today = None
-            for bar in bars:
-                converted = _bar_to_dict(bar)
-                existing[converted["date"]] = converted
-                if converted["date"] == datetime.now(EASTERN_TZ).date().isoformat():
-                    actual_today = converted
-
-            current_price = get_current_price(symbol, client)
-            if current_price is not None:
-                _merge_today_quote(
-                    existing,
-                    symbol,
-                    float(current_price),
-                    _is_regular_market_open(),
-                    actual_today,
-                )
-            ordered = [existing[key] for key in sorted(existing)][-lookback_days:]
-            cache_file.write_text(json.dumps({
-                "symbol": symbol.upper(),
-                "timeframe": "1Day",
-                "feed": "IEX",
-                "lookback_days": lookback_days,
-                "last_updated": datetime.now(timezone.utc).isoformat(),
-                "last_candle_date": ordered[-1]["date"] if ordered else None,
-                "bars": ordered,
-            }, indent=2), encoding="utf-8")
-            print(f"[CACHE] {symbol}: stored {len(ordered)} daily candles")
+            if isinstance(data, dict):
+                bars_by_symbol = data
         except Exception as error:
-            print(f"[CACHE] {symbol}: refresh failed: {error}")
+            print(f"[CACHE] Daily-bars batch failed: {error}")
+
+        try:
+            response = client.get_stock_latest_quote(
+                StockLatestQuoteRequest(symbol_or_symbols=batch_symbols)
+            )
+            if isinstance(response, dict):
+                quotes_by_symbol = response
+        except Exception as error:
+            print(f"[CACHE] Latest-quotes batch failed: {error}")
+
+        for symbol in batch_symbols:
+            cache_file = CACHE_DIR / f"{symbol}.json"
+            existing = {}
+            if cache_file.exists():
+                try:
+                    existing = {
+                        bar["date"]: bar
+                        for bar in json.loads(cache_file.read_text(encoding="utf-8")).get("bars", [])
+                    }
+                except Exception:
+                    existing = {}
+
+            try:
+                actual_today = None
+                for bar in bars_by_symbol.get(symbol, []):
+                    converted = _bar_to_dict(bar)
+                    existing[converted["date"]] = converted
+                    if converted["date"] == today:
+                        actual_today = converted
+
+                quote = quotes_by_symbol.get(symbol)
+                current_price = getattr(quote, "ask_price", None)
+                if current_price is not None:
+                    _merge_today_quote(existing, symbol, float(current_price), market_open, actual_today)
+
+                ordered = [existing[key] for key in sorted(existing)][-lookback_days:]
+                cache_file.write_text(json.dumps({
+                    "symbol": symbol,
+                    "timeframe": "1Day",
+                    "feed": "IEX",
+                    "lookback_days": lookback_days,
+                    "last_updated": datetime.now(timezone.utc).isoformat(),
+                    "last_candle_date": ordered[-1]["date"] if ordered else None,
+                    "bars": ordered,
+                }, indent=2), encoding="utf-8")
+                print(f"[CACHE] {symbol}: stored {len(ordered)} daily candles")
+            except Exception as error:
+                print(f"[CACHE] {symbol}: refresh failed: {error}")
 
 
 def get_current_price(symbol: str, client: StockHistoricalDataClient) -> float | None:
@@ -428,24 +508,28 @@ def check_zone_freshness(symbol: str, demand_low: float, demand_high: float,
         return False, f"Check failed: {error_msg}", False, f"Check failed: {error_msg}"
 
 
-def check_cached_zone_freshness(demand_low: float, demand_high: float,
-                               supply_low: float, supply_high: float,
+def check_cached_zone_freshness(demand_low: float | None, demand_high: float | None,
+                               supply_low: float | None, supply_high: float | None,
                                current_price: float,
                                candles: list[Candle]) -> tuple[bool, str, bool, str]:
     """Check freshness using the cached daily candles only."""
     recent_candles = candles[-3:]
-    demand_is_fresh = current_price > demand_high
-    supply_is_fresh = current_price < supply_low
+    demand_is_fresh = demand_low is not None and demand_high is not None and current_price > demand_high
+    supply_is_fresh = supply_low is not None and supply_high is not None and current_price < supply_low
 
-    if not demand_is_fresh:
+    if demand_low is None or demand_high is None:
+        demand_notes = "No demand zone found"
+    elif not demand_is_fresh:
         demand_notes = f"STALE - Price reached zone (${current_price:.2f} <= zone ${demand_high:.2f})"
-    elif any(candle.low <= demand_high and candle.low > demand_low * 0.95 for candle in recent_candles):
+    elif any(candle.low <= demand_high for candle in recent_candles):
         demand_is_fresh = False
         demand_notes = "STALE - Recent cached daily candle tested demand zone"
     else:
         demand_notes = "Fresh - not tested recently"
 
-    if not supply_is_fresh:
+    if supply_low is None or supply_high is None:
+        supply_notes = "No supply zone found"
+    elif not supply_is_fresh:
         supply_notes = f"STALE - Price reached zone (${current_price:.2f} >= zone ${supply_low:.2f})"
     elif any(candle.high >= supply_low and candle.high < supply_high * 1.05 for candle in recent_candles):
         supply_is_fresh = False
@@ -470,7 +554,7 @@ def scan_stock(symbol: str, client: StockHistoricalDataClient, ticker_dir: Path,
             return None
         
         # Get current price
-        price = candles[-1].close if client is None else get_current_price(symbol, client)
+        price = candles[-1].close
         if not price:
             return None
         
@@ -478,18 +562,16 @@ def scan_stock(symbol: str, client: StockHistoricalDataClient, ticker_dir: Path,
         atr = get_atr(symbol, client, candles)
         if not atr:
             return None
+
+        if ((zones['demand'] and zones['demand']['size'] > atr) or
+            (zones['supply'] and zones['supply']['size'] > atr)):
+            return None
         
         # Check zone freshness
-        if client is None:
-            demand_fresh, demand_notes, supply_fresh, supply_notes = check_cached_zone_freshness(
-                zones['demand']['low'], zones['demand']['high'],
-                zones['supply']['low'], zones['supply']['high'], price, candles
-            )
-        else:
-            demand_fresh, demand_notes, supply_fresh, supply_notes = check_zone_freshness(
-                symbol, zones['demand']['low'], zones['demand']['high'],
-                zones['supply']['low'], zones['supply']['high'], price, client
-            )
+        demand_fresh, demand_notes, supply_fresh, supply_notes = check_cached_zone_freshness(
+            zones['demand']['low'], zones['demand']['high'],
+            zones['supply']['low'], zones['supply']['high'], price, candles
+        )
         
         # Create setup
         setup = StockSetup(
@@ -529,24 +611,32 @@ def scan_stock(symbol: str, client: StockHistoricalDataClient, ticker_dir: Path,
                 f.write(f"  Within ATR:   {in_atr}\n\n")
                 
                 f.write("DEMAND ZONE (Buy Zone):\n")
-                f.write(f"  Range:        ${setup.demand_zone_low:.2f} - ${setup.demand_zone_high:.2f}\n")
-                f.write(f"  Size:         ${setup.demand_zone_size:.2f}\n")
-                f.write(f"  Distance:     ${dist_demand:.2f} ({(dist_demand/setup.atr)*100:.0f}% of ATR)\n")
-                f.write(f"  Formed:       {setup.demand_formed}\n")
-                f.write(f"  FRESHNESS:    {'FRESH' if setup.demand_is_fresh else 'STALE'}\n")
-                f.write(f"  Notes:        {setup.demand_freshness_notes}\n\n")
+                if setup.demand_zone_low is None:
+                    f.write("  No demand zone found\n\n")
+                else:
+                    f.write(f"  Range:        ${setup.demand_zone_low:.2f} - ${setup.demand_zone_high:.2f}\n")
+                    f.write(f"  Size:         ${setup.demand_zone_size:.2f}\n")
+                    f.write(f"  Distance:     ${dist_demand:.2f} ({(dist_demand/setup.atr)*100:.0f}% of ATR)\n")
+                    f.write(f"  Formed:       {setup.demand_formed}\n")
+                    f.write(f"  FRESHNESS:    {'FRESH' if setup.demand_is_fresh else 'STALE'}\n")
+                    f.write(f"  Notes:        {setup.demand_freshness_notes}\n\n")
                 
                 f.write("SUPPLY ZONE (Sell Zone):\n")
-                f.write(f"  Range:        ${setup.supply_zone_low:.2f} - ${setup.supply_zone_high:.2f}\n")
-                f.write(f"  Size:         ${setup.supply_zone_size:.2f}\n")
-                f.write(f"  Distance:     ${dist_supply:.2f}\n")
-                f.write(f"  Formed:       {setup.supply_formed}\n")
-                f.write(f"  FRESHNESS:    {'FRESH' if setup.supply_is_fresh else 'STALE'}\n")
-                f.write(f"  Notes:        {setup.supply_freshness_notes}\n\n")
+                if setup.supply_zone_low is None:
+                    f.write("  No supply zone found\n\n")
+                else:
+                    f.write(f"  Range:        ${setup.supply_zone_low:.2f} - ${setup.supply_zone_high:.2f}\n")
+                    f.write(f"  Size:         ${setup.supply_zone_size:.2f}\n")
+                    f.write(f"  Distance:     ${dist_supply:.2f}\n")
+                    f.write(f"  Formed:       {setup.supply_formed}\n")
+                    f.write(f"  FRESHNESS:    {'FRESH' if setup.supply_is_fresh else 'STALE'}\n")
+                    f.write(f"  Notes:        {setup.supply_freshness_notes}\n\n")
                 
                 f.write("TRADE METRICS:\n")
-                f.write(f"  Stop Loss Distance:  ${setup.current_price - setup.demand_zone_low:.2f}\n")
-                f.write(f"  Profit Target (PT):  ${setup.supply_zone_low - setup.current_price:.2f}\n")
+                stop_distance = setup.current_price - setup.demand_zone_low if setup.demand_zone_low is not None else None
+                profit_distance = setup.supply_zone_low - setup.current_price if setup.supply_zone_low is not None else None
+                f.write(f"  Stop Loss Distance:  ${stop_distance:.2f}\n" if stop_distance is not None else "  Stop Loss Distance:  N/A\n")
+                f.write(f"  Profit Target (PT):  ${profit_distance:.2f}\n" if profit_distance is not None else "  Profit Target (PT):  N/A\n")
                 f.write(f"  Risk:Reward Ratio:   1:{rr_ratio:.2f}\n")
         
         return setup
@@ -586,10 +676,10 @@ def process_batch(batch_symbols: list, batch_num: int, client: StockHistoricalDa
     return batch_setups
 
 
-def process_cached_sensitivities(symbols: list[str], cached_candles: dict[str, list[Candle]],
-                                 ticker_dir: Path, sensitivities: list[str],
-                                 lookback_days: int) -> dict[str, list[StockSetup]]:
-    """Run every symbol/sensitivity combination concurrently from memory."""
+def process_sensitivities(symbols: list[str], cached_candles: dict[str, list[Candle]],
+                          ticker_dir: Path, sensitivities: list[str],
+                          lookback_days: int) -> dict[str, list[StockSetup]]:
+    """Run every symbol/sensitivity combination against cached daily candles."""
     results = {sensitivity: [] for sensitivity in sensitivities}
     with ThreadPoolExecutor(max_workers=min(32, max(1, len(symbols) * len(sensitivities)))) as executor:
         jobs = {
@@ -614,52 +704,54 @@ def process_cached_sensitivities(symbols: list[str], cached_candles: dict[str, l
     return results
 
 
-def create_found_zones_report(all_setups: list, report_path: Path, sensitivity: str = 'balanced') -> None:
-    """
-    Create found_zones.output by consolidating all ticker files into a single summary.
-    Shows all found zones with key metrics sorted by proximity.
-    """
-    if not all_setups:
-        with open(report_path, 'w', encoding='utf-8') as f:
-            f.write("No stocks found with demand/supply zones.\n")
-        return
-    
-    # Sort by distance to demand (closest first)
-    sorted_setups = sorted(all_setups, key=lambda x: x.distance_to_demand())
-    
+def create_found_zones_report(all_setups: list, report_path: Path,
+                              sensitivity: str = 'balanced',
+                              all_symbols: list[str] | None = None) -> None:
+    """Write every ticker result, followed by the closest demand-zone picks."""
+    setup_by_symbol = {setup.symbol: setup for setup in all_setups}
+    ordered_symbols = all_symbols or [setup.symbol for setup in all_setups]
+    top_n = load_zone_scan_config()["TOP_N_TICKERS"]
+    demand_candidates = sorted(
+        (setup for setup in all_setups
+         if setup.demand_zone_low is not None and setup.demand_is_fresh),
+        key=lambda setup: setup.distance_to_demand(),
+    )
+
     with open(report_path, 'w', encoding='utf-8') as f:
-        f.write("="*120 + "\n")
+        f.write("=" * 120 + "\n")
         f.write(f"FOUND ZONES - {sensitivity.upper()} SENSITIVITY\n")
         f.write(f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
-        f.write("="*120 + "\n\n")
-        
-        f.write(f"Total Zones Found: {len(all_setups)}\n")
-        f.write(f"Sorted by: Distance to Demand Zone (closest first)\n\n")
-        
-        for rank, setup in enumerate(sorted_setups, 1):
-            rr_ratio = setup.stop_loss_to_profit_target_ratio()
-            dist_demand = setup.distance_to_demand()
-            dist_supply = setup.distance_to_supply()
-            pct_atr = (dist_demand / setup.atr) * 100
-            in_atr = "✓" if setup.is_demand_in_atr_reach() else " "
-            demand_fresh = "✓" if setup.demand_is_fresh else "✗"
-            supply_fresh = "✓" if setup.supply_is_fresh else "✗"
-            
-            f.write(f"{rank:3d}. {setup.symbol:6s} | ${setup.current_price:8.2f} | ")
-            f.write(f"Demand: ${setup.demand_zone_low:.2f}-${setup.demand_zone_high:.2f} | ")
-            f.write(f"Supply: ${setup.supply_zone_low:.2f}-${setup.supply_zone_high:.2f} | ")
-            f.write(f"Dist: ${dist_demand:6.2f} ({pct_atr:3.0f}% ATR) [{in_atr}] | ")
-            f.write(f"RR: 1:{rr_ratio:.2f} | ")
-            f.write(f"Fresh: D{demand_fresh}S{supply_fresh}\n")
-        
-        f.write("\n" + "="*120 + "\n")
-        f.write("LEGEND:\n")
-        f.write("  [✓] Within 1 ATR from demand zone (actionable)\n")
-        f.write("  Dist: Distance from current price to demand zone\n")
-        f.write("  ATR %: Distance as percentage of Average True Range\n")
-        f.write("  RR: Risk:Reward ratio (higher is better)\n")
-        f.write("  Fresh: D=Demand zone fresh, S=Supply zone fresh\n")
-        f.write("  ✓ = Fresh (not tested), ✗ = Stale (already tested)\n")
+        f.write("=" * 120 + "\n\n")
+        f.write(f"All Tickers Analyzed: {len(ordered_symbols)}\n")
+        f.write("Results are shown in lists/ order.\n\n")
+
+        for rank, symbol in enumerate(ordered_symbols, 1):
+            setup = setup_by_symbol.get(symbol)
+            if setup is None:
+                f.write(f"{rank:3d}. {symbol:8s} | No cached data / no zone found\n")
+                continue
+            demand = (
+                f"${setup.demand_zone_low:.2f}-${setup.demand_zone_high:.2f} ({setup.demand_formed})"
+                if setup.demand_zone_low is not None else "NONE"
+            )
+            supply = (
+                f"${setup.supply_zone_low:.2f}-${setup.supply_zone_high:.2f} ({setup.supply_formed})"
+                if setup.supply_zone_low is not None else "NONE"
+            )
+            f.write(
+                f"{rank:3d}. {symbol:8s} | ${setup.current_price:8.2f} | "
+                f"Demand: {demand} | Supply: {supply}\n"
+            )
+
+        f.write("\n" + "=" * 120 + "\n")
+        f.write(f"TOP {min(top_n, len(demand_candidates))} CLOSEST TO DEMAND\n")
+        f.write("Sorted by current-price distance to the demand-zone high.\n\n")
+        for rank, setup in enumerate(demand_candidates[:top_n], 1):
+            f.write(
+                f"{rank:3d}. {setup.symbol:8s} | Current: ${setup.current_price:.2f} | "
+                f"Demand: ${setup.demand_zone_low:.2f}-${setup.demand_zone_high:.2f} "
+                f"({setup.demand_formed}) | Distance: ${setup.distance_to_demand():.2f}\n"
+            )
 
 
 def compile_daily_report(all_setups: list, report_path: Path, sensitivity: str = 'balanced') -> None:
@@ -676,9 +768,18 @@ def compile_daily_report(all_setups: list, report_path: Path, sensitivity: str =
             f.write("No stocks found with demand/supply zones.\n")
         return
     
-    # Calculate metrics for each setup
+    complete_setups = [
+        setup for setup in all_setups
+        if setup.demand_zone_low is not None and setup.supply_zone_low is not None
+    ]
+    if not complete_setups:
+        with open(report_path, 'w', encoding='utf-8') as f:
+            f.write("No tickers with both demand and supply zones found.\n")
+        return
+
+    # Calculate metrics for each complete setup
     report_data = []
-    for setup in all_setups:
+    for setup in complete_setups:
         gap = setup.supply_zone_low - setup.demand_zone_high
         size_demand = setup.demand_zone_size
         
@@ -866,18 +967,7 @@ def main(cache_daily_bars: bool = False, sensitivities: list[str] | None = None,
     print("ZONE SCANNER - CACHED DAILY DATA")
     print("="*100)
     
-    # Load all watchlists
-    watchlists = {
-        'ETF': load_watchlist('etf.txt'),
-        'SPY': load_watchlist('spy.txt'),
-        'NASDAQ': load_watchlist('nasdaq.txt')
-    }
-    
-    all_symbols = set()
-    for symbols in watchlists.values():
-        all_symbols.update(symbols)
-    
-    all_symbols = sorted(list(all_symbols))
+    all_symbols = load_all_list_symbols()
     
     print(f"\nTotal unique stocks to scan: {len(all_symbols)}")
     print(f"Batch size: 100 stocks")
@@ -894,14 +984,12 @@ def main(cache_daily_bars: bool = False, sensitivities: list[str] | None = None,
             print(f"Error: Failed to initialize Alpaca client: {e}")
             return
         refresh_cached_candles(all_symbols, client, lookback_days)
-    else:
-        missing_cache = [symbol for symbol in all_symbols if not (CACHE_DIR / f"{symbol.upper()}.json").exists()]
-        if missing_cache:
-            print(f"\n[CACHE] Missing cached data for {len(missing_cache)} symbols.")
-            print("[CACHE] Run with --cache_daily_bars before scanning.")
-            return
+    missing_cache = [symbol for symbol in all_symbols if not (CACHE_DIR / f"{symbol.upper()}.json").exists()]
+    if missing_cache:
+        print(f"\n[CACHE] Missing cached data for {len(missing_cache)} symbols.")
+        print("[CACHE] Those symbols will be reported as no cached data / no zone found.")
 
-    print(f"\n[CACHE] Loading {len(all_symbols)} ticker files once from {CACHE_DIR}...")
+    print(f"\n[CACHE] Loading {lookback_days}-day daily candles from {CACHE_DIR}...")
     cached_candles = {}
     for symbol in all_symbols:
         candles = load_cached_candles(symbol, lookback_days)
@@ -917,11 +1005,11 @@ def main(cache_daily_bars: bool = False, sensitivities: list[str] | None = None,
     results_dir = Path(__file__).parent.parent / "results"
     results_dir.mkdir(parents=True, exist_ok=True)
     
-    # Process every selected sensitivity concurrently over the shared cache.
+    # Process every selected sensitivity concurrently with cached daily data.
     sensitivities = sensitivities or ['balanced']
     all_summaries = {}
     scan_started = datetime.now()
-    setups_by_sensitivity = process_cached_sensitivities(
+    setups_by_sensitivity = process_sensitivities(
         all_symbols, cached_candles, ticker_dir, sensitivities, lookback_days
     )
     print(f"[SCAN] Parallel scan completed in {datetime.now() - scan_started}")
@@ -963,7 +1051,7 @@ def main(cache_daily_bars: bool = False, sensitivities: list[str] | None = None,
         
         compile_top_picks(all_setups, pick_path, sensitivity)
         compile_daily_report(all_setups, report_path, sensitivity)
-        create_found_zones_report(all_setups, found_zones_path, sensitivity)
+        create_found_zones_report(all_setups, found_zones_path, sensitivity, all_symbols)
         if sensitivity == 'balanced':
             compile_balanced_top_20(all_setups, results_dir / "top-20.txt")
         

@@ -3,27 +3,27 @@ TICKER: CIEN
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $367.69
-  ATR (14-day): $22.30
+  Price:        $377.95
+  ATR (14-day): $19.46
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $311.94 - $328.85
   Size:         $16.91
-  Distance:     $38.84 (174% of ATR)
+  Distance:     $49.10 (252% of ATR)
   Formed:       2026-09-04
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $424.92 - $462.38
-  Size:         $37.45
-  Distance:     $57.23
-  Formed:       2026-06-17
+  Range:        $574.91 - $605.61
+  Size:         $30.70
+  Distance:     $196.96
+  Formed:       2026-05-22
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $55.75
-  Profit Target (PT):  $57.23
-  Risk:Reward Ratio:   1:1.03
+  Stop Loss Distance:  $66.01
+  Profit Target (PT):  $196.96
+  Risk:Reward Ratio:   1:2.98

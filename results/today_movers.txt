@@ -6,16 +6,16 @@
 [AUTH] Paper trading: True
 [AUTH] Authentication OK: account=a38a...edd4 status=AccountStatus.ACTIVE
 Top 10 stock gainers today
-Market data updated: 2026-09-23T13:35:00.259551648Z
+Market data updated: 2026-09-29T13:44:00.256704795Z
  #  Symbol          Price       Change    Percent
 -------------------------------------------------
- 1  BENF     $      2.73 $      2.19    407.15%
- 2  WHLR     $      5.70 $      3.83    204.81%
- 3  IPDN     $      6.78 $      2.88     73.97%
- 4  BENFW    $      0.01 $      0.01     68.67%
- 5  VTGN     $      0.40 $      0.15     60.22%
- 6  HCTI     $      1.28 $      0.42     48.03%
- 7  STLNW    $      0.03 $      0.01     46.34%
- 8  MSS      $      2.24 $      0.68     43.59%
- 9  BFRGW    $      0.15 $      0.05     42.62%
-10  DCOY     $      4.42 $      1.32     42.52%
+ 1  ARBEW    $      0.06 $      0.04    223.23%
+ 2  PIIIW    $      0.02 $      0.01    169.84%
+ 3  BKYI     $      3.25 $      1.57     93.51%
+ 4  FLDDW    $      0.12 $      0.05     65.38%
+ 5  NCPL     $      1.76 $      0.68     62.96%
+ 6  SSTI     $      8.33 $      2.86     52.29%
+ 7  SLND     $      0.92 $      0.31     50.49%
+ 8  SLND.WS  $      0.03 $      0.01     46.96%
+ 9  BIAFW    $      0.38 $      0.12     46.15%
+10  YMT      $      2.51 $      0.74     41.80%

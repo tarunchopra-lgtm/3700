@@ -3,14 +3,14 @@ TICKER: NEM
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $128.80
-  ATR (14-day): $4.17
+  Price:        $127.30
+  ATR (14-day): $4.06
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $102.82 - $106.32
   Size:         $3.50
-  Distance:     $22.48 (539% of ATR)
+  Distance:     $20.98 (517% of ATR)
   Formed:       2026-08-05
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
@@ -18,12 +18,12 @@ DEMAND ZONE (Buy Zone):
 SUPPLY ZONE (Sell Zone):
   Range:        $130.95 - $133.69
   Size:         $2.74
-  Distance:     $2.15
+  Distance:     $3.65
   Formed:       2026-08-26
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $25.98
-  Profit Target (PT):  $2.15
-  Risk:Reward Ratio:   1:0.08
+  Stop Loss Distance:  $24.48
+  Profit Target (PT):  $3.65
+  Risk:Reward Ratio:   1:0.15

@@ -1818,8 +1818,6 @@ for symbol in list(trade_states.keys()):
     elif not bracket1_data and not bracket2_data:
         print(f"[STARTUP] [{symbol}] No position or tracker - will place entry orders")
 
-_cleanup_orphan_position_files(set(trade_states))
-
 print()
 
 
@@ -1849,6 +1847,8 @@ for trade_id, symbol, num_stocks, entry_price, stop_price, target1_price, target
 if not trade_states:
     print("Error: No valid trades loaded")
     sys.exit(1)
+
+_cleanup_orphan_position_files(set(trade_states))
 
 # Restore persistent JSON tracking after the configured symbols exist in memory.
 # This must happen before stale-order cleanup so active OCO and entry IDs are preserved.

@@ -1,0 +1,27 @@
+{
+  "symbol": "WTW",
+  "qty": 2,
+  "entry_price": 288.8,
+  "entry_time": "2026-09-29T12:26:35.133737",
+  "brackets": {
+    "bracket1": {
+      "entry_order_id": "61ea20f5-2da5-44df-81ef-06fb5f31de19",
+      "stop_order_id": "55e4f1d1-324e-43d1-8840-096888e1dcf5",
+      "target_order_id": "4ba1fe80-8049-48c8-9cd7-3e975a83c12d",
+      "qty": 1,
+      "target_price": 290.0,
+      "stop_price": 287.0,
+      "status": "pending"
+    },
+    "bracket2": {
+      "entry_order_id": "6011ef3f-9e8f-4a05-9695-e863d9f79576",
+      "stop_order_id": "82a0344f-4ea2-41c6-9130-2a958a2d6857",
+      "target_order_id": "ff56e081-f40e-4943-ac57-db63d63e1b46",
+      "qty": 1,
+      "target_price": 310.0,
+      "stop_price": 287.0,
+      "status": "pending"
+    }
+  },
+  "last_updated": "2026-09-29T12:32:25.075673"
+}

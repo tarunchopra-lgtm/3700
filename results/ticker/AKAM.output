@@ -3,27 +3,27 @@ TICKER: AKAM
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $123.99
-  ATR (14-day): $5.43
-  Within ATR:   NO
+  Price:        $113.94
+  ATR (14-day): $6.97
+  Within ATR:   YES
 
 DEMAND ZONE (Buy Zone):
-  Range:        $102.78 - $107.79
-  Size:         $5.01
-  Distance:     $16.20 (298% of ATR)
-  Formed:       2026-09-14
-  FRESHNESS:    STALE
-  Notes:        STALE - Recent cached daily candle tested demand zone
-
-SUPPLY ZONE (Sell Zone):
-  Range:        $154.90 - $164.74
-  Size:         $9.84
-  Distance:     $30.91
-  Formed:       2026-06-03
+  Range:        $103.75 - $107.42
+  Size:         $3.67
+  Distance:     $6.52 (93% of ATR)
+  Formed:       2026-09-15
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
+SUPPLY ZONE (Sell Zone):
+  Range:        $124.50 - $130.54
+  Size:         $6.04
+  Distance:     $10.56
+  Formed:       2026-07-09
+  FRESHNESS:    STALE
+  Notes:        STALE - Recent cached daily candle tested supply zone
+
 TRADE METRICS:
-  Stop Loss Distance:  $21.20
-  Profit Target (PT):  $30.91
-  Risk:Reward Ratio:   1:1.46
+  Stop Loss Distance:  $10.19
+  Profit Target (PT):  $10.56
+  Risk:Reward Ratio:   1:1.04

@@ -3,27 +3,27 @@ TICKER: DELL
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $586.68
-  ATR (14-day): $33.58
+  Price:        $562.89
+  ATR (14-day): $32.08
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $298.65 - $312.13
-  Size:         $13.48
-  Distance:     $274.55 (818% of ATR)
-  Formed:       2026-05-26
+  Range:        $418.53 - $436.70
+  Size:         $18.17
+  Distance:     $126.19 (393% of ATR)
+  Formed:       2026-07-13
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $567.55 - $594.45
-  Size:         $26.90
-  Distance:     $0.00
+  Range:        $567.38 - $595.51
+  Size:         $28.13
+  Distance:     $4.49
   Formed:       2026-09-21
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($586.68 >= zone $567.55)
+  Notes:        STALE - Recent cached daily candle tested supply zone
 
 TRADE METRICS:
-  Stop Loss Distance:  $288.02
-  Profit Target (PT):  $-19.13
-  Risk:Reward Ratio:   1:-0.07
+  Stop Loss Distance:  $144.36
+  Profit Target (PT):  $4.49
+  Risk:Reward Ratio:   1:0.03

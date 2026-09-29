@@ -4,12 +4,12 @@
 # Active trade configuration (first non-comment line will be used):
 # supply and demand
 #mu 2 940 930 950 1032
-#nvda 2 212 210 214 231
+nvda 100 222 219 225 230
 #intc 2 99 97 101 131
 #aapl 2 335 333 337 340
 #googl 2 333 330 336 394
 #gld 2 376 372 380 420
-#zm 2 87 86 88 97
+zm 2 87 86 88 97
 #vz 2 48.24 47 49 51
 #ste 2 203 199 207 230
 #axon 2 403 397 409 600
@@ -28,12 +28,6 @@
 # 13 if trade is below buy limit price, it should buy only when trade goes above limit price, not fill before that. this needs lot of testing because it keeps giving me false entries
 # basically pick buy price above current price on following trade
 #
-benf 1000 2 1.9 2.1 3
-whlr 1000 5.20 5.05 5.35 7.25
-# 9/24 today's high
-fsly 100 23 22 24 30
-secz 100 12 11 13 15
-
-# another one 
-apus 1000 5.5 5 8 11
-#srzn 100 30 29 31 35
+benf 1000 1.5 1.2 1.8 3
+whlr 1000 4 3 5 7
+apus 1000 9 8 10 12

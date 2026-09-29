@@ -10,10 +10,12 @@ Change one or two values at a time, run a scan, and compare:
   results/top-20.txt
   results/ticker/*.output
 
-The scanner uses cached daily candles. Refresh the cache first when needed:
+The scanner uses cached daily candles with the same balanced analysis path as
+strategies/find_zones.py. An optional cache refresh updates the local candle
+files:
   python strategies/zone_scan.py --cache_daily_bars --balanced
 
-Then repeat analysis without historical downloads:
+Run the scanner normally against the local cache:
   python strategies/zone_scan.py --balanced
 
 Run other sensitivity passes:
@@ -25,6 +27,21 @@ The current implementation reads the origin-zone values from:
   lists/zone_origin_config.txt
 
 The command-line values below control zone_scan.py execution.
+
+
+REPORT SETTINGS
+===============
+
+File:
+  lists/zone_scan_config.txt
+
+TOP_N_TICKERS
+-------------
+Controls how many current ticker setups are shown in found_zones_<sensitivity>.txt.
+The default is 10. Increase it when a broader shortlist is needed.
+
+Example:
+  TOP_N_TICKERS=20
 
 
 1. CACHE AND DATA PARAMETERS

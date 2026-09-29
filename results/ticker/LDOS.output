@@ -3,14 +3,14 @@ TICKER: LDOS
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $136.63
-  ATR (14-day): $4.18
+  Price:        $130.18
+  ATR (14-day): $4.88
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $103.95 - $107.52
   Size:         $3.57
-  Distance:     $29.11 (697% of ATR)
+  Distance:     $22.66 (464% of ATR)
   Formed:       2026-07-20
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
@@ -18,12 +18,12 @@ DEMAND ZONE (Buy Zone):
 SUPPLY ZONE (Sell Zone):
   Range:        $138.78 - $142.37
   Size:         $3.59
-  Distance:     $2.15
+  Distance:     $8.60
   Formed:       2026-08-28
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $32.68
-  Profit Target (PT):  $2.15
-  Risk:Reward Ratio:   1:0.07
+  Stop Loss Distance:  $26.23
+  Profit Target (PT):  $8.60
+  Risk:Reward Ratio:   1:0.33

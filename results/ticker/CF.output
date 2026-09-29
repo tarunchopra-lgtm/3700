@@ -3,27 +3,27 @@ TICKER: CF
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $120.76
-  ATR (14-day): $5.35
-  Within ATR:   YES
+  Price:        $120.66
+  ATR (14-day): $4.99
+  Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $116.74 - $119.03
-  Size:         $2.29
-  Distance:     $1.73 (32% of ATR)
-  Formed:       2026-08-14
+  Range:        $106.26 - $109.91
+  Size:         $3.65
+  Distance:     $10.75 (216% of ATR)
+  Formed:       2026-06-12
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
   Range:        $132.71 - $141.46
   Size:         $8.75
-  Distance:     $11.95
+  Distance:     $12.05
   Formed:       2026-09-11
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $4.02
-  Profit Target (PT):  $11.95
-  Risk:Reward Ratio:   1:2.97
+  Stop Loss Distance:  $14.40
+  Profit Target (PT):  $12.05
+  Risk:Reward Ratio:   1:0.84

@@ -38,4 +38,4 @@ msi 2 446.88 446 448 480
 #today's movers 10/1
 #4  NXL      $      7.27 $      2.99     69.86%
 nxl 2 7 6.5 8 8.5
-## adding git info
+## adding git info. more info

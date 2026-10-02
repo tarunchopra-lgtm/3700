@@ -3,27 +3,27 @@ TICKER: TPR
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $118.30
-  ATR (14-day): $3.66
+  Price:        $121.80
+  ATR (14-day): $3.59
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $108.15 - $114.55
-  Size:         $6.40
-  Distance:     $3.75 (102% of ATR)
-  Formed:       2025-10-13
+  Range:        $111.34 - $113.90
+  Size:         $2.56
+  Distance:     $7.90 (220% of ATR)
+  Formed:       2026-09-24
   FRESHNESS:    STALE
   Notes:        STALE - Recent cached daily candle tested demand zone
 
 SUPPLY ZONE (Sell Zone):
   Range:        $121.84 - $124.39
   Size:         $2.55
-  Distance:     $3.54
+  Distance:     $0.04
   Formed:       2026-09-02
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $10.15
-  Profit Target (PT):  $3.54
-  Risk:Reward Ratio:   1:0.35
+  Stop Loss Distance:  $10.46
+  Profit Target (PT):  $0.04
+  Risk:Reward Ratio:   1:0.00

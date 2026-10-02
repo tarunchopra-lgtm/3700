@@ -2,10 +2,10 @@
   "symbol": "MU",
   "qty": 2,
   "entry_price": 1050.0,
-  "entry_time": "2026-09-29T07:00:15.660499",
+  "entry_time": "2026-10-01T10:42:07.937488",
   "brackets": {
     "bracket1": {
-      "entry_order_id": "2c90783a-8039-47d1-8ce6-80d9cbbc0284",
+      "entry_order_id": "39983ba8-3d11-482c-bdda-419162d28ee9",
       "stop_order_id": null,
       "target_order_id": null,
       "qty": 1,
@@ -14,7 +14,7 @@
       "status": "pending"
     },
     "bracket2": {
-      "entry_order_id": "d8771755-0480-4ad9-9bf1-abbfc33dfa7f",
+      "entry_order_id": "38f0517d-992d-444d-8e38-89b37a35945e",
       "stop_order_id": null,
       "target_order_id": null,
       "qty": 1,
@@ -23,5 +23,5 @@
       "status": "pending"
     }
   },
-  "last_updated": "2026-09-29T07:00:15.688713"
+  "last_updated": "2026-10-01T10:42:07.984727"
 }

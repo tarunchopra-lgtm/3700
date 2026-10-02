@@ -6,8 +6,8 @@
   "brackets": {
     "bracket1": {
       "entry_order_id": "447ce04c-3d73-43a6-9eee-d76ca29fdee4",
-      "stop_order_id": "58c337d7-5b01-42e7-a028-f51977ef7d15",
-      "target_order_id": "63a8dccc-3927-46c1-96a6-96a204b795d3",
+      "stop_order_id": null,
+      "target_order_id": null,
       "qty": 1,
       "target_price": 119.0,
       "stop_price": 115.5,
@@ -23,5 +23,7 @@
       "status": "pending"
     }
   },
-  "last_updated": "2026-09-29T12:32:23.592657"
+  "last_updated": "2026-10-01T06:44:44.744328",
+  "current_price": 119.0,
+  "current_pnl": null
 }

@@ -1,0 +1,27 @@
+{
+  "symbol": "MSI",
+  "qty": 2,
+  "entry_price": 446.88,
+  "entry_time": "2026-10-01T12:59:16.255986",
+  "brackets": {
+    "bracket1": {
+      "entry_order_id": "98c95925-7ad1-4f68-856d-d1e1c548da53",
+      "stop_order_id": null,
+      "target_order_id": null,
+      "qty": 1,
+      "target_price": 448.0,
+      "stop_price": 446.0,
+      "status": "pending"
+    },
+    "bracket2": {
+      "entry_order_id": "b7371921-ce75-4622-87f0-cb53b9073ba8",
+      "stop_order_id": null,
+      "target_order_id": null,
+      "qty": 1,
+      "target_price": 480.0,
+      "stop_price": 446.0,
+      "status": "pending"
+    }
+  },
+  "last_updated": "2026-10-01T12:59:16.285043"
+}

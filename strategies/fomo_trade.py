@@ -112,6 +112,13 @@ POSITIONS_DIR = WORKSPACE_ROOT / "positions"
 POSITIONS_DIR.mkdir(exist_ok=True)
 
 REQUEST_TIMEOUT_SECONDS = float(os.getenv("ALPACA_HTTP_TIMEOUT", "15"))
+# Alpaca's basic market-data subscription permits IEX. Set
+# ALPACA_STOCK_DATA_FEED=SIP only when the account has SIP access.
+STOCK_PRICE_FEED = (
+    DataFeed.SIP
+    if os.getenv("ALPACA_STOCK_DATA_FEED", "IEX").upper() == "SIP"
+    else DataFeed.IEX
+)
 
 # These module-level values are created once when the script starts. Functions
 # below can read them without receiving them as parameters. This is convenient
@@ -600,7 +607,7 @@ def _entry_price_is_reached(trade_id: str) -> bool:
 
 def _submit_entry_order(trade_id: str, qty: float, limit_price: float,
                         time_in_force: TimeInForce, is_stock: bool):
-    """Submit a buy entry only after a final live-price check."""
+    """Submit a buy limit order only while the live price is above its limit."""
     if is_stock and not _is_regular_market_open():
         raise ValueError(
             f"Entry blocked for {trade_id}: Alpaca regular market session is closed"
@@ -1226,37 +1233,6 @@ def _get_bracket_outcome(symbol: str, bracket_num: int, cfg: dict, state: dict) 
             "exit_price": stop_price,
         }
     elif target_status == "open" or stop_status == "open":
-        try:
-            current_price = _get_current_price(symbol)
-        except Exception as error:
-            print(f"[{symbol}] Could not read price for fallback stop: {error}")
-            current_price = None
-
-        if (
-            current_price is not None
-            and current_price <= stop_price
-            and target_status != "filled"
-            and stop_status != "filled"
-            and (
-                "/" in _broker_symbol(symbol)
-                or _is_regular_market_open()
-            )
-        ):
-            fallback_submitted = _submit_fallback_stop(
-                symbol,
-                float(bracket.get("qty") or cfg["bracket_qty"]),
-                target_order_id,
-                stop_order_id,
-            )
-            if fallback_submitted:
-                return {
-                    "status": "stopped_out",
-                    "bracket": bracket_num,
-                    "stop_price": stop_price,
-                    "profit_loss": "loss",
-                    "exit_price": current_price,
-                }
-
         return {
             "status": "pending",
             "bracket": bracket_num,
@@ -1282,13 +1258,13 @@ def _get_current_price(symbol: str) -> float:
         price_request = OptionLatestTradeRequest(symbol_or_symbols=symbol, feed=OptionsFeed.INDICATIVE)
         latest_trade = _timed("get_option_latest_trade", data_client.get_option_latest_trade, price_request)
     else:
-        price_request = StockLatestTradeRequest(symbol_or_symbols=symbol, feed=DataFeed.IEX)
+        price_request = StockLatestTradeRequest(symbol_or_symbols=symbol, feed=STOCK_PRICE_FEED)
         latest_trade = _timed("get_stock_latest_trade", data_client.get_stock_latest_trade, price_request)
         trade = latest_trade[symbol]
 
         # IEX may return the last extended-hours trade even when a newer
         # early-session quote is available. Use the newer valid midpoint.
-        quote_request = StockLatestQuoteRequest(symbol_or_symbols=symbol, feed=DataFeed.IEX)
+        quote_request = StockLatestQuoteRequest(symbol_or_symbols=symbol, feed=STOCK_PRICE_FEED)
         try:
             latest_quote = _timed("get_stock_latest_quote", data_client.get_stock_latest_quote, quote_request)
             quote = latest_quote.get(symbol)
@@ -1317,7 +1293,7 @@ def _get_buy_safety_price(symbol: str) -> float:
     try:
         quote_request = StockLatestQuoteRequest(
             symbol_or_symbols=broker_symbol,
-            feed=DataFeed.IEX,
+            feed=STOCK_PRICE_FEED,
         )
         latest_quote = _timed(
             "get_stock_latest_quote_for_buy",
@@ -1760,6 +1736,51 @@ def _cancel_pending_entries_below_limit(trade_id: str) -> None:
             )
         except Exception as error:
             print(f"[{trade_id}] Could not cancel pending B{bracket_num} entry: {error}")
+
+
+def _reconcile_tracked_entry_prices(trade_id: str) -> None:
+    """Replace restored open buy entries whose limit differs from the config."""
+    if trade_id not in trade_states:
+        return
+
+    cfg = trade_states[trade_id]["config"]
+    state = trade_states[trade_id]["state"]
+    configured_price = float(cfg["entry_price"])
+
+    for bracket_num in (1, 2):
+        bracket = state[f"bracket{bracket_num}"]
+        entry_id = bracket.get("entry_order_id")
+        if not entry_id:
+            continue
+
+        try:
+            order = trading_client.get_order_by_id(entry_id)
+            status = str(getattr(order, "status", "")).lower()
+            side = str(getattr(order, "side", "")).lower()
+            limit_price = getattr(order, "limit_price", None)
+            if "buy" not in side or limit_price is None:
+                continue
+            if not any(marker in status for marker in ("new", "open", "accepted", "pending", "held")):
+                continue
+            if abs(float(limit_price) - configured_price) < 1e-9:
+                continue
+
+            trading_client.cancel_order_by_id(entry_id)
+            bracket["entry_order_id"] = None
+            save_bracket_file(
+                trade_id,
+                bracket_num,
+                entry_price=configured_price,
+                stop_price=cfg["stop_price"],
+                target_price=cfg["target1_price"] if bracket_num == 1 else cfg["target2_price"],
+                qty=cfg["bracket_qty"],
+            )
+            print(
+                f"[{trade_id}] Replaced stale B{bracket_num} entry {entry_id}: "
+                f"${float(limit_price):.2f} -> ${configured_price:.2f}"
+            )
+        except Exception as error:
+            print(f"[{trade_id}] Could not reconcile B{bracket_num} entry price: {error}")
                 
 # ============================================================================
 # STARTUP: Scan existing positions and open orders
@@ -1854,6 +1875,11 @@ _cleanup_orphan_position_files(set(trade_states))
 # This must happen before stale-order cleanup so active OCO and entry IDs are preserved.
 for trade_id in trade_states:
     _restore_trade_tracking(trade_id)
+
+# The config is authoritative across restarts. Restore IDs first, then replace
+# any still-open entry orders that were created at an older configured price.
+for trade_id in trade_states:
+    _reconcile_tracked_entry_prices(trade_id)
 
 # Remove completed trackers before collecting IDs to preserve.
 for trade_id in list(trade_states):

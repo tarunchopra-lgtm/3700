@@ -3,14 +3,14 @@ TICKER: USB
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $58.95
-  ATR (14-day): $1.53
-  Within ATR:   NO
+  Price:        $56.31
+  ATR (14-day): $1.58
+  Within ATR:   YES
 
 DEMAND ZONE (Buy Zone):
   Range:        $55.19 - $56.05
   Size:         $0.86
-  Distance:     $2.90 (190% of ATR)
+  Distance:     $0.26 (16% of ATR)
   Formed:       2026-06-05
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
@@ -18,12 +18,12 @@ DEMAND ZONE (Buy Zone):
 SUPPLY ZONE (Sell Zone):
   Range:        $62.26 - $63.33
   Size:         $1.07
-  Distance:     $3.31
+  Distance:     $5.95
   Formed:       2026-09-11
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $3.77
-  Profit Target (PT):  $3.31
-  Risk:Reward Ratio:   1:0.88
+  Stop Loss Distance:  $1.12
+  Profit Target (PT):  $5.95
+  Risk:Reward Ratio:   1:5.29

@@ -3,27 +3,27 @@ TICKER: MSI
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $475.53
-  ATR (14-day): $12.22
+  Price:        $473.61
+  ATR (14-day): $11.77
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $436.18 - $445.63
-  Size:         $9.45
-  Distance:     $29.90 (245% of ATR)
-  Formed:       2026-08-03
+  Range:        $401.83 - $410.76
+  Size:         $8.93
+  Distance:     $62.85 (534% of ATR)
+  Formed:       2026-07-21
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
   Range:        $483.58 - $489.90
   Size:         $6.32
-  Distance:     $8.05
+  Distance:     $9.97
   Formed:       2026-08-27
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $39.35
-  Profit Target (PT):  $8.05
-  Risk:Reward Ratio:   1:0.20
+  Stop Loss Distance:  $71.78
+  Profit Target (PT):  $9.97
+  Risk:Reward Ratio:   1:0.14

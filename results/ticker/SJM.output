@@ -3,14 +3,14 @@ TICKER: SJM
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $120.98
-  ATR (14-day): $2.66
+  Price:        $123.31
+  ATR (14-day): $3.10
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $108.12 - $110.55
   Size:         $2.43
-  Distance:     $10.43 (393% of ATR)
+  Distance:     $12.76 (411% of ATR)
   Formed:       2026-07-14
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
@@ -18,12 +18,12 @@ DEMAND ZONE (Buy Zone):
 SUPPLY ZONE (Sell Zone):
   Range:        $130.74 - $133.34
   Size:         $2.60
-  Distance:     $9.76
+  Distance:     $7.43
   Formed:       2026-09-01
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $12.86
-  Profit Target (PT):  $9.76
-  Risk:Reward Ratio:   1:0.76
+  Stop Loss Distance:  $15.19
+  Profit Target (PT):  $7.43
+  Risk:Reward Ratio:   1:0.49

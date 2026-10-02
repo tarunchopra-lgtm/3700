@@ -1,0 +1,44 @@
+====================================================================================================
+CANDLESTICK PATTERNS - CARR
+Generated: 2026-09-30 15:01:51 EDT
+Lookback: 365 calendar days
+Each pattern shows only its most recent occurrence.
+====================================================================================================
+
+Latest pattern occurrences: 35
+
+CDLMARUBOZU            | Bearish  | 2026-09-30 | Signal: -100 | OHLC: 55.68/55.73/54.76/54.83 | Candle range: $0.97
+CDLLONGLINE            | Bearish  | 2026-09-30 | Signal: -100 | OHLC: 55.68/55.73/54.76/54.83 | Candle range: $0.97
+CDLHIKKAKE             | Bullish  | 2026-09-30 | Signal:  100 | OHLC: 55.68/55.73/54.76/54.83 | Candle range: $0.97
+CDLCLOSINGMARUBOZU     | Bearish  | 2026-09-30 | Signal: -100 | OHLC: 55.68/55.73/54.76/54.83 | Candle range: $0.97
+CDLBELTHOLD            | Bearish  | 2026-09-30 | Signal: -100 | OHLC: 55.68/55.73/54.76/54.83 | Candle range: $0.97
+CDLSPINNINGTOP         | Bearish  | 2026-09-29 | Signal: -100 | OHLC: 55.58/56.03/55.11/55.41 | Candle range: $0.92
+CDLLONGLEGGEDDOJI      | Bullish  | 2026-09-28 | Signal:  100 | OHLC: 55.98/56.23/54.65/55.86 | Candle range: $1.58
+CDLHIGHWAVE            | Bearish  | 2026-09-28 | Signal: -100 | OHLC: 55.98/56.23/54.65/55.86 | Candle range: $1.58
+CDLHARAMICROSS         | Bearish  | 2026-09-28 | Signal: -100 | OHLC: 55.98/56.23/54.65/55.86 | Candle range: $1.58
+CDLHARAMI              | Bearish  | 2026-09-28 | Signal: -100 | OHLC: 55.98/56.23/54.65/55.86 | Candle range: $1.58
+CDLDOJI                | Bullish  | 2026-09-28 | Signal:  100 | OHLC: 55.98/56.23/54.65/55.86 | Candle range: $1.58
+CDLSHORTLINE           | Bullish  | 2026-09-24 | Signal:  100 | OHLC: 54.59/55.19/54.41/54.87 | Candle range: $0.77
+CDLINVERTEDHAMMER      | Bullish  | 2026-09-23 | Signal:  100 | OHLC: 54.83/55.73/54.80/55.12 | Candle range: $0.94
+CDLRICKSHAWMAN         | Bullish  | 2026-09-22 | Signal:  100 | OHLC: 55.35/55.58/54.85/55.24 | Candle range: $0.73
+CDL3OUTSIDE            | Bearish  | 2026-09-16 | Signal: -100 | OHLC: 56.09/56.53/53.74/54.24 | Candle range: $2.79
+CDLENGULFING           | Bearish  | 2026-09-15 | Signal: -100 | OHLC: 57.72/58.16/54.82/55.54 | Candle range: $3.34
+CDLDARKCLOUDCOVER      | Bearish  | 2026-09-08 | Signal: -100 | OHLC: 59.96/60.31/59.09/59.12 | Candle range: $1.23
+CDLTHRUSTING           | Bearish  | 2026-09-02 | Signal: -100 | OHLC: 57.18/57.81/56.48/57.56 | Candle range: $1.34
+CDLHOMINGPIGEON        | Bullish  | 2026-08-26 | Signal:  100 | OHLC: 59.10/59.53/58.44/58.73 | Candle range: $1.10
+CDLTAKURI              | Bullish  | 2026-07-30 | Signal:  100 | OHLC: 61.18/61.41/59.12/61.37 | Candle range: $2.29
+CDLDRAGONFLYDOJI       | Bullish  | 2026-07-30 | Signal:  100 | OHLC: 61.18/61.41/59.12/61.37 | Candle range: $2.29
+CDL3INSIDE             | Bearish  | 2026-07-20 | Signal: -100 | OHLC: 68.66/69.19/66.84/67.00 | Candle range: $2.34
+CDLMATCHINGLOW         | Bullish  | 2026-07-06 | Signal:  100 | OHLC: 70.72/70.72/69.17/70.12 | Candle range: $1.55
+CDLSHOOTINGSTAR        | Bearish  | 2026-06-18 | Signal: -100 | OHLC: 71.73/72.88/71.57/71.80 | Candle range: $1.31
+CDLGRAVESTONEDOJI      | Bullish  | 2026-06-18 | Signal:  100 | OHLC: 71.73/72.88/71.57/71.80 | Candle range: $1.31
+CDLGAPSIDESIDEWHITE    | Bearish  | 2026-05-29 | Signal: -100 | OHLC: 63.36/65.24/63.14/63.97 | Candle range: $2.10
+CDLHAMMER              | Bullish  | 2026-05-18 | Signal:  100 | OHLC: 64.67/64.84/63.48/64.53 | Candle range: $1.36
+CDLDOJISTAR            | Bullish  | 2026-05-18 | Signal:  100 | OHLC: 64.67/64.84/63.48/64.53 | Candle range: $1.36
+CDLEVENINGSTAR         | Bearish  | 2026-05-04 | Signal: -100 | OHLC: 67.05/67.32/65.15/65.92 | Candle range: $2.17
+CDLEVENINGDOJISTAR     | Bearish  | 2026-05-04 | Signal: -100 | OHLC: 67.05/67.32/65.15/65.92 | Candle range: $2.17
+CDLSTALLEDPATTERN      | Bearish  | 2026-04-14 | Signal: -100 | OHLC: 64.35/64.96/63.50/64.66 | Candle range: $1.46
+CDLLADDERBOTTOM        | Bullish  | 2026-03-31 | Signal:  100 | OHLC: 55.73/56.73/55.23/56.30 | Candle range: $1.50
+CDLHANGINGMAN          | Bearish  | 2026-03-25 | Signal: -100 | OHLC: 59.68/59.73/58.48/59.26 | Candle range: $1.25
+CDLPIERCING            | Bullish  | 2026-01-08 | Signal:  100 | OHLC: 52.19/53.91/51.76/53.85 | Candle range: $2.15
+CDLADVANCEBLOCK        | Bearish  | 2025-11-28 | Signal: -100 | OHLC: 54.63/54.91/54.12/54.80 | Candle range: $0.79

@@ -1,0 +1,27 @@
+{
+  "symbol": "TTD",
+  "qty": 2,
+  "entry_price": 12.11,
+  "entry_time": "2026-09-30T10:55:33.271773",
+  "brackets": {
+    "bracket1": {
+      "entry_order_id": "a50f5740-e2c8-4bae-8d2a-f4f656cd3e47",
+      "stop_order_id": "d8d8d02c-cb58-4043-9ec6-3c58efa8e07f",
+      "target_order_id": "2f0da3f9-bcf5-4103-a473-bf3551b90261",
+      "qty": 1,
+      "target_price": 13.11,
+      "stop_price": 11.0,
+      "status": "pending"
+    },
+    "bracket2": {
+      "entry_order_id": "1fc179d5-a2f6-4399-93ed-d3da219a4e80",
+      "stop_order_id": "7b5e481a-6355-4f9c-b883-4824fef22665",
+      "target_order_id": "f7ea9b5a-8334-4bcf-9f0e-e1ebc3b9bbc1",
+      "qty": 1,
+      "target_price": 25.0,
+      "stop_price": 11.0,
+      "status": "pending"
+    }
+  },
+  "last_updated": "2026-10-01T06:59:49.822969"
+}

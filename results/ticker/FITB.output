@@ -3,14 +3,14 @@ TICKER: FITB
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $51.75
-  ATR (14-day): $1.39
+  Price:        $50.59
+  ATR (14-day): $1.41
   Within ATR:   YES
 
 DEMAND ZONE (Buy Zone):
   Range:        $49.47 - $50.40
   Size:         $0.93
-  Distance:     $1.35 (97% of ATR)
+  Distance:     $0.19 (13% of ATR)
   Formed:       2026-06-03
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
@@ -18,12 +18,12 @@ DEMAND ZONE (Buy Zone):
 SUPPLY ZONE (Sell Zone):
   Range:        $57.41 - $58.46
   Size:         $1.05
-  Distance:     $5.66
+  Distance:     $6.81
   Formed:       2026-08-12
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $2.28
-  Profit Target (PT):  $5.66
-  Risk:Reward Ratio:   1:2.48
+  Stop Loss Distance:  $1.12
+  Profit Target (PT):  $6.81
+  Risk:Reward Ratio:   1:6.08

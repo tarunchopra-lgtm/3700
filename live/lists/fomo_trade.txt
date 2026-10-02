@@ -20,7 +20,7 @@ wtw 2 288.8 287 290 310
 # mu 10 1100 1090 1110 1140
 #mu 2 1050 1040 1060 1090
 # normal stop loss occured, now will see if entry happes
-mu 2 1050 1040 1080 1100
+mu 2 1075 1070 1080 1100
 
 ### intc is to test limit order of above current price
 # intc did a 116 entry, also sell 119 1st leg next day

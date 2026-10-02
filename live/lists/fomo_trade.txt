@@ -39,3 +39,4 @@ msi 2 446.88 446 448 480
 #4  NXL      $      7.27 $      2.99     69.86%
 nxl 2 7 6.5 8 8.5
 ## adding git info. more info test live to local
+# live git updated, checking local now

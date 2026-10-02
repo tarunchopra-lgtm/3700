@@ -41,3 +41,4 @@ nxl 2 7 6.5 8 8.5
 ## adding git info. more info test live to local
 # live git updated, checking local now
 # checking 10 seconds update
+# checking 2nd time 10 seconds update

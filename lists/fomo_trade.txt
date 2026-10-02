@@ -3,31 +3,40 @@
 # Repeating a ticker creates independent trackers: SPY_1.json, SPY_2.json, etc.
 # Active trade configuration (first non-comment line will be used):
 # supply and demand
-#mu 2 940 930 950 1032
-nvda 100 222 219 225 230
-#intc 2 99 97 101 131
-#aapl 2 335 333 337 340
-#googl 2 333 330 336 394
-#gld 2 376 372 380 420
-zm 2 87 86 88 97
-#vz 2 48.24 47 49 51
-#ste 2 203 199 207 230
-#axon 2 403 397 409 600
-### gap up
-### spy
-#spy 2 773.6 773.5 773.7 773.8
-### etf
-#iwm 2 285 284 286 294
-## trend up
-#sofi 100 17.25 16.85 17.75 18.25
-#kr 10 99 98 100 103
-#jagx 100 15 14 16 20
-# benf and whlr to be tested for over night #2 stock should be able to run over multiple days, specially when stock configuraiton is in fomo_trade.txt anyways
 
-#artl 100 12 11 13 14
-# 13 if trade is below buy limit price, it should buy only when trade goes above limit price, not fill before that. this needs lot of testing because it keeps giving me false entries
-# basically pick buy price above current price on following trade
-#
+
+
+### multiple days so OCO etc are tracked as well
+#nvda 100 211 209 213 250
+#intc 100 90 88 92 132
+# following is to track multiple days of a trade
+# benf did get entry at 1.5, has been multiple days, lets see how 1.2 and 1.8 plays out
 benf 1000 1.5 1.2 1.8 3
-whlr 1000 4 3 5 7
-apus 1000 9 8 10 12
+# wtw, did a stop loss 2nd day, so waiting on 288.8 to occur again
+# wtw did target 1 with no program running so that's good
+wtw 2 288.8 287 290 310
+
+### mu is to test limit order of buy below current price
+# mu 10 1100 1090 1110 1140
+#mu 2 1050 1040 1060 1090
+# normal stop loss occured, now will see if entry happes
+mu 2 1050 1040 1080 1100
+
+### intc is to test limit order of above current price
+# intc did a 116 entry, also sell 119 1st leg next day
+intc 2 116 115.5 119 125
+
+# ttd, trying to see from friend circle if this would work
+ttd 2 12.11 11 13.11 25
+
+## another one from chart
+#  4
+#. MSI      | Current: $447.93 | Demand: $436.18-$445.63 (2026-08-03) | Distance: $2.30
+# multiple stops and multiple rentries tested with no target 1 or 2. so it worked
+msi 2 446.88 446 448 480
+
+#today's movers 10/1
+#4  NXL      $      7.27 $      2.99     69.86%
+nxl 2 7 6.5 8 8.5
+## adding git info. more info
+## checking if update makes to local copy, not live

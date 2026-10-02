@@ -5,9 +5,12 @@ import os
 import smtplib
 import sys
 import time
+import difflib
+import hashlib
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from email.message import EmailMessage
+from urllib.request import Request, urlopen
 
 from alpaca.trading.enums import QueryOrderStatus
 from alpaca.trading.requests import GetOrdersRequest
@@ -25,6 +28,12 @@ from roles.credentials import bootstrap_trading_auth
 POLL_SECONDS = 60
 DEFAULT_TO_EMAIL = "tarun.chopra@gmail.com"
 POSITIONS_DIR = WORKSPACE_ROOT / "positions"
+LOCAL_FOMO_CONFIG = WORKSPACE_ROOT / "lists" / "fomo_trade.txt"
+REMOTE_FOMO_CONFIG_URL = (
+    "https://raw.githubusercontent.com/tarunchopra-lgtm/3700/main/"
+    "live/lists/fomo_trade.txt"
+)
+REMOTE_CONFIG_TIMEOUT_SECONDS = 20
 
 
 @dataclass(frozen=True)
@@ -247,6 +256,51 @@ def _send_email(
         smtp.send_message(msg)
 
 
+def _active_config_symbols(text: str) -> set[str]:
+    """Return symbols from active, non-comment FOMO configuration lines."""
+    symbols = set()
+    for raw_line in text.splitlines():
+        parts = raw_line.strip().split()
+        if parts and not parts[0].startswith("#"):
+            symbols.add(parts[0].upper())
+    return symbols
+
+
+def _sync_remote_fomo_config() -> tuple[bool, str, set[str]]:
+    """Copy the remote FOMO config locally only when its content hash changes."""
+    request = Request(
+        REMOTE_FOMO_CONFIG_URL,
+        headers={"User-Agent": "3700-email-status/1.0"},
+    )
+    with urlopen(request, timeout=REMOTE_CONFIG_TIMEOUT_SECONDS) as response:
+        remote_bytes = response.read()
+
+    remote_hash = hashlib.sha256(remote_bytes).hexdigest()
+    local_bytes = LOCAL_FOMO_CONFIG.read_bytes() if LOCAL_FOMO_CONFIG.exists() else b""
+    if hashlib.sha256(local_bytes).hexdigest() == remote_hash:
+        return False, "", set()
+
+    old_text = local_bytes.decode("utf-8", errors="replace")
+    new_text = remote_bytes.decode("utf-8", errors="replace")
+    diff = "\n".join(
+        difflib.unified_diff(
+            old_text.splitlines(),
+            new_text.splitlines(),
+            fromfile=str(LOCAL_FOMO_CONFIG),
+            tofile=REMOTE_FOMO_CONFIG_URL,
+            lineterm="",
+        )
+    )
+
+    LOCAL_FOMO_CONFIG.parent.mkdir(parents=True, exist_ok=True)
+    temporary_path = LOCAL_FOMO_CONFIG.with_suffix(".tmp")
+    temporary_path.write_bytes(remote_bytes)
+    temporary_path.replace(LOCAL_FOMO_CONFIG)
+
+    changed_symbols = _active_config_symbols(old_text) | _active_config_symbols(new_text)
+    return True, diff or "Configuration content changed.", changed_symbols
+
+
 def main() -> int:
     # Handle help flag
     if len(sys.argv) > 1:
@@ -324,6 +378,29 @@ NOTES:
     print(f"Email alerts will be sent to: {to_email}")
 
     try:
+        config_changed, config_diff, config_symbols = _sync_remote_fomo_config()
+        if config_changed:
+            config_body = "FOMO configuration changed on GitHub.\n\n" + config_diff
+            config_attachments = _find_position_files(config_symbols)
+            try:
+                _send_email(
+                    from_email,
+                    to_email,
+                    app_password,
+                    "FOMO Configuration Changed",
+                    config_body,
+                    config_attachments,
+                )
+                print(
+                    f"[{datetime.now().strftime('%H:%M:%S')}] "
+                    f"FOMO configuration email sent ({len(config_attachments)} attachment(s))."
+                )
+            except Exception as exc:
+                print(f"[{datetime.now().strftime('%H:%M:%S')}] Failed to send config email: {exc}")
+    except Exception as exc:
+        print(f"[{datetime.now().strftime('%H:%M:%S')}] Remote FOMO config sync failed: {exc}")
+
+    try:
         prev_positions = _snapshot_positions(trading_client)
         prev_orders = _snapshot_orders(trading_client)
     except Exception as exc:
@@ -335,20 +412,43 @@ NOTES:
     try:
         while True:
             time.sleep(POLL_SECONDS)
+            config_change_lines: list[str] = []
+            config_symbols: set[str] = set()
+            try:
+                config_changed, config_diff, config_symbols = _sync_remote_fomo_config()
+                if config_changed:
+                    config_change_lines = [
+                        "FOMO CONFIGURATION CHANGED:",
+                        config_diff,
+                    ]
+                    print(f"[{datetime.now().strftime('%H:%M:%S')}] Remote FOMO configuration changed.")
+            except Exception as exc:
+                print(f"[{datetime.now().strftime('%H:%M:%S')}] Remote FOMO config sync failed: {exc}")
+
             try:
                 curr_positions = _snapshot_positions(trading_client)
                 curr_orders = _snapshot_orders(trading_client)
-                change_lines, touched_symbols = _build_change_lines(prev_positions, curr_positions, prev_orders, curr_orders)
+                account_change_lines, touched_symbols = _build_change_lines(
+                    prev_positions, curr_positions, prev_orders, curr_orders
+                )
             except Exception as exc:
                 print(f"[{datetime.now().strftime('%H:%M:%S')}] Poll failed: {exc}")
                 continue
 
+            change_lines = config_change_lines + account_change_lines
+            touched_symbols.update(config_symbols)
             if change_lines:
                 now = datetime.now(timezone.utc).astimezone().strftime("%Y-%m-%d %H:%M:%S %Z")
-                subject = "Alpaca Status Change Alert"
+                subject = (
+                    "FOMO Config and Alpaca Status Change Alert"
+                    if config_change_lines and account_change_lines
+                    else "FOMO Configuration Change Alert"
+                    if config_change_lines
+                    else "Alpaca Status Change Alert"
+                )
                 body = "\n".join(
                     [
-                        f"Detected account changes at {now}.",
+                        f"Detected changes at {now}.",
                         "",
                         *change_lines,
                     ]

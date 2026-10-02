@@ -41,3 +41,4 @@ nxl 2 7 6.5 8 8.5
 ## adding git info. more info
 ## checking if update makes to local copy, not live
 # another update
+# another update to test script

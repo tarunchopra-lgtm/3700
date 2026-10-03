@@ -4,8 +4,6 @@
 # Active trade configuration (first non-comment line will be used):
 # supply and demand
 
-
-
 ### multiple days so OCO etc are tracked as well
 #nvda 100 211 209 213 250
 #intc 100 90 88 92 132

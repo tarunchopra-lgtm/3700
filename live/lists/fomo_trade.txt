@@ -14,19 +14,19 @@ benf 1000 1.5 1.2 1.8 3
 # wtw did target 1 with no program running so that's good
 # 10/2 worked many times for stop loss, worked for target 1 once, target 2 is far but is right target, lets see how it goes next week
 
-wtw 2 288.8 287 290 310
+wtw 2 286 282 290 310
 
 ### mu is to test limit order of buy below current price
 # mu 10 1100 1090 1110 1140
 #mu 2 1050 1040 1060 1090
 # normal stop loss occured, now will see if entry happes
 # 10/2 added this for quick day trade, it entered, no stop loss, so will have to wait till monday
-mu 2 1075 1070 1080 1100
+mu 2 1050 1045 1055 1075
 
 ### intc is to test limit order of above current price
 # intc did a 116 entry, also sell 119 1st leg next day
 # 10/2 worked great, for both target 1 and target 2 
-intc 20 114 113 119 125
+intc 20 116 113 119 125
 
 # ttd, trying to see from friend circle if this would work
 # 10/2 so far oky, waiting on target 1

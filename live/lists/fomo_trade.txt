@@ -39,14 +39,3 @@ ttd 2 12.11 11 13.11 25
 # 10/2 target 1 achieved, few stop losses. 
 msi 2 446.88 446 448 480
 
-#today's movers 10/1
-#4  NXL      $      7.27 $      2.99     69.86%
-# did target 1 and the stop loss toonxl 2 7 6.5 8 8.5
-## adding git info. more info test live to local
-# live git updated, checking local now
-# checking 10 seconds update
-# checking 2nd time 10 seconds update
-# 3rd time 10 seconds update...
-# 4th time
-# 5th time 914pm
-# 6th 918pm

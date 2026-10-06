@@ -5,7 +5,7 @@
 # supply and demand
 
 ### multiple days so OCO etc are tracked as well
-#nvda 100 211 209 213 250
+nvda 20 240.1 238 243 280
 #intc 100 90 88 92 132
 # following is to track multiple days of a trade
 # benf did get entry at 1.5, has been multiple days, lets see how 1.2 and 1.8 plays out

@@ -5,15 +5,12 @@
 # supply and demand
 
 ### multiple days so OCO etc are tracked as well
-nvda 20 240.1 238 243 280
-#intc 100 90 88 92 132
-# following is to track multiple days of a trade
-# benf did get entry at 1.5, has been multiple days, lets see how 1.2 and 1.8 plays out
-benf 1000 1.5 1.2 1.8 3
+nvda 20 233 223 243 280
+
+
 # wtw, did a stop loss 2nd day, so waiting on 288.8 to occur again
 # wtw did target 1 with no program running so that's good
 # 10/2 worked many times for stop loss, worked for target 1 once, target 2 is far but is right target, lets see how it goes next week
-
 wtw 2 286 282 290 310
 
 ### mu is to test limit order of buy below current price
@@ -21,7 +18,7 @@ wtw 2 286 282 290 310
 #mu 2 1050 1040 1060 1090
 # normal stop loss occured, now will see if entry happes
 # 10/2 added this for quick day trade, it entered, no stop loss, so will have to wait till monday
-mu 2 1050 1045 1055 1075
+mu 2 1075 1070 1080 1200
 
 ### intc is to test limit order of above current price
 # intc did a 116 entry, also sell 119 1st leg next day

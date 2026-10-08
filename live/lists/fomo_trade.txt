@@ -18,7 +18,7 @@ wtw 2 286 282 290 310
 #mu 2 1050 1040 1060 1090
 # normal stop loss occured, now will see if entry happes
 # 10/2 added this for quick day trade, it entered, no stop loss, so will have to wait till monday
-mu 2 1066 1056 1076 1200
+mu 2 1030 1020 1050 1200
 
 ### intc is to test limit order of above current price
 # intc did a 116 entry, also sell 119 1st leg next day

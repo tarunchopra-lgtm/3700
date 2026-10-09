@@ -34,7 +34,7 @@ ttd 2 12.11 11 13.11 25
 #. MSI      | Current: $447.93 | Demand: $436.18-$445.63 (2026-08-03) | Distance: $2.30
 # multiple stops and multiple rentries tested with no target 1 or 2. so it worked
 # 10/2 target 1 achieved, few stop losses. 
-msi 2 446.88 446 448 480
+msi 2 446 440 452 480
 
 ##
 # SLV      $53.45     $9.28    $53.60-$54.26             $56.27-$60.36             $2.02    $0.66   

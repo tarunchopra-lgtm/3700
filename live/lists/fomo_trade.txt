@@ -46,5 +46,5 @@ hon 4 204.72 200 210 232
 # NRG      $106.33    $18.13   $93.72-$99.64             $142.91-$150.45           $43.27   $5.92    0.137  
 nrg 4 99.64 93 107 140
 
-## testing stop limit order, where current is below buy
+## testing stop limit order, where current is below buy, it takes few seconds but limit order was changed to stop limit order and new order was in place and old cancelled, so far, before making position, everything is working
 dal 2 82 80 83 85

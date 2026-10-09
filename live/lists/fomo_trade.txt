@@ -47,4 +47,4 @@ hon 4 204.72 200 210 232
 nrg 4 99.64 93 107 140
 
 ## testing stop limit order, where current is below buy
-dal 2 81.8 80 83 85
+dal 2 82 80 83 85

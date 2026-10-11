@@ -3,27 +3,27 @@ TICKER: WM
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $218.81
-  ATR (14-day): $3.73
+  Price:        $217.51
+  ATR (14-day): $5.72
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $206.39 - $209.31
-  Size:         $2.93
-  Distance:     $9.50 (254% of ATR)
-  Formed:       2026-09-22
+  Range:        $200.82 - $204.97
+  Size:         $4.15
+  Distance:     $12.54 (219% of ATR)
+  Formed:       2026-10-01
   FRESHNESS:    STALE
   Notes:        STALE - Recent cached daily candle tested demand zone
 
 SUPPLY ZONE (Sell Zone):
   Range:        $235.80 - $239.36
   Size:         $3.56
-  Distance:     $16.99
+  Distance:     $18.29
   Formed:       2026-07-23
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $12.42
-  Profit Target (PT):  $16.99
-  Risk:Reward Ratio:   1:1.37
+  Stop Loss Distance:  $16.69
+  Profit Target (PT):  $18.29
+  Risk:Reward Ratio:   1:1.10

@@ -1,82 +1,8 @@
 ========================================================================================================================
-TOP 10 TRADING PICKS - BALANCED SENSITIVITY (Fresh Zones, Within 1 ATR)
-Generated: 2026-10-01 07:36:52
+TOP 10 TRADING PICKS - BALANCED SENSITIVITY (WITHIN ATR, FRESH ZONES ONLY)
+Generated: 2026-10-09 06:16:39
 ========================================================================================================================
 
-Total Actionable Stocks (within 1 ATR + FRESH): 3
-Top 10 shown below (sorted by proximity to fresh demand zone)
+No stocks with FRESH zones (within 1 ATR and not recently tested) found.
 
-FRESHNESS CRITERIA:
-  - Zone must NOT be already reached by current price
-  - Zone must NOT be tested by recent candle wicks (last 2 hours)
-  - Zone must be within 1 ATR distance from current price
-
-1. USB
-------------------------------------------------------------------------------------------------------------------------
-Current Price:       $56.31
-ATR (14-day):        $1.58
-
-DEMAND ZONE:         $55.19 - $56.05
-  Distance:          $0.26 (16% of ATR) [PRIMARY SORT]
-  Formed:            2026-06-05
-  Freshness:         ✓ FRESH - Fresh - not tested recently
-
-SUPPLY ZONE:         $62.26 - $63.33
-  Distance:          $5.95 [SECONDARY SORT]
-  Formed:            2026-09-11
-  Freshness:         ✓ FRESH - Fresh - not tested recently
-
-TRADE SETUP:
-  Entry Range:       $55.19 - $56.05
-  Stop Loss:         $55.18
-  Profit Target:     $62.26
-  Risk Amount:       $1.12
-  Reward Amount:     $5.95
-  RISK:REWARD:       1:5.29
-
-2. BKNG
-------------------------------------------------------------------------------------------------------------------------
-Current Price:       $160.99
-ATR (14-day):        $5.82
-
-DEMAND ZONE:         $155.38 - $159.21
-  Distance:          $1.78 (31% of ATR) [PRIMARY SORT]
-  Formed:            2026-09-24
-  Freshness:         ✓ FRESH - Fresh - not tested recently
-
-SUPPLY ZONE:         $210.84 - $215.03
-  Distance:          $49.84 [SECONDARY SORT]
-  Formed:            2026-08-24
-  Freshness:         ✓ FRESH - Fresh - not tested recently
-
-TRADE SETUP:
-  Entry Range:       $155.38 - $159.21
-  Stop Loss:         $155.37
-  Profit Target:     $210.84
-  Risk Amount:       $5.62
-  Reward Amount:     $49.84
-  RISK:REWARD:       1:8.88
-
-3. GLD
-------------------------------------------------------------------------------------------------------------------------
-Current Price:       $382.00
-ATR (14-day):        $60.12
-
-DEMAND ZONE:         $373.83 - $376.64
-  Distance:          $5.36 (9% of ATR) [PRIMARY SORT]
-  Formed:            2026-08-04
-  Freshness:         ✓ FRESH - Fresh - not tested recently
-
-SUPPLY ZONE:         $388.39 - $403.11
-  Distance:          $6.39 [SECONDARY SORT]
-  Formed:            2026-09-15
-  Freshness:         ✓ FRESH - Fresh - not tested recently
-
-TRADE SETUP:
-  Entry Range:       $373.83 - $376.64
-  Stop Loss:         $373.82
-  Profit Target:     $388.39
-  Risk Amount:       $8.17
-  Reward Amount:     $6.39
-  RISK:REWARD:       1:0.78
-
+Note: Setups are filtered to exclude STALE zones that have been recently tested by price action.

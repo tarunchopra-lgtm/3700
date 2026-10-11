@@ -3,27 +3,27 @@ TICKER: BALL
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $61.32
-  ATR (14-day): $1.47
+  Price:        $58.37
+  ATR (14-day): $1.86
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $56.35 - $58.41
-  Size:         $2.05
-  Distance:     $2.91 (198% of ATR)
-  Formed:       2026-06-12
+  Range:        $51.95 - $53.57
+  Size:         $1.62
+  Distance:     $4.80 (258% of ATR)
+  Formed:       2026-06-05
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $61.30 - $63.94
-  Size:         $2.63
-  Distance:     $0.00
-  Formed:       2026-07-06
-  FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($61.32 >= zone $61.30)
+  Range:        $60.74 - $61.92
+  Size:         $1.18
+  Distance:     $2.38
+  Formed:       2026-09-16
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $4.97
-  Profit Target (PT):  $-0.02
-  Risk:Reward Ratio:   1:-0.00
+  Stop Loss Distance:  $6.41
+  Profit Target (PT):  $2.38
+  Risk:Reward Ratio:   1:0.37

@@ -1,0 +1,344 @@
+[AUTH] Script: fomo_trade.py
+[AUTH] Python executable: C:\Users\TarunChopra\3700\.venv\Scripts\python.exe
+[AUTH] Credentials file: C:\Users\TarunChopra\3700\env\credentials
+[AUTH] API key: PKLU...AJ3U (len=26)
+[AUTH] Secret key: DoMF...u8zk (len=44)
+[AUTH] Paper trading: True
+[AUTH] Authentication OK: account=a38a...edd4 status=AccountStatus.ACTIVE
+
+[STARTUP] Reconciling with existing positions and orders...
+
+
+
+╔════════════════════════════════════════════════════════════╗
+║                                                              ║
+║ FOMO TRADE - MULTI-SYMBOL SIMULTANEOUS TRADING               ║
+║ (Dynamic Config - Hot Reload Enabled)                        ║
+║ Regular Market Hours Only                                    ║
+║                                                              ║
+║ 📅 TRADING HOURS:                                             ║
+║   • Stocks/Options: 6:30 AM - 12:40 PM ET                    ║
+║   • Crypto: 24/7 (anytime)                                   ║
+║                                                              ║
+╚════════════════════════════════════════════════════════════╝
+
+[INFO] Loaded 7 initial trade configuration(s):
+
+  BENF:
+    Entry: $1.50 | Shares: 1000 | Stop: $1.20
+    Target1: $1.80 | Target2: $3.00
+
+  WTW:
+    Entry: $288.80 | Shares: 2 | Stop: $287.00
+    Target1: $290.00 | Target2: $310.00
+
+  MU:
+    Entry: $1050.00 | Shares: 2 | Stop: $1040.00
+    Target1: $1080.00 | Target2: $1100.00
+
+  INTC:
+    Entry: $116.00 | Shares: 2 | Stop: $115.50
+    Target1: $119.00 | Target2: $125.00
+
+  TTD:
+    Entry: $12.11 | Shares: 2 | Stop: $11.00
+    Target1: $13.11 | Target2: $25.00
+
+  MSI:
+    Entry: $446.88 | Shares: 2 | Stop: $446.00
+    Target1: $448.00 | Target2: $480.00
+
+  NXL:
+    Entry: $7.00 | Shares: 2 | Stop: $6.50
+    Target1: $8.00 | Target2: $8.50
+
+[INFO] Cleaning up duplicate/stale orders (preserving tracked entry/OCO orders)...
+
+  ✓ Cancelled duplicate order e007b177-d70f-451f-94a4-31dd1b6a62b6 (MU OrderSide.BUY 1 @ $1050)
+  ✓ Cancelled duplicate order c0da0d78-f397-4761-84aa-5e9204f234a6 (MU OrderSide.BUY 1 @ $1050)
+  ✓ Cancelled duplicate order 434c26bc-d1f3-462a-8ace-d4fa05111a0c (WTW OrderSide.SELL 1 @ $310)
+  ✓ Cancelled duplicate order eb27b141-c1e5-4d93-b9a9-c19ca2941510 (MSI OrderSide.SELL 1 @ $480)
+  ✓ Cancelled duplicate order f7ea9b5a-8334-4bcf-9f0e-e1ebc3b9bbc1 (TTD OrderSide.SELL 1 @ $25)
+  ✓ Cancelled duplicate order 2f0da3f9-bcf5-4103-a473-bf3551b90261 (TTD OrderSide.SELL 1 @ $13.11)
+[INFO] Cancelled 6 duplicate/stale orders
+
+[INFO] Placing new 50/50 entry orders...
+
+[BENF] Recovered B1 entry ID: b9ebc478-ea4a-4679-93a7-05c3d8cf79a6
+[BENF] Recovered B2 entry ID: 6ecbc4dd-8d8e-470f-a5ca-f9e9f3b846bb
+[BENF] B1 protection deferred: Alpaca reports fewer than 500 unreserved shares
+[BENF] B2 protection deferred: Alpaca reports fewer than 500 unreserved shares
+[WTW] Recovered B1 entry ID: 61ea20f5-2da5-44df-81ef-06fb5f31de19
+[WTW] Recovered B2 entry ID: 6011ef3f-9e8f-4a05-9695-e863d9f79576
+[ALERT] [WTW] B1 entry is FILLED @ $288.74 but missing stop, target tracking ID(s)
+[WTW] ✗ B1 OCO protection error: OCO protection deferred for WTW: Alpaca regular market session is closed
+[ALERT] [WTW] B2 entry is FILLED @ $288.74 but missing stop, target tracking ID(s)
+[WTW] ✗ B2 OCO protection error: OCO protection deferred for WTW: Alpaca regular market session is closed
+[MU] Recovered B1 entry ID: 16198989-defb-4786-bdfe-716eda12dc76
+[MU] Recovered B2 entry ID: e50117d1-721e-46aa-a7bc-b80fa049c76f
+[MU] B1 protection deferred: Alpaca reports fewer than 1 unreserved shares
+[MU] B2 protection deferred: Alpaca reports fewer than 1 unreserved shares
+[INTC] Recovered B1 entry ID: 447ce04c-3d73-43a6-9eee-d76ca29fdee4
+[INTC] Recovered B2 entry ID: dc837eac-f1a2-44e1-a9f9-4b1355119cd1
+[INTC] B1 protection deferred: Alpaca reports fewer than 1 unreserved shares
+[INTC] B2 protection deferred: Alpaca reports fewer than 1 unreserved shares
+[TTD] Recovered B1 entry ID: a50f5740-e2c8-4bae-8d2a-f4f656cd3e47
+[TTD] Recovered B2 entry ID: 1fc179d5-a2f6-4399-93ed-d3da219a4e80
+[ALERT] [TTD] B1 entry is FILLED @ $12.11 but missing stop, target tracking ID(s)
+[TTD] ✗ B1 OCO protection error: OCO protection deferred for TTD: Alpaca regular market session is closed
+[ALERT] [TTD] B2 entry is FILLED @ $12.11 but missing stop, target tracking ID(s)
+[TTD] ✗ B2 OCO protection error: OCO protection deferred for TTD: Alpaca regular market session is closed
+[MSI] Recovered B1 entry ID: 225fc07f-380c-4993-8e13-63a73e0a0567
+[MSI] Recovered B2 entry ID: 17cfbe0a-1236-4706-a860-acadaac6c3be
+[ALERT] [MSI] B1 entry is FILLED @ $446.87 but missing stop, target tracking ID(s)
+[MSI] ✗ B1 OCO protection error: OCO protection deferred for MSI: Alpaca regular market session is closed
+[ALERT] [MSI] B2 entry is FILLED @ $446.87 but missing stop, target tracking ID(s)
+[MSI] ✗ B2 OCO protection error: OCO protection deferred for MSI: Alpaca regular market session is closed
+[NXL] Recovered B1 entry ID: aaa25386-b484-4914-bf28-95049fab8ba4
+[NXL] Recovered B2 entry ID: ea0f5df2-39de-4e45-bed1-3fb7d6938336
+[NXL] B1 protection deferred: Alpaca reports fewer than 1 unreserved shares
+[NXL] B2 protection deferred: Alpaca reports fewer than 1 unreserved shares
+[STARTUP] [BENF] Skipping entry (tracked order IDs restored from previous run)
+
+[STARTUP] [WTW] Skipping entry (tracked order IDs restored from previous run)
+
+[STARTUP] [MU] Skipping entry (tracked order IDs restored from previous run)
+
+[STARTUP] [INTC] Skipping entry (tracked order IDs restored from previous run)
+
+[STARTUP] [TTD] Skipping entry (tracked order IDs restored from previous run)
+
+[STARTUP] [MSI] Skipping entry (tracked order IDs restored from previous run)
+
+[STARTUP] [NXL] Skipping entry (tracked order IDs restored from previous run)
+
+[INFO] All entry orders already in place or filled
+
+[INFO] Monitoring started (unified 10s check for market & config)...
+
+[INFO] Position trackers: positions/TICKER.json (entry and OCO IDs)
+
+
+[13:03:24] 🔍 Market & Config Check (7 symbols)...
+[RECONCILE] [BENF] No broker position remains; removed completed tracker
+[RECONCILE] [MU] No broker position remains; removed completed tracker
+[RECONCILE] [INTC] No broker position remains; removed completed tracker
+[RECONCILE] [NXL] No broker position remains; removed completed tracker
+[BENF] Live current/ask safety price: $1.24 | Entry: $1.50
+[BENF] Waiting: live current price or ask $1.24 is not above buy limit $1.50
+[MU] Live current/ask safety price: $1087.68 | Entry: $1050.00
+[MU] ✗ Bracket 1 ERROR: Entry blocked for MU: Alpaca regular market session is closed
+[MU] ✗ Bracket 2 ERROR: Entry blocked for MU: Alpaca regular market session is closed
+[INTC] Live current/ask safety price: $113.06 | Entry: $116.00
+[INTC] Waiting: live current price or ask $113.06 is not above buy limit $116.00
+[NXL] Live current/ask safety price: $4.38 | Entry: $7.00
+[NXL] Waiting: live current price or ask $4.38 is not above buy limit $7.00
+Traceback (most recent call last):
+  File [35m"C:\Users\TarunChopra\3700\strategies\fomo_trade.py"[0m, line [35m2334[0m, in [35m<module>[0m
+    [31m_recover_missing_entry_ids_for_trade[0m[1;31m(trade_id)[0m
+    [31m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[1;31m^^^^^^^^^^[0m
+  File [35m"C:\Users\TarunChopra\3700\strategies\fomo_trade.py"[0m, line [35m1037[0m, in [35m_recover_missing_entry_ids_for_trade[0m
+    if [1;31mbracket.get[0m("entry_order_id")
+       [1;31m^^^^^^^^^^^[0m
+[1;35mAttributeError[0m: [35m'bool' object has no attribute 'get'[0m
+[AUTH] Script: fomo_trade.py
+[AUTH] Python executable: C:\Users\TarunChopra\3700\.venv\Scripts\python.exe
+[AUTH] Credentials file: C:\Users\TarunChopra\3700\env\credentials
+[AUTH] API key: PKLU...AJ3U (len=26)
+[AUTH] Secret key: DoMF...u8zk (len=44)
+[AUTH] Paper trading: True
+[AUTH] Authentication OK: account=a38a...edd4 status=AccountStatus.ACTIVE
+
+[STARTUP] Reconciling with existing positions and orders...
+
+
+
+╔════════════════════════════════════════════════════════════╗
+║                                                              ║
+║ FOMO TRADE - MULTI-SYMBOL SIMULTANEOUS TRADING               ║
+║ (Dynamic Config - Hot Reload Enabled)                        ║
+║ Regular Market Hours Only                                    ║
+║                                                              ║
+║ 📅 TRADING HOURS:                                             ║
+║   • Stocks/Options: 6:30 AM - 12:40 PM ET                    ║
+║   • Crypto: 24/7 (anytime)                                   ║
+║                                                              ║
+╚════════════════════════════════════════════════════════════╝
+
+[STARTUP] [WTW] Restored B1: entry=61ea20f5-2da5-44df-81ef-06fb5f31de19, stop=None, target=None
+[STARTUP] [WTW] Restored B2: entry=6011ef3f-9e8f-4a05-9695-e863d9f79576, stop=None, target=None
+[STARTUP] [TTD] Restored B1: entry=a50f5740-e2c8-4bae-8d2a-f4f656cd3e47, stop=None, target=None
+[STARTUP] [TTD] Restored B2: entry=1fc179d5-a2f6-4399-93ed-d3da219a4e80, stop=None, target=None
+[STARTUP] [MSI] Restored B1: entry=225fc07f-380c-4993-8e13-63a73e0a0567, stop=None, target=None
+[STARTUP] [MSI] Restored B2: entry=17cfbe0a-1236-4706-a860-acadaac6c3be, stop=None, target=None
+[INFO] Loaded 7 initial trade configuration(s):
+
+  BENF:
+    Entry: $1.50 | Shares: 1000 | Stop: $1.20
+    Target1: $1.80 | Target2: $3.00
+
+  WTW:
+    Entry: $288.80 | Shares: 2 | Stop: $287.00
+    Target1: $290.00 | Target2: $310.00
+
+  MU:
+    Entry: $1050.00 | Shares: 2 | Stop: $1040.00
+    Target1: $1080.00 | Target2: $1100.00
+
+  INTC:
+    Entry: $116.00 | Shares: 2 | Stop: $115.50
+    Target1: $119.00 | Target2: $125.00
+
+  TTD:
+    Entry: $12.11 | Shares: 2 | Stop: $11.00
+    Target1: $13.11 | Target2: $25.00
+
+  MSI:
+    Entry: $446.88 | Shares: 2 | Stop: $446.00
+    Target1: $448.00 | Target2: $480.00
+
+  NXL:
+    Entry: $7.00 | Shares: 2 | Stop: $6.50
+    Target1: $8.00 | Target2: $8.50
+
+[INFO] Cleaning up duplicate/stale orders (preserving tracked entry/OCO orders)...
+
+[INFO] ✓ Preserved 6 tracked entry/OCO orders
+
+[INFO] No duplicate orders to cancel (all are tracked)
+
+[INFO] Placing new 50/50 entry orders...
+
+[BENF] Recovered B1 entry ID: b9ebc478-ea4a-4679-93a7-05c3d8cf79a6
+[BENF] Recovered B2 entry ID: 6ecbc4dd-8d8e-470f-a5ca-f9e9f3b846bb
+[BENF] B1 protection deferred: Alpaca reports fewer than 500 unreserved shares
+[BENF] B2 protection deferred: Alpaca reports fewer than 500 unreserved shares
+[ALERT] [WTW] B1 entry is FILLED @ $288.74 but missing stop, target tracking ID(s)
+[WTW] ✗ B1 OCO protection error: OCO protection deferred for WTW: Alpaca regular market session is closed
+[ALERT] [WTW] B2 entry is FILLED @ $288.74 but missing stop, target tracking ID(s)
+[WTW] ✗ B2 OCO protection error: OCO protection deferred for WTW: Alpaca regular market session is closed
+[MU] Recovered B1 entry ID: 16198989-defb-4786-bdfe-716eda12dc76
+[MU] Recovered B2 entry ID: e50117d1-721e-46aa-a7bc-b80fa049c76f
+[MU] B1 protection deferred: Alpaca reports fewer than 1 unreserved shares
+[MU] B2 protection deferred: Alpaca reports fewer than 1 unreserved shares
+[INTC] Recovered B1 entry ID: 447ce04c-3d73-43a6-9eee-d76ca29fdee4
+[INTC] Recovered B2 entry ID: dc837eac-f1a2-44e1-a9f9-4b1355119cd1
+[INTC] B1 protection deferred: Alpaca reports fewer than 1 unreserved shares
+[INTC] B2 protection deferred: Alpaca reports fewer than 1 unreserved shares
+[ALERT] [TTD] B1 entry is FILLED @ $12.11 but missing stop, target tracking ID(s)
+[TTD] ✗ B1 OCO protection error: OCO protection deferred for TTD: Alpaca regular market session is closed
+[ALERT] [TTD] B2 entry is FILLED @ $12.11 but missing stop, target tracking ID(s)
+[TTD] ✗ B2 OCO protection error: OCO protection deferred for TTD: Alpaca regular market session is closed
+[ALERT] [MSI] B1 entry is FILLED @ $446.87 but missing stop, target tracking ID(s)
+[MSI] ✗ B1 OCO protection error: OCO protection deferred for MSI: Alpaca regular market session is closed
+[ALERT] [MSI] B2 entry is FILLED @ $446.87 but missing stop, target tracking ID(s)
+[MSI] ✗ B2 OCO protection error: OCO protection deferred for MSI: Alpaca regular market session is closed
+[NXL] Recovered B1 entry ID: aaa25386-b484-4914-bf28-95049fab8ba4
+[NXL] Recovered B2 entry ID: ea0f5df2-39de-4e45-bed1-3fb7d6938336
+[NXL] B1 protection deferred: Alpaca reports fewer than 1 unreserved shares
+[NXL] B2 protection deferred: Alpaca reports fewer than 1 unreserved shares
+[STARTUP] [BENF] Skipping entry (tracked order IDs restored from previous run)
+
+[STARTUP] [WTW] Skipping entry (tracked order IDs restored from previous run)
+
+[STARTUP] [MU] Skipping entry (tracked order IDs restored from previous run)
+
+[STARTUP] [INTC] Skipping entry (tracked order IDs restored from previous run)
+
+[STARTUP] [TTD] Skipping entry (tracked order IDs restored from previous run)
+
+[STARTUP] [MSI] Skipping entry (tracked order IDs restored from previous run)
+
+[STARTUP] [NXL] Skipping entry (tracked order IDs restored from previous run)
+
+[INFO] All entry orders already in place or filled
+
+[INFO] Monitoring started (unified 10s check for market & config)...
+
+[INFO] Position trackers: positions/TICKER.json (entry and OCO IDs)
+
+
+[13:04:02] 🔍 Market & Config Check (7 symbols)...
+[RECONCILE] [BENF] No broker position remains; removed completed tracker
+[RECONCILE] [MU] No broker position remains; removed completed tracker
+[RECONCILE] [INTC] No broker position remains; removed completed tracker
+[RECONCILE] [NXL] No broker position remains; removed completed tracker
+[BENF] Live current/ask safety price: $1.24 | Entry: $1.50
+[BENF] Waiting: live current price or ask $1.24 is not above buy limit $1.50
+[MU] Live current/ask safety price: $1087.68 | Entry: $1050.00
+[MU] ✗ Bracket 1 ERROR: Entry blocked for MU: Alpaca regular market session is closed
+[MU] ✗ Bracket 2 ERROR: Entry blocked for MU: Alpaca regular market session is closed
+[INTC] Live current/ask safety price: $113.06 | Entry: $116.00
+[INTC] Waiting: live current price or ask $113.06 is not above buy limit $116.00
+[NXL] Live current/ask safety price: $4.38 | Entry: $7.00
+[NXL] Waiting: live current price or ask $4.38 is not above buy limit $7.00
+Traceback (most recent call last):
+  File [35m"C:\Users\TarunChopra\3700\strategies\fomo_trade.py"[0m, line [35m2334[0m, in [35m<module>[0m
+    [31m_recover_missing_entry_ids_for_trade[0m[1;31m(trade_id)[0m
+    [31m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[1;31m^^^^^^^^^^[0m
+  File [35m"C:\Users\TarunChopra\3700\strategies\fomo_trade.py"[0m, line [35m1037[0m, in [35m_recover_missing_entry_ids_for_trade[0m
+    if [1;31mbracket.get[0m("entry_order_id")
+       [1;31m^^^^^^^^^^^[0m
+[1;35mAttributeError[0m: [35m'bool' object has no attribute 'get'[0m
+[AUTH] Script: fomo_trade.py
+[AUTH] Python executable: C:\Users\TarunChopra\3700\.venv\Scripts\python.exe
+[AUTH] Credentials file: C:\Users\TarunChopra\3700\env\credentials
+[AUTH] API key: PKLU...AJ3U (len=26)
+[AUTH] Secret key: DoMF...u8zk (len=44)
+[AUTH] Paper trading: True
+[AUTH] Authentication OK: account=a38a...edd4 status=AccountStatus.ACTIVE
+
+[STARTUP] Reconciling with existing positions and orders...
+
+
+
+╔════════════════════════════════════════════════════════════╗
+║                                                              ║
+║ FOMO TRADE - MULTI-SYMBOL SIMULTANEOUS TRADING               ║
+║ (Dynamic Config - Hot Reload Enabled)                        ║
+║ Regular Market Hours Only                                    ║
+║                                                              ║
+║ 📅 TRADING HOURS:                                             ║
+║   • Stocks/Options: 6:30 AM - 12:40 PM ET                    ║
+║   • Crypto: 24/7 (anytime)                                   ║
+║                                                              ║
+╚════════════════════════════════════════════════════════════╝
+
+[CONFIG] ✓ Deleted orphan tracker MSI.json
+[CONFIG] ✓ Deleted orphan tracker TTD.json
+[CONFIG] ✓ Deleted orphan tracker WTW.json
+[INFO] Loaded 1 initial trade configuration(s):
+
+  AAPL:
+    Entry: $336.00 | Shares: 6 | Stop: $335.00
+    Target1: $337.00 | Target2: $340.00
+
+[INFO] Cleaning up duplicate/stale orders (preserving tracked entry/OCO orders)...
+
+[INFO] No existing orders to cancel
+
+[INFO] Placing new 50/50 entry orders...
+
+[ALERT] [AAPL] B1 missing entry ID; no matching filled buy found
+[INFO] Placing 1 missing entry orders...
+
+[AAPL] Live current/ask safety price: $336.58 | Entry: $336.00
+[AAPL] ✗ Bracket 1 ERROR: Entry blocked for AAPL: Alpaca regular market session is closed
+[AAPL] ✗ Bracket 2 ERROR: Entry blocked for AAPL: Alpaca regular market session is closed
+[INFO] Monitoring started (unified 10s check for market & config)...
+
+[INFO] Position trackers: positions/TICKER.json (entry and OCO IDs)
+
+
+[13:04:40] 🔍 Market & Config Check (1 symbols)...
+[AAPL] Live current/ask safety price: $336.58 | Entry: $336.00
+[AAPL] ✗ Bracket 1 ERROR: Entry blocked for AAPL: Alpaca regular market session is closed
+[AAPL] ✗ Bracket 2 ERROR: Entry blocked for AAPL: Alpaca regular market session is closed
+Traceback (most recent call last):
+  File [35m"C:\Users\TarunChopra\3700\strategies\fomo_trade.py"[0m, line [35m2334[0m, in [35m<module>[0m
+    [31m_recover_missing_entry_ids_for_trade[0m[1;31m(trade_id)[0m
+    [31m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[1;31m^^^^^^^^^^[0m
+  File [35m"C:\Users\TarunChopra\3700\strategies\fomo_trade.py"[0m, line [35m1037[0m, in [35m_recover_missing_entry_ids_for_trade[0m
+    if [1;31mbracket.get[0m("entry_order_id")
+       [1;31m^^^^^^^^^^^[0m
+[1;35mAttributeError[0m: [35m'bool' object has no attribute 'get'[0m

@@ -3,27 +3,27 @@ TICKER: ROK
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $451.50
-  ATR (14-day): $10.80
+  Price:        $473.67
+  ATR (14-day): $16.11
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $406.92 - $415.42
-  Size:         $8.50
-  Distance:     $36.08 (334% of ATR)
-  Formed:       2026-09-18
+  Range:        $417.12 - $428.01
+  Size:         $10.89
+  Distance:     $45.66 (283% of ATR)
+  Formed:       2026-08-31
   FRESHNESS:    STALE
   Notes:        STALE - Recent cached daily candle tested demand zone
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $457.37 - $468.11
-  Size:         $10.74
-  Distance:     $5.87
-  Formed:       2026-06-02
-  FRESHNESS:    FRESH
-  Notes:        Fresh - not tested recently
+  Range:        $463.67 - $474.49
+  Size:         $10.82
+  Distance:     $0.00
+  Formed:       2026-06-16
+  FRESHNESS:    STALE
+  Notes:        STALE - Price reached zone ($473.67 >= zone $463.67)
 
 TRADE METRICS:
-  Stop Loss Distance:  $44.58
-  Profit Target (PT):  $5.87
-  Risk:Reward Ratio:   1:0.13
+  Stop Loss Distance:  $56.55
+  Profit Target (PT):  $-10.00
+  Risk:Reward Ratio:   1:-0.18

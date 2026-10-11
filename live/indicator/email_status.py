@@ -5,9 +5,13 @@ import os
 import smtplib
 import sys
 import time
+import difflib
+import hashlib
+import threading
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from email.message import EmailMessage
+from urllib.request import Request, urlopen
 
 from alpaca.trading.enums import QueryOrderStatus
 from alpaca.trading.requests import GetOrdersRequest
@@ -22,9 +26,15 @@ if str(WORKSPACE_ROOT) not in sys.path:
 from roles.credentials import bootstrap_trading_auth
 
 
-POLL_SECONDS = 60
+POLL_SECONDS = 10
 DEFAULT_TO_EMAIL = "tarun.chopra@gmail.com"
 POSITIONS_DIR = WORKSPACE_ROOT / "positions"
+LOCAL_FOMO_CONFIG = WORKSPACE_ROOT / "lists" / "fomo_trade.txt"
+REMOTE_FOMO_CONFIG_URL = (
+    "https://raw.githubusercontent.com/tarunchopra-lgtm/3700/main/"
+    "live/lists/fomo_trade.txt"
+)
+REMOTE_CONFIG_TIMEOUT_SECONDS = 20
 
 
 @dataclass(frozen=True)
@@ -247,6 +257,118 @@ def _send_email(
         smtp.send_message(msg)
 
 
+def _active_config_symbols(text: str) -> set[str]:
+    """Return symbols from active, non-comment FOMO configuration lines."""
+    symbols = set()
+    for raw_line in text.splitlines():
+        parts = raw_line.strip().split()
+        if parts and not parts[0].startswith("#"):
+            symbols.add(parts[0].upper())
+    return symbols
+
+
+def _sync_remote_fomo_config() -> tuple[bool, str, set[str]]:
+    """Copy the remote FOMO config locally only when its content hash changes."""
+    cache_buster = str(int(time.time()))
+    request = Request(
+        f"{REMOTE_FOMO_CONFIG_URL}?check={cache_buster}",
+        headers={
+            "User-Agent": "3700-email-status/1.0",
+            "Cache-Control": "no-cache",
+            "Pragma": "no-cache",
+        },
+    )
+    with urlopen(request, timeout=REMOTE_CONFIG_TIMEOUT_SECONDS) as response:
+        remote_bytes = response.read()
+
+    remote_hash = hashlib.sha256(remote_bytes).hexdigest()
+    local_bytes = LOCAL_FOMO_CONFIG.read_bytes() if LOCAL_FOMO_CONFIG.exists() else b""
+    local_hash = hashlib.sha256(local_bytes).hexdigest()
+    print(
+        f"[{datetime.now().strftime('%H:%M:%S')}] [CONFIG] "
+        f"remote={remote_hash[:12]} local={local_hash[:12]}",
+        flush=True,
+    )
+    if local_hash == remote_hash:
+        return False, "", set()
+
+    old_text = local_bytes.decode("utf-8", errors="replace")
+    new_text = remote_bytes.decode("utf-8", errors="replace")
+    diff = "\n".join(
+        difflib.unified_diff(
+            old_text.splitlines(),
+            new_text.splitlines(),
+            fromfile=str(LOCAL_FOMO_CONFIG),
+            tofile=REMOTE_FOMO_CONFIG_URL,
+            lineterm="",
+        )
+    )
+
+    LOCAL_FOMO_CONFIG.parent.mkdir(parents=True, exist_ok=True)
+    temporary_path = LOCAL_FOMO_CONFIG.with_suffix(".tmp")
+    temporary_path.write_bytes(remote_bytes)
+    temporary_path.replace(LOCAL_FOMO_CONFIG)
+
+    changed_symbols = _active_config_symbols(old_text) | _active_config_symbols(new_text)
+    return True, diff or "Configuration content changed.", changed_symbols
+
+
+def _monitor_remote_fomo_config(
+    from_email: str,
+    to_email: str,
+    app_password: str,
+    stop_event: threading.Event,
+) -> None:
+    """Check the remote config on its own timer, independent of Alpaca polling."""
+    next_check = time.monotonic() + POLL_SECONDS
+    while True:
+        wait_seconds = max(0.0, next_check - time.monotonic())
+        if stop_event.wait(wait_seconds):
+            return
+        next_check += POLL_SECONDS
+        check_started = time.monotonic()
+        check_time = datetime.now().strftime("%H:%M:%S")
+        print(f"[{check_time}] [CONFIG] Checking GitHub config...", flush=True)
+        try:
+            config_changed, config_diff, config_symbols = _sync_remote_fomo_config()
+            elapsed = time.monotonic() - check_started
+            status = "CHANGED" if config_changed else "unchanged"
+            print(
+                f"[{datetime.now().strftime('%H:%M:%S')}] [CONFIG] "
+                f"GitHub check complete: {status} ({elapsed:.2f}s).",
+                flush=True,
+            )
+            if config_changed:
+                config_body = "FOMO configuration changed on GitHub.\n\n" + config_diff
+                config_attachments = _find_position_files(config_symbols)
+                _send_email(
+                    from_email,
+                    to_email,
+                    app_password,
+                    "FOMO Configuration Changed",
+                    config_body,
+                    config_attachments,
+                )
+                print(
+                    f"[{datetime.now().strftime('%H:%M:%S')}] "
+                    f"FOMO configuration email sent ({len(config_attachments)} attachment(s)).",
+                    flush=True,
+                )
+        except Exception as exc:
+            print(
+                f"[{datetime.now().strftime('%H:%M:%S')}] Remote FOMO config sync failed: {exc}",
+                flush=True,
+            )
+
+        elapsed = time.monotonic() - check_started
+        if elapsed > POLL_SECONDS:
+            print(
+                f"[{datetime.now().strftime('%H:%M:%S')}] "
+                f"Remote config check took {elapsed:.1f}s (target interval: {POLL_SECONDS}s).",
+                flush=True,
+            )
+
+
 def main() -> int:
     # Handle help flag
     if len(sys.argv) > 1:
@@ -264,7 +386,7 @@ DESCRIPTION:
   Monitors your Alpaca trading account for changes
   Tracks open/closed positions and order status changes
   Emails alerts when positions open/close or orders change
-  Runs continuously polling every 60 seconds
+    Runs continuously polling every 10 seconds
   Useful for passive monitoring without watching screen
 
 MONITORING:
@@ -284,7 +406,7 @@ ALERTS:
 EXAMPLE:
   python indicator/email_status.py
     - Start monitoring account
-    - Sends emails to configured address every minute if changes detected
+    - Sends emails to configured address when changes are detected
     - Press Ctrl+C to stop monitoring
 
 OUTPUT:
@@ -302,7 +424,7 @@ CONFIGURATION:
 NOTES:
   - Requires Alpaca API credentials
   - Requires Gmail account with app password configured
-  - Poll interval: 60 seconds (change POLL_SECONDS in code)
+    - Poll interval: 10 seconds (change POLL_SECONDS in code)
   - Runs as foreground process (start with & for background)
   - Best used with process manager for 24/7 monitoring
   - Compare each snapshot against previous to detect changes
@@ -324,6 +446,35 @@ NOTES:
     print(f"Email alerts will be sent to: {to_email}")
 
     try:
+        config_changed, config_diff, config_symbols = _sync_remote_fomo_config()
+        if config_changed:
+            config_body = "FOMO configuration changed on GitHub.\n\n" + config_diff
+            config_attachments = _find_position_files(config_symbols)
+            _send_email(
+                from_email,
+                to_email,
+                app_password,
+                "FOMO Configuration Changed",
+                config_body,
+                config_attachments,
+            )
+            print(
+                f"[{datetime.now().strftime('%H:%M:%S')}] "
+                f"FOMO configuration email sent ({len(config_attachments)} attachment(s))."
+            )
+    except Exception as exc:
+        print(f"[{datetime.now().strftime('%H:%M:%S')}] Remote FOMO config sync failed: {exc}")
+
+    config_stop_event = threading.Event()
+    config_thread = threading.Thread(
+        target=_monitor_remote_fomo_config,
+        args=(from_email, to_email, app_password, config_stop_event),
+        name="fomo-config-monitor",
+        daemon=True,
+    )
+    config_thread.start()
+
+    try:
         prev_positions = _snapshot_positions(trading_client)
         prev_orders = _snapshot_orders(trading_client)
     except Exception as exc:
@@ -338,31 +489,34 @@ NOTES:
             try:
                 curr_positions = _snapshot_positions(trading_client)
                 curr_orders = _snapshot_orders(trading_client)
-                change_lines, touched_symbols = _build_change_lines(prev_positions, curr_positions, prev_orders, curr_orders)
+                account_change_lines, touched_symbols = _build_change_lines(
+                    prev_positions, curr_positions, prev_orders, curr_orders
+                )
             except Exception as exc:
                 print(f"[{datetime.now().strftime('%H:%M:%S')}] Poll failed: {exc}")
                 continue
 
-            if change_lines:
+            if account_change_lines:
                 now = datetime.now(timezone.utc).astimezone().strftime("%Y-%m-%d %H:%M:%S %Z")
                 subject = "Alpaca Status Change Alert"
                 body = "\n".join(
                     [
-                        f"Detected account changes at {now}.",
+                        f"Detected changes at {now}.",
                         "",
-                        *change_lines,
+                        *account_change_lines,
                     ]
                 )
                 attachments = _find_position_files(touched_symbols)
                 try:
                     _send_email(from_email, to_email, app_password, subject, body, attachments)
-                    print(f"[{datetime.now().strftime('%H:%M:%S')}] Alert email sent ({len(change_lines)} change(s), {len(attachments)} attachment(s)).")
+                    print(f"[{datetime.now().strftime('%H:%M:%S')}] Alert email sent ({len(account_change_lines)} change(s), {len(attachments)} attachment(s)).")
                 except Exception as exc:
                     print(f"[{datetime.now().strftime('%H:%M:%S')}] Failed to send email: {exc}")
 
             prev_positions = curr_positions
             prev_orders = curr_orders
     except KeyboardInterrupt:
+        config_stop_event.set()
         print("Stopped by user.")
         return 0
 

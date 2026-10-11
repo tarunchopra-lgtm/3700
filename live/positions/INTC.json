@@ -1,29 +1,28 @@
 {
   "symbol": "INTC",
-  "qty": 2,
-  "entry_price": 116.0,
-  "entry_time": "2026-09-29T12:15:54.700948",
+  "qty": 20,
+  "entry_price": 105.5,
+  "entry_time": "2026-10-09T11:23:25.993571",
   "brackets": {
     "bracket1": {
-      "entry_order_id": "447ce04c-3d73-43a6-9eee-d76ca29fdee4",
+      "entry_order_id": "f2ad5615-88e7-434b-8d0e-c7443aba9aa8",
       "stop_order_id": null,
       "target_order_id": null,
-      "qty": 1,
-      "target_price": 119.0,
-      "stop_price": 115.5,
+      "qty": 10,
+      "target_price": 116.0,
+      "stop_price": 102.0,
       "status": "pending"
     },
     "bracket2": {
-      "entry_order_id": "dc837eac-f1a2-44e1-a9f9-4b1355119cd1",
-      "stop_order_id": "5992ab43-41c0-4ff7-9831-96363fb37a76",
-      "target_order_id": "b5412e13-7693-4861-9956-deb6146a3172",
-      "qty": 1,
+      "entry_order_id": "fa241b7b-ada0-4b2c-b93e-1e842c0f6ba8",
+      "stop_order_id": null,
+      "target_order_id": null,
+      "qty": 10,
       "target_price": 125.0,
-      "stop_price": 115.5,
+      "stop_price": 102.0,
       "status": "pending"
     }
   },
-  "last_updated": "2026-10-01T06:44:44.744328",
-  "current_price": 119.0,
-  "current_pnl": null
+  "last_updated": "2026-10-10T20:39:20.889180",
+  "stop_loss_tracker": 0
 }

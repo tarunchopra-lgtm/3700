@@ -331,7 +331,14 @@ $Trigger3 = New-ScheduledTaskTrigger -Daily -At 06:31
 Register-ScheduledTask -TaskName "zone_scan" -Action $Action3 -Trigger $Trigger3 -Description "Scan demand/supply zones on all symbols, update result files, and email report" -AsJob
 Write-Host "✓ Task 'zone_scan' created - runs daily at 6:31 AM (emails: daily_report.txt, found_zones.txt, pick.txt)"
 
+$Action3 = New-ScheduledTaskAction -Execute "python.exe" -Argument "strategies/zone_scan.py --all-sensitivities" -WorkingDirectory "C:\Users\TarunChopra\3700"
+$Trigger3 = New-ScheduledTaskTrigger -Daily -At 06:32
+Register-ScheduledTask -TaskName "zone_scan" -Action $Action3 -Trigger $Trigger3 -Description "Scan demand/supply zones on all symbols, update result files, and email report" -AsJob
+Write-Host "✓ Task 'zone_scan' created - runs daily at 6:32 AM (emails: daily_report.txt, found_zones.txt, pick.txt)"
+
+
 easily enable disable
+
 
 Disable-ScheduledTask -TaskName "3700 Daily Account Stat"
 Disable-ScheduledTask -TaskName "3700 Daily Breakout Email"
@@ -351,3 +358,29 @@ Enable-ScheduledTask -TaskName "zone_scan"
 $Action3 = New-ScheduledTaskAction -Execute "python.exe" -Argument "strategies/zone_scan.py " -WorkingDirectory "C:\Users\TarunChopra\3700"
 $Trigger3 = New-ScheduledTaskTrigger -Daily -At 06:31
 Register-ScheduledTask -TaskName "zone_scan" -Action $Action3 -Trigger $Trigger3 -Description "Scan demand/supply zones on all symbols, update result files, and email report" -AsJob
+
+
+$Action = New-ScheduledTaskAction `
+    -Execute "python.exe" `
+    -Argument "strategies/zone_scan.py --cache_daily_bars" `
+    -WorkingDirectory "C:\Users\TarunChopra\3700"
+
+$Trigger = New-ScheduledTaskTrigger -Daily -At "06:31"
+
+Set-ScheduledTask `
+    -TaskName "zone_scan_cache_candles" `
+    -Action $Action `
+    -Trigger $Trigger
+
+    $Action = New-ScheduledTaskAction `
+    -Execute "python.exe" `
+    -Argument "strategies/zone_scan.py --cache_daily_bars" `
+    -WorkingDirectory "C:\Users\TarunChopra\3700"
+
+$Trigger = New-ScheduledTaskTrigger -Daily -At "06:31"
+
+Register-ScheduledTask `
+    -TaskName "zone_scan_cache_candles" `
+    -Action $Action `
+    -Trigger $Trigger
+    -Description "Cache daily candles for zone scanning"

@@ -3,27 +3,27 @@ TICKER: AMP
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $490.08
-  ATR (14-day): $17.90
+  Price:        $498.61
+  ATR (14-day): $22.29
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $444.80 - $457.24
   Size:         $12.44
-  Distance:     $32.84 (183% of ATR)
+  Distance:     $41.37 (186% of ATR)
   Formed:       2026-06-26
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $534.21 - $549.35
-  Size:         $15.13
-  Distance:     $44.13
-  Formed:       2026-09-17
+  Range:        $552.48 - $561.79
+  Size:         $9.31
+  Distance:     $53.88
+  Formed:       2026-09-14
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $45.28
-  Profit Target (PT):  $44.13
-  Risk:Reward Ratio:   1:0.97
+  Stop Loss Distance:  $53.81
+  Profit Target (PT):  $53.88
+  Risk:Reward Ratio:   1:1.00

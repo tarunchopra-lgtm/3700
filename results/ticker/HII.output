@@ -3,27 +3,27 @@ TICKER: HII
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $285.57
-  ATR (14-day): $6.12
+  Price:        $279.09
+  ATR (14-day): $47.34
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $265.00 - $276.68
-  Size:         $11.67
-  Distance:     $8.89 (145% of ATR)
-  Formed:       2026-07-17
+  Range:        $256.82 - $269.41
+  Size:         $12.59
+  Distance:     $9.68 (20% of ATR)
+  Formed:       2026-09-29
   FRESHNESS:    STALE
-  Notes:        STALE - Daily candle tested zone yesterday (low $275.86)
+  Notes:        STALE - Recent cached daily candle tested demand zone
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $274.90 - $295.48
-  Size:         $20.58
-  Distance:     $0.00
-  Formed:       2026-06-22
-  FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($285.57 >= zone $274.90)
+  Range:        $290.80 - $298.59
+  Size:         $7.79
+  Distance:     $11.71
+  Formed:       2026-06-09
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $20.56
-  Profit Target (PT):  $-10.67
-  Risk:Reward Ratio:   1:-0.52
+  Stop Loss Distance:  $22.27
+  Profit Target (PT):  $11.71
+  Risk:Reward Ratio:   1:0.53

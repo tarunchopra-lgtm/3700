@@ -3,27 +3,27 @@ TICKER: SYK
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $298.80
-  ATR (14-day): $10.54
+  Price:        $298.10
+  ATR (14-day): $8.64
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $267.00 - $277.00
-  Size:         $10.00
-  Distance:     $21.80 (207% of ATR)
-  Formed:       2026-09-11
-  FRESHNESS:    FRESH
-  Notes:        Fresh - not tested recently
+  Range:        $271.39 - $277.41
+  Size:         $6.02
+  Distance:     $20.69 (239% of ATR)
+  Formed:       2026-09-30
+  FRESHNESS:    STALE
+  Notes:        STALE - Recent cached daily candle tested demand zone
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $329.25 - $334.75
-  Size:         $5.50
-  Distance:     $30.45
+  Range:        $329.29 - $334.71
+  Size:         $5.42
+  Distance:     $31.19
   Formed:       2026-06-29
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $31.80
-  Profit Target (PT):  $30.45
-  Risk:Reward Ratio:   1:0.96
+  Stop Loss Distance:  $26.71
+  Profit Target (PT):  $31.19
+  Risk:Reward Ratio:   1:1.17

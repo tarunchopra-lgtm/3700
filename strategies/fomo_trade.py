@@ -105,6 +105,41 @@ WORKSPACE_ROOT = Path(__file__).resolve().parent.parent
 if str(WORKSPACE_ROOT) not in sys.path:
     sys.path.insert(0, str(WORKSPACE_ROOT))
 
+
+class _TerminalOutputTee:
+    """Write program output to both the terminal and the FOMO log file."""
+
+    def __init__(self, terminal, log_file) -> None:
+        self.terminal = terminal
+        self.log_file = log_file
+
+    def write(self, text: str) -> int:
+        written = self.terminal.write(text)
+        self.log_file.write(text)
+        self.flush()
+        return written
+
+    def flush(self) -> None:
+        self.terminal.flush()
+        self.log_file.flush()
+
+    def __getattr__(self, name):
+        return getattr(self.terminal, name)
+
+
+def setup_output_logging() -> None:
+    """Mirror all stdout and stderr output to logs/fomo_trade.log."""
+    log_directory = WORKSPACE_ROOT / "logs"
+    log_directory.mkdir(parents=True, exist_ok=True)
+    log_file = (log_directory / "fomo_trade.log").open(
+        mode="a", encoding="utf-8", buffering=1
+    )
+    sys.stdout = _TerminalOutputTee(sys.stdout, log_file)
+    sys.stderr = _TerminalOutputTee(sys.stderr, log_file)
+
+
+setup_output_logging()
+
 from roles.credentials import bootstrap_trading_auth
 
 # Position tracking directory
@@ -294,6 +329,14 @@ def save_bracket_file(symbol: str, bracket_num: int, entry_order_id: str = None,
     # Keep symbol-level tracker values aligned with the active config when a
     # new entry or updated bracket is persisted.
     pos_data["symbol"] = symbol
+    pos_data.setdefault("both_positions_stop_loss_today", 0)
+    pos_data.setdefault("stop_loss_count_date", datetime.now().date().isoformat())
+    if entry_order_id is not None:
+        previous_status = pos_data.get("brackets", {}).get(
+            f"bracket{bracket_num}", {}
+        ).get("status")
+        if previous_status in ("target_filled", "stopped_out"):
+            pos_data["stop_loss_cycle_recorded"] = False
     if entry_price is not None:
         pos_data["entry_price"] = entry_price
     if qty is not None:
@@ -376,6 +419,27 @@ def save_position_status(symbol: str, qty: float, entry_price: float,
     pos_data["current_price"] = current_price
     pos_data["current_pnl"] = current_pnl
     save_position_tracking(symbol, pos_data)
+    if bracket1_status == "stopped_out" and bracket2_status == "stopped_out":
+        _record_both_positions_stop_loss(symbol)
+
+
+def _record_both_positions_stop_loss(trade_id: str) -> int:
+    """Count one completed two-bracket stop-loss cycle for the current day."""
+    pos_data = load_position_tracking(trade_id) or {"symbol": trade_id}
+    today = datetime.now().date().isoformat()
+    if pos_data.get("stop_loss_count_date") != today:
+        pos_data["both_positions_stop_loss_today"] = 0
+        pos_data["stop_loss_count_date"] = today
+        pos_data["stop_loss_cycle_recorded"] = False
+
+    if not pos_data.get("stop_loss_cycle_recorded", False):
+        pos_data["both_positions_stop_loss_today"] = int(
+            pos_data.get("both_positions_stop_loss_today", 0)
+        ) + 1
+        pos_data["stop_loss_cycle_recorded"] = True
+        save_position_tracking(trade_id, pos_data)
+
+    return int(pos_data.get("both_positions_stop_loss_today", 0))
 
 
 def load_position_status(symbol: str) -> dict | None:
@@ -619,6 +683,26 @@ def _submit_entry_order(trade_id: str, qty: float, limit_price: float,
         )
     order = _create_limit_order(
         trade_id, qty, OrderSide.BUY, limit_price, time_in_force, is_stock
+    )
+    return trading_client.submit_order(order_data=order)
+
+
+def _submit_market_entry_order(trade_id: str, qty: float, is_stock: bool):
+    """Submit a market re-entry only after the buy-limit safety check passes."""
+    if is_stock and not _is_regular_market_open():
+        raise ValueError(
+            f"Market re-entry blocked for {trade_id}: Alpaca regular market session is closed"
+        )
+    if not _entry_price_is_reached(trade_id):
+        raise ValueError(
+            f"Market re-entry blocked for {trade_id}: live price is below "
+            "the configured buy limit"
+        )
+    order = MarketOrderRequest(
+        symbol=_broker_symbol(trade_id),
+        qty=qty,
+        side=OrderSide.BUY,
+        time_in_force=TimeInForce.DAY,
     )
     return trading_client.submit_order(order_data=order)
 
@@ -1597,11 +1681,12 @@ def _cleanup_orphan_position_files(active_trade_ids: set[str]) -> None:
             print(f"[CONFIG] ⚠ Could not delete orphan tracker {position_file.name}: {error}")
 
 
-def _place_entry_orders_for_symbols(symbols_to_place):
+def _place_entry_orders_for_symbols(symbols_to_place, market_reentry: bool = False):
     """
-    Place two half-size limit entry orders at the configured entry price.
+    Place two half-size entry orders at the configured entry price.
 
-    Their OCO exit pairs are submitted after both entries fill.
+    Fresh entries remain limit orders. A market order is used only for a
+    qualifying post-stop re-entry, after the same price safety check passes.
     """
     for symbol in symbols_to_place:
         if symbol not in trade_states:
@@ -1609,6 +1694,7 @@ def _place_entry_orders_for_symbols(symbols_to_place):
         
         cfg = trade_states[symbol]["config"]
         state = trade_states[symbol]["state"]
+        state["market_reentry"] = market_reentry
         
         try:
             # Do not park a buy limit while price is below the configured entry.
@@ -1630,15 +1716,22 @@ def _place_entry_orders_for_symbols(symbols_to_place):
                 print(f"[{symbol}] ⊘ Bracket 1 target already filled; skipping entry")
             else:
                 try:
-                    entry1_response = _submit_entry_order(
-                        symbol, float(cfg["bracket_qty"]), cfg["entry_price"],
-                        cfg["order_time_in_force"], not cfg["is_crypto"] and not cfg["is_option"]
-                    )
+                    if market_reentry:
+                        entry1_response = _submit_market_entry_order(
+                            symbol, float(cfg["bracket_qty"]),
+                            not cfg["is_crypto"] and not cfg["is_option"],
+                        )
+                    else:
+                        entry1_response = _submit_entry_order(
+                            symbol, float(cfg["bracket_qty"]), cfg["entry_price"],
+                            cfg["order_time_in_force"], not cfg["is_crypto"] and not cfg["is_option"]
+                        )
                     entry1_id = str(entry1_response.id)
                     if entry1_id:
                         state["bracket1"]["entry_order_id"] = entry1_id
                         bracket1_placed = True
-                        print(f"[{symbol}] ✓ Bracket 1: BUY {cfg['bracket_qty']} @ ${cfg['entry_price']:.2f} (ID: {entry1_id})")
+                        order_type = "MARKET" if market_reentry else f"LIMIT ${cfg['entry_price']:.2f}"
+                        print(f"[{symbol}] ✓ Bracket 1: BUY {cfg['bracket_qty']} ({order_type}) (ID: {entry1_id})")
                     else:
                         print(f"[{symbol}] ✗ Bracket 1: No response ID")
                 except Exception as e:
@@ -1651,15 +1744,22 @@ def _place_entry_orders_for_symbols(symbols_to_place):
                 print(f"[{symbol}] ⊘ Bracket 2 target already filled; skipping entry")
             else:
                 try:
-                    entry2_response = _submit_entry_order(
-                        symbol, float(cfg["bracket_qty"]), cfg["entry_price"],
-                        cfg["order_time_in_force"], not cfg["is_crypto"] and not cfg["is_option"]
-                    )
+                    if market_reentry:
+                        entry2_response = _submit_market_entry_order(
+                            symbol, float(cfg["bracket_qty"]),
+                            not cfg["is_crypto"] and not cfg["is_option"],
+                        )
+                    else:
+                        entry2_response = _submit_entry_order(
+                            symbol, float(cfg["bracket_qty"]), cfg["entry_price"],
+                            cfg["order_time_in_force"], not cfg["is_crypto"] and not cfg["is_option"]
+                        )
                     entry2_id = str(entry2_response.id)
                     if entry2_id:
                         state["bracket2"]["entry_order_id"] = entry2_id
                         bracket2_placed = True
-                        print(f"[{symbol}] ✓ Bracket 2: BUY {cfg['bracket_qty']} @ ${cfg['entry_price']:.2f} (ID: {entry2_id})")
+                        order_type = "MARKET" if market_reentry else f"LIMIT ${cfg['entry_price']:.2f}"
+                        print(f"[{symbol}] ✓ Bracket 2: BUY {cfg['bracket_qty']} ({order_type}) (ID: {entry2_id})")
                     else:
                         print(f"[{symbol}] ✗ Bracket 2: No response ID")
                 except Exception as e:
@@ -1689,6 +1789,7 @@ def _place_entry_orders_for_symbols(symbols_to_place):
                     qty=cfg["bracket_qty"]
                 )
             if bracket1_placed and bracket2_placed:
+                state["market_reentry"] = False
                 print(f"[{symbol}] ✓ Both native bracket entries placed.\n")
         except Exception as e:
             print(f"[{symbol}] ✗ Critical error in placement: {e}\n")
@@ -2205,13 +2306,20 @@ try:
             # Safety: If bracket 1 placed but bracket 2 missing, place bracket 2 now
             if b1_entry_id and not b2_entry_id:
                 try:
-                    entry2_response = _submit_entry_order(
-                        symbol, float(cfg["bracket_qty"]), cfg["entry_price"],
-                        cfg["order_time_in_force"], not cfg["is_crypto"] and not cfg["is_option"]
-                    )
+                    if state.get("market_reentry", False):
+                        entry2_response = _submit_market_entry_order(
+                            symbol, float(cfg["bracket_qty"]),
+                            not cfg["is_crypto"] and not cfg["is_option"],
+                        )
+                    else:
+                        entry2_response = _submit_entry_order(
+                            symbol, float(cfg["bracket_qty"]), cfg["entry_price"],
+                            cfg["order_time_in_force"], not cfg["is_crypto"] and not cfg["is_option"]
+                        )
                     entry2_id = str(entry2_response.id)
                     if entry2_id:
                         state["bracket2"]["entry_order_id"] = entry2_id
+                        state["market_reentry"] = False
                         save_bracket_file(symbol, 2, entry_order_id=entry2_id,
                                         entry_price=cfg["entry_price"], stop_price=cfg["stop_price"],
                                         target_price=cfg["target2_price"], qty=cfg["bracket_qty"])
@@ -2513,8 +2621,18 @@ try:
                     # This means: Bracket1 either hit target1 OR stop
                     #            Bracket2 either hit target2 OR stop
                     # Now wait for price to return to entry level to re-enter
+                    position_data = load_position_tracking(symbol) or {}
+                    stop_loss_count = int(
+                        position_data.get("both_positions_stop_loss_today", 0)
+                    )
                     try:
                         if _entry_price_is_reached(symbol):
+                            market_reentry = stop_loss_count >= 1
+                            reentry_order_description = (
+                                "market"
+                                if market_reentry
+                                else f"limit ${cfg['entry_price']:.2f}"
+                            )
                             current_price = _get_current_price(symbol)
                             # Price has returned to or passed the entry level.
                             print(f"\n[{current_time.strftime('%H:%M:%S')}] [{symbol}] 🔄 RE-ENTRY OPPORTUNITY!")
@@ -2523,11 +2641,9 @@ try:
                                 f"has reached buy limit ${cfg['entry_price']:.2f}"
                             )
                             print(
-                                f"  Placing new orders at limit ${cfg['entry_price']:.2f}\n"
+                                f"  Placing {reentry_order_description} "
+                                f"orders (both-stop count today: {stop_loss_count})\n"
                             )
-                            
-                            # Clear position status (position territory cleared)
-                            remove_position_status(symbol)
                             
                             # Reset bracket states
                             state["bracket1"] = {
@@ -2542,10 +2658,13 @@ try:
                                 "target_order_id": None,
                                 "filled": False,
                             }
+                            state["market_reentry"] = market_reentry
                             
                             # Place new bracket orders
                             try:
-                                _place_entry_orders_for_symbols([symbol])
+                                _place_entry_orders_for_symbols(
+                                    [symbol], market_reentry=market_reentry
+                                )
                             except Exception as e:
                                 print(f"  ✗ Error placing new bracket orders: {e}\n")
                     

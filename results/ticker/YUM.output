@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: YUM
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $146.19
+  ATR (14-day): $3.83
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $136.30 - $138.48
+  Size:         $2.18
+  Distance:     $7.71 (201% of ATR)
+  Formed:       2026-09-29
+  FRESHNESS:    STALE
+  Notes:        STALE - Recent cached daily candle tested demand zone
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $151.99 - $154.56
+  Size:         $2.57
+  Distance:     $5.80
+  Formed:       2026-08-28
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+TRADE METRICS:
+  Stop Loss Distance:  $9.89
+  Profit Target (PT):  $5.80
+  Risk:Reward Ratio:   1:0.59

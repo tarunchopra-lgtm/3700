@@ -3,14 +3,14 @@ TICKER: PRU
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $112.09
-  ATR (14-day): $2.77
+  Price:        $114.61
+  ATR (14-day): $2.99
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $106.77 - $109.27
   Size:         $2.50
-  Distance:     $2.82 (102% of ATR)
+  Distance:     $5.34 (178% of ATR)
   Formed:       2026-06-25
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
@@ -18,12 +18,12 @@ DEMAND ZONE (Buy Zone):
 SUPPLY ZONE (Sell Zone):
   Range:        $117.72 - $119.62
   Size:         $1.90
-  Distance:     $5.63
+  Distance:     $3.11
   Formed:       2026-09-24
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $5.32
-  Profit Target (PT):  $5.63
-  Risk:Reward Ratio:   1:1.06
+  Stop Loss Distance:  $7.84
+  Profit Target (PT):  $3.11
+  Risk:Reward Ratio:   1:0.40

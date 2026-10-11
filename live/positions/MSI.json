@@ -1,27 +1,28 @@
 {
   "symbol": "MSI",
   "qty": 2,
-  "entry_price": 446.88,
-  "entry_time": "2026-10-01T12:59:16.255986",
+  "entry_price": 445.0,
+  "entry_time": "2026-10-09T11:23:27.025723",
   "brackets": {
     "bracket1": {
-      "entry_order_id": "98c95925-7ad1-4f68-856d-d1e1c548da53",
-      "stop_order_id": null,
-      "target_order_id": null,
+      "entry_order_id": "37a7a26f-cb78-459d-b86d-db3cdd8c1102",
+      "stop_order_id": "ec9653e3-674c-4bc6-9786-f70af087f0ca",
+      "target_order_id": "3479a437-bc8f-4bdd-be2c-a670fd8fbebc",
       "qty": 1,
-      "target_price": 448.0,
-      "stop_price": 446.0,
+      "target_price": 452.0,
+      "stop_price": 440.0,
       "status": "pending"
     },
     "bracket2": {
-      "entry_order_id": "b7371921-ce75-4622-87f0-cb53b9073ba8",
-      "stop_order_id": null,
-      "target_order_id": null,
+      "entry_order_id": "f8978488-b167-4df6-b22b-980b9c9ce38a",
+      "stop_order_id": "31b78f30-9cf8-45b5-9b08-d5f1ca152e91",
+      "target_order_id": "97f14f35-f869-4f17-bb2e-56339a049ab0",
       "qty": 1,
       "target_price": 480.0,
-      "stop_price": 446.0,
+      "stop_price": 440.0,
       "status": "pending"
     }
   },
-  "last_updated": "2026-10-01T12:59:16.285043"
+  "last_updated": "2026-10-10T20:39:26.617276",
+  "stop_loss_tracker": 0
 }

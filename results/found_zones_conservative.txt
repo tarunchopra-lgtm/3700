@@ -1,49 +1,556 @@
 ========================================================================================================================
 FOUND ZONES - CONSERVATIVE SENSITIVITY
-Generated: 2026-09-22 21:52:17
+Generated: 2026-10-09 06:16:39
 ========================================================================================================================
 
-Total Zones Found: 32
-Sorted by: Distance to Demand Zone (closest first)
+All Tickers Analyzed: 541
+Results are shown in lists/ order.
 
-  1. PEG    | $   73.66 | Demand: $70.06-$70.94 | Supply: $75.47-$76.43 | Dist: $  2.72 (211% ATR) [ ] | RR: 1:0.50 | Fresh: D✗S✓
-  2. SO     | $   90.45 | Demand: $85.87-$87.04 | Supply: $92.48-$93.37 | Dist: $  3.41 (242% ATR) [ ] | RR: 1:0.44 | Fresh: D✗S✓
-  3. FITB   | $   57.11 | Demand: $52.72-$53.55 | Supply: $57.41-$58.46 | Dist: $  3.56 (282% ATR) [ ] | RR: 1:0.07 | Fresh: D✗S✓
-  4. SRE    | $   85.53 | Demand: $80.84-$81.71 | Supply: $88.37-$89.69 | Dist: $  3.82 (249% ATR) [ ] | RR: 1:0.61 | Fresh: D✗S✓
-  5. VZ     | $   49.27 | Demand: $42.91-$43.87 | Supply: $50.94-$51.66 | Dist: $  5.41 (459% ATR) [ ] | RR: 1:0.26 | Fresh: D✓S✓
-  6. KR     | $   63.26 | Demand: $56.37-$57.37 | Supply: $63.62-$65.01 | Dist: $  5.89 (335% ATR) [ ] | RR: 1:0.05 | Fresh: D✓S✓
-  7. MTB    | $  238.01 | Demand: $224.87-$227.76 | Supply: $251.62-$255.64 | Dist: $ 10.25 (210% ATR) [ ] | RR: 1:1.04 | Fresh: D✗S✓
-  8. DLR    | $  195.30 | Demand: $181.48-$185.02 | Supply: $197.91-$201.40 | Dist: $ 10.28 (220% ATR) [ ] | RR: 1:0.19 | Fresh: D✗S✓
-  9. SPG    | $  217.39 | Demand: $202.94-$205.96 | Supply: $218.84-$221.53 | Dist: $ 11.43 (320% ATR) [ ] | RR: 1:0.10 | Fresh: D✗S✓
- 10. MMM    | $  177.78 | Demand: $162.91-$166.05 | Supply: $178.28-$180.97 | Dist: $ 11.73 (320% ATR) [ ] | RR: 1:0.03 | Fresh: D✗S✓
- 11. ADP    | $  284.31 | Demand: $268.01-$272.01 | Supply: $285.25-$287.85 | Dist: $ 12.30 (214% ATR) [ ] | RR: 1:0.06 | Fresh: D✗S✓
- 12. Q      | $  133.35 | Demand: $116.25-$120.63 | Supply: $139.99-$143.73 | Dist: $ 12.72 (264% ATR) [ ] | RR: 1:0.39 | Fresh: D✗S✓
- 13. BNY    | $  159.14 | Demand: $143.72-$146.16 | Supply: $161.21-$163.51 | Dist: $ 12.98 (375% ATR) [ ] | RR: 1:0.13 | Fresh: D✓S✓
- 14. DHI    | $  154.18 | Demand: $137.42-$140.37 | Supply: $162.07-$165.69 | Dist: $ 13.81 (340% ATR) [ ] | RR: 1:0.47 | Fresh: D✗S✓
- 15. PRU    | $  123.13 | Demand: $107.43-$109.27 | Supply: $124.39-$126.19 | Dist: $ 13.86 (568% ATR) [ ] | RR: 1:0.08 | Fresh: D✓S✓
- 16. CB     | $  356.16 | Demand: $337.25-$342.07 | Supply: $360.61-$365.84 | Dist: $ 14.09 (231% ATR) [ ] | RR: 1:0.24 | Fresh: D✗S✓
- 17. PNC    | $  251.67 | Demand: $229.99-$233.81 | Supply: $254.63-$258.92 | Dist: $ 17.85 (317% ATR) [ ] | RR: 1:0.14 | Fresh: D✗S✓
- 18. ABNB   | $  170.84 | Demand: $149.58-$152.50 | Supply: $180.29-$184.22 | Dist: $ 18.34 (382% ATR) [ ] | RR: 1:0.44 | Fresh: D✓S✓
- 19. HLT    | $  327.27 | Demand: $302.11-$307.88 | Supply: $328.49-$334.17 | Dist: $ 19.39 (300% ATR) [ ] | RR: 1:0.05 | Fresh: D✗S✓
- 20. WTW    | $  314.50 | Demand: $286.80-$293.99 | Supply: $320.03-$324.95 | Dist: $ 20.51 (264% ATR) [ ] | RR: 1:0.20 | Fresh: D✓S✓
- 21. BR     | $  172.39 | Demand: $143.16-$147.44 | Supply: $177.95-$182.46 | Dist: $ 24.95 (540% ATR) [ ] | RR: 1:0.19 | Fresh: D✓S✓
- 22. UNP    | $  291.13 | Demand: $258.19-$263.17 | Supply: $306.24-$311.19 | Dist: $ 27.96 (484% ATR) [ ] | RR: 1:0.46 | Fresh: D✓S✓
- 23. LDOS   | $  136.63 | Demand: $103.95-$107.52 | Supply: $138.78-$142.37 | Dist: $ 29.11 (697% ATR) [ ] | RR: 1:0.07 | Fresh: D✓S✓
- 24. ERIE   | $  247.11 | Demand: $209.97-$214.53 | Supply: $248.75-$254.53 | Dist: $ 32.58 (473% ATR) [ ] | RR: 1:0.04 | Fresh: D✓S✓
- 25. CDNS   | $  314.58 | Demand: $273.20-$281.84 | Supply: $337.94-$346.56 | Dist: $ 32.74 (353% ATR) [ ] | RR: 1:0.56 | Fresh: D✓S✓
- 26. CAH    | $  236.22 | Demand: $194.12-$196.84 | Supply: $246.18-$249.21 | Dist: $ 39.38 (733% ATR) [ ] | RR: 1:0.24 | Fresh: D✓S✓
- 27. AMGN   | $  427.64 | Demand: $374.62-$386.44 | Supply: $435.23-$445.49 | Dist: $ 41.20 (349% ATR) [ ] | RR: 1:0.14 | Fresh: D✗S✓
- 28. LII    | $  410.13 | Demand: $356.67-$366.12 | Supply: $530.49-$539.58 | Dist: $ 44.01 (373% ATR) [ ] | RR: 1:2.25 | Fresh: D✗S✓
- 29. GRMN   | $  298.43 | Demand: $238.90-$242.87 | Supply: $309.26-$313.67 | Dist: $ 55.56 (915% ATR) [ ] | RR: 1:0.18 | Fresh: D✓S✓
- 30. TDY    | $  661.61 | Demand: $593.62-$604.40 | Supply: $675.33-$685.74 | Dist: $ 57.21 (522% ATR) [ ] | RR: 1:0.20 | Fresh: D✓S✓
- 31. AXON   | $  483.73 | Demand: $403.35-$425.32 | Supply: $597.06-$614.84 | Dist: $ 58.41 (259% ATR) [ ] | RR: 1:1.41 | Fresh: D✓S✓
- 32. WDC    | $  489.09 | Demand: $407.20-$427.96 | Supply: $586.34-$663.92 | Dist: $ 61.13 (248% ATR) [ ] | RR: 1:1.19 | Fresh: D✓S✓
+  1. SPY      | No cached data / no zone found
+  2. QQQ      | No cached data / no zone found
+  3. IWM      | No cached data / no zone found
+  4. DIA      | No cached data / no zone found
+  5. VTI      | No cached data / no zone found
+  6. VOO      | No cached data / no zone found
+  7. EFA      | No cached data / no zone found
+  8. EEM      | No cached data / no zone found
+  9. VEA      | No cached data / no zone found
+ 10. VWO      | No cached data / no zone found
+ 11. GLD      | No cached data / no zone found
+ 12. SLV      | $   54.69 | Demand: $53.60-$54.26 (2026-08-04) | Supply: $56.27-$60.36 (2026-09-15)
+ 13. TLT      | No cached data / no zone found
+ 14. IEF      | No cached data / no zone found
+ 15. HYG      | No cached data / no zone found
+ 16. LQD      | No cached data / no zone found
+ 17. XLF      | No cached data / no zone found
+ 18. XLK      | No cached data / no zone found
+ 19. XLE      | No cached data / no zone found
+ 20. XLV      | No cached data / no zone found
+ 21. XLI      | No cached data / no zone found
+ 22. XLP      | No cached data / no zone found
+ 23. XLY      | No cached data / no zone found
+ 24. XLB      | No cached data / no zone found
+ 25. XLU      | No cached data / no zone found
+ 26. ADBE     | No cached data / no zone found
+ 27. AMD      | No cached data / no zone found
+ 28. ABNB     | No cached data / no zone found
+ 29. ALNY     | No cached data / no zone found
+ 30. GOOGL    | No cached data / no zone found
+ 31. GOOG     | No cached data / no zone found
+ 32. AMZN     | No cached data / no zone found
+ 33. AEP      | No cached data / no zone found
+ 34. AMGN     | $  423.43 | Demand: $375.20-$384.61 (2026-09-14) | Supply: $435.23-$445.49 (2026-09-02)
+ 35. ADI      | No cached data / no zone found
+ 36. AAPL     | No cached data / no zone found
+ 37. AMAT     | No cached data / no zone found
+ 38. APP      | No cached data / no zone found
+ 39. ARM      | No cached data / no zone found
+ 40. ASML     | No cached data / no zone found
+ 41. ALAB     | No cached data / no zone found
+ 42. ADSK     | No cached data / no zone found
+ 43. ADP      | No cached data / no zone found
+ 44. AXON     | No cached data / no zone found
+ 45. BKR      | No cached data / no zone found
+ 46. BKNG     | No cached data / no zone found
+ 47. AVGO     | No cached data / no zone found
+ 48. CDNS     | No cached data / no zone found
+ 49. CTAS     | No cached data / no zone found
+ 50. CSCO     | No cached data / no zone found
+ 51. CCEP     | No cached data / no zone found
+ 52. CMCSA    | No cached data / no zone found
+ 53. CEG      | No cached data / no zone found
+ 54. CPRT     | No cached data / no zone found
+ 55. CRWV     | No cached data / no zone found
+ 56. COST     | No cached data / no zone found
+ 57. CRWD     | No cached data / no zone found
+ 58. CSX      | No cached data / no zone found
+ 59. DDOG     | No cached data / no zone found
+ 60. DXCM     | No cached data / no zone found
+ 61. FANG     | No cached data / no zone found
+ 62. DASH     | No cached data / no zone found
+ 63. EXC      | No cached data / no zone found
+ 64. FAST     | No cached data / no zone found
+ 65. FER      | No cached data / no zone found
+ 66. FTNT     | No cached data / no zone found
+ 67. GEHC     | No cached data / no zone found
+ 68. GILD     | No cached data / no zone found
+ 69. HONA     | No cached data / no zone found
+ 70. HON      | No cached data / no zone found
+ 71. IDXX     | No cached data / no zone found
+ 72. INTC     | No cached data / no zone found
+ 73. INTU     | No cached data / no zone found
+ 74. ISRG     | No cached data / no zone found
+ 75. KDP      | No cached data / no zone found
+ 76. KLAC     | No cached data / no zone found
+ 77. KHC      | No cached data / no zone found
+ 78. LRCX     | No cached data / no zone found
+ 79. LIN      | No cached data / no zone found
+ 80. LITE     | No cached data / no zone found
+ 81. MAR      | No cached data / no zone found
+ 82. MRVL     | No cached data / no zone found
+ 83. MELI     | No cached data / no zone found
+ 84. META     | No cached data / no zone found
+ 85. MCHP     | No cached data / no zone found
+ 86. MU       | No cached data / no zone found
+ 87. MSFT     | No cached data / no zone found
+ 88. MSTR     | No cached data / no zone found
+ 89. MDLZ     | No cached data / no zone found
+ 90. MPWR     | No cached data / no zone found
+ 91. MNST     | No cached data / no zone found
+ 92. NBIS     | No cached data / no zone found
+ 93. NFLX     | No cached data / no zone found
+ 94. NVDA     | No cached data / no zone found
+ 95. NXPI     | No cached data / no zone found
+ 96. ORLY     | No cached data / no zone found
+ 97. ODFL     | No cached data / no zone found
+ 98. PCAR     | No cached data / no zone found
+ 99. PLTR     | No cached data / no zone found
+100. PANW     | No cached data / no zone found
+101. PAYX     | $  109.80 | Demand: $98.57-$101.17 (2026-10-05) | Supply: $113.39-$116.67 (2026-09-17)
+102. PYPL     | No cached data / no zone found
+103. PDD      | No cached data / no zone found
+104. PEP      | No cached data / no zone found
+105. QCOM     | No cached data / no zone found
+106. REGN     | No cached data / no zone found
+107. RKLB     | No cached data / no zone found
+108. ROP      | No cached data / no zone found
+109. ROST     | No cached data / no zone found
+110. SNDK     | No cached data / no zone found
+111. STX      | No cached data / no zone found
+112. SHOP     | No cached data / no zone found
+113. SPCX     | No cached data / no zone found
+114. SBUX     | No cached data / no zone found
+115. SNPS     | No cached data / no zone found
+116. TMUS     | No cached data / no zone found
+117. TTWO     | No cached data / no zone found
+118. TER      | No cached data / no zone found
+119. TSLA     | No cached data / no zone found
+120. TXN      | No cached data / no zone found
+121. TRI      | No cached data / no zone found
+122. VRTX     | No cached data / no zone found
+123. WMT      | No cached data / no zone found
+124. WBD      | No cached data / no zone found
+125. WDC      | No cached data / no zone found
+126. MMM      | No cached data / no zone found
+127. AOS      | No cached data / no zone found
+128. ABT      | No cached data / no zone found
+129. ABBV     | No cached data / no zone found
+130. ACN      | No cached data / no zone found
+131. AES      | No cached data / no zone found
+132. AFL      | No cached data / no zone found
+133. A        | No cached data / no zone found
+134. APD      | No cached data / no zone found
+135. AKAM     | No cached data / no zone found
+136. ALB      | No cached data / no zone found
+137. ARE      | No cached data / no zone found
+138. ALGN     | No cached data / no zone found
+139. ALLE     | No cached data / no zone found
+140. LNT      | No cached data / no zone found
+141. ALL      | No cached data / no zone found
+142. MO       | No cached data / no zone found
+143. AMCR     | No cached data / no zone found
+144. AEE      | No cached data / no zone found
+145. AXP      | No cached data / no zone found
+146. AIG      | No cached data / no zone found
+147. AMT      | No cached data / no zone found
+148. AWK      | No cached data / no zone found
+149. AMP      | No cached data / no zone found
+150. AME      | No cached data / no zone found
+151. APH      | No cached data / no zone found
+152. AON      | No cached data / no zone found
+153. APA      | No cached data / no zone found
+154. APO      | No cached data / no zone found
+155. APTV     | No cached data / no zone found
+156. ACGL     | No cached data / no zone found
+157. ADM      | No cached data / no zone found
+158. ARES     | No cached data / no zone found
+159. ANET     | No cached data / no zone found
+160. AJG      | No cached data / no zone found
+161. AIZ      | No cached data / no zone found
+162. T        | No cached data / no zone found
+163. ATO      | No cached data / no zone found
+164. AZO      | No cached data / no zone found
+165. AVY      | No cached data / no zone found
+166. BALL     | No cached data / no zone found
+167. BAC      | No cached data / no zone found
+168. BAX      | No cached data / no zone found
+169. BDX      | No cached data / no zone found
+170. BRK.B    | No cached data / no zone found
+171. BBY      | No cached data / no zone found
+172. TECH     | No cached data / no zone found
+173. BIIB     | No cached data / no zone found
+174. BLK      | No cached data / no zone found
+175. BX       | No cached data / no zone found
+176. XYZ      | No cached data / no zone found
+177. BNY      | No cached data / no zone found
+178. BA       | No cached data / no zone found
+179. BSX      | No cached data / no zone found
+180. BMY      | No cached data / no zone found
+181. BR       | $  175.34 | Demand: $156.00-$160.39 (2026-10-05) | Supply: $181.00-$185.82 (2026-08-25)
+182. BRO      | No cached data / no zone found
+183. BF.B     | No cached data / no zone found
+184. BLDR     | No cached data / no zone found
+185. BG       | No cached data / no zone found
+186. BXP      | No cached data / no zone found
+187. CHRW     | No cached data / no zone found
+188. CPT      | No cached data / no zone found
+189. COF      | No cached data / no zone found
+190. CAH      | No cached data / no zone found
+191. CCL      | No cached data / no zone found
+192. CARR     | No cached data / no zone found
+193. CVNA     | No cached data / no zone found
+194. CASY     | No cached data / no zone found
+195. CAT      | No cached data / no zone found
+196. CBOE     | No cached data / no zone found
+197. CBRE     | No cached data / no zone found
+198. CDW      | No cached data / no zone found
+199. COR      | No cached data / no zone found
+200. CNC      | No cached data / no zone found
+201. CNP      | No cached data / no zone found
+202. CF       | No cached data / no zone found
+203. CRL      | No cached data / no zone found
+204. SCHW     | No cached data / no zone found
+205. CHTR     | No cached data / no zone found
+206. CVX      | No cached data / no zone found
+207. CMG      | No cached data / no zone found
+208. CB       | No cached data / no zone found
+209. CHD      | No cached data / no zone found
+210. CIEN     | No cached data / no zone found
+211. CI       | No cached data / no zone found
+212. CINF     | No cached data / no zone found
+213. C        | No cached data / no zone found
+214. CFG      | No cached data / no zone found
+215. CLX      | No cached data / no zone found
+216. CME      | No cached data / no zone found
+217. CMS      | No cached data / no zone found
+218. KO       | No cached data / no zone found
+219. CTSH     | No cached data / no zone found
+220. COHR     | No cached data / no zone found
+221. COIN     | No cached data / no zone found
+222. CL       | No cached data / no zone found
+223. FIX      | No cached data / no zone found
+224. COP      | No cached data / no zone found
+225. ED       | No cached data / no zone found
+226. STZ      | No cached data / no zone found
+227. COO      | No cached data / no zone found
+228. GLW      | No cached data / no zone found
+229. CPAY     | No cached data / no zone found
+230. CTVA     | No cached data / no zone found
+231. CSGP     | No cached data / no zone found
+232. CRH      | No cached data / no zone found
+233. CCI      | No cached data / no zone found
+234. CMI      | No cached data / no zone found
+235. CVS      | No cached data / no zone found
+236. DHR      | No cached data / no zone found
+237. DRI      | No cached data / no zone found
+238. DVA      | No cached data / no zone found
+239. DECK     | No cached data / no zone found
+240. DE       | No cached data / no zone found
+241. DELL     | No cached data / no zone found
+242. DAL      | No cached data / no zone found
+243. DVN      | No cached data / no zone found
+244. DLR      | No cached data / no zone found
+245. DG       | No cached data / no zone found
+246. DLTR     | No cached data / no zone found
+247. D        | No cached data / no zone found
+248. DPZ      | No cached data / no zone found
+249. DOV      | No cached data / no zone found
+250. DOW      | No cached data / no zone found
+251. DHI      | No cached data / no zone found
+252. DTE      | No cached data / no zone found
+253. DUK      | No cached data / no zone found
+254. DD       | No cached data / no zone found
+255. ETN      | No cached data / no zone found
+256. EBAY     | No cached data / no zone found
+257. ECHO     | No cached data / no zone found
+258. ECL      | No cached data / no zone found
+259. EIX      | No cached data / no zone found
+260. EW       | No cached data / no zone found
+261. ELV      | No cached data / no zone found
+262. EME      | No cached data / no zone found
+263. EMR      | No cached data / no zone found
+264. ETR      | No cached data / no zone found
+265. EOG      | No cached data / no zone found
+266. EQT      | No cached data / no zone found
+267. EFX      | No cached data / no zone found
+268. EQIX     | No cached data / no zone found
+269. ERIE     | No cached data / no zone found
+270. ESS      | No cached data / no zone found
+271. EL       | No cached data / no zone found
+272. EG       | No cached data / no zone found
+273. EVRG     | No cached data / no zone found
+274. ES       | No cached data / no zone found
+275. EXE      | No cached data / no zone found
+276. EXPE     | No cached data / no zone found
+277. EXPD     | No cached data / no zone found
+278. EXR      | No cached data / no zone found
+279. XOM      | No cached data / no zone found
+280. FFIV     | No cached data / no zone found
+281. FDS      | No cached data / no zone found
+282. FICO     | No cached data / no zone found
+283. FRT      | No cached data / no zone found
+284. FDX      | No cached data / no zone found
+285. FDXF     | No cached data / no zone found
+286. FERG     | No cached data / no zone found
+287. FIS      | No cached data / no zone found
+288. FITB     | No cached data / no zone found
+289. FSLR     | No cached data / no zone found
+290. FE       | No cached data / no zone found
+291. FISV     | No cached data / no zone found
+292. FLEX     | No cached data / no zone found
+293. F        | No cached data / no zone found
+294. FTV      | No cached data / no zone found
+295. FOXA     | No cached data / no zone found
+296. BEN      | No cached data / no zone found
+297. FCX      | No cached data / no zone found
+298. GRMN     | No cached data / no zone found
+299. IT       | No cached data / no zone found
+300. GE       | No cached data / no zone found
+301. GEV      | No cached data / no zone found
+302. GEN      | No cached data / no zone found
+303. GNRC     | No cached data / no zone found
+304. GD       | No cached data / no zone found
+305. GIS      | No cached data / no zone found
+306. GM       | No cached data / no zone found
+307. GPC      | No cached data / no zone found
+308. GPN      | No cached data / no zone found
+309. GL       | No cached data / no zone found
+310. GDDY     | No cached data / no zone found
+311. GS       | No cached data / no zone found
+312. HAL      | No cached data / no zone found
+313. HIG      | No cached data / no zone found
+314. HAS      | No cached data / no zone found
+315. HCA      | No cached data / no zone found
+316. DOC      | No cached data / no zone found
+317. HSIC     | No cached data / no zone found
+318. HSY      | No cached data / no zone found
+319. HPE      | No cached data / no zone found
+320. HLT      | No cached data / no zone found
+321. HD       | No cached data / no zone found
+322. HRL      | No cached data / no zone found
+323. HST      | No cached data / no zone found
+324. HWM      | No cached data / no zone found
+325. HPQ      | No cached data / no zone found
+326. HUBB     | No cached data / no zone found
+327. HUM      | No cached data / no zone found
+328. HBAN     | No cached data / no zone found
+329. HII      | No cached data / no zone found
+330. IBM      | No cached data / no zone found
+331. IEX      | No cached data / no zone found
+332. ITW      | No cached data / no zone found
+333. INCY     | No cached data / no zone found
+334. IR       | No cached data / no zone found
+335. PODD     | No cached data / no zone found
+336. IBKR     | No cached data / no zone found
+337. ICE      | No cached data / no zone found
+338. IFF      | No cached data / no zone found
+339. IP       | No cached data / no zone found
+340. IVZ      | No cached data / no zone found
+341. INVH     | No cached data / no zone found
+342. IQV      | No cached data / no zone found
+343. IRM      | No cached data / no zone found
+344. JBHT     | No cached data / no zone found
+345. JBL      | No cached data / no zone found
+346. JKHY     | No cached data / no zone found
+347. J        | No cached data / no zone found
+348. JNJ      | No cached data / no zone found
+349. JCI      | No cached data / no zone found
+350. JPM      | No cached data / no zone found
+351. KVUE     | No cached data / no zone found
+352. KEY      | No cached data / no zone found
+353. KEYS     | No cached data / no zone found
+354. KMB      | No cached data / no zone found
+355. KIM      | No cached data / no zone found
+356. KMI      | No cached data / no zone found
+357. KKR      | No cached data / no zone found
+358. KR       | No cached data / no zone found
+359. LHX      | No cached data / no zone found
+360. LH       | No cached data / no zone found
+361. LVS      | No cached data / no zone found
+362. LDOS     | No cached data / no zone found
+363. LEN      | No cached data / no zone found
+364. LII      | No cached data / no zone found
+365. LLY      | No cached data / no zone found
+366. LYV      | No cached data / no zone found
+367. LMT      | No cached data / no zone found
+368. L        | No cached data / no zone found
+369. LOW      | No cached data / no zone found
+370. LULU     | No cached data / no zone found
+371. LYB      | No cached data / no zone found
+372. MTB      | No cached data / no zone found
+373. MPC      | No cached data / no zone found
+374. MRSH     | No cached data / no zone found
+375. MLM      | No cached data / no zone found
+376. MAS      | No cached data / no zone found
+377. MA       | No cached data / no zone found
+378. MKC      | No cached data / no zone found
+379. MCD      | $  247.54 | Demand: $230.64-$234.22 (2026-10-06) | Supply: $247.69-$250.50 (2026-09-17)
+380. MCK      | No cached data / no zone found
+381. MDT      | No cached data / no zone found
+382. MRK      | No cached data / no zone found
+383. MET      | No cached data / no zone found
+384. MTD      | No cached data / no zone found
+385. MGM      | No cached data / no zone found
+386. MAA      | No cached data / no zone found
+387. MRNA     | No cached data / no zone found
+388. TAP      | No cached data / no zone found
+389. MCO      | No cached data / no zone found
+390. MS       | No cached data / no zone found
+391. MOS      | No cached data / no zone found
+392. MSI      | No cached data / no zone found
+393. MSCI     | No cached data / no zone found
+394. NDAQ     | No cached data / no zone found
+395. NTAP     | No cached data / no zone found
+396. NEM      | No cached data / no zone found
+397. NWSA     | No cached data / no zone found
+398. NEE      | No cached data / no zone found
+399. NKE      | No cached data / no zone found
+400. NI       | No cached data / no zone found
+401. NDSN     | No cached data / no zone found
+402. NSC      | No cached data / no zone found
+403. NTRS     | No cached data / no zone found
+404. NOC      | No cached data / no zone found
+405. NCLH     | No cached data / no zone found
+406. NRG      | No cached data / no zone found
+407. NUE      | No cached data / no zone found
+408. NVR      | No cached data / no zone found
+409. OXY      | No cached data / no zone found
+410. OMC      | No cached data / no zone found
+411. ON       | No cached data / no zone found
+412. OKE      | No cached data / no zone found
+413. ORCL     | No cached data / no zone found
+414. OTIS     | No cached data / no zone found
+415. PKG      | No cached data / no zone found
+416. PSKY     | No cached data / no zone found
+417. PH       | No cached data / no zone found
+418. PNR      | No cached data / no zone found
+419. PFE      | No cached data / no zone found
+420. PCG      | No cached data / no zone found
+421. PM       | No cached data / no zone found
+422. PSX      | No cached data / no zone found
+423. PNW      | No cached data / no zone found
+424. PNC      | No cached data / no zone found
+425. PPG      | No cached data / no zone found
+426. PPL      | No cached data / no zone found
+427. PFG      | No cached data / no zone found
+428. PG       | No cached data / no zone found
+429. PGR      | No cached data / no zone found
+430. PLD      | No cached data / no zone found
+431. PRU      | No cached data / no zone found
+432. PEG      | No cached data / no zone found
+433. PTC      | No cached data / no zone found
+434. PSA      | No cached data / no zone found
+435. PHM      | No cached data / no zone found
+436. PWR      | No cached data / no zone found
+437. DGX      | No cached data / no zone found
+438. Q        | No cached data / no zone found
+439. RL       | No cached data / no zone found
+440. RJF      | $  170.02 | Demand: $148.16-$152.79 (2026-06-29) | Supply: $173.49-$176.40 (2026-09-09)
+441. RDDT     | No cached data / no zone found
+442. RTX      | No cached data / no zone found
+443. O        | No cached data / no zone found
+444. REG      | No cached data / no zone found
+445. RF       | No cached data / no zone found
+446. RSG      | No cached data / no zone found
+447. RMD      | No cached data / no zone found
+448. RVTY     | No cached data / no zone found
+449. HOOD     | No cached data / no zone found
+450. ROK      | No cached data / no zone found
+451. ROL      | No cached data / no zone found
+452. RCL      | No cached data / no zone found
+453. SPGI     | No cached data / no zone found
+454. CRM      | No cached data / no zone found
+455. SBAC     | No cached data / no zone found
+456. SLB      | No cached data / no zone found
+457. SRE      | No cached data / no zone found
+458. NOW      | No cached data / no zone found
+459. SHW      | No cached data / no zone found
+460. SPG      | No cached data / no zone found
+461. SWKS     | No cached data / no zone found
+462. SJM      | No cached data / no zone found
+463. SW       | No cached data / no zone found
+464. SNA      | No cached data / no zone found
+465. SOLV     | No cached data / no zone found
+466. SO       | No cached data / no zone found
+467. LUV      | No cached data / no zone found
+468. SWK      | No cached data / no zone found
+469. STT      | No cached data / no zone found
+470. STLD     | No cached data / no zone found
+471. STE      | No cached data / no zone found
+472. SYK      | No cached data / no zone found
+473. SMCI     | No cached data / no zone found
+474. SYF      | No cached data / no zone found
+475. SYY      | No cached data / no zone found
+476. TROW     | No cached data / no zone found
+477. TPR      | No cached data / no zone found
+478. TRGP     | No cached data / no zone found
+479. TGT      | No cached data / no zone found
+480. TEL      | No cached data / no zone found
+481. TDY      | No cached data / no zone found
+482. TPL      | No cached data / no zone found
+483. TXT      | No cached data / no zone found
+484. TMO      | No cached data / no zone found
+485. TJX      | No cached data / no zone found
+486. TKO      | No cached data / no zone found
+487. TTD      | No cached data / no zone found
+488. TSCO     | No cached data / no zone found
+489. TT       | No cached data / no zone found
+490. TDG      | No cached data / no zone found
+491. TRV      | No cached data / no zone found
+492. TRMB     | No cached data / no zone found
+493. TFC      | No cached data / no zone found
+494. TYL      | No cached data / no zone found
+495. TSN      | No cached data / no zone found
+496. USB      | No cached data / no zone found
+497. UBER     | No cached data / no zone found
+498. UDR      | No cached data / no zone found
+499. ULTA     | No cached data / no zone found
+500. UNP      | No cached data / no zone found
+501. UAL      | No cached data / no zone found
+502. UPS      | No cached data / no zone found
+503. URI      | No cached data / no zone found
+504. UNH      | No cached data / no zone found
+505. UHS      | No cached data / no zone found
+506. VLO      | No cached data / no zone found
+507. VEEV     | No cached data / no zone found
+508. VTR      | No cached data / no zone found
+509. VLTO     | No cached data / no zone found
+510. VRSN     | No cached data / no zone found
+511. VRSK     | No cached data / no zone found
+512. VZ       | No cached data / no zone found
+513. VRT      | No cached data / no zone found
+514. VTRS     | No cached data / no zone found
+515. VICI     | No cached data / no zone found
+516. V        | No cached data / no zone found
+517. VST      | No cached data / no zone found
+518. VMRK     | No cached data / no zone found
+519. VMC      | No cached data / no zone found
+520. WRB      | No cached data / no zone found
+521. GWW      | No cached data / no zone found
+522. WAB      | No cached data / no zone found
+523. DIS      | No cached data / no zone found
+524. WM       | No cached data / no zone found
+525. WAT      | No cached data / no zone found
+526. WEC      | No cached data / no zone found
+527. WFC      | No cached data / no zone found
+528. WELL     | No cached data / no zone found
+529. WST      | No cached data / no zone found
+530. WY       | No cached data / no zone found
+531. WSM      | No cached data / no zone found
+532. WMB      | No cached data / no zone found
+533. WTW      | No cached data / no zone found
+534. WDAY     | No cached data / no zone found
+535. WYNN     | No cached data / no zone found
+536. XEL      | No cached data / no zone found
+537. XYL      | No cached data / no zone found
+538. YUM      | No cached data / no zone found
+539. ZBRA     | No cached data / no zone found
+540. ZBH      | No cached data / no zone found
+541. ZTS      | No cached data / no zone found
 
 ========================================================================================================================
-LEGEND:
-  [✓] Within 1 ATR from demand zone (actionable)
-  Dist: Distance from current price to demand zone
-  ATR %: Distance as percentage of Average True Range
-  RR: Risk:Reward ratio (higher is better)
-  Fresh: D=Demand zone fresh, S=Supply zone fresh
-  ✓ = Fresh (not tested), ✗ = Stale (already tested)
+TOP 2 CLOSEST TO DEMAND
+Sorted by current-price distance to the demand-zone high.
+
+  1. RJF      | Current: $170.02 | Demand: $148.16-$152.79 (2026-06-29) | Distance: $17.23
+  2. AMGN     | Current: $423.43 | Demand: $375.20-$384.61 (2026-09-14) | Distance: $38.82

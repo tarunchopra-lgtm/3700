@@ -3,27 +3,27 @@ TICKER: DLTR
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $115.06
-  ATR (14-day): $3.70
+  Price:        $118.58
+  ATR (14-day): $4.18
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $107.69 - $110.30
-  Size:         $2.61
-  Distance:     $4.76 (129% of ATR)
-  Formed:       2026-06-05
+  Range:        $109.58 - $113.17
+  Size:         $3.59
+  Distance:     $5.41 (130% of ATR)
+  Formed:       2026-06-10
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
   Range:        $129.96 - $133.43
   Size:         $3.47
-  Distance:     $14.90
+  Distance:     $11.38
   Formed:       2026-09-03
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $7.37
-  Profit Target (PT):  $14.90
-  Risk:Reward Ratio:   1:2.02
+  Stop Loss Distance:  $9.00
+  Profit Target (PT):  $11.38
+  Risk:Reward Ratio:   1:1.26

@@ -1,10 +1,6 @@
 TOP 20 - BALANCED FRESH DEMAND ZONES
-Generated: 2026-10-01 07:36:52
+Generated: 2026-10-09 06:16:39
 Filter: demand is fresh, price is within one ATR, closest first.
 =========================================================================================================
 
-#   TICKER   PRICE       DEMAND ZONE             DISTANCE      ATR         R:R       
----------------------------------------------------------------------------------------------------------
-1   USB      $56.31      $55.19-$56.05           $0.26         $1.58       1:5.29    
-2   BKNG     $160.99     $155.38-$159.21         $1.78         $5.82       1:8.88    
-3   GLD      $382.00     $373.83-$376.64         $5.36         $60.12      1:0.78    
+No fresh demand zones within one ATR were found.

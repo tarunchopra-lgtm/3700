@@ -1,0 +1,28 @@
+{
+  "symbol": "HON",
+  "qty": 4,
+  "entry_price": 204.72,
+  "entry_time": "2026-10-09T09:35:00.611766",
+  "brackets": {
+    "bracket1": {
+      "entry_order_id": "a81f9eea-8478-45a8-bfcf-d40f728566a6",
+      "stop_order_id": null,
+      "target_order_id": null,
+      "qty": 2,
+      "target_price": 210.0,
+      "stop_price": 200.0,
+      "status": "pending"
+    },
+    "bracket2": {
+      "entry_order_id": "b9f66ba3-1bc6-4798-8e01-ff18633d8740",
+      "stop_order_id": null,
+      "target_order_id": null,
+      "qty": 2,
+      "target_price": 232.0,
+      "stop_price": 200.0,
+      "status": "pending"
+    }
+  },
+  "last_updated": "2026-10-10T20:39:20.963361",
+  "stop_loss_tracker": 0
+}

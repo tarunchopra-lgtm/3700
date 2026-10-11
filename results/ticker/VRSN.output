@@ -3,27 +3,27 @@ TICKER: VRSN
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $317.10
-  ATR (14-day): $8.64
+  Price:        $308.15
+  ATR (14-day): $9.38
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $244.74 - $251.04
-  Size:         $6.30
-  Distance:     $66.06 (765% of ATR)
+  Range:        $244.84 - $249.91
+  Size:         $5.06
+  Distance:     $58.24 (621% of ATR)
   Formed:       2026-06-23
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $289.51 - $303.00
-  Size:         $13.49
-  Distance:     $14.10
-  Formed:       2026-08-03
+  Range:        $300.82 - $308.22
+  Size:         $7.40
+  Distance:     $0.00
+  Formed:       2026-09-18
   FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($317.10 >= zone $289.51)
+  Notes:        STALE - Price reached zone ($308.15 >= zone $300.82)
 
 TRADE METRICS:
-  Stop Loss Distance:  $72.36
-  Profit Target (PT):  $-27.59
-  Risk:Reward Ratio:   1:-0.38
+  Stop Loss Distance:  $63.31
+  Profit Target (PT):  $-7.33
+  Risk:Reward Ratio:   1:-0.12

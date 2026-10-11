@@ -3,27 +3,27 @@ TICKER: CDW
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $129.72
-  ATR (14-day): $6.07
+  Price:        $139.84
+  ATR (14-day): $6.71
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $107.95 - $111.34
-  Size:         $3.39
-  Distance:     $18.38 (303% of ATR)
-  Formed:       2026-05-22
+  Range:        $126.29 - $130.00
+  Size:         $3.70
+  Distance:     $9.85 (147% of ATR)
+  Formed:       2026-06-11
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
   Range:        $145.30 - $150.34
   Size:         $5.03
-  Distance:     $15.58
+  Distance:     $5.46
   Formed:       2026-09-22
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $21.77
-  Profit Target (PT):  $15.58
-  Risk:Reward Ratio:   1:0.72
+  Stop Loss Distance:  $13.55
+  Profit Target (PT):  $5.46
+  Risk:Reward Ratio:   1:0.40

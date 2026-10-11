@@ -89,7 +89,7 @@ import re
 import sys
 import requests
 from alpaca.common.exceptions import APIError
-from alpaca.trading.requests import GetOrderByIdRequest, GetOrdersRequest, LimitOrderRequest, MarketOrderRequest, ReplaceOrderRequest, StopLossRequest, StopOrderRequest, TakeProfitRequest
+from alpaca.trading.requests import GetOrderByIdRequest, GetOrdersRequest, LimitOrderRequest, MarketOrderRequest, ReplaceOrderRequest, StopLimitOrderRequest, StopLossRequest, StopOrderRequest, TakeProfitRequest
 from alpaca.trading.enums import OrderClass, OrderSide, TimeInForce, QueryOrderStatus
 from alpaca.data.enums import DataFeed, OptionsFeed
 from alpaca.data.historical import CryptoHistoricalDataClient, StockHistoricalDataClient, OptionHistoricalDataClient
@@ -104,6 +104,29 @@ import sys
 WORKSPACE_ROOT = Path(__file__).resolve().parent.parent
 if str(WORKSPACE_ROOT) not in sys.path:
     sys.path.insert(0, str(WORKSPACE_ROOT))
+
+
+class _Tee:
+    def __init__(self, *streams):
+        self.streams = streams
+
+    def write(self, text):
+        for stream in self.streams:
+            stream.write(text)
+            stream.flush()
+
+    def flush(self):
+        for stream in self.streams:
+            stream.flush()
+
+
+LOGS_DIR = WORKSPACE_ROOT / "logs"
+LOGS_DIR.mkdir(exist_ok=True)
+LOG_FILE = open(LOGS_DIR / "fomo_trade.lo", "a", encoding="utf-8", buffering=1)
+sys.stdout = _Tee(sys.stdout, LOG_FILE)
+sys.stderr = _Tee(sys.stderr, LOG_FILE)
+
+STOP_LIMIT_ENTRY_BUFFER = 0.10
 
 from roles.credentials import bootstrap_trading_auth
 
@@ -285,6 +308,7 @@ def save_bracket_file(symbol: str, bracket_num: int, entry_order_id: str = None,
             "qty": qty * 2 if qty else 0,
             "entry_price": entry_price,
             "entry_time": datetime.now().isoformat(),
+            "stop_loss_tracker": 0,
             "brackets": {
                 "bracket1": {"status": "pending"},
                 "bracket2": {"status": "pending"}
@@ -298,6 +322,7 @@ def save_bracket_file(symbol: str, bracket_num: int, entry_order_id: str = None,
         pos_data["entry_price"] = entry_price
     if qty is not None:
         pos_data["qty"] = qty * 2
+    pos_data["stop_loss_tracker"] = int(pos_data.get("stop_loss_tracker", 0) or 0)
     
     pos_data["brackets"][f"bracket{bracket_num}"] = {
         "entry_order_id": entry_order_id,
@@ -371,11 +396,70 @@ def save_position_status(symbol: str, qty: float, entry_price: float,
     }
     pos_data["qty"] = qty
     pos_data["entry_price"] = entry_price
+    pos_data["stop_loss_tracker"] = int(pos_data.get("stop_loss_tracker", 0) or 0)
     pos_data.setdefault("brackets", {}).setdefault("bracket1", {})["status"] = bracket1_status
     pos_data.setdefault("brackets", {}).setdefault("bracket2", {})["status"] = bracket2_status
     pos_data["current_price"] = current_price
     pos_data["current_pnl"] = current_pnl
     save_position_tracking(symbol, pos_data)
+
+
+def _get_stop_loss_tracker(symbol: str) -> int:
+    pos_data = load_position_tracking(symbol)
+    if not pos_data:
+        return 0
+    return int(pos_data.get("stop_loss_tracker", 0) or 0)
+
+
+def _increment_stop_loss_tracker(symbol: str) -> int:
+    pos_data = load_position_tracking(symbol) or {
+        "symbol": symbol,
+        "qty": 0,
+        "brackets": {},
+    }
+    tracker = int(pos_data.get("stop_loss_tracker", 0) or 0) + 1
+    pos_data["stop_loss_tracker"] = tracker
+    save_position_tracking(symbol, pos_data)
+    return tracker
+
+
+def _cancel_buy_entries_after_stop_limit(trade_id: str) -> None:
+    """Cancel open buy entries after the stop-loss trading limit is reached."""
+    try:
+        open_orders = _get_open_orders_for_symbol(trade_id)
+    except Exception as error:
+        print(f"[{trade_id}] Could not inspect open buy entries after stop limit: {error}")
+        return
+
+    state = trade_states[trade_id]["state"]
+    for order in open_orders:
+        order_id = str(getattr(order, "id", ""))
+        side = str(getattr(order, "side", "")).lower()
+        status = str(getattr(order, "status", "")).lower()
+        if not side.endswith("buy") or not any(
+            marker in status for marker in ("new", "open", "accepted", "pending", "held")
+        ):
+            continue
+        try:
+            trading_client.cancel_order_by_id(order_id)
+            print(f"[{trade_id}] Cancelled buy entry {order_id}: stop_loss_tracker exceeded 10")
+            for bracket_num in (1, 2):
+                bracket = state[f"bracket{bracket_num}"]
+                if bracket.get("entry_order_id") != order_id:
+                    continue
+                bracket["entry_order_id"] = None
+                save_bracket_file(
+                    trade_id,
+                    bracket_num,
+                    entry_price=trade_states[trade_id]["config"]["entry_price"],
+                    stop_price=trade_states[trade_id]["config"]["stop_price"],
+                    target_price=trade_states[trade_id]["config"][
+                        "target1_price" if bracket_num == 1 else "target2_price"
+                    ],
+                    qty=trade_states[trade_id]["config"]["bracket_qty"],
+                )
+        except Exception as error:
+            print(f"[{trade_id}] Could not cancel buy entry {order_id}: {error}")
 
 
 def load_position_status(symbol: str) -> dict | None:
@@ -400,8 +484,19 @@ def load_position_status(symbol: str) -> dict | None:
 
 
 def remove_position_status(symbol: str) -> bool:
-    """Legacy wrapper: removes position tracking file"""
-    return remove_position_tracking(symbol)
+    """Clear completed position status while retaining the stop-loss counter."""
+    pos_data = load_position_tracking(symbol)
+    if not pos_data:
+        return False
+
+    pos_data["qty"] = 0
+    pos_data["stop_loss_tracker"] = int(pos_data.get("stop_loss_tracker", 0) or 0)
+    pos_data["brackets"] = {
+        "bracket1": {"status": "pending"},
+        "bracket2": {"status": "pending"},
+    }
+    save_position_tracking(symbol, pos_data)
+    return True
 
 
 
@@ -583,6 +678,23 @@ def _create_limit_order(symbol: str, qty: float, side: OrderSide, limit_price: f
     return LimitOrderRequest(**order_dict)
 
 
+def _create_stop_limit_entry_order(symbol: str, qty: float, entry_price: float,
+                                   time_in_force: TimeInForce, is_stock: bool = False) -> StopLimitOrderRequest:
+    """Create a buy stop-limit that activates when price crosses the entry."""
+    buy_limit_price = round(entry_price + STOP_LIMIT_ENTRY_BUFFER, 2)
+    order_dict = {
+        "symbol": _broker_symbol(symbol),
+        "qty": qty,
+        "side": OrderSide.BUY,
+        "time_in_force": time_in_force,
+        "limit_price": buy_limit_price,
+        "stop_price": round(entry_price, 2),
+    }
+    if is_stock and EXTENDED_HOURS_ENABLED:
+        order_dict["extended_hours"] = True
+    return StopLimitOrderRequest(**order_dict)
+
+
 # Order helper pattern:
 #   1. validate local conditions,
 #   2. build an Alpaca request object,
@@ -607,19 +719,29 @@ def _entry_price_is_reached(trade_id: str) -> bool:
 
 def _submit_entry_order(trade_id: str, qty: float, limit_price: float,
                         time_in_force: TimeInForce, is_stock: bool):
-    """Submit a buy limit order only while the live price is above its limit."""
+    """Submit a limit buy above entry, or a stop-market buy below entry."""
+    stop_loss_tracker = _get_stop_loss_tracker(trade_id)
+    if stop_loss_tracker > 10:
+        raise ValueError(
+            f"Buy blocked for {trade_id}: stop_loss_tracker is {stop_loss_tracker}, above limit 10"
+        )
     if is_stock and not _is_regular_market_open():
         raise ValueError(
             f"Entry blocked for {trade_id}: Alpaca regular market session is closed"
         )
-    if not _entry_price_is_reached(trade_id):
+    buy_safety_price = _get_buy_safety_price(trade_id)
+    print(f"[{trade_id}] Live current/ask safety price: ${buy_safety_price:.2f} | Entry: ${limit_price:.2f}")
+    if buy_safety_price == limit_price:
         raise ValueError(
-            f"Entry blocked for {trade_id}: live price is below "
-            f"configured limit ${limit_price:.2f}"
+            f"Entry blocked for {trade_id}: live price equals configured entry "
+            f"${limit_price:.2f}"
         )
-    order = _create_limit_order(
-        trade_id, qty, OrderSide.BUY, limit_price, time_in_force, is_stock
-    )
+    if buy_safety_price > limit_price:
+        print(f"[{trade_id}] Placing limit BUY at ${limit_price:.2f}")
+        order = _create_limit_order(trade_id, qty, OrderSide.BUY, limit_price, time_in_force, is_stock)
+    else:
+        print(f"[{trade_id}] Placing stop-market BUY: stop ${limit_price:.2f}")
+        order = _create_stop_order(trade_id, qty, OrderSide.BUY, limit_price, time_in_force, is_stock)
     return trading_client.submit_order(order_data=order)
 
 
@@ -1058,12 +1180,15 @@ def _refresh_completed_tracker_for_position(trade_id: str, position) -> bool:
     if position_qty <= 0:
         return False
 
+    existing_tracker = _get_stop_loss_tracker(trade_id)
+
     _reset_trade_order_tracking(trade_id)
     position_data = {
         "symbol": trade_id,
         "qty": position_qty,
         "entry_price": cfg["entry_price"],
         "entry_time": datetime.now().isoformat(),
+        "stop_loss_tracker": existing_tracker,
         "brackets": {
             "bracket1": {
                 "entry_order_id": None,
@@ -1142,6 +1267,18 @@ def _reconcile_trade_tracker(trade_id: str) -> bool:
                     print(f"[RECONCILE] [{trade_id}] Cancelled stale exit {order_id}")
                 except Exception as error:
                     print(f"[RECONCILE] [{trade_id}] Could not cancel stale exit {order_id}: {error}")
+
+    position_data = load_position_tracking(trade_id)
+    if position_data and "stop_loss_tracker" in position_data:
+        position_data["qty"] = 0
+        position_data["brackets"] = {
+            "bracket1": {"status": "pending"},
+            "bracket2": {"status": "pending"},
+        }
+        save_position_tracking(trade_id, position_data)
+        _reset_trade_order_tracking(trade_id)
+        print(f"[RECONCILE] [{trade_id}] No broker position remains; preserved stop-loss tracker")
+        return True
 
     if remove_position_tracking(trade_id):
         _reset_trade_order_tracking(trade_id)
@@ -1484,6 +1621,11 @@ def _restore_trade_tracking(trade_id: str) -> None:
             f"target={bracket['target_order_id']}"
         )
 
+    position_data = load_position_tracking(trade_id)
+    if position_data is not None and "stop_loss_tracker" not in position_data:
+        position_data["stop_loss_tracker"] = 0
+        save_position_tracking(trade_id, position_data)
+
 
 def _migrate_single_tracker_for_duplicates(configs: list[tuple]) -> None:
     """Rename SYMBOL.json to SYMBOL_1.json when that ticker gains a second config line."""
@@ -1611,10 +1753,6 @@ def _place_entry_orders_for_symbols(symbols_to_place):
         state = trade_states[symbol]["state"]
         
         try:
-            # Do not park a buy limit while price is below the configured entry.
-            if not _entry_price_is_reached(symbol):
-                continue
-            
             # Check for existing position
             existing_pos = _find_position_for_symbol(symbol, retries=1, delay_seconds=0.0)
             if existing_pos and not cfg["is_duplicate_ticker"]:
@@ -1715,6 +1853,9 @@ def _cancel_pending_entries_below_limit(trade_id: str) -> None:
             order = trading_client.get_order_by_id(entry_id)
             status = str(getattr(order, "status", "")).lower()
             side = str(getattr(order, "side", "")).lower()
+            order_type = str(getattr(order, "type", "")).lower()
+            if "stop" in order_type:
+                continue
             if "buy" not in side or not any(
                 marker in status for marker in ("new", "open", "accepted", "pending", "held")
             ):
@@ -2468,6 +2609,10 @@ try:
                             # Bracket hit stop loss! Half the position exits at loss
                             stop_price = outcome["stop_price"]
                             print(f"[{current_time.strftime('%H:%M:%S')}] [{symbol}] Bracket {bracket_num} STOPPED OUT ⚠ @ ${stop_price:.2f}")
+                            stop_loss_tracker = _increment_stop_loss_tracker(symbol)
+                            print(f"[{symbol}] stop_loss_tracker incremented to {stop_loss_tracker}")
+                            if stop_loss_tracker > 10:
+                                _cancel_buy_entries_after_stop_limit(symbol)
                             bracket["filled"] = True
                             remove_bracket_file(symbol, bracket_num)
                             

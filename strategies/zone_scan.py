@@ -759,7 +759,7 @@ def compile_daily_report(all_setups: list, report_path: Path, sensitivity: str =
     Compile daily report with analysis metrics sorted by demand/gap ratio.
     
     Report shows:
-    TICKER CURRENT_PRICE ATR DEMAND_ZONE SUPPLY_ZONE GAP SIZE_DEMAND RATIO_DEMAND_vs_GAP
+    TICKER PRICE ATR_DISTANCE DEMAND_ZONE SUPPLY_ZONE GAP_%
     
     Sorted by: ratio_of_demand_zone_vs_gap (ascending - tighter zones first)
     """
@@ -782,6 +782,8 @@ def compile_daily_report(all_setups: list, report_path: Path, sensitivity: str =
     for setup in complete_setups:
         gap = setup.supply_zone_low - setup.demand_zone_high
         size_demand = setup.demand_zone_size
+        atr_distance = setup.distance_to_demand() / setup.atr if setup.atr > 0 else float("inf")
+        gap_percent = gap / size_demand * 100 if size_demand > 0 else 0
         
         # Ratio = demand zone size / gap between zones
         # Lower ratio = smaller demand zone relative to gap = tighter setup
@@ -791,9 +793,11 @@ def compile_daily_report(all_setups: list, report_path: Path, sensitivity: str =
             'ticker': setup.symbol,
             'current_price': setup.current_price,
             'atr': setup.atr,
+            'atr_distance': atr_distance,
             'demand_zone': f"${setup.demand_zone_low:.2f}-${setup.demand_zone_high:.2f}",
             'supply_zone': f"${setup.supply_zone_low:.2f}-${setup.supply_zone_high:.2f}",
             'gap': gap,
+            'gap_percent': gap_percent,
             'size_demand': size_demand,
             'ratio': ratio,
             'setup': setup  # Keep reference for additional info
@@ -808,7 +812,7 @@ def compile_daily_report(all_setups: list, report_path: Path, sensitivity: str =
         f.write(f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
         f.write("="*120 + "\n\n")
         # Header with column names
-        f.write(f"{'TICKER':<8} {'PRICE':<10} {'ATR':<8} {'DEMAND_ZONE':<25} {'SUPPLY_ZONE':<25} {'GAP':<8} {'D_SIZE':<8} {'RATIO':<8}\n")
+        f.write(f"{'TICKER':<8} {'PRICE':<10} {'ATR_DISTANCE':<14} {'DEMAND_ZONE':<25} {'SUPPLY_ZONE':<25} {'GAP_%':<10}\n")
         f.write("="*120 + "\n")
         
         # Data rows
@@ -816,12 +820,10 @@ def compile_daily_report(all_setups: list, report_path: Path, sensitivity: str =
             f.write(
                 f"{data['ticker']:<8} "
                 f"${data['current_price']:<9.2f} "
-                f"${data['atr']:<7.2f} "
+                f"{data['atr_distance']:<13.2f} "
                 f"{data['demand_zone']:<25} "
                 f"{data['supply_zone']:<25} "
-                f"${data['gap']:<7.2f} "
-                f"${data['size_demand']:<7.2f} "
-                f"{data['ratio']:<7.3f}\n"
+                f"{data['gap_percent']:.1f}%\n"
             )
         
         # Footer with stats
@@ -840,12 +842,10 @@ def compile_daily_report(all_setups: list, report_path: Path, sensitivity: str =
         f.write(f"\nColumn Definitions:\n")
         f.write(f"  TICKER: Stock symbol\n")
         f.write(f"  PRICE: Current price\n")
-        f.write(f"  ATR: 14-day Average True Range\n")
+        f.write(f"  ATR_DISTANCE: Distance from current price to demand-zone high / ATR\n")
         f.write(f"  DEMAND_ZONE: Buy zone range (low-high)\n")
         f.write(f"  SUPPLY_ZONE: Sell zone range (low-high)\n")
-        f.write(f"  GAP: Distance from demand zone high to supply zone low\n")
-        f.write(f"  D_SIZE: Size of demand zone\n")
-        f.write(f"  RATIO: Demand zone size / Gap (lower = tighter setup)\n")
+        f.write(f"  GAP_%: Distance from demand-zone high to supply-zone low / demand-zone risk\n")
 
 
 def compile_top_picks(all_setups: list, pick_path: Path, sensitivity: str = 'balanced') -> None:

@@ -3,27 +3,27 @@ TICKER: DECK
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $85.80
-  ATR (14-day): $2.67
+  Price:        $85.05
+  ATR (14-day): $3.02
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $77.38 - $80.28
-  Size:         $2.90
-  Distance:     $5.52 (207% of ATR)
-  Formed:       2026-09-16
-  FRESHNESS:    STALE
-  Notes:        STALE - Recent cached daily candle tested demand zone
+  Range:        $77.22 - $78.70
+  Size:         $1.48
+  Distance:     $6.35 (210% of ATR)
+  Formed:       2026-09-29
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
   Range:        $99.16 - $101.28
   Size:         $2.12
-  Distance:     $13.36
+  Distance:     $14.11
   Formed:       2026-08-04
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $8.42
-  Profit Target (PT):  $13.36
-  Risk:Reward Ratio:   1:1.59
+  Stop Loss Distance:  $7.83
+  Profit Target (PT):  $14.11
+  Risk:Reward Ratio:   1:1.80

@@ -3,27 +3,27 @@ TICKER: COP
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $132.58
-  ATR (14-day): $3.82
+  Price:        $134.20
+  ATR (14-day): $3.97
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $109.58 - $112.88
   Size:         $3.30
-  Distance:     $19.70 (516% of ATR)
+  Distance:     $21.32 (537% of ATR)
   Formed:       2026-07-15
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 SUPPLY ZONE (Sell Zone):
-  Range:        $131.12 - $141.62
-  Size:         $10.50
-  Distance:     $0.00
-  Formed:       2026-09-16
-  FRESHNESS:    STALE
-  Notes:        STALE - Price reached zone ($132.58 >= zone $131.12)
+  Range:        $134.82 - $138.76
+  Size:         $3.94
+  Distance:     $0.62
+  Formed:       2026-09-11
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $23.00
-  Profit Target (PT):  $-1.46
-  Risk:Reward Ratio:   1:-0.06
+  Stop Loss Distance:  $24.62
+  Profit Target (PT):  $0.62
+  Risk:Reward Ratio:   1:0.03

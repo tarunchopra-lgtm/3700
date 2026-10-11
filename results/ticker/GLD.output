@@ -3,27 +3,27 @@ TICKER: GLD
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $382.00
-  ATR (14-day): $60.12
-  Within ATR:   YES
+  Price:        $378.63
+  ATR (14-day): $113.37
+  Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $373.83 - $376.64
   Size:         $2.81
-  Distance:     $5.36 (9% of ATR)
+  Distance:     $1.99 (2% of ATR)
   Formed:       2026-08-04
-  FRESHNESS:    FRESH
-  Notes:        Fresh - not tested recently
+  FRESHNESS:    STALE
+  Notes:        STALE - Recent cached daily candle tested demand zone
 
 SUPPLY ZONE (Sell Zone):
   Range:        $388.39 - $403.11
   Size:         $14.72
-  Distance:     $6.39
+  Distance:     $9.76
   Formed:       2026-09-15
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $8.17
-  Profit Target (PT):  $6.39
-  Risk:Reward Ratio:   1:0.78
+  Stop Loss Distance:  $4.80
+  Profit Target (PT):  $9.76
+  Risk:Reward Ratio:   1:2.03

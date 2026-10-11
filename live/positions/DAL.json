@@ -1,0 +1,28 @@
+{
+  "symbol": "DAL",
+  "qty": 2,
+  "entry_price": 82.0,
+  "entry_time": "2026-10-09T12:42:04.073685",
+  "brackets": {
+    "bracket1": {
+      "entry_order_id": "22090d09-0e72-458f-92a8-96b831eb9809",
+      "stop_order_id": null,
+      "target_order_id": null,
+      "qty": 1,
+      "target_price": 83.0,
+      "stop_price": 80.0,
+      "status": "pending"
+    },
+    "bracket2": {
+      "entry_order_id": "9669ce10-1661-48c5-91b8-a9fbb228be54",
+      "stop_order_id": null,
+      "target_order_id": null,
+      "qty": 1,
+      "target_price": 85.0,
+      "stop_price": 80.0,
+      "status": "pending"
+    }
+  },
+  "last_updated": "2026-10-10T20:39:20.981427",
+  "stop_loss_tracker": 0
+}

@@ -24,6 +24,8 @@ mu 2 1000 990 1010 1025
 # intc did a 116 entry, also sell 119 1st leg next day
 # 10/2 worked great, for both target 1 and target 2 
 #intc 20 105.5 102 116 125
+# testing intc for small profits
+intc 10 101.75 101.5 102 102.25
 
 # ttd, trying to see from friend circle if this would work
 # 10/2 so far oky, waiting on target 1

@@ -25,7 +25,7 @@ mu 2 1000 990 1010 1025
 # 10/2 worked great, for both target 1 and target 2 
 #intc 20 105.5 102 116 125
 # testing intc for small profits
-intc 10 100.9 100.8 101 101.1
+intc 10 101.5 101.4 101.6 101.7
 
 # ttd, trying to see from friend circle if this would work
 # 10/2 so far oky, waiting on target 1

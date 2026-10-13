@@ -6,7 +6,7 @@
 
 ### multiple days so OCO etc are tracked as well
 nvda 20 225 224 226 228
+nvda 10 227 226 228 229
 mu 10 925 920 935 955
-
 intc 10 97 96 98 100
 

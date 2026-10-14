@@ -5,5 +5,5 @@
 # supply and demand
 
 ### multiple days so OCO etc are tracked as well
-mu 10 925 920 935 955
+mu 40 930 920 940 975
 

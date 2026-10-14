@@ -5,5 +5,5 @@
 # supply and demand
 
 ### multiple days so OCO etc are tracked as well
-mu 40 930 920 940 975
+mu 40 924 922 940 975
 

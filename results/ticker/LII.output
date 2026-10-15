@@ -4,14 +4,14 @@ TICKER: LII
 
 CURRENT STATUS:
   Price:        $413.47
-  ATR (14-day): $18.72
+  ATR (14-day): $19.92
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
-  Range:        $355.00 - $369.63
-  Size:         $14.62
-  Distance:     $43.84 (234% of ATR)
-  Formed:       2026-09-29
+  Range:        $352.89 - $363.90
+  Size:         $11.00
+  Distance:     $49.57 (249% of ATR)
+  Formed:       2026-10-07
   FRESHNESS:    STALE
   Notes:        STALE - Recent cached daily candle tested demand zone
 
@@ -24,6 +24,6 @@ SUPPLY ZONE (Sell Zone):
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $58.47
+  Stop Loss Distance:  $60.58
   Profit Target (PT):  $109.92
-  Risk:Reward Ratio:   1:1.88
+  Risk:Reward Ratio:   1:1.81

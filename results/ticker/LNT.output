@@ -1,0 +1,29 @@
+====================================================================================================
+TICKER: LNT
+====================================================================================================
+
+CURRENT STATUS:
+  Price:        $69.57
+  ATR (14-day): $1.92
+  Within ATR:   NO
+
+DEMAND ZONE (Buy Zone):
+  Range:        $64.44 - $65.66
+  Size:         $1.22
+  Distance:     $3.91 (204% of ATR)
+  Formed:       2026-10-06
+  FRESHNESS:    STALE
+  Notes:        STALE - Recent cached daily candle tested demand zone
+
+SUPPLY ZONE (Sell Zone):
+  Range:        $76.20 - $77.34
+  Size:         $1.14
+  Distance:     $6.64
+  Formed:       2026-07-13
+  FRESHNESS:    FRESH
+  Notes:        Fresh - not tested recently
+
+TRADE METRICS:
+  Stop Loss Distance:  $5.13
+  Profit Target (PT):  $6.64
+  Risk:Reward Ratio:   1:1.29

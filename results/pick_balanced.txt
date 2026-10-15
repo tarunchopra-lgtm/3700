@@ -1,8 +1,36 @@
 ========================================================================================================================
-TOP 10 TRADING PICKS - BALANCED SENSITIVITY (WITHIN ATR, FRESH ZONES ONLY)
-Generated: 2026-10-09 06:16:39
+TOP 10 TRADING PICKS - BALANCED SENSITIVITY (Fresh Zones, Within 1 ATR)
+Generated: 2026-10-12 06:38:30
 ========================================================================================================================
 
-No stocks with FRESH zones (within 1 ATR and not recently tested) found.
+Total Actionable Stocks (within 1 ATR + FRESH): 1
+Top 10 shown below (sorted by proximity to fresh demand zone)
 
-Note: Setups are filtered to exclude STALE zones that have been recently tested by price action.
+FRESHNESS CRITERIA:
+  - Zone must NOT be already reached by current price
+  - Zone must NOT be tested by recent candle wicks (last 2 hours)
+  - Zone must be within 1 ATR distance from current price
+
+1. INTC
+------------------------------------------------------------------------------------------------------------------------
+Current Price:       $102.09
+ATR (14-day):        $6.55
+
+DEMAND ZONE:         $94.53 - $98.85
+  Distance:          $3.24 (49% of ATR) [PRIMARY SORT]
+  Formed:            2026-09-14
+  Freshness:         ✓ FRESH - Fresh - not tested recently
+
+SUPPLY ZONE:         $126.69 - $132.57
+  Distance:          $24.59 [SECONDARY SORT]
+  Formed:            2026-06-15
+  Freshness:         ✓ FRESH - Fresh - not tested recently
+
+TRADE SETUP:
+  Entry Range:       $94.53 - $98.85
+  Stop Loss:         $94.52
+  Profit Target:     $126.69
+  Risk Amount:       $7.56
+  Reward Amount:     $24.59
+  RISK:REWARD:       1:3.25
+

@@ -6,16 +6,16 @@
 [AUTH] Paper trading: True
 [AUTH] Authentication OK: account=a38a...edd4 status=AccountStatus.ACTIVE
 Top 10 stock gainers today
-Market data updated: 2026-10-08T23:59:00.158862056Z
+Market data updated: 2026-10-12T13:38:00.21840365Z
  #  Symbol          Price       Change    Percent
 -------------------------------------------------
- 1  DAAQW    $      0.20 $      0.12    150.00%
- 2  ALISU    $     40.00 $     23.35    140.24%
- 3  FLYE     $      2.32 $      1.05     82.68%
- 4  FVNNU    $     32.47 $     13.07     67.37%
- 5  EURKR    $      0.44 $      0.17     62.87%
- 6  SCAGW    $      0.01 $      0.00     50.00%
- 7  AIXI     $      1.93 $      0.61     46.21%
- 8  PCRX     $     36.39 $     11.19     44.40%
- 9  QNME     $      0.83 $      0.25     43.28%
-10  OLB      $      0.55 $      0.16     41.86%
+ 1  MNDR     $      3.16 $      2.31    271.75%
+ 2  SKYAW    $      0.09 $      0.06    245.98%
+ 3  YMAT     $      2.20 $      0.91     70.53%
+ 4  CLWT     $      2.27 $      0.91     66.97%
+ 5  SBFMW    $      0.05 $      0.02     60.00%
+ 6  COPL.WS  $      0.03 $      0.01     59.70%
+ 7  GIXI     $      6.04 $      2.15     55.27%
+ 8  LNKS     $      1.45 $      0.49     51.74%
+ 9  ORIQW    $      0.19 $      0.06     50.04%
+10  CAPNR    $      0.12 $      0.04     49.50%

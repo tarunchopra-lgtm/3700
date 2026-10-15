@@ -1,6 +1,8 @@
 TOP 20 - BALANCED FRESH DEMAND ZONES
-Generated: 2026-10-09 06:16:39
+Generated: 2026-10-12 06:38:30
 Filter: demand is fresh, price is within one ATR, closest first.
 =========================================================================================================
 
-No fresh demand zones within one ATR were found.
+#   TICKER   PRICE       DEMAND ZONE             DISTANCE      ATR         R:R       
+---------------------------------------------------------------------------------------------------------
+1   INTC     $102.09     $94.53-$98.85           $3.24         $6.55       1:3.25    

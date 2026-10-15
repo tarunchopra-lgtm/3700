@@ -3,14 +3,14 @@ TICKER: REGN
 ====================================================================================================
 
 CURRENT STATUS:
-  Price:        $739.13
-  ATR (14-day): $27.64
+  Price:        $752.02
+  ATR (14-day): $26.80
   Within ATR:   NO
 
 DEMAND ZONE (Buy Zone):
   Range:        $678.00 - $701.82
   Size:         $23.83
-  Distance:     $37.31 (135% of ATR)
+  Distance:     $50.20 (187% of ATR)
   Formed:       2026-07-28
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
@@ -18,12 +18,12 @@ DEMAND ZONE (Buy Zone):
 SUPPLY ZONE (Sell Zone):
   Range:        $785.01 - $805.52
   Size:         $20.51
-  Distance:     $45.88
+  Distance:     $32.99
   Formed:       2026-09-24
   FRESHNESS:    FRESH
   Notes:        Fresh - not tested recently
 
 TRADE METRICS:
-  Stop Loss Distance:  $61.13
-  Profit Target (PT):  $45.88
-  Risk:Reward Ratio:   1:0.75
+  Stop Loss Distance:  $74.02
+  Profit Target (PT):  $32.99
+  Risk:Reward Ratio:   1:0.45

@@ -3,17 +3,9 @@
   "timeframe": "1Day",
   "feed": "IEX",
   "lookback_days": 90,
-  "last_updated": "2026-10-09T13:16:08.891515+00:00",
-  "last_candle_date": "2026-10-09",
+  "last_updated": "2026-10-12T13:34:28.262893+00:00",
+  "last_candle_date": "2026-10-12",
   "bars": [
-    {
-      "date": "2026-06-05",
-      "open": 22.74,
-      "high": 22.765,
-      "low": 21.995,
-      "close": 22.25,
-      "volume": 516080
-    },
     {
       "date": "2026-06-08",
       "open": 22.2,
@@ -720,11 +712,19 @@
     },
     {
       "date": "2026-10-09",
-      "open": 0.0,
-      "high": 0.0,
-      "low": 0.0,
-      "close": 0.0,
-      "volume": 0
+      "open": 19.795,
+      "high": 19.87,
+      "low": 18.68,
+      "close": 18.735,
+      "volume": 1024179
+    },
+    {
+      "date": "2026-10-12",
+      "open": 18.83,
+      "high": 19.0,
+      "low": 18.83,
+      "close": 18.88,
+      "volume": 6516
     }
   ]
 }

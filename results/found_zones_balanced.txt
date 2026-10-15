@@ -1,6 +1,6 @@
 ========================================================================================================================
 FOUND ZONES - BALANCED SENSITIVITY
-Generated: 2026-10-09 06:16:39
+Generated: 2026-10-12 06:38:30
 ========================================================================================================================
 
 All Tickers Analyzed: 541
@@ -16,8 +16,8 @@ Results are shown in lists/ order.
   8. EEM      | No cached data / no zone found
   9. VEA      | No cached data / no zone found
  10. VWO      | No cached data / no zone found
- 11. GLD      | No cached data / no zone found
- 12. SLV      | $   54.69 | Demand: $53.60-$54.26 (2026-08-04) | Supply: $56.27-$60.36 (2026-09-15)
+ 11. GLD      | $  382.43 | Demand: $373.83-$376.64 (2026-08-04) | Supply: $388.39-$403.11 (2026-09-15)
+ 12. SLV      | $   54.62 | Demand: $53.60-$54.26 (2026-08-04) | Supply: $56.27-$60.36 (2026-09-15)
  13. TLT      | No cached data / no zone found
  14. IEF      | No cached data / no zone found
  15. HYG      | No cached data / no zone found
@@ -34,12 +34,12 @@ Results are shown in lists/ order.
  26. ADBE     | No cached data / no zone found
  27. AMD      | No cached data / no zone found
  28. ABNB     | No cached data / no zone found
- 29. ALNY     | No cached data / no zone found
+ 29. ALNY     | $  246.73 | Demand: $197.95-$207.23 (2026-07-31) | Supply: $248.39-$256.67 (2026-09-28)
  30. GOOGL    | No cached data / no zone found
  31. GOOG     | No cached data / no zone found
  32. AMZN     | No cached data / no zone found
  33. AEP      | No cached data / no zone found
- 34. AMGN     | $  423.43 | Demand: $375.20-$384.61 (2026-09-14) | Supply: $435.23-$445.49 (2026-09-02)
+ 34. AMGN     | $  416.91 | Demand: $375.20-$384.61 (2026-09-14) | Supply: $435.23-$445.49 (2026-09-02)
  35. ADI      | No cached data / no zone found
  36. AAPL     | No cached data / no zone found
  37. AMAT     | No cached data / no zone found
@@ -48,7 +48,7 @@ Results are shown in lists/ order.
  40. ASML     | No cached data / no zone found
  41. ALAB     | No cached data / no zone found
  42. ADSK     | No cached data / no zone found
- 43. ADP      | No cached data / no zone found
+ 43. ADP      | $  273.74 | Demand: $240.44-$247.65 (2026-07-22) | Supply: $282.94-$287.85 (2026-08-28)
  44. AXON     | No cached data / no zone found
  45. BKR      | No cached data / no zone found
  46. BKNG     | No cached data / no zone found
@@ -77,7 +77,7 @@ Results are shown in lists/ order.
  69. HONA     | No cached data / no zone found
  70. HON      | No cached data / no zone found
  71. IDXX     | No cached data / no zone found
- 72. INTC     | No cached data / no zone found
+ 72. INTC     | $  102.09 | Demand: $94.53-$98.85 (2026-09-14) | Supply: $126.69-$132.57 (2026-06-15)
  73. INTU     | No cached data / no zone found
  74. ISRG     | No cached data / no zone found
  75. KDP      | No cached data / no zone found
@@ -106,12 +106,12 @@ Results are shown in lists/ order.
  98. PCAR     | No cached data / no zone found
  99. PLTR     | No cached data / no zone found
 100. PANW     | No cached data / no zone found
-101. PAYX     | $  109.80 | Demand: $98.57-$101.17 (2026-10-05) | Supply: $113.39-$116.67 (2026-09-17)
+101. PAYX     | No cached data / no zone found
 102. PYPL     | No cached data / no zone found
 103. PDD      | No cached data / no zone found
 104. PEP      | No cached data / no zone found
 105. QCOM     | No cached data / no zone found
-106. REGN     | No cached data / no zone found
+106. REGN     | $  752.02 | Demand: $678.00-$701.82 (2026-07-28) | Supply: $785.01-$805.52 (2026-09-24)
 107. RKLB     | No cached data / no zone found
 108. ROP      | No cached data / no zone found
 109. ROST     | No cached data / no zone found
@@ -154,7 +154,7 @@ Results are shown in lists/ order.
 146. AIG      | No cached data / no zone found
 147. AMT      | No cached data / no zone found
 148. AWK      | No cached data / no zone found
-149. AMP      | No cached data / no zone found
+149. AMP      | $  528.29 | Demand: $444.80-$457.24 (2026-06-26) | Supply: $552.48-$561.79 (2026-09-14)
 150. AME      | No cached data / no zone found
 151. APH      | No cached data / no zone found
 152. AON      | No cached data / no zone found
@@ -167,7 +167,7 @@ Results are shown in lists/ order.
 159. ANET     | No cached data / no zone found
 160. AJG      | No cached data / no zone found
 161. AIZ      | No cached data / no zone found
-162. T        | No cached data / no zone found
+162. T        | $   22.47 | Demand: $21.25-$21.70 (2026-07-13) | Supply: $23.98-$24.45 (2026-10-05)
 163. ATO      | No cached data / no zone found
 164. AZO      | No cached data / no zone found
 165. AVY      | No cached data / no zone found
@@ -186,7 +186,7 @@ Results are shown in lists/ order.
 178. BA       | No cached data / no zone found
 179. BSX      | No cached data / no zone found
 180. BMY      | No cached data / no zone found
-181. BR       | $  175.34 | Demand: $156.00-$160.39 (2026-10-05) | Supply: $181.00-$185.82 (2026-08-25)
+181. BR       | $  175.49 | Demand: $156.00-$160.39 (2026-10-05) | Supply: $177.95-$182.46 (2026-09-01)
 182. BRO      | No cached data / no zone found
 183. BF.B     | No cached data / no zone found
 184. BLDR     | No cached data / no zone found
@@ -212,7 +212,7 @@ Results are shown in lists/ order.
 204. SCHW     | No cached data / no zone found
 205. CHTR     | No cached data / no zone found
 206. CVX      | No cached data / no zone found
-207. CMG      | $   34.23 | Demand: $30.21-$31.45 (2026-10-06) | Supply: $35.66-$36.63 (2026-09-10)
+207. CMG      | No cached data / no zone found
 208. CB       | No cached data / no zone found
 209. CHD      | No cached data / no zone found
 210. CIEN     | No cached data / no zone found
@@ -251,7 +251,7 @@ Results are shown in lists/ order.
 243. DVN      | No cached data / no zone found
 244. DLR      | No cached data / no zone found
 245. DG       | No cached data / no zone found
-246. DLTR     | No cached data / no zone found
+246. DLTR     | $  126.90 | Demand: $109.58-$113.17 (2026-06-10) | Supply: $129.96-$133.43 (2026-09-03)
 247. D        | No cached data / no zone found
 248. DPZ      | No cached data / no zone found
 249. DOV      | No cached data / no zone found
@@ -369,7 +369,7 @@ Results are shown in lists/ order.
 361. LVS      | No cached data / no zone found
 362. LDOS     | No cached data / no zone found
 363. LEN      | No cached data / no zone found
-364. LII      | No cached data / no zone found
+364. LII      | $  413.47 | Demand: $352.89-$363.90 (2026-10-07) | Supply: $523.39-$540.38 (2026-07-20)
 365. LLY      | No cached data / no zone found
 366. LYV      | No cached data / no zone found
 367. LMT      | No cached data / no zone found
@@ -384,7 +384,7 @@ Results are shown in lists/ order.
 376. MAS      | No cached data / no zone found
 377. MA       | No cached data / no zone found
 378. MKC      | No cached data / no zone found
-379. MCD      | $  247.54 | Demand: $230.64-$234.22 (2026-10-06) | Supply: $247.69-$250.50 (2026-09-17)
+379. MCD      | No cached data / no zone found
 380. MCK      | No cached data / no zone found
 381. MDT      | No cached data / no zone found
 382. MRK      | No cached data / no zone found
@@ -415,7 +415,7 @@ Results are shown in lists/ order.
 407. NUE      | No cached data / no zone found
 408. NVR      | No cached data / no zone found
 409. OXY      | No cached data / no zone found
-410. OMC      | No cached data / no zone found
+410. OMC      | $   81.21 | Demand: $74.23-$75.92 (2026-10-05) | Supply: $85.70-$88.13 (2026-08-31)
 411. ON       | No cached data / no zone found
 412. OKE      | No cached data / no zone found
 413. ORCL     | No cached data / no zone found
@@ -445,7 +445,7 @@ Results are shown in lists/ order.
 437. DGX      | No cached data / no zone found
 438. Q        | No cached data / no zone found
 439. RL       | No cached data / no zone found
-440. RJF      | $  170.02 | Demand: $148.16-$152.79 (2026-06-29) | Supply: $173.49-$176.40 (2026-09-09)
+440. RJF      | $  172.58 | Demand: $156.22-$159.24 (2026-10-07) | Supply: $173.49-$176.40 (2026-09-09)
 441. RDDT     | No cached data / no zone found
 442. RTX      | No cached data / no zone found
 443. O        | No cached data / no zone found
@@ -467,7 +467,7 @@ Results are shown in lists/ order.
 459. SHW      | No cached data / no zone found
 460. SPG      | No cached data / no zone found
 461. SWKS     | No cached data / no zone found
-462. SJM      | No cached data / no zone found
+462. SJM      | $  129.05 | Demand: $115.48-$117.92 (2026-10-05) | Supply: $130.74-$134.03 (2026-08-28)
 463. SW       | No cached data / no zone found
 464. SNA      | No cached data / no zone found
 465. SOLV     | No cached data / no zone found
@@ -500,7 +500,7 @@ Results are shown in lists/ order.
 492. TRMB     | No cached data / no zone found
 493. TFC      | No cached data / no zone found
 494. TYL      | No cached data / no zone found
-495. TSN      | No cached data / no zone found
+495. TSN      | $   56.39 | Demand: $51.59-$52.41 (2026-10-05) | Supply: $60.13-$61.54 (2026-07-29)
 496. USB      | No cached data / no zone found
 497. UBER     | No cached data / no zone found
 498. UDR      | No cached data / no zone found
@@ -522,7 +522,7 @@ Results are shown in lists/ order.
 514. VTRS     | No cached data / no zone found
 515. VICI     | No cached data / no zone found
 516. V        | No cached data / no zone found
-517. VST      | $  164.67 | Demand: $141.11-$146.90 (2026-10-04) | Supply: $165.13-$168.93 (2026-07-23)
+517. VST      | $  168.00 | Demand: $141.11-$146.90 (2026-10-04) | Supply: $165.13-$168.93 (2026-07-23)
 518. VMRK     | No cached data / no zone found
 519. VMC      | No cached data / no zone found
 520. WRB      | No cached data / no zone found
@@ -549,9 +549,15 @@ Results are shown in lists/ order.
 541. ZTS      | No cached data / no zone found
 
 ========================================================================================================================
-TOP 3 CLOSEST TO DEMAND
+TOP 9 CLOSEST TO DEMAND
 Sorted by current-price distance to the demand-zone high.
 
-  1. RJF      | Current: $170.02 | Demand: $148.16-$152.79 (2026-06-29) | Distance: $17.23
-  2. VST      | Current: $164.67 | Demand: $141.11-$146.90 (2026-10-04) | Distance: $17.77
-  3. AMGN     | Current: $423.43 | Demand: $375.20-$384.61 (2026-09-14) | Distance: $38.82
+  1. T        | Current: $22.47 | Demand: $21.25-$21.70 (2026-07-13) | Distance: $0.77
+  2. INTC     | Current: $102.09 | Demand: $94.53-$98.85 (2026-09-14) | Distance: $3.24
+  3. DLTR     | Current: $126.90 | Demand: $109.58-$113.17 (2026-06-10) | Distance: $13.73
+  4. VST      | Current: $168.00 | Demand: $141.11-$146.90 (2026-10-04) | Distance: $21.10
+  5. ADP      | Current: $273.74 | Demand: $240.44-$247.65 (2026-07-22) | Distance: $26.09
+  6. AMGN     | Current: $416.91 | Demand: $375.20-$384.61 (2026-09-14) | Distance: $32.30
+  7. ALNY     | Current: $246.73 | Demand: $197.95-$207.23 (2026-07-31) | Distance: $39.50
+  8. REGN     | Current: $752.02 | Demand: $678.00-$701.82 (2026-07-28) | Distance: $50.20
+  9. AMP      | Current: $528.29 | Demand: $444.80-$457.24 (2026-06-26) | Distance: $71.05

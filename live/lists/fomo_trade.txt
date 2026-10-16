@@ -5,5 +5,8 @@
 # supply and demand
 
 ### multiple days so OCO etc are tracked as well
-mu 40 875 870 880 925
+mu 10 890 880 900 925
 csco 10 107 104 110 113
+amat 10 428 412 444 509
+# arm 10 215 209 221 309
+

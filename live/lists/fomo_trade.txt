@@ -7,6 +7,6 @@
 ### multiple days so OCO etc are tracked as well
 mu 10 890 880 900 925
 csco 10 107 104 110 113
-amat 10 428 412 444 509
+amat 10 424 412 444 509
 # arm 10 215 209 221 309
 

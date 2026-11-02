@@ -6,7 +6,7 @@
 
 ### multiple days so OCO etc are tracked as well
 
-csco 10 102 99 108.6 108.6
+csco 10 102 99 108.6 110
 nvda 10 195 190 200 240
 ctva 100 11.69 11.4 12 14
 hsy 10 162 155 170 188

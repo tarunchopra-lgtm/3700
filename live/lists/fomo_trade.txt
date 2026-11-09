@@ -6,14 +6,11 @@
 
 ### multiple days so OCO etc are tracked as well
 
-csco 10 92 90 95 100
-#nvda 10 178.25 176 182 195
+
+nvda 50 170 163 180 195
 ctva 100 11.69 11.4 12 13
 now 10 101 97 120 125
 goog 10 276 266 286 300
 
-mrvl 10 135 130 140 150
-
 slb 50 48.4 47 50 52
-intc 100 50.81 49 52 60
 

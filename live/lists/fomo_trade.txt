@@ -7,8 +7,8 @@
 ### multiple days so OCO etc are tracked as well
 
 
-nvda 50 170 163 180 195
-ctva 100 11.69 11.4 12 13
+nvda 50 145 140 150 195
+ctva 100 9.25 9 10 11
 now 10 101 97 120 125
 goog 10 276 266 286 300
 lyb 100 58 56 60 64
